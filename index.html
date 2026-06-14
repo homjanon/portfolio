@@ -38,7 +38,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .fg input,.fg select{padding:7px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:.88rem;min-width:90px;font-family:inherit;background:var(--card);color:var(--text);transition:.2s}
 .fg input:focus,.fg select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-l)}
 .ci{width:120px;font-family:'SF Mono','Consolas',monospace}.si{width:90px}.pi{width:110px}
-.adb{font-size:.65rem;padding:1px 6px;border-radius:8px;background:#dbeafe;color:#2563eb;margin-left:4px}
+.adb{font-size:.65rem;padding:1px 6px;border-radius:8px;background:#dbeafe;color:#2563eb;margin-left:4px;vertical-align:middle}
+.fg-row{display:flex;gap:10px}
+.fg-row .fg{flex:1;min-width:0}
+.fg-row .fg input{width:100%}
+.aform .btn-add{height:40px;padding:0 20px;font-weight:600;font-size:.9rem;white-space:nowrap;align-self:flex-end}
 .twrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:.85rem}
 th{text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);color:var(--sub);font-weight:600;font-size:.75rem;white-space:nowrap}
@@ -68,7 +72,21 @@ td.nm{max-width:140px;overflow:hidden;text-overflow:ellipsis}
 @keyframes spin{to{transform:rotate(360deg)}}
 .flash{animation:fl .8s ease}
 @keyframes fl{0%{background:#dbeafe}100%{background:transparent}}
-@media(max-width:768px){.ctn{padding:10px 14px}.header h1{font-size:1.3rem}.sgrid{grid-template-columns:repeat(2,1fr)}.cgrid{grid-template-columns:1fr}.aform{flex-direction:column}.fg input,.fg select{width:100%!important};.modal-panel{bottom:0;border-radius:var(--radius) var(--radius) 0 0;width:100%}}
+@media(max-width:768px){
+  .ctn{padding:10px 14px}
+  .header h1{font-size:1.3rem}
+  .sgrid{grid-template-columns:repeat(2,1fr)}
+  .cgrid{grid-template-columns:1fr}
+  /* 添加持仓表单——手机优化 */
+  .aform{display:flex;flex-direction:column;gap:12px;align-items:stretch}
+  .aform .fg input,.aform .fg select{width:100%!important;padding:10px 12px;font-size:.9rem}
+  .fg-row{display:flex;gap:10px}
+  .fg-row .fg{flex:1;min-width:0}
+  .fg-row .fg input{width:100%!important}
+  .aform .btn-add{width:100%;justify-content:center;height:44px;font-size:.95rem;margin-top:2px;align-self:auto}
+  .ci{width:100%!important}
+  .modal-panel{bottom:0;border-radius:var(--radius) var(--radius) 0 0;width:100%}
+}
 /* 手机端卡片 */
 .mcards{display:none;flex-direction:column;gap:10px}
 @media(max-width:768px){#tableWrap{display:none}.mcards{display:flex}}
@@ -179,9 +197,11 @@ td.nm{max-width:140px;overflow:hidden;text-overflow:ellipsis}
     <div class="aform">
       <div class="fg"><label>代码 <span class="adb" id="dBadge" style="display:none"></span></label><input type="text" class="ci" id="iCode" placeholder="如 600036" oninput="autoDetect()" autocomplete="off"></div>
       <div class="fg"><label>市场</label><select id="iMkt"><option value="">自动检测</option><option value="sh">A股沪市</option><option value="sz">A股深市</option><option value="hk">港股</option><option value="us">美股</option><option value="fund">基金</option></select></div>
-      <div class="fg"><label>持有数量（股/份）</label><input type="number" class="si" id="iShares" placeholder="100" min="0" step="any"></div>
-      <div class="fg"><label>成本价</label><input type="number" class="pi" id="iCost" placeholder="成本单价" min="0" step="any"></div>
-      <button class="btn btn-p" onclick="addHolding()" style="height:36px">➕ 添加</button>
+      <div class="fg-row">
+        <div class="fg"><label>持有数量（股/份）</label><input type="number" class="si" id="iShares" placeholder="100" min="0" step="any"></div>
+        <div class="fg"><label>成本价</label><input type="number" class="pi" id="iCost" placeholder="成本单价" min="0" step="any"></div>
+      </div>
+      <button class="btn btn-p btn-add" onclick="addHolding()">➕ 添加</button>
     </div>
   </div>
 
