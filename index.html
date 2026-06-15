@@ -284,7 +284,7 @@ async function fetchExchangeRates(force=false) {
     return true;
   }
   try {
-    const r = await fetch('https://open.er-api.com/v6/latest/USD', {signal: AbortSignal.timeout(8000), cache: 'no-store'});
+    const r = await fetch('https://open.er-api.com/v6/latest/USD', {signal: AbortSignal.timeout(8000), cache: 'no-store', headers: {'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache'}});
     if (!r.ok) throw new Error('HTTP '+r.status);
     const d = await r.json();
     if (d.result === 'success' && d.rates && d.rates.CNY && d.rates.HKD) {
@@ -331,7 +331,7 @@ async function testProxy(){
   if(!url){toast('请先输入代理地址','error');return}
   btn.disabled=true;btn.innerHTML='<span class="spinner"></span> 测试中...';
   try{
-    const r=await fetch(url+'?url='+encodeURIComponent('https://fundgz.1234567.com.cn/js/001234.js'),{signal:AbortSignal.timeout(10000)});
+    const r=await fetch(url+'?url='+encodeURIComponent('https://fundgz.1234567.com.cn/js/001234.js'),{signal:AbortSignal.timeout(10000),cache:'no-store',headers:{'Cache-Control':'no-cache, no-store, must-revalidate','Pragma':'no-cache'}});
     if(!r.ok)throw new Error('HTTP '+r.status);
     const t=await r.text();
     if(t.includes('jsonpgz')){toast('✅ 代理可用！基金数据正常','success')}
@@ -382,10 +382,10 @@ async function fetchTencentBatch(tcCodes) {
   const results = {};
   for (let i = 0; i < tcCodes.length; i += batchSize) {
     const batch = tcCodes.slice(i, i + batchSize);
-    // 加 _t 时间戳绕过 CDN/浏览器缓存，确保获取最新价格
-    const url = 'https://qt.gtimg.cn/q=' + batch.join(',') + '&_=' + Date.now();
+    // 加随机时间戳绕过 CDN/浏览器缓存（手机浏览器缓存更激进，用随机数更可靠）
+    const url = 'https://qt.gtimg.cn/q=' + batch.join(',') + '&_t=' + Date.now() + '_' + Math.random().toString(36).slice(2,8);
     try {
-      const resp = await fetch(url, { cache: 'reload' });
+      const resp = await fetch(url, { cache: 'no-store', headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache' } });
       // 关键：以 ArrayBuffer 方式读取，然后手动 GBK 解码
       const buffer = await resp.arrayBuffer();
       const text = decodeGBK(buffer);
@@ -474,7 +474,7 @@ function proxyFetch(targetUrl, opts={}){
   if(!proxyUrl)throw new Error('未配置CORS代理');
   let base = proxyUrl;
   if(!base.includes('?url=')){base = base.replace(/\/+$/,'') + '/?url=';}
-  return fetch(base + encodeURIComponent(targetUrl), {cache: 'reload', ...opts, signal: (opts.signal||AbortSignal.timeout(10000))});
+  return fetch(base + encodeURIComponent(targetUrl), {cache: 'no-store', headers: {'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache'}, ...opts, signal: (opts.signal||AbortSignal.timeout(10000))});
 }
 
 // 1. 天天基金 JSONP（实时估值，国内基金快）
@@ -488,7 +488,7 @@ function fetchFundPriceJSONP(code){
       if(!data || !data.name) { reject(new Error('fundgz returned empty')); return; }
       resolve({name:data.name||code,price:parseFloat(data.dwjz)||null,estPrice:parseFloat(data.gsz)||null,changePct:parseFloat(data.gszzl)||0});
     };
-    script.src='https://fundgz.1234567.com.cn/js/'+code+'.js?_='+Date.now();
+    script.src='https://fundgz.1234567.com.cn/js/'+code+'.js?_r='+Date.now()+'_'+Math.random().toString(36).slice(2,8);
     script.onerror=()=>{clearTimeout(timer);cleanup();reject(new Error('JSONP load failed'))};
     function cleanup(){if(script.parentNode)script.parentNode.removeChild(script);delete window.jsonpgz}
     document.head.appendChild(script);
@@ -501,7 +501,7 @@ function fetchFundPricePingzhong(code){
   return new Promise((resolve,reject)=>{
     const script=document.createElement('script');
     const timer=setTimeout(()=>{cleanup();reject(new Error('Pingzhong timeout'))},10000);
-    script.src='https://fund.eastmoney.com/pingzhongdata/'+code+'.js?_='+Date.now();
+    script.src='https://fund.eastmoney.com/pingzhongdata/'+code+'.js?_r='+Date.now()+'_'+Math.random().toString(36).slice(2,8);
     script.onload=()=>{
       clearTimeout(timer);
       try{
@@ -547,7 +547,7 @@ function fetchFundPriceSearchJSONP(code){
         });
       }catch(e){reject(e);}
     };
-    script.src='https://fundsuggest.eastmoney.com/FundSearch/api/FundSearchAPI.ashx?callback='+cbName+'&m=1&key='+code+'&_='+Date.now();
+    script.src='https://fundsuggest.eastmoney.com/FundSearch/api/FundSearchAPI.ashx?callback='+cbName+'&m=1&key='+code+'&_r='+Date.now()+'_'+Math.random().toString(36).slice(2,8);
     script.onerror=()=>{clearTimeout(timer);cleanup();reject(new Error('Search JSONP load failed'))};
     function cleanup(){if(script.parentNode)script.parentNode.removeChild(script);delete window[cbName]}
     document.head.appendChild(script);
