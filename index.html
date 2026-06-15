@@ -24,8 +24,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hira
 .sdot.ld{animation:pulse 1s infinite alternate;background:#fbbf24}
 @keyframes pulse{from{opacity:1}to{opacity:.3}}
 .sdot.ok{background:#16a34a}.sdot.err{background:#dc2626}
-.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:20px}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:12px}
 .scard{background:var(--card);border-radius:var(--radius);padding:16px 20px;box-shadow:var(--shadow)}
+.exrate-bar{font-size:.72rem;color:var(--sub);text-align:center;margin-bottom:16px;padding:4px 0}
 .scard .lb{font-size:.78rem;color:var(--sub);margin-bottom:4px;font-weight:500}
 .scard .vl{font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums}
 .scard .sb{font-size:.78rem;margin-top:4px;font-weight:500}
@@ -153,7 +154,7 @@ td.nm{max-width:140px;overflow:hidden;text-overflow:ellipsis}
     <div class="stit">⚙️ 设置</div>
     <p style="font-size:.78rem;color:var(--sub);line-height:1.6;margin-bottom:6px">
       📈 <strong>股票行情</strong>：腾讯财经直连，无需代理。<br>
-      🏦 <strong>基金行情</strong>：JSONP 直连天天基金，无需代理。仅极少情况回退到代理。
+      🏦 <strong>基金行情</strong>：估值→历史净值→搜索→代理，四重回退，无需代理即可覆盖。
     </p>
     <div class="srow">
       <div class="fg" style="flex:1;min-width:200px">
@@ -190,6 +191,10 @@ td.nm{max-width:140px;overflow:hidden;text-overflow:ellipsis}
     <div class="scard"><div class="lb">💹 累计盈亏</div><div class="vl" id="tPnl">¥0.00</div><div class="sb" id="tPnlP">--</div></div>
     <div class="scard"><div class="lb">📅 今日盈亏</div><div class="vl" id="dPnl">¥0.00</div><div class="sb" id="dPnlP">--</div></div>
     <div class="scard"><div class="lb">💵 累计分红</div><div class="vl" id="tDiv">¥0.00</div><div class="sb" id="tDivSub">覆盖分红后收益</div></div>
+  </div>
+  <div class="exrate-bar" id="exrateBar" style="display:none">
+    💱 参考汇率：1 USD = <strong id="erUSD">--</strong> 元 | 1 HKD = <strong id="erHKD">--</strong> 元
+    <span style="font-size:.65rem;color:var(--sub)">（每日首次刷新生效，非实时）</span>
   </div>
 
   <div class="sec">
@@ -267,6 +272,45 @@ const $ = id => document.getElementById(id);
 const ML = {sh:'A股沪市',sz:'A股深市',hk:'港股',us:'美股',fund:'基金'};
 const CC = {sh:'¥',sz:'¥',hk:'HK$',us:'$',fund:'¥'};
 
+// ========== 汇率（每日首次刷新成功后缓存）==========
+let exRateUSD = parseFloat(localStorage.getItem('pf_exrate_usd')) || 0;
+let exRateHKD = parseFloat(localStorage.getItem('pf_exrate_hkd')) || 0;
+let exRateDate = localStorage.getItem('pf_exrate_date') || '';
+
+async function fetchExchangeRates(force=false) {
+  const today = new Date().toDateString();
+  if (!force && exRateDate === today && exRateUSD > 0 && exRateHKD > 0) {
+    console.log('Exchange rates: using cached ('+exRateDate+') USD/CNY='+exRateUSD.toFixed(4)+' HKD/CNY='+exRateHKD.toFixed(4));
+    return true;
+  }
+  try {
+    const r = await fetch('https://open.er-api.com/v6/latest/USD', {signal: AbortSignal.timeout(8000), cache: 'no-store'});
+    if (!r.ok) throw new Error('HTTP '+r.status);
+    const d = await r.json();
+    if (d.result === 'success' && d.rates && d.rates.CNY && d.rates.HKD) {
+      exRateUSD = d.rates.CNY;
+      exRateHKD = exRateUSD / d.rates.HKD; // USD/CNY ÷ USD/HKD = HKD/CNY
+      exRateDate = today;
+      localStorage.setItem('pf_exrate_usd', exRateUSD);
+      localStorage.setItem('pf_exrate_hkd', exRateHKD);
+      localStorage.setItem('pf_exrate_date', exRateDate);
+      console.log('Exchange rates updated: USD/CNY='+exRateUSD.toFixed(4)+' HKD/CNY='+exRateHKD.toFixed(4));
+      return true;
+    }
+    throw new Error('Invalid response');
+  } catch(e) {
+    console.warn('Exchange rate fetch failed:', e.message);
+    return false;
+  }
+}
+
+function toCNY(amount, market) {
+  if (!amount || isNaN(amount)) return 0;
+  if (market === 'hk') return amount * (exRateHKD || 0.93);
+  if (market === 'us') return amount * (exRateUSD || 7.2);
+  return amount;
+}
+
 function toast(m,t='info'){const e=document.createElement('div');e.className=`toast toast-${t}`;e.textContent=m;document.body.appendChild(e);setTimeout(()=>e.remove(),3000)}
 function setStatus(s,t){$('sDot').className='sdot '+s;$('sTxt').textContent=t}
 function save(){localStorage.setItem('pf_h',JSON.stringify(holdings))}
@@ -338,9 +382,10 @@ async function fetchTencentBatch(tcCodes) {
   const results = {};
   for (let i = 0; i < tcCodes.length; i += batchSize) {
     const batch = tcCodes.slice(i, i + batchSize);
-    const url = 'https://qt.gtimg.cn/q=' + batch.join(',');
+    // 加 _t 时间戳绕过 CDN/浏览器缓存，确保获取最新价格
+    const url = 'https://qt.gtimg.cn/q=' + batch.join(',') + '&_=' + Date.now();
     try {
-      const resp = await fetch(url);
+      const resp = await fetch(url, { cache: 'reload' });
       // 关键：以 ArrayBuffer 方式读取，然后手动 GBK 解码
       const buffer = await resp.arrayBuffer();
       const text = decodeGBK(buffer);
@@ -422,38 +467,104 @@ function parseTencentLine(line) {
   return { symbol, market, name, price, prevClose, changePct, englishName };
 }
 
-// ========== 天天基金 API ==========
-// ========== 代理请求（基金JSONP回退 + 分红检测API）==========
+// ========== 天天基金 / 东方财富 基金 API ==========
+// ========== 代理请求（基金 JSONP 回退 + 分红检测 API）==========
 // 所有需要 CORS 代理的请求统一走此函数，自动处理 URL 格式
 function proxyFetch(targetUrl, opts={}){
   if(!proxyUrl)throw new Error('未配置CORS代理');
   let base = proxyUrl;
   if(!base.includes('?url=')){base = base.replace(/\/+$/,'') + '/?url=';}
-  return fetch(base + encodeURIComponent(targetUrl), {...opts, signal: (opts.signal||AbortSignal.timeout(10000))});
+  return fetch(base + encodeURIComponent(targetUrl), {cache: 'reload', ...opts, signal: (opts.signal||AbortSignal.timeout(10000))});
 }
 
-// 优先使用 JSONP（无需代理，<script> 标签绕过 CORS，国内直连更快）
+// 1. 天天基金 JSONP（实时估值，国内基金快）
 function fetchFundPriceJSONP(code){
   return new Promise((resolve,reject)=>{
     const script=document.createElement('script');
     const timer=setTimeout(()=>{cleanup();reject(new Error('JSONP timeout'))},8000);
     window.jsonpgz=function(data){
       clearTimeout(timer);cleanup();
+      // 有些基金（如 QDII）返回空 jsonpgz()，此时 data 为 undefined
+      if(!data || !data.name) { reject(new Error('fundgz returned empty')); return; }
       resolve({name:data.name||code,price:parseFloat(data.dwjz)||null,estPrice:parseFloat(data.gsz)||null,changePct:parseFloat(data.gszzl)||0});
     };
-    script.src='https://fundgz.1234567.com.cn/js/'+code+'.js';
+    script.src='https://fundgz.1234567.com.cn/js/'+code+'.js?_='+Date.now();
     script.onerror=()=>{clearTimeout(timer);cleanup();reject(new Error('JSONP load failed'))};
     function cleanup(){if(script.parentNode)script.parentNode.removeChild(script);delete window.jsonpgz}
     document.head.appendChild(script);
   });
 }
 
+// 2. 东方财富 pingzhongdata（历史净值，含每日涨跌，QDII 兜底）
+// 以 <script> 加载 fund.eastmoney.com/pingzhongdata/CODE.js，读取全局变量
+function fetchFundPricePingzhong(code){
+  return new Promise((resolve,reject)=>{
+    const script=document.createElement('script');
+    const timer=setTimeout(()=>{cleanup();reject(new Error('Pingzhong timeout'))},10000);
+    script.src='https://fund.eastmoney.com/pingzhongdata/'+code+'.js?_='+Date.now();
+    script.onload=()=>{
+      clearTimeout(timer);
+      try{
+        const arr = window.Data_netWorthTrend;
+        const name = window.fS_name || code;
+        if(!arr || !arr.length){ cleanup(); reject(new Error('No netWorthTrend data')); return; }
+        const last = arr[arr.length-1];
+        const nav = parseFloat(last.y)||null;
+        const ret = parseFloat(last.equityReturn)||0;
+        cleanup();
+        resolve({ name, price: nav, estPrice: null, changePct: ret });
+      }catch(e){ cleanup(); reject(e); }
+    };
+    script.onerror=()=>{clearTimeout(timer);cleanup();reject(new Error('Pingzhong load failed'))};
+    function cleanup(){
+      if(script.parentNode)script.parentNode.removeChild(script);
+      // 清理全局变量避免污染
+      try{delete window.Data_netWorthTrend}catch(_){window.Data_netWorthTrend=undefined}
+      try{delete window.fS_name}catch(_){window.fS_name=undefined}
+      try{delete window.fS_code}catch(_){window.fS_code=undefined}
+    }
+    document.head.appendChild(script);
+  });
+}
+
+// 3. 东方财富搜索 JSONP（仅已确认净值，无涨跌数据，终极兜底）
+function fetchFundPriceSearchJSONP(code){
+  return new Promise((resolve,reject)=>{
+    const cbName='_fs'+Date.now()+Math.random().toString(36).slice(2,6);
+    const script=document.createElement('script');
+    const timer=setTimeout(()=>{cleanup();reject(new Error('Search JSONP timeout'))},8000);
+    window[cbName]=function(data){
+      clearTimeout(timer);cleanup();
+      try{
+        if(data.ErrCode!==0||!data.Datas||!data.Datas.length) { reject(new Error('Search API returned empty')); return; }
+        const d=data.Datas[0];
+        const info=d.FundBaseInfo||{};
+        resolve({
+          name:info.SHORTNAME||d.NAME||code,
+          price:parseFloat(info.DWJZ)||null,
+          estPrice:null,  // 搜索 API 无实时估值
+          changePct:0     // 无涨跌幅数据
+        });
+      }catch(e){reject(e);}
+    };
+    script.src='https://fundsuggest.eastmoney.com/FundSearch/api/FundSearchAPI.ashx?callback='+cbName+'&m=1&key='+code+'&_='+Date.now();
+    script.onerror=()=>{clearTimeout(timer);cleanup();reject(new Error('Search JSONP load failed'))};
+    function cleanup(){if(script.parentNode)script.parentNode.removeChild(script);delete window[cbName]}
+    document.head.appendChild(script);
+  });
+}
+
 async function fetchFundPrice(code) {
-  // 1. 优先 JSONP（直连天天基金，不走代理，国内快）
-  try{return await fetchFundPriceJSONP(code)}catch(e){console.log('JSONP fallback to proxy:',e.message)}
-  // 2. 回退：走 Cloudflare Worker 代理
+  // 1. 优先 JSONP（天天基金实时估值，国内直连快）
+  try{return await fetchFundPriceJSONP(code)}catch(e){console.log('fundgz JSONP fail/empty, try pingzhong:',e.message)}
+  // 2. 东方财富历史净值（pingzhongdata，已确认净值+涨跌，QDII 适用）
+  try{return await fetchFundPricePingzhong(code)}catch(e){console.log('Pingzhong fail, try search:',e.message)}
+  // 3. 东方财富搜索 JSONP（仅已确认净值，无涨跌幅）
+  try{return await fetchFundPriceSearchJSONP(code)}catch(e){console.log('Search JSONP fail, try proxy:',e.message)}
+  // 4. 回退：走 Cloudflare Worker 代理
   if (!proxyUrl) throw new Error('未配置CORS代理，请在设置中填入 Cloudflare Worker 地址');
   try {
+    // 4a. 代理访问 fundgz
     const r = await proxyFetch('https://fundgz.1234567.com.cn/js/'+code+'.js');
     if (r.ok) {
       const t = await r.text();
@@ -461,10 +572,44 @@ async function fetchFundPrice(code) {
         const m = t.match(/jsonpgz\((.+)\)/);
         if (m) {
           const d = JSON.parse(m[1]);
-          return { name: d.name||code, price: parseFloat(d.dwjz)||null, estPrice: parseFloat(d.gsz)||null, changePct: parseFloat(d.gszzl)||0 };
+          if(d.name) return { name: d.name||code, price: parseFloat(d.dwjz)||null, estPrice: parseFloat(d.gsz)||null, changePct: parseFloat(d.gszzl)||0 };
         }
       }
     }
+    // 4b. 代理访问 pingzhongdata（历史净值）
+    try{
+      const r2 = await proxyFetch('https://fund.eastmoney.com/pingzhongdata/'+code+'.js');
+      if(r2.ok){
+        const t2 = await r2.text();
+        const mName = t2.match(/var fS_name\s*=\s*"([^"]+)"/);
+        const mTrend = t2.match(/var Data_netWorthTrend\s*=\s*(\[[\s\S]*?\])/);
+        if(mTrend){
+          const arr = JSON.parse(mTrend[1]);
+          if(arr && arr.length){
+            const last = arr[arr.length-1];
+            const name = (mName&&mName[1])||code;
+            const nav = parseFloat(last.y)||null;
+            const ret = parseFloat(last.equityReturn)||0;
+            return { name, price: nav, estPrice: null, changePct: ret };
+          }
+        }
+      }
+    }catch(e2){console.warn('Proxy pingzhong also failed:',e2.message)}
+    // 4c. 代理访问搜索 API
+    try{
+      const r3 = await proxyFetch('https://fundsuggest.eastmoney.com/FundSearch/api/FundSearchAPI.ashx?callback=cb&m=1&key='+code);
+      if(r3.ok){
+        const t3 = await r3.text();
+        const m3 = t3.match(/cb\((.+)\)/);
+        if(m3){
+          const d3 = JSON.parse(m3[1]);
+          if(d3.ErrCode===0&&d3.Datas&&d3.Datas.length){
+            const info = d3.Datas[0].FundBaseInfo||{};
+            return { name: info.SHORTNAME||d3.Datas[0].NAME||code, price: parseFloat(info.DWJZ)||null, estPrice: null, changePct: 0 };
+          }
+        }
+      }
+    }catch(e3){console.warn('Proxy search also failed:',e3.message)}
   } catch(e) { throw new Error(e.message||'代理请求失败'); }
   throw new Error('基金数据获取失败');
 }
@@ -549,6 +694,7 @@ async function refreshAll(){
   if(!holdings.length){toast('暂无持仓','info');return}
   const btn=$('btnRefresh');btn.disabled=true;btn.innerHTML='<span class="spinner"></span> 刷新中...';
   setStatus('ld','正在刷新行情...');
+  await fetchExchangeRates(); // 每日首次刷新时更新汇率
   await refreshHoldings(holdings);
   save();renderAll();btn.disabled=false;btn.innerHTML='🔄 刷新行情';
   const ok=holdings.filter(h=>h.currentPrice!=null).length,fail=holdings.length-ok;
@@ -607,11 +753,11 @@ function getEffectiveDailyPnlPct(h){
 function renderAll(){renderSummary();renderTable();renderCharts()}
 
 function renderSummary(){
-  const tc=holdings.reduce((s,h)=>s+h.costPrice*getOrigShares(h),0);
-  const tm=holdings.reduce((s,h)=>s+(h.currentPrice!=null?h.currentPrice*h.shares:h.costPrice*getOrigShares(h)),0);
-  const totalCash=getTotalCashDiv();
+  const tc=holdings.reduce((s,h)=>s+toCNY(h.costPrice*getOrigShares(h),h.market),0);
+  const tm=holdings.reduce((s,h)=>s+toCNY((h.currentPrice!=null?h.currentPrice:h.costPrice)*h.shares,h.market),0);
+  const totalCash=getTotalCashDiv(); // 分红直接是人民币
   const tp=tm-tc+totalCash,tpp=tc>0?tp/tc*100:0;
-  const dp=holdings.reduce((s,h)=>s+(getEffectiveDailyPnl(h)||0),0);
+  const dp=holdings.reduce((s,h)=>s+toCNY(getEffectiveDailyPnl(h)||0,h.market),0);
   const dpp=tm>0?dp/tm*100:0;
   $('tCost').textContent='¥'+tc.toFixed(2);
   $('tMv').textContent='¥'+tm.toFixed(2);
@@ -623,6 +769,18 @@ function renderSummary(){
   // 分红卡片
   $('tDiv').textContent='¥'+totalCash.toFixed(2);
   $('tDivSub').textContent=totalCash>0?'已覆盖 '+holdings.filter(h=>getCashDiv(h)>0).length+' 个持仓':(holdings.length?'无分红记录':'');
+  // 汇率显示
+  updateExrateBar();
+}
+
+function updateExrateBar(){
+  const bar = $('exrateBar');
+  if (!bar) return;
+  const hasFx = holdings.some(h => h.market === 'hk' || h.market === 'us');
+  if (!hasFx || (!exRateUSD && !exRateHKD)) { bar.style.display = 'none'; return; }
+  bar.style.display = 'block';
+  if (exRateUSD > 0) $('erUSD').textContent = '¥' + exRateUSD.toFixed(4);
+  if (exRateHKD > 0) $('erHKD').textContent = '¥' + exRateHKD.toFixed(4);
 }
 
 function renderTable(){
@@ -660,7 +818,7 @@ function renderCharts(){
   if(!holdings.length){['cMktW','cTypW'].forEach(id=>{const e=$(id);if(e)e.innerHTML='<div class="ndata"><p>暂无数据</p></div>'});return}
   const CO=['#ef4444','#f59e0b','#3b82f6','#10b981','#8b5cf6','#ec4899','#06b6d4'];
   const md={},td={};
-  holdings.forEach(h=>{const l=ML[h.market]||h.market,v=(h.currentPrice||h.costPrice)*h.shares;md[l]=(md[l]||0)+v;const t=h.market==='fund'?'基金':'股票';td[t]=(td[t]||0)+v});
+  holdings.forEach(h=>{const l=ML[h.market]||h.market,v=toCNY((h.currentPrice||h.costPrice)*h.shares,h.market);md[l]=(md[l]||0)+v;const t=h.market==='fund'?'基金':'股票';td[t]=(td[t]||0)+v});
   function mk(cid,ents,off){const cv=$(cid);if(!cv)return null;return new Chart(cv,{type:'doughnut',data:{labels:ents.map(e=>e[0]),datasets:[{data:ents.map(e=>e[1]),backgroundColor:CO.slice(off,off+ents.length),borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{position:'bottom',labels:{padding:14,usePointStyle:true,pointStyleWidth:10}},tooltip:{callbacks:{label:ctx=>{const t=ctx.dataset.data.reduce((a,b)=>a+b,0);return` ${ctx.label}: ¥${ctx.parsed.toFixed(2)} (${t>0?(ctx.parsed/t*100).toFixed(1):'0.0'}%)`}}}}}})}
   const me=Object.entries(md),te=Object.entries(td);
   if(me.length)charts.mkt=mk('cMkt',me,0);
@@ -886,6 +1044,8 @@ async function checkAndRecordDividends(h){
 // ========== 初始化 ==========
 function init(){
   $('proxyInput').value=proxyUrl;
+  // 启动时尝试获取汇率（有缓存则用缓存）
+  fetchExchangeRates().then(()=>{renderAll()});
   renderAll();
   // 启动时检查代理配置（仅对基金 JSONP 回退需要）
   if(!proxyUrl && holdings.some(h=>h.market==='fund')){
