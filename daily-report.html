@@ -2,331 +2,186 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<title>全球金融市场日报 - 2026-07-02</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>全球金融市场日报</title>
 <style>
-:root{--bg:#fff;--text:#1a1a2e;--card-bg:#f8f9fc;--border:#e2e8f0;--up:#e74c3c;--down:#2ecc71;--accent:#2563eb}
-@media(prefers-color-scheme:dark){
-:root{--bg:#0f0f23;--text:#e2e8f0;--card-bg:#1a1a2e;--border:#2d2d4a;--accent:#60a5fa}
-}
+:root{--bg:#f8f9fa;--card:#fff;--text:#1a1a2e;--sub:#6b7280;--border:#e5e7eb;--accent:#2563eb;--highlight:#fef3c7;--active:#dbeafe;--table-head:#f1f5f9}
+@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--sub:#94a3b8;--border:#334155;--accent:#3b82f6;--highlight:#3d2e00;--active:#1e3a5f;--table-head:#1e293b}}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:0;padding-bottom:80px}
-.header{background:linear-gradient(135deg,#1a1a2e,#16213e);color:#fff;padding:24px 16px;text-align:center;position:sticky;top:0;z-index:10}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.75;min-height:100dvh;padding:0 0 120px;-webkit-text-size-adjust:100%}
+.tip{background:#fef3c7;color:#92400e;font-size:13px;padding:8px 14px;text-align:center;border-bottom:1px solid #fde68a}
+@media(prefers-color-scheme:dark){.tip{background:#422006;color:#fde68a;border-color:#78350f}}
+.header{background:var(--card);border-bottom:1px solid var(--border);padding:18px 16px;text-align:center}
 .header h1{font-size:20px;font-weight:700;margin-bottom:4px}
-.header .meta{font-size:13px;opacity:.8}
-.container{max-width:800px;margin:0 auto;padding:12px 16px}
-.section{margin:16px 0;background:var(--card-bg);border-radius:12px;padding:16px;border:1px solid var(--border)}
-.section h2{font-size:16px;font-weight:700;margin-bottom:12px;color:var(--accent);border-left:4px solid var(--accent);padding-left:10px}
-.section h3{font-size:14px;font-weight:600;margin:12px 0 8px}
-table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
-th,td{padding:8px 6px;text-align:left;border-bottom:1px solid var(--border)}
-th{background:rgba(37,99,235,.08);font-weight:600;font-size:12px}
-.up{color:var(--up);font-weight:600}
-.down{color:var(--down);font-weight:600}
-.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;margin-right:4px}
-.tag-hot{background:#fee2e2;color:#dc2626}
-.tag-cool{background:#dbeafe;color:#2563eb}
-.note{font-size:12px;color:#888;margin-top:8px;padding:8px;background:rgba(0,0,0,.03);border-radius:6px}
-.footer{text-align:center;font-size:12px;color:#666;padding:20px;border-top:1px solid var(--border);margin-top:20px}
-.highlight{background:rgba(255,193,7,.3);transition:background .3s}
-#controls{position:fixed;bottom:0;left:0;right:0;background:var(--card-bg);border-top:2px solid var(--border);padding:8px 12px;display:flex;align-items:center;gap:8px;z-index:100;flex-wrap:wrap;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding-bottom:env(safe-area-inset-bottom,8px)}
-#controls button{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:14px;cursor:pointer;white-space:nowrap;min-width:44px}
-#controls button:active{opacity:.8}
-#controls .speed{font-size:12px;display:flex;align-items:center;gap:4px}
-#controls select{background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:4px;font-size:12px}
-#progress-wrap{flex:1;min-width:60px;display:flex;align-items:center;gap:6px}
-#progress{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden;cursor:pointer}
-#progress-bar{height:100%;background:var(--accent);width:0%;border-radius:3px;transition:width .2s}
-#status{font-size:11px;color:#888;white-space:nowrap}
-@media(max-width:480px){
-.header h1{font-size:17px}
-.container{padding:8px 10px}
-.section{padding:12px;margin:10px 0}
-table{font-size:12px}
-th,td{padding:5px 4px}
-#controls{padding:6px 8px;gap:4px}
-#controls button{padding:6px 10px;font-size:13px}
-}
+.header .date{font-size:13px;color:var(--sub)}
+.article{max-width:720px;margin:0 auto;padding:16px}
+.article h2{font-size:18px;margin:28px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--accent);display:inline-block}
+.article h3{font-size:16px;margin:18px 0 8px;color:var(--accent)}
+.article h4{font-size:15px;margin:14px 0 6px}
+.article p{margin:8px 0}
+.article table{width:100%;border-collapse:collapse;margin:10px 0 16px;font-size:14px;border-radius:8px;overflow:hidden}
+.article th{background:var(--table-head);font-weight:600;text-align:left;padding:8px 10px;font-size:13px;color:var(--sub);border-bottom:2px solid var(--border)}
+.article td{padding:8px 10px;border-bottom:1px solid var(--border)}
+.article tr:last-child td{border-bottom:none}
+.article strong{color:var(--accent);font-weight:700}
+.article blockquote{border-left:3px solid var(--accent);padding:8px 14px;margin:10px 0;background:var(--table-head);border-radius:0 8px 8px 0;color:var(--sub);font-size:14px}
+.article ul,.article ol{padding-left:22px;margin:8px 0}
+.article li{margin:4px 0}
+.article hr{border:none;border-top:1px solid var(--border);margin:20px 0}
+.up{color:#059669;font-weight:600} .down{color:#dc2626;font-weight:600}
+@media(prefers-color-scheme:dark){.up{color:#34d399}.down{color:#f87171}}
+.speak-active{background:var(--active)!important;border-radius:6px;padding:2px 8px;margin:-2px -8px;display:inline-block;transition:background .2s}
+.player{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--card);border-top:1px solid var(--border);padding:10px 16px max(10px,env(safe-area-inset-bottom,10px));box-shadow:0 -2px 12px rgba(0,0,0,.08)}
+.player-row{display:flex;align-items:center;gap:10px;max-width:500px;margin:0 auto}
+.btn{width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;-webkit-tap-highlight-color:transparent;background:var(--bg);color:var(--text);border:1px solid var(--border)}
+.btn:active{transform:scale(.94)}
+.btn-play{width:56px;height:56px;font-size:24px;background:var(--accent);color:#fff;border:none;box-shadow:0 3px 10px rgba(37,99,235,.3)}
+.btn-sm{width:36px;height:36px;font-size:16px}
+.speed{font-size:12px;color:var(--sub);min-width:32px;text-align:center;cursor:pointer;padding:4px 0;user-select:none}
+.progress{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--accent);border-radius:2px;width:0;transition:width .2s linear}
+.toast{position:fixed;top:12px;left:50%;transform:translateX(-50%);background:#1f2937;color:#fff;padding:8px 20px;border-radius:20px;font-size:14px;z-index:300;pointer-events:none;opacity:0;transition:opacity .25s}
+.toast.show{opacity:1}
+@media(prefers-color-scheme:dark){.toast{background:#374151}}
 </style>
 </head>
 <body>
-
-<div class="header">
-  <h1>🌏 全球金融市场日报</h1>
-  <div class="meta">2026年7月2日（星期四）· 北京时间 09:51 · 完整版</div>
+<div class="tip">💡 在浏览器中打开此页即可朗读（微信内长按 → 在浏览器中打开）</div>
+<div class="header"><h1>📰 全球金融市场日报</h1><div class="date">2026年07月02日</div></div>
+<div class="article" id="articleContent">
+<h1>🌐 全球金融市场日报</h1>
+<p><strong>查询时间</strong>：2026年7月2日 07:00（北京时间）| <strong>周四</strong> | <strong>完整模式</strong></p>
+<hr>
+<h2>一、前一日A股收盘概况</h2>
+<table><thead><tr>
+<th>指数</th>
+<th>收盘点位</th>
+<th>涨跌幅</th>
+</tr></thead><tbody>
+<tr>
+<td>上证指数</td>
+<td>4112.48</td>
+<td><strong><span class="up"&gt;↑0.44%</span></strong></td>
+</tr>
+<tr>
+<td>深证成指</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>沪深300</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<p>市场情绪：A股成交额达3.68万亿天量，4300股上涨。风格明显切换，科创50 <strong><span class="down"&gt;↓2.48%</span></strong>，资金从硬科技流向金融、化工、养殖等板块。</p>
+<h2>二、美股收盘概况</h2>
+<table><thead><tr>
+<th>指数</th>
+<th>收盘点位</th>
+<th>涨跌幅</th>
+</tr></thead><tbody>
+<tr>
+<td>道琼斯</td>
+<td>盘中创新高后回落</td>
+<td><strong><span class="down"&gt;↓0.03%</span></strong></td>
+</tr>
+<tr>
+<td>标普500</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>纳斯达克</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<p>费城半导体指数 <strong><span class="down"&gt;↓5%</span></strong>，Meta逆市 <strong><span class="up"&gt;↑8.81%</span></strong>。</p>
+<h2>三、恐慌指数</h2>
+<table><thead><tr>
+<th>指数</th>
+<th>数值</th>
+<th>解读</th>
+</tr></thead><tbody>
+<tr>
+<td>VIX</td>
+<td><strong>17.99</strong></td>
+<td>正常区间</td>
+</tr>
+<tr>
+<td>VXN</td>
+<td><strong>27.69</strong></td>
+<td>中度恐慌（纳指波动加剧）</td>
+</tr>
+</tbody></table>
+<h2>四、主要指数估值</h2>
+<table><thead><tr>
+<th>指数</th>
+<th>PE</th>
+<th>PB</th>
+<th>估值分位</th>
+</tr></thead><tbody>
+<tr>
+<td>纳斯达克100</td>
+<td>—</td>
+<td>—</td>
+<td>97%+（极高）</td>
+</tr>
+<tr>
+<td>标普500</td>
+<td>—</td>
+<td>—</td>
+<td>97%+（极高）</td>
+</tr>
+<tr>
+<td>恒生科技</td>
+<td>—</td>
+<td>—</td>
+<td>12%（极低）</td>
+</tr>
+<tr>
+<td>红利低波</td>
+<td>—</td>
+<td>—</td>
+<td>&lt;20%（较低）</td>
+</tr>
+</tbody></table>
+<h2>五、个人持仓动态</h2>
+<ul>
+<li><strong>招商银行A（600036）</strong>：35.91元 <strong><span class="up"&gt;↑1.15%</span></strong>，主力净流入3.96亿</li>
+<li><strong>QQQM</strong>：298.61美元 <strong><span class="down"&gt;↓1.44%</span></strong></li>
+<li><strong>纳指100联接（016452）</strong>：净值2.3595，近一周 <strong><span class="up"&gt;↑2.98%</span></strong>（限购50元/日）</li>
+<li><strong>红利低波（020602）</strong>：净值0.9910，近一周 <strong><span class="down"&gt;↓1.80%</span></strong></li>
+</ul>
+<h2>六、行业要闻与重点新闻</h2>
+<h3>📌 今日关注</h3>
+<p>今晚20:30美国6月非农就业报告（因周五休市提前发布）——将直接影响美联储7月加息预期，可能触发全球风险资产波动。</p>
 </div>
-
-<div class="container">
-
-<!-- 一、A股 -->
-<div class="section" data-section="a-share">
-  <h2>一、前一日A股收盘概况</h2>
-  <p style="font-size:13px;color:#888;margin-bottom:8px">2026年7月1日（星期三）</p>
-  <table>
-    <tr><th>指数</th><th>收盘点位</th><th>涨跌幅</th></tr>
-    <tr><td><strong>上证指数</strong></td><td>4112.45</td><td><span class="up">↑0.44%</span></td></tr>
-    <tr><td><strong>深证成指</strong></td><td>16119.17</td><td><span class="down">↓0.53%</span></td></tr>
-    <tr><td><strong>沪深300</strong></td><td>4958.98</td><td><span class="down">↓0.41%</span></td></tr>
-  </table>
-  <p style="font-size:13px">两市成交 <strong>36,828亿元</strong>（放量3,890亿），超 <strong>4,300只</strong> 个股上涨，220+只涨停。养殖业、保险、券商领涨，科技股分化回调。</p>
-</div>
-
-<!-- 二、美股 -->
-<div class="section" data-section="us-stocks">
-  <h2>二、美股收盘概况</h2>
-  <p style="font-size:13px;color:#888;margin-bottom:8px">2026年7月1日（美东时间）</p>
-  <table>
-    <tr><th>指数</th><th>收盘点位</th><th>涨跌幅</th></tr>
-    <tr><td><strong>道琼斯（DJI）</strong></td><td>52,305.24</td><td><span class="down">↓0.03%</span></td></tr>
-    <tr><td><strong>标普500（SPX）</strong></td><td>7,483.23</td><td><span class="down">↓0.22%</span></td></tr>
-    <tr><td><strong>纳斯达克综合（IXIC）</strong></td><td>26,040.03</td><td><span class="down">↓0.66%</span></td></tr>
-  </table>
-  <p style="font-size:13px">道指盘中创历史新高52,742.66后回落。Meta进军云计算引发AI硬件股暴跌，美光/闪迪跌超10%。ADP就业数据不及预期，7月加息概率降至29.4%。</p>
-</div>
-
-<!-- 三、恐慌指数 -->
-<div class="section" data-section="vix">
-  <h2>三、恐慌指数</h2>
-  <table>
-    <tr><th>指数</th><th>最新值</th><th>变化</th><th>解读</th></tr>
-    <tr><td><strong>VIX</strong></td><td>17.99</td><td><span class="down">↓2.8%</span></td><td>正常/温和区间</td></tr>
-    <tr><td><strong>VXN</strong></td><td>27.69</td><td><span class="up">↑2.14%</span></td><td>接近中度恐慌，科技股波动加剧</td></tr>
-  </table>
-</div>
-
-<!-- 四、估值 -->
-<div class="section" data-section="valuation">
-  <h2>四、主要指数估值</h2>
-  <table>
-    <tr><th>指数</th><th>PE(TTM)</th><th>PB</th><th>PE分位</th><th>备注</th></tr>
-    <tr><td><strong>纳指100</strong></td><td>~35.8-37.4</td><td>~10.1</td><td>近10年 85%+</td><td>CAPE约42.3</td></tr>
-    <tr><td><strong>标普500</strong></td><td>~26-29</td><td>~5.46</td><td>近10年 ~96%</td><td>CAPE约40-42</td></tr>
-    <tr><td><strong>中证A500</strong></td><td>~15.7-17.0</td><td>~1.71</td><td>~74%</td><td>估值适中</td></tr>
-    <tr><td><strong>创业板指</strong></td><td>~52.99</td><td>~5.1</td><td>偏高</td><td>需盈利验证</td></tr>
-    <tr><td><strong>红利低波</strong></td><td>~8.47</td><td>~0.68</td><td>历史低位</td><td>股息率<span class="up">4.38%</span></td></tr>
-    <tr><td><strong>恒生科技</strong></td><td>~22</td><td>~2.7</td><td>近5年 ~23%</td><td>PEG约1.08</td></tr>
-  </table>
-</div>
-
-<!-- 五、持仓 -->
-<div class="section" data-section="holdings">
-  <h2>五、个人持仓动态</h2>
-  <table>
-    <tr><th>持仓</th><th>最新价</th><th>涨跌幅</th></tr>
-    <tr><td>招商银行A股（600036）</td><td><strong>35.91元</strong></td><td><span class="up">↑1.15%</span></td></tr>
-    <tr><td>招商银行H股（03968）</td><td><strong>44.10港元</strong></td><td><span class="up">↑0.76%</span></td></tr>
-    <tr><td>QQQM（纳指100 ETF）</td><td><strong>$298.61</strong></td><td><span class="down">↓1.44%</span></td></tr>
-  </table>
-  <p style="font-size:13px;margin-top:8px">A/H溢价率 <strong>-4.68%</strong>（H股折价）。2025年度末期股息8月21日派发。</p>
-  <table style="margin-top:8px">
-    <tr><th>代码</th><th>名称</th><th>净值</th><th>涨跌幅</th><th>日期</th></tr>
-    <tr><td>016452</td><td>南方纳指100联接</td><td><strong>2.3595</strong></td><td><span class="up">↑1.54%</span></td><td>06-30</td></tr>
-    <tr><td>017641</td><td>摩根标普500联接</td><td><strong>1.6742</strong></td><td><span class="up">↑0.67%</span></td><td>06-30</td></tr>
-    <tr><td>020602</td><td>易方达红利低波联接</td><td><strong>0.9910</strong></td><td><span class="up">↑0.98%</span></td><td>07-01</td></tr>
-    <tr><td>020741</td><td>华泰安悦债券C</td><td><strong>1.1423</strong></td><td><span class="down">↓0.31%</span></td><td>07-01</td></tr>
-  </table>
-</div>
-
-<!-- 六、行业要闻 -->
-<div class="section" data-section="news">
-  <h2>六、行业要闻与重点新闻</h2>
-
-  <h3>🌍 全球重点新闻 TOP 5</h3>
-  <ol style="font-size:13px;padding-left:20px;margin:8px 0">
-    <li><strong>Meta进军云计算</strong> — 拟向外部客户出售AI算力，股价涨近9%，但引发全球AI硬件链暴跌，韩国Kospi一度跌6.5%。</li>
-    <li><strong>王毅同鲁比奥通电话</strong> — 强调构建建设性战略稳定关系，拉长合作清单、压缩问题清单，台湾问题需慎重。</li>
-    <li><strong>近20家半导体企业7月1日集体涨价</strong> — 士兰微涨15%、扬杰科技涨10-15%，AI超级周期向上游传导全面加速。</li>
-    <li><strong>美国ADP就业不及预期</strong> — 6月新增9.8万人，低于预期的11万人，就业市场降温信号。</li>
-    <li><strong>全球海洋温度创新高</strong> — 哥白尼机构发布6月21日全球海洋表面平均温度打破历史纪录。</li>
-  </ol>
-
-  <h3>💰 QDII额度与场内ETF溢价</h3>
-  <p style="font-size:13px">7月3日（美国独立日）多只纳指/标普500 QDII基金暂停申赎。当前溢价率：</p>
-  <table>
-    <tr><th>ETF</th><th>代码</th><th>溢价率</th></tr>
-    <tr><td>纳指ETF国泰</td><td>513100</td><td><span class="up">9.07%</span></td></tr>
-    <tr><td>纳指ETF广发</td><td>159941</td><td><span class="up">8.77%</span></td></tr>
-    <tr><td>标普500博时</td><td>513500</td><td><span class="up">3.36%</span></td></tr>
-    <tr><td>标普500华夏</td><td>159655</td><td><span class="up">2.43%</span></td></tr>
-  </table>
-
-  <h3>🔬 A股科技板块</h3>
-  <p style="font-size:13px">半导体涨价潮正式落地，电子行业市值超越银行成为A股第一大行业。国常会加码AI政策，算力和芯片替代持续受驱动。</p>
-
-  <h3>💸 A股资金流向与热门板块</h3>
-  <p style="font-size:13px">7月1日北向资金净买入89亿元创近月新高，呈"沪强深弱"格局。主力资金净流入券商信托超80亿元。两融余额约3.01万亿元。</p>
-  <p style="font-size:13px"><strong>🔥 热门板块：</strong>券商/保险（大金融）、养殖业/猪肉、周期资源（化工）</p>
-
-  <h3>📊 国内公募/债券市场</h3>
-  <p style="font-size:13px">上半年"翻倍基"达240只以上创历史之最。首批中证REITs全收益指数基金正式发售。央行"借券"操作扰动债市。</p>
-</div>
-
-<div class="footer">
-  <p>📱 手机朗读：<a href="https://homjanon.github.io/portfolio/daily-report.html" target="_blank">homjanon.github.io/portfolio/daily-report.html</a></p>
-  <p>📚 MD已同步到IMA知识库 - 投资</p>
-  <p style="margin-top:8px">风险提示：本报告仅供参考，不构成投资建议。市场有风险，投资需谨慎。</p>
-</div>
-
-</div>
-
-<!-- 朗读控制栏 -->
-<div id="controls">
-  <button id="btnPlay" onclick="togglePlay()">▶</button>
-  <button id="btnPrev" onclick="prevSegment()" title="上一段">⏮</button>
-  <button id="btnNext" onclick="nextSegment()" title="下一段">⏭</button>
-  <span class="speed">语速
-    <select id="rateSelect" onchange="setRate(this.value)">
-      <option value="0.7">0.7x</option>
-      <option value="0.85">0.85x</option>
-      <option value="1" selected>1x</option>
-      <option value="1.2">1.2x</option>
-      <option value="1.5">1.5x</option>
-    </select>
-  </span>
-  <div id="progress-wrap">
-    <div id="progress" onclick="seekProgress(event)">
-      <div id="progress-bar"></div>
-    </div>
-    <span id="status">0/0</span>
-  </div>
-</div>
-
+<div class="player"><div class="player-row">
+<button class="btn btn-sm" id="btnPrev">⏮</button>
+<button class="btn btn-sm" id="btnSkipBack">⏪</button>
+<button class="btn btn-play" id="btnPlay">▶</button>
+<button class="btn btn-sm" id="btnSkipFwd">⏩</button>
+<button class="btn btn-sm" id="btnNext">⏭</button>
+<span class="speed" id="speedLabel">1×</span>
+<div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+</div></div>
+<div class="toast" id="toast"></div>
 <script>
-let synth = window.speechSynthesis;
-let utterance = null;
-let segments = [];
-let currentIdx = 0;
-let isPlaying = false;
-let isPaused = false;
-
-function getSegments(){
-  const els = document.querySelectorAll('.section');
-  const segs = [];
-  els.forEach(el=>{
-    const heading = el.querySelector('h2');
-    if(heading) segs.push(heading.textContent);
-    const ps = el.querySelectorAll('p, li, td');
-    ps.forEach(p=>{
-      const t = p.textContent.trim();
-      if(t.length>5) segs.push(t);
-    });
-  });
-  return segs;
-}
-
-segments = getSegments();
-updateStatus();
-
-function speak(idx){
-  if(idx>=segments.length){stop();return;}
-  currentIdx=idx;
-  const text = segments[idx];
-  utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'zh-CN';
-  utterance.rate = parseFloat(document.getElementById('rateSelect').value);
-  utterance.onend = ()=>{
-    removeHighlight();
-    currentIdx++;
-    if(currentIdx<segments.length){
-      speak(currentIdx);
-    }else{
-      stop();
-    }
-  };
-  utterance.onboundary = (e)=>{
-    if(e.name==='word'){
-      // highlight not used per-word due to complexity
-    }
-  };
-  synth.speak(utterance);
-  isPlaying=true;
-  isPaused=false;
-  document.getElementById('btnPlay').textContent='⏸';
-  highlightSegment(idx);
-  updateStatus();
-}
-
-function togglePlay(){
-  if(isPlaying && !isPaused){
-    synth.pause();
-    isPaused=true;
-    document.getElementById('btnPlay').textContent='▶';
-  }else if(isPaused){
-    synth.resume();
-    isPaused=false;
-    document.getElementById('btnPlay').textContent='⏸';
-  }else{
-    speak(currentIdx);
-  }
-}
-
-function stop(){
-  if(synth.speaking) synth.cancel();
-  isPlaying=false;
-  isPaused=false;
-  document.getElementById('btnPlay').textContent='▶';
-  removeHighlight();
-}
-
-function nextSegment(){
-  if(currentIdx<segments.length-1){
-    stop();
-    currentIdx++;
-    speak(currentIdx);
-  }
-}
-
-function prevSegment(){
-  if(currentIdx>0){
-    stop();
-    currentIdx--;
-    speak(currentIdx);
-  }
-}
-
-function setRate(val){
-  if(utterance){
-    utterance.rate=parseFloat(val);
-  }
-}
-
-function highlightSegment(idx){
-  removeHighlight();
-  let count=0;
-  document.querySelectorAll('.section p, .section li, .section td').forEach(el=>{
-    if(el.textContent.trim()===segments[idx]||el.textContent.trim().length>5){
-      count++;
-      if(count===idx+1){
-        el.classList.add('highlight');
-        el.scrollIntoView({behavior:'smooth',block:'center'});
-      }
-    }
-  });
-}
-
-function removeHighlight(){
-  document.querySelectorAll('.highlight').forEach(el=>el.classList.remove('highlight'));
-}
-
-function updateStatus(){
-  document.getElementById('status').textContent=currentIdx+'/'+segments.length;
-  const pct = segments.length>0 ? (currentIdx/segments.length*100) : 0;
-  document.getElementById('progress-bar').style.width=pct+'%';
-}
-
-function seekProgress(e){
-  const rect = document.getElementById('progress').getBoundingClientRect();
-  const pct = (e.clientX-rect.left)/rect.width;
-  const idx = Math.floor(pct*segments.length);
-  if(idx>=0 && idx<segments.length){
-    stop();
-    currentIdx=idx;
-    speak(idx);
-  }
-}
-
-window.addEventListener('beforeunload',()=>{if(synth.speaking)synth.cancel()});
+(function(){var a=document.getElementById("articleContent"),b=document.getElementById("btnPlay"),c=document.getElementById("progressFill"),d=document.getElementById("speedLabel"),e=document.getElementById("toast"),f=[],g=0,h=!1,i=1,j=null,k=null;
+function l(m){e.textContent=m;e.classList.add("show");clearTimeout(k);k=setTimeout(function(){e.classList.remove("show")},2000)}
+function n(){var m=document.createTreeWalker(a,NodeFilter.SHOW_TEXT,{acceptNode:function(o){var p=o.textContent.trim();if(!p)return NodeFilter.FILTER_REJECT;var q=o.parentElement;while(q&&q!==a){if(["SCRIPT","STYLE","CODE","PRE"].indexOf(q.tagName)>=0)return NodeFilter.FILTER_REJECT;q=q.parentElement}return NodeFilter.FILTER_ACCEPT}});f=[];var r={};while(m.nextNode()){var s=m.currentNode.textContent.trim();if(s.length>=4&&!r[s]){r[s]=!0;f.push({node:m.currentNode,text:s})}}g=0}
+function t(u){if(u<0||u>=f.length)return;if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;var v=f[u];j=new SpeechSynthesisUtterance(v.text);j.lang="zh-CN";j.rate=i;j.pitch=1;var w=document.querySelectorAll(".speak-active");for(var x=0;x<w.length;x++)w[x].classList.remove("speak-active");var y=v.node.parentElement;if(y&&y!==a){y.classList.add("speak-active");y.scrollIntoView({behavior:"smooth",block:"center"})}
+j.onend=function(){var z=document.querySelectorAll(".speak-active");for(var A=0;A<z.length;A++)z[A].classList.remove("speak-active");g++;var B=f.length>0?Math.round(g/f.length*100):0;c.style.width=B+"%";if(g<f.length&&h)t(g);else if(g>=f.length){h=!1;b.textContent="▶";l("✅ 朗读完成")}};j.onerror=function(B){if(B.error!=="interrupted"&&B.error!=="canceled")console.warn(B.error)};speechSynthesis.speak(j);var B=f.length>0?Math.round(g/f.length*100):0;c.style.width=B+"%"}
+function C(){if(f.length===0)n();if(f.length===0){l("⚠️ 暂无可朗读内容");return}if(speechSynthesis.paused)speechSynthesis.resume();else if(!speechSynthesis.speaking)t(g);h=!0;b.textContent="⏸"}
+function D(){speechSynthesis.pause();h=!1;b.textContent="▶"}
+function E(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});h=!1;b.textContent="▶";g=0;c.style.width="0"}
+function F(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.min(g+1,f.length-1);var m=f.length>0?Math.round(g/f.length*100):0;c.style.width=m+"%";if(h)t(g)}
+function G(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.max(g-1,0);var m=f.length>0?Math.round(g/f.length*100):0;c.style.width=m+"%";if(h)t(g)}
+b.addEventListener("click",function(){h?D():C()});document.getElementById("btnNext").addEventListener("click",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.min(g+3,f.length-1);var m=f.length>0?Math.round(g/f.length*100):0;c.style.width=m+"%";if(h)t(g)});document.getElementById("btnPrev").addEventListener("click",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.max(g-3,0);var m=f.length>0?Math.round(g/f.length*100):0;c.style.width=m+"%";if(h)t(g)});document.getElementById("btnSkipFwd").addEventListener("click",F);document.getElementById("btnSkipBack").addEventListener("click",G);d.addEventListener("click",function(){var m=[0.75,1,1.25,1.5];var o=m.indexOf(i);i=m[(o+1)%m.length];d.textContent=i+"×";if(h&&speechSynthesis.speaking){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(p){p.classList.remove("speak-active")});t(g)}});
+document.addEventListener("keydown",function(m){if(m.target.tagName==="INPUT"||m.target.tagName==="TEXTAREA")return;if(m.key===" "){m.preventDefault();h?D():C()}else if(m.key==="ArrowRight")F();else if(m.key==="ArrowLeft")G();else if(m.key==="Escape")E()});
+n();b.addEventListener("touchstart",function(){var m=new SpeechSynthesisUtterance("");m.volume=0;speechSynthesis.speak(m)},{once:!0});setInterval(function(){if(h&&!speechSynthesis.speaking&&!speechSynthesis.pending&&g<f.length)t(g)},4000);window.addEventListener("beforeunload",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel()})})();
 </script>
-
 </body>
 </html>
