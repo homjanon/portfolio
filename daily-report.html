@@ -40,6 +40,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 .btn-play{width:56px;height:56px;font-size:24px;background:var(--accent);color:#fff;border:none;box-shadow:0 3px 10px rgba(37,99,235,.3)}
 .btn-sm{width:36px;height:36px;font-size:16px}
 .speed{font-size:12px;color:var(--sub);min-width:32px;text-align:center;cursor:pointer;padding:4px 0;user-select:none}
+.voice-btn{font-size:12px;color:var(--sub);min-width:48px;text-align:center;cursor:pointer;padding:4px 6px;user-select:none;border-radius:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.voice-btn:active{background:var(--bg)}
+.voice-btn.has-voices{color:var(--accent)}
 .progress{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
 .progress-fill{height:100%;background:var(--accent);border-radius:2px;width:0;transition:width .2s linear}
 .toast{position:fixed;top:12px;left:50%;transform:translateX(-50%);background:#1f2937;color:#fff;padding:8px 20px;border-radius:20px;font-size:14px;z-index:300;pointer-events:none;opacity:0;transition:opacity .25s}
@@ -61,10 +64,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 <hr>
 <h2>一、前一日 A 股收盘概况</h2>
 <div class="table-text">上证指数报收4112.48，上涨0.44%。深证成指报收12853.21，上涨0.67%。沪深300报收4821.55，上涨0.31%。</div>
-<p class="">市场情绪：A 股成交额达 3.68 万亿天量，4300 股上涨。风格明显切换，科创 50 <strong><span class="down">↓2.48%</span></strong>，资金从硬科技流向金融、化工、养殖等板块。北向资金净流入 127 亿元。</p>
+<p class="">市场情绪：A 股成交额达 3.68 万亿天量，4300 股上涨。风格明显切换，科创 50 <strong><span class="down">下跌2.48%</span></strong>，资金从硬科技流向金融、化工、养殖等板块。北向资金净流入 127 亿元。</p>
 <h2>二、美股收盘概况</h2>
 <div class="table-text">道琼斯，盘中创新高后回落，下跌0.03%。标普500报收5987.34，下跌0.12%。纳斯达克报收19284.71，下跌0.41%。</div>
-<p class="">费城半导体指数 <strong><span class="down">↓5%</span></strong>，英伟达 <strong><span class="down">↓7.8%</span></strong> 领跌。Meta 逆市 <strong><span class="up">↑8.81%</span></strong>，AI 广告营收指引超预期。市场消化美联储 7 月加息预期，10 年期美债收益率升至 4.62%。</p>
+<p class="">费城半导体指数 <strong><span class="down">下跌5%</span></strong>，英伟达 <strong><span class="down">下跌7.8%</span></strong> 领跌。Meta 逆市 <strong><span class="up">上涨8.81%</span></strong>，AI 广告营收指引超预期。市场消化美联储 7 月加息预期，10 年期美债收益率升至 4.62%。</p>
 <h2>三、恐慌指数</h2>
 <div class="table-text">VIX报17.99，处于正常区间。VXN报27.69，处于中度恐慌（纳指波动加剧）。</div>
 <h2>四、主要指数估值</h2>
@@ -100,7 +103,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 <p class="no-indent">多家基金公司暂停 QDII 大额申购，纳指 100 类 ETF 溢价率持续走高，建议关注折价机会或场外限购渠道。</p>
 </blockquote>
 <h3>🔬 A 股科技板块</h3>
-<p class="">科创 50 遭遇资金大幅流出，半导体板块整体回调，中芯国际 <strong><span class="down">↓3.7%</span></strong>、寒武纪 <strong><span class="down">↓5.2%</span></strong>。但 AI 应用端逆势活跃，昆仑万维 <strong><span class="up">↑6.3%</span></strong>，公司宣布"天工 3.0"大模型通过备案。工信部发布《人工智能赋能新型工业化行动方案》，明确 2027 年目标。</p>
+<p class="">科创 50 遭遇资金大幅流出，半导体板块整体回调，中芯国际 <strong><span class="down">下跌3.7%</span></strong>、寒武纪 <strong><span class="down">下跌5.2%</span></strong>。但 AI 应用端逆势活跃，昆仑万维 <strong><span class="up">上涨6.3%</span></strong>，公司宣布"天工 3.0"大模型通过备案。工信部发布《人工智能赋能新型工业化行动方案》，明确 2027 年目标。</p>
 <h3>💰 A 股资金流向与热门板块</h3>
 <div class="table-text">维度主力净流入 TOP，近 5 日银行（+58 亿）、化工（+42 亿）、农林牧渔（+31 亿），近 10 日银行（+105 亿）、化工（+78 亿）、公用事业（+62 亿）。维度主力净流出 TOP，近 5 日电子（-87 亿）、计算机（-65 亿）、通信（-48 亿），近 10 日电子（-153 亿）、计算机（-112 亿）、传媒（-85 亿）。维度北向资金，近 5 日沪股通净买入 89 亿、深股通净买入 38 亿，近 10 日近 10 日累计净流入 342 亿。</div>
 <p class=""><strong>结论</strong>：当前最火热板块为 <strong>银行</strong>（高股息 + 防御属性）、<strong>化工</strong>（周期复苏 + 涨价逻辑）、<strong>农林牧渔</strong>（猪周期反转预期）。科技板块资金持续出逃，风格切换明显。</p>
@@ -115,26 +118,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 <button class="btn btn-play" id="btnPlay">▶</button>
 <button class="btn btn-sm" id="btnSkipFwd">⏩</button>
 <button class="btn btn-sm" id="btnNext">⏭</button>
+<span class="voice-btn" id="voiceLabel" title="点击切换朗读音色">🎙️</span>
 <span class="speed" id="speedLabel">1×</span>
 <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
 </div></div>
 <div class="toast" id="toast"></div>
 <script>
-(function(){var a=document.getElementById("articleContent"),b=document.getElementById("btnPlay"),c=document.getElementById("progressFill"),d=document.getElementById("speedLabel"),e=document.getElementById("toast"),f=[],g=0,h=!1,i=1,j=null,k=null;
-function l(m){e.textContent=m;e.classList.add("show");clearTimeout(k);k=setTimeout(function(){e.classList.remove("show")},2000)}
-function n(){var m=document.createTreeWalker(a,NodeFilter.SHOW_TEXT,{acceptNode:function(o){var p=o.textContent.trim();if(!p)return NodeFilter.FILTER_REJECT;var q=o.parentElement;while(q&&q!==a){if(["SCRIPT","STYLE","CODE","PRE"].indexOf(q.tagName)>=0)return NodeFilter.FILTER_REJECT;q=q.parentElement}return NodeFilter.FILTER_ACCEPT}});f=[];var r={};while(m.nextNode()){var s=m.currentNode.textContent.trim();if(s.length>=2){f.push({node:m.currentNode,text:s})}}g=0}
-function t(u){if(u<0||u>=f.length)return;if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;var v=f[u];j=new SpeechSynthesisUtterance(v.text);j.lang="zh-CN";j.rate=i;j.pitch=1;document.querySelectorAll(".speak-active").forEach(function(w){w.classList.remove("speak-active")});var y=v.node.parentElement;if(y&&y!==a){y.classList.add("speak-active");y.scrollIntoView({behavior:"smooth",block:"center"})}
-j.onend=function(){document.querySelectorAll(".speak-active").forEach(function(w){w.classList.remove("speak-active")});g++;var w=f.length>0?Math.round(g/f.length*100):0;c.style.width=w+"%";if(g<f.length&&h)t(g);else if(g>=f.length){h=!1;b.textContent="▶";l("✅ 朗读完成")}};j.onerror=function(w){if(w.error!=="interrupted"&&w.error!=="canceled")console.warn(w.error)};speechSynthesis.speak(j);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%"}
-function C(){if(f.length===0)n();if(f.length===0){l("⚠️ 暂无可朗读内容");return}if(speechSynthesis.paused)speechSynthesis.resume();else if(!speechSynthesis.speaking)t(g);h=!0;b.textContent="⏸"}
+(function(){var a=document.getElementById("articleContent"),b=document.getElementById("btnPlay"),c=document.getElementById("progressFill"),d=document.getElementById("speedLabel"),e=document.getElementById("toast"),vl=document.getElementById("voiceLabel"),f=[],g=0,h=!1,i=1,j=null,k=null,m=[],n=0,o=null;
+function P(){m=speechSynthesis.getVoices().filter(function(q){return q.lang.indexOf("zh")===0});if(m.length>0){n=parseInt(localStorage.getItem("ttsVoiceIdx")||"0");if(n>=m.length)n=0;o=m[n];vl.textContent=o.name.length>6?o.name.slice(0,6)+"…":o.name;vl.classList.add("has-voices");vl.title="当前: "+o.name+"（点击切换）"}else{o=null;vl.textContent="🎙️";vl.title="未检测到中文语音"}}
+speechSynthesis.addEventListener("voiceschanged",P);P();
+vl.addEventListener("click",function(){if(m.length<2)return;n=(n+1)%m.length;o=m[n];vl.textContent=o.name.length>6?o.name.slice(0,6)+"…":o.name;vl.title="当前: "+o.name+"（点击切换）";try{localStorage.setItem("ttsVoiceIdx",String(n))}catch(_){}if(h){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(q){q.classList.remove("speak-active")});t(g)}});
+function l(q){e.textContent=q;e.classList.add("show");clearTimeout(k);k=setTimeout(function(){e.classList.remove("show")},2000)}
+function p(){var q=document.createTreeWalker(a,NodeFilter.SHOW_TEXT,{acceptNode:function(r){var s=r.textContent.trim();if(!s)return NodeFilter.FILTER_REJECT;var t=r.parentElement;while(t&&t!==a){if(["SCRIPT","STYLE","CODE","PRE"].indexOf(t.tagName)>=0)return NodeFilter.FILTER_REJECT;t=t.parentElement}return NodeFilter.FILTER_ACCEPT}});f=[];while(q.nextNode()){var u=q.currentNode.textContent.trim();if(u.length>=2)f.push({node:q.currentNode,text:u})}g=0}
+function t(q){if(q<0||q>=f.length)return;if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;var r=f[q];j=new SpeechSynthesisUtterance(r.text);j.lang="zh-CN";j.rate=i;j.pitch=1;if(o)j.voice=o;document.querySelectorAll(".speak-active").forEach(function(s){s.classList.remove("speak-active")});var u=r.node.parentElement;if(u&&u!==a){u.classList.add("speak-active");u.scrollIntoView({behavior:"smooth",block:"center"})}
+j.onend=function(){document.querySelectorAll(".speak-active").forEach(function(s){s.classList.remove("speak-active")});g++;var s=f.length>0?Math.round(g/f.length*100):0;c.style.width=s+"%";if(g<f.length&&h)t(g);else if(g>=f.length){h=!1;b.textContent="▶";l("✅ 朗读完成")}};j.onerror=function(s){if(s.error!=="interrupted"&&s.error!=="canceled")console.warn(s.error)};speechSynthesis.speak(j);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%"}
+function C(){if(f.length===0)p();if(f.length===0){l("⚠️ 暂无可朗读内容");return}if(speechSynthesis.paused)speechSynthesis.resume();else if(!speechSynthesis.speaking)t(g);h=!0;b.textContent="⏸"}
 function D(){speechSynthesis.pause();h=!1;b.textContent="▶"}
-function E(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});h=!1;b.textContent="▶";g=0;c.style.width="0"}
-function F(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.min(g+1,f.length-1);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%";if(h)t(g)}
-function G(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.max(g-1,0);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%";if(h)t(g)}
-b.addEventListener("click",function(){h?D():C()});document.getElementById("btnNext").addEventListener("click",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.min(g+3,f.length-1);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%";if(h)t(g)});document.getElementById("btnPrev").addEventListener("click",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.max(g-3,0);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%";if(h)t(g)});document.getElementById("btnSkipFwd").addEventListener("click",F);document.getElementById("btnSkipBack").addEventListener("click",G);d.addEventListener("click",function(){var m=[0.75,1,1.25,1.5];var o=m.indexOf(i);i=m[(o+1)%m.length];d.textContent=i+"×";if(h&&speechSynthesis.speaking){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(p){p.classList.remove("speak-active")});t(g)}});
-document.addEventListener("keydown",function(m){if(m.target.tagName==="INPUT"||m.target.tagName==="TEXTAREA")return;if(m.key===" "){m.preventDefault();h?D():C()}else if(m.key==="ArrowRight")F();else if(m.key==="ArrowLeft")G();else if(m.key==="Escape")E()});
-n();b.addEventListener("touchstart",function(){var m=new SpeechSynthesisUtterance("");m.volume=0;speechSynthesis.speak(m)},{once:!0});setInterval(function(){if(h&&!speechSynthesis.speaking&&!speechSynthesis.pending&&g<f.length)t(g)},4000);
+function E(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(q){q.classList.remove("speak-active")});h=!1;b.textContent="▶";g=0;c.style.width="0"}
+function F(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(q){q.classList.remove("speak-active")});g=Math.min(g+1,f.length-1);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%";if(h)t(g)}
+function G(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(q){q.classList.remove("speak-active")});g=Math.max(g-1,0);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%";if(h)t(g)}
+b.addEventListener("click",function(){h?D():C()});document.getElementById("btnNext").addEventListener("click",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(q){q.classList.remove("speak-active")});g=Math.min(g+3,f.length-1);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%";if(h)t(g)});document.getElementById("btnPrev").addEventListener("click",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(q){q.classList.remove("speak-active")});g=Math.max(g-3,0);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%";if(h)t(g)});document.getElementById("btnSkipFwd").addEventListener("click",F);document.getElementById("btnSkipBack").addEventListener("click",G);d.addEventListener("click",function(){var q=[0.75,1,1.25,1.5];var r=q.indexOf(i);i=q[(r+1)%q.length];d.textContent=i+"×";if(h&&speechSynthesis.speaking){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(s){s.classList.remove("speak-active")});t(g)}});
+document.addEventListener("keydown",function(q){if(q.target.tagName==="INPUT"||q.target.tagName==="TEXTAREA")return;if(q.key===" "){q.preventDefault();h?D():C()}else if(q.key==="ArrowRight")F();else if(q.key==="ArrowLeft")G();else if(q.key==="Escape")E()});
+p();b.addEventListener("touchstart",function(){var q=new SpeechSynthesisUtterance("");q.volume=0;speechSynthesis.speak(q)},{once:!0});setInterval(function(){if(h&&!speechSynthesis.speaking&&!speechSynthesis.pending&&g<f.length)t(g)},4000);
 window.addEventListener("beforeunload",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel()});
-(function(){var r=document.getElementById("reportDate");if(!r)return;var m=r.textContent.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);if(!m)return;var rd=new Date(m[1],m[2]-1,m[3]);var td=new Date();td.setHours(0,0,0,0);if(rd<td){document.getElementById("staleBanner").classList.add("show");document.getElementById("refreshBtn").classList.add("show")}})();
+(function(){var q=document.getElementById("reportDate");if(!q)return;var r=q.textContent.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);if(!r)return;var s=new Date(r[1],r[2]-1,r[3]);var t=new Date();t.setHours(0,0,0,0);if(s<t){document.getElementById("staleBanner").classList.add("show");document.getElementById("refreshBtn").classList.add("show")}})();
 })();
 </script>
 </body>
