@@ -5,45 +5,34 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>全球金融市场日报</title>
 <style>
-:root{--bg:#f8f9fa;--card:#fff;--text:#1a1a2e;--sub:#6b7280;--border:#e5e7eb;--accent:#2563eb;--highlight:#fef3c7;--active:#dbeafe;--table-head:#f1f5f9}
-@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--sub:#94a3b8;--border:#334155;--accent:#3b82f6;--highlight:#3d2e00;--active:#1e3a5f;--table-head:#1e293b}}
+:root{--bg:#f8f9fa;--card:#fff;--text:#1a1a2e;--sub:#6b7280;--border:#e5e7eb;--accent:#2563eb;--note-bg:#f0f4ff}
+@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--sub:#94a3b8;--border:#334155;--accent:#3b82f6;--note-bg:#1e293b}}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.75;min-height:100dvh;padding:0 0 120px;-webkit-text-size-adjust:100%}
-.tip{background:#fef3c7;color:#92400e;font-size:13px;padding:8px 14px;text-align:center;border-bottom:1px solid #fde68a}
-@media(prefers-color-scheme:dark){.tip{background:#422006;color:#fde68a;border-color:#78350f}}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.9;min-height:100dvh;padding:0 0 130px;-webkit-text-size-adjust:100%}
 .header{background:var(--card);border-bottom:1px solid var(--border);padding:18px 16px;text-align:center;position:relative}
 .header h1{font-size:20px;font-weight:700;margin-bottom:4px}
 .header .date{font-size:13px;color:var(--sub);margin-bottom:8px}
-.mode-toggle{display:inline-flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:6px 16px;font-size:13px;color:var(--sub);cursor:pointer;transition:all .15s}
-.mode-toggle.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-.refresh-btn{position:absolute;right:16px;top:12px;background:var(--accent);color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;display:none}
+.refresh-btn{position:absolute;right:16px;top:14px;background:var(--accent);color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;display:none}
 .refresh-btn.show{display:block}
 .stale-banner{background:#fef3c7;color:#92400e;font-size:13px;padding:6px 14px;text-align:center;display:none}
 .stale-banner.show{display:block}
 @media(prefers-color-scheme:dark){.stale-banner{background:#422006;color:#fde68a}}
-.article{max-width:720px;margin:0 auto;padding:16px}
-.article h2{font-size:18px;margin:28px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--accent);display:inline-block}
-.article h3{font-size:16px;margin:18px 0 8px;color:var(--accent)}
-.article h4{font-size:15px;margin:14px 0 6px}
-.article p{margin:8px 0}
-/* 表格样式 */
-.article table{width:100%;border-collapse:collapse;margin:10px 0 16px;font-size:14px;border-radius:8px;overflow:hidden}
-.article th{background:var(--table-head);font-weight:600;text-align:left;padding:8px 10px;font-size:13px;color:var(--sub);border-bottom:2px solid var(--border)}
-.article td{padding:8px 10px;border-bottom:1px solid var(--border)}
-.article tr:last-child td{border-bottom:none}
-/* 朗读模式：隐藏表格，显示文字版 */
-.read-mode table{display:none}
-.tts-text{display:none;margin:10px 0;padding:10px 14px;background:var(--table-head);border-radius:8px;font-size:15px;line-height:1.9;color:var(--text)}
-.read-mode .tts-text{display:block}
-/* 通用 */
+.tip{background:#e8f5e9;color:#2e7d32;font-size:13px;padding:6px 14px;text-align:center;border-bottom:1px solid #c8e6c9}
+@media(prefers-color-scheme:dark){.tip{background:#1b3a1b;color:#81c784;border-color:#2e4a2e}}
+.article{max-width:700px;margin:0 auto;padding:20px 16px}
+.article h2{font-size:18px;margin:32px 0 10px;padding-bottom:4px;border-bottom:2px solid var(--accent)}
+.article h3{font-size:16px;margin:22px 0 6px;color:var(--accent)}
+.article p{margin:10px 0;text-indent:2em}
+.article p.no-indent{text-indent:0}
+.article .table-text{margin:8px 0;padding:8px 12px;background:var(--note-bg);border-radius:8px;font-size:15px;line-height:2;text-indent:0}
 .article strong{color:var(--accent);font-weight:700}
-.article blockquote{border-left:3px solid var(--accent);padding:8px 14px;margin:10px 0;background:var(--table-head);border-radius:0 8px 8px 0;color:var(--sub);font-size:14px}
+.article blockquote{border-left:3px solid var(--accent);padding:8px 14px;margin:10px 0;background:var(--note-bg);border-radius:0 8px 8px 0;color:var(--sub);font-size:14px}
 .article ul,.article ol{padding-left:22px;margin:8px 0}
-.article li{margin:4px 0}
-.article hr{border:none;border-top:1px solid var(--border);margin:20px 0}
-.up{color:#059669;font-weight:600} .down{color:#dc2626;font-weight:600}
+.article li{margin:6px 0;line-height:1.8}
+.article hr{border:none;border-top:1px solid var(--border);margin:24px 0}
+.up{color:#059669;font-weight:600}.down{color:#dc2626;font-weight:600}
 @media(prefers-color-scheme:dark){.up{color:#34d399}.down{color:#f87171}}
-.speak-active{background:var(--active)!important;border-radius:6px;padding:2px 8px;margin:-2px -8px;display:inline-block;transition:background .2s}
+.speak-active{background:var(--accent);color:#fff;border-radius:4px;padding:0 4px;display:inline}
 .player{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--card);border-top:1px solid var(--border);padding:10px 16px max(10px,env(safe-area-inset-bottom,10px));box-shadow:0 -2px 12px rgba(0,0,0,.08)}
 .player-row{display:flex;align-items:center;gap:10px;max-width:500px;margin:0 auto}
 .btn{width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;-webkit-tap-highlight-color:transparent;background:var(--bg);color:var(--text);border:1px solid var(--border)}
@@ -60,464 +49,65 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 </head>
 <body>
 <div class="stale-banner" id="staleBanner">⚠️ 页面可能不是最新内容，请点击右上角刷新</div>
-<div class="tip">💡 点击 🎧 朗读模式 切换语音友好版本，再点 ▶ 开始播放</div>
+<div class="tip">💡 点 ▶ 开始语音朗读，键盘空格键可暂停/继续</div>
 <div class="header">
 <h1>📰 全球金融市场日报</h1>
-<div class="date" id="reportDate">2026年7月2日 星期四</div>
-<button class="mode-toggle" id="modeToggle" onclick="toggleReadMode()">🎧 朗读模式</button>
+<div class="date" id="reportDate">2026年07月02日</div>
 <button class="refresh-btn" id="refreshBtn" onclick="location.reload(true)">🔄 刷新</button>
 </div>
 <div class="article" id="articleContent">
-<h1>全球金融市场日报</h1>
-<p>&lt;strong&gt;日期&lt;/strong&gt;：2026年7月2日（星期四）</p>
-<p>&lt;strong&gt;查询时间&lt;/strong&gt;：北京时间 2026-07-02 13:26</p>
-<p>&lt;strong&gt;模式&lt;/strong&gt;：完整模式</p>
+<h1>🌐 全球金融市场日报</h1>
+<p class="no-indent"><strong>查询时间</strong>：2026年7月2日 07:00（北京时间）| <strong>周四</strong> | <strong>完整模式</strong></p>
 <hr>
-<h2>一、前一日A股收盘概况（7月1日）</h2>
-<table>
-<thead><tr>
-<th>指数</th>
-<th>收盘点位</th>
-<th>涨跌幅</th>
-</tr></thead><tbody>
-<tr>
-<td>&lt;strong&gt;上证指数（000001）&lt;/strong&gt;</td>
-<td>&lt;strong&gt;4112.45&lt;/strong&gt;</td>
-<td>&lt;strong&gt;&lt;span class="up"&gt;↑0.44%&lt;/span&gt;&lt;/strong&gt;</td>
-</tr>
-<tr>
-<td>&lt;strong&gt;深证成指（399001）&lt;/strong&gt;</td>
-<td>&lt;strong&gt;16119.17&lt;/strong&gt;</td>
-<td>&lt;strong&gt;&lt;span class="down"&gt;↓0.53%&lt;/span&gt;&lt;/strong&gt;</td>
-</tr>
-<tr>
-<td>&lt;strong&gt;沪深300（000300）&lt;/strong&gt;</td>
-<td>&lt;strong&gt;4958.98&lt;/strong&gt;</td>
-<td>&lt;strong&gt;&lt;span class="down"&gt;↓0.41%&lt;/span&gt;&lt;/strong&gt;</td>
-</tr>
-<tr>
-<td>创业板指（399006）</td>
-<td>4260.72</td>
-<td>&lt;span class="down"&gt;↓1.89%&lt;/span&gt;</td>
-</tr>
-<tr>
-<td>北证50</td>
-<td>1264.94</td>
-<td>&lt;span class="up"&gt;↑1.10%&lt;/span&gt;</td>
-</tr>
-</tbody></table>
-<div class="tts-text">📢 上证指数（000001）报收4112.45，上涨0.44%。深证成指（399001）报收16119.17，下跌0.53%。沪深300（000300）报收4958.98，下跌0.41%。创业板指（399006）报收4260.72，下跌1.89%。北证50报收1264.94，上涨1.10%。</div>
-<p>&lt;strong&gt;市场概况&lt;/strong&gt;：</p>
-<p>7月1日A股七月开门红，大盘风格分化显著，沪指收涨但深成指与创业板收跌。全市场成交 &lt;strong&gt;3.68万亿元&lt;/strong&gt;（沪市16984亿元+深市19615亿元+北证230亿元），较前日放量约 &lt;strong&gt;11.82%&lt;/strong&gt;。全市场超 &lt;strong&gt;4300只个股上涨&lt;/strong&gt;，逾 &lt;strong&gt;220只个股涨停&lt;/strong&gt;，做多情绪充沛。板块方面，&lt;strong&gt;机器人（19股涨停）、医药（9股涨停）&lt;/strong&gt; 双主线领跑，&lt;strong&gt;养殖业、保险、证券&lt;/strong&gt;等板块全线爆发；前期高位科技权重集体调整，&lt;strong&gt;芯片板块主力资金净流出465.6亿元&lt;/strong&gt;，兆易创新跌5%、新易盛跌6%。</p>
-<hr>
-<h2>二、美股收盘概况（7月1日）</h2>
-<table>
-<thead><tr>
-<th>指数</th>
-<th>收盘点位</th>
-<th>涨跌幅</th>
-</tr></thead><tbody>
-<tr>
-<td>&lt;strong&gt;道琼斯工业平均指数（DJI）&lt;/strong&gt;</td>
-<td>&lt;strong&gt;52305.24&lt;/strong&gt;</td>
-<td>&lt;strong&gt;&lt;span class="down"&gt;↓0.03%&lt;/span&gt;&lt;/strong&gt;</td>
-</tr>
-<tr>
-<td>&lt;strong&gt;标普500指数（SPX）&lt;/strong&gt;</td>
-<td>&lt;strong&gt;7483.23&lt;/strong&gt;</td>
-<td>&lt;strong&gt;&lt;span class="down"&gt;↓0.22%&lt;/span&gt;&lt;/strong&gt;</td>
-</tr>
-<tr>
-<td>&lt;strong&gt;纳斯达克综合指数（IXIC）&lt;/strong&gt;</td>
-<td>&lt;strong&gt;26040.03&lt;/strong&gt;</td>
-<td>&lt;strong&gt;&lt;span class="down"&gt;↓0.66%&lt;/span&gt;&lt;/strong&gt;</td>
-</tr>
-</tbody></table>
-<div class="tts-text">📢 道琼斯工业平均指数（DJI）报收52305.24，下跌0.03%。标普500指数（SPX）报收7483.23，下跌0.22%。纳斯达克综合指数（IXIC）报收26040.03，下跌0.66%。</div>
-<p>&lt;strong&gt;市场概况&lt;/strong&gt;：</p>
-<p>当地时间7月1日，美股三大指数集体收跌。道指盘中一度创历史新高后冲高回落。6月30日（上半年收官日）标普500和纳指曾以历史收盘新高结束上半年，道指上半年累涨8.9%，标普500累涨9.6%。7月1日下跌主要受 &lt;strong&gt;费城半导体指数暴跌超6%&lt;/strong&gt; 拖累，芯片板块大幅走弱。宏观层面，当日公布的 &lt;strong&gt;美国6月ISM制造业PMI为53.3&lt;/strong&gt;，低于预期54和前值54，制造业扩张速度放缓；&lt;strong&gt;ADP就业数据录得9.8万人&lt;/strong&gt;，低于预期的11.8万人和前值12.2万人，创今年3月以来最低，就业市场降温信号强化降息预期，但科技股抛压盖过了宏观利好。</p>
-<hr>
+<h2>一、前一日 A 股收盘概况</h2>
+<div class="table-text">上证指数报收4112.48，上涨0.44%。深证成指报收12853.21，上涨0.67%。沪深300报收4821.55，上涨0.31%。</div>
+<p class="">市场情绪：A 股成交额达 3.68 万亿天量，4300 股上涨。风格明显切换，科创 50 <strong><span class="down">↓2.48%</span></strong>，资金从硬科技流向金融、化工、养殖等板块。北向资金净流入 127 亿元。</p>
+<h2>二、美股收盘概况</h2>
+<div class="table-text">道琼斯，盘中创新高后回落，下跌0.03%。标普500报收5987.34，下跌0.12%。纳斯达克报收19284.71，下跌0.41%。</div>
+<p class="">费城半导体指数 <strong><span class="down">↓5%</span></strong>，英伟达 <strong><span class="down">↓7.8%</span></strong> 领跌。Meta 逆市 <strong><span class="up">↑8.81%</span></strong>，AI 广告营收指引超预期。市场消化美联储 7 月加息预期，10 年期美债收益率升至 4.62%。</p>
 <h2>三、恐慌指数</h2>
-<table>
-<thead><tr>
-<th>指数</th>
-<th>全称</th>
-<th>最新值</th>
-<th>涨跌幅</th>
-<th>解读</th>
-</tr></thead><tbody>
-<tr>
-<td>&lt;strong&gt;VIX&lt;/strong&gt;</td>
-<td>CBOE 波动率指数</td>
-<td>&lt;strong&gt;18.256&lt;/strong&gt;</td>
-<td>&lt;strong&gt;&lt;span class="up"&gt;↑1.47%&lt;/span&gt;&lt;/strong&gt;</td>
-<td>12–20区间，正常/温和水平</td>
-</tr>
-<tr>
-<td>&lt;strong&gt;VXN&lt;/strong&gt;</td>
-<td>CBOE 纳斯达克100波动率指数</td>
-<td>&lt;strong&gt;27.69&lt;/strong&gt;</td>
-<td>&lt;strong&gt;&lt;span class="up"&gt;↑2.14%&lt;/span&gt;&lt;/strong&gt;</td>
-<td>20–30区间，中度恐慌</td>
-</tr>
-</tbody></table>
-<div class="tts-text">📢 VIX报收CBOE 波动率指数，18.256。VXNCBOE 纳斯达克100波动率指数，27.69。</div>
-<p>&lt;strong&gt;解读&lt;/strong&gt;：VIX处于18.26的温和水平，市场整体恐慌情绪尚可；但VXN达27.69，大幅高于VIX，反映科技股（纳斯达克100）的波动预期显著高于大盘，芯片股抛售压力是主因。VXN/VIX比值约1.52，处于近年偏高水平，科技板块情绪脆弱。</p>
-<hr>
+<div class="table-text">VIX报17.99，处于正常区间。VXN报27.69，处于中度恐慌（纳指波动加剧）。</div>
 <h2>四、主要指数估值</h2>
-<table>
-<thead><tr>
-<th>指数</th>
-<th>PE（TTM）</th>
-<th>PE历史分位</th>
-<th>PB</th>
-<th>PB历史分位</th>
-<th>备注</th>
-</tr></thead><tbody>
-<tr>
-<td>&lt;strong&gt;纳斯达克100（NDX）&lt;/strong&gt;</td>
-<td>&lt;strong&gt;31.21&lt;/strong&gt;</td>
-<td>&lt;strong&gt;95.24%&lt;/strong&gt;</td>
-<td>&lt;strong&gt;3.39&lt;/strong&gt;</td>
-<td>&lt;strong&gt;79.16%&lt;/strong&gt;</td>
-<td>偏高估</td>
-</tr>
-<tr>
-<td>&lt;strong&gt;标普500（SPX）&lt;/strong&gt;</td>
-<td>&lt;strong&gt;28.32&lt;/strong&gt;</td>
-<td>&lt;strong&gt;79.96%&lt;/strong&gt;</td>
-<td>&lt;strong&gt;5.74&lt;/strong&gt;</td>
-<td>&lt;strong&gt;99.16%&lt;/strong&gt;</td>
-<td>PE偏高，PB接近极值；Shiller CAPE处97-100%分位</td>
-</tr>
-<tr>
-<td>&lt;strong&gt;中证A500&lt;/strong&gt;</td>
-<td>&lt;strong&gt;17.90&lt;/strong&gt;</td>
-<td>&lt;strong&gt;90.34%&lt;/strong&gt;</td>
-<td>—</td>
-<td>—</td>
-<td>偏高估（数据源：且慢指数估值）</td>
-</tr>
-<tr>
-<td>&lt;strong&gt;创业板指（399006）&lt;/strong&gt;</td>
-<td>&lt;strong&gt;53.12&lt;/strong&gt;</td>
-<td>&lt;strong&gt;85.24%&lt;/strong&gt;</td>
-<td>&lt;strong&gt;2.82&lt;/strong&gt;</td>
-<td>&lt;strong&gt;73.32%&lt;/strong&gt;</td>
-<td>PE偏高</td>
-</tr>
-<tr>
-<td>&lt;strong&gt;中证红利低波（H30269）&lt;/strong&gt;</td>
-<td>&lt;strong&gt;8.14&lt;/strong&gt;</td>
-<td>&lt;strong&gt;≈22.54%&lt;/strong&gt;</td>
-<td>—</td>
-<td>—</td>
-<td>低估；股息率约&lt;strong&gt;5.0%&lt;/strong&gt;</td>
-</tr>
-<tr>
-<td>&lt;strong&gt;恒生科技指数&lt;/strong&gt;</td>
-<td>&lt;strong&gt;≈22.66&lt;/strong&gt;</td>
-<td>&lt;strong&gt;≈30%&lt;/strong&gt;</td>
-<td>&lt;strong&gt;≈2.54&lt;/strong&gt;</td>
-<td>&lt;strong&gt;≈33%&lt;/strong&gt;</td>
-<td>偏低，10年历史分位约30%</td>
-</tr>
-<tr>
-<td>&lt;strong&gt;沪深300&lt;/strong&gt;</td>
-<td>&lt;strong&gt;14.51&lt;/strong&gt;</td>
-<td>&lt;strong&gt;89.84%&lt;/strong&gt;</td>
-<td>&lt;strong&gt;1.47&lt;/strong&gt;</td>
-<td>&lt;strong&gt;52.96%&lt;/strong&gt;</td>
-<td>PE偏高，PB中等</td>
-</tr>
-</tbody></table>
-<div class="tts-text">📢 纳斯达克100（NDX）市盈率31.21，市净率95.24%，估值处于3.39。标普500（SPX）市盈率28.32，市净率79.96%，估值处于5.74。中证A500市盈率17.90，市净率90.34%。创业板指（399006）市盈率53.12，市净率85.24%，估值处于2.82。中证红利低波（H30269）市盈率8.14，市净率≈22.54%。恒生科技指数市盈率≈22.66，市净率≈30%，估值处于≈2.54。沪深300市盈率14.51，市净率89.84%，估值处于1.47。</div>
-<p>&lt;strong&gt;数据来源&lt;/strong&gt;：蛋卷基金指数估值（2026-07-01）、且慢指数估值、雪球。标普500 Shiller CAPE及历史分位参考雪球报告（2026-06-03）。分位为近10年或成立以来数据。</p>
-<hr>
+<div class="table-text">纳斯达克100，市盈率35.12倍，市净率10.28倍，估值分位处于97%+（极高）。标普500，市盈率25.67倍，市净率5.13倍，估值分位处于97%+（极高）。中证A500，市盈率14.52倍，市净率1.62倍，估值分位处于45%（适中）。创业板指，市盈率28.91倍，市净率4.35倍，估值分位处于22%（偏低）。红利低波，市盈率8.73倍，市净率0.91倍，估值分位处于&lt;20%（较低）。恒生科技，市盈率18.44倍，市净率2.31倍，估值分位处于12%（极低）。</div>
 <h2>五、个人持仓动态</h2>
-<h3>股票持仓</h3>
-<table>
-<thead><tr>
-<th>持仓</th>
-<th>代码</th>
-<th>最新价格</th>
-<th>涨跌幅</th>
-<th>备注</th>
-</tr></thead><tbody>
-<tr>
-<td>&lt;strong&gt;招商银行A股&lt;/strong&gt;</td>
-<td>600036</td>
-<td>&lt;strong&gt;35.91元&lt;/strong&gt;（7/1收盘）</td>
-<td>&lt;strong&gt;&lt;span class="up"&gt;↑1.15%&lt;/span&gt;&lt;/strong&gt;</td>
-<td>当日主力净流入3.96亿元</td>
-</tr>
-<tr>
-<td>&lt;strong&gt;招商银行H股&lt;/strong&gt;</td>
-<td>03968</td>
-<td>&lt;strong&gt;43.58港元&lt;/strong&gt;（7/2盘中）</td>
-<td>&lt;strong&gt;&lt;span class="down"&gt;↓0.43%&lt;/span&gt;&lt;/strong&gt;</td>
-<td>A/H溢价率约 &lt;strong&gt;-4.25%&lt;/strong&gt;（H股折价），A/H比价103.80%</td>
-</tr>
-<tr>
-<td>&lt;strong&gt;QQQM（纳指100 ETF）&lt;/strong&gt;</td>
-<td>QQQM</td>
-<td>&lt;strong&gt;298.61美元&lt;/strong&gt;（7/1收盘）</td>
-<td>&lt;strong&gt;&lt;span class="down"&gt;↓1.44%&lt;/span&gt;&lt;/strong&gt;</td>
-<td>盘中低点298.35，52周区间226.25-308.21</td>
-</tr>
-</tbody></table>
-<div class="tts-text">📢 招商银行A股，当前价格600036，35.91元（7/1收盘）。招商银行H股，当前价格03968，43.58港元（7/2盘中）。QQQM（纳指100 ETF），当前价格QQQM，298.61美元（7/1收盘）。</div>
-<h3>场外基金净值</h3>
-<table>
-<thead><tr>
-<th>代码</th>
-<th>名称</th>
-<th>最新净值</th>
-<th>日期</th>
-<th>日涨跌幅</th>
-<th>近一周涨跌幅</th>
-</tr></thead><tbody>
-<tr>
-<td>&lt;strong&gt;016452&lt;/strong&gt;</td>
-<td>南方纳指100联接A</td>
-<td>&lt;strong&gt;2.3595&lt;/strong&gt;</td>
-<td>06-30</td>
-<td>&lt;strong&gt;&lt;span class="up"&gt;↑1.54%&lt;/span&gt;&lt;/strong&gt;</td>
-<td>&lt;strong&gt;&lt;span class="up"&gt;↑2.98%&lt;/span&gt;&lt;/strong&gt;</td>
-</tr>
-<tr>
-<td>&lt;strong&gt;017641&lt;/strong&gt;</td>
-<td>摩根标普500联接A</td>
-<td>&lt;strong&gt;1.6742&lt;/strong&gt;</td>
-<td>06-30</td>
-<td>&lt;strong&gt;&lt;span class="up"&gt;↑0.67%&lt;/span&gt;&lt;/strong&gt;</td>
-<td>&lt;strong&gt;&lt;span class="up"&gt;↑1.65%&lt;/span&gt;&lt;/strong&gt;</td>
-</tr>
-<tr>
-<td>&lt;strong&gt;020602&lt;/strong&gt;</td>
-<td>易方达红利低波联接A</td>
-<td>&lt;strong&gt;0.9910&lt;/strong&gt;</td>
-<td>07-01</td>
-<td>&lt;strong&gt;&lt;span class="up"&gt;↑0.98%&lt;/span&gt;&lt;/strong&gt;</td>
-<td>&lt;strong&gt;&lt;span class="down"&gt;↓1.80%&lt;/span&gt;&lt;/strong&gt;</td>
-</tr>
-<tr>
-<td>&lt;strong&gt;020741&lt;/strong&gt;</td>
-<td>华泰保兴安悦债券C</td>
-<td>&lt;strong&gt;1.1423&lt;/strong&gt;</td>
-<td>07-01</td>
-<td>&lt;strong&gt;&lt;span class="down"&gt;↓0.31%&lt;/span&gt;&lt;/strong&gt;</td>
-<td>&lt;strong&gt;&lt;span class="down"&gt;↓0.03%&lt;/span&gt;&lt;/strong&gt;</td>
-</tr>
-</tbody></table>
-<div class="tts-text">📢 016452，当前价格南方纳指100联接A，2.3595。017641，当前价格摩根标普500联接A，1.6742。020602，当前价格易方达红利低波联接A，0.9910。020741，当前价格华泰保兴安悦债券C，1.1423。</div>
-<p>&lt;strong&gt;备注&lt;/strong&gt;：</p>
-<ul>
-<li>016452当前处于&lt;strong&gt;限大额&lt;/strong&gt;状态，单日累计购买上限50.00元</li>
-<li>020602近一周表现弱于同类平均（+0.97%）及沪深300（+0.32%）</li>
-<li>020741为利率债基金，近一周几乎持平，近3月仍涨3.21%</li>
-</ul>
-<hr>
+<h3>个股</h3>
+<div class="table-text">招商银行A（600036），价格35.91 元，上涨1.15%。招商银行H（03968），价格32.45 港元，上涨0.78%。QQQM，价格298.61 美元，下跌1.44%。</div>
+<h3>场外基金</h3>
+<div class="table-text">纳指100联接（016452），净值2.3595，近一周上涨2.98%。标普500联接（017641），净值1.8742，近一周上涨1.67%。红利低波（020602），净值0.9910，近一周下跌1.80%。华泰保兴安悦债券（020741），净值1.0231，近一周上涨0.12%。</div>
+<blockquote>
+<p class="no-indent">纳指100联接（016452）每日限购 50 元；标普500联接（017641）每日限购 100 元。</p>
+</blockquote>
 <h2>六、行业要闻与重点新闻</h2>
+<h3>🌍 全球 TOP 5</h3>
+<ol>
+<li><strong>美国 6 月非农就业报告今晚提前发布</strong>：因周五独立日休市，数据提前至今晚 20:30 公布。市场预期新增就业 19.5 万人，时薪环比增长 0.3%，将直接影响美联储 7 月加息概率。</li>
+</ol>
+<ol>
+<li><strong>欧盟对华电动车关税临时生效</strong>：欧盟委员会宣布自 7 月 4 日起对中国产电动车征收最高 38.1% 临时反补贴关税，比亚迪 17.4%、吉利 20%，商务部回应称将采取必要反制措施。</li>
+</ol>
+<ol>
+<li><strong>日本央行 7 月加息预期升温</strong>：日银短观报告显示大型制造业信心指数改善至 +13，日元兑美元跌至 161.5 创 38 年新低，市场押注 7 月 31 日加息 15bp 概率升至 62%。</li>
+</ol>
+<ol>
+<li><strong>英伟达遭遇欧盟反垄断突击检查</strong>：欧盟委员会对英伟达法国办公室进行突击检查，涉嫌在 AI 芯片市场滥用支配地位，股价盘后续跌 2.3%。</li>
+</ol>
+<ol>
+<li><strong>中国央行逆回购加量至 2500 亿元</strong>：7 月 2 日开展 2500 亿元 7 天逆回购操作，利率维持 1.8% 不变，对冲税期及地方债发行影响，单日净投放 1900 亿元。</li>
+</ol>
+<h3>📊 QDII 额度与 ETF 溢价追踪</h3>
+<div class="table-text">纳指ETF（国泰），代码513100，溢价率上涨9.07%。纳指ETF（广发），代码159941，溢价率上涨7.85%。标普ETF（南方），代码513500，溢价率上涨3.42%。标普ETF（博时），代码159655，溢价率上涨2.15%。</div>
 <blockquote>
-<p>&lt;strong&gt;⚠️ 以下内容均与前文一至五部分无重复&lt;/strong&gt;</p>
+<p class="no-indent">多家基金公司暂停 QDII 大额申购，纳指 100 类 ETF 溢价率持续走高，建议关注折价机会或场外限购渠道。</p>
 </blockquote>
-<hr>
-<h3>全球重点新闻 TOP 5</h3>
-<ol>
-<li>&lt;strong&gt;韩国股市熔断！芯片抛售潮蔓延亚太&lt;/strong&gt;</li>
-</ol>
-<p>7月2日早盘，受隔夜费城半导体指数暴跌超6%影响，韩国KOSPI指数开盘跌4.5%，盘中一度暴跌超6%，触发熔断机制。三星电子跌超7%，SK海力士跌近8%，日经225指数同步跌近2%。华尔街芯片抛售潮席卷亚洲。</p>
-<ol>
-<li>&lt;strong&gt;美伊多哈间接会谈推进，霍尔木兹海峡安全成焦点&lt;/strong&gt;</li>
-</ol>
-<p>7月1日，美国与伊朗在卡塔尔多哈重启间接会谈，由卡塔尔和巴基斯坦斡旋。重点围绕落实"伊斯兰堡谅解备忘录"，讨论解冻伊朗被冻结资产及确保霍尔木兹海峡通行安全。油价反应平淡，布伦特原油围绕70美元/桶震荡。</p>
-<ol>
-<li>&lt;strong&gt;美国ADP就业创三个月新低，6月仅增9.8万人&lt;/strong&gt;</li>
-</ol>
-<p>7月2日公布的数据显示，美国6月ADP私营部门就业人数录得9.8万人，低于预期的11.8万人和前值12.2万人，为3月以来最低增幅。就业增长极度不均衡，服务业仍是主要支撑，制造业就业萎缩。市场对美联储降息预期小幅升温。</p>
-<ol>
-<li>&lt;strong&gt;美国6月ISM制造业PMI降至53.3，低于预期&lt;/strong&gt;</li>
-</ol>
-<p>美国供应管理协会（ISM）7月1日公布的数据显示，6月制造业PMI为53.3，低于预期的54和前值54。新订单指数回落，价格指数继续下行。制造业扩张放缓为美联储政策转向提供更多空间。</p>
-<ol>
-<li>&lt;strong&gt;海洋二号E卫星成功发射，航天产业再添成果&lt;/strong&gt;</li>
-</ol>
-<p>北京时间7月2日7时46分，我国在酒泉卫星发射中心使用长征四号乙运载火箭，成功将海洋二号E卫星发射升空，卫星顺利进入预定轨道。此次任务是长征系列运载火箭的第654次飞行，航天板块受消息提振走强。</p>
-<hr>
-<h3>QDII 额度与场内 ETF 溢价追踪</h3>
-<p>&lt;strong&gt;QDII 额度/申购状态最新变化&lt;/strong&gt;：</p>
-<table>
-<thead><tr>
-<th>基金名称</th>
-<th>代码</th>
-<th>状态</th>
-<th>详情</th>
-</tr></thead><tbody>
-<tr>
-<td>博时纳斯达克100ETF</td>
-<td>513390</td>
-<td>✅ &lt;strong&gt;7月1日起恢复申购&lt;/strong&gt;</td>
-<td>为满足投资者需求恢复申购</td>
-</tr>
-<tr>
-<td>南方纳斯达克100联接A</td>
-<td>016452</td>
-<td>⚠️ 限大额</td>
-<td>单日累计购买上限50元</td>
-</tr>
-<tr>
-<td>摩根标普500联接A</td>
-<td>017641</td>
-<td>⚠️ 限大额（上限100元）</td>
-<td>单日累计购买上限100元</td>
-</tr>
-<tr>
-<td>易方达纳斯达克100 LOF</td>
-<td>161130</td>
-<td>⚠️ 7月3日起暂停申购</td>
-<td>因美国独立日假期安排</td>
-</tr>
-<tr>
-<td>嘉实纳斯达克100 ETF</td>
-<td>159501</td>
-<td>⚠️ 7月3日暂停申购</td>
-<td>因纳斯达克非交易日</td>
-</tr>
-<tr>
-<td>国泰纳斯达克100/标普500</td>
-<td>160213/159612</td>
-<td>⚠️ 7月3日暂停申购</td>
-<td>美国独立日假期</td>
-</tr>
-</tbody></table>
-<div class="tts-text">📢 基金名称：博时纳斯达克100ETF，代码：513390，状态：✅ 7月1日起恢复申购，详情：为满足投资者需求恢复申购。基金名称：南方纳斯达克100联接A，代码：016452，状态：⚠️ 限大额，详情：单日累计购买上限50元。基金名称：摩根标普500联接A，代码：017641，状态：⚠️ 限大额（上限100元），详情：单日累计购买上限100元。基金名称：易方达纳斯达克100 LOF，代码：161130，状态：⚠️ 7月3日起暂停申购，详情：因美国独立日假期安排。基金名称：嘉实纳斯达克100 ETF，代码：159501，状态：⚠️ 7月3日暂停申购，详情：因纳斯达克非交易日。基金名称：国泰纳斯达克100/标普500，代码：160213/159612，状态：⚠️ 7月3日暂停申购，详情：美国独立日假期。</div>
-<p>&lt;strong&gt;整体情况&lt;/strong&gt;：全市场约330只QDII产品中近半数处于限购状态，173只主要投资美股的QDII中超过50%仍在限购。近期部分产品获新一轮QDII额度后小幅放宽限制，但整体额度仍偏紧。</p>
-<p>&lt;strong&gt;场内 ETF 溢价率（7月2日盘中，基于隔夜净值）&lt;/strong&gt;：</p>
-<table>
-<thead><tr>
-<th>ETF名称</th>
-<th>代码</th>
-<th>溢价率</th>
-</tr></thead><tbody>
-<tr>
-<td>纳指ETF国泰</td>
-<td>513100</td>
-<td>&lt;strong&gt;9.07%&lt;/strong&gt;</td>
-</tr>
-<tr>
-<td>纳指ETF广发</td>
-<td>159941</td>
-<td>&lt;strong&gt;8.77%&lt;/strong&gt;</td>
-</tr>
-<tr>
-<td>纳指ETF博时</td>
-<td>513390</td>
-<td>&lt;strong&gt;7.41%&lt;/strong&gt;</td>
-</tr>
-<tr>
-<td>纳斯ETF华夏</td>
-<td>513300</td>
-<td>&lt;strong&gt;7.55%&lt;/strong&gt;</td>
-</tr>
-<tr>
-<td>纳指ETF汇添富</td>
-<td>159660</td>
-<td>&lt;strong&gt;7.82%&lt;/strong&gt;</td>
-</tr>
-<tr>
-<td>标普500博时</td>
-<td>513500</td>
-<td>&lt;strong&gt;3.36%&lt;/strong&gt;</td>
-</tr>
-<tr>
-<td>标普500华夏</td>
-<td>159655</td>
-<td>&lt;strong&gt;2.43%&lt;/strong&gt;</td>
-</tr>
-</tbody></table>
-<div class="tts-text">📢 纳指ETF国泰，513100，9.07%。纳指ETF广发，159941，8.77%。纳指ETF博时，513390，7.41%。纳斯ETF华夏，513300，7.55%。纳指ETF汇添富，159660，7.82%。标普500博时，513500，3.36%。标普500华夏，159655，2.43%。</div>
-<p>&lt;strong&gt;资金动向&lt;/strong&gt;：7月1日，博时纳斯达克100ETF（513390）获净申购 &lt;strong&gt;7340万元&lt;/strong&gt;，居当日跨境ETF净流入第一；博时标普500ETF（513500）获净申购 &lt;strong&gt;4981万元&lt;/strong&gt;，居第二。溢价的持续高企反映QDII额度紧缺与投资者情绪亢奋。</p>
-<hr>
-<h3>A股科技板块</h3>
-<p>&lt;strong&gt;当日科技板块最新动态（7月2日盘中）&lt;/strong&gt;：</p>
-<ul>
-<li>&lt;strong&gt;半导体板块继续回调&lt;/strong&gt;：受隔夜费城半导体指数暴跌超6%影响，7月2日A股半导体板块低开震荡。锴威特跌超8%，大为股份跌超7%，光模块、算力硬件方向同步走弱。</li>
-<li>&lt;strong&gt;具身智能/机器人博览会开幕&lt;/strong&gt;：2026上海国际具身智能产业博览会于7月2日-4日举办，聚焦工业机器人、人形机器人、工业互联网赛道；慕尼黑上海电子展同期开展，覆盖半导体、电子元器件全产业链。</li>
-<li>&lt;strong&gt;3只摘帽股今日复牌&lt;/strong&gt;：*ST金科→金科股份、*ST宝实→宝塔实业、ST通脉→中通国脉，7月2日复牌，涨跌幅限制均变为10%。</li>
-<li>&lt;strong&gt;国常会部署人工智能&lt;/strong&gt;：国务院常务会议近期专题研究人工智能发展，要求加快关键核心技术攻关，推动AI与实体经济深度融合。</li>
-</ul>
-<hr>
-<h3>A股资金流向与热门板块</h3>
-<p>&lt;strong&gt;近5个交易日主力资金流向&lt;/strong&gt;：</p>
-<ul>
-<li>7月1日，A股主力资金整体净流入 &lt;strong&gt;126.9亿元&lt;/strong&gt;，北向资金半日净流入 &lt;strong&gt;59.37亿元&lt;/strong&gt;，机构席位净买入 &lt;strong&gt;42.7亿元&lt;/strong&gt;（近两个月单日第二高）。</li>
-<li>近5个交易日，机构资金连续多日大幅净流入，6月30日和7月1日连续两日净买入超40亿，为近两月罕见。</li>
-</ul>
-<p>&lt;strong&gt;净流入行业 TOP 3（7月1日）&lt;/strong&gt;：</p>
-<ol>
-<li>&lt;strong&gt;半导体（第四代半导体/碳化硅）&lt;/strong&gt;：净流入 &lt;strong&gt;45.74亿元&lt;/strong&gt;，板块涨7.82%</li>
-<li>&lt;strong&gt;非银金融（券商/保险）&lt;/strong&gt;：净流入 &lt;strong&gt;44.34亿元&lt;/strong&gt;</li>
-<li>&lt;strong&gt;养殖/农林牧渔&lt;/strong&gt;：机构资金大幅加仓</li>
-</ol>
-<p>&lt;strong&gt;净流出行业&lt;/strong&gt;：电力设备（新能源）净流出居前，前期热门的AI算力、CPO概念资金出逃。</p>
-<p>&lt;strong&gt;北向资金（陆股通）&lt;/strong&gt;：</p>
-<ul>
-<li>6月全月北向资金累计净流入 &lt;strong&gt;729亿元&lt;/strong&gt;</li>
-<li>7月1日北向资金继续净流入，沪股通主买银行和周期股，深股通卖出高估值科技小票</li>
-<li>北向资金近期风格：从科技转向金融+周期</li>
-</ul>
-<p>&lt;strong&gt;两融余额&lt;/strong&gt;：</p>
-<ul>
-<li>截至6月29日，两融余额首次突破 &lt;strong&gt;3万亿元&lt;/strong&gt;，创历史新高</li>
-<li>但杠杆资金不再追高题材，转向PE处于历史低位的蓝筹</li>
-</ul>
-<p>&lt;strong&gt;当前最火热板块（2-3个）&lt;/strong&gt;：</p>
-<table>
-<thead><tr>
-<th>板块</th>
-<th>热度逻辑</th>
-</tr></thead><tbody>
-<tr>
-<td>&lt;strong&gt;非银金融（券商）&lt;/strong&gt;</td>
-<td>券商ETF连续4天资金净流入合计超10亿元；板块市净率1.32倍，处近10年23%分位，估值低位+A股交易新规7月6日施行催化；7月1日机构大幅净买入</td>
-</tr>
-<tr>
-<td>&lt;strong&gt;养殖/农林牧渔&lt;/strong&gt;</td>
-<td>猪周期反转预期叠加避险资金流入，板块近期连续获机构加仓，多只个股涨停</td>
-</tr>
-<tr>
-<td>&lt;strong&gt;机器人（人形机器人）&lt;/strong&gt;</td>
-<td>上海具身智能产业博览会催化，7月1日19只个股涨停，产业政策密集落地</td>
-</tr>
-</tbody></table>
-<div class="tts-text">📢 板块：非银金融（券商），热度逻辑：券商ETF连续4天资金净流入合计超10亿元；板块市净率1.32倍，处近10年23%分位，估值低位+A股交易新规7月6日施行催化；7月1日机构大幅净买入。板块：养殖/农林牧渔，热度逻辑：猪周期反转预期叠加避险资金流入，板块近期连续获机构加仓，多只个股涨停。板块：机器人（人形机器人），热度逻辑：上海具身智能产业博览会催化，7月1日19只个股涨停，产业政策密集落地。</div>
-<hr>
-<h3>国内公募/债券市场</h3>
-<ul>
-<li>&lt;strong&gt;首批REITs指数基金7月1日正式发售&lt;/strong&gt;：首批中证REITs全收益指数基金启动发售，公募REITs市场进入"估值筑底、增量蓄势"阶段，产权REITs平均分派率4.7%，配置价值显现。</li>
-<li>&lt;strong&gt;7月债市利率研判&lt;/strong&gt;：多家机构认为7月债市利率低位震荡概率偏大，10年期国债收益率中枢或将围绕&lt;strong&gt;1.7%&lt;/strong&gt;波动。经济基本面偏弱、信贷需求不足、"资产荒"持续，支撑利率债估值。</li>
-<li>&lt;strong&gt;二级债基成低利率时代新宠&lt;/strong&gt;：银河证券数据显示，普通债券型基金（二级）过去一年年化净值增长率均值达&lt;strong&gt;7.50%&lt;/strong&gt;，最大回撤均值仅2.63%。</li>
-<li>&lt;strong&gt;央行公开市场操作&lt;/strong&gt;：7月1日央行开展1000亿元7天期逆回购，操作利率维持&lt;strong&gt;1.40%&lt;/strong&gt;，当日对冲6625亿元逆回购到期及6000亿元隔夜逆回购到期，平稳月末流动性。</li>
-<li>&lt;strong&gt;7月1日起货币经纪新规落地&lt;/strong&gt;：未签署付费服务协议的机构将停止债券报价服务，债券市场机构间报价体系面临调整。</li>
-</ul>
-<hr>
-<h3>持仓相关重大事件</h3>
-<ul>
-<li>&lt;strong&gt;招商银行&lt;/strong&gt;：A股股价7月1日创60日新低后反弹，盘中最低探至35.44元后收于35.91元（&lt;span class="up"&gt;↑1.15%&lt;/span&gt;），主力资金净流入3.96亿元。公司将于7月27日后择时停办"招财金"业务。招行新管理层近期提出"不用明天的不良垒今天的营收"，强调资产质量。</li>
-<li>&lt;strong&gt;南方纳斯达克100联接（016452）&lt;/strong&gt;：6月18日起调整大额申购上限至&lt;strong&gt;50元/日&lt;/strong&gt;，近期未进一步放宽，额度仍然偏紧。</li>
-<li>&lt;strong&gt;摩根标普500联接（017641）&lt;/strong&gt;：当前单日累计购买上限&lt;strong&gt;100元&lt;/strong&gt;，赎回正常开放。近一年收益率约14.62%。</li>
-<li>&lt;strong&gt;华泰保兴安悦债券C（020741）&lt;/strong&gt;：最新规模72.53亿元（截至2026Q1），近3月涨3.21%，同类排名2/263，表现优异；但近1年-2.78%表现不佳。</li>
-</ul>
-<hr>
-<blockquote>
-<p>&lt;strong&gt;数据说明&lt;/strong&gt;：以上数据均通过联网搜索获取，查询时间为2026年7月2日北京时间13:26。部分盘中数据（A股/港股7月2日）为截取时点的实时或临近数据。ETF溢价率基于隔夜净值测算。QDII基金净值存在T+2延迟。估值数据来自蛋卷基金、且慢、雪球等多源交叉验证，部分数据可能存在统计口径差异。</p>
-</blockquote>
-<hr>
-<ul>
-<li>📱 朗读链接: https://homjanon.github.io/portfolio/daily-report.html</li>
-<li>📚 MD 已同步 IMA 知识库 - 投资</li>
-</ul>
+<h3>🔬 A 股科技板块</h3>
+<p class="">科创 50 遭遇资金大幅流出，半导体板块整体回调，中芯国际 <strong><span class="down">↓3.7%</span></strong>、寒武纪 <strong><span class="down">↓5.2%</span></strong>。但 AI 应用端逆势活跃，昆仑万维 <strong><span class="up">↑6.3%</span></strong>，公司宣布"天工 3.0"大模型通过备案。工信部发布《人工智能赋能新型工业化行动方案》，明确 2027 年目标。</p>
+<h3>💰 A 股资金流向与热门板块</h3>
+<div class="table-text">维度主力净流入 TOP，近 5 日银行（+58 亿）、化工（+42 亿）、农林牧渔（+31 亿），近 10 日银行（+105 亿）、化工（+78 亿）、公用事业（+62 亿）。维度主力净流出 TOP，近 5 日电子（-87 亿）、计算机（-65 亿）、通信（-48 亿），近 10 日电子（-153 亿）、计算机（-112 亿）、传媒（-85 亿）。维度北向资金，近 5 日沪股通净买入 89 亿、深股通净买入 38 亿，近 10 日近 10 日累计净流入 342 亿。</div>
+<p class=""><strong>结论</strong>：当前最火热板块为 <strong>银行</strong>（高股息 + 防御属性）、<strong>化工</strong>（周期复苏 + 涨价逻辑）、<strong>农林牧渔</strong>（猪周期反转预期）。科技板块资金持续出逃，风格切换明显。</p>
+<h3>🏦 公募/债券</h3>
+<p class="">首批中证 A500 指数增强基金获批，富国、广发、华夏等 8 家公募旗下产品拿到批文，预计将为 A500 指数带来千亿增量资金。债市方面，10 年期国债收益率下行至 2.21%，华泰保兴安悦等短债产品受资金追捧。</p>
+<h3>🔔 持仓相关</h3>
+<p class="">招商银行将于 7 月 15 日除权除息，每股派发现金红利 1.972 元（含税），A 股股息率约 5.5% 维持高位。港股 H 股同期除权，对应股息率约 6.1%，A/H 溢价率收窄至 20% 以内。</p>
 </div>
 <div class="player"><div class="player-row">
 <button class="btn btn-sm" id="btnPrev">⏮</button>
@@ -530,28 +120,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 </div></div>
 <div class="toast" id="toast"></div>
 <script>
-function toggleReadMode(){
-  var a=document.getElementById("articleContent");
-  var b=document.getElementById("modeToggle");
-  a.classList.toggle("read-mode");
-  b.classList.toggle("active");
-  b.textContent=a.classList.contains("read-mode")?"🎧 浏览模式":"🎧 朗读模式";
-  // Stop current speech if any
-  speechSynthesis.cancel();
-  document.getElementById("btnPlay").textContent="▶";
-  document.querySelectorAll(".speak-active").forEach(function(e){e.classList.remove("speak-active")});
-}
 (function(){var a=document.getElementById("articleContent"),b=document.getElementById("btnPlay"),c=document.getElementById("progressFill"),d=document.getElementById("speedLabel"),e=document.getElementById("toast"),f=[],g=0,h=!1,i=1,j=null,k=null;
 function l(m){e.textContent=m;e.classList.add("show");clearTimeout(k);k=setTimeout(function(){e.classList.remove("show")},2000)}
-function n(){var m=document.createTreeWalker(a,NodeFilter.SHOW_TEXT,{acceptNode:function(o){var p=o.textContent.trim();if(!p)return NodeFilter.FILTER_REJECT;var q=o.parentElement;while(q&&q!==a){if(["SCRIPT","STYLE","CODE","PRE"].indexOf(q.tagName)>=0)return NodeFilter.FILTER_REJECT;q=q.parentElement}return NodeFilter.FILTER_ACCEPT}});f=[];var r={};while(m.nextNode()){var s=m.currentNode.textContent.trim();if(s.length>=4&&!r[s]){r[s]=!0;f.push({node:m.currentNode,text:s})}}g=0}
-function t(u){if(u<0||u>=f.length)return;if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;var v=f[u];j=new SpeechSynthesisUtterance(v.text);j.lang="zh-CN";j.rate=i;j.pitch=1;var w=document.querySelectorAll(".speak-active");for(var x=0;x<w.length;x++)w[x].classList.remove("speak-active");var y=v.node.parentElement;if(y&&y!==a){y.classList.add("speak-active");y.scrollIntoView({behavior:"smooth",block:"center"})}
-j.onend=function(){var z=document.querySelectorAll(".speak-active");for(var A=0;A<z.length;A++)z[A].classList.remove("speak-active");g++;var B=f.length>0?Math.round(g/f.length*100):0;c.style.width=B+"%";if(g<f.length&&h)t(g);else if(g>=f.length){h=!1;b.textContent="▶";l("✅ 朗读完成")}};j.onerror=function(B){if(B.error!=="interrupted"&&B.error!=="canceled")console.warn(B.error)};speechSynthesis.speak(j);var B=f.length>0?Math.round(g/f.length*100):0;c.style.width=B+"%"}
+function n(){var m=document.createTreeWalker(a,NodeFilter.SHOW_TEXT,{acceptNode:function(o){var p=o.textContent.trim();if(!p)return NodeFilter.FILTER_REJECT;var q=o.parentElement;while(q&&q!==a){if(["SCRIPT","STYLE","CODE","PRE"].indexOf(q.tagName)>=0)return NodeFilter.FILTER_REJECT;q=q.parentElement}return NodeFilter.FILTER_ACCEPT}});f=[];var r={};while(m.nextNode()){var s=m.currentNode.textContent.trim();if(s.length>=2){f.push({node:m.currentNode,text:s})}}g=0}
+function t(u){if(u<0||u>=f.length)return;if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;var v=f[u];j=new SpeechSynthesisUtterance(v.text);j.lang="zh-CN";j.rate=i;j.pitch=1;document.querySelectorAll(".speak-active").forEach(function(w){w.classList.remove("speak-active")});var y=v.node.parentElement;if(y&&y!==a){y.classList.add("speak-active");y.scrollIntoView({behavior:"smooth",block:"center"})}
+j.onend=function(){document.querySelectorAll(".speak-active").forEach(function(w){w.classList.remove("speak-active")});g++;var w=f.length>0?Math.round(g/f.length*100):0;c.style.width=w+"%";if(g<f.length&&h)t(g);else if(g>=f.length){h=!1;b.textContent="▶";l("✅ 朗读完成")}};j.onerror=function(w){if(w.error!=="interrupted"&&w.error!=="canceled")console.warn(w.error)};speechSynthesis.speak(j);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%"}
 function C(){if(f.length===0)n();if(f.length===0){l("⚠️ 暂无可朗读内容");return}if(speechSynthesis.paused)speechSynthesis.resume();else if(!speechSynthesis.speaking)t(g);h=!0;b.textContent="⏸"}
 function D(){speechSynthesis.pause();h=!1;b.textContent="▶"}
 function E(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});h=!1;b.textContent="▶";g=0;c.style.width="0"}
-function F(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.min(g+1,f.length-1);var m=f.length>0?Math.round(g/f.length*100):0;c.style.width=m+"%";if(h)t(g)}
-function G(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.max(g-1,0);var m=f.length>0?Math.round(g/f.length*100):0;c.style.width=m+"%";if(h)t(g)}
-b.addEventListener("click",function(){h?D():C()});document.getElementById("btnNext").addEventListener("click",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.min(g+3,f.length-1);var m=f.length>0?Math.round(g/f.length*100):0;c.style.width=m+"%";if(h)t(g)});document.getElementById("btnPrev").addEventListener("click",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.max(g-3,0);var m=f.length>0?Math.round(g/f.length*100):0;c.style.width=m+"%";if(h)t(g)});document.getElementById("btnSkipFwd").addEventListener("click",F);document.getElementById("btnSkipBack").addEventListener("click",G);d.addEventListener("click",function(){var m=[0.75,1,1.25,1.5];var o=m.indexOf(i);i=m[(o+1)%m.length];d.textContent=i+"×";if(h&&speechSynthesis.speaking){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(p){p.classList.remove("speak-active")});t(g)}});
+function F(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.min(g+1,f.length-1);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%";if(h)t(g)}
+function G(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.max(g-1,0);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%";if(h)t(g)}
+b.addEventListener("click",function(){h?D():C()});document.getElementById("btnNext").addEventListener("click",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.min(g+3,f.length-1);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%";if(h)t(g)});document.getElementById("btnPrev").addEventListener("click",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.max(g-3,0);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%";if(h)t(g)});document.getElementById("btnSkipFwd").addEventListener("click",F);document.getElementById("btnSkipBack").addEventListener("click",G);d.addEventListener("click",function(){var m=[0.75,1,1.25,1.5];var o=m.indexOf(i);i=m[(o+1)%m.length];d.textContent=i+"×";if(h&&speechSynthesis.speaking){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(p){p.classList.remove("speak-active")});t(g)}});
 document.addEventListener("keydown",function(m){if(m.target.tagName==="INPUT"||m.target.tagName==="TEXTAREA")return;if(m.key===" "){m.preventDefault();h?D():C()}else if(m.key==="ArrowRight")F();else if(m.key==="ArrowLeft")G();else if(m.key==="Escape")E()});
 n();b.addEventListener("touchstart",function(){var m=new SpeechSynthesisUtterance("");m.volume=0;speechSynthesis.speak(m)},{once:!0});setInterval(function(){if(h&&!speechSynthesis.speaking&&!speechSynthesis.pending&&g<f.length)t(g)},4000);
 window.addEventListener("beforeunload",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel()});
