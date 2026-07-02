@@ -144,7 +144,7 @@ def _table_to_text(rows, section_name=""):
     # 检测表格类型并生成对应文本
     first_header = headers[0] if headers else ""
     
-    # 指数收盘表格（如 A 股/美股指数）
+    # 指数收盘表格（如 A 股/美股指数、恐慌指数）
     if any(kw in first_header for kw in ['指数', '标的']):
         sentences = []
         for row in data_rows:
@@ -153,9 +153,19 @@ def _table_to_text(rows, section_name=""):
             name = row[0].replace('**', '')
             val = _safe(row[1]) if len(row) > 1 else None
             change = _safe(row[2]) if len(row) > 2 else None
+            # 恐慌指数：数值 → 解读
+            extra = _safe(row[3]) if len(row) > 3 else None
+            
             if val and change:
                 c = _clean(change)
-                sentences.append(f"{name}报收{val}，{c}")
+                # 如果 val 是描述性文字（如"盘中创新高后回落"），直接嵌入
+                if len(val) > 10:
+                    sentences.append(f"{name}{val}，{c}")
+                else:
+                    sentences.append(f"{name}报收{val}，{c}")
+            elif val and extra:
+                # 恐慌指数格式：指数 + 数值 + 解读
+                sentences.append(f"{name}{val}，处于{extra}")
             elif val:
                 sentences.append(f"{name}报收{val}")
             elif change:
@@ -253,7 +263,10 @@ def _clean(text):
 def _safe( val):
     """处理缺失值"""
     v = val.replace('**', '').strip()
-    if not v or v in ('—', '-', '--', '...'):
+    if not v or v in ('—', '-', '--', '...', '—', '－', '――'):
+        return None
+    # 如果值本身看起来不像有意义的数据（如纯标点）
+    if re.match(r'^[─\-–—\s]+$', v):
         return None
     return v
 
