@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""把 Markdown 日报转为自包含朗读 HTML"""
+"""把 Markdown 日报转为朗读优化 HTML"""
 import sys, re, os, datetime
 
 TEMPLATE = r'''<!DOCTYPE html>
@@ -17,10 +17,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 @media(prefers-color-scheme:dark){.tip{background:#422006;color:#fde68a;border-color:#78350f}}
 .header{background:var(--card);border-bottom:1px solid var(--border);padding:18px 16px;text-align:center;position:relative}
 .header h1{font-size:20px;font-weight:700;margin-bottom:4px}
-.header .date{font-size:13px;color:var(--sub)}
-.refresh-btn{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:var(--accent);color:#fff;border:none;padding:8px 14px;border-radius:20px;font-size:13px;cursor:pointer;display:none;transition:all .15s}
+.header .date{font-size:13px;color:var(--sub);margin-bottom:8px}
+.mode-toggle{display:inline-flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:6px 16px;font-size:13px;color:var(--sub);cursor:pointer;transition:all .15s}
+.mode-toggle.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.refresh-btn{position:absolute;right:16px;top:12px;background:var(--accent);color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;display:none}
 .refresh-btn.show{display:block}
-.refresh-btn:active{transform:translateY(-50%) scale(.95)}
 .stale-banner{background:#fef3c7;color:#92400e;font-size:13px;padding:6px 14px;text-align:center;display:none}
 .stale-banner.show{display:block}
 @media(prefers-color-scheme:dark){.stale-banner{background:#422006;color:#fde68a}}
@@ -29,10 +30,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 .article h3{font-size:16px;margin:18px 0 8px;color:var(--accent)}
 .article h4{font-size:15px;margin:14px 0 6px}
 .article p{margin:8px 0}
+/* 表格样式 */
 .article table{width:100%;border-collapse:collapse;margin:10px 0 16px;font-size:14px;border-radius:8px;overflow:hidden}
 .article th{background:var(--table-head);font-weight:600;text-align:left;padding:8px 10px;font-size:13px;color:var(--sub);border-bottom:2px solid var(--border)}
 .article td{padding:8px 10px;border-bottom:1px solid var(--border)}
 .article tr:last-child td{border-bottom:none}
+/* 朗读模式：隐藏表格，显示文字版 */
+.read-mode table{display:none}
+.tts-text{display:none;margin:10px 0;padding:10px 14px;background:var(--table-head);border-radius:8px;font-size:15px;line-height:1.9;color:var(--text)}
+.read-mode .tts-text{display:block}
+/* 通用 */
 .article strong{color:var(--accent);font-weight:700}
 .article blockquote{border-left:3px solid var(--accent);padding:8px 14px;margin:10px 0;background:var(--table-head);border-radius:0 8px 8px 0;color:var(--sub);font-size:14px}
 .article ul,.article ol{padding-left:22px;margin:8px 0}
@@ -56,9 +63,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 </style>
 </head>
 <body>
-<div class="tip">💡 在浏览器中打开此页即可朗读（微信内长按 → 在浏览器中打开）</div>
-<div class="stale-banner" id="staleBanner">⚠️ 页面可能不是最新内容，请点击刷新</div>
-<div class="header"><h1>📰 全球金融市场日报</h1><div class="date">__DATE__</div><button class="refresh-btn" id="refreshBtn" onclick="location.reload(true)">🔄 刷新</button></div>
+<div class="stale-banner" id="staleBanner">⚠️ 页面可能不是最新内容，请点击右上角刷新</div>
+<div class="tip">💡 点击 🎧 朗读模式 切换语音友好版本，再点 ▶ 开始播放</div>
+<div class="header">
+<h1>📰 全球金融市场日报</h1>
+<div class="date" id="reportDate">__DATE__</div>
+<button class="mode-toggle" id="modeToggle" onclick="toggleReadMode()">🎧 朗读模式</button>
+<button class="refresh-btn" id="refreshBtn" onclick="location.reload(true)">🔄 刷新</button>
+</div>
 <div class="article" id="articleContent">
 __CONTENT__
 </div>
@@ -73,6 +85,17 @@ __CONTENT__
 </div></div>
 <div class="toast" id="toast"></div>
 <script>
+function toggleReadMode(){
+  var a=document.getElementById("articleContent");
+  var b=document.getElementById("modeToggle");
+  a.classList.toggle("read-mode");
+  b.classList.toggle("active");
+  b.textContent=a.classList.contains("read-mode")?"🎧 浏览模式":"🎧 朗读模式";
+  // Stop current speech if any
+  speechSynthesis.cancel();
+  document.getElementById("btnPlay").textContent="▶";
+  document.querySelectorAll(".speak-active").forEach(function(e){e.classList.remove("speak-active")});
+}
 (function(){var a=document.getElementById("articleContent"),b=document.getElementById("btnPlay"),c=document.getElementById("progressFill"),d=document.getElementById("speedLabel"),e=document.getElementById("toast"),f=[],g=0,h=!1,i=1,j=null,k=null;
 function l(m){e.textContent=m;e.classList.add("show");clearTimeout(k);k=setTimeout(function(){e.classList.remove("show")},2000)}
 function n(){var m=document.createTreeWalker(a,NodeFilter.SHOW_TEXT,{acceptNode:function(o){var p=o.textContent.trim();if(!p)return NodeFilter.FILTER_REJECT;var q=o.parentElement;while(q&&q!==a){if(["SCRIPT","STYLE","CODE","PRE"].indexOf(q.tagName)>=0)return NodeFilter.FILTER_REJECT;q=q.parentElement}return NodeFilter.FILTER_ACCEPT}});f=[];var r={};while(m.nextNode()){var s=m.currentNode.textContent.trim();if(s.length>=4&&!r[s]){r[s]=!0;f.push({node:m.currentNode,text:s})}}g=0}
@@ -85,7 +108,8 @@ function F(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;d
 function G(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.max(g-1,0);var m=f.length>0?Math.round(g/f.length*100):0;c.style.width=m+"%";if(h)t(g)}
 b.addEventListener("click",function(){h?D():C()});document.getElementById("btnNext").addEventListener("click",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.min(g+3,f.length-1);var m=f.length>0?Math.round(g/f.length*100):0;c.style.width=m+"%";if(h)t(g)});document.getElementById("btnPrev").addEventListener("click",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.max(g-3,0);var m=f.length>0?Math.round(g/f.length*100):0;c.style.width=m+"%";if(h)t(g)});document.getElementById("btnSkipFwd").addEventListener("click",F);document.getElementById("btnSkipBack").addEventListener("click",G);d.addEventListener("click",function(){var m=[0.75,1,1.25,1.5];var o=m.indexOf(i);i=m[(o+1)%m.length];d.textContent=i+"×";if(h&&speechSynthesis.speaking){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(p){p.classList.remove("speak-active")});t(g)}});
 document.addEventListener("keydown",function(m){if(m.target.tagName==="INPUT"||m.target.tagName==="TEXTAREA")return;if(m.key===" "){m.preventDefault();h?D():C()}else if(m.key==="ArrowRight")F();else if(m.key==="ArrowLeft")G();else if(m.key==="Escape")E()});
-n();b.addEventListener("touchstart",function(){var m=new SpeechSynthesisUtterance("");m.volume=0;speechSynthesis.speak(m)},{once:!0});setInterval(function(){if(h&&!speechSynthesis.speaking&&!speechSynthesis.pending&&g<f.length)t(g)},4000);window.addEventListener("beforeunload",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel()});
+n();b.addEventListener("touchstart",function(){var m=new SpeechSynthesisUtterance("");m.volume=0;speechSynthesis.speak(m)},{once:!0});setInterval(function(){if(h&&!speechSynthesis.speaking&&!speechSynthesis.pending&&g<f.length)t(g)},4000);
+window.addEventListener("beforeunload",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel()});
 (function(){var r=document.getElementById("reportDate");if(!r)return;var m=r.textContent.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);if(!m)return;var rd=new Date(m[1],m[2]-1,m[3]);var td=new Date();td.setHours(0,0,0,0);if(rd<td){document.getElementById("staleBanner").classList.add("show");document.getElementById("refreshBtn").classList.add("show")}})();
 })();
 </script>
@@ -94,51 +118,219 @@ n();b.addEventListener("touchstart",function(){var m=new SpeechSynthesisUtteranc
 '''
 
 
+def _extract_table_data(table_lines):
+    """从 markdown 表格行提取数据"""
+    rows = []
+    for line in table_lines:
+        line = line.strip()
+        if not line.startswith('|'):
+            continue
+        cells = [c.strip() for c in line.strip('|').split('|')]
+        # 跳过分隔行
+        if all(re.match(r'^[-:]+$', c) for c in cells):
+            continue
+        rows.append(cells)
+    return rows
+
+
+def _table_to_text(rows, section_name=""):
+    """将表格数据转为朗读友好的叙述文本"""
+    if len(rows) < 2:
+        return ""
+    
+    headers = rows[0]
+    data_rows = rows[1:]
+    
+    # 检测表格类型并生成对应文本
+    first_header = headers[0] if headers else ""
+    
+    # 指数收盘表格（如 A 股/美股指数）
+    if any(kw in first_header for kw in ['指数', '标的']):
+        sentences = []
+        for row in data_rows:
+            if len(row) < 2:
+                continue
+            name = row[0].replace('**', '')
+            val = _safe(row[1]) if len(row) > 1 else None
+            change = _safe(row[2]) if len(row) > 2 else None
+            if val and change:
+                c = _clean(change)
+                sentences.append(f"{name}报收{val}，{c}")
+            elif val:
+                sentences.append(f"{name}报收{val}")
+            elif change:
+                c = _clean(change)
+                sentences.append(f"{name}{c}")
+            # 跳过全空行
+        if sentences:
+            return "。".join(sentences) + "。"
+        return ""
+
+    # 估值表格
+    if any(kw in first_header for kw in ['指数']):
+        parts = []
+        for row in data_rows:
+            if len(row) < 2:
+                continue
+            name = row[0].replace('**', '')
+            pe = _safe(row[1]) if len(row) > 1 else None
+            pb = _safe(row[2]) if len(row) > 2 else None
+            pos = _safe(row[3]) if len(row) > 3 else None
+            text = f"{name}"
+            if pe:
+                text += f"市盈率{pe}"
+            if pb:
+                text += f"，市净率{pb}"
+            if pos:
+                text += f"，估值处于{pos}"
+            if text != name:
+                parts.append(text)
+        if parts:
+            return "。".join(parts) + "。"
+        return ""
+
+    # 持仓表格
+    if any(kw in first_header for kw in ['持仓', '代码']):
+        parts = []
+        for row in data_rows:
+            if len(row) < 2:
+                continue
+            name = row[0].replace('**', '')
+            val = _safe(row[1]) if len(row) > 1 else None
+            change = _safe(row[2]) if len(row) > 2 else None
+            text = f"{name}"
+            if val:
+                text += f"，当前价格{val}"
+            if change:
+                text += f"，{_clean(change)}"
+            if val or change:
+                parts.append(text)
+        if parts:
+            return "。".join(parts) + "。"
+        return ""
+
+    # QDII/溢价表格
+    if any(kw in first_header for kw in ['ETF', '溢价', '代码']):
+        parts = []
+        for row in data_rows:
+            if len(row) < 2:
+                continue
+            name = row[0].replace('**', '')
+            val = _safe(row[1]) if len(row) > 1 else None
+            extra = _safe(row[2]) if len(row) > 2 else None
+            text = f"{name}"
+            if val:
+                text += f"，{val}"
+            if extra:
+                text += f"，{extra}"
+            parts.append(text)
+        if parts:
+            return "。".join(parts) + "。"
+        return ""
+
+    # 通用表格
+    parts = []
+    for row in data_rows:
+        sentence_parts = []
+        for i, cell in enumerate(row):
+            v = _safe(cell)
+            if v and i < len(headers):
+                h = headers[i].replace('**', '')
+                sentence_parts.append(f"{h}：{v}")
+        if sentence_parts:
+            parts.append("，".join(sentence_parts))
+    if parts:
+        return "。".join(parts) + "。"
+    return ""
+
+
+def _clean(text):
+    """清理文本中的 markdown 标记，保留涨跌"""
+    text = text.replace('**', '')
+    text = text.replace('↑', '上涨').replace('↓', '下跌')
+    return text
+
+def _safe( val):
+    """处理缺失值"""
+    v = val.replace('**', '').strip()
+    if not v or v in ('—', '-', '--', '...'):
+        return None
+    return v
+
+
 def md_to_html(text):
-    """极简 Markdown → HTML 转换"""
+    """Markdown → 朗读优化 HTML"""
     lines = text.split('\n')
     out = []
     in_table = False
+    table_lines = []
     in_list = False
+    list_type = 'ul'
     in_quote = False
+
+    def flush_table():
+        nonlocal in_table, table_lines
+        if not table_lines:
+            return
+        rows = _extract_table_data(table_lines)
+        # 生成表格 HTML
+        if rows:
+            out.append('<table>')
+            # 表头
+            out.append('<thead><tr>')
+            for h in rows[0]:
+                out.append(f'<th>{_inline(h)}</th>')
+            out.append('</tr></thead><tbody>')
+            for row in rows[1:]:
+                out.append('<tr>')
+                for cell in row:
+                    out.append(f'<td>{_inline(cell)}</td>')
+                out.append('</tr>')
+            out.append('</tbody></table>')
+            
+            # 生成朗读版文本
+            tts = _table_to_text(rows)
+            if tts:
+                out.append(f'<div class="tts-text">📢 {tts}</div>')
+        
+        table_lines = []
+        in_table = False
+
+    def flush_list():
+        nonlocal in_list, list_type
+        if in_list:
+            out.append(f'</{list_type}>')
+            in_list = False
+
+    def flush_quote():
+        nonlocal in_quote
+        if in_quote:
+            out.append('</blockquote>')
+            in_quote = False
 
     for line in lines:
         stripped = line.strip()
 
-        # 跳过空行
         if not stripped:
-            if in_quote:
-                out.append('</blockquote>')
-                in_quote = False
-            if in_table:
-                out.append('</tbody></table>')
-                in_table = False
-            if in_list:
-                out.append('</ul>')
-                in_list = False
+            flush_quote()
+            flush_table()
+            flush_list()
             continue
 
         # 标题
         if stripped.startswith('### '):
-            if in_quote: out.append('</blockquote>'); in_quote = False
-            if in_table: out.append('</tbody></table>'); in_table = False
-            if in_list: out.append('</ul>'); in_list = False
+            flush_quote(); flush_table(); flush_list()
             out.append(f'<h3>{_inline(stripped[4:])}</h3>')
         elif stripped.startswith('## '):
-            if in_quote: out.append('</blockquote>'); in_quote = False
-            if in_table: out.append('</tbody></table>'); in_table = False
-            if in_list: out.append('</ul>'); in_list = False
+            flush_quote(); flush_table(); flush_list()
             out.append(f'<h2>{_inline(stripped[3:])}</h2>')
         elif stripped.startswith('# '):
-            if in_quote: out.append('</blockquote>'); in_quote = False
-            if in_table: out.append('</tbody></table>'); in_table = False
-            if in_list: out.append('</ul>'); in_list = False
+            flush_quote(); flush_table(); flush_list()
             out.append(f'<h1>{_inline(stripped[2:])}</h1>')
 
         # 引用
         elif stripped.startswith('> '):
-            if in_list: out.append('</ul>'); in_list = False
-            if in_table: out.append('</tbody></table>'); in_table = False
+            flush_list(); flush_table()
             if not in_quote:
                 out.append('<blockquote>')
                 in_quote = True
@@ -146,80 +338,59 @@ def md_to_html(text):
 
         # 表格
         elif stripped.startswith('|'):
-            if in_list: out.append('</ul>'); in_list = False
-            if in_quote: out.append('</blockquote>'); in_quote = False
-            cells = [c.strip() for c in stripped.strip('|').split('|')]
-            # 跳过分隔行
-            if all(re.match(r'^[-:]+$', c) for c in cells):
-                continue
-            if not in_table:
-                out.append('<table><thead><tr>')
-                for c in cells:
-                    out.append(f'<th>{_inline(c)}</th>')
-                out.append('</tr></thead><tbody>')
-                in_table = True
-                in_table_header = True
-            else:
-                out.append('<tr>')
-                for c in cells:
-                    out.append(f'<td>{_inline(c)}</td>')
-                out.append('</tr>')
+            flush_list(); flush_quote()
+            table_lines.append(stripped)
+            in_table = True
 
         # 无序列表
         elif stripped.startswith('- '):
-            if in_table: out.append('</tbody></table>'); in_table = False
-            if in_quote: out.append('</blockquote>'); in_quote = False
+            flush_table(); flush_quote()
             if not in_list:
                 out.append('<ul>')
+                list_type = 'ul'
                 in_list = True
             out.append(f'<li>{_inline(stripped[2:])}</li>')
 
         # 有序列表
         elif re.match(r'^\d+\.\s', stripped):
-            if in_table: out.append('</tbody></table>'); in_table = False
-            if in_quote: out.append('</blockquote>'); in_quote = False
+            flush_table(); flush_quote()
             if not in_list:
                 out.append('<ol>')
+                list_type = 'ol'
                 in_list = True
             content = re.sub(r'^\d+\.\s', '', stripped)
             out.append(f'<li>{_inline(content)}</li>')
 
         # 水平线
         elif stripped in ('---', '***', '___'):
-            if in_table: out.append('</tbody></table>'); in_table = False
-            if in_quote: out.append('</blockquote>'); in_quote = False
-            if in_list: out.append('</ul>'); in_list = False
+            flush_quote(); flush_table(); flush_list()
             out.append('<hr>')
 
         # 普通段落
         else:
-            if in_table: out.append('</tbody></table>'); in_table = False
-            if in_quote: out.append('</blockquote>'); in_quote = False
-            if in_list: out.append('</ul>'); in_list = False
+            flush_table(); flush_quote(); flush_list()
             out.append(f'<p>{_inline(stripped)}</p>')
 
     # 收尾
-    if in_quote: out.append('</blockquote>')
-    if in_table: out.append('</tbody></table>')
-    if in_list: out.append('</ul>')
+    flush_quote(); flush_table(); flush_list()
 
     return '\n'.join(out)
 
 
 def _inline(text):
-    """处理行内元素：粗体、涨跌箭头"""
-    # 粗体 **text**
+    """处理行内元素"""
     text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
-    # 上涨 ↑ 标记
     text = re.sub(r'(↑[\d.]+%?)', r'<span class="up">\1</span>', text)
-    # 下跌 ↓ 标记
     text = re.sub(r'(↓[\d.]+%?)', r'<span class="down">\1</span>', text)
-    # 转义 HTML
-    text = text.replace('&', '&amp;').replace('<strong>', '␂STRONG␂').replace('</strong>', '␂/STRONG␂')
-    text = text.replace('<span', '␂SPAN').replace('</span>', '␂/SPAN␂')
+    # 保护已生成的 HTML 标签
+    text = text.replace('&', '&amp;')
+    for tag in ['strong', 'span']:
+        text = text.replace(f'&lt;{tag}', f'␂{tag}')
+        text = text.replace(f'&lt;/{tag}&gt;', f'␂/{tag}␂')
     text = text.replace('<', '&lt;').replace('>', '&gt;')
-    text = text.replace('␂STRONG␂', '<strong>').replace('␂/STRONG␂', '</strong>')
-    text = text.replace('␂SPAN', '<span').replace('␂/SPAN␂', '</span>')
+    for tag in ['strong', 'span']:
+        text = text.replace(f'␂{tag}', f'<{tag}')
+        text = text.replace(f'␂/{tag}␂', f'</{tag}>')
     return text
 
 
@@ -234,21 +405,20 @@ def main():
     with open(md_file, 'r', encoding='utf-8') as f:
         md_text = f.read()
 
-    # 提取日期
     date_match = re.search(r'(\d{4})年(\d{1,2})月(\d{1,2})日.*?星期([一二三四五六日])', md_text)
     if date_match:
         date_str = f'{date_match.group(1)}年{date_match.group(2)}月{date_match.group(3)}日 星期{date_match.group(4)}'
     else:
         date_str = datetime.datetime.now().strftime('%Y年%m月%d日')
 
-    # 转换内容
     html_content = md_to_html(md_text)
     html_output = TEMPLATE.replace('__DATE__', date_str).replace('__CONTENT__', html_content)
 
     with open(html_file, 'w', encoding='utf-8') as f:
         f.write(html_output)
 
-    print(f"✅ 生成朗读 HTML: {html_file} ({len(html_output)} 字节)")
+    tts_count = html_output.count('tts-text')
+    print(f"✅ 生成朗读 HTML: {html_file} ({len(html_output)} 字节, {tts_count} 个朗读段落)")
 
 
 if __name__ == '__main__':
