@@ -15,9 +15,15 @@ TEMPLATE = r'''<!DOCTYPE html>
 body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.75;min-height:100dvh;padding:0 0 120px;-webkit-text-size-adjust:100%}
 .tip{background:#fef3c7;color:#92400e;font-size:13px;padding:8px 14px;text-align:center;border-bottom:1px solid #fde68a}
 @media(prefers-color-scheme:dark){.tip{background:#422006;color:#fde68a;border-color:#78350f}}
-.header{background:var(--card);border-bottom:1px solid var(--border);padding:18px 16px;text-align:center}
+.header{background:var(--card);border-bottom:1px solid var(--border);padding:18px 16px;text-align:center;position:relative}
 .header h1{font-size:20px;font-weight:700;margin-bottom:4px}
 .header .date{font-size:13px;color:var(--sub)}
+.refresh-btn{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:var(--accent);color:#fff;border:none;padding:8px 14px;border-radius:20px;font-size:13px;cursor:pointer;display:none;transition:all .15s}
+.refresh-btn.show{display:block}
+.refresh-btn:active{transform:translateY(-50%) scale(.95)}
+.stale-banner{background:#fef3c7;color:#92400e;font-size:13px;padding:6px 14px;text-align:center;display:none}
+.stale-banner.show{display:block}
+@media(prefers-color-scheme:dark){.stale-banner{background:#422006;color:#fde68a}}
 .article{max-width:720px;margin:0 auto;padding:16px}
 .article h2{font-size:18px;margin:28px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--accent);display:inline-block}
 .article h3{font-size:16px;margin:18px 0 8px;color:var(--accent)}
@@ -51,7 +57,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 </head>
 <body>
 <div class="tip">💡 在浏览器中打开此页即可朗读（微信内长按 → 在浏览器中打开）</div>
-<div class="header"><h1>📰 全球金融市场日报</h1><div class="date">__DATE__</div></div>
+<div class="stale-banner" id="staleBanner">⚠️ 页面可能不是最新内容，请点击刷新</div>
+<div class="header"><h1>📰 全球金融市场日报</h1><div class="date">__DATE__</div><button class="refresh-btn" id="refreshBtn" onclick="location.reload(true)">🔄 刷新</button></div>
 <div class="article" id="articleContent">
 __CONTENT__
 </div>
@@ -78,7 +85,9 @@ function F(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;d
 function G(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.max(g-1,0);var m=f.length>0?Math.round(g/f.length*100):0;c.style.width=m+"%";if(h)t(g)}
 b.addEventListener("click",function(){h?D():C()});document.getElementById("btnNext").addEventListener("click",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.min(g+3,f.length-1);var m=f.length>0?Math.round(g/f.length*100):0;c.style.width=m+"%";if(h)t(g)});document.getElementById("btnPrev").addEventListener("click",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(m){m.classList.remove("speak-active")});g=Math.max(g-3,0);var m=f.length>0?Math.round(g/f.length*100):0;c.style.width=m+"%";if(h)t(g)});document.getElementById("btnSkipFwd").addEventListener("click",F);document.getElementById("btnSkipBack").addEventListener("click",G);d.addEventListener("click",function(){var m=[0.75,1,1.25,1.5];var o=m.indexOf(i);i=m[(o+1)%m.length];d.textContent=i+"×";if(h&&speechSynthesis.speaking){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(p){p.classList.remove("speak-active")});t(g)}});
 document.addEventListener("keydown",function(m){if(m.target.tagName==="INPUT"||m.target.tagName==="TEXTAREA")return;if(m.key===" "){m.preventDefault();h?D():C()}else if(m.key==="ArrowRight")F();else if(m.key==="ArrowLeft")G();else if(m.key==="Escape")E()});
-n();b.addEventListener("touchstart",function(){var m=new SpeechSynthesisUtterance("");m.volume=0;speechSynthesis.speak(m)},{once:!0});setInterval(function(){if(h&&!speechSynthesis.speaking&&!speechSynthesis.pending&&g<f.length)t(g)},4000);window.addEventListener("beforeunload",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel()})})();
+n();b.addEventListener("touchstart",function(){var m=new SpeechSynthesisUtterance("");m.volume=0;speechSynthesis.speak(m)},{once:!0});setInterval(function(){if(h&&!speechSynthesis.speaking&&!speechSynthesis.pending&&g<f.length)t(g)},4000);window.addEventListener("beforeunload",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel()});
+(function(){var r=document.getElementById("reportDate");if(!r)return;var m=r.textContent.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);if(!m)return;var rd=new Date(m[1],m[2]-1,m[3]);var td=new Date();td.setHours(0,0,0,0);if(rd<td){document.getElementById("staleBanner").classList.add("show");document.getElementById("refreshBtn").classList.add("show")}})();
+})();
 </script>
 </body>
 </html>
