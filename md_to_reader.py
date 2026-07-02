@@ -143,7 +143,52 @@ def _table_to_text(rows, section_name=""):
     
     # 检测表格类型并生成对应文本
     first_header = headers[0] if headers else ""
+    all_headers = " ".join(headers)
     
+    # 估值表格（headers 含 PE/PB/估值）—— 必须最先检查
+    if any(kw in all_headers for kw in ['PE', 'PB', '估值', '市盈率', '市净率']):
+        parts = []
+        for row in data_rows:
+            if len(row) < 2: continue
+            name = row[0].replace('**', '')
+            pe = _safe(row[1]) if len(row) > 1 else None
+            pb = _safe(row[2]) if len(row) > 2 else None
+            pos = _safe(row[3]) if len(row) > 3 else None
+            text = name
+            if pe: text += f"市盈率{pe}"
+            if pb: text += f"，市净率{pb}"
+            if pos: text += f"，估值处于{pos}"
+            if text != name: parts.append(text)
+        return "。".join(parts) + "。" if parts else ""
+
+    # QDII/ETF溢价表格（headers 含 ETF代码/溢价）
+    if any(kw in all_headers for kw in ['ETF代码', '溢价率']):
+        parts = []
+        for row in data_rows:
+            if len(row) < 2: continue
+            name = row[0].replace('**', '')
+            val = _safe(row[1]) if len(row) > 1 else None
+            extra = _safe(row[2]) if len(row) > 2 else None
+            text = name
+            if val: text += f"，{val}"
+            if extra: text += f"，{extra}"
+            parts.append(text)
+        return "。".join(parts) + "。" if parts else ""
+
+    # 持仓表格
+    if any(kw in first_header for kw in ['持仓', '标的', '代码']):
+        parts = []
+        for row in data_rows:
+            if len(row) < 2: continue
+            name = row[0].replace('**', '')
+            val = _safe(row[1]) if len(row) > 1 else None
+            change = _safe(row[2]) if len(row) > 2 else None
+            text = name
+            if val: text += f"，当前价格{val}"
+            if change: text += f"，{_clean(change)}"
+            if val or change: parts.append(text)
+        return "。".join(parts) + "。" if parts else ""
+
     # 指数收盘表格（如 A 股/美股指数、恐慌指数）
     if any(kw in first_header for kw in ['指数', '标的']):
         sentences = []
@@ -174,68 +219,6 @@ def _table_to_text(rows, section_name=""):
             # 跳过全空行
         if sentences:
             return "。".join(sentences) + "。"
-        return ""
-
-    # 估值表格
-    if any(kw in first_header for kw in ['指数']):
-        parts = []
-        for row in data_rows:
-            if len(row) < 2:
-                continue
-            name = row[0].replace('**', '')
-            pe = _safe(row[1]) if len(row) > 1 else None
-            pb = _safe(row[2]) if len(row) > 2 else None
-            pos = _safe(row[3]) if len(row) > 3 else None
-            text = f"{name}"
-            if pe:
-                text += f"市盈率{pe}"
-            if pb:
-                text += f"，市净率{pb}"
-            if pos:
-                text += f"，估值处于{pos}"
-            if text != name:
-                parts.append(text)
-        if parts:
-            return "。".join(parts) + "。"
-        return ""
-
-    # 持仓表格
-    if any(kw in first_header for kw in ['持仓', '代码']):
-        parts = []
-        for row in data_rows:
-            if len(row) < 2:
-                continue
-            name = row[0].replace('**', '')
-            val = _safe(row[1]) if len(row) > 1 else None
-            change = _safe(row[2]) if len(row) > 2 else None
-            text = f"{name}"
-            if val:
-                text += f"，当前价格{val}"
-            if change:
-                text += f"，{_clean(change)}"
-            if val or change:
-                parts.append(text)
-        if parts:
-            return "。".join(parts) + "。"
-        return ""
-
-    # QDII/溢价表格
-    if any(kw in first_header for kw in ['ETF', '溢价', '代码']):
-        parts = []
-        for row in data_rows:
-            if len(row) < 2:
-                continue
-            name = row[0].replace('**', '')
-            val = _safe(row[1]) if len(row) > 1 else None
-            extra = _safe(row[2]) if len(row) > 2 else None
-            text = f"{name}"
-            if val:
-                text += f"，{val}"
-            if extra:
-                text += f"，{extra}"
-            parts.append(text)
-        if parts:
-            return "。".join(parts) + "。"
         return ""
 
     # 通用表格
