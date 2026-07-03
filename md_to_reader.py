@@ -7,6 +7,9 @@ TEMPLATE = r'''<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>全球金融市场日报</title>
 <style>
 :root{--bg:#f8f9fa;--card:#fff;--text:#1a1a2e;--sub:#6b7280;--border:#e5e7eb;--accent:#2563eb;--note-bg:#f0f4ff}
@@ -55,12 +58,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 </style>
 </head>
 <body>
-<div class="stale-banner" id="staleBanner">⚠️ 页面可能不是最新内容，请点击右上角刷新</div>
-<div class="tip">💡 点 ▶ 开始语音朗读，键盘空格键可暂停/继续</div>
+<div class="stale-banner" id="staleBanner"></div>
+<div class="tip">💡 点 ▶ 开始语音朗读，键盘空格键可暂停/继续；检测到旧版时页面自动刷新</div>
 <div class="header">
 <h1>📰 全球金融市场日报</h1>
 <div class="date" id="reportDate">__DATE__</div>
-<button class="refresh-btn" id="refreshBtn" onclick="location.reload(true)">🔄 刷新</button>
+<button class="refresh-btn" id="refreshBtn" onclick="window.location.href=window.location.pathname+'?_='+Date.now()">🔄 刷新</button>
 </div>
 <div class="article" id="articleContent">
 __CONTENT__
@@ -94,7 +97,7 @@ b.addEventListener("click",function(){h?D():C()});document.getElementById("btnNe
 document.addEventListener("keydown",function(q){if(q.target.tagName==="INPUT"||q.target.tagName==="TEXTAREA")return;if(q.key===" "){q.preventDefault();h?D():C()}else if(q.key==="ArrowRight")F();else if(q.key==="ArrowLeft")G();else if(q.key==="Escape")E()});
 p();b.addEventListener("touchstart",function(){var q=new SpeechSynthesisUtterance("");q.volume=0;speechSynthesis.speak(q)},{once:!0});setInterval(function(){if(h&&!speechSynthesis.speaking&&!speechSynthesis.pending&&g<f.length)t(g)},4000);
 window.addEventListener("beforeunload",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel()});
-(function(){var q=document.getElementById("reportDate");if(!q)return;var r=q.textContent.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);if(!r)return;var s=new Date(r[1],r[2]-1,r[3]);var t=new Date();t.setHours(0,0,0,0);if(s<t){document.getElementById("staleBanner").classList.add("show");document.getElementById("refreshBtn").classList.add("show")}})();
+(function(){var q=document.getElementById("reportDate");if(!q)return;var r=q.textContent.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);if(!r)return;var s=new Date(r[1],r[2]-1,r[3]);var t=new Date();t.setHours(0,0,0,0);if(s<t){var b=document.getElementById("staleBanner"),btn=document.getElementById("refreshBtn");b.textContent="⏳ 已检测旧版内容，正在自动刷新...";b.classList.add("show");btn.classList.add("show");setTimeout(function(){window.location.href=window.location.pathname+"?_="+Date.now()},1500)}})();
 })();
 </script>
 </body>
