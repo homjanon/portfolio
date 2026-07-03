@@ -120,55 +120,103 @@ def _clean(text):
 
 
 def _table_to_text(rows):
-    """表格 → 自然叙述文本"""
+    """表格 → 自然叙述文本（通过表头关键词智能映射列位置）"""
     if len(rows) < 2:
         return ""
     headers = [h.replace('**', '') for h in rows[0]]
     data_rows = rows[1:]
-    first_header = headers[0] if headers else ""
     all_headers = " ".join(headers)
+    first_header = headers[0] if headers else ""
 
-    # ── 估值表（含 PE/PB/估值）──
+    def _col_idx(keywords, exclude_kw=None):
+        """在 headers 中查找包含某关键词的列索引"""
+        kws = keywords if isinstance(keywords, (list, tuple)) else [keywords]
+        for i, h in enumerate(headers):
+            if all(k in h for k in kws):
+                if exclude_kw and exclude_kw in h:
+                    continue
+                return i
+        return None
+
+    # ── 估值表（PE/PB 多列格式）──
     if any(kw in all_headers for kw in ['PE', 'PB', '估值', '市盈率', '市净率']):
+        pe_col = _col_idx('PE', '分位') or _col_idx('市盈') or None
+        pe_pct_col = _col_idx(['PE', '分位']) or _col_idx(['PE', '历史']) or None
+        pb_col = _col_idx('PB', '分位') or _col_idx('市净') or None
+        pb_pct_col = _col_idx(['PB', '分位']) or _col_idx(['PB', '历史']) or None
+        pos_col = _col_idx('分位') or _col_idx('历史分位') or None
+        # 如果是 4 列拆分格式且有备注列，调整
+        notes_col = _col_idx('备注') or None
         parts = []
         for row in data_rows:
-            if len(row) < 2: continue
-            name = row[0].replace('**', '')
-            pe = _safe(row[1]) if len(row) > 1 else None
-            pb = _safe(row[2]) if len(row) > 2 else None
-            pos = _safe(row[3]) if len(row) > 3 else None
+            name = row[0].replace('**', '') if len(row) > 0 else ''
             details = []
-            if pe: details.append(f"市盈率{pe}倍")
-            if pb: details.append(f"市净率{pb}倍")
-            if pos: details.append(f"估值分位处于{pos}")
+            if pe_col is not None and pe_col < len(row):
+                pe = _safe(row[pe_col])
+                if pe: details.append(f"市盈率{pe}倍")
+            if pb_col is not None and pb_col < len(row):
+                pb = _safe(row[pb_col])
+                if pb: details.append(f"市净率{pb}倍")
+            # PE 分位
+            used_summary = False
+            if pe_pct_col is not None and pe_pct_col < len(row):
+                pct = _safe(row[pe_pct_col])
+                if pct: details.append(f"PE分位{pct}")
+            elif pos_col is not None and pos_col < len(row) and pos_col != (pb_pct_col or -1):
+                pct = _safe(row[pos_col])
+                if pct:
+                    details.append(f"PE分位{pct}")
+                    used_summary = True
+            # PB 分位
+            if pb_pct_col is not None and pb_pct_col < len(row):
+                pct = _safe(row[pb_pct_col])
+                if pct: details.append(f"PB分位{pct}")
+            elif not used_summary and pos_col is not None and pos_col < len(row) and pos_col != (pe_pct_col or -1):
+                pct = _safe(row[pos_col])
+                if pct:
+                    details.append(f"PB分位{pct}")
+                    used_summary = True
+            # 汇总估值结论（与已使用过的不同才输出）
+            if not used_summary and pos_col is not None and pos_col < len(row):
+                pos = _safe(row[pos_col])
+                if pos and len(pos) < 20:
+                    details.append(f"估值{pos}")
+            # 备注
+            if notes_col is not None and notes_col < len(row):
+                note = row[notes_col].replace('**', '').strip()
+                if note and not any(kw in all_headers for kw in ['备注']):
+                    pass
             if details:
                 parts.append(f"{name}，{'，'.join(details)}")
-        return "。".join(parts) + "。"
+        if parts:
+            return "。".join(parts) + "。"
 
     # ── 恐慌指数（VIX/VXN）──
-    if ("指数" in first_header and len(headers) >= 3
+    if (headers and len(headers) >= 3
             and any(kw in headers[2] for kw in ['解读', '状态', '区间'])):
+        val_col = _col_idx('数值') or _col_idx('最新值') or 1
+        desc_col = _col_idx('解读') or _col_idx('状态') or _col_idx('区间') or 2
         sentences = []
         for row in data_rows:
-            if len(row) < 2: continue
-            name = row[0].replace('**', '')
-            val = _safe(row[1]) if len(row) > 1 else None
-            desc = _safe(row[2]) if len(row) > 2 else None
+            name = row[0].replace('**', '') if len(row) > 0 else ''
+            val = _safe(row[val_col]) if len(row) > val_col else None
+            desc = _safe(row[desc_col]) if len(row) > desc_col else None
             if val and desc:
-                sentences.append(f"{name}报{val}，处于{desc}")
+                sentences.append(f"{name}报{val}，{desc}")
             elif val:
                 sentences.append(f"{name}报{val}")
         if sentences:
             return "。".join(sentences) + "。"
 
     # ── QDII/ETF溢价表 ──
-    if any(kw in all_headers for kw in ['ETF代码', '溢价率']):
+    if any(kw in all_headers for kw in ['ETF', '溢价率']):
+        code_col = _col_idx('代码') or _col_idx('ETF代码') or 1
+        premium_col = _col_idx('溢价') or _col_idx('溢价率') or 2
         parts = []
         for row in data_rows:
-            if len(row) < 2: continue
-            name = row[0].replace('**', '')
-            code = _safe(row[1]) if len(row) > 1 else None
-            premium = _safe(row[2]) if len(row) > 2 else None
+            name = row[0].replace('**', '') if len(row) > 0 else ''
+            code = _safe(row[code_col]) if len(row) > code_col else None
+            premium = _safe(row[premium_col]) if len(row) > premium_col else None
             text_parts = [name]
             if code: text_parts.append(f"代码{code}")
             if premium: text_parts.append(f"溢价率{_clean(premium)}")
@@ -178,48 +226,57 @@ def _table_to_text(rows):
             return "。".join(parts) + "。"
 
     # ── 场外基金表（代码 + 名称 + 净值）──
-    if (len(headers) >= 3 and '代码' in first_header
-            and any(kw in headers[1] for kw in ['名称', '基金'])
-            and any(kw in all_headers for kw in ['净值', '涨跌'])):
+    code_col = _col_idx('代码')
+    name_col = _col_idx('名称') or _col_idx('基金')
+    if code_col is not None and code_col == 0 and name_col is not None:
+        nav_col = _col_idx('净值') or _col_idx('最新净值') or 2
+        change_col = _col_idx('日涨跌') or _col_idx('涨跌幅') or _col_idx('涨跌') or 3
         parts = []
         for row in data_rows:
-            if len(row) < 3: continue
-            code = row[0].replace('**', '')
-            fname = _safe(row[1])
-            nav = _safe(row[2]) if len(row) > 2 else None
-            change = _safe(row[3]) if len(row) > 3 else None
+            code = row[0].replace('**', '') if len(row) > 0 else ''
+            fname = _safe(row[1]) if len(row) > 1 else None
+            nav = _safe(row[nav_col]) if len(row) > nav_col else None
+            change = _safe(row[change_col]) if len(row) > change_col else None
             text = fname if fname else code
             if code and fname:
                 text = f"{fname}（{code}）"
             if nav: text += f"，净值{nav}"
-            if change: text += f"，近一周{_clean(change)}"
+            if change: text += f"，近周{_clean(change)}"
             if nav or change: parts.append(text)
         if parts:
             return "。".join(parts) + "。"
 
     # ── 个股持仓表 ──
-    if any(kw in first_header for kw in ['持仓', '标的']):
+    code_col = _col_idx('代码')
+    price_col = _col_idx('价') or _col_idx('收盘价') or _col_idx('价格') or _col_idx('最新价') or 1
+    change_col = _col_idx('涨跌') or _col_idx('涨跌幅') or (price_col + 1 if price_col is not None else 2)
+    if '标的' in first_header or '持仓' in first_header or ('代码' in all_headers and price_col != 0):
         parts = []
         for row in data_rows:
             if len(row) < 2: continue
             name = row[0].replace('**', '')
-            val = _safe(row[1]) if len(row) > 1 else None
-            change = _safe(row[2]) if len(row) > 2 else None
+            if code_col is not None and code_col > 0 and code_col < len(row):
+                code = row[code_col].replace('**', '')
+                name = f"{name}（{code}）"
+            price = _safe(row[price_col]) if len(row) > price_col else None
+            change = _safe(row[change_col]) if len(row) > change_col else None
             text = name
-            if val: text += f"，价格{val}"
+            if price: text += f"，价格{price}"
             if change: text += f"，{_clean(change)}"
-            if val or change: parts.append(text)
+            if price or change: parts.append(text)
         if parts:
             return "。".join(parts) + "。"
 
     # ── 指数收盘表（A股/美股指数）──
     if any(kw in first_header for kw in ['指数', '标的']):
+        val_col = _col_idx('点位') or _col_idx('收盘价') or _col_idx('收盘点位') or _col_idx('价格') or 1
+        change_col = _col_idx('涨跌') or _col_idx('涨跌幅') or 2
         sentences = []
         for row in data_rows:
             if len(row) < 2: continue
             name = row[0].replace('**', '')
-            val = _safe(row[1]) if len(row) > 1 else None
-            change = _safe(row[2]) if len(row) > 2 else None
+            val = _safe(row[val_col]) if len(row) > val_col else None
+            change = _safe(row[change_col]) if len(row) > change_col else None
             if val and change:
                 c = _clean(change)
                 if re.search(r'\d', val):
@@ -250,15 +307,11 @@ def _table_to_text(rows):
 
 def _inline(text):
     """行内元素：**加粗** → <strong>，↑↓ → 上涨/下跌（无箭头，适合朗读）"""
-    # arrow → text first (before bold wrapping)
     text = re.sub(r'↑([\d.]+%?)', r'<span class="up">上涨\1</span>', text)
     text = re.sub(r'↓([\d.]+%?)', r'<span class="down">下跌\1</span>', text)
-    # standalone arrows without numbers
     text = re.sub(r'(?<!上涨)(?<!下跌)↑(?![\d.])', '上涨', text)
     text = re.sub(r'(?<!上涨)(?<!下跌)↓(?![\d.])', '下跌', text)
-    # bold
     text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
-    # 保护已生成的标签
     idx = 0
     protected = []
     def _protect(m):
@@ -283,7 +336,7 @@ def md_to_html(text):
     in_list = False
     list_type = 'ul'
     in_quote = False
-    first_para = True  # 首段不缩进
+    first_para = True
 
     def flush_table():
         nonlocal in_table, table_lines
@@ -324,7 +377,6 @@ def md_to_html(text):
             flush_quote(); flush_table(); flush_list()
             continue
 
-        # 标题
         if stripped.startswith('### '):
             flush_quote(); flush_table(); flush_list()
             out.append(f'<h3>{_inline(stripped[4:])}</h3>')
@@ -335,7 +387,6 @@ def md_to_html(text):
             flush_quote(); flush_table(); flush_list()
             out.append(f'<h1>{_inline(stripped[2:])}</h1>')
 
-        # 引用
         elif stripped.startswith('> '):
             flush_list(); flush_table()
             if not in_quote:
@@ -343,13 +394,11 @@ def md_to_html(text):
                 in_quote = True
             out.append(f'<p class="no-indent">{_inline(stripped[2:])}</p>')
 
-        # 表格 → 转为文字段落
         elif stripped.startswith('|'):
             flush_list(); flush_quote()
             table_lines.append(stripped)
             in_table = True
 
-        # 无序列表
         elif stripped.startswith('- '):
             flush_table(); flush_quote()
             if not in_list:
@@ -357,7 +406,6 @@ def md_to_html(text):
                 list_type = 'ul'; in_list = True
             out.append(f'<li>{_inline(stripped[2:])}</li>')
 
-        # 有序列表
         elif re.match(r'^\d+\.\s', stripped):
             flush_table(); flush_quote()
             if not in_list:
@@ -366,12 +414,10 @@ def md_to_html(text):
             content = re.sub(r'^\d+\.\s', '', stripped)
             out.append(f'<li>{_inline(content)}</li>')
 
-        # 水平线
         elif stripped in ('---', '***', '___'):
             flush_quote(); flush_table(); flush_list()
             out.append('<hr>')
 
-        # 普通段落
         else:
             flush_table(); flush_quote(); flush_list()
             cls = 'no-indent' if first_para else ''
