@@ -10,6 +10,7 @@ TEMPLATE = r'''<!DOCTYPE html>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
+<link rel="icon" href="data:,">
 <title>全球金融市场日报</title>
 <style>
 :root{--bg:#f8f9fa;--card:#fff;--text:#1a1a2e;--sub:#6b7280;--border:#e5e7eb;--accent:#2563eb;--note-bg:#f0f4ff}
@@ -112,6 +113,10 @@ document.addEventListener("keydown",function(e){if(e.target.tagName==="INPUT"||e
 // 过期检测
 (function(){var q=document.getElementById("reportDate");if(!q)return;var r=q.textContent.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);if(!r)return;var s=new Date(r[1],r[2]-1,r[3]);var d=new Date();d.setHours(0,0,0,0);if(s<d){var b=document.getElementById("staleBanner"),btn=document.getElementById("refreshBtn");b.textContent="⏳ 已检测旧版内容，正在自动刷新...";b.classList.add("show");btn.classList.add("show");setTimeout(function(){window.location.href=window.location.pathname+"?_="+Date.now()},1500)}})();
 })();
+</script>
+<script>
+// 注册 Service Worker：强制网络刷新 HTML
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').then(function(reg){console.log('SW registered')})["catch"](function(e){console.warn('SW failed:',e)})}
 </script>
 </body>
 </html>'''
