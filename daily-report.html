@@ -11,7 +11,7 @@
 :root{--bg:#f8f9fa;--card:#fff;--text:#1a1a2e;--sub:#6b7280;--border:#e5e7eb;--accent:#2563eb;--note-bg:#f0f4ff}
 @media(prefers-color-scheme:dark){:root{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--sub:#94a3b8;--border:#334155;--accent:#3b82f6;--note-bg:#1e293b}}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.9;min-height:100dvh;padding:0 0 130px;-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.9;min-height:100dvh;padding:0 0 150px;-webkit-text-size-adjust:100%}
 .header{background:var(--card);border-bottom:1px solid var(--border);padding:18px 16px;text-align:center;position:relative}
 .header h1{font-size:20px;font-weight:700;margin-bottom:4px}
 .header .date{font-size:13px;color:var(--sub);margin-bottom:8px}
@@ -35,27 +35,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 .article hr{border:none;border-top:1px solid var(--border);margin:24px 0}
 .up{color:#059669;font-weight:600}.down{color:#dc2626;font-weight:600}
 @media(prefers-color-scheme:dark){.up{color:#34d399}.down{color:#f87171}}
-.speak-active{background:var(--accent);color:#fff;border-radius:4px;padding:0 4px;display:inline}
 .player{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--card);border-top:1px solid var(--border);padding:10px 16px max(10px,env(safe-area-inset-bottom,10px));box-shadow:0 -2px 12px rgba(0,0,0,.08)}
-.player-row{display:flex;align-items:center;gap:10px;max-width:500px;margin:0 auto}
-.btn{width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;-webkit-tap-highlight-color:transparent;background:var(--bg);color:var(--text);border:1px solid var(--border)}
-.btn:active{transform:scale(.94)}
-.btn-play{width:56px;height:56px;font-size:24px;background:var(--accent);color:#fff;border:none;box-shadow:0 3px 10px rgba(37,99,235,.3)}
-.btn-sm{width:36px;height:36px;font-size:16px}
-.speed{font-size:12px;color:var(--sub);min-width:32px;text-align:center;cursor:pointer;padding:4px 0;user-select:none}
-.voice-btn{font-size:12px;color:var(--sub);min-width:48px;text-align:center;cursor:pointer;padding:4px 6px;user-select:none;border-radius:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.voice-btn:active{background:var(--bg)}
-.voice-btn.has-voices{color:var(--accent)}
-.progress{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
-.progress-fill{height:100%;background:var(--accent);border-radius:2px;width:0;transition:width .2s linear}
-.toast{position:fixed;top:12px;left:50%;transform:translateX(-50%);background:#1f2937;color:#fff;padding:8px 20px;border-radius:20px;font-size:14px;z-index:300;pointer-events:none;opacity:0;transition:opacity .25s}
-.toast.show{opacity:1}
-@media(prefers-color-scheme:dark){.toast{background:#374151}}
+.player-row{display:flex;align-items:center;gap:8px;max-width:500px;margin:0 auto}
+.btn-play{width:48px;height:48px;border-radius:50%;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;-webkit-tap-highlight-color:transparent;background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(37,99,235,.25)}
+.btn-play:active{transform:scale(.92)}
+.player-time{font-size:11px;color:var(--sub);min-width:36px;text-align:center;white-space:nowrap;font-variant-numeric:tabular-nums}
+.progress-wrap{flex:1;height:32px;display:flex;align-items:center;cursor:pointer;position:relative;min-width:60px}
+.progress-track{width:100%;height:4px;background:var(--border);border-radius:2px;overflow:hidden;position:relative}
+.progress-fill{height:100%;background:var(--accent);border-radius:2px;width:0;transition:none}
+.progress-thumb{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;background:var(--accent);border:2px solid #fff;transform:translate(-50%,-50%);opacity:0;transition:opacity .12s;pointer-events:none;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.progress-wrap:hover .progress-thumb,.progress-wrap:active .progress-thumb{opacity:1}
+@media(prefers-color-scheme:dark){.progress-thumb{border-color:var(--card)}}
+.player-sub{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:2px}
+.speed-btn{background:none;border:none;color:var(--sub);font-size:11px;cursor:pointer;padding:2px 6px;border-radius:3px;transition:all .12s}
+.speed-btn.active{color:var(--accent);font-weight:600}
+.speed-btn:hover{background:var(--note-bg)}
+.voice-label{font-size:10px;color:var(--sub);padding:2px 4px}
 </style>
 </head>
 <body>
 <div class="stale-banner" id="staleBanner"></div>
-<div class="tip">💡 点 ▶ 开始语音朗读，键盘空格键可暂停/继续；检测到旧版时页面自动刷新</div>
+<div class="tip">💡 点击 ▶ 播放音频日报（微软 AI 语音播报），暂停/续播/拖动进度条均可</div>
 <div class="header">
 <h1>📰 全球金融市场日报</h1>
 <div class="date" id="reportDate">2026年07月04日</div>
@@ -160,36 +160,50 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 <p class=""><strong>📚 MD 已同步 IMA 知识库 - 投资/日报</strong></p>
 <p class="">*数据来源：Wind、东方财富、新浪财经、天天基金、聚金数据、雪球等 | 发布时间：2026.07.04 08:30*</p>
 </div>
-<div class="player"><div class="player-row">
-<button class="btn btn-sm" id="btnPrev">⏮</button>
-<button class="btn btn-sm" id="btnSkipBack">⏪</button>
-<button class="btn btn-play" id="btnPlay">▶</button>
-<button class="btn btn-sm" id="btnSkipFwd">⏩</button>
-<button class="btn btn-sm" id="btnNext">⏭</button>
-<span class="voice-btn" id="voiceLabel" title="点击切换朗读音色">🎙️</span>
-<span class="speed" id="speedLabel">1×</span>
-<div class="progress"><div class="progress-fill" id="progressFill"></div></div>
-</div></div>
-<div class="toast" id="toast"></div>
+<div class="player">
+<div class="player-row">
+<button class="btn-play" id="btnPlay">▶</button>
+<span class="player-time" id="currentTime">00:00</span>
+<div class="progress-wrap" id="progressWrap">
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+<div class="progress-thumb" id="progressThumb"></div>
+</div>
+<span class="player-time" id="totalTime">00:00</span>
+</div>
+<div class="player-sub">
+<button class="speed-btn" data-speed="0.8">0.8×</button>
+<button class="speed-btn active" data-speed="1">1×</button>
+<button class="speed-btn" data-speed="1.2">1.2×</button>
+<button class="speed-btn" data-speed="1.5">1.5×</button>
+<span class="voice-label">🎙 微软 Yunyang（男声·新闻）</span>
+</div>
+</div>
+<audio id="audioPlayer" preload="auto" src="daily-report.mp3"></audio>
 <script>
-(function(){var a=document.getElementById("articleContent"),b=document.getElementById("btnPlay"),c=document.getElementById("progressFill"),d=document.getElementById("speedLabel"),e=document.getElementById("toast"),vl=document.getElementById("voiceLabel"),f=[],g=0,h=!1,i=1,j=null,k=null,m=[],n=0,o=null;
-function P(){m=speechSynthesis.getVoices().filter(function(q){return q.lang.indexOf("zh")===0});if(m.length>0){n=parseInt(localStorage.getItem("ttsVoiceIdx")||"0");if(n>=m.length)n=0;o=m[n];vl.textContent=o.name.length>6?o.name.slice(0,6)+"…":o.name;vl.classList.add("has-voices");vl.title="当前: "+o.name+"（点击切换）"}else{o=null;vl.textContent="🎙️";vl.title="未检测到中文语音"}}
-speechSynthesis.addEventListener("voiceschanged",P);P();
-vl.addEventListener("click",function(){if(m.length<2)return;n=(n+1)%m.length;o=m[n];vl.textContent=o.name.length>6?o.name.slice(0,6)+"…":o.name;vl.title="当前: "+o.name+"（点击切换）";try{localStorage.setItem("ttsVoiceIdx",String(n))}catch(_){}if(h){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(q){q.classList.remove("speak-active")});t(g)}});
-function l(q){e.textContent=q;e.classList.add("show");clearTimeout(k);k=setTimeout(function(){e.classList.remove("show")},2000)}
-function p(){var q=document.createTreeWalker(a,NodeFilter.SHOW_TEXT,{acceptNode:function(r){var s=r.textContent.trim();if(!s)return NodeFilter.FILTER_REJECT;var t=r.parentElement;while(t&&t!==a){if(["SCRIPT","STYLE","CODE","PRE"].indexOf(t.tagName)>=0)return NodeFilter.FILTER_REJECT;t=t.parentElement}return NodeFilter.FILTER_ACCEPT}});f=[];while(q.nextNode()){var u=q.currentNode.textContent.trim();if(u.length>=2)f.push({node:q.currentNode,text:u})}g=0}
-function t(q){if(q<0||q>=f.length)return;if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;var r=f[q];j=new SpeechSynthesisUtterance(r.text);j.lang="zh-CN";j.rate=i;j.pitch=1;if(o)j.voice=o;document.querySelectorAll(".speak-active").forEach(function(s){s.classList.remove("speak-active")});var u=r.node.parentElement;if(u&&u!==a){u.classList.add("speak-active");u.scrollIntoView({behavior:"smooth",block:"center"})}
-j.onend=function(){document.querySelectorAll(".speak-active").forEach(function(s){s.classList.remove("speak-active")});g++;var s=f.length>0?Math.round(g/f.length*100):0;c.style.width=s+"%";if(g<f.length&&h)t(g);else if(g>=f.length){h=!1;b.textContent="▶";l("✅ 朗读完成")}};j.onerror=function(s){if(s.error!=="interrupted"&&s.error!=="canceled")console.warn(s.error)};speechSynthesis.speak(j);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%"}
-function C(){if(f.length===0)p();if(f.length===0){l("⚠️ 暂无可朗读内容");return}if(speechSynthesis.paused)speechSynthesis.resume();else if(!speechSynthesis.speaking)t(g);h=!0;b.textContent="⏸"}
-function D(){speechSynthesis.pause();h=!1;b.textContent="▶"}
-function E(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(q){q.classList.remove("speak-active")});h=!1;b.textContent="▶";g=0;c.style.width="0"}
-function F(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(q){q.classList.remove("speak-active")});g=Math.min(g+1,f.length-1);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%";if(h)t(g)}
-function G(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(q){q.classList.remove("speak-active")});g=Math.max(g-1,0);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%";if(h)t(g)}
-b.addEventListener("click",function(){h?D():C()});document.getElementById("btnNext").addEventListener("click",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(q){q.classList.remove("speak-active")});g=Math.min(g+3,f.length-1);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%";if(h)t(g)});document.getElementById("btnPrev").addEventListener("click",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(q){q.classList.remove("speak-active")});g=Math.max(g-3,0);c.style.width=f.length>0?Math.round(g/f.length*100)+"%":"0%";if(h)t(g)});document.getElementById("btnSkipFwd").addEventListener("click",F);document.getElementById("btnSkipBack").addEventListener("click",G);d.addEventListener("click",function(){var q=[0.75,1,1.25,1.5];var r=q.indexOf(i);i=q[(r+1)%q.length];d.textContent=i+"×";if(h&&speechSynthesis.speaking){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel();j=null;document.querySelectorAll(".speak-active").forEach(function(s){s.classList.remove("speak-active")});t(g)}});
-document.addEventListener("keydown",function(q){if(q.target.tagName==="INPUT"||q.target.tagName==="TEXTAREA")return;if(q.key===" "){q.preventDefault();h?D():C()}else if(q.key==="ArrowRight")F();else if(q.key==="ArrowLeft")G();else if(q.key==="Escape")E()});
-p();b.addEventListener("touchstart",function(){var q=new SpeechSynthesisUtterance("");q.volume=0;speechSynthesis.speak(q)},{once:!0});setInterval(function(){if(h&&!speechSynthesis.speaking&&!speechSynthesis.pending&&g<f.length)t(g)},4000);
-window.addEventListener("beforeunload",function(){if(j){j.onend=null;j.onerror=null}speechSynthesis.cancel()});
-(function(){var q=document.getElementById("reportDate");if(!q)return;var r=q.textContent.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);if(!r)return;var s=new Date(r[1],r[2]-1,r[3]);var t=new Date();t.setHours(0,0,0,0);if(s<t){var b=document.getElementById("staleBanner"),btn=document.getElementById("refreshBtn");b.textContent="⏳ 已检测旧版内容，正在自动刷新...";b.classList.add("show");btn.classList.add("show");setTimeout(function(){window.location.href=window.location.pathname+"?_="+Date.now()},1500)}})();
+(function(){var p=document.getElementById("btnPlay"),a=document.getElementById("audioPlayer"),c=document.getElementById("progressFill"),t=document.getElementById("progressThumb"),w=document.getElementById("progressWrap"),ct=document.getElementById("currentTime"),tt=document.getElementById("totalTime"),sb=document.querySelectorAll(".speed-btn");
+function fmt(s){if(!s||!isFinite(s))return"00:00";var m=Math.floor(s/60),sec=Math.floor(s%60);return(m<10?"0":"")+m+":"+(sec<10?"0":"")+sec}
+function upd(){var d=a.duration||0,n=a.currentTime||0;var pct=d>0?(n/d*100):0;c.style.width=pct+"%";if(t)t.style.left=pct+"%";ct.textContent=fmt(n);if(d)tt.textContent=fmt(d)}
+a.addEventListener("loadedmetadata",function(){tt.textContent=fmt(a.duration||0);upd()});
+a.addEventListener("timeupdate",upd);
+a.addEventListener("ended",function(){p.textContent="▶"});
+a.addEventListener("pause",function(){p.textContent="▶"});
+a.addEventListener("play",function(){p.textContent="⏸"});
+p.addEventListener("click",function(){if(a.paused){a.play()["catch"](function(e){console.warn(e)})}else{a.pause()}});
+function doSeek(e){var r=w.getBoundingClientRect(),x=(e.clientX||0)-r.left,pct=Math.max(0,Math.min(1,x/r.width));c.style.width=(pct*100)+"%";if(t)t.style.left=(pct*100)+"%";if(a.duration){a.currentTime=pct*a.duration;ct.textContent=fmt(a.currentTime)}}
+w.addEventListener("click",function(e){doSeek(e)});
+var drag=false;
+w.addEventListener("mousedown",function(e){drag=true;doSeek(e)});
+document.addEventListener("mousemove",function(e){if(drag){doSeek(e)}});
+document.addEventListener("mouseup",function(){drag=false});
+w.addEventListener("touchstart",function(e){drag=true;var touch=e.touches[0];doSeek({clientX:touch.clientX})});
+document.addEventListener("touchmove",function(e){if(drag){var touch=e.touches[0];doSeek({clientX:touch.clientX});e["default"]()}},{passive:false});
+document.addEventListener("touchend",function(){drag=false});
+// 倍速切换
+sb.forEach(function(btn){btn.addEventListener("click",function(){sb.forEach(function(b){b.classList.remove("active")});btn.classList.add("active");a.playbackRate=parseFloat(btn.getAttribute("data-speed"))})});
+// 键盘快捷键
+document.addEventListener("keydown",function(e){if(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA")return;if(e.key===" "){e["default"]();if(a.paused){a.play()["catch"](function(){})}else{a.pause()}}else if(e.key==="ArrowRight"){a.currentTime=Math.min(a.currentTime+10,a.duration||a.currentTime)}else if(e.key==="ArrowLeft"){a.currentTime=Math.max(a.currentTime-10,0)}});
+// 过期检测
+(function(){var q=document.getElementById("reportDate");if(!q)return;var r=q.textContent.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);if(!r)return;var s=new Date(r[1],r[2]-1,r[3]);var d=new Date();d.setHours(0,0,0,0);if(s<d){var b=document.getElementById("staleBanner"),btn=document.getElementById("refreshBtn");b.textContent="⏳ 已检测旧版内容，正在自动刷新...";b.classList.add("show");btn.classList.add("show");setTimeout(function(){window.location.href=window.location.pathname+"?_="+Date.now()},1500)}})();
 })();
 </script>
 </body>
