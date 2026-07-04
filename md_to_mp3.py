@@ -29,7 +29,7 @@ def parse_md_sections(md_text):
             text = '\n'.join(current_lines).strip()
             if text:
                 blocks.append((current_type, current_title, current_lines[:]))
-            current_lines = []
+        current_lines = []  # 无论是否 flush 都清空
 
     for line in lines:
         stripped = line.strip()
@@ -181,15 +181,12 @@ def build_podcast_text(blocks, date_str):
             continue
 
         if typ == 'section':
-            # 判断本板块下是否有子板块。有则跳过（子板块会读标题）
-            rest = blocks[blocks.index((typ, title, block_lines)) + 1:]
-            has_sub = any(b[0] == 'subsection' for b in rest
-                          if not b[0] == 'section')
-            if not has_sub:
-                title_clean = clean_text(title)
-                lines.append(f'—— {title_clean} ——')
-                lines.append('')
-                lines.append(body)
+            # 有正文内容的 section 直接朗读（如「一、今日关注」）
+            # 空内容的 section（仅作为子板块容器，如「二、市场全景」）已被 block_to_text 返回空跳过
+            title_clean = clean_text(title)
+            lines.append(f'—— {title_clean} ——')
+            lines.append('')
+            lines.append(body)
 
         elif typ == 'subsection':
             title_clean = clean_text(title)
