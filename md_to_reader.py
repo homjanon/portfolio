@@ -86,7 +86,7 @@ __CONTENT__
 <button class="speed-btn" data-speed="1.5">1.5×</button>
 </div>
 </div>
-<audio id="audioPlayer" preload="auto" src="daily-report.mp3"></audio>
+<audio id="audioPlayer" preload="auto" src="daily-report.mp3?__MP3VER__"></audio>
 <script>
 (function(){var p=document.getElementById("btnPlay"),a=document.getElementById("audioPlayer"),c=document.getElementById("progressFill"),t=document.getElementById("progressThumb"),w=document.getElementById("progressWrap"),ct=document.getElementById("currentTime"),tt=document.getElementById("totalTime"),sb=document.querySelectorAll(".speed-btn");
 function fmt(s){if(!s||!isFinite(s))return"00:00";var m=Math.floor(s/60),sec=Math.floor(s%60);return(m<10?"0":"")+m+":"+(sec<10?"0":"")+sec}
@@ -453,11 +453,15 @@ def main():
     date_match = re.search(r'(\d{4})年(\d{1,2})月(\d{1,2})日.*?星期([一二三四五六日])', md_text)
     if date_match:
         date_str = f'{date_match.group(1)}年{date_match.group(2)}月{date_match.group(3)}日 星期{date_match.group(4)}'
+        date_tag = f'{date_match.group(1)}{date_match.group(2).zfill(2)}{date_match.group(3).zfill(2)}'
     else:
-        date_str = datetime.datetime.now().strftime('%Y年%m月%d日')
+        now = datetime.datetime.now()
+        date_str = now.strftime('%Y年%m月%d日')
+        date_tag = now.strftime('%Y%m%d')
 
     html_content = md_to_html(md_text)
     html_output = TEMPLATE.replace('__DATE__', date_str).replace('__CONTENT__', html_content)
+    html_output = html_output.replace('__MP3VER__', date_tag)
 
     with open(html_file, 'w', encoding='utf-8') as f:
         f.write(html_output)
