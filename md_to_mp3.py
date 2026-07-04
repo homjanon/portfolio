@@ -25,11 +25,14 @@ def parse_md_sections(md_text):
 
     def flush_block():
         nonlocal current_lines
-        if current_type and current_lines:
+        if current_type == 'section':
+            # section 即使没有正文也输出（作为板块分隔符）
+            blocks.append((current_type, current_title, current_lines[:]))
+        elif current_type and current_lines:
             text = '\n'.join(current_lines).strip()
             if text:
                 blocks.append((current_type, current_title, current_lines[:]))
-        current_lines = []  # 无论是否 flush 都清空
+        current_lines = []
 
     for line in lines:
         stripped = line.strip()
@@ -176,23 +179,23 @@ def build_podcast_text(blocks, date_str):
 
     # 逐板块播报
     for typ, title, block_lines in blocks:
-        body = block_to_text(block_lines)
-        if not body:
-            continue
-
         if typ == 'section':
-            # 有正文内容的 section 直接朗读（如「一、今日关注」）
-            # 空内容的 section（仅作为子板块容器，如「二、市场全景」）已被 block_to_text 返回空跳过
             title_clean = clean_text(title)
-            lines.append(f'—— {title_clean} ——')
             lines.append('')
-            lines.append(body)
+            lines.append(f'—— {title_clean} ——')
+            body = block_to_text(block_lines)
+            if body:
+                lines.append('')
+                lines.append(body)
 
         elif typ == 'subsection':
             title_clean = clean_text(title)
-            lines.append(f'—— {title_clean} ——')
             lines.append('')
-            lines.append(body)
+            lines.append(f'—— {title_clean} ——')
+            body = block_to_text(block_lines)
+            if body:
+                lines.append('')
+                lines.append(body)
 
     # 结束语
     lines.append('')
