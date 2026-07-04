@@ -172,9 +172,7 @@ def build_podcast_text(blocks, date_str):
     lines = []
 
     # 开场白
-    lines.append('大家早上好。')
-    lines.append(f'今天是{date_str}。')
-    lines.append('欢迎收听今日全球金融市场日报。')
+    lines.append(f'早上好，今天是{date_str}，以下是最新的金融简报。')
     lines.append('')
 
     # 逐板块播报
