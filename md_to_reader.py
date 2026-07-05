@@ -12,6 +12,7 @@ TEMPLATE = r'''<!DOCTYPE html>
 <meta http-equiv="Expires" content="0">
 <link rel="icon" href="data:,">
 <title>全球金融市场日报</title>
+<!-- build=__BUILD__ -->
 <style>
 :root{--bg:#f8f9fa;--card:#fff;--text:#1a1a2e;--sub:#6b7280;--border:#e5e7eb;--accent:#2563eb;--note-bg:#f0f4ff}
 @media(prefers-color-scheme:dark){:root{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--sub:#94a3b8;--border:#334155;--accent:#3b82f6;--note-bg:#1e293b}}
@@ -492,6 +493,7 @@ def main():
     html_content = md_to_html(md_text)
     html_output = TEMPLATE.replace('__DATE__', date_str).replace('__CONTENT__', html_content)
     html_output = html_output.replace('__MP3VER__', date_tag)
+    html_output = html_output.replace('__BUILD__', datetime.datetime.now().strftime('%Y%m%d%H%M'))
 
     with open(html_file, 'w', encoding='utf-8') as f:
         f.write(html_output)
