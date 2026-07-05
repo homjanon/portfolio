@@ -8,7 +8,7 @@ import sys, re, os, subprocess, tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-DEFAULT_VOICE = "zh-CN-XiaoxiaoNeural"
+DEFAULT_VOICE = "zh-CN-YunyangNeural"
 DEFAULT_RATE = "+0%"
 
 
