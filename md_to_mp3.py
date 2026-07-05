@@ -71,18 +71,80 @@ def parse_md_sections(md_text):
     return blocks
 
 
+def _clean_date(text):
+    """将日期格式统一为适合朗读的中文"""
+    # 7/6（周一）→ 7月6日星期一；7/6(周一) → 7月6日星期一
+    text = re.sub(r'(\d{1,2})/(\d{1,2})[（(]周([一二三四五六日])[）)]', r'\1月\2日星期\3', text)
+    # 独立的 7/6 → 7月6日（仅当前后不是数字时）
+    text = re.sub(r'(?<!\d)(\d{1,2})/(\d{1,2})(?!\d)', r'\1月\2日', text)
+    # （周一）→ 星期一，(周一) → 星期一
+    text = re.sub(r'[（(]周([一二三四五六日])[）)]', r'星期\1', text)
+    return text
+
+
+def _clean_hashtags(text):
+    """移除话题标签中的 # 号（保留文字）"""
+    # #AI #芯片 → AI 芯片（#后跟中文或英文单词）
+    text = re.sub(r'#([^\s#]+)', r'\1', text)
+    # 移除孤立的 #
+    text = text.replace('#', '')
+    return text
+
+
+def _merge_sources(source_lines):
+    """合并多条来源行，提取媒体名称，去重，简化"""
+    all_names = []
+    for s in source_lines:
+        # 提取「数据来源：...」或「来源：...」中的内容
+        m = re.search(r'[：:]\s*(.+)', s)
+        if m:
+            content = m.group(1)
+        else:
+            content = s
+        # 去掉发布时间部分（| 发布时间...）
+        content = re.sub(r'[|｜]\s*发布时间.*', '', content).strip()
+        # 去掉句尾的标点
+        content = content.rstrip('。，、；： \t')
+        # 分割媒体名称
+        names = re.split(r'[、，,]\s*', content)
+        for n in names:
+            n = n.strip().rstrip('等')
+            if n and n not in all_names:
+                all_names.append(n)
+    if not all_names:
+        return ''
+    if len(all_names) <= 2:
+        return '、'.join(all_names)
+    return '、'.join(all_names[:-1]) + '、' + all_names[-1] + '等'
+
+
 def clean_text(text):
-    """清洗单段文本"""
+    """清洗单段文本，输出适合新闻播报的纯文本"""
     text = text.replace('**', '').replace('*', '')
     text = text.replace('`', '')
+
+    # 箭头转文字
     text = re.sub(r'↑([\d.]+%?)', r'上涨\1', text)
     text = re.sub(r'↓([\d.]+%?)', r'下跌\1', text)
     text = text.replace('↑', '上涨').replace('↓', '下跌')
+
+    # 符号转文字
     text = text.replace('&gt;', '>').replace('&lt;', '<').replace('&amp;', '&')
     text = re.sub(r'>(\d+\.?\d*%)', r'超过\1', text)
     text = re.sub(r'<(\d+\.?\d*%)', r'不足\1', text)
+
+    # 日期格式
+    text = _clean_date(text)
+    # 话题标签
+    text = _clean_hashtags(text)
+
+    # 清理竖线、长横线、多余空格
     text = text.replace('|', '')
     text = re.sub(r'[─\-]{2,}', '', text)
+    # 括号转顿号或逗号（更适合朗读停顿），移除右括号
+    text = text.replace('（', '，').replace('）', '')
+    text = text.replace('(', '，').replace(')', '')
+    text = re.sub(r'，+', '，', text)  # 去重逗号
     text = re.sub(r' +', ' ', text)
     return text.strip('，。、；： \t')
 
@@ -148,8 +210,14 @@ def block_to_text(lines):
             result = table_to_narration(rows)
 
     other_lines = []
+    source_lines = []  # 收集来源信息，后续统一处理
     for line in text_lines:
-        if any(kw in line for kw in ['朗读链接', 'MD 已同步', '数据来源', '发布时间']):
+        # 过滤元数据行
+        if any(kw in line for kw in ['朗读链接', 'MD 已同步', '发布时间']):
+            continue
+        # 收集来源信息（合并简化）
+        if '数据来源' in line or line.startswith('来源：') or line.startswith('来源:'):
+            source_lines.append(line)
             continue
         if re.match(r'^https?://', line):
             continue
@@ -170,6 +238,7 @@ def block_to_text(lines):
 def build_podcast_text(blocks, date_str):
     """将结构化板块组装为新闻播客纯文本（不含任何 XML 标签）"""
     lines = []
+    all_source_lines = []  # 收集全篇来源信息
 
     # 开场白
     lines.append(f'早上好，今天是{date_str}，以下是最新的金融简报。')
@@ -178,6 +247,10 @@ def build_podcast_text(blocks, date_str):
     # 逐板块播报
     for typ, title, block_lines in blocks:
         if typ == 'section':
+            # 收集来源信息
+            for bl in block_lines:
+                if '数据来源' in bl or bl.startswith('来源：') or bl.startswith('来源:'):
+                    all_source_lines.append(bl)
             title_clean = clean_text(title)
             lines.append('')
             lines.append(f'—— {title_clean} ——')
@@ -187,6 +260,10 @@ def build_podcast_text(blocks, date_str):
                 lines.append(body)
 
         elif typ == 'subsection':
+            # 收集来源信息
+            for bl in block_lines:
+                if '数据来源' in bl or bl.startswith('来源：') or bl.startswith('来源:'):
+                    all_source_lines.append(bl)
             title_clean = clean_text(title)
             lines.append('')
             lines.append(f'—— {title_clean} ——')
@@ -194,6 +271,13 @@ def build_podcast_text(blocks, date_str):
             if body:
                 lines.append('')
                 lines.append(body)
+
+    # 统一添加来源声明（去重、简化）
+    if all_source_lines:
+        sources = _merge_sources(all_source_lines)
+        if sources:
+            lines.append('')
+            lines.append(f'以上内容来源：{sources}。')
 
     # 结束语
     lines.append('')
@@ -204,9 +288,11 @@ def build_podcast_text(blocks, date_str):
 
 def get_date_from_md(md_text):
     """从 MD 中提取日期字符串"""
-    m = re.search(r'(\d{4})年(\d{1,2})月(\d{1,2})日.*?星期([一二三四五六日])', md_text)
+    # 匹配「2026年7月5日（周日）」或「2026年7月5日，星期日」
+    m = re.search(r'(\d{4})年(\d{1,2})月(\d{1,2})日.*?(?:星期([一二三四五六日])|[（(]周([一二三四五六日])[）)])', md_text)
     if m:
-        return f'{m.group(1)}年{m.group(2)}月{m.group(3)}日，星期{m.group(4)}'
+        weekday = m.group(4) or m.group(5)
+        return f'{m.group(1)}年{m.group(2)}月{m.group(3)}日，星期{weekday}'
     m2 = re.search(r'(\d{4})年(\d{1,2})月(\d{1,2})日', md_text)
     if m2:
         return f'{m2.group(1)}年{m2.group(2)}月{m2.group(3)}日'
