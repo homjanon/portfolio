@@ -338,8 +338,38 @@ def _inline(text):
     return text
 
 
+def _collapse_list_blank_lines(text):
+    """合并列表项之间的空行（MD 中列表项之间有空行时会被拆成多个列表）"""
+    lines = text.split('\n')
+    result = []
+    i = 0
+    while i < len(lines):
+        result.append(lines[i])
+        current = lines[i].strip()
+        # 当前行为列表项
+        if re.match(r'^\d+\.\s', current) or current.startswith('- '):
+            current_is_ol = bool(re.match(r'^\d+\.\s', current))
+            current_is_ul = current.startswith('- ')
+            # 查看后续空行后的下一行是否同类列表项
+            j = i + 1
+            while j < len(lines) and not lines[j].strip():
+                j += 1
+            if j < len(lines):
+                next_line = lines[j].strip()
+                next_is_ol = bool(re.match(r'^\d+\.\s', next_line))
+                next_is_ul = next_line.startswith('- ')
+                if (current_is_ol and next_is_ol) or (current_is_ul and next_is_ul):
+                    # 跳过中间的空白行，让两个列表项连在同一个列表中
+                    i = j
+                    continue
+        i += 1
+    return '\n'.join(result)
+
+
 def md_to_html(text):
     """Markdown → 纯文本叙述 HTML（表格全部转为段落文字）"""
+    # 先预处理：合并被空行分隔的同类列表项
+    text = _collapse_list_blank_lines(text)
     lines = text.split('\n')
     out = []
     in_table = False

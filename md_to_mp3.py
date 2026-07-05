@@ -192,7 +192,9 @@ def block_to_text(lines):
         elif line.startswith('- '):
             text_lines.append(line[2:].strip())
         elif re.match(r'^\d+\.\s', line):
-            text_lines.append(re.sub(r'^\d+\.\s', '', line))
+            # 保留数字编号并转为适合朗读的中文序号："1. 内容" → "第1，内容"
+            line = re.sub(r'^(\d+)\.\s', lambda m: f'第{m.group(1)}，', line)
+            text_lines.append(line)
         elif line.startswith('**查询时间'):
             continue
         else:
