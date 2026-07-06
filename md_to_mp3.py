@@ -225,8 +225,8 @@ def block_to_text(lines):
     other_lines = []
     source_lines = []  # 收集来源信息，后续统一处理
     for line in text_lines:
-        # 过滤元数据行
-        if any(kw in line for kw in ['朗读链接', 'MD 已同步', '发布时间']):
+        # 过滤元数据行和隐私内容
+        if any(kw in line for kw in ['朗读链接', 'MD 已同步', 'IMA', '知识库', '发布时间']):
             continue
         # 收集来源信息（合并简化）
         if '数据来源' in line or line.startswith('来源：') or line.startswith('来源:'):
@@ -294,7 +294,7 @@ def build_podcast_text(blocks, date_str):
 
     # 结束语
     lines.append('')
-    lines.append('以上就是今日全球金融市场日报的全部内容，感谢收听，祝您投资顺利。')
+    lines.append('以上就是今天的全部内容，感谢收听，祝您投资顺利。')
 
     return '\n'.join(lines)
 

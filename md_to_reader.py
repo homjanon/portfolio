@@ -466,6 +466,11 @@ def md_to_html(text):
             content = stripped.strip('* ').strip()
             out.append(f'<p class="source">{content}</p>')
 
+        # 隐私过滤：不展示内部信息
+        elif any(kw in stripped for kw in ['MD 已同步', '朗读链接', 'IMA 知识库']):
+            flush_table(); flush_list(); flush_quote()
+            # 完全跳过，不输出
+
         else:
             flush_table(); flush_quote(); flush_list()
             cls = 'no-indent' if first_para else ''
@@ -498,7 +503,7 @@ def main():
 
     html_content = md_to_html(md_text)
     html_output = TEMPLATE.replace('__DATE__', date_str).replace('__CONTENT__', html_content)
-    html_output = html_output.replace('__MP3VER__', date_tag)
+    html_output = html_output.replace('__MP3VER__', datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
     html_output = html_output.replace('__BUILD__', datetime.datetime.now().strftime('%Y%m%d%H%M'))
 
     with open(html_file, 'w', encoding='utf-8') as f:
