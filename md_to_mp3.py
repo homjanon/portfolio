@@ -100,30 +100,33 @@ def _clean_hashtags(text):
 
 
 def _merge_sources(source_lines):
-    """合并多条来源行，提取媒体名称，去重，简化"""
+    """从来源行中提取媒体名称（去重、去时间），返回简短来源声明"""
     all_names = []
     for s in source_lines:
         # 提取「数据来源：...」或「来源：...」中的内容
         m = re.search(r'[：:]\s*(.+)', s)
-        if m:
-            content = m.group(1)
-        else:
-            content = s
-        # 去掉发布时间部分（| 发布时间...）
+        content = m.group(1) if m else s
+        # 移除"发布时间"部分
         content = re.sub(r'[|｜]\s*发布时间.*', '', content).strip()
-        # 去掉句尾的标点
-        content = content.rstrip('。，、；： \t')
-        # 分割媒体名称
-        names = re.split(r'[、，,]\s*', content)
-        for n in names:
-            n = n.strip().rstrip('等')
-            if n and n not in all_names:
-                all_names.append(n)
+        # 按 | 分割多个来源
+        parts = re.split(r'[|｜]', content)
+        for part in parts:
+            part = part.strip()
+            # 去掉时间和日期部分
+            name = re.sub(r'\s*\d{4}[-.]\d{1,2}[-.]\d{1,2}.*$', '', part).strip()
+            # 去掉末尾标点和多余信息
+            name = re.sub(r'[。，、；：*\s]+$', '', name).strip()
+            # 只保留媒体名（取前8个汉字）
+            name = name[:12]
+            if name and name not in all_names and name not in ('数据来源', '来源'):
+                all_names.append(name)
     if not all_names:
         return ''
-    if len(all_names) <= 2:
-        return '、'.join(all_names)
-    return '、'.join(all_names[:-1]) + '、' + all_names[-1] + '等'
+    # 限制数量，保持简洁
+    shown = all_names[:6]
+    if len(all_names) > 6:
+        return '、'.join(shown) + '等'
+    return '、'.join(shown)
 
 
 def clean_text(text):
