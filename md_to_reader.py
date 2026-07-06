@@ -36,6 +36,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 .article .table-text{margin:8px 0;padding:8px 12px;background:var(--note-bg);border-radius:8px;font-size:15px;line-height:2;text-indent:0}
 .article strong{color:var(--accent);font-weight:700}
 .article blockquote{border-left:3px solid var(--accent);padding:8px 14px;margin:10px 0;background:var(--note-bg);border-radius:0 8px 8px 0;color:var(--sub);font-size:14px}
+.article .source{font-size:12px;color:var(--sub);margin:2px 0 10px;text-indent:0;font-style:normal}
 .article ul,.article ol{padding-left:22px;margin:8px 0}
 .article li{margin:6px 0;line-height:1.8}
 .article hr{border:none;border-top:1px solid var(--border);margin:24px 0}
@@ -340,7 +341,7 @@ def _inline(text):
 
 
 def _collapse_list_blank_lines(text):
-    """合并列表项之间的空行（MD 中列表项之间有空行时会被拆成多个列表）"""
+    """合并列表项之间的空行以及数据来源行（MD 中列表项之间有空行或来源行时会被拆成多个列表）"""
     lines = text.split('\n')
     result = []
     i = 0
@@ -351,16 +352,16 @@ def _collapse_list_blank_lines(text):
         if re.match(r'^\d+\.\s', current) or current.startswith('- '):
             current_is_ol = bool(re.match(r'^\d+\.\s', current))
             current_is_ul = current.startswith('- ')
-            # 查看后续空行后的下一行是否同类列表项
+            # 查看后续空行或数据来源行后的下一行是否同类列表项
             j = i + 1
-            while j < len(lines) and not lines[j].strip():
+            while j < len(lines) and (not lines[j].strip() or re.match(r'^\s+\*?数据来源', lines[j]) or re.match(r'^\s+\*?来源[：:]', lines[j])):
                 j += 1
             if j < len(lines):
                 next_line = lines[j].strip()
                 next_is_ol = bool(re.match(r'^\d+\.\s', next_line))
                 next_is_ul = next_line.startswith('- ')
                 if (current_is_ol and next_is_ol) or (current_is_ul and next_is_ul):
-                    # 跳过中间的空白行，让两个列表项连在同一个列表中
+                    # 跳过中间的空白行和来源行，让两个列表项连在同一个列表中
                     i = j
                     continue
         i += 1
@@ -459,6 +460,11 @@ def md_to_html(text):
         elif stripped in ('---', '***', '___'):
             flush_quote(); flush_table(); flush_list()
             out.append('<hr>')
+
+        elif stripped.startswith('*') and ('数据来源' in stripped or stripped.startswith('*来源：') or stripped.startswith('*来源:')):
+            flush_table(); flush_list(); flush_quote()
+            content = stripped.strip('* ').strip()
+            out.append(f'<p class="source">{content}</p>')
 
         else:
             flush_table(); flush_quote(); flush_list()

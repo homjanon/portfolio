@@ -71,8 +71,16 @@ def parse_md_sections(md_text):
     return blocks
 
 
+_NUM_CN = ['零','一','二','三','四','五','六','七','八','九','十']
+
+
+def _num_cn(n):
+    """数字转中文：1→一, 2→二 ... 10→十"""
+    n = int(n)
+    return _NUM_CN[n] if 0 <= n <= 10 else str(n)
+
+
 def _clean_date(text):
-    """将日期格式统一为适合朗读的中文"""
     # 7/6（周一）→ 7月6日星期一；7/6(周一) → 7月6日星期一
     text = re.sub(r'(\d{1,2})/(\d{1,2})[（(]周([一二三四五六日])[）)]', r'\1月\2日星期\3', text)
     # 独立的 7/6 → 7月6日（仅当前后不是数字时）
@@ -192,8 +200,8 @@ def block_to_text(lines):
         elif line.startswith('- '):
             text_lines.append(line[2:].strip())
         elif re.match(r'^\d+\.\s', line):
-            # 保留数字编号并转为适合朗读的中文序号："1. 内容" → "第1，内容"
-            line = re.sub(r'^(\d+)\.\s', lambda m: f'第{m.group(1)}，', line)
+            # 保留数字编号并转为适合朗读的中文序号："1. 内容" → "一、内容"
+            line = re.sub(r'^(\d+)\.\s', lambda m: f'{_num_cn(m.group(1))}、', line)
             text_lines.append(line)
         elif line.startswith('**查询时间'):
             continue
