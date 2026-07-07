@@ -8,12 +8,12 @@
 <meta http-equiv="Expires" content="0">
 <link rel="icon" href="data:,">
 <title>全球金融市场日报</title>
-<!-- build=202607071443 -->
+<!-- build=202607071524 -->
 <style>
 :root{--bg:#f8f9fa;--card:#fff;--text:#1a1a2e;--sub:#6b7280;--border:#e5e7eb;--accent:#2563eb;--note-bg:#f0f4ff}
 @media(prefers-color-scheme:dark){:root{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--sub:#94a3b8;--border:#334155;--accent:#3b82f6;--note-bg:#1e293b}}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.9;min-height:100dvh;padding:0 0 150px;-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:18px;line-height:2.0;min-height:100dvh;padding:0 0 150px;-webkit-text-size-adjust:100%}
 .header{background:var(--card);border-bottom:1px solid var(--border);padding:18px 16px;text-align:center;position:relative}
 .header h1{font-size:20px;font-weight:700;margin-bottom:4px}
 .header .date{font-size:13px;color:var(--sub);margin-bottom:8px}
@@ -25,21 +25,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 .tip{background:#e8f5e9;color:#2e7d32;font-size:13px;padding:6px 14px;text-align:center;border-bottom:1px solid #c8e6c9}
 @media(prefers-color-scheme:dark){.tip{background:#1b3a1b;color:#81c784;border-color:#2e4a2e}}
 .article{max-width:700px;margin:0 auto;padding:20px 16px}
-.article h2{font-size:18px;margin:32px 0 10px;padding-bottom:4px;border-bottom:2px solid var(--accent)}
-.article h3{font-size:16px;margin:22px 0 6px;color:var(--accent)}
-.article p{margin:10px 0;text-indent:2em}
+.article h2{font-size:20px;margin:38px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--accent)}
+.article h3{font-size:17px;margin:26px 0 8px;color:var(--accent)}
+.article p{margin:14px 0;text-indent:0}
 .article p.no-indent{text-indent:0}
 .article .table-text{margin:8px 0;padding:8px 12px;background:var(--note-bg);border-radius:8px;font-size:15px;line-height:2;text-indent:0}
 .article strong{color:var(--accent);font-weight:700}
-.article blockquote{border-left:3px solid var(--accent);padding:8px 14px;margin:10px 0;background:var(--note-bg);border-radius:0 8px 8px 0;color:var(--sub);font-size:14px}
-.article .source{font-size:12px;color:var(--sub);margin:2px 0 10px;text-indent:0;font-style:normal}
+.article blockquote{border-left:4px solid var(--accent);padding:10px 16px;margin:14px 0;background:var(--note-bg);border-radius:0 10px 10px 0;color:var(--sub);font-size:15px;line-height:1.8}
+.article .source{font-size:13px;color:var(--sub);margin:4px 0 12px;text-indent:0;font-style:normal}
 .article ul,.article ol{padding-left:22px;margin:8px 0}
 .article li{margin:6px 0;line-height:1.8}
 .article hr{border:none;border-top:1px solid var(--border);margin:24px 0}
 .up{color:#059669;font-weight:600}.down{color:#dc2626;font-weight:600}
 @media(prefers-color-scheme:dark){.up{color:#34d399}.down{color:#f87171}}
 .player{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--card);border-top:1px solid var(--border);padding:10px 16px max(10px,env(safe-area-inset-bottom,10px));box-shadow:0 -2px 12px rgba(0,0,0,.08)}
-.player-row{display:flex;align-items:center;gap:8px;max-width:500px;margin:0 auto}
+.player-row{display:flex;align-items:center;gap:8px;max-width:700px;margin:0 auto}
 .btn-play{width:48px;height:48px;border-radius:50%;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;-webkit-tap-highlight-color:transparent;background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(37,99,235,.25)}
 .btn-play:active{transform:scale(.92)}
 .player-time{font-size:11px;color:var(--sub);min-width:36px;text-align:center;white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -58,65 +58,47 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 </head>
 <body>
 <div class="stale-banner" id="staleBanner"></div>
-<div class="tip">💡 点击 ▶ 播放音频日报（微软 AI 语音播报），暂停/续播/拖动进度条均可</div>
+<div class="tip">点击 ▶ 播放音频日报（微软 AI 语音播报），暂停/续播/拖动进度条均可</div>
 <div class="header">
-<h1>📰 全球金融市场日报</h1>
-<div class="date" id="reportDate">2026年7月7日 星期二</div>
-<button class="refresh-btn" id="refreshBtn" onclick="window.location.href=window.location.pathname+'?_='+Date.now()">🔄 刷新</button>
+<h1>全球金融市场日报</h1>
+<div class="date" id="reportDate">2026年07月07日</div>
+<button class="refresh-btn" id="refreshBtn" onclick="window.location.href=window.location.pathname+'?_='+Date.now()">刷新</button>
 </div>
 <div class="article" id="articleContent">
-<h1>全球金融市场日报</h1>
-<p class="no-indent"><strong>查询时间</strong>：2026年7月7日（星期二）14:30 北京时间</p>
-<hr>
 <h2>一、今日关注（宏观日历）</h2>
 <ul>
-<li><strong>7月7日（今日）</strong>：三星电子发布Q2初步业绩，营业利润同比大增约18倍创历史新高；SK海力士美股IPO启动，拟发行1779万股ADS</li>
+<li><strong>今晚（7月7日）</strong>：三星电子发布Q2初步业绩，市场预期营业利润同比暴涨约18倍</li>
 <li><strong>7月8-10日</strong>：2026中国互联网大会在北京举行</li>
-<li><strong>7月9日（周四）</strong>：中国6月CPI/PPI同步出炉；美联储公布6月货币政策会议纪要（新主席沃什首次主持）；美国7月4日当周初请失业金人数；MLCC龙头三环集团港股上市</li>
+<li><strong>7月9日（周四）</strong>：中国6月CPI/PPI同步出炉；美联储公布6月货币政策会议纪要；美国7月4日当周初请失业金人数；MLCC龙头三环集团港股上市；立讯精密港股上市</li>
 <li><strong>7月9-10日</strong>：中国6月社融增量、M1/M2货币供应数据发布窗口</li>
 <li><strong>7月10日（周五）</strong>：美国6月CPI数据公布</li>
 </ul>
 <blockquote>
-<p class="no-indent">数据来源：东方财富 | 金十数据 | 证券时报 2026-07-07</p>
+<p class="no-indent">数据来源：东方财富 | 金十数据</p>
 </blockquote>
 <hr>
 <h2>二、市场全景</h2>
 <h3>A股收盘（7月6日 周一）</h3>
 <div class="table-text">上证指数报收4041.24，下跌0.06%。深证成指报收15416.80，下跌1.16%。沪深300报收4842.00，平收。科创50报收1996.10，上涨1.04%。创业板指报收3948.86，下跌1.77%。</div>
-<p class="">7月6日A股呈现沪强深弱的极致分化格局。两市成交额约<strong>3.09万亿元</strong>，较前一个交易日缩量约<strong>913亿元</strong>，低于5日均值。全市场下跌个股超<strong>3500家</strong>，涨跌比约1:3.5。涨停<strong>71家</strong>，跌停家数未明显扩大。</p>
+<p class="no-indent">7月6日A股呈现沪强深弱的极致分化格局。两市成交额约<strong>3.09万亿元</strong>，较前一个交易日缩量约<strong>913亿元</strong>，低于5日均值。全市场下跌个股超<strong>3500家</strong>，涨跌比约1:3.5。涨停<strong>71家</strong>，跌停家数未明显扩大。</p>
 <p class=""><strong>申万一级行业</strong>涨跌幅TOP3：煤炭（上涨<strong>4.11%</strong>）、农林牧渔（上涨<strong>2.57%</strong>）、石油石化（上涨<strong>2.43%</strong>）；BOTTOM3：玻璃玻纤、工业气体、金属新材料等板块领跌。</p>
 <p class="source">主力资金**：全天呈极端分化态势，煤炭、银行等高股息板块主力资金净流入居前；半导体、光通信、PCB等上半年热门科技赛道遭遇集中获利兑现，主力净流出规模较大。**北向资金**当日成交3963.37亿元，占两市成交额12.82%，整体呈震荡态势（数据来源：东方财富 | 证券时报 2026-07-06）。</p>
 <p class="source">板块轮动判断**：市场正经历从上半年AI硬科技主线向高股息+防御板块的风格再平衡，权重蓝筹托底指数，成长赛道集体回调。7月6日起A股新版交易规则正式落地（主板ST股涨跌幅调至10%、盘后固定价格交易扩展至全市场），为当日情绪面重要变量（数据来源：财联社 2026-07-06）。</p>
-<blockquote>
-<p class="no-indent">数据来源：雪球 | 东方财富 | 中新经纬 | 新浪财经 2026-07-06</p>
-</blockquote>
 <h3>美股收盘（7月6日 周一）</h3>
 <div class="table-text">道琼斯工业报收53055.91，上涨0.29%。标普500报收7537.43，上涨0.72%。纳斯达克综合报收26121.16，上涨1.12%。</div>
 <p class="">美股三大指数全线收涨，道指<strong>首次突破53000点</strong>创收盘历史新高，纳指在AI科技、存储芯片带动下领涨全场。大型科技股普涨，特斯拉（上涨<strong>6%</strong>+）、Meta（上涨<strong>近3%</strong>）、苹果（上涨<strong>1%</strong>+）、英伟达（上涨<strong>0.37%</strong>）。西部数据（上涨<strong>7%</strong>+）领涨存储半导体板块。</p>
 <p class="">标普500十一大板块<strong>六跌五涨</strong>，医疗板块（下跌<strong>1.17%</strong>）和公用事业板块（下跌<strong>1.06%</strong>）领跌，科技板块领涨。驱动因素包括：AI硬件板块前期调整结束后的情绪修复、市场对Q2财报季的乐观预期、以及波斯湾局势缓和带来的风险偏好回升（数据来源：新华社 | 新浪财经 2026-07-07）。</p>
-<blockquote>
-<p class="no-indent">数据来源：新华社纽约 | 新浪财经 | 证券时报 2026-07-06/07</p>
-</blockquote>
 <h3>港股收盘（7月6日 周一）</h3>
 <p class="">恒生指数收报<strong>23616.32</strong>点，上涨<strong>1.14%</strong>；恒生国企指数收报<strong>7812.35</strong>点，上涨<strong>1.46%</strong>。恒生科技指数涨<strong>0.94%</strong>，报4541.23点。科网股普涨，快手（上涨<strong>7%</strong>+）、腾讯（上涨<strong>4.82%</strong>）、美团（上涨<strong>4%</strong>+）领涨；创新药板块强势走高；光通信PCB板块集体重挫，长飞光纤光缆（下跌<strong>14%</strong>+）。</p>
 <p class="source">南下资金**当日净买入**205.28亿港元**，创近期单日新高，其中港股通（沪）净买入超125亿港元，港股通（深）净买入超79亿港元，大型机构资金（保险、银行理财等）是买入主力（数据来源：财联社 | 东方财富 2026-07-06）。</p>
-<blockquote>
-<p class="no-indent">数据来源：新华社香港 | 财联社 | 东方财富 2026-07-06</p>
-</blockquote>
 <h3>恐慌指数</h3>
 <div class="table-text">VIX报17.51（期货），12-20 正常区间，市场情绪平稳。VXN报相对VIX比值约1.64，纳指波动预期偏高，科技股情绪敏感。</div>
-<p class="">VIX自6月由21-22区间回落后，当前维持在16-17附近，反映市场对系统性风险的担忧已显著消退，但VXN/VIX比值处于2017年以来高位，显示科技板块波动预期仍高于整体市场（数据来源：英为财情 | StockQ 2026-07-07）。</p>
-<blockquote>
-<p class="no-indent">数据来源：英为财情 | StockQ 2026-07-07</p>
-</blockquote>
+<p class="">VIX自6月由21-22区间回落后，当前维持在16-17附近，反映市场对系统性风险的担忧已显著消退，但VXN/VIX比值处于2017年以来高位，显示科技板块波动预期仍高于整体市场（数据来源：Investing.com | StockQ 2026-07-07）。</p>
 <h3>大宗商品与汇率</h3>
-<p class=""><strong>原油</strong>：WTI原油报<strong>68.67美元/桶</strong>（<span class="up">上涨0.18%</span>），布伦特原油报<strong>71.99美元/桶</strong>（日内小幅波动）。波斯湾局势持续缓和，霍尔木兹海峡逐步通航，中东多国加紧出货库存原油。沙特阿美将8月销往亚洲的阿拉伯轻质原油官方售价下调11美元/桶，降幅远超预期（创2000年以来最大单月降幅），市场对供应过剩的担忧加剧。</p>
+<p class=""><strong>原油</strong>：WTI原油报<strong>68.67美元/桶</strong>（<span class="up">上涨0.18%</span>），布伦特原油报<strong>71.99美元/桶</strong>（日内小幅波动）。波斯湾局势持续缓和，霍尔木兹海峡逐步通航，中东多国加紧出货库存原油。沙特阿美将8月销往亚洲的阿拉伯轻质原油官方售价下调11美元/桶，降幅远超预期，市场对供应过剩的担忧加剧。</p>
 <p class=""><strong>黄金</strong>：COMEX黄金报<strong>4178.60美元/盎司</strong>（<span class="up">上涨0.27%</span>），现货黄金报<strong>4167.64美元/盎司</strong>（<span class="up">上涨0.06%</span>）。美国6月非农就业大幅不及预期后美联储加息预期降温，金价阶段性超跌修复，但仍受美元走强压制。</p>
 <p class=""><strong>汇率</strong>：美元指数报<strong>100.85</strong>（-0.01%）。离岸人民币(USD/CNH)报<strong>6.7853</strong>（较前日升值89点）；在岸人民币(USD/CNY)报<strong>6.7925</strong>。</p>
-<p class="source">中美利差**：10年期美债收益率报**4.48%**（↓1.0BP），10年期中国国债收益率报**1.7379%**（7月6日1.7365%，↓0.84BP），中美利差倒挂**274BP**，倒挂幅度较前日收窄1.0BP。利差维持深度倒挂，中债利率持续下行至历史低位区间，对30年国债ETF（511260）和7-10年国开债指数基金（003376）形成基本面支撑——利差虽深度倒挂但边际收窄，叠加国内流动性充裕（央行7月6日净投放2000亿元），中债利率下行趋势短期延续，利好上述久期型债券资产（数据来源：雪球 | 新浪财经 | 英为财情 | 中国货币网 2026-07-06/07）。</p>
-<blockquote>
-<p class="no-indent">数据来源：新浪财经 | 雪球 | 金投网 | 英为财情 | 中国货币网 2026-07-06/07</p>
-</blockquote>
+<p class="source">中美利差**：10年期美债收益率报**4.48%**（↓1.0BP），10年期中国国债收益率报**1.7379%**（↓0.84BP），中美利差倒挂**274BP**，倒挂幅度较前日收窄1.0BP。利差维持深度倒挂，中债利率持续下行至历史低位区间，对30年国债ETF（511260）和7-10年国开债指数基金（003376）形成基本面支撑——利差虽深度倒挂但边际收窄，叠加国内流动性充裕，中债利率下行趋势短期延续，利好上述久期型债券资产（数据来源：雪球 | 新浪财经 | Investing.com 2026-07-06/07）。</p>
 <hr>
 <h2>三、估值与持仓</h2>
 <h3>估值异动预警</h3>
@@ -124,60 +106,48 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 <div class="table-text">标普500（SPX），市盈率26.86倍，PE分位PE 60.87% / Shiller PE 41.66（&gt;90%分位）</div>
 <div class="table-text">中证A500，市盈率17.68倍，PE分位PE 88.75%</div>
 <div class="table-text">创业板指（399006），市盈率50.30倍，PE分位PE 67.01%</div>
-<div class="table-text">中证红利低波，市盈率PE~8.14倍，市净率PB~0.68倍，PE分位PE 22.54% / PB 17%</div>
+<div class="table-text">中证红利低波，市盈率PE~7.89倍，市净率PB~0.68倍，PE分位PE 22.54% / PB 17%</div>
 <div class="table-text">恒生科技，市盈率PE 21.90倍，PE分位PE 23.92%</div>
 <p class=""><strong>估值预警展开（仅极端区间）</strong>：</p>
 <ul>
-<li><strong>标普500</strong>：PE 26.86倍（60.87%分位），但Shiller PE/CAPE高达<strong>41.66</strong>，处于历史&gt;<strong>90%分位</strong>，为过去50年仅约9%时间达到的极高估值水平。当前AI盈利支撑短期走势，但长期预期回报空间被大幅压缩。</li>
-<li><strong>中证红利低波</strong>：股息率约<strong>5.32%</strong>（中证红利口径，近10年高位），PE-TTM仅8.14倍、处近10年22.54%分位。当前10年期国债收益率仅1.74%，红利低波股息率相对国债收益率的"股息剪刀差"约3.6个百分点，<strong>高股息配置价值显著</strong>，在资产荒背景下对长线资金具有较强吸引力。红利低波ETF易方达（563020）年内获资金净流入<strong>81.7亿元</strong>，连续8日净流入。</li>
-<li><strong>恒生科技</strong>：PE 21.90倍，PE历史分位<strong>23.92%</strong>（即估值低于成立以来约76%的时间），处于极低价值区。6月指数单边下跌后，估值安全边际与技术面超卖状态提供支撑，南向资金能否持续回流是关键变量。</li>
+<li><strong>标普500</strong>：PE 26.86倍（60.87%分位），但Shiller PE/CAPE高达<strong>41.66</strong>，处于历史&gt;<strong>90%分位</strong>，为过去50年仅9%时间达到的极高估值水平。当前AI盈利支撑短期走势，但长期预期回报空间被大幅压缩。</li>
+<li><strong>中证红利低波</strong>：股息率约<strong>5.32%</strong>，处于近10年较高分位。当前10年期国债收益率仅1.73%，红利低波股息率相对国债收益率的"股息剪刀差"约3.6个百分点，<strong>高股息配置价值显著</strong>，在资产荒背景下对长线资金具有较强吸引力。红利低波ETF易方达（563020）年内获资金净流入<strong>81.7亿元</strong>，连续8日净流入。</li>
+<li><strong>恒生科技</strong>：PE 21.90倍，PE历史分位<strong>23.92%</strong>（即估值低于成立以来约76%的时间），处于极低价值区。6月指数单边下跌8.44%后，估值安全边际与技术面超卖状态提供支撑，南向资金能否持续回流是关键变量。</li>
 </ul>
 <p class="">其余6个指数中：纳斯达克100 PE分位45%处于中位，创业板指67%分位偏高但未到极端区间，中证A500 PE分位88.75%接近极值但成立时间较短参考意义有限，沪深300 PE分位87.82%偏高但未触发&gt;90%阈值。</p>
 <blockquote>
-<p class="no-indent">数据来源：且慢（qieman.com）| 雪球（蛋卷）| 东方财富 2026-07-06/07</p>
+<p class="no-indent">数据来源：且慢 | 雪球 | 东方财富 2026-07-06/07</p>
 </blockquote>
 <h2>四、行业洞察</h2>
 <h3>全球 TOP 5 新闻</h3>
 <ol>
-<li><strong>三星电子Q2营业利润预增约18倍创历史新高</strong>：三星电子7月7日发布Q2初步业绩，营业利润同比大增1810.3%至89.4万亿韩元（约584亿美元），营收171万亿韩元同比增129.3%，连续三个季度创纪录。AI存储芯片涨价是核心驱动（数据来源：Bloomberg | 中新经纬 | 新浪财经 2026-07-07）。</li>
-<li><strong>英伟达下一代AI服务器架构推迟传闻冲击PCB产业链，英伟达否认</strong>：研究机构SemiAnalysis称英伟达Kyber NVL144机架级架构因PCB制造困难将推迟超12个月至2028年推出，亚洲PCB供应链股价重挫；英伟达发言人书面回应"产品路线图未改变"。港股长飞光纤光缆单日跌超14%，A股PCB板块集体承压（数据来源：Reuters | 腾讯财经 | 新浪财经 2026-07-06/07）。</li>
-<li><strong>SK海力士赴美上市发行1779万股ADS</strong>：SEC文件显示，SK海力士在美股IPO中发行1779万股美国存托股票，每ADS代表十分之一普通股，参考价每份ADR约24.25万韩元，基石投资者有意购买高达70亿美元ADS，拟于本周五在纳斯达克挂牌（代码SKHY），或成外资企业赴美上市历史最大规模（数据来源：Financial Times | 财联社 | 东方财富 2026-07-06/07）。</li>
-<li><strong>波斯湾局势缓和，沙特大幅下调对亚洲原油官价</strong>：美伊停火、霍尔木兹海峡复航后，沙特阿美将8月销往亚洲的阿拉伯轻质原油官价下调11美元/桶至较基准折价1.50美元，为2000年以来最大单月降幅，远超市场预期8美元。WTI原油回落至68美元/桶区间，OPEC+内部减产约束面临考验（数据来源：The Wall Street Journal | 彭博 | 同花顺 2026-07-06/07）。</li>
-<li><strong>特朗普称正与普京磋商结束俄乌冲突</strong>：美国总统特朗普就乌克兰问题表示正与俄罗斯总统普京进行磋商，称进行了"非常好的通话"，并称普京希望结束冲突。若俄乌冲突出现实质性缓和，全球地缘风险溢价将进一步回落，对欧洲能源安全和全球粮食供应链构成重大影响（数据来源：Bloomberg | 光明网 | Yahoo Finance 2026-07-06/07）。</li>
+<li><strong>三星电子Q2营业利润预增约18倍创历史新高</strong>：三星电子今日（7月7日）发布Q2初步业绩，市场预期营业利润同比暴涨约18倍至563亿美元，半导体业务贡献主要增量。公司高层此前称2026年全年营业利润有望超过40年来总和。（Bloomberg 2026-07-07）</li>
+<li><strong>英伟达下一代AI服务器机架架构被传推迟，PCB板块暴跌</strong>：消息称英伟达下一代AI服务器机架架构因制造困难将推迟一年以上推出，该消息冲击亚洲PCB产业链。英伟达发言人书面回应称产品路线图未改变。港股长飞光纤光缆单日跌超14%，A股PCB板块集体承压。（Reuters 2026-07-06）</li>
+<li><strong>SK海力士赴美上市发行1779万股ADS</strong>：美国SEC文件显示，SK海力士在公开募股中发行1779万股美国存托股票，每ADS代表十分之一普通股，基石投资者有意购买高达70亿美元ADS。此举被视为韩国存储巨头加速全球资本布局的标志性事件。（Financial Times / Bloomberg 2026-07-07）</li>
+<li><strong>波斯湾局势持续缓和，沙特大幅下调对亚洲原油官价</strong>：中东16艘油轮合计2800万桶原油正在运往欧洲途中。沙特阿美将8月销往亚洲的阿拉伯轻质原油官价下调11美元/桶，为近年最大单月降幅。WTI原油回落至68美元/桶区间，OPEC+内部减产约束面临考验。（The Wall Street Journal / Reuters 2026-07-06/07）</li>
+<li><strong>特朗普称正与普京磋商结束俄乌冲突</strong>：美国总统特朗普就乌克兰问题表示正与俄罗斯总统普京进行磋商，称进行了"非常好的通话"。若俄乌冲突出现实质性缓和，全球地缘风险溢价将进一步回落，对欧洲能源安全和全球粮食供应链构成重大影响。（Bloomberg / Yahoo Finance 2026-07-06）</li>
 </ol>
-<blockquote>
-<p class="no-indent">数据来源：Bloomberg | Reuters | Financial Times | The Wall Street Journal | Yahoo Finance | 光明网 2026-07-06/07</p>
-</blockquote>
 <h3>A 股资金流向与热门板块</h3>
 <p class="">近5日/10日主力资金呈现明确的"<strong>高切低</strong>"特征：上半年资金高度集中的AI算力、半导体、光模块等科技赛道连续遭遇主力净流出，而煤炭、银行、石油石化等高股息板块持续获得净流入。红利低波ETF易方达（563020）连续8日净流入，年内净流入81.7亿元领跑全市场。</p>
-<p class="source">北向资金**：7月6日成交3963.37亿元。虽无大规模净买入，但外资对半导体设备、消费电子等自主可控方向保持配置热情。**两融余额**：截至7月6日，两市融资余额降至**29609.75亿元**（两融余额29926.14亿元），较前日减少约104.96亿元（两融整体减少107.23亿元），杠杆资金在科技板块回调中降仓（数据来源：同花顺 | 东方财富 2026-07-07）。</p>
+<p class=""><strong>北向资金</strong>：7月6日成交3963.37亿元。虽无大规模净买入，但外资对半导体设备、消费电子等自主可控方向保持配置热情。<strong>两融余额</strong>：截至7月6日，两市融资余额降至<strong>29609.75亿元</strong>，较前日减少104.96亿元，杠杆资金在科技板块回调中降仓。</p>
 <p class=""><strong>结论</strong>：当前最火爆的2-3个板块为<strong>煤炭</strong>（基本面+高股息双驱动）、<strong>银行</strong>（低估值+高分红，板块资金持续流入）、<strong>养殖/农林牧渔</strong>（猪价短期强势反弹，外三元生猪均价近10天累计上涨16.8%）。市场风格正从"科技单边"向"高股息+超跌修复"再平衡。</p>
 <blockquote>
 <p class="no-indent">数据来源：东方财富 | 同花顺 | 财联社 2026-07-06/07</p>
 </blockquote>
 <h3>A 股科技板块</h3>
 <p class="">7月6日科技板块整体承压，PCB/光通信方向受英伟达下一代产品推迟传闻冲击，相关个股大幅回调。但<strong>科创50</strong>逆势收涨<strong>1.04%</strong>，海光信息（上涨<strong>6.43%</strong>）、佰维存储（上涨<strong>5.10%</strong>）等半导体个股走强，显示资金在科技板块内部从高位PCB/光模块向低位半导体设备/存储方向切换。"清朗·整治AI应用乱象"专项行动持续推进，中央网信办聚焦AI备案、安全审核等治理重点（数据来源：东方财富 | 财联社 2026-07-06）。</p>
-<blockquote>
-<p class="no-indent">数据来源：东方财富 | 财联社 2026-07-06</p>
-</blockquote>
 <h3>公募/债券</h3>
 <ul>
-<li><strong>债市</strong>：7月6日10年期国债收益率下行至1.7365%（7月7日1.7390）。央行当日开展<strong>1万亿元</strong>3个月期买断式逆回购操作，扣除到期8000亿元后净投放<strong>2000亿元</strong>，操作后买断式逆回购余额增至5.6万亿元，为连续第5个月通过该工具向市场注入中长期流动性（数据来源：财联社 | 中国货币网 | 同花顺 2026-07-06/07）。</li>
+<li><strong>债市</strong>：7月6日10年期国债收益率下行0.84BP报1.7379%。央行当日开展<strong>1万亿元</strong>3个月期买断式逆回购操作，扣除到期8000亿元后净投放<strong>2000亿元</strong>，为连续第5个月通过该工具向市场注入中长期流动性。"固收+"基金上半年平均业绩继续领先，转债新券表现强势，机构提示高溢价风险（数据来源：财联社 | 证券时报 2026-07-06/07）。</li>
 <li><strong>公募发行</strong>：2026上半年880只新基落地，123家公募参与新发，双双刷新近7年同期峰值。被动指数稳居发行主力，固收+迎来阶段性爆发。东财汇裕嘉选债券于7月7日至13日公开发售（数据来源：财联社 2026-07-04/07）。</li>
 </ul>
-<blockquote>
-<p class="no-indent">数据来源：财联社 | 同花顺 | 证券时报 | 中国货币网 2026-07-06/07</p>
-</blockquote>
 <h3>持仓相关</h3>
 <ul>
-<li><strong>招商银行</strong>：7月6日收盘价37.73元（<span class="up">上涨2.44%</span>），主力资金净流入3.42亿元。2025年度分红派息实施中，每股1.003元（含税），股权登记日7月9日、除息日7月10日。H股方面，平安资管近期以均价44.6637港元/股增持2223.2万股、持股比例升至26.20%，显示机构长期看好（数据来源：证券之星 | 格隆汇 2026-07-03/06）。</li>
+<li><strong>招商银行</strong>：7月6日收盘价37.73元（<span class="up">上涨2.44%</span>），主力资金净流入3.42亿元。2025年度分红派息实施中，每股1.003元（含税），股权登记日及除息日待后续公告。H股方面，平安资管近期以均价44.66港元/股增持2223.2万股，显示机构长期看好（数据来源：证券之星 | 格隆汇 2026-07-03/06）。</li>
 <li><strong>红利低波</strong>：中证红利低波指数7月6日上涨<strong>2.1%</strong>，煤炭、银行等高股息权重股逆势走强。成分股新奥股份发布2025年度分红实施公告，每股现金红利0.96元，股权登记日7月8日。红利低波ETF易方达连续8日资金净流入，年内累计净流入81.7亿元（数据来源：同花顺 | 金融界 2026-07-06/07）。</li>
 </ul>
-<blockquote>
-<p class="no-indent">数据来源：证券之星 | 同花顺 | 金融界 2026-07-06/07</p>
-</blockquote>
 <hr>
-<p class="source">汇总来源声明**：本报告数据来源于财联社、东方财富、新浪财经、英为财情、且慢、雪球（含蛋卷）、中国货币网、证券时报、新华社、中新经纬、金投网、同花顺、Bloomberg、Reuters、Financial Times、The Wall Street Journal、Yahoo Finance、光明网等主流财经媒体，数据截止时间以各条末尾标注为准。部分基金净值因QDII T+2结算存在延时。</p>
+<p class="source">汇总来源声明**：本报告数据来源于财联社、东方财富、新浪财经、英为财情、且慢、雪球（含蛋卷）、证券时报、新华社、中新经纬、金投网、同花顺、Bloomberg、Reuters、Financial Times、The Wall Street Journal、Yahoo Finance等主流财经媒体，数据截止时间以各条末尾标注为准。部分基金净值因QDII T+2结算存在延时。</p>
 <hr>
 <ul>
 <li>📱 朗读链接: https://homjanon.github.io/portfolio/daily-report.html</li>
@@ -201,7 +171,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 <button class="speed-btn" data-speed="1.5">1.5×</button>
 </div>
 </div>
-<audio id="audioPlayer" preload="auto" src="daily-report.mp3?20260707144351"></audio>
+<audio id="audioPlayer" preload="auto" src="daily-report.mp3?20260707152426"></audio>
 <script>
 (function(){var p=document.getElementById("btnPlay"),a=document.getElementById("audioPlayer"),c=document.getElementById("progressFill"),t=document.getElementById("progressThumb"),w=document.getElementById("progressWrap"),ct=document.getElementById("currentTime"),tt=document.getElementById("totalTime"),sb=document.querySelectorAll(".speed-btn");
 function fmt(s){if(!s||!isFinite(s))return"00:00";var m=Math.floor(s/60),sec=Math.floor(s%60);return(m<10?"0":"")+m+":"+(sec<10?"0":"")+sec}
@@ -226,12 +196,8 @@ sb.forEach(function(btn){btn.addEventListener("click",function(){sb.forEach(func
 // 键盘快捷键
 document.addEventListener("keydown",function(e){if(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA")return;if(e.key===" "){e["default"]();if(a.paused){a.play()["catch"](function(){})}else{a.pause()}}else if(e.key==="ArrowRight"){a.currentTime=Math.min(a.currentTime+10,a.duration||a.currentTime)}else if(e.key==="ArrowLeft"){a.currentTime=Math.max(a.currentTime-10,0)}});
 // 过期检测
-(function(){var q=document.getElementById("reportDate");if(!q)return;var r=q.textContent.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);if(!r)return;var s=new Date(r[1],r[2]-1,r[3]);var d=new Date();d.setHours(0,0,0,0);if(s<d){var b=document.getElementById("staleBanner"),btn=document.getElementById("refreshBtn");b.textContent="⏳ 已检测旧版内容，正在自动刷新...";b.classList.add("show");btn.classList.add("show");setTimeout(function(){window.location.href=window.location.pathname+"?_="+Date.now()},1500)}})();
+(function(){var q=document.getElementById("reportDate");if(!q)return;var r=q.textContent.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);if(!r)return;var s=new Date(r[1],r[2]-1,r[3]);var d=new Date();d.setHours(0,0,0,0);if(s<d){var b=document.getElementById("staleBanner"),btn=document.getElementById("refreshBtn");b.textContent="已检测旧版内容，正在自动刷新...";b.classList.add("show");btn.classList.add("show");setTimeout(function(){window.location.href=window.location.pathname+"?_="+Date.now()},1500)}})();
 })();
-</script>
-<script>
-// 注册 Service Worker：强制网络刷新 HTML
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').then(function(reg){console.log('SW registered')})["catch"](function(e){console.warn('SW failed:',e)})}
 </script>
 </body>
 </html>
