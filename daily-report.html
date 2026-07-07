@@ -8,6 +8,7 @@
 <meta http-equiv="Expires" content="0">
 <link rel="icon" href="data:,">
 <title>全球金融市场日报</title>
+<!-- build=202607060855 -->
 <style>
 :root{--bg:#f8f9fa;--card:#fff;--text:#1a1a2e;--sub:#6b7280;--border:#e5e7eb;--accent:#2563eb;--note-bg:#f0f4ff}
 @media(prefers-color-scheme:dark){:root{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--sub:#94a3b8;--border:#334155;--accent:#3b82f6;--note-bg:#1e293b}}
@@ -52,6 +53,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 .speed-btn{background:none;border:none;color:var(--sub);font-size:11px;cursor:pointer;padding:2px 6px;border-radius:3px;transition:all .12s}
 .speed-btn.active{color:var(--accent);font-weight:600}
 .speed-btn:hover{background:var(--note-bg)}
+.voice-label{font-size:10px;color:var(--sub);padding:2px 4px}
 </style>
 </head>
 <body>
@@ -59,108 +61,65 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 <div class="tip">💡 点击 ▶ 播放音频日报（微软 AI 语音播报），暂停/续播/拖动进度条均可</div>
 <div class="header">
 <h1>📰 全球金融市场日报</h1>
-<div class="date" id="reportDate">2026年07月07日</div>
+<div class="date" id="reportDate">2026年07月06日</div>
 <button class="refresh-btn" id="refreshBtn" onclick="window.location.href=window.location.pathname+'?_='+Date.now()">🔄 刷新</button>
 </div>
 <div class="article" id="articleContent">
 <h1>全球金融市场日报</h1>
-<p class="no-indent"><strong>查询时间</strong>：2026年7月7日（周二）10:30 北京时间</p>
+<p class="no-indent"><strong>查询时间</strong>：2026年7月6日（周一）07:20 北京时间</p>
+<p class=""><strong>执行模式</strong>：精简版（周一）</p>
 <hr>
-<h2>一、今日关注（宏观日历）</h2>
-<ul>
-<li><strong>今日（7/7）</strong>：中国6月外汇储备公布；中国央行行长潘功胜出席香港固定收益及货币论坛；北约峰会（7/7-7/8）；美国5月贸易帐；三星电子发布Q2初步财报；OpenAI发布GPT-5.6；太阳谷年度峰会（OpenAI/苹果/Meta CEO出席）</li>
-<li><strong>周三（7/8）</strong>：美联储6月FOMC会议纪要发布（沃什上任后首份纪要）；美国EIA原油库存周报；美国贸易代表办公室举行对60个经济体加征关税听证会</li>
-<li><strong>周四（7/9）</strong>：中国6月CPI/PPI通胀数据；美国6月CPI（市场预期同比受油价回落影响小幅下行）；美国初请失业金人数</li>
-<li><strong>下周起</strong>：A股中报披露季正式开启；中国6月社融信贷数据（M1新口径首秀）</li>
-</ul>
-<p class="">（数据来源：雪球 | 发布时间：2026-07-05）</p>
-<h2>二、市场全景</h2>
-<h3>A股收盘（7月6日）</h3>
-<div class="table-text">上证指数报收4041.24，下跌0.06%。深证成指报收15416.80，下跌1.16%。沪深300报收基本平收。科创50报收1996.10，上涨1.04%。创业板指报收3948.86，下跌1.77%。</div>
-<p class="">（数据来源：财联社 | 发布时间：2026-07-06 15:00）</p>
-<p class="">A股三大股指7月6日冲高回落、走势分化。沪深两市成交额 <strong>3.09万亿元</strong>，较上日缩量约900亿元，但仍连续15个交易日维持3万亿上方。全市场上涨个股约1800余只，下跌超3500只，赚钱效应偏弱。涨停71只（不含ST），跌停54只。</p>
-<p class=""><strong>申万一级行业</strong>：上涨TOP3为煤炭（<strong><span class="up">上涨4.11%</span></strong>）、农林牧渔（<strong><span class="up">上涨2%</span>+</strong>）、石油石化（<strong><span class="up">上涨2%</span>+</strong>）；下跌BOTTOM3为建筑材料（<strong><span class="down">下跌5.75%</span></strong>）、通信（<strong><span class="down">下跌3%</span>+</strong>）、金属新材料。<strong>主力资金净流出590.34亿元</strong>，其中创业板净流出274.93亿元。板块轮动呈现明显的"防御+红利"风格——煤炭、银行、石油石化等低估值板块获资金青睐，前期强势的AI硬件材料链（PCB/玻纤/光通信）集体大幅回调。</p>
-<p class="">（数据来源：证券时报·数据宝、新浪财经 | 发布时间：2026-07-06 17:00）</p>
-<h3>美股收盘（7月6日）</h3>
-<div class="table-text">道琼斯工业报收53055.91，上涨0.29%（历史新高）。标普500报收7537.43，上涨0.72%。纳斯达克综合报收26121.16，上涨1.12%。</div>
-<p class="">（数据来源：财联社 | 发布时间：2026-07-07 06:00）</p>
-<p class="">美股三大指数集体走强，道指再创历史新高，标普500创三周新高。主要驱动因素：<strong>半导体板块止跌回升</strong>（此前两日连跌的费城半导体指数收涨超2%），西部数据涨超7%，AMD涨6.6%，博通涨近4%）；"科技七巨头"中特斯拉反弹6.7%领涨，仅微软因宣布裁员4800人收跌近1%。标普500十一大板块中，科技（+1.5%）、通信服务（+1.2%）领涨，能源（-0.3%）和公用事业（-0.4%）落后。美国6月ISM服务业PMI回落至54.0（预期54.2），但就业指数意外回暖创2024年来最大升幅，缓解了上周非农爆冷引发的衰退担忧。</p>
-<p class="">（数据来源：财联社、新浪财经 | 发布时间：2026-07-07 06:30）</p>
-<h3>港股收盘（7月6日）</h3>
-<p class="">恒生指数收报 <strong>23616.32点</strong>，上涨 <strong><span class="up">上涨1.14%</span></strong>；恒生国企指数收报 <strong>7812.35点</strong>，上涨 <strong><span class="up">上涨1.46%</span></strong>。科网股普涨，快手涨超7%，美团、腾讯涨超4%，创新药板块再度爆发，电力设备股活跃。光通信和PCB板块因英伟达服务器延期传闻集体大跌，长飞光纤光缆跌超14%。<strong>南下资金净买入超205亿港元</strong>，为近期单日最高水平，资金通过沪港通大幅流入大型蓝筹。</p>
-<p class="">（数据来源：财联社、东方财富 | 发布时间：2026-07-06 16:30）</p>
-<h3>恐慌指数</h3>
-<div class="table-text">VIX报17.51，12-20正常区间，市场情绪平稳。VXN报数据暂不可得。</div>
-<p class="">VIX维持在17附近，市场恐慌情绪处于正常偏低水平。6月VIX曾因美伊冲突一度冲高至21-22，随着霍尔木兹海峡通航逐步恢复，波动率已回落至稳态区间。</p>
-<p class="">（数据来源：Investing.com、东财 | 发布时间：2026-07-07）</p>
-<h3>大宗商品与汇率</h3>
-<p class=""><strong>原油</strong>：WTI 8月原油期货收报 <strong>68.55美元/桶</strong>（<span class="down">下跌0.20%</span>），创美伊冲突爆发前以来新低。沙特阿美将8月对亚洲客户的轻质原油官价下调11美元/桶（创26年最大降幅），且霍尔木兹海峡通航以每周15%-20%速度恢复，地缘风险溢价持续剥离。</p>
-<p class=""><strong>黄金</strong>：COMEX黄金期货收报 <strong>4176.3美元/盎司</strong>（<span class="up">上涨1.23%</span>），但现货黄金7日亚盘回落至4140美元附近，日内跌0.6%。非农疲弱支撑金价反弹，但等待周三美联储纪要考验。</p>
-<p class=""><strong>汇率</strong>：美元兑离岸人民币（USD/CNH）报 <strong>6.7899</strong>（<span class="up">上涨0.09%</span>），离岸人民币止步两连涨；美元指数脱离两周低位；日元跌离两周高位，美元兑日元重上162。</p>
-<p class=""><strong>债券</strong>：10年期美债收益率报 <strong>4.47%</strong>（日内降约1bp）；中国10年期国债收益率报 <strong>1.7365%</strong>（<span class="down">下跌0.57</span>bp）。<strong>中美利差约2.73个百分点</strong>，仍处于历史较阔水平。</p>
-<p class="">（数据来源：华尔街见闻、新浪财经、中国货币网 | 发布时间：2026-07-07 08:00）</p>
-<h2>三、估值与持仓</h2>
-<h3>估值异动预警</h3>
-<p class="">据雪球蛋卷基金（danjuanapp.com）2026年7月3日-6日数据：</p>
-<div class="table-text">标普500，市盈率TTM 27-30倍 / CAPE 41倍倍，市净率~4.5倍，PE分位PE分位 ~91% / CAPE分位 98%。纳斯达克100，市盈率33.55倍，PE分位76.97%，PB分位94.80%，估值76.97%。中证A500，市盈率16.99倍，PE分位74.39%，PB分位43%，估值74.39%。创业板指，市盈率51.07倍，市净率7.11倍，PE分位67.20%，PB分位83.9%，估值67.20%。红利低波，市盈率7.56倍，PE分位67.68%，估值67.68%。恒生科技，市盈率21.85倍，市净率2.45倍，PE分位23.54%，PB分位24.72%，估值23.54%。</div>
-<p class="">（数据来源：雪球蛋卷、雪球指数估值 | 发布时间：2026-07-03至07-06）</p>
-<p class="">6个指数中，<strong>标普500处于98%+极高风险区</strong>（CAPE突破40倍，为百年历史第二高），恒生科技处于24%左右较低价值区，红利低波估值适中，其余指数基本持平。</p>
-<blockquote>
-<p class="no-indent">⚠️ <strong>标普500席勒CAPE（周期调整市盈率）已攀升至41倍</strong>，仅次于1999年互联网泡沫时期的44倍，隐含未来10年年化回报率仅约1.3%-1.6%，估值泡沫风险不容忽视。</p>
-</blockquote>
-<p class="">（数据来源：新浪财经 | 发布时间：2026-06-30）</p>
-<h3>个人持仓</h3>
-<p class=""><strong>个股</strong>：</p>
-<ul>
-<li>招商银行A（600036），收盘价 <strong>37.73元</strong>，上涨 <strong><span class="up">上涨2.44%</span></strong>。主力资金净买入3.42亿元。近日公告每股派发现金红利1.003元（含税），7月6-10日这周银行密集分红季开启。</li>
-<li>招商银行H（03968），收盘价 <strong>45.36港元</strong>，上涨 <strong><span class="up">上涨2.62%</span></strong>。<strong>A/H溢价率约-4.7%</strong>（H股折人民币约39.6元，高于A股37.73元），H股相对A股存在溢价。</li>
-<li>QQQM（Invesco纳斯达克100 ETF），收盘价 <strong>297.52美元</strong>，上涨 <strong><span class="up">上涨1.40%</span></strong>，52周区间224.95-307.86美元。</li>
-</ul>
-<p class="">（数据来源：证券之星、新浪财经、招商银行官网 | 发布时间：2026-07-06 16:00）</p>
-<p class=""><strong>场外基金</strong>（净值保留4位小数）：</p>
-<p class="">016452（南方纳斯达克100联接）净值 <strong>2.2865</strong>（7/2，日<span class="down">下跌1.56%</span>，近周约-0.5%）；017641（摩根标普500联接）净值 <strong>1.6693</strong>（7/3，近周约+0.8%）；020602（易方达红利低波联接）净值 <strong>1.0210</strong>（7/6，日<span class="up">上涨1.96%</span>，近周约+3.1%）；020741（华泰保兴安悦债券C）净值 <strong>1.1439</strong>（7/6，日<span class="up">上涨0.27%</span>，近周约+0.6%）。</p>
-<p class="">（数据来源：天天基金网、新浪基金 | 发布时间：2026-07-03至07-06）</p>
-<h2>四、行业洞察</h2>
-<h3>全球 TOP 5</h3>
+<h2>一、行业要闻与重点新闻</h2>
+<h3>全球重点新闻 TOP 5</h3>
 <ol>
-<li><strong>沙特创26年最大降幅对亚洲降价</strong>：沙特阿美将8月对亚洲客户轻质原油官价下调11美元/桶至折价1.5美元，降幅远超预期的8美元，原油供应洪流加速回归，WTI跌至68.55美元创美伊冲突前新低。（Bloomberg | 2026-07-07）</li>
-<li><strong>英伟达辟谣服务器延期传闻</strong>：回应Kyber NVL144因PCB制造问题推迟超一年的市场消息，称产品路线图未变。但市场已引发日韩台AI硬件供应链股周一重挫，分歧加剧。（Reuters | 2026-07-07）</li>
-<li><strong>美联储纪要明日登场，加息预期升温</strong>：6月FOMC纪要（沃什首份）将显示过半委员支持年内再加息一次，市场已为10月会议定价21个基点紧缩预期，联邦基金期货定价年内加息概率攀升。（The Wall Street Journal | 2026-07-06）</li>
-<li><strong>SK海力士ADR募资280亿美元获大幅超额认购</strong>：受近期股价下滑影响发行规模缩水约10亿，但认购倍数仍强劲，投资者有意认购高达70亿美元ADS，约占四分之一，显示AI存储需求依旧旺盛。（Financial Times | 2026-07-07）</li>
-<li><strong>韩国央行罕见警告芯片ETF风险</strong>：对三星电子与SK海力士单股杠杆ETF发出风险警告，5月底以来该类产品单月成交额高达212万亿韩元（占ETF总成交逾四分之一），央行担忧顺周期机制放大波动。（Barron's | 2026-07-07）</li>
+<li><strong>A股交易新规今日正式施行</strong>：7月6日起，沪深交易所盘后固定价格交易机制由科创板、创业板扩展至全部A股及沪深ETF，交易时间为15:05至15:30；同时主板ST、*ST股票涨跌幅限制由5%调整至10%。这是近年来A股交易机制最大一次升级调整。</li>
+<li><strong>美股独立日假期后今日恢复交易</strong>：7月3日（周五）美股因独立日全天休市，7月6日（周一）恢复正常交易。上周（7月1-2日）美股极致分化，道指创历史新高报52900.07点，但费城半导体指数两日累计暴跌超11%，科技板块大幅承压。</li>
+<li><strong>美国6月非农就业仅增5.7万人</strong>：7月2日公布的6月非农数据远低于市场预期的11.3万人，华尔街交易员完全定价美联储加息时点从10月推迟至12月，2026年内降息预期彻底落空。受此影响，美元指数回落，黄金重回4100美元/盎司上方。</li>
+<li><strong>宇树科技科创板IPO注册生效</strong>：证监会7月2日同意宇树科技科创板IPO注册，从受理到注册仅104天，刷新科创板审核纪录。A股"人形机器人第一股"即将诞生，最快7月中下旬正式挂牌。上周五机器人概念股已批量涨停。</li>
+<li><strong>纳指ETF溢价风险再度预警</strong>：7月5日，华泰柏瑞和汇添富旗下纳指ETF相继发布溢价风险提示，二级市场交易价格明显高于基金份额参考净值。纳指ETF（159660）历史溢价率曾达12.6%，限大额申购状态持续。</li>
 </ol>
-<h3>QDII额度与ETF溢价</h3>
+<p class="source">数据来源：基金公司公告 2026-07-05 | 东方财富 2026-07-05 18:30</p>
+<h3>A股上周回顾</h3>
+<p class="">上周（7月1-3日）A股三大指数集体收红，上证指数报4043.64点（+0.37%），深证成指报15597.51点（+0.64%），创业板指报4019.93点（+0.07%）。科创50表现偏弱，收跌0.59%报1975.60点。日成交额约3.18万亿元，较前周缩量明显。</p>
+<p class="source">数据来源：东方财富 2026-07-03 15:30 | 同花顺 2026-07-03 16:00</p>
+<p class="">板块方面，人形机器人板块受宇树科技IPO催化全周大涨，贵金属、军工装备走强；半导体、消费电子受美股拖累承压。北向资金整体呈观望态势，偏好大消费和金融板块。</p>
+<p class="source">数据来源：Wind 2026-07-03 17:00 | 雪球 2026-07-03 18:30</p>
+<h3>本周关注要点</h3>
 <ul>
-<li><strong>额度变化</strong>：华夏基金7月7日起将旗下纳指100ETF联接和标普500ETF联接官方直销渠道单日申购上限提至300元（A/C类额度分开计算），释放QDII额度小幅松动的信号，但多数基金公司额度仍紧绷。</li>
-<li><strong>场内ETF溢价</strong>：纳指100ETF（513100/159941等）溢价率约 <strong>0.5%-1.5%</strong>，标普500ETF（513500/159655等）溢价率约 <strong>0.3%-1.0%</strong>，整体处于±1%正常区间内，无明显溢价套利机会。</li>
+<li>A股交易新规今日施行，关注盘后交易机制对流动性的影响</li>
+<li>美股独立日假期后恢复交易，关注半导体板块能否企稳</li>
+<li>招行A股分红股权登记日7月9日，除权除息日7月10日</li>
+<li>美股Q2财报季即将开启，关注银行业绩及AI相关公司指引</li>
+<li>美国6月CPI数据预计7月中旬公布</li>
 </ul>
-<p class="">（数据来源：东方财富、华夏基金公告 | 发布时间：2026-07-07）</p>
-<h3>A股资金流向与热门板块</h3>
-<p class=""><strong>近5日+10日主力资金</strong>：电子行业近两周累计净流出超千亿，高估值科技板块持续失血；医药生物获资金逆势净流入居首，汽车、大消费紧随其后。<strong>北向资金</strong>7月6日成交3963亿元（占两市12.82%），维持中性偏谨慎态度。<strong>两融余额</strong>截至7月3日约2.97万亿元，单周减少约197亿元，杠杆资金活跃度明显降温。</p>
-<p class=""><strong>结论</strong>：当前最火爆的2-3个方向为——① <strong>煤炭/银行/红利低波</strong>（防御性资金抱团，中报分红季催化）；② <strong>创新药/医药生物</strong>（低位防御+中报预期驱动）；③ <strong>养殖/猪肉</strong>（猪价近10天反弹16.8%触底修复逻辑）。市场整体呈现"高切低"风格，AI硬件链获利盘大幅兑现。</p>
-<p class="">（数据来源：证券时报·数据宝、东方财富Choice、同花顺 | 发布时间：2026-07-06至07-07）</p>
-<h3>A股科技板块</h3>
-<p class="">7月6日科技板块整体承压。PCB/CPO/光通信方向因英伟达服务器延期传闻集体大跌，中国巨石跌停，长飞光纤跌超14%。科创50盘中巨震（振幅5.48%）但收涨1.04%，显示2000点附近有买盘承接。液冷服务器方向逆势活跃，大元泵业、宏盛股份涨停，与算力基建配套需求挂钩。交换机/网络设备盘中走强，菲菱科思20CM涨停、紫光股份涨停，星网锐捷走出5天4板。</p>
-<p class="">（数据来源：雪球、新浪财经 | 发布时间：2026-07-06 15:30）</p>
-<h3>公募/债券</h3>
-<ul>
-<li><strong>政策与热点</strong>：A股33家银行本周（7/6-7/10）密集分红，合计超911亿元，包括中国银行、交通银行、招商银行等高股息标的集中派息，红利低波ETF易方达连续8日净流入，年内获资金净流入81.7亿元。华为Mate90系列计划搭载基于"韬定律"的新麒麟芯片（采用逻辑折叠技术），相关概念股受关注。</li>
-<li><strong>债券市场</strong>：中国10年期国债收益率报1.7365%（<span class="down">下跌0.57</span>bp），短端1年期1.12%，资金面充裕。DR007围绕政策利率1.40%窄幅波动，AAA级1年期同业存单收益率降至1.47%历史极低点。超长债配置价值凸显，市场预期7月中下旬超长端利率将加速下行。</li>
-</ul>
-<p class="">（数据来源：上证报、中国货币网、中证报 | 发布时间：2026-07-07）</p>
-<h3>持仓相关</h3>
-<ul>
-<li><strong>腾讯减持快手</strong>：腾讯确认出售2.7亿股快手股份，完成后持股比例由15.68%降至9.37%，不再为主要股东。快手旗下可灵AI此前刚完成近30亿美元融资。快手7月6日港股仍涨超7%，市场反应平稳。</li>
-<li><strong>英特尔上调CPU价格</strong>：部分Xeon服务器芯片涨幅达7%-12%，AI算力需求正在改变CPU市场"价格只降不升"的传统逻辑。ARM架构在云原生推理场景渗透斜率更陡峭，CPU需求弹性被低估。</li>
-<li><strong>苹果折叠屏iPhone进展</strong>：郭明錤称折叠屏iPhone组装出货700-800万部，三季度仅50-100万部，预计与iPhone 18系列同台发布但推迟至四季度预购，年底前供货紧张。</li>
-<li><strong>博通与苹果续签ASIC合作</strong>：定制芯片合同延长至2031年，为多代产品开发和供应定制ASIC芯片，强化AI芯片业务增长预期。</li>
-</ul>
-<p class="">（数据来源：新浪科技、上证报、华尔街见闻 | 发布时间：2026-07-07）</p>
+<p class="source">数据来源：财联社 2026-07-05 20:00 | 央视财经 2026-07-05 21:00</p>
 <hr>
-<p class="source">数据来源汇总：财联社、新浪财经、东方财富、腾讯财经、英为财情、雪球（含蛋卷）、且慢、证券时报、华尔街见闻、Bloomberg、Reuters、The Wall Street Journal、Financial Times、Barron's。报告生成时间：2026年7月7日 10:30 北京时间。</p>
-<blockquote>
-<p class="no-indent"><strong>免责声明</strong>：本报告仅供信息参考，不构成任何投资建议。投资有风险，决策需谨慎。</p>
-</blockquote>
+<h2>二、深度观察</h2>
+<h3>A股交易新规落地：盘后交易扩围与ST涨跌幅调整的市场影响</h3>
+<p class=""><strong>事件概述</strong>：2026年7月6日，A股交易新规正式施行。这是自2023年注册制全面落地以来，A股市场交易机制最重大的一次系统性升级。核心变化集中在三个方面：盘后固定价格交易全面扩围、基金收盘交易机制调整、主板ST股票涨跌幅放宽至10%。</p>
+<p class="source">数据来源：上交所交易规则 2026-04-24 | 央视财经 2026-07-05 21:30</p>
+<p class=""><strong>规则要点解读</strong>：</p>
+<p class=""><strong>一、盘后固定价格交易扩围：从科创/创业板走向全市场</strong></p>
+<p class="">此前，盘后固定价格交易仅适用于科创板、创业板股票。新规将这一机制扩展至全部A股（北交所暂不实施）及沪深市场ETF。交易时间为每个交易日15:05至15:30，以当日收盘价作为固定价格撮合交易。这一变化对于机构投资者和量化策略意义重大——可以在收盘后继续执行批量调仓，减少对盘中价格的冲击。对于普通投资者而言，也增加了一个操作窗口，适合在收盘后基于当日收盘价进行交易决策。</p>
+<p class="source">数据来源：上交所公告 2026-04-24 | 深交所公告 2026-04-24</p>
+<p class=""><strong>二、基金收盘交易机制调整：从连续竞价到集合竞价</strong></p>
+<p class="">新规将基金收盘阶段交易方式由连续竞价调整为收盘集合竞价，通过集合竞价产生收盘价。这一调整有助于减少基金收盘阶段的异常波动，提高收盘价的公允性和稳定性。尤其对于ETF产品，收盘价的稳定性将直接提升套利效率，缩小二级市场交易价格与IOPV之间的价差。</p>
+<p class="source">数据来源：上交所交易规则 2026-04-24 | 中国基金报 2026-07-05</p>
+<p class=""><strong>三、主板ST股票涨跌幅放宽至10%</strong></p>
+<p class="">这是最受个人投资者关注的变化。此前主板ST、*ST股票涨跌幅限制为5%，新规将其统一调整至10%，与普通A股一致。这一调整的核心逻辑在于：随着退市制度的完善和常态化退市的推进，ST股票的风险已经通过退市风险警示（*ST）和终止上市机制充分释放，原有的5%涨跌幅限制在一定程度上限制了定价效率。放宽至10%后，ST股票的流动性有望改善，定价效率提升，但相应的波动风险也同步加大。</p>
+<p class="source">数据来源：证监会公告 2026-04-24 | 央视财经 2026-07-02 07:07</p>
+<p class=""><strong>市场影响前瞻</strong>：</p>
+<p class="">短期来看，新规落地首周，市场可能需要一定的适应期。盘后交易的增量订单对现有交易生态的冲击有限——参考科创板、创业板已有经验，盘后交易量占全日成交量的比例通常不足1%。但长期而言，这是A股交易制度与国际接轨的重要一步。</p>
+<p class="">值得关注的是，新规选择在7月6日（周一）施行，正值美股独立日假期后恢复交易的第一天，也是A股经历上周科技股剧烈分化后的首个交易日。叠加美国非农数据引发的加息预期推迟、AI芯片产业逻辑变局等多重因素，本周的市场波动可能加大。</p>
+<p class="">对于投资者而言，建议关注以下方向：</p>
+<ol>
+<li><strong>盘后交易对ETF的影响</strong>——ETF盘后交易的扩展有望提升套利效率，缩小溢价率，对QDII ETF的高溢价品种可能形成价格收敛效应</li>
+<li><strong>ST板块的风险与机会</strong>——涨跌幅放宽至10%后，ST股票的波动性将显著增加，投机性资金可能阶段性活跃，但基本面风险仍需警惕</li>
+<li><strong>市场流动性结构变化</strong>——盘后交易机制为机构调仓提供了更多选择，可能降低盘中大单交易的冲击成本，有助于改善市场微观结构</li>
+</ol>
+<p class="source">数据来源：华泰证券研究 2026-07-05 | 中信建投研报 2026-07-05</p>
+<hr>
+<p class="source">数据来源：Wind、东方财富、新浪财经、财联社、央视财经、华尔街见闻等 | 发布时间：2026.07.06 07:20</p>
 </div>
 <div class="player">
 <div class="player-row">
@@ -179,7 +138,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 <button class="speed-btn" data-speed="1.5">1.5×</button>
 </div>
 </div>
-<audio id="audioPlayer" preload="auto" src="daily-report.mp3?20260707103658"></audio>
+<audio id="audioPlayer" preload="auto" src="daily-report.mp3?20260706085512"></audio>
 <script>
 (function(){var p=document.getElementById("btnPlay"),a=document.getElementById("audioPlayer"),c=document.getElementById("progressFill"),t=document.getElementById("progressThumb"),w=document.getElementById("progressWrap"),ct=document.getElementById("currentTime"),tt=document.getElementById("totalTime"),sb=document.querySelectorAll(".speed-btn");
 function fmt(s){if(!s||!isFinite(s))return"00:00";var m=Math.floor(s/60),sec=Math.floor(s%60);return(m<10?"0":"")+m+":"+(sec<10?"0":"")+sec}
@@ -199,12 +158,16 @@ document.addEventListener("mouseup",function(){drag=false});
 w.addEventListener("touchstart",function(e){drag=true;var touch=e.touches[0];doSeek({clientX:touch.clientX})});
 document.addEventListener("touchmove",function(e){if(drag){var touch=e.touches[0];doSeek({clientX:touch.clientX});e["default"]()}},{passive:false});
 document.addEventListener("touchend",function(){drag=false});
+// 倍速切换
 sb.forEach(function(btn){btn.addEventListener("click",function(){sb.forEach(function(b){b.classList.remove("active")});btn.classList.add("active");a.playbackRate=parseFloat(btn.getAttribute("data-speed"))})});
+// 键盘快捷键
 document.addEventListener("keydown",function(e){if(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA")return;if(e.key===" "){e["default"]();if(a.paused){a.play()["catch"](function(){})}else{a.pause()}}else if(e.key==="ArrowRight"){a.currentTime=Math.min(a.currentTime+10,a.duration||a.currentTime)}else if(e.key==="ArrowLeft"){a.currentTime=Math.max(a.currentTime-10,0)}});
-(function(){var q=document.getElementById("reportDate");if(!q)return;var r=q.textContent.match(/(\d{4})年(\d{1,2})月(\d{1,2})��/);if(!r)return;var s=new Date(r[1],r[2]-1,r[3]);var d=new Date();d.setHours(0,0,0,0);if(s<d){var b=document.getElementById("staleBanner"),btn=document.getElementById("refreshBtn");b.textContent="⏳ 已检测旧版内容，正在自动刷新...";b.classList.add("show");btn.classList.add("show");setTimeout(function(){window.location.href=window.location.pathname+"?_="+Date.now()},1500)}})();
+// 过期检测
+(function(){var q=document.getElementById("reportDate");if(!q)return;var r=q.textContent.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);if(!r)return;var s=new Date(r[1],r[2]-1,r[3]);var d=new Date();d.setHours(0,0,0,0);if(s<d){var b=document.getElementById("staleBanner"),btn=document.getElementById("refreshBtn");b.textContent="⏳ 已检测旧版内容，正在自动刷新...";b.classList.add("show");btn.classList.add("show");setTimeout(function(){window.location.href=window.location.pathname+"?_="+Date.now()},1500)}})();
 })();
 </script>
 <script>
+// 注册 Service Worker：强制网络刷新 HTML
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').then(function(reg){console.log('SW registered')})["catch"](function(e){console.warn('SW failed:',e)})}
 </script>
 </body>
