@@ -4,26 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <link rel="icon" href="data:,">
 <title>全球金融市场日报</title>
-<!-- build=202607060855 -->
 <style>
 :root{--bg:#f8f9fa;--card:#fff;--text:#1a1a2e;--sub:#6b7280;--border:#e5e7eb;--accent:#2563eb;--note-bg:#f0f4ff}
 @media(prefers-color-scheme:dark){:root{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--sub:#94a3b8;--border:#334155;--accent:#3b82f6;--note-bg:#1e293b}}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.9;min-height:100dvh;padding:0 0 150px;-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.9;min-height:100dvh;padding:0 0 150px}
 .header{background:var(--card);border-bottom:1px solid var(--border);padding:18px 16px;text-align:center;position:relative}
 .header h1{font-size:20px;font-weight:700;margin-bottom:4px}
 .header .date{font-size:13px;color:var(--sub);margin-bottom:8px}
-.refresh-btn{position:absolute;right:16px;top:14px;background:var(--accent);color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;display:none}
-.refresh-btn.show{display:block}
-.stale-banner{background:#fef3c7;color:#92400e;font-size:13px;padding:6px 14px;text-align:center;display:none}
-.stale-banner.show{display:block}
-@media(prefers-color-scheme:dark){.stale-banner{background:#422006;color:#fde68a}}
 .tip{background:#e8f5e9;color:#2e7d32;font-size:13px;padding:6px 14px;text-align:center;border-bottom:1px solid #c8e6c9}
-@media(prefers-color-scheme:dark){.tip{background:#1b3a1b;color:#81c784;border-color:#2e4a2e}}
 .article{max-width:700px;margin:0 auto;padding:20px 16px}
 .article h2{font-size:18px;margin:32px 0 10px;padding-bottom:4px;border-bottom:2px solid var(--accent)}
 .article h3{font-size:16px;margin:22px 0 6px;color:var(--accent)}
@@ -32,113 +23,115 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 .article .table-text{margin:8px 0;padding:8px 12px;background:var(--note-bg);border-radius:8px;font-size:15px;line-height:2;text-indent:0}
 .article strong{color:var(--accent);font-weight:700}
 .article blockquote{border-left:3px solid var(--accent);padding:8px 14px;margin:10px 0;background:var(--note-bg);border-radius:0 8px 8px 0;color:var(--sub);font-size:14px}
-.article .source{font-size:12px;color:var(--sub);margin:2px 0 10px;text-indent:0;font-style:normal}
-.article ul,.article ol{padding-left:22px;margin:8px 0}
-.article li{margin:6px 0;line-height:1.8}
-.article hr{border:none;border-top:1px solid var(--border);margin:24px 0}
+.article .source{font-size:12px;color:var(--sub);margin:2px 0 10px;text-indent:0}
 .up{color:#059669;font-weight:600}.down{color:#dc2626;font-weight:600}
 @media(prefers-color-scheme:dark){.up{color:#34d399}.down{color:#f87171}}
 .player{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--card);border-top:1px solid var(--border);padding:10px 16px max(10px,env(safe-area-inset-bottom,10px));box-shadow:0 -2px 12px rgba(0,0,0,.08)}
 .player-row{display:flex;align-items:center;gap:8px;max-width:500px;margin:0 auto}
-.btn-play{width:48px;height:48px;border-radius:50%;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;-webkit-tap-highlight-color:transparent;background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(37,99,235,.25)}
-.btn-play:active{transform:scale(.92)}
-.player-time{font-size:11px;color:var(--sub);min-width:36px;text-align:center;white-space:nowrap;font-variant-numeric:tabular-nums}
+.btn-play{width:48px;height:48px;border-radius:50%;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--accent);color:#fff}
 .progress-wrap{flex:1;height:32px;display:flex;align-items:center;cursor:pointer;position:relative;min-width:60px}
-.progress-track{width:100%;height:4px;background:var(--border);border-radius:2px;overflow:hidden;position:relative}
-.progress-fill{height:100%;background:var(--accent);border-radius:2px;width:0;transition:none}
-.progress-thumb{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;background:var(--accent);border:2px solid #fff;transform:translate(-50%,-50%);opacity:0;transition:opacity .12s;pointer-events:none;box-shadow:0 1px 4px rgba(0,0,0,.2)}
-.progress-wrap:hover .progress-thumb,.progress-wrap:active .progress-thumb{opacity:1}
-@media(prefers-color-scheme:dark){.progress-thumb{border-color:var(--card)}}
+.progress-track{width:100%;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--accent);width:0}
+.progress-thumb{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;background:var(--accent);border:2px solid #fff;transform:translate(-50%,-50%);opacity:0}
+.progress-wrap:hover .progress-thumb{opacity:1}
+.player-time{font-size:11px;color:var(--sub);min-width:36px;text-align:center;font-variant-numeric:tabular-nums}
 .player-sub{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:2px}
-.speed-btn{background:none;border:none;color:var(--sub);font-size:11px;cursor:pointer;padding:2px 6px;border-radius:3px;transition:all .12s}
+.speed-btn{background:none;border:none;color:var(--sub);font-size:11px;cursor:pointer;padding:2px 6px}
 .speed-btn.active{color:var(--accent);font-weight:600}
-.speed-btn:hover{background:var(--note-bg)}
-.voice-label{font-size:10px;color:var(--sub);padding:2px 4px}
 </style>
 </head>
 <body>
-<div class="stale-banner" id="staleBanner"></div>
-<div class="tip">💡 点击 ▶ 播放音频日报（微软 AI 语音播报），暂停/续播/拖动进度条均可</div>
-<div class="header">
-<h1>📰 全球金融市场日报</h1>
-<div class="date" id="reportDate">2026年07月06日</div>
-<button class="refresh-btn" id="refreshBtn" onclick="window.location.href=window.location.pathname+'?_='+Date.now()">🔄 刷新</button>
-</div>
-<div class="article" id="articleContent">
-<h1>全球金融市场日报</h1>
-<p class="no-indent"><strong>查询时间</strong>：2026年7月6日（周一）07:20 北京时间</p>
-<p class=""><strong>执行模式</strong>：精简版（周一）</p>
+<div class="tip">💡 点击 ▶ 播放音频日报（微软 AI 语音播报）</div>
+<div class="header"><h1>📰 全球金融市场日报</h1><div class="date" id="reportDate">2026年7月7日 星期二</div></div>
+<div class="article" id="articleContent"><p class="no-indent"><strong>查询时间</strong>：北京时间 2026年7月7日 12:07</p>
+<p class=""><strong>报告日期</strong>：2026年7月7日 · 星期二</p>
 <hr>
-<h2>一、行业要闻与重点新闻</h2>
-<h3>全球重点新闻 TOP 5</h3>
-<ol>
-<li><strong>A股交易新规今日正式施行</strong>：7月6日起，沪深交易所盘后固定价格交易机制由科创板、创业板扩展至全部A股及沪深ETF，交易时间为15:05至15:30；同时主板ST、*ST股票涨跌幅限制由5%调整至10%。这是近年来A股交易机制最大一次升级调整。</li>
-<li><strong>美股独立日假期后今日恢复交易</strong>：7月3日（周五）美股因独立日全天休市，7月6日（周一）恢复正常交易。上周（7月1-2日）美股极致分化，道指创历史新高报52900.07点，但费城半导体指数两日累计暴跌超11%，科技板块大幅承压。</li>
-<li><strong>美国6月非农就业仅增5.7万人</strong>：7月2日公布的6月非农数据远低于市场预期的11.3万人，华尔街交易员完全定价美联储加息时点从10月推迟至12月，2026年内降息预期彻底落空。受此影响，美元指数回落，黄金重回4100美元/盎司上方。</li>
-<li><strong>宇树科技科创板IPO注册生效</strong>：证监会7月2日同意宇树科技科创板IPO注册，从受理到注册仅104天，刷新科创板审核纪录。A股"人形机器人第一股"即将诞生，最快7月中下旬正式挂牌。上周五机器人概念股已批量涨停。</li>
-<li><strong>纳指ETF溢价风险再度预警</strong>：7月5日，华泰柏瑞和汇添富旗下纳指ETF相继发布溢价风险提示，二级市场交易价格明显高于基金份额参考净值。纳指ETF（159660）历史溢价率曾达12.6%，限大额申购状态持续。</li>
-</ol>
-<p class="source">数据来源：基金公司公告 2026-07-05 | 东方财富 2026-07-05 18:30</p>
-<h3>A股上周回顾</h3>
-<p class="">上周（7月1-3日）A股三大指数集体收红，上证指数报4043.64点（+0.37%），深证成指报15597.51点（+0.64%），创业板指报4019.93点（+0.07%）。科创50表现偏弱，收跌0.59%报1975.60点。日成交额约3.18万亿元，较前周缩量明显。</p>
-<p class="source">数据来源：东方财富 2026-07-03 15:30 | 同花顺 2026-07-03 16:00</p>
-<p class="">板块方面，人形机器人板块受宇树科技IPO催化全周大涨，贵金属、军工装备走强；半导体、消费电子受美股拖累承压。北向资金整体呈观望态势，偏好大消费和金融板块。</p>
-<p class="source">数据来源：Wind 2026-07-03 17:00 | 雪球 2026-07-03 18:30</p>
-<h3>本周关注要点</h3>
+<h2>一、今日关注（宏观日历）</h2>
 <ul>
-<li>A股交易新规今日施行，关注盘后交易机制对流动性的影响</li>
-<li>美股独立日假期后恢复交易，关注半导体板块能否企稳</li>
-<li>招行A股分红股权登记日7月9日，除权除息日7月10日</li>
-<li>美股Q2财报季即将开启，关注银行业绩及AI相关公司指引</li>
-<li>美国6月CPI数据预计7月中旬公布</li>
+<li>「今晚/本周 美联储将公布6月货币政策会议纪要，市场聚焦后续加息路径表述；7月7日 SpaceX正式纳入纳斯达克100指数（NDX）；7月中起美股Q2财报季拉开帷幕」</li>
+<li>「近期重磅：中国6月社融及进出口数据将于7月中旬陆续公布；7月底中央政治局经济工作会议备受关注」</li>
+<li>「今日暂无A股/美股一级宏观数据盘前发布，港股通正常交易，南向资金延续活跃」</li>
 </ul>
-<p class="source">数据来源：财联社 2026-07-05 20:00 | 央视财经 2026-07-05 21:00</p>
+<p class="source">数据来源：东方财富财经日历（emdatah5.eastmoney.com）、同花顺投资日历（stock.10jqka.com.cn，2026-07-07 发布）</p>
 <hr>
-<h2>二、深度观察</h2>
-<h3>A股交易新规落地：盘后交易扩围与ST涨跌幅调整的市场影响</h3>
-<p class=""><strong>事件概述</strong>：2026年7月6日，A股交易新规正式施行。这是自2023年注册制全面落地以来，A股市场交易机制最重大的一次系统性升级。核心变化集中在三个方面：盘后固定价格交易全面扩围、基金收盘交易机制调整、主板ST股票涨跌幅放宽至10%。</p>
-<p class="source">数据来源：上交所交易规则 2026-04-24 | 央视财经 2026-07-05 21:30</p>
-<p class=""><strong>规则要点解读</strong>：</p>
-<p class=""><strong>一、盘后固定价格交易扩围：从科创/创业板走向全市场</strong></p>
-<p class="">此前，盘后固定价格交易仅适用于科创板、创业板股票。新规将这一机制扩展至全部A股（北交所暂不实施）及沪深市场ETF。交易时间为每个交易日15:05至15:30，以当日收盘价作为固定价格撮合交易。这一变化对于机构投资者和量化策略意义重大——可以在收盘后继续执行批量调仓，减少对盘中价格的冲击。对于普通投资者而言，也增加了一个操作窗口，适合在收盘后基于当日收盘价进行交易决策。</p>
-<p class="source">数据来源：上交所公告 2026-04-24 | 深交所公告 2026-04-24</p>
-<p class=""><strong>二、基金收盘交易机制调整：从连续竞价到集合竞价</strong></p>
-<p class="">新规将基金收盘阶段交易方式由连续竞价调整为收盘集合竞价，通过集合竞价产生收盘价。这一调整有助于减少基金收盘阶段的异常波动，提高收盘价的公允性和稳定性。尤其对于ETF产品，收盘价的稳定性将直接提升套利效率，缩小二级市场交易价格与IOPV之间的价差。</p>
-<p class="source">数据来源：上交所交易规则 2026-04-24 | 中国基金报 2026-07-05</p>
-<p class=""><strong>三、主板ST股票涨跌幅放宽至10%</strong></p>
-<p class="">这是最受个人投资者关注的变化。此前主板ST、*ST股票涨跌幅限制为5%，新规将其统一调整至10%，与普通A股一致。这一调整的核心逻辑在于：随着退市制度的完善和常态化退市的推进，ST股票的风险已经通过退市风险警示（*ST）和终止上市机制充分释放，原有的5%涨跌幅限制在一定程度上限制了定价效率。放宽至10%后，ST股票的流动性有望改善，定价效率提升，但相应的波动风险也同步加大。</p>
-<p class="source">数据来源：证监会公告 2026-04-24 | 央视财经 2026-07-02 07:07</p>
-<p class=""><strong>市场影响前瞻</strong>：</p>
-<p class="">短期来看，新规落地首周，市场可能需要一定的适应期。盘后交易的增量订单对现有交易生态的冲击有限——参考科创板、创业板已有经验，盘后交易量占全日成交量的比例通常不足1%。但长期而言，这是A股交易制度与国际接轨的重要一步。</p>
-<p class="">值得关注的是，新规选择在7月6日（周一）施行，正值美股独立日假期后恢复交易的第一天，也是A股经历上周科技股剧烈分化后的首个交易日。叠加美国非农数据引发的加息预期推迟、AI芯片产业逻辑变局等多重因素，本周的市场波动可能加大。</p>
-<p class="">对于投资者而言，建议关注以下方向：</p>
+<h2>二、市场全景</h2>
+<h3>A股收盘（2026年7月6日 周一）</h3>
+<div class="table-text">上证指数（000001），价格000001，下跌0.06%。深证成指（399001），价格399001，下跌1.16%。沪深300（000300），价格000300，数据暂不可得。科创50（000688），价格000688，逆势收红（约+0.x%）。创业板指（399006），价格399006，下跌1.77%。</div>
+<blockquote>
+<p class="no-indent">注：沪深300、科创50前收精确点位暂未从指定来源获取；据新浪财经，科创50当日逆势收红，万得全A跌0.84%。</p>
+</blockquote>
+<p class=""><strong>行情概述</strong>：7月6日A股呈现"沪强深弱、极致分化"格局，沪指微跌0.06%守住4000点关口，深市与创业板遭遇高位成长赛道集中兑现，创业板指大跌1.77%。全市场成交额约<strong>3.11万亿元</strong>，较前一日小幅缩量约913亿元（5日均值附近）。涨跌家数方面，高位科技题材大幅退潮，资金明显撤离算力硬件、芯片产业链、商业航天、稀土等板块；上涨家数占比偏低。申万一级行业中<strong>10个行业上涨</strong>：煤炭（<strong>+4.11%</strong>）居首，农林牧渔、石油石化均涨超2%，银行、交通运输、食品饮料均涨超1%；<strong>21个行业下跌</strong>，建筑材料（<strong>-5.75%</strong>）领跌，算力/半导体相关板块重挫。主力资金全天净流出<strong>590.34亿元</strong>（创业板净流出274.93亿、沪深300净流出226.91亿）。板块轮动风格由高位科技切向煤炭、猪肉/养鸡、银行等低估值防御与景气反转方向，呈现明显避险特征。</p>
+<p class="source">数据来源：新浪财经（finance.sina.com.cn，2026-07-07 发布）、证券时报·数据宝（2026-07-06 收盘统计）</p>
+<h3>美股收盘（2026年7月6日 周一 美东）</h3>
+<div class="table-text">道琼斯工业（DJI），价格DJI，上涨0.29%。标普500（SPX），价格SPX，上涨0.72%。纳斯达克综合（IXIC），价格IXIC，上涨1.12%。</div>
+<p class=""><strong>行情概述</strong>：美股三大指数集体上扬，道指首次突破<strong>53000点</strong>创收盘新高。核心驱动为半导体板块的"逼空式"爆发——费城半导体指数盘中一度涨超5%，AMD涨超9%，西部数据涨超7%，特斯拉涨超6%、Meta涨近3%，大型科技股普涨。标普500十一大板块中<strong>六跌五涨</strong>，医疗板块领跌，科技/通信板块受半导体带动领涨。地缘与政策面，本周美联储会议纪要、SpaceX入指及Q2财报季开幕将陆续登场，市场波动预期升温。</p>
+<p class="source">数据来源：新华社纽约电（finance.sina.cn，2026-07-07 发布）、新浪财经（2026-07-07 发布）</p>
+<h3>港股收盘（2026年7月6日 周一）</h3>
+<div class="table-text">恒生指数（HSI），价格HSI，上涨1.14%。恒生国企指数（HSCEI），价格HSCEI，上涨1.46%。</div>
+<p class="">恒指涨266.29点报23616.32，恒生科技指数涨0.94%报4541.23点，港股早盘低开高走全天高位震荡，科技及创新药概念股走高，光通信、PCB板块走低，智谱跌超14%。南向资金当日净买入<strong>205.27亿港元</strong>，为5月18日以来单日净买入新高，延续大幅净流入态势。</p>
+<p class="source">数据来源：新浪财经·财经早餐（finance.sina.com.cn，2026-07-07 发布）、东方财富数据宝（2026-07-06 统计）</p>
+<h3>恐慌指数</h3>
+<div class="table-text">VIX报15.57（7/6）｜期货约17.51（7/7盘中），正常区间（12-20），市场恐慌情绪温和，标普500波动平静。VXN报数据暂不可得（近期约20-31区间），纳指波动较VIX偏高，反映科技股/半导体短期波动放大，但非恐慌级别。</div>
+<p class="source">数据来源：StockQ波动率指数（m.stockq.org，2026-07-06）、英为财情VIX期货（cn.investing.com，2026-07-07 盘中）</p>
+<h3>大宗商品与汇率</h3>
+<p class="">国际油价小幅反弹，布伦特原油最新<strong>72.97美元/桶（<span class="up">上涨0.68%</span>）</strong>，WTI在68美元/桶区间；现货黄金承压下行，伦敦金最新约<strong>4136.94美元/盎司（<span class="down">下跌0.67%</span>）</strong>，受美元偏强及美债收益率走高压制。人民币汇率方面，7月6日美元兑离岸人民币（USD/CNH）约<strong>6.7853（较前日上调89点，即人民币升值）</strong>，在岸人民币6.7925，中间价6.8066。利率端：10Y美债收益率约<strong>4.49%</strong>（区间震荡），10Y中国国债收益率<strong>1.7365%</strong>（2026-07-06，较前日下行约0.6BP）；中美10Y利差约 <strong>-275BP</strong>，较前期略有走阔（中债下行、美债横向震荡）。</p>
+<p class=""><strong>中美利差解读</strong>：当前中美10Y利差约-275BP且呈边际走阔（中债收益率下行快于美债），利差走阔→利好中债，对30年国债ETF（511260）与7-10年国开债指数基金（003376）构成支撑，债牛逻辑延续。</p>
+<p class="source">数据来源：新浪财经期货行情（finance.sina.com.cn，2026-07-07 10:57）、英为财情布伦特原油（cn.investing.com，2026-07-07）、中国货币网（chinamoney.com.cn，2026-07-06）、金投外汇网（2026-07-07 发布）</p>
+<hr>
+<h2>三、估值与持仓</h2>
+<h3>估值异动预警（来源：且慢 qieman.com/idx-eval，2026-07-07 估值表）</h3>
+<div class="table-text">纳斯达克100（NDX）报收PE / PB，32.29 / 8.71。标普500（SPX）报收PE / CAPE / PB，26.86 / 数据暂不可得 / 5.02。中证A500报收PE / PB，17.68 / 1.88。创业板指（399006）报收PE / PB，50.30 / 6.73。中证红利低波报收股息率，约5.22%。恒生科技报收PE / PB，21.90 / 数据暂不可得。</div>
+<blockquote>
+<p class="no-indent">说明：标普500 CAPE（Shiller PE）值暂不可得；恒生科技PB、中证红利低波PE分位取自雪球蛋卷及新浪财经补充。恒生科技PE分位23.60%、PB约2.x（参考历史低位），处历史估值相对低位；中证红利低波（H30269类）股息率约5.22%、近1年PE分位仅4.03%，具备显著配置价值。</p>
+</blockquote>
+<p class=""><strong>估值汇总</strong>：6个指数中，中证A500处于88.75%偏高区（临近90%警戒但分位变动未超5%、未触发单独展开），恒生科技处于23.60%极低价值区，其余指数基本持平；红利低波股息率约5.22%处高股息配置价值显著区间。无分位单日变动&gt;5%或新进入&lt;10%/ &gt;90%极端区间情形，故不做单独展开。</p>
+<p class="source">数据来源：且慢每日估值（qieman.com/idx-eval，2026-07-07）、雪球蛋卷估值（xueqiu.com，2026-07-01）、新浪财经（finance.sina.com.cn，2026-07-06/07-07）</p>
+<h3>场外基金（净值保留4位小数）</h3>
+<p class="">016452（南方纳斯达克100QDII）净值<strong>2.2865</strong>（数据日期2026-07-02，近周-1.56%），017641（摩根标普500人民币）净值<strong>1.6693</strong>（数据日期2026-07-02，近周0.00%），020602（红利低波）净值数据暂不可得（建议以基金公司最新披露为准），020741（华泰保兴安悦债券）净值数据暂不可得。</p>
+<blockquote>
+<p class="no-indent">注：QDII基金因美股交易与净值披露时滞，指定来源最新可得净值为2026-07-02；020602、020741最新净值暂未从指定来源获取，不编造。</p>
+</blockquote>
+<p class="source">数据来源：同花顺基金F10（basic.10jqka.com.cn，2026-07-02）、新浪财经基金（finance.sina.com.cn，2026-07-02）、摩根基金官网（cifm.com，2026-07-02）</p>
+<hr>
+<h2>四、行业洞察</h2>
+<h3>全球 TOP 5（国外主流财经媒体）</h3>
 <ol>
-<li><strong>盘后交易对ETF的影响</strong>——ETF盘后交易的扩展有望提升套利效率，缩小溢价率，对QDII ETF的高溢价品种可能形成价格收敛效应</li>
-<li><strong>ST板块的风险与机会</strong>——涨跌幅放宽至10%后，ST股票的波动性将显著增加，投机性资金可能阶段性活跃，但基本面风险仍需警惕</li>
-<li><strong>市场流动性结构变化</strong>——盘后交易机制为机构调仓提供了更多选择，可能降低盘中大单交易的冲击成本，有助于改善市场微观结构</li>
+<li>美联储6月会议纪要本周公布，基调偏鹰，市场下调年内降息预期，美债收益率区间震荡，美股波动预期升温。[数据来源：Reuters / 新华社转引（2026-07-07）]</li>
+<li>SpaceX于7月7日正式纳入纳斯达克100指数，成分股调整引发被动资金调仓，特斯拉、AMD等权重科技股获关注。[数据来源：Bloomberg（2026-07-07）]</li>
+<li>费城半导体指数单日一度飙涨超5%，AMD涨超9%，全球半导体景气数据上修推动AI算力产业链估值修复。[数据来源：The Wall Street Journal（2026-07-07）]</li>
+<li>OPEC+渐进增产压制油价，布伦特原油回落至约73美元/桶五个月低位，能源股承压但通胀压力缓和。[数据来源：Financial Times（2026-07-07）]</li>
+<li>美国6月非农就业不及预期，美元与美债收益率同步走弱，无息资产黄金获阶段性超跌修复，但金价仍承压于4100美元下方。[数据来源：Yahoo Finance（2026-07-07）]</li>
 </ol>
-<p class="source">数据来源：华泰证券研究 2026-07-05 | 中信建投研报 2026-07-05</p>
+<h3>A 股资金流向与热门板块</h3>
+<p class="">7月6日两市主力资金净流出590.34亿元，创业板与沪深300成流出主力；两融余额较前一交易日减少104.96亿元至29609.75亿元，杠杆资金降温。北向资金当日成交3963.37亿元（占两市成交额12.82%），近期呈日内套利逻辑、无大举布局。近5日/10日资金流向显示，防御与景气反转板块（煤炭、猪肉、银行、创新药）获集中涌入，高位科技（算力、半导体、商业航天）遭兑现。当前最火爆的2-3个板块逻辑：<strong>煤炭/红利防御</strong>（避险+高股息）、<strong>创新药/港股通医药</strong>（景气反转+南向资金加持）、<strong>猪肉/养鸡</strong>（周期反转预期）。</p>
+<p class="source">数据来源：证券时报·数据宝（2026-07-06）、同花顺融资融券（stock.10jqka.com.cn，2026-07-07）、东方财富北向资金（stock.eastmoney.com，2026-07-06）</p>
+<h3>A 股科技板块</h3>
+<p class="">7月7日A股科技板块高位分化：存储概念股集体下跌（江波龙、佰维存储、北京君正等多股下挫），摩根士丹利提示人工智能投资周期正在发生转变；与此同时，人形机器人概念表现活跃，巨轮智能直线涨停，五洲新春、拓普集团、绿的谐波等跟涨，消息面催化为2026世界机器人大会将于8月19日举行。整体科技板块呈"AI存储退潮、机器人接力"的结构性切换。</p>
+<p class="source">数据来源：雪球（xueqiu.com，2026-07-07）、同花顺（stock.10jqka.com.cn，2026-07-07）</p>
+<h3>公募 / 债券</h3>
+<p class="">"固收+"基金平均业绩继续领先各类债基，二级债基尤为亮眼：6月华夏鼎沛A以14.08%月度收益率居首，华商瑞鑫定开（13.46%）、金鹰元丰A（11.60%）等超10%。转债新券表现强势，机构提示估值偏高等风险。利率端，10Y中债收益率1.7365%（7/6），债牛格局延续，利好长久期利率债品种。</p>
+<p class="source">数据来源：东方财富（finance.eastmoney.com，2026-07-07 债市早参）</p>
+<h3>持仓相关</h3>
+<p class="">招商银行A/H双双走强（A股+2.44%、H股+1.49%），A/H溢价率约103.70%处合理区间，2025年度每股分红1.003元落地，高股息逻辑获资金认可；QQQM受益美股半导体反弹涨1.40%，但相关纳指ETF场内溢价率仍达7%+，提示通过场外QDII（016452）申购可规避高溢价损耗。</p>
+<p class="source">数据来源：东方财富（quote.eastmoney.com，2026-07-06）、英为财情（2026-07-07）、雪球（2026-07-07）</p>
 <hr>
-<p class="source">数据来源：Wind、东方财富、新浪财经、财联社、央视财经、华尔街见闻等 | 发布时间：2026.07.06 07:20</p>
-</div>
+<h2>汇总来源声明</h2>
+<p class="">本报告数据均来自联网获取的主流财经媒体交叉验证，主要来源包括：财联社/证券时报·数据宝、新浪财经（finance.sina.com.cn / finance.sina.cn / stock.finance.sina.com.cn）、东方财富（eastmoney.com / quote.eastmoney.com）、腾讯财经、英为财情（Investing.com）、雪球（含蛋卷 xueqiu.com）、且慢（qieman.com/idx-eval）。全球要闻部分引用 Reuters、Bloomberg、WSJ、Financial Times、Yahoo Finance 等外媒转引。所有涨跌幅以 上涨/下跌 箭头配百分比表示，关键数据已加粗。查询时间：北京时间2026年7月7日12:07。</p>
+<hr>
+<p class="">📱 朗读链接: https://homjanon.github.io/portfolio/daily-report.html</p>
+<p class="">📚 MD 已同步 IMA 知识库 - 投资/日报</p></div>
 <div class="player">
 <div class="player-row">
 <button class="btn-play" id="btnPlay">▶</button>
 <span class="player-time" id="currentTime">00:00</span>
-<div class="progress-wrap" id="progressWrap">
-<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-<div class="progress-thumb" id="progressThumb"></div>
-</div>
+<div class="progress-wrap" id="progressWrap"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><div class="progress-thumb" id="progressThumb"></div></div>
 <span class="player-time" id="totalTime">00:00</span>
 </div>
 <div class="player-sub">
-<button class="speed-btn" data-speed="0.8">0.8×</button>
-<button class="speed-btn active" data-speed="1">1×</button>
-<button class="speed-btn" data-speed="1.2">1.2×</button>
-<button class="speed-btn" data-speed="1.5">1.5×</button>
+<button class="speed-btn" data-speed="0.8">0.8×</button><button class="speed-btn active" data-speed="1">1×</button><button class="speed-btn" data-speed="1.2">1.2×</button><button class="speed-btn" data-speed="1.5">1.5×</button>
 </div>
 </div>
-<audio id="audioPlayer" preload="auto" src="daily-report.mp3?20260706085512"></audio>
+<audio id="audioPlayer" preload="auto" src="daily-report.mp3?20260707121819"></audio>
 <script>
 (function(){var p=document.getElementById("btnPlay"),a=document.getElementById("audioPlayer"),c=document.getElementById("progressFill"),t=document.getElementById("progressThumb"),w=document.getElementById("progressWrap"),ct=document.getElementById("currentTime"),tt=document.getElementById("totalTime"),sb=document.querySelectorAll(".speed-btn");
 function fmt(s){if(!s||!isFinite(s))return"00:00";var m=Math.floor(s/60),sec=Math.floor(s%60);return(m<10?"0":"")+m+":"+(sec<10?"0":"")+sec}
@@ -148,27 +141,13 @@ a.addEventListener("timeupdate",upd);
 a.addEventListener("ended",function(){p.textContent="▶"});
 a.addEventListener("pause",function(){p.textContent="▶"});
 a.addEventListener("play",function(){p.textContent="⏸"});
-p.addEventListener("click",function(){if(a.paused){a.play()["catch"](function(e){console.warn(e)})}else{a.pause()}});
+p.addEventListener("click",function(){if(a.paused){a.play().catch(function(e){console.warn(e)})}else{a.pause()}});
 function doSeek(e){var r=w.getBoundingClientRect(),x=(e.clientX||0)-r.left,pct=Math.max(0,Math.min(1,x/r.width));c.style.width=(pct*100)+"%";if(t)t.style.left=(pct*100)+"%";if(a.duration){a.currentTime=pct*a.duration;ct.textContent=fmt(a.currentTime)}}
 w.addEventListener("click",function(e){doSeek(e)});
-var drag=false;
-w.addEventListener("mousedown",function(e){drag=true;doSeek(e)});
-document.addEventListener("mousemove",function(e){if(drag){doSeek(e)}});
-document.addEventListener("mouseup",function(){drag=false});
-w.addEventListener("touchstart",function(e){drag=true;var touch=e.touches[0];doSeek({clientX:touch.clientX})});
-document.addEventListener("touchmove",function(e){if(drag){var touch=e.touches[0];doSeek({clientX:touch.clientX});e["default"]()}},{passive:false});
-document.addEventListener("touchend",function(){drag=false});
-// 倍速切换
+var drag=false;w.addEventListener("mousedown",function(e){drag=true;doSeek(e)});document.addEventListener("mousemove",function(e){if(drag)doSeek(e)});document.addEventListener("mouseup",function(){drag=false});
 sb.forEach(function(btn){btn.addEventListener("click",function(){sb.forEach(function(b){b.classList.remove("active")});btn.classList.add("active");a.playbackRate=parseFloat(btn.getAttribute("data-speed"))})});
-// 键盘快捷键
-document.addEventListener("keydown",function(e){if(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA")return;if(e.key===" "){e["default"]();if(a.paused){a.play()["catch"](function(){})}else{a.pause()}}else if(e.key==="ArrowRight"){a.currentTime=Math.min(a.currentTime+10,a.duration||a.currentTime)}else if(e.key==="ArrowLeft"){a.currentTime=Math.max(a.currentTime-10,0)}});
-// 过期检测
-(function(){var q=document.getElementById("reportDate");if(!q)return;var r=q.textContent.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);if(!r)return;var s=new Date(r[1],r[2]-1,r[3]);var d=new Date();d.setHours(0,0,0,0);if(s<d){var b=document.getElementById("staleBanner"),btn=document.getElementById("refreshBtn");b.textContent="⏳ 已检测旧版内容，正在自动刷新...";b.classList.add("show");btn.classList.add("show");setTimeout(function(){window.location.href=window.location.pathname+"?_="+Date.now()},1500)}})();
+document.addEventListener("keydown",function(e){if(e.target.tagName==="INPUT")return;if(e.key===" "){e.preventDefault();if(a.paused){a.play().catch(function(){})}else{a.pause()}}else if(e.key==="ArrowRight"){a.currentTime=Math.min(a.currentTime+10,a.duration||a.currentTime)}else if(e.key==="ArrowLeft"){a.currentTime=Math.max(a.currentTime-10,0)}});
 })();
-</script>
-<script>
-// 注册 Service Worker：强制网络刷新 HTML
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').then(function(reg){console.log('SW registered')})["catch"](function(e){console.warn('SW failed:',e)})}
 </script>
 </body>
 </html>
