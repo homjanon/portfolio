@@ -131,6 +131,13 @@ def _merge_sources(source_lines):
 
 def clean_text(text):
     """清洗单段文本，输出适合新闻播报的纯文本"""
+    # 先去掉数据来源中的网址部分：中文名(域名) → 中文名
+    text = re.sub(r'([\u4e00-\u9fff]+)\((?:[a-zA-Z0-9][-a-zA-Z0-9]*\.[a-zA-Z]{2,})\)', r'\1', text)
+
+    # 去掉表情符号（⚠️✅⬆⬇等），避免朗读乱码
+    text = re.sub(r'[\U0001F300-\U0001FAFF\U0001F600-\U0001F64F\U0001F680-\U0001F6FF'
+                  r'\U0001F1E0-\U0001F1FF\u2600-\u26FF\u2700-\u27BF\uFE00-\uFE0F]', '', text)
+
     text = text.replace('**', '').replace('*', '')
     text = text.replace('`', '')
 
@@ -149,6 +156,9 @@ def clean_text(text):
     # 话题标签
     text = _clean_hashtags(text)
 
+    # 移除所有数据来源声明（包括内联括号和独立行尾的）
+    text = re.sub(r'[（(]\s*数据来源[：:][^）)]*[）)]', '', text)
+    text = re.sub(r'[（(]\s*来源[：:][^）)]*[）)]', '', text)
     # 清理竖线、长横线、多余空格
     text = text.replace('|', '')
     text = re.sub(r'[─\-]{2,}', '', text)
@@ -161,11 +171,215 @@ def clean_text(text):
 
 
 def table_to_narration(rows):
-    """将表格行转为叙述性文字"""
+    """将表格行转为叙述性文字（按表类型智能分发）"""
     if len(rows) < 2:
         return ''
     headers = [h.replace('**', '') for h in rows[0]]
+    all_headers = ' '.join(headers)
+    first_header = headers[0] if headers else ''
 
+    # ── 估值表（PE/PB/分位/评估）──
+    if any(kw in all_headers for kw in ['PE', 'PB', '估值', '市盈率', '市净率']):
+        return _valuation_summary(rows, headers)
+
+    # ── 指数收盘表（A股/美股/港股）──
+    if ('收盘点位' in all_headers
+            or ('指数' in first_header and any(kw in all_headers for kw in ['涨跌幅', '涨跌']))):
+        return _index_table_narration(rows, headers)
+
+    # ── 场外基金/持仓表（有代码+净值+涨跌幅）──
+    if '代码' in all_headers and ('净值' in all_headers or '涨跌幅' in all_headers or '近周' in all_headers):
+        return _fund_table_narration(rows, headers)
+
+    # ── VIX恐慌指数表 ──
+    if len(headers) >= 3 and any(kw in headers[2] for kw in ['解读', '状态', '区间']):
+        return _vix_table_narration(rows, headers)
+
+    # ── 通用兜底 ──
+    return _generic_table_narration(rows, headers)
+
+
+def _safe(val):
+    """过滤缺失值"""
+    v = val.replace('**', '').strip()
+    if not v or v in ('—', '-', '--', '...', '—', '－', '――'):
+        return None
+    if re.match(r'^[─\-–—\s]+$', v):
+        return None
+    return v
+
+
+def _fix_point_decimal(val):
+    """将指数收盘点位中的小数点替换为'点'，避免TTS将'1996.10'误读为1996年10月"""
+    # 仅处理看起来像指数点位的数字（整数部分+小数部分）
+    m = re.match(r'^(\d{3,5})\.(\d{1,2})$', val)
+    if m:
+        decimal_part = m.group(2).rstrip('0')
+        if decimal_part:
+            return f'{m.group(1)}点{decimal_part}'
+        else:
+            return m.group(1)
+    return val
+
+
+def _find_col(headers, keywords, exclude=None):
+    """在表头中查找包含所有关键词的列索引"""
+    for i, h in enumerate(headers):
+        if all(k in h for k in keywords):
+            if exclude is None or exclude not in h:
+                return i
+    return None
+
+
+def _valuation_summary(rows, headers):
+    """估值表 → 一句话汇总播报，与 HTML 版保持一致"""
+    assess_col = _find_col(headers, ['评估']) or _find_col(headers, ['备注']) or _find_col(headers, ['说明'])
+
+    high_risk = []
+    high_watch = []
+    low_value = []
+    dividend = []
+    normal = []
+
+    for row in rows[1:]:
+        if len(row) < 2:
+            continue
+        name = row[0].replace('**', '').strip()
+        name_simple = re.sub(r'[（(][^)）]*[)）]', '', name).strip()
+
+        assess = ''
+        if assess_col is not None and assess_col < len(row):
+            raw = _safe(row[assess_col])
+            assess = clean_text(raw) if raw else ''
+
+        # 提取股息率
+        div_match = re.search(r'股息率约?([\d.]+%)', assess)
+        if div_match:
+            dividend.append(f'{name_simple}股息率约{div_match.group(1)}')
+            continue
+
+        # 分类
+        if '极高风险' in assess or '极高估' in assess:
+            high_risk.append(name_simple)
+        elif '估值偏高' in assess:
+            high_watch.append(name_simple)
+        elif '偏高' in assess:
+            high_watch.append(name_simple)
+        elif '极低价值' in assess or '低估' in assess:
+            low_value.append(name_simple)
+        elif '适中' in assess or '中位' in assess or '正常' in assess:
+            normal.append(name_simple)
+        else:
+            normal.append(name_simple)
+
+    segments = []
+    if high_risk:
+        segments.append(f"{'、'.join(high_risk)}极高风险")
+    if high_watch:
+        segments.append(f"{'、'.join(high_watch)}估值偏高")
+    if low_value:
+        segments.append(f"{'、'.join(low_value)}极低价值区")
+    if dividend:
+        segments.append('，'.join(dividend))
+    if normal:
+        segments.append(f"{'、'.join(normal)}估值适中")
+
+    return '估值异动预警：' + '，'.join(segments) + '。'
+
+def _index_table_narration(rows, headers):
+    """指数收盘表 →「xx报xxxx，上涨/下跌x%」格式"""
+    val_col = _find_col(headers, ['收盘']) or _find_col(headers, ['点位']) or _find_col(headers, ['价格']) or 1
+    change_col = _find_col(headers, ['涨跌']) or _find_col(headers, ['涨跌幅']) or 2
+
+    parts = []
+    for row in rows[1:]:
+        if len(row) < 2:
+            continue
+        name = row[0].replace('**', '').strip()
+        val = _safe(row[val_col]) if val_col < len(row) else None
+        change = _safe(row[change_col]) if change_col < len(row) else None
+
+        val_text = ''
+        if val:
+            val_text = _fix_point_decimal(val)
+        change_text = clean_text(change) if change else ''
+        # 统一平盘表述
+        if change_text in ('平收', '平', '持平'):
+            change_text = '平盘'
+
+        if val_text and change_text:
+            parts.append(f'{name}报{val_text}，{change_text}')
+        elif val_text:
+            parts.append(f'{name}报{val_text}')
+        elif change_text:
+            parts.append(f'{name}{change_text}')
+
+    if parts:
+        return '。'.join(parts) + '。'
+    return ''
+
+
+def _fund_table_narration(rows, headers):
+    """场外基金/持仓表 →「名称涨/跌x%」格式（无代码、无净值）"""
+    code_col = _find_col(headers, ['代码'])
+    name_col = _find_col(headers, ['名称']) or _find_col(headers, ['基金'])
+    change_col = _find_col(headers, ['涨跌']) or _find_col(headers, ['涨跌幅']) or _find_col(headers, ['近周']) or _find_col(headers, ['收益'])
+
+    parts = []
+    for row in rows[1:]:
+        if len(row) < 2:
+            continue
+        # 优先用名称列
+        if name_col is not None and name_col < len(row):
+            name = row[name_col].replace('**', '').strip()
+        else:
+            name = row[1].replace('**', '').strip() if len(row) > 1 else row[0].replace('**', '').strip()
+
+        change = ''
+        if change_col is not None and change_col < len(row):
+            raw = _safe(row[change_col])
+            if raw:
+                # 先移除括号后缀（如「（日）」），避免 clean_text 把括号转逗号后残留
+                raw = re.sub(r'[（(][^)）]*[)）]', '', raw).strip()
+                change = clean_text(raw)
+
+        if change:
+            # 统一涨跌/平表述
+            parts.append(f'{name}{change}')
+        elif name:
+            parts.append(name)
+
+    if parts:
+        text = '。'.join(parts) + '。'
+        return text
+    return ''
+
+
+def _vix_table_narration(rows, headers):
+    """VIX恐慌指数表"""
+    val_col = _find_col(headers, ['数值']) or _find_col(headers, ['最新值']) or 1
+    desc_col = _find_col(headers, ['解读']) or _find_col(headers, ['状态']) or _find_col(headers, ['区间']) or 2
+
+    parts = []
+    for row in rows[1:]:
+        name = row[0].replace('**', '').strip() if len(row) > 0 else ''
+        val = _safe(row[val_col]) if val_col < len(row) else None
+        desc = _safe(row[desc_col]) if desc_col < len(row) else None
+
+        if val and desc:
+            parts.append(f'{name}报{clean_text(val)}，{clean_text(desc)}')
+        elif val:
+            parts.append(f'{name}报{clean_text(val)}')
+        elif desc:
+            parts.append(f'{name}{clean_text(desc)}')
+
+    if parts:
+        return '。'.join(parts) + '。'
+    return ''
+
+
+def _generic_table_narration(rows, headers):
+    """通用表格叙事（兜底）"""
     parts = []
     for row in rows[1:]:
         name = row[0].replace('**', '') if len(row) > 0 else ''
@@ -180,13 +394,13 @@ def table_to_narration(rows):
             h = headers[i]
             if h in ('名称', '净值日期', '—'):
                 continue
-            if h in ('涨跌幅', '涨跌'):
-                values.append(cell)
+            if h in ('涨跌幅', '涨跌', '近周收益'):
+                values.append(clean_text(cell))
             else:
-                values.append(f"{h}{cell}")
+                values.append(f'{h}{cell}')
 
         if values:
-            parts.append(f"{name}，{'，'.join(values)}")
+            parts.append(f'{name}，{"，".join(values)}')
 
     text = '。'.join(parts) + '。'
     return clean_text(text)
@@ -228,14 +442,21 @@ def block_to_text(lines):
         # 过滤元数据行和隐私内容
         if any(kw in line for kw in ['朗读链接', 'MD 已同步', 'IMA', '知识库', '发布时间']):
             continue
-        # 收集来源信息（合并简化）
-        if '数据来源' in line or line.startswith('来源：') or line.startswith('来源:'):
+        # 过滤估值头部数据来源行
+        if line.strip().startswith('**数据来源**') or line.strip().startswith('**来源声明**'):
+            continue
+        # 收集来源信息（仅独立来源行，不误抓段落内联来源）
+        stripped = line.strip()
+        if re.match(r'^[> *]*数据来源[：:]', stripped) or stripped.startswith('来源：') or stripped.startswith('来源:'):
             source_lines.append(line)
             continue
         if re.match(r'^https?://', line):
             continue
         line = re.sub(r'[\U0001F300-\U0001FAFF\U0001F600-\U0001F64F\U0001F680-\U0001F6FF'
                       r'\U0001F1E0-\U0001F1FF\u2600-\u26FF\u2700-\u27BF\uFE00-\uFE0F]', '', line)
+        # 中美利差精简为一句话：只保留首个完整句
+        if '中美利差' in line:
+            line = line.split('。', maxsplit=1)[0] + '。'
         line = line.strip()
         if line:
             other_lines.append(line)
@@ -248,49 +469,110 @@ def block_to_text(lines):
     return result or other
 
 
+def _simplify_holdings_text(text):
+    """将个人持仓的详细描述简化为「名称+涨跌幅」格式
+
+    输入 text 结构：
+      [基金表叙述（来自 _fund_table_narration）] + [个股自由文本]
+    输出：
+      基金名涨/跌X%。基金名平。个股名涨X%，个股名涨Y%。
+    """
+    # ── 分离基金叙述与个股文本 ──
+    # 基金叙述以「。」分隔的「名称涨/跌X%」片段组成，位于文本前部
+    # 个股文本以「A股/港股/美股 —」标记开始
+    stock_marker = re.search(r'(?:A股|港股|美股)\s*—', text)
+    fund_narration = ''
+    stock_text = text
+
+    if stock_marker:
+        split_pos = stock_marker.start()
+        # 往前找最近的句号作为分割点
+        prev_period = text.rfind('。', 0, split_pos)
+        if prev_period >= 0:
+            fund_narration = text[:prev_period].strip()
+            stock_text = text[prev_period + 1:].strip()
+        else:
+            fund_narration = ''
+            stock_text = text[split_pos:].strip()
+
+    # ── 个股简化 ──
+    name_code = re.compile(r'(?:A股|港股|美股)\s*—\s*([^，,]{1,30}?)[，,]\s*(\d{5,6})')
+    stock_results = []
+    pos = 0
+    while pos < len(stock_text):
+        m = name_code.search(stock_text, pos)
+        if not m:
+            break
+        name = m.group(1).strip()
+        after_start = m.end()
+        after = stock_text[after_start:after_start + 150]
+        chg = re.search(r'(上涨|下跌)\s*([\d.]+%)', after)
+        if chg:
+            direction = '涨' if '上涨' in chg.group(0) else '跌'
+            stock_results.append(f'{name}{direction}{chg.group(2)}')
+        else:
+            stock_results.append(name)
+        pos = after_start
+
+    # ── 合并 ──
+    parts = []
+    if fund_narration:
+        parts.append(fund_narration.rstrip('。'))
+    parts.extend(stock_results)
+
+    if parts:
+        return '。'.join(parts) + '。'
+    return text
+
+
 def build_podcast_text(blocks, date_str):
     """将结构化板块组装为新闻播客纯文本（不含任何 XML 标签）"""
     lines = []
-    all_source_lines = []  # 收集全篇来源信息
 
     # 开场白
     lines.append(f'早上好，今天是{date_str}，以下是最新的金融简报。')
     lines.append('')
 
     # 逐板块播报
+    _SKIP_SECTIONS = ['QDII', '个人持仓']
+
     for typ, title, block_lines in blocks:
+        # 跳过指定板块（HTML 同样跳过）
+        if any(kw in title for kw in _SKIP_SECTIONS):
+            continue
         if typ == 'section':
-            # 收集来源信息
-            for bl in block_lines:
-                if '数据来源' in bl or bl.startswith('来源：') or bl.startswith('来源:'):
-                    all_source_lines.append(bl)
             title_clean = clean_text(title)
             lines.append('')
             lines.append(f'—— {title_clean} ——')
             body = block_to_text(block_lines)
+            # 个人持仓板块：精简为仅名称+涨跌幅
+            if body and any(kw in title for kw in ['持仓', '个人持仓']):
+                body = _simplify_holdings_text(body)
+            # 估值板块：只保留表格式汇总播报，去掉后续重复的文字描述
+            if body and any(kw in title for kw in ['估值']) and '持仓' not in title:
+                first_period = body.find('。')
+                if first_period > 0:
+                    body = body[:first_period + 1]
             if body:
                 lines.append('')
                 lines.append(body)
 
         elif typ == 'subsection':
-            # 收集来源信息
-            for bl in block_lines:
-                if '数据来源' in bl or bl.startswith('来源：') or bl.startswith('来源:'):
-                    all_source_lines.append(bl)
             title_clean = clean_text(title)
             lines.append('')
             lines.append(f'—— {title_clean} ——')
             body = block_to_text(block_lines)
+            # 个人持仓板块：精简为仅名称+涨跌幅
+            if body and any(kw in title for kw in ['持仓', '个人持仓']):
+                body = _simplify_holdings_text(body)
+            # 估值板块：只保留表格式汇总播报，去掉后续重复的文字描述
+            if body and any(kw in title for kw in ['估值']) and '持仓' not in title:
+                first_period = body.find('。')
+                if first_period > 0:
+                    body = body[:first_period + 1]
             if body:
                 lines.append('')
                 lines.append(body)
-
-    # 统一添加来源声明（去重、简化）
-    if all_source_lines:
-        sources = _merge_sources(all_source_lines)
-        if sources:
-            lines.append('')
-            lines.append(f'以上内容来源：{sources}。')
 
     # 结束语
     lines.append('')

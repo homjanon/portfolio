@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 预抓取金融市场数据 — 按板块切分为结构化 JSON 文件。
-v21.1: +申万实时涨跌幅+同花顺资金流+中美宏观+全球央行利率+QDII溢价+分红+研报+中英文双源RSS+PMI尾行bug修复
+v22: +申万实时涨跌幅+同花顺资金流+中美宏观+全球央行利率+QDII溢价+分红+研报+中英文双源RSS+PMI尾行bug修复+宏观扩展
 
 输出文件（11个，均在 /workspace/data_*.json）：
   data_market_cn.json       A股5大指数行情           akshare新浪 → 腾讯API
@@ -13,7 +13,7 @@ v21.1: +申万实时涨跌幅+同花顺资金流+中美宏观+全球央行利率
   data_industry.json        🆕 申万31行业涨跌幅+同花顺90行业资金流+全市场PE  akshare(申万+同花顺+乐咕乐股)
   data_holdings.json        🆕 个人持仓行情+分红历史+研报  腾讯API + akshare(分红+研报)
   data_news_rss.json        全球TOP10新闻源          Google News RSS 英文(9外媒白名单) + 中文(国内财经媒体)
-  data_extra.json           🆕 全球宏观+QDII+资金面   akshare(美国12项宏观+全球央行利率+QDII溢价+欧洲CPI)
+  data_extra.json           🆕 全球宏观+QDII+资金面   akshare(美国18+项宏观+全球央行利率+QDII溢价+欧洲CPI+BDI/SOX)
   data_macro.json           🆕 中国宏观数据           akshare(LPR/PMI/CPI/M2/社融/GDP/贸易差额)
 
 每个文件：{"ts":"...", "ok":true/false, "data":..., "error":"..."}
@@ -581,7 +581,7 @@ def fetch_industry():
 
 
 # ═══════════════════════════════════════════════════════════════
-# 🆕 v21.1 数据源: 新浪汇率 + akshare资金面 + Google News RSS(英+中)
+# 🆕 v22 数据源: 新浪汇率 + akshare资金面 + Google News RSS(英+中) + 宏观扩展(核心PCE/BDI/SOX等)
 # ═══════════════════════════════════════════════════════════════
 
 # ─── 数据源G: 新浪USD/CNH 即期汇率 ─────────────────────────
@@ -602,7 +602,7 @@ def _sina_fx_usdcnh():
 
 
 def fetch_extra():
-    """v21: 汇率+资金面+涨跌(保留) + 美国宏观12项 + 全球央行利率 + QDII溢价 + 欧洲CPI"""
+    """v22: 汇率+资金面+涨跌(保留) + 美国宏观18+项 + 全球央行利率 + QDII溢价 + 欧洲CPI + BDI/SOX"""
     import akshare as ak
     result = {}
     today_str = datetime.now(TZ_CN).strftime("%Y%m%d")
@@ -655,7 +655,7 @@ def fetch_extra():
         result["跌停数"] = len(dt) if dt is not None else None
     except: result["跌停数"] = None
 
-    # ── 🆕 5. 美国宏观12项指标 ──
+    # ── 🆕 5. 美国宏观12+项指标（v22: +核心PCE/消费者信心/工业产出/ISM非制造业/BDI）──
     us_macro = {}
     us_functions = {
         '非农': lambda: ak.macro_usa_non_farm(),
@@ -665,11 +665,20 @@ def fetch_extra():
         'PPI': lambda: ak.macro_usa_ppi(),
         '核心PPI': lambda: ak.macro_usa_core_ppi(),
         'ISM制造业PMI': lambda: ak.macro_usa_ism_pmi(),
+        'ISM非制造业PMI': lambda: ak.macro_usa_ism_non_pmi(),
         '零售销售月率': lambda: ak.macro_usa_retail_sales(),
         'ADP就业': lambda: ak.macro_usa_adp_employment(),
         '初请失业金': lambda: ak.macro_usa_initial_jobless(),
         'GDP': lambda: ak.macro_usa_gdp_monthly(),
         '美联储利率': lambda: ak.macro_bank_usa_interest_rate(),
+        # v22 新增
+        '核心PCE': lambda: ak.macro_usa_core_pce_price(),
+        '密歇根消费者信心': lambda: ak.macro_usa_michigan_consumer_sentiment(),
+        '工业产出月率': lambda: ak.macro_usa_industrial_production(),
+        '新屋开工': lambda: ak.macro_usa_house_starts(),
+        '耐用品订单': lambda: ak.macro_usa_durable_goods_orders(),
+        'EIA原油库存': lambda: ak.macro_usa_eia_crude_rate(),
+        'Markit制造业PMI': lambda: ak.macro_usa_pmi(),
     }
     for label, fn in us_functions.items():
         try:
@@ -759,12 +768,36 @@ def fetch_extra():
             eu_macro[label] = {'error': str(e)[:100]}
     result['欧洲宏观'] = eu_macro
 
+    # ── 🆕 v22: 全球先行指标（BDI航运 + SOX半导体）──
+    import pandas as _pd_bdi
+    for key, label, fn in [
+        ('BDI', '波罗的海干散货指数', lambda: ak.macro_shipping_bdi()),
+        ('SOX', '费城半导体指数', lambda: ak.macro_global_sox_index()),
+    ]:
+        try:
+            df = fn()
+            if df is not None and len(df) > 0:
+                if '最新值' in df.columns:
+                    val = df.iloc[-1]['最新值']
+                else:
+                    val = df.iloc[-1, -1]  # 兜底取最后一列
+                try:
+                    val_f = float(val)
+                    result[key] = str(round(val_f, 2)) if not _pd_bdi.isna(val_f) else 'N/A'
+                except (ValueError, TypeError):
+                    result[key] = str(val)
+                result[f'{key}_日期'] = str(df.iloc[-1]['日期']) if '日期' in df.columns else ''
+            else:
+                result[key] = 'N/A'
+        except Exception as e:
+            result[key] = f'error: {str(e)[:60]}'
+
     return _ok(result)
 
 
 # ─── 数据源H: Google News RSS → 英文9外媒 + 中文国内财经 ──────
 def _fetch_rss_news():
-    """v21.1: 全球TOP10新闻 — 英文前5条(9外媒) + 中文后5条(国内财经)"""
+    """v22: 全球TOP10新闻 — 英文前5条(9外媒) + 中文后5条(国内财经)"""
     ALLOWED_EN = {
         "Bloomberg", "Reuters", "Financial Times", "WSJ", "Wall Street Journal",
         "CNBC", "Yahoo Finance", "Forbes", "Barron's", "Fortune"
@@ -987,7 +1020,7 @@ def fetch_macro():
 # 主流程
 # ═══════════════════════════════════════════════════════════════
 def main():
-    print(f"═══ 预抓取金融市场数据（v21: +申万实时+同花顺资金+中美宏观+全球利率+QDII溢价+分红+研报） ═══")
+    print(f"═══ 预抓取金融市场数据（v22: +申万实时+同花顺资金+中美宏观+全球利率+QDII溢价+分红+研报+宏观扩展） ═══")
     print(f"时间: {_ts()}\n")
 
     modules = [

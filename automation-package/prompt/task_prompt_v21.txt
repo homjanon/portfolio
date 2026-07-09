@@ -43,7 +43,7 @@ python3 /workspace/prefetch_data.py
 | 🆕 行业+资金 | `data_industry.json` | akshare(申万+同花顺+乐咕乐股) | 31行业涨跌幅TOP3/BOTTOM3+90行业资金净流入+全市场PE日更 |
 | 🆕 持仓+分红 | `data_holdings.json` | 腾讯API+akshare(分红+研报) | 招行A/H/长电/QQQM/SPY行情+分红日历+研报评级 |
 | 全球TOP10新闻 | `data_news_rss.json` | Google News RSS 英文(9外媒白名单)+中文(国内财经媒体) | 当日英文15条财经头条+中文15条国内财经头条 |
-| 🆕 全球宏观+QDII | `data_extra.json` | akshare(美国宏观+全球利率+QDII溢价)+新浪汇率 | 美国12项宏观/全球央行利率/40只QDII溢价/欧元区CPI/资金流/涨跌 |
+| 🆕 全球宏观+QDII | `data_extra.json` | akshare(美国宏观+全球利率+QDII溢价)+新浪汇率 | 美国18+项宏观/全球央行利率/40只QDII溢价/欧元区CPI/资金流/涨跌/BDI/SOX |
 | 🆕 中国宏观 | `data_macro.json` | akshare宏观数据 | LPR/PMI/CPI/M2/社融/GDP/贸易差额 |
 
 **使用规则**：
@@ -62,7 +62,7 @@ python3 /workspace/prefetch_data.py
 
 ## ▸ 完整模式（周二至周六执行）
 
-整体结构：**市场全景 → 风险与估值总览 → 行业洞察 → 今日关注**（共 4 部分）
+整体结构：**市场全景 → 行业洞察 → 今日关注**（共 3 部分）
 
 ### 一、市场全景
 
@@ -88,7 +88,7 @@ python3 /workspace/prefetch_data.py
 | 纳斯达克综合 | IXIC |
 
 **附加描述**（一段话）：
-- 📊 先读取 `data_extra.json` → "美国宏观"字段获取最新12项指标（非农/失业率/CPI/PPI/ISM PMI/零售/GDP/美联储利率等），用1句话概述当前宏观环境
+- 📊 先读取 `data_extra.json` → "美国宏观"字段获取最新18+项指标（非农/失业率/CPI/核心PCE/PPI/ISM PMI/零售/GDP/消费者信心等），用1句话概述当前宏观环境
 - 主要驱动因素（美联储政策动态、地缘政治、关键个股异动）— 需联网搜索
 - 标普500十一大板块涨跌概况
 
@@ -114,12 +114,9 @@ python3 /workspace/prefetch_data.py
 **中美利差解读（必须输出）**：在利率板块末尾，用一句话结合当日中美利差水平，点明对中债利率走势的影响方向（利差走阔→利好中债/利差收窄→承压），简洁有力。
 
 ---
+#### 估值水位与情绪
 
-### 二、风险与估值总览
-
-> ⚡ 估值异动预警独立展示，PE/PB/分位/股息率数据从雪球蛋卷API获取。
-
-#### 估值异动预警（必须遵守输出规则）
+> 以下估值数据从 `data_valuation.json` 获取，已覆盖 5 大核心指数，不再单独联网搜索。
 
 **估值数据来源**：先读取 `data_valuation.json` 获取雪球蛋卷API提供的 PE/PB/分位/股息率数据。已覆盖 5 个指数（沪深300、创业板、红利低波、恒生科技、标普500），不再单独联网搜索。
 - **红利低波**：直接使用 JSON 中的股息率字段评估，格式如"股息率约5.22%，处于xx%分位，配置价值显著"。
@@ -169,9 +166,11 @@ python3 /workspace/prefetch_data.py
 
 ---
 
-### 三、行业洞察
+### 二、行业洞察
 
-**去重原则（重要更新）**：优先选择前文未涉及的新闻角度。若关键新闻与前文有内容重叠，**允许补充前文未提及的新视角或新数据**，而非简单回避。其他子板块（QDII/资金流向/科技/债券/持仓）仍应包含前文未出现的新信息。
+**去重原则（重要更新）**：优先选择前文未涉及的新闻角度。若关键新闻与前文有内容重叠，**允许补充前文未提及的新视角或新数据**，而非简单回避。其他子板块（QDII/资金流向/债券/持仓）仍应包含前文未出现的新信息。
+
+> **科技板块动态**：如有重大科技新闻（AI/半导体/新能源等），在行业洞察开篇用一段话概括，不超过2句。若无重大新闻则不展开。
 
 #### 🆕 全球 TOP 10（RSS驱动，≤40 字/条，轻量日可压到 6–8 条）
 
@@ -197,20 +196,18 @@ python3 /workspace/prefetch_data.py
 
 关注标的：招商银行（A/H）、红利低波指数、长江电力、QQQM、SPY。
 
-#### QDII 额度与 ETF 溢价
+#### QDII ETF 溢价监测
 
-📊 先读取 `data_extra.json` → "QDII_溢价"字段获取40只QDII ETF溢价率（集思录JSL数据）。筛选标普500/道琼斯/德国/法国/沙特/东南亚相关ETF展示溢价。纳指ETF（513100/159941等）JSL未覆盖，需联网搜索补充。
+📊 先读取 `data_extra.json` → "QDII_溢价"字段获取40只QDII ETF溢价率（集思录JSL数据）。**仅列示溢价>3%或折价>2%的异常品种**（常态下≤3只），正常品种无需列出。若无异常，注明「QDII溢价整体正常，最高溢价约x.xx%（xx ETF）」。纳指ETF（513100/159941等）JSL未覆盖，需联网搜索补充。
 
-- 溢价判定：±1%正常 / >3%明显溢价
-- 优先用表格列出核心QDII溢价（从prefetch），格式：`|代码|名称|现价|净值|溢价率|评估|`
-
-
-#### A 股科技板块
-
-当日科技板块最新动态。如无重大新闻则注明「板块无明显异动」。
+- 溢价判定：±1%正常 / >3%明显溢价 / 折价>2%关注
+- 仅异常品种用表格展示，格式：`|代码|名称|溢价率|评估|`
 
 
-### 四、今日关注
+
+
+
+### 三、今日关注
 
 📊 先读取 `data_macro.json` 获取最新中国宏观数据，读取 `data_extra.json` → "美国宏观"/"全球央行利率"/"欧洲宏观"获取全球宏观全景。用1句话概述当前宏观环境（利率/通胀/就业/GDP现状），**必须在数值后标注数据日期**（如"PMI 50.3（2026年6月）、GDP 5.2%（2025Q3）"），避免使用过时数据而不自知。
 
@@ -225,12 +222,16 @@ python3 /workspace/prefetch_data.py
 
 - 全球 TOP 10（40-60 字/条）
 - A 股资金流向回顾（读取 `data_industry.json` → 资金_净流入TOP5/资金_全市场净流入_亿字段，周末/节前最后几个交易日资金动向总结）
-- A 股科技板块：周末要闻回顾
+- 科技板块动态（周末/节前科技要闻复盘，无重大新闻则注明「无明显异动」）
 
 ### 二、深度观察专栏
 
-**周日主题**：当周 **A 股资金流向趋势总结**（5 天数据拉通分析，板块轮动全景）
-**周一主题**：**全球宏观一周回顾**（利率预期变化、地缘风险演变、下周展望）
+**周日/周一主题**（AI 根据当日数据自动选择最佳主题）：
+- **A 股资金流向趋势总结**（5 天数据拉通分析，板块轮动全景）
+- **全球宏观一周回顾**（利率预期变化、地缘风险演变、下周展望）
+- **红利资产专题**（高股息板块资金动向、分红公告汇总、红利低波股息率跟踪）
+- **QDII溢价趋势**（跨境ETF溢价率周度变化、套利机会提示）
+- **银行股专题**（招商银行A/H走势、银行板块资金流、行业监管动态）
 
 500-800 字，结构：
 1. **事件概述**：事实 + 关键数据
@@ -247,14 +248,14 @@ python3 /workspace/prefetch_data.py
 完成报告生成后，按顺序执行以下 Bash 命令。注意将 `YYYY-MM-DD` 替换为当天日期。
 
 ```bash
-# 第0步：创建预抓取数据脚本（v21.1: akshare全栈版+中英文双源RSS，11个JSON数据源）
+# 第0步：创建预抓取数据脚本（v22: akshare全栈版+中英文双源RSS+宏观扩展，11个JSON数据源）
 pip3 install akshare -q 2>/dev/null || echo "⚠️ akshare 安装超时"
 
 cat > /workspace/prefetch_data.py << PREFETCHEOF
 #!/usr/bin/env python3
 """
 预抓取金融市场数据 — 按板块切分为结构化 JSON 文件。
-v21.1: +申万实时涨跌幅+同花顺资金流+中美宏观+全球央行利率+QDII溢价+分红+研报+中英文双源RSS+PMI尾行bug修复
+v22: +申万实时涨跌幅+同花顺资金流+中美宏观+全球央行利率+QDII溢价+分红+研报+中英文双源RSS+PMI尾行bug修复+宏观扩展
 
 输出文件（11个，均在 /workspace/data_*.json）：
   data_market_cn.json       A股5大指数行情           akshare新浪 → 腾讯API
@@ -266,7 +267,7 @@ v21.1: +申万实时涨跌幅+同花顺资金流+中美宏观+全球央行利率
   data_industry.json        🆕 申万31行业涨跌幅+同花顺90行业资金流+全市场PE  akshare(申万+同花顺+乐咕乐股)
   data_holdings.json        🆕 个人持仓行情+分红历史+研报  腾讯API + akshare(分红+研报)
   data_news_rss.json        全球TOP10新闻源          Google News RSS 英文(9外媒白名单) + 中文(国内财经媒体)
-  data_extra.json           🆕 全球宏观+QDII+资金面   akshare(美国12项宏观+全球央行利率+QDII溢价+欧洲CPI)
+  data_extra.json           🆕 全球宏观+QDII+资金面   akshare(美国18+项宏观+全球央行利率+QDII溢价+欧洲CPI+BDI/SOX)
   data_macro.json           🆕 中国宏观数据           akshare(LPR/PMI/CPI/M2/社融/GDP/贸易差额)
 
 每个文件：{"ts":"...", "ok":true/false, "data":..., "error":"..."}
@@ -834,7 +835,7 @@ def fetch_industry():
 
 
 # ═══════════════════════════════════════════════════════════════
-# 🆕 v21.1 数据源: 新浪汇率 + akshare资金面 + Google News RSS(英+中)
+# 🆕 v22 数据源: 新浪汇率 + akshare资金面 + Google News RSS(英+中) + 宏观扩展(核心PCE/BDI/SOX等)
 # ═══════════════════════════════════════════════════════════════
 
 # ─── 数据源G: 新浪USD/CNH 即期汇率 ─────────────────────────
@@ -855,7 +856,7 @@ def _sina_fx_usdcnh():
 
 
 def fetch_extra():
-    """v21: 汇率+资金面+涨跌(保留) + 美国宏观12项 + 全球央行利率 + QDII溢价 + 欧洲CPI"""
+    """v22: 汇率+资金面+涨跌(保留) + 美国宏观18+项 + 全球央行利率 + QDII溢价 + 欧洲CPI + BDI/SOX"""
     import akshare as ak
     result = {}
     today_str = datetime.now(TZ_CN).strftime("%Y%m%d")
@@ -908,7 +909,7 @@ def fetch_extra():
         result["跌停数"] = len(dt) if dt is not None else None
     except: result["跌停数"] = None
 
-    # ── 🆕 5. 美国宏观12项指标 ──
+    # ── 🆕 5. 美国宏观12+项指标（v22: +核心PCE/消费者信心/工业产出/ISM非制造业/BDI）──
     us_macro = {}
     us_functions = {
         '非农': lambda: ak.macro_usa_non_farm(),
@@ -918,11 +919,20 @@ def fetch_extra():
         'PPI': lambda: ak.macro_usa_ppi(),
         '核心PPI': lambda: ak.macro_usa_core_ppi(),
         'ISM制造业PMI': lambda: ak.macro_usa_ism_pmi(),
+        'ISM非制造业PMI': lambda: ak.macro_usa_ism_non_pmi(),
         '零售销售月率': lambda: ak.macro_usa_retail_sales(),
         'ADP就业': lambda: ak.macro_usa_adp_employment(),
         '初请失业金': lambda: ak.macro_usa_initial_jobless(),
         'GDP': lambda: ak.macro_usa_gdp_monthly(),
         '美联储利率': lambda: ak.macro_bank_usa_interest_rate(),
+        # v22 新增
+        '核心PCE': lambda: ak.macro_usa_core_pce_price(),
+        '密歇根消费者信心': lambda: ak.macro_usa_michigan_consumer_sentiment(),
+        '工业产出月率': lambda: ak.macro_usa_industrial_production(),
+        '新屋开工': lambda: ak.macro_usa_house_starts(),
+        '耐用品订单': lambda: ak.macro_usa_durable_goods_orders(),
+        'EIA原油库存': lambda: ak.macro_usa_eia_crude_rate(),
+        'Markit制造业PMI': lambda: ak.macro_usa_pmi(),
     }
     for label, fn in us_functions.items():
         try:
@@ -1012,12 +1022,36 @@ def fetch_extra():
             eu_macro[label] = {'error': str(e)[:100]}
     result['欧洲宏观'] = eu_macro
 
+    # ── 🆕 v22: 全球先行指标（BDI航运 + SOX半导体）──
+    import pandas as _pd_bdi
+    for key, label, fn in [
+        ('BDI', '波罗的海干散货指数', lambda: ak.macro_shipping_bdi()),
+        ('SOX', '费城半导体指数', lambda: ak.macro_global_sox_index()),
+    ]:
+        try:
+            df = fn()
+            if df is not None and len(df) > 0:
+                if '最新值' in df.columns:
+                    val = df.iloc[-1]['最新值']
+                else:
+                    val = df.iloc[-1, -1]  # 兜底取最后一列
+                try:
+                    val_f = float(val)
+                    result[key] = str(round(val_f, 2)) if not _pd_bdi.isna(val_f) else 'N/A'
+                except (ValueError, TypeError):
+                    result[key] = str(val)
+                result[f'{key}_日期'] = str(df.iloc[-1]['日期']) if '日期' in df.columns else ''
+            else:
+                result[key] = 'N/A'
+        except Exception as e:
+            result[key] = f'error: {str(e)[:60]}'
+
     return _ok(result)
 
 
 # ─── 数据源H: Google News RSS → 英文9外媒 + 中文国内财经 ──────
 def _fetch_rss_news():
-    """v21.1: 全球TOP10新闻 — 英文前5条(9外媒) + 中文后5条(国内财经)"""
+    """v22: 全球TOP10新闻 — 英文前5条(9外媒) + 中文后5条(国内财经)"""
     ALLOWED_EN = {
         "Bloomberg", "Reuters", "Financial Times", "WSJ", "Wall Street Journal",
         "CNBC", "Yahoo Finance", "Forbes", "Barron's", "Fortune"
@@ -1240,7 +1274,7 @@ def fetch_macro():
 # 主流程
 # ═══════════════════════════════════════════════════════════════
 def main():
-    print(f"═══ 预抓取金融市场数据（v21: +申万实时+同花顺资金+中美宏观+全球利率+QDII溢价+分红+研报） ═══")
+    print(f"═══ 预抓取金融市场数据（v22: +申万实时+同花顺资金+中美宏观+全球利率+QDII溢价+分红+研报+宏观扩展） ═══")
     print(f"时间: {_ts()}\n")
 
     modules = [
@@ -2610,7 +2644,7 @@ MP3EOF
 
 ---
 
-## 二、风险与估值总览
+#### 估值水位与情绪（示例）
 
 ### 估值异动预警
 
@@ -2647,7 +2681,7 @@ MP3EOF
 
 ---
 
-## 三、行业洞察
+## 二、行业洞察
 
 ### 全球 TOP 10 新闻
 
@@ -2680,12 +2714,12 @@ MP3EOF
 - **场内ETF溢价率（7月7日盘中）**：纳指100ETF（513100）溢价约**1-2%**，标普500ETF（513500）溢价约**1-2%**，均处于±3%正常区间内，未出现明显溢价。近期随着美股反弹、资金情绪平稳，QDII ETF溢价率较6月高峰有所回落（数据来源：东方财富 2026-07-07）。
 
 
-### A 股科技板块
+### A 股科技板块（并入行业洞察导语）
 
 7月6日科技板块整体承压，PCB/光通信方向受英伟达下一代产品推迟传闻冲击，相关个股大幅回调。但**科创50**逆势收涨**1.04%**，海光信息（↑**6.43%**）、佰维存储（↑**5.10%**）等半导体个股走强，显示资金在科技板块内部从高位PCB/光模块向低位半导体设备/存储方向切换。"清朗·整治AI应用乱象"专项行动持续推进，中央网信办聚焦AI备案、安全审核等治理重点（数据来源：东方财富 | 财联社 2026-07-06）。
 
 
-## 四、今日关注
+## 三、今日关注
 
 - **7月8-10日**：中国6月社融数据发布窗口
 - **7月9日（周四）**：中国6月CPI/PPI；美联储会议纪要
@@ -2781,4 +2815,4 @@ python3 /workspace/push_to_ima.py "$REPORT_DATE"
 
 ---
 
-**注意**：结构化行情数据由 prefetch_data.py 预抓取（v21: akshare全栈+腾讯API+雪球蛋卷API+新浪汇率+Google News RSS+JSL集思录）。仅美股驱动因素、持仓聚焦催化、A股科技板块动态需 WebSearch（全部为定性分析）。以下数据已由预抓取覆盖：申万行业/主力资金/中美宏观/全球央行利率/QDII溢价/持仓分红/研报评级/全市场PE。不可编造或使用猜测数据。
+**注意**：结构化行情数据由 prefetch_data.py 预抓取（v22: akshare全栈+腾讯API+雪球蛋卷API+新浪汇率+Google News RSS+JSL集思录+宏观扩展）。仅美股驱动因素、持仓聚焦催化、A股科技板块动态需 WebSearch（全部为定性分析）。以下数据已由预抓取覆盖：申万行业/主力资金/中美宏观/全球央行利率/QDII溢价/持仓分红/研报评级/全市场PE/BDI/SOX。不可编造或使用猜测数据。

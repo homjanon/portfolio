@@ -17,7 +17,7 @@ TEMPLATE = r'''<!DOCTYPE html>
 :root{--bg:#f8f9fa;--card:#fff;--text:#1a1a2e;--sub:#6b7280;--border:#e5e7eb;--accent:#2563eb;--note-bg:#f0f4ff}
 @media(prefers-color-scheme:dark){:root{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--sub:#94a3b8;--border:#334155;--accent:#3b82f6;--note-bg:#1e293b}}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.9;min-height:100dvh;padding:0 0 150px;-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:18px;line-height:2.0;min-height:100dvh;padding:0 0 150px;-webkit-text-size-adjust:100%}
 .header{background:var(--card);border-bottom:1px solid var(--border);padding:18px 16px;text-align:center;position:relative}
 .header h1{font-size:20px;font-weight:700;margin-bottom:4px}
 .header .date{font-size:13px;color:var(--sub);margin-bottom:8px}
@@ -29,21 +29,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 .tip{background:#e8f5e9;color:#2e7d32;font-size:13px;padding:6px 14px;text-align:center;border-bottom:1px solid #c8e6c9}
 @media(prefers-color-scheme:dark){.tip{background:#1b3a1b;color:#81c784;border-color:#2e4a2e}}
 .article{max-width:700px;margin:0 auto;padding:20px 16px}
-.article h2{font-size:18px;margin:32px 0 10px;padding-bottom:4px;border-bottom:2px solid var(--accent)}
-.article h3{font-size:16px;margin:22px 0 6px;color:var(--accent)}
-.article p{margin:10px 0;text-indent:2em}
+.article h2{font-size:20px;margin:38px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--accent)}
+.article h3{font-size:17px;margin:26px 0 8px;color:var(--accent)}
+.article p{margin:14px 0;text-indent:0}
 .article p.no-indent{text-indent:0}
 .article .table-text{margin:8px 0;padding:8px 12px;background:var(--note-bg);border-radius:8px;font-size:15px;line-height:2;text-indent:0}
 .article strong{color:var(--accent);font-weight:700}
-.article blockquote{border-left:3px solid var(--accent);padding:8px 14px;margin:10px 0;background:var(--note-bg);border-radius:0 8px 8px 0;color:var(--sub);font-size:14px}
-.article .source{font-size:12px;color:var(--sub);margin:2px 0 10px;text-indent:0;font-style:normal}
+.article blockquote{border-left:4px solid var(--accent);padding:10px 16px;margin:14px 0;background:var(--note-bg);border-radius:0 10px 10px 0;color:var(--sub);font-size:15px;line-height:1.8}
+.article .source{font-size:13px;color:var(--sub);margin:4px 0 12px;text-indent:0;font-style:normal}
 .article ul,.article ol{padding-left:22px;margin:8px 0}
 .article li{margin:6px 0;line-height:1.8}
 .article hr{border:none;border-top:1px solid var(--border);margin:24px 0}
 .up{color:#059669;font-weight:600}.down{color:#dc2626;font-weight:600}
 @media(prefers-color-scheme:dark){.up{color:#34d399}.down{color:#f87171}}
 .player{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--card);border-top:1px solid var(--border);padding:10px 16px max(10px,env(safe-area-inset-bottom,10px));box-shadow:0 -2px 12px rgba(0,0,0,.08)}
-.player-row{display:flex;align-items:center;gap:8px;max-width:500px;margin:0 auto}
+.player-row{display:flex;align-items:center;gap:8px;max-width:700px;margin:0 auto}
 .btn-play{width:48px;height:48px;border-radius:50%;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;-webkit-tap-highlight-color:transparent;background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(37,99,235,.25)}
 .btn-play:active{transform:scale(.92)}
 .player-time{font-size:11px;color:var(--sub);min-width:36px;text-align:center;white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -62,11 +62,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 </head>
 <body>
 <div class="stale-banner" id="staleBanner"></div>
-<div class="tip">💡 点击 ▶ 播放音频日报（微软 AI 语音播报），暂停/续播/拖动进度条均可</div>
+<div class="tip">点击 ▶ 播放音频日报（微软 AI 语音播报），暂停/续播/拖动进度条均可</div>
 <div class="header">
-<h1>📰 全球金融市场日报</h1>
+<h1>全球金融市场日报</h1>
 <div class="date" id="reportDate">__DATE__</div>
-<button class="refresh-btn" id="refreshBtn" onclick="window.location.href=window.location.pathname+'?_='+Date.now()">🔄 刷新</button>
+<button class="refresh-btn" id="refreshBtn" onclick="window.location.href=window.location.pathname+'?_='+Date.now()">刷新</button>
 </div>
 <div class="article" id="articleContent">
 __CONTENT__
@@ -113,12 +113,8 @@ sb.forEach(function(btn){btn.addEventListener("click",function(){sb.forEach(func
 // 键盘快捷键
 document.addEventListener("keydown",function(e){if(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA")return;if(e.key===" "){e["default"]();if(a.paused){a.play()["catch"](function(){})}else{a.pause()}}else if(e.key==="ArrowRight"){a.currentTime=Math.min(a.currentTime+10,a.duration||a.currentTime)}else if(e.key==="ArrowLeft"){a.currentTime=Math.max(a.currentTime-10,0)}});
 // 过期检测
-(function(){var q=document.getElementById("reportDate");if(!q)return;var r=q.textContent.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);if(!r)return;var s=new Date(r[1],r[2]-1,r[3]);var d=new Date();d.setHours(0,0,0,0);if(s<d){var b=document.getElementById("staleBanner"),btn=document.getElementById("refreshBtn");b.textContent="⏳ 已检测旧版内容，正在自动刷新...";b.classList.add("show");btn.classList.add("show");setTimeout(function(){window.location.href=window.location.pathname+"?_="+Date.now()},1500)}})();
+(function(){var q=document.getElementById("reportDate");if(!q)return;var r=q.textContent.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);if(!r)return;var s=new Date(r[1],r[2]-1,r[3]);var d=new Date();d.setHours(0,0,0,0);if(s<d){var b=document.getElementById("staleBanner"),btn=document.getElementById("refreshBtn");b.textContent="已检测旧版内容，正在自动刷新...";b.classList.add("show");btn.classList.add("show");setTimeout(function(){window.location.href=window.location.pathname+"?_="+Date.now()},1500)}})();
 })();
-</script>
-<script>
-// 注册 Service Worker：强制网络刷新 HTML
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').then(function(reg){console.log('SW registered')})["catch"](function(e){console.warn('SW failed:',e)})}
 </script>
 </body>
 </html>'''
@@ -160,49 +156,69 @@ def _table_to_text(rows):
                 return i
         return None
 
-    # ── 估值表（PE/PB 多列格式）──
+    # ── 估值表（PE/PB 多列格式）── 简化为一句话汇总，适合朗读
     if any(kw in all_headers for kw in ['PE', 'PB', '估值', '市盈率', '市净率']):
-        pe_col = _col_idx('PE', '分位') or _col_idx('市盈') or None
         pe_pct_col = _col_idx(['PE', '分位']) or _col_idx(['PE', '历史']) or None
-        pb_col = _col_idx('PB', '分位') or _col_idx('市净') or None
         pb_pct_col = _col_idx(['PB', '分位']) or _col_idx(['PB', '历史']) or None
-        pos_col = _col_idx('分位') or _col_idx('历史分位') or None
-        notes_col = _col_idx('备注') or None
-        parts = []
+        assess_col = _col_idx('评估') or _col_idx('备注') or None
+
+        total = 0
+        high_risk = []    # 极高风险 / 高估
+        high_watch = []   # 偏高
+        low_value = []    # 极低价值 / 低估
+        dividend = []     # 股息率
+        normal = []       # 适中 / 其余
+
         for row in data_rows:
-            name = row[0].replace('**', '') if len(row) > 0 else ''
-            details = []
-            if pe_col is not None and pe_col < len(row):
-                pe = _safe(row[pe_col])
-                if pe: details.append(f"市盈率{pe}倍")
-            if pb_col is not None and pb_col < len(row):
-                pb = _safe(row[pb_col])
-                if pb: details.append(f"市净率{pb}倍")
-            used_summary = False
-            if pe_pct_col is not None and pe_pct_col < len(row):
-                pct = _safe(row[pe_pct_col])
-                if pct: details.append(f"PE分位{pct}")
-            elif pos_col is not None and pos_col < len(row) and pos_col != (pb_pct_col or -1):
-                pct = _safe(row[pos_col])
-                if pct:
-                    details.append(f"PE分位{pct}")
-                    used_summary = True
-            if pb_pct_col is not None and pb_pct_col < len(row):
-                pct = _safe(row[pb_pct_col])
-                if pct: details.append(f"PB分位{pct}")
-            elif not used_summary and pos_col is not None and pos_col < len(row) and pos_col != (pe_pct_col or -1):
-                pct = _safe(row[pos_col])
-                if pct:
-                    details.append(f"PB分位{pct}")
-                    used_summary = True
-            if not used_summary and pos_col is not None and pos_col < len(row):
-                pos = _safe(row[pos_col])
-                if pos and len(pos) < 20:
-                    details.append(f"估值{pos}")
-            if details:
-                parts.append(f"{name}，{'，'.join(details)}")
-        if parts:
-            return "。".join(parts) + "。"
+            if len(row) < 2:
+                continue
+            total += 1
+            name = row[0].replace('**', '').strip()
+            # 简化名称：去掉括号内英文代码
+            name_simple = re.sub(r'[（(][^)）]*[)）]', '', name).strip()
+
+            assess = ''
+            if assess_col is not None and assess_col < len(row):
+                assess = _safe(row[assess_col]) or ''
+            assess = assess.replace('**', '').strip()
+
+            # 提取股息率数字（如"股息率约5.32%"）
+            div_match = re.search(r'股息率约?([\d.]+%)', assess)
+            if div_match:
+                dividend.append(f"{name_simple}股息率约{div_match.group(1)}")
+                continue
+
+            # 按评估文字分类
+            if '极高风险' in assess or '极高估' in assess:
+                high_risk.append(name_simple)
+            elif '估值偏高' in assess:
+                high_watch.append(name_simple)
+            elif '偏高' in assess:
+                high_watch.append(name_simple)
+            elif '极低价值' in assess or '低估' in assess:
+                low_value.append(name_simple)
+            elif '适中' in assess or '中位' in assess or '正常' in assess:
+                normal.append(name_simple)
+            else:
+                normal.append(name_simple)
+
+        # 组装一句话（每类之间用逗号分隔，同类多名用顿号分隔）
+        segments = []
+        if high_risk:
+            segments.append(f"{'、'.join(high_risk)}极高风险")
+        if high_watch:
+            segments.append(f"{'、'.join(high_watch)}估值偏高")
+        if low_value:
+            segments.append(f"{'、'.join(low_value)}极低价值区")
+        if dividend:
+            segments.append('，'.join(dividend))
+        if normal:
+            segments.append(f"{'、'.join(normal)}估值适中")
+
+        text = '估值异动预警：' + '，'.join(segments) + '。'
+        # 清理多余逗号
+        text = re.sub(r'，+', '，', text)
+        return text
 
     # ── 恐慌指数（VIX/VXN）──
     if (headers and len(headers) >= 3
@@ -318,6 +334,13 @@ def _table_to_text(rows):
     return ""
 
 
+def _strip_source_url(text):
+    """去掉数据来源中的网址部分，如「英为财情(Investing.com)」→「英为财情」"""
+    # 中文名(英文域名) 格式
+    text = re.sub(r'([\u4e00-\u9fff]+)\((?:[a-zA-Z0-9][-a-zA-Z0-9]*\.[a-zA-Z]{2,})\)', r'\1', text)
+    return text
+
+
 def _inline(text):
     """行内元素：**加粗** → <strong>，↑↓ → 上涨/下跌（无箭头，适合朗读）"""
     text = re.sub(r'↑([\d.]+%?)', r'<span class="up">上涨\1</span>', text)
@@ -399,8 +422,14 @@ def md_to_html(text):
         if rows:
             tts = _table_to_text(rows)
             if tts:
-                tts_safe = tts.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
-                out.append(f'<div class="table-text">{tts_safe}</div>')
+                if isinstance(tts, list):
+                    # 估值表：每个指数独立 div
+                    for item in tts:
+                        tts_safe = item.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+                        out.append(f'<div class="table-text">{tts_safe}</div>')
+                else:
+                    tts_safe = tts.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+                    out.append(f'<div class="table-text">{tts_safe}</div>')
 
     def flush_list():
         nonlocal in_list, list_type
@@ -414,28 +443,49 @@ def md_to_html(text):
             out.append('</blockquote>')
             in_quote = False
 
+    # 板块跳过开关：HTML 不展示 QDII 和个人持仓板块（MD 保留）
+    _SKIP_SECTIONS = ['QDII', '个人持仓']
+    # 跳过的行内关键词：查询时间等元信息块不展示在朗读版
+    _SKIP_LINE_KW = ['查询时间']
+    skip_section = False
+
     for line in lines:
         stripped = line.strip()
         if not stripped:
             flush_quote(); flush_table(); flush_list()
             continue
 
+        # 跳过含特定关键词的整行（如 查询时间 blockquote 行）
+        if any(kw in stripped for kw in _SKIP_LINE_KW):
+            flush_quote()  # 如果正在 blockquote 内则关闭
+            continue
+
         if stripped.startswith('### '):
             flush_quote(); flush_table(); flush_list()
+            skip_section = any(kw in stripped for kw in _SKIP_SECTIONS)
+            if skip_section:
+                continue
             out.append(f'<h3>{_inline(stripped[4:])}</h3>')
         elif stripped.startswith('## '):
             flush_quote(); flush_table(); flush_list()
+            skip_section = any(kw in stripped for kw in _SKIP_SECTIONS)
+            if skip_section:
+                continue
             out.append(f'<h2>{_inline(stripped[3:])}</h2>')
         elif stripped.startswith('# '):
             flush_quote(); flush_table(); flush_list()
-            out.append(f'<h1>{_inline(stripped[2:])}</h1>')
+            # 跳过顶层标题：模板 .header 区域已显示标题+日期，MD 中 # 标题不再重复渲染
+            continue
+        elif skip_section:
+            # 跳过整个板块的所有内容行（包括表格、列表、段落）
+            continue
 
         elif stripped.startswith('> '):
             flush_list(); flush_table()
             if not in_quote:
                 out.append('<blockquote>')
                 in_quote = True
-            out.append(f'<p class="no-indent">{_inline(stripped[2:])}</p>')
+            out.append(f'<p class="no-indent">{_inline(_strip_source_url(stripped[2:]))}</p>')
 
         elif stripped.startswith('|'):
             flush_list(); flush_quote()
@@ -461,10 +511,16 @@ def md_to_html(text):
             flush_quote(); flush_table(); flush_list()
             out.append('<hr>')
 
-        elif stripped.startswith('*') and ('数据来源' in stripped or stripped.startswith('*来源：') or stripped.startswith('*来源:')):
+        elif not stripped.startswith('**') and stripped.startswith('*') and ('数据来源' in stripped or stripped.startswith('*来源：') or stripped.startswith('*来源:')):
             flush_table(); flush_list(); flush_quote()
             content = stripped.strip('* ').strip()
+            content = _strip_source_url(content)
             out.append(f'<p class="source">{content}</p>')
+
+        # 跳过估值异动预警的头部数据来源行（已经固化到模板尾部）
+        elif stripped.startswith('**数据来源**') or stripped.startswith('**来源声明**'):
+            flush_table(); flush_list(); flush_quote()
+            continue
 
         # 隐私过滤：不展示内部信息
         elif any(kw in stripped for kw in ['MD 已同步', '朗读链接', 'IMA 知识库']):
