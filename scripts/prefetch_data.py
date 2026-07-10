@@ -646,17 +646,27 @@ def fetch_extra():
     result = {}
     today_str = datetime.now(TZ_CN).strftime("%Y%m%d")
 
-    # ── 1. USD/CNH 汇率（akshare currency_usd_cnh_sina）──
+    # ── 1. USD/CNH 汇率（akshare 外汇局中间价 → yfinance 兜底）──
+    usdcnh_ok = False
     try:
-        _df_fx = ak.currency_usd_cnh_sina()
+        _df_fx = ak.currency_boc_safe()
         if _df_fx is not None and len(_df_fx) > 0:
-            result["USD_CNH"] = round(float(_df_fx.iloc[-1]['最新价']), 4)
-        else:
-            result["USD_CNH"] = None
+            _latest = _df_fx.iloc[-1]
+            _usd_str = str(_latest.get("美元", ""))
+            if _usd_str:
+                # 央行中间价以 "元/100外币" 计，如 679.89 → 6.7989
+                result["USD_CNH"] = round(float(_usd_str) / 100.0, 4)
+                result["USD_CNH_日期"] = str(_latest.get("日期", ""))
+                result["USD_CNH_来源"] = "akshare 外汇局中间价"
+                usdcnh_ok = True
     except Exception as e:
-        print(f"    currency_usd_cnh_sina 失败: {e}")
-        result["USD_CNH"] = None
-    result["USD_CNH"] = fx["USD_CNH"] if fx else None
+        print(f"    currency_boc_safe 失败: {e}")
+
+    if not usdcnh_ok:
+        yf_fx = _yf_fallback({"USD_CNH": "USDCNH=X"})
+        if yf_fx.get("USD_CNH"):
+            result["USD_CNH"] = yf_fx["USD_CNH"]["最新价"]
+            result["USD_CNH_来源"] = "yfinance兜底"
 
     # ── 2. 南下/北向资金 + 涨跌家数（保留）──
     try:
