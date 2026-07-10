@@ -85,10 +85,10 @@ jobs:
           ls -la _site/
 
       - name: 部署到 GitHub Pages
-        if: always() && steps.prepare_deploy.outputs.run != 'skipped'
+        if: always()
         uses: peaceiris/actions-gh-pages@v4
         with:
-          personal_token: ${{ secrets.GH_PAGES_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
           publish_branch: gh-pages
           force_orphan: true
