@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
-调用 LLM 生成日报 — 双模型自动降级：
-  主: GitHub Models GPT-4.1 (GITHUB_TOKEN)
-  兜底: 智谱 GLM-4.7-Flash (ZHIPU_API_KEY)
+调用 LLM 生成日报：
+  智谱 GLM-4.7-Flash (ZHIPU_API_KEY)
 
 用法: python3 scripts/call_llm.py
   读取 prompt/daily_report_prompt.txt (system) + data_*.json (user)
@@ -13,12 +12,6 @@ import os, sys, json, glob, time, requests
 
 PROMPT_PATH = os.path.join(os.path.dirname(__file__), "..", "prompt", "daily_report_prompt.txt")
 LLM_CONFIGS = [
-    {
-        "name": "GitHub Models GPT-4.1",
-        "api_url": "https://models.github.ai/inference/chat/completions",
-        "api_key_env": "GITHUB_TOKEN",
-        "model": "openai/gpt-4.1",
-    },
     {
         "name": "Zhipu GLM-4.7-Flash",
         "api_url": "https://open.bigmodel.cn/api/paas/v4/chat/completions",

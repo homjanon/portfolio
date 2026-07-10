@@ -1,22 +1,19 @@
 #!/usr/bin/env python3
 """
 预抓取金融市场数据 — 按板块切分为结构化 JSON 文件。
-v26: 新增统一 yfinance 兜底函数，在其他数据源失败时自动调用
-     - _yf_fallback() 覆盖外围指数/US10Y/美股持仓/A股/港股
-     - 不影响主数据源流程，仅当主源返回空/错误时触发
+v27: 精简数据源 + 修复 US10Y/QDII + 移除今日关注相关数据 + 移除 data_macro.json
 
-输出文件（11个，均在 data_*.json，默认当前目录）：
+输出文件（10个，均在 data_*.json，默认当前目录）：
   data_market_cn.json       A股5大指数行情           akshare新浪
   data_market_hk.json       港股恒生+国企指数         akshare新浪
   data_market_global.json   全球主要指数              akshare新浪(美股)+东财(外围)
-  data_forex_rate.json      汇率/商品/中美债券        akshare期货 + FRED DGS10(US10Y)
+  data_forex_rate.json      汇率/商品/中美债券        akshare期货 + 中美债收益率
   data_valuation.json       中美核心指数估值+PE/PB分位 雪球蛋卷API
   data_fund.json            基金净值+净值估算+ETF溢价  akshare天天基金
   data_industry.json        申万31行业涨跌幅+同花顺90行业资金流+全市场PE  akshare
   data_holdings.json        个人持仓+监督池行情+分红+研报  腾讯API + akshare(分红+研报)
   data_news_rss.json        全球TOP10新闻源          Google News RSS 英文+中文
-  data_extra.json           全球宏观+QDII+资金面      akshare(美国宏观+全球利率+QDII溢价)
-  data_macro.json           中国宏观数据             akshare(LPR/PMI/CPI/M2/社融/GDP/贸易差额)
+  data_extra.json           汇率+资金面+QDII+涨停/跌停  akshare(汇率/资金流/QDII)
 
 每个文件：{"ts":"...", "ok":true/false, "data":..., "error":"..."}
 """
@@ -433,7 +430,7 @@ def fetch_forex_rate():
     except Exception as e:
         print(f"    期货数据获取失败: {e}")
 
-    # ── 债券收益率: CN10Y来自akshare, US10Y来自FRED DGS10 ──
+    # ── 债券收益率: CN10Y + US10Y 同一来源 akshare bond_zh_us_rate ──
     try:
         import akshare as ak
         df = ak.bond_zh_us_rate()
@@ -441,34 +438,16 @@ def fetch_forex_rate():
             last = df.iloc[-1]
             result["CN10Y"] = {"名称": "10Y中国国债收益率", "最新值": _num(last.get("中国国债收益率10年")),
                               "日期": str(last.iloc[0]), "source": "akshare"}
-    except: pass
-
-    # US10Y via FRED DGS10（直连文本文件，无需API Key）
-    us10y_ok = False
-    try:
-        r = requests.get("https://fred.stlouisfed.org/data/DGS10.txt", timeout=20)
-        for line in reversed([l for l in r.text.splitlines() if l and not l.startswith("#")]):
-            parts = line.split()
-            if len(parts) == 2:
-                result["US10Y"] = {"名称": "10Y美国国债收益率",
-                                   "最新值": _num(parts[1]), "日期": parts[0],
-                                   "source": "FRED DGS10"}
-                us10y_ok = True
-                break
+            result["US10Y"] = {"名称": "10Y美国国债收益率", "最新值": _num(last.get("美国国债收益率10年")),
+                              "日期": str(last.iloc[0]), "source": "akshare(bond_zh_us_rate)"}
+            print(f"    中美10Y: CN={result['CN10Y']['最新值']}, US={result['US10Y']['最新值']}")
     except Exception as e:
-        print(f"    FRED DGS10 失败: {e}")
+        print(f"    bond_zh_us_rate 失败: {e}")
+        for k in ["CN10Y", "US10Y"]:
+            if k not in result:
+                result[k] = {"note": "数据暂不可得"}
 
-    # US10Y yfinance 兜底（^TNX，值为收益率如4.54）
-    if not us10y_ok:
-        yf_us10y = _yf_fallback({"US10Y": "^TNX"})
-        if yf_us10y.get("US10Y"):
-            result["US10Y"] = {"名称": "10Y美国国债收益率",
-                               "最新值": yf_us10y["US10Y"]["最新价"],
-                               "涨跌幅": yf_us10y["US10Y"]["涨跌幅"],
-                               "source": "yfinance兜底(^TNX)"}
-
-    # ── USD/CNH: 由 fetch_extra 通过 akshare currency_usd_cnh_sina 获取 ──
-    #（此处不重复拉取，fetch_forex_rate 不担保汇率字段）
+    # ── USD/CNH: 由 fetch_extra 获取 ──
 
     # 标记缺失
     for k in ["WTI原油","COMEX黄金","CN10Y","US10Y"]:
@@ -652,7 +631,7 @@ def fetch_industry():
 # ═══════════════════════════════════════════════════════════════
 
 def fetch_extra():
-    """v22: 汇率+资金面+涨跌(保留) + 美国宏观18+项 + 全球央行利率 + QDII溢价 + 欧洲CPI + BDI/SOX"""
+    """v27: 资金面(南下/北向/涨跌/两融/涨停) + QDII溢价 + USD/CNH"""
     import akshare as ak
     result = {}
     today_str = datetime.now(TZ_CN).strftime("%Y%m%d")
@@ -723,84 +702,7 @@ def fetch_extra():
         result["跌停数"] = len(dt) if dt is not None else None
     except: result["跌停数"] = None
 
-    # ── 🆕 5. 美国宏观12+项指标（v22: +核心PCE/消费者信心/工业产出/ISM非制造业/BDI）──
-    us_macro = {}
-    us_functions = {
-        '非农': lambda: ak.macro_usa_non_farm(),
-        '失业率': lambda: ak.macro_usa_unemployment_rate(),
-        'CPI月率': lambda: ak.macro_usa_cpi_monthly(),
-        '核心CPI月率': lambda: ak.macro_usa_core_cpi_monthly(),
-        'PPI': lambda: ak.macro_usa_ppi(),
-        '核心PPI': lambda: ak.macro_usa_core_ppi(),
-        'ISM制造业PMI': lambda: ak.macro_usa_ism_pmi(),
-        'ISM非制造业PMI': lambda: ak.macro_usa_ism_non_pmi(),
-        '零售销售月率': lambda: ak.macro_usa_retail_sales(),
-        'ADP就业': lambda: ak.macro_usa_adp_employment(),
-        '初请失业金': lambda: ak.macro_usa_initial_jobless(),
-        'GDP': lambda: ak.macro_usa_gdp_monthly(),
-        '美联储利率': lambda: ak.macro_bank_usa_interest_rate(),
-        # v22 新增
-        '核心PCE': lambda: ak.macro_usa_core_pce_price(),
-        '密歇根消费者信心': lambda: ak.macro_usa_michigan_consumer_sentiment(),
-        '工业产出月率': lambda: ak.macro_usa_industrial_production(),
-        '新屋开工': lambda: ak.macro_usa_house_starts(),
-        '耐用品订单': lambda: ak.macro_usa_durable_goods_orders(),
-        'EIA原油库存': lambda: ak.macro_usa_eia_crude_rate(),
-        'Markit制造业PMI': lambda: ak.macro_usa_pmi(),
-    }
-    for label, fn in us_functions.items():
-        try:
-            df = fn()
-            if df is not None and len(df) > 0:
-                latest = df.dropna(subset=['今值']).tail(1)
-                if len(latest) > 0:
-                    r = latest.iloc[0]
-                    us_macro[label] = {
-                        '今值': str(r.get('今值', 'N/A')),
-                        '预测值': str(r.get('预测值', 'N/A')),
-                        '前值': str(r.get('前值', 'N/A')),
-                        '日期': str(r.get('日期', '')),
-                    }
-        except Exception as e:
-            us_macro[label] = {'error': str(e)[:100]}
-    # 🕐 v22: 过滤 — 仅保留近1个月内公布的数据
-    _cutoff = datetime.now().replace(tzinfo=None) - timedelta(days=30)
-    for _k in list(us_macro.keys()):
-        _d = us_macro[_k].get('日期', '')
-        try:
-            if '-' in _d:
-                _dt = datetime.strptime(_d, '%Y-%m-%d')
-            else:
-                _dt = datetime.strptime(_d, '%Y-%m')
-        except:
-            _dt = datetime(2000, 1, 1)  # 无法解析→视为陈旧
-        if _dt < _cutoff:
-            del us_macro[_k]
-    result['美国宏观'] = us_macro
-
-    # ── 🆕 6. 全球央行利率 ──
-    global_rates = {}
-    rate_functions = {
-        '欧央行': lambda: ak.macro_bank_euro_interest_rate(),
-        '日央行': lambda: ak.macro_bank_japan_interest_rate(),
-        '英央行': lambda: ak.macro_bank_english_interest_rate(),
-    }
-    for label, fn in rate_functions.items():
-        try:
-            df = fn()
-            if df is not None and len(df) > 0:
-                latest = df.dropna(subset=['今值']).tail(1)
-                if len(latest) > 0:
-                    r = latest.iloc[0]
-                    global_rates[label] = {
-                        '利率': str(r.get('今值', 'N/A')),
-                        '日期': str(r.get('日期', '')),
-                    }
-        except Exception as e:
-            global_rates[label] = {'error': str(e)[:100]}
-    result['全球央行利率'] = global_rates
-
-    # ── 🆕 v25: QDII监测 — 场内ETF溢价率（akshare fund_etf_spot_em自带溢价率）+ 场外申购额度（东方财富）──
+    # ── 🆕 v25: QDII监测 — 场内ETF溢价率（akshare fund_etf_spot_em → 腾讯+东方财富直连HTTP兜底）──
     qdii_data = {"场内ETF": [], "场外QDII": []}
     _etf_set = {"513100","513500","159941","159659","159612","513650"}
     _etf_names = {
@@ -836,11 +738,19 @@ def fetch_extra():
                     _mp = _v["price"]; _cp = _v["change_pct"]; break
             _nav = None; _nav_d = None
             try:
-                _df_nav = ak.fund_open_fund_info_em(symbol=_code, indicator="单位净值走势")
-                if _df_nav is not None and len(_df_nav) > 0:
-                    _nav = round(float(_df_nav.iloc[-1]['单位净值']), 4)
-                    _nav_d = str(_df_nav.iloc[-1]['净值日期'])
-            except: pass
+                # 东方财富直连 HTTP API（比 akshare fund_open_fund_info_em 更可靠）
+                _nav_url = f"https://api.fund.eastmoney.com/f10/lsjz?fundCode={_code}&pageIndex=1&pageSize=2"
+                _nav_resp = requests.get(_nav_url,
+                    headers={"User-Agent": UA, "Referer": "https://fund.eastmoney.com/"}, timeout=10)
+                _nav_resp.encoding = "utf-8"
+                _nav_j = _nav_resp.json()
+                _nav_rows = _nav_j.get("Data", {}).get("LSJZList", [])
+                if _nav_rows:
+                    _nav_last = _nav_rows[-1]
+                    _nav = round(float(_nav_last.get("DWJZ", 0)), 4)
+                    _nav_d = str(_nav_last.get("FSRQ", ""))
+            except Exception as _nav_e:
+                print(f"      东方财富净值API失败({_code}): {_nav_e}")
             _pr = round((_mp - _nav) / _nav * 100, 2) if _mp and _nav and _nav > 0 else None
             qdii_data["场内ETF"].append({
                 "代码": _code, "名称": _etf_names.get(_code,""),
@@ -871,53 +781,6 @@ def fetch_extra():
     except Exception as e:
         qdii_data["_场外_error"] = str(e)[:100]
     result['QDII_监测'] = qdii_data
-
-    # ── 🆕 8. 欧洲CPI/GDP ──
-    eu_macro = {}
-    eu_functions = {
-        '欧元区CPI年率': lambda: ak.macro_euro_cpi_yoy(),
-        '欧元区GDP年率': lambda: ak.macro_euro_gdp_yoy(),
-    }
-    for label, fn in eu_functions.items():
-        try:
-            df = fn()
-            if df is not None and len(df) > 0:
-                latest = df.dropna(subset=['今值']).tail(1)
-                if len(latest) > 0:
-                    r = latest.iloc[0]
-                    eu_macro[label] = {
-                        '今值': str(r.get('今值', 'N/A')),
-                        '预测值': str(r.get('预测值', 'N/A')),
-                        '前值': str(r.get('前值', 'N/A')),
-                        '日期': str(r.get('日期', '')),
-                    }
-        except Exception as e:
-            eu_macro[label] = {'error': str(e)[:100]}
-    result['欧洲宏观'] = eu_macro
-
-    # ── 🆕 v22: 全球先行指标（BDI航运 + SOX半导体）──
-    import pandas as _pd_bdi
-    for key, label, fn in [
-        ('BDI', '波罗的海干散货指数', lambda: ak.macro_shipping_bdi()),
-        ('SOX', '费城半导体指数', lambda: ak.macro_global_sox_index()),
-    ]:
-        try:
-            df = fn()
-            if df is not None and len(df) > 0:
-                if '最新值' in df.columns:
-                    val = df.iloc[-1]['最新值']
-                else:
-                    val = df.iloc[-1, -1]  # 兜底取最后一列
-                try:
-                    val_f = float(val)
-                    result[key] = str(round(val_f, 2)) if not _pd_bdi.isna(val_f) else 'N/A'
-                except (ValueError, TypeError):
-                    result[key] = str(val)
-                result[f'{key}_日期'] = str(df.iloc[-1]['日期']) if '日期' in df.columns else ''
-            else:
-                result[key] = 'N/A'
-        except Exception as e:
-            result[key] = f'error: {str(e)[:60]}'
 
     return _ok(result)
 
@@ -953,7 +816,7 @@ def _fetch_rss_news():
             desc_el = item.find("description")
             pub_el = item.find("pubDate")
             title = title_el.text if title_el is not None else ""
-            title = re.sub(r"\s*[-–|]\s*" + re.escape(source) + r"\s*$", "", title).strip()
+            title = re.sub(r"\s*[-–|]\s*" + re.escape(source) + r"\s*$", "", title).strip()[:40]
             desc = desc_el.text if desc_el is not None else ""
             desc = re.sub(r"<[^>]+>", " ", desc).strip()[:200]
             result.append({
@@ -1271,7 +1134,7 @@ def fetch_macro():
 # 主流程
 # ═══════════════════════════════════════════════════════════════
 def main():
-    print(f"═══ 预抓取金融市场数据（v22: +申万实时+同花顺资金+中美宏观+全球利率+QDII溢价+分红+研报+宏观扩展） ═══")
+    print(f"═══ 预抓取金融市场数据（v27: 精简+修复+移除data_macro） ═══")
     print(f"时间: {_ts()}\n")
 
     modules = [
@@ -1284,8 +1147,7 @@ def main():
         ("data_industry.json",       fetch_industry,       "申万+同花顺行业"),
         ("data_holdings.json",       fetch_holdings,       "持仓行情+分红+研报"),
         ("data_news_rss.json",       _fetch_rss_news,      "全球TOP10 RSS新闻(英+中)"),
-        ("data_extra.json",          fetch_extra,          "全球宏观+QDII+资金面"),
-        ("data_macro.json",          fetch_macro,          "中国宏观数据"),
+        ("data_extra.json",          fetch_extra,          "资金面+QDII+涨停/跌停"),
     ]
 
     successes = 0

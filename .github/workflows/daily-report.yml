@@ -21,7 +21,6 @@ jobs:
     permissions:
       contents: write
       pages: write
-      models: read
 
     steps:
       - name: 检出代码
@@ -56,7 +55,6 @@ jobs:
           python3 scripts/call_llm.py
           echo "✅ 报告生成完成"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
 
       - name: 转换 MD → HTML
@@ -80,6 +78,7 @@ jobs:
         run: |
           mkdir -p _site
           cp daily-report.html _site/ 2>/dev/null || true
+          cp daily-report.md _site/ 2>/dev/null || true
           cp daily-report.mp3 _site/ 2>/dev/null || true
           cp web/sw.js _site/ 2>/dev/null || true
           echo "部署目录 _site 内容:"
