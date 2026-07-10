@@ -1,0 +1,85 @@
+name: 每日金融日报
+
+on:
+  schedule:
+    # 北京时间 06:50 = UTC 前一日 22:50
+    - cron: '50 22 * * *'
+  workflow_dispatch:
+    inputs:
+      skip_mp3:
+        description: '跳过 MP3 生成'
+        required: false
+        default: false
+        type: boolean
+
+env:
+  TZ: Asia/Shanghai
+
+jobs:
+  daily-report:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: 安装依赖
+        run: |
+          pip install akshare requests pandas yfinance edge-tts lxml
+
+      - name: 预抓取数据
+        id: prefetch
+        continue-on-error: true
+        run: |
+          echo "▶ 运行预抓取脚本..."
+          python3 scripts/prefetch_data.py || echo "⚠️ 预抓取部分失败，LLM将使用现有数据"
+
+      - name: 展示预抓取结果
+        if: always()
+        run: |
+          echo "预抓取 JSON 文件:"
+          ls -la data_*.json 2>/dev/null || echo "(暂无)"
+
+      - name: 调用 LLM 生成日报
+        id: call_llm
+        run: |
+          echo "▶ 调用 LLM 生成报告..."
+          python3 scripts/call_llm.py
+          echo "✅ 报告生成完成"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
+
+      - name: 转换 MD → HTML
+        id: md_to_html
+        run: |
+          echo "▶ 转换 MD → HTML..."
+          python3 scripts/md_to_reader.py report.md daily-report.html
+          echo "✅ HTML 生成完成"
+
+      - name: 生成 MP3 音频
+        id: md_to_mp3
+        continue-on-error: true
+        if: ${{ !inputs.skip_mp3 }}
+        run: |
+          echo "▶ 生成 MP3 音频..."
+          python3 scripts/md_to_mp3.py report.md daily-report.mp3
+
+      - name: 部署到 GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.GH_PAGES_TOKEN }}
+          publish_dir: ./
+          publish_branch: gh-pages
+          force_orphan: true
+          file_pattern: 'daily-report.html daily-report.mp3 web/sw.js'
