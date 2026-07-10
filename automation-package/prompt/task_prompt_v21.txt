@@ -949,6 +949,19 @@ def fetch_extra():
                     }
         except Exception as e:
             us_macro[label] = {'error': str(e)[:100]}
+    # 🕐 v22: 过滤 — 仅保留近1个月内公布的数据
+    _cutoff = datetime.now().replace(tzinfo=None) - timedelta(days=30)
+    for _k in list(us_macro.keys()):
+        _d = us_macro[_k].get('日期', '')
+        try:
+            if '-' in _d:
+                _dt = datetime.strptime(_d, '%Y-%m-%d')
+            else:
+                _dt = datetime.strptime(_d, '%Y-%m')
+        except:
+            _dt = datetime(2000, 1, 1)  # 无法解析→视为陈旧
+        if _dt < _cutoff:
+            del us_macro[_k]
     result['美国宏观'] = us_macro
 
     # ── 🆕 6. 全球央行利率 ──
