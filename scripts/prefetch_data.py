@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 预抓取金融市场数据 — 按板块切分为结构化 JSON 文件。
-v28: QDII回退腾讯API+东方财富HTTP方案 + 场外精简 + 持仓聚焦约束
+v29: QDII场外纳指100/标普500可申购大额度 + RSS desc截断600
 
 输出文件（10个，均在 data_*.json，默认当前目录）：
   data_market_cn.json       A股5大指数行情           akshare新浪
@@ -13,7 +13,7 @@ v28: QDII回退腾讯API+东方财富HTTP方案 + 场外精简 + 持仓聚焦约
   data_industry.json        申万31行业涨跌幅+同花顺90行业资金流+全市场PE  akshare
   data_holdings.json        个人持仓+监督池行情+分红+研报  腾讯API + akshare(分红+研报)
   data_news_rss.json        全球TOP10新闻源          Google News RSS 英文+中文
-  data_extra.json           资金面+QDII+涨停/跌停  akshare(汇率/资金流/QDII)
+  data_extra.json           资金面+QDII+涨停/跌停  akshare(汇率/资金流/QDII)  v29: 场外QDII纳指100/标普500可申购大额度
 
 每个文件：{"ts":"...", "ok":true/false, "data":..., "error":"..."}
 """
@@ -631,7 +631,7 @@ def fetch_industry():
 # ═══════════════════════════════════════════════════════════════
 
 def fetch_extra():
-    """v28: 资金面 + QDII监测(腾讯API实时价+东方财富HTTP净值) + 场外申购额度精简"""
+    """v29: 资金面 + QDII监测(腾讯API实时价+东方财富HTTP净值) + 场外申购额度(Nasdaq100/S&P500可申购大额度)"""
     import akshare as ak
     result = {}
     today_str = datetime.now(TZ_CN).strftime("%Y%m%d")
@@ -746,17 +746,19 @@ def fetch_extra():
             "最新净值": _nav, "净值日期": _nav_d, "溢价率": _pr,
             "溢价率来源": "腾讯价+东方财富净值",
         })
-    # 场外QDII申购额度（精简：排除美元份额，最多15条）
+    # 场外QDII申购额度（纳指100/标普500，可申购且额度较大的6条）
     try:
         import pandas as pd
         _df = ak.fund_purchase_em()
-        _qdii_kw = ["纳指","纳斯达克","标普500","标普"]
+        _qdii_kw = ["纳指","纳斯达克100","标普500"]
         _seen = set()
         for _kw in _qdii_kw:
             _mask = (
                 _df['基金简称'].str.contains(_kw, na=False)
                 & _df['基金类型'].str.contains('海外', na=False)
                 & ~_df['基金简称'].str.contains('美元', na=False)
+                & (_df['申购状态'] != '场内交易')
+                & (_df['申购状态'] != '暂停申购')
             )
             for _, _r in _df[_mask].iterrows():
                 _c = str(_r['基金代码'])
@@ -773,10 +775,10 @@ def fetch_extra():
                 })
     except Exception as e:
         qdii_data["_场外_error"] = str(e)[:100]
-    # 按日累计限定金额升序排列（限购优先），最多15条
+    # 按日累计限定金额降序排列（大额度优先），最多6条
     if qdii_data["场外QDII"]:
-        qdii_data["场外QDII"].sort(key=lambda x: x["日累计限定金额"])
-        qdii_data["场外QDII"] = qdii_data["场外QDII"][:15]
+        qdii_data["场外QDII"].sort(key=lambda x: x["日累计限定金额"], reverse=True)
+        qdii_data["场外QDII"] = qdii_data["场外QDII"][:6]
     result['QDII_监测'] = qdii_data
 
     return _ok(result)
@@ -1131,7 +1133,7 @@ def fetch_macro():
 # 主流程
 # ═══════════════════════════════════════════════════════════════
 def main():
-    print(f"═══ 预抓取金融市场数据（v28: QDII回退腾讯+东财 + 场外精简） ═══")
+    print(f"═══ 预抓取金融市场数据（v29: QDII场外纳指100/标普500可申购大额度） ═══")
     print(f"时间: {_ts()}\n")
 
     modules = [
