@@ -604,15 +604,28 @@ def md_to_news(md_file):
     return build_podcast_text(blocks, date_str)
 
 
-def generate_mp3(md_file, output_file, voice=DEFAULT_VOICE, rate=DEFAULT_RATE):
-    """生成 MP3（纯文本输入，不含任何 SSML 标签）"""
-    print(f"📖 生成新闻播客脚本: {md_file}")
-    plain_text = md_to_news(md_file)
+def generate_mp3(input_file, output_file, voice=DEFAULT_VOICE, rate=DEFAULT_RATE):
+    """生成 MP3
+    - 输入为 .txt 文件：直接读取纯文本
+    - 输入为 .md 文件：解析 MD 后再合成（向后兼容）
+    """
+    if input_file.endswith('.txt'):
+        # 直接读取广播稿文本
+        with open(input_file, 'r', encoding='utf-8') as f:
+            plain_text = f.read().strip()
+        print(f"📖 读取广播稿: {len(plain_text)} 字符")
+    else:
+        # 旧逻辑：解析 MD
+        print(f"📖 解析 MD 生成播客脚本: {input_file}")
+        with open(input_file, 'r', encoding='utf-8') as f:
+            md_text = f.read()
+        date_str = get_date_from_md(md_text)
+        blocks = parse_md_sections(md_text)
+        plain_text = build_podcast_text(blocks, date_str)
 
-    # 检查纯文本是否干净
-    if '<' in plain_text and '>' in plain_text:
-        # 如果有残留标签，自动清理
-        plain_text = re.sub(r'<[^>]+>', '', plain_text)
+    if not plain_text:
+        print("❌ 输入文本为空")
+        return False
 
     with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False, encoding='utf-8') as f:
         f.write(plain_text)
@@ -645,20 +658,24 @@ def generate_mp3(md_file, output_file, voice=DEFAULT_VOICE, rate=DEFAULT_RATE):
 
 def main():
     if len(sys.argv) < 2:
-        print("用法: python3 md_to_mp3.py <input.md> [output.mp3] [voice]")
-        print("语音: zh-CN-YunyangNeural (男声新闻·默认)")
-        print("      zh-CN-XiaoxiaoNeural (女声新闻)")
-        sys.exit(1)
+        # 默认尝试 script.txt（LLM 生成的广播稿），不存在则用 report.md
+        input_file = "script.txt"
+        if not os.path.exists(input_file):
+            input_file = "report.md"
+            if not os.path.exists(input_file):
+                print("❌ 未找到 script.txt 或 report.md")
+                sys.exit(1)
+    else:
+        input_file = sys.argv[1]
 
-    md_file = sys.argv[1]
-    mp3_file = sys.argv[2] if len(sys.argv) > 2 else md_file.rsplit('.', 1)[0] + '.mp3'
+    mp3_file = sys.argv[2] if len(sys.argv) > 2 else "daily-report.mp3"
     voice = sys.argv[3] if len(sys.argv) > 3 else DEFAULT_VOICE
 
-    if not os.path.exists(md_file):
-        print(f"❌ 文件不存在: {md_file}", file=sys.stderr)
+    if not os.path.exists(input_file):
+        print(f"❌ 文件不存在: {input_file}", file=sys.stderr)
         sys.exit(1)
 
-    success = generate_mp3(md_file, mp3_file, voice)
+    success = generate_mp3(input_file, mp3_file, voice)
     if not success:
         sys.exit(1)
 

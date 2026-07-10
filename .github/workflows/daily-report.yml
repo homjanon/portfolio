@@ -65,13 +65,23 @@ jobs:
           python3 scripts/md_to_reader.py report.md daily-report.html
           echo "✅ HTML 生成完成"
 
+      - name: 转换日报为广播稿
+        id: md_to_script
+        continue-on-error: true
+        run: |
+          echo "▶ 转换日报为广播稿..."
+          python3 scripts/md_to_script.py
+          echo "✅ 广播稿生成完成"
+        env:
+          SENSENOVA_API_KEY: ${{ secrets.SENSENOVA_API_KEY }}
+
       - name: 生成 MP3 音频
         id: md_to_mp3
         continue-on-error: true
         if: ${{ !inputs.skip_mp3 }}
         run: |
           echo "▶ 生成 MP3 音频..."
-          python3 scripts/md_to_mp3.py report.md daily-report.mp3
+          python3 scripts/md_to_mp3.py
 
       - name: 准备部署文件
         id: prepare_deploy
