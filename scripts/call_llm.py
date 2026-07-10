@@ -9,7 +9,7 @@
   输出: report.md
 """
 
-import os, sys, json, glob, time, requests
+import os, sys, json, glob, time, requests, re
 
 PROMPT_PATH = os.path.join(os.path.dirname(__file__), "..", "prompt", "daily_report_prompt.txt")
 LLM_CONFIGS = [
@@ -42,7 +42,7 @@ def _call_llm(api_url, api_key, model, system, user, timeout=180, extra_headers=
         ],
     }
     last_exc = None
-    for attempt in range(3):
+    for attempt in range(2):
         try:
             resp = requests.post(
                 api_url,
@@ -123,7 +123,7 @@ def main():
         print("❌ 所有 LLM 均失败，无法生成报告")
         sys.exit(1)
 
-    # 4. 后处理: 移除 markdown 代码块围栏
+    # 4. 后处理: 移除 markdown 代码块围栏 和 LLM 前置废话
     content = content.strip()
     if content.startswith("```markdown"):
         content = content[len("```markdown"):].strip()
@@ -131,6 +131,10 @@ def main():
         content = content[3:].strip()
     if content.endswith("```"):
         content = content[:-3].strip()
+    # 删除第一个 # 或 ## 标题之前的所有文字（去掉 LLM 的输出前确认语等废话）
+    _heading_match = re.search(r'^#{1,6}\s', content, re.MULTILINE)
+    if _heading_match and _heading_match.start() > 0:
+        content = content[_heading_match.start():]
 
     # 5. 写入 report.md
     out_path = "report.md"
