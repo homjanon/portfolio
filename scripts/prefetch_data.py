@@ -815,7 +815,7 @@ def _fetch_rss_news():
             title = title_el.text if title_el is not None else ""
             title = re.sub(r"\s*[-–|]\s*" + re.escape(source) + r"\s*$", "", title).strip()[:100]
             desc = desc_el.text if desc_el is not None else ""
-            desc = re.sub(r"<[^>]+>", " ", desc).strip()[:200]
+            desc = re.sub(r"<[^>]+>", " ", desc).strip()[:600]
             result.append({
                 "title": title,
                 "desc": desc,
