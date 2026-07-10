@@ -1,9 +1,6 @@
 name: 每日金融日报
 
 on:
-  schedule:
-    # 北京时间 07:30 = UTC 前一日 23:30
-    - cron: '30 23 * * *'
   workflow_dispatch:
     inputs:
       skip_mp3:
