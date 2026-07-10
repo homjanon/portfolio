@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 调用 LLM 生成日报：
-  智谱 GLM-4.7-Flash (ZHIPU_API_KEY)
+  主模型: 智谱 GLM-4.7-Flash (ZHIPU_API_KEY)
+  兜底: 商汤日日新 DeepSeek-V4-Flash (SENSENOVA_API_KEY)
 
 用法: python3 scripts/call_llm.py
   读取 prompt/daily_report_prompt.txt (system) + data_*.json (user)
@@ -17,6 +18,12 @@ LLM_CONFIGS = [
         "api_url": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
         "api_key_env": "ZHIPU_API_KEY",
         "model": "glm-4.7-flash",
+    },
+    {
+        "name": "SenseTime DeepSeek-V4-Flash",
+        "api_url": "https://token.sensenova.cn/v1/chat/completions",
+        "api_key_env": "SENSENOVA_API_KEY",
+        "model": "deepseek-v4-flash",
     },
 ]
 

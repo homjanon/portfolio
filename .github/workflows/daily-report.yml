@@ -56,6 +56,7 @@ jobs:
           echo "✅ 报告生成完成"
         env:
           ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
+          SENSENOVA_API_KEY: ${{ secrets.SENSENOVA_API_KEY }}
 
       - name: 转换 MD → HTML
         id: md_to_html
