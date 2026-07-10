@@ -813,7 +813,7 @@ def _fetch_rss_news():
             desc_el = item.find("description")
             pub_el = item.find("pubDate")
             title = title_el.text if title_el is not None else ""
-            title = re.sub(r"\s*[-–|]\s*" + re.escape(source) + r"\s*$", "", title).strip()[:40]
+            title = re.sub(r"\s*[-–|]\s*" + re.escape(source) + r"\s*$", "", title).strip()[:100]
             desc = desc_el.text if desc_el is not None else ""
             desc = re.sub(r"<[^>]+>", " ", desc).strip()[:200]
             result.append({

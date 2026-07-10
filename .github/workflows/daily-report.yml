@@ -79,7 +79,7 @@ jobs:
         run: |
           mkdir -p _site
           cp daily-report.html _site/ 2>/dev/null || true
-          cp daily-report.md _site/ 2>/dev/null || true
+          cp report.md _site/daily-report.md 2>/dev/null || true
           cp daily-report.mp3 _site/ 2>/dev/null || true
           cp web/sw.js _site/ 2>/dev/null || true
           echo "部署目录 _site 内容:"
