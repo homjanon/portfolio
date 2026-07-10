@@ -444,7 +444,7 @@ def md_to_html(text):
             in_quote = False
 
     # 板块跳过开关：HTML 不展示 QDII 和个人持仓板块（MD 保留）
-    _SKIP_SECTIONS = ['QDII', '个人持仓']
+    _SKIP_SECTIONS = []
     # 跳过的行内关键词：查询时间等元信息块不展示在朗读版
     _SKIP_LINE_KW = ['查询时间']
     skip_section = False
@@ -460,22 +460,21 @@ def md_to_html(text):
             flush_quote()  # 如果正在 blockquote 内则关闭
             continue
 
-        if stripped.startswith('### '):
+        # 通用标题处理：支持 # ~ ######（v24 修复 #### 漏渲染）
+        _hm = re.match(r'^(#{1,6})\s+(.*)', stripped)
+        if _hm:
             flush_quote(); flush_table(); flush_list()
+            _level = len(_hm.group(1))
+            _text = _hm.group(2)
+            if _level == 1:
+                # 跳过顶层标题：模板 .header 区域已显示标题+日期
+                continue
             skip_section = any(kw in stripped for kw in _SKIP_SECTIONS)
             if skip_section:
                 continue
-            out.append(f'<h3>{_inline(stripped[4:])}</h3>')
-        elif stripped.startswith('## '):
-            flush_quote(); flush_table(); flush_list()
-            skip_section = any(kw in stripped for kw in _SKIP_SECTIONS)
-            if skip_section:
-                continue
-            out.append(f'<h2>{_inline(stripped[3:])}</h2>')
-        elif stripped.startswith('# '):
-            flush_quote(); flush_table(); flush_list()
-            # 跳过顶层标题：模板 .header 区域已显示标题+日期，MD 中 # 标题不再重复渲染
-            continue
+            # h4+ 降级为 h3 样式，避免引入新样式
+            _tag = f'h{min(_level, 3)}'
+            out.append(f'<{_tag}>{_inline(_text)}</{_tag}>')
         elif skip_section:
             # 跳过整个板块的所有内容行（包括表格、列表、段落）
             continue
