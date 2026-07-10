@@ -393,7 +393,16 @@ def _collapse_list_blank_lines(text):
 
 def md_to_html(text):
     """Markdown → 纯文本叙述 HTML（表格全部转为段落文字）"""
-    # 先预处理：合并被空行分隔的同类列表项
+    # 先预处理：将续行（以空格开头的内容行）并入编号项行
+    _merged = []
+    for line in text.split('\n'):
+        if _merged and line.startswith(' ') and line.strip():
+            _merged[-1] = _merged[-1].rstrip() + ' ' + line.strip()
+        else:
+            _merged.append(line)
+    text = '\n'.join(_merged)
+
+    # 再预处理：合并被空行分隔的同类列表项
     text = _collapse_list_blank_lines(text)
     lines = text.split('\n')
     out = []
