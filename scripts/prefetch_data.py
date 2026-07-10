@@ -1,20 +1,24 @@
 #!/usr/bin/env python3
 """
 预抓取金融市场数据 — 按板块切分为结构化 JSON 文件。
-v22: +申万实时涨跌幅+同花顺资金流+中美宏观+全球央行利率+QDII溢价+分红+研报+中英文双源RSS+PMI尾行bug修复+宏观扩展
+v25: 精简数据源架构：akshare 主覆盖(~90%) + 雪球蛋卷(估值分位) + 腾讯API(实时个股) + Google RSS(新闻)
+     - 移除 yfinance（东财+腾讯已够）
+     - 移除新浪直连（统一 akshare currency_usd_cnh_sina）
+     - QDII ETF 改用 akshare fund_etf_spot_em（自带溢价率）
+     - 指数数据单一来源 akshare，去掉腾讯兜底
 
 输出文件（11个，均在 data_*.json，默认当前目录）：
-  data_market_cn.json       A股5大指数行情           akshare新浪 → 腾讯API
-  data_market_hk.json       港股恒生+国企指数         akshare新浪 → 腾讯API
-  data_market_global.json   全球主要指数              akshare新浪(美股)+东财(全球) → 腾讯API
-  data_forex_rate.json      汇率/商品/中美债券        akshare期货 + 债券
-  data_valuation.json       中美核心指数估值+PE/PB分位 雪球蛋卷API + akshare
+  data_market_cn.json       A股5大指数行情           akshare新浪
+  data_market_hk.json       港股恒生+国企指数         akshare新浪
+  data_market_global.json   全球主要指数              akshare新浪(美股)+东财(外围)
+  data_forex_rate.json      汇率/商品/中美债券        akshare期货 + FRED DGS10(US10Y)
+  data_valuation.json       中美核心指数估值+PE/PB分位 雪球蛋卷API
   data_fund.json            基金净值+净值估算+ETF溢价  akshare天天基金
-  data_industry.json        🆕 申万31行业涨跌幅+同花顺90行业资金流+全市场PE  akshare(申万+同花顺+乐咕乐股)
-  data_holdings.json        🆕 个人持仓+监督池行情+分红+研报  腾讯API + akshare(分红+研报)
-  data_news_rss.json        全球TOP10新闻源          Google News RSS 英文(9外媒白名单) + 中文(国内财经媒体)
-  data_extra.json           🆕 全球宏观+QDII+资金面   akshare(美国18+项宏观+全球央行利率+QDII溢价+欧洲CPI+BDI/SOX)
-  data_macro.json           🆕 中国宏观数据           akshare(LPR/PMI/CPI/M2/社融/GDP/贸易差额)
+  data_industry.json        申万31行业涨跌幅+同花顺90行业资金流+全市场PE  akshare
+  data_holdings.json        个人持仓+监督池行情+分红+研报  腾讯API + akshare(分红+研报)
+  data_news_rss.json        全球TOP10新闻源          Google News RSS 英文+中文
+  data_extra.json           全球宏观+QDII+资金面      akshare(美国宏观+全球利率+QDII溢价)
+  data_macro.json           中国宏观数据             akshare(LPR/PMI/CPI/M2/社融/GDP/贸易差额)
 
 每个文件：{"ts":"...", "ok":true/false, "data":..., "error":"..."}
 """
@@ -224,22 +228,8 @@ def fetch_market_cn():
         if len(rows) >= 4:
             return _ok(rows)
 
-    raw = _tencent_quote("sh000001,sz399001,sh000300,sh000688,sz399006")
-    if raw:
-        tencent_map = {"上证指数":"000001","深证成指":"399001",
-                       "沪深300":"000300","科创50":"000688","创业板指":"399006"}
-        rows = []
-        for qc, v in raw.items():
-            if v["name"] in tencent_map:
-                rows.append({
-                    "指数": v["name"], "代码": tencent_map[v["name"]],
-                    "最新价": v["price"], "涨跌幅": v["change_pct"],
-                    "成交量": v["volume"], "今开": v["open"],
-                    "最高": v["high"], "最低": v["low"],
-                })
-        if rows:
-            return _ok(rows)
-    return _fail("A股指数数据全部不可用")
+    # 新浪API失败时直接标注（腾讯兜底相比新浪无增量，不再重复抓取）
+    return _ok([{"指数": n, "代码": c, "error": "新浪API无数据"} for n, c in WANTED])
 
 
 # ─── 2. 港股指数行情（不变）──────────────────────────────────
@@ -265,23 +255,15 @@ def fetch_market_hk():
         if len(rows) >= 2:
             return _ok(rows)
 
-    raw = _tencent_quote("hkHSI,hkHSCEI")
-    name_map = {"HSI":"恒生指数","HSCEI":"恒生中国企业指数"}
-    rows = [{"指数":name_map[k],"代码":k,"最新价":v["price"],
-             "涨跌幅":v["change_pct"],"今开":v["open"],
-             "最高":v["high"],"最低":v["low"]}
-            for k,v in raw.items() if k in name_map]
-    if len(rows) >= 2:
-        return _ok(rows)
-    return _fail("港股指数数据全部不可用")
+    return _fail("港股指数数据全部不可用（新浪API无数据）")
 
 
-# ─── 3. 全球主要指数（v19重写：akshare新浪美股 + 东财全球 + 腾讯兜底）──
+# ─── 3. 全球主要指数（akshare新浪美股 + 东财全球）──
 def fetch_market_global():
     """美股(DJI/SPX/IXIC) + 日经/KOSPI/STOXX"""
     result = {}
 
-    # ── 美股三大指数: akshare新浪 ──
+    # ── 美股三大指数: akshare新浪（单一来源，无需腾讯兜底）──
     us_map = {".DJI": "道琼斯工业", ".INX": "标普500", ".IXIC": "纳斯达克综合"}
     for sym, name in us_map.items():
         data = _akshare_sina_us_index(sym)
@@ -290,19 +272,7 @@ def fetch_market_global():
                            "今开": data["open"], "最高": data["high"], "最低": data["low"],
                            "source": "akshare新浪"}
         else:
-            result[name] = {"代码": sym, "note": "WebSearch备用"}
-
-    # 腾讯API兜底美股
-    if any("note" in result.get(n, {}) for n in us_map.values()):
-        raw = _tencent_quote("usDJI,usIXIC,usSPX")
-        tencent_name = {"DJI":"道琼斯工业","IXIC":"纳斯达克综合","SPX":"标普500"}
-        for qc, v in raw.items():
-            name = tencent_name.get(qc)
-            if name and "note" in result.get(name, {}):
-                result[name] = {"代码": us_map[[k for k,v2 in us_map.items() if v2==name][0]],
-                               "最新价": v["price"], "涨跌幅": v["change_pct"],
-                               "今开": v["open"], "最高": v["high"], "最低": v["low"],
-                               "source": "腾讯API"}
+            result[name] = {"代码": sym, "error": "新浪API无数据"}
 
     # ── 全球指数: akshare东财 ──
     df = _ak_eastmoney("index_global_spot_em")
@@ -319,36 +289,15 @@ def fetch_market_global():
                         break
             except: pass
 
-    # 标记缺失
+    # 标记缺失（东财已覆盖，无需 yfinance 兜底）
     for label in global_targets.values():
         if label not in result:
-            result[label] = {"名称": label, "note": "WebSearch备用"}
-
-    # ── yfinance兜底外围指数（日经225/KOSPI/STOXX600，仅在GitHub Actions环境US IP可用）──
-    _YF_GLOBAL = {"日经225": "^N225", "KOSPI": "^KS11", "STOXX 600": "^STOXX"}
-    try:
-        import yfinance as yf
-        for label, ticker in _YF_GLOBAL.items():
-            if label in result and "note" not in result[label]:
-                continue
-            try:
-                hist = yf.Ticker(ticker).history(period="2d")
-                if hist is not None and len(hist) >= 1:
-                    last = hist.iloc[-1]
-                    prev = hist.iloc[-2] if len(hist) >= 2 else last
-                    chg = (last["Close"]/prev["Close"] - 1) * 100 if prev["Close"] else None
-                    result[label] = {"名称": label, "最新价": round(float(last["Close"]), 2),
-                                     "涨跌幅": round(float(chg), 2) if chg is not None else None,
-                                     "source": "yfinance"}
-            except Exception as e:
-                print(f"    yfinance {ticker} 失败: {e}")
-    except ImportError:
-        print("    yfinance 未安装，跳过外围指数兜底")
+            result[label] = {"名称": label, "error": "东财API无数据"}
 
     return _ok(result)
 
 
-# ─── 4. 汇率/商品/债券（v19重写：akshare期货 + 债券，移除yfinance）───
+# ─── 4. 汇率/商品/债券（akshare期货 + FRED DGS10）───
 def fetch_forex_rate():
     """原油(WTI)/黄金(COMEX)/CNH汇率/中美债券收益率"""
     result = {}
@@ -411,8 +360,8 @@ def fetch_forex_rate():
         if "US10Y" not in result:
             result.setdefault("US10Y", {})["note"] = "FRED获取失败"
 
-    # ── USD/CNH: 无免费API，标记 ──
-    result["USD/CNH"] = {"名称": "美元/离岸人民币", "note": "WebSearch备用"}
+    # ── USD/CNH: 由 fetch_extra 通过 akshare currency_usd_cnh_sina 获取 ──
+    #（此处不重复拉取，fetch_forex_rate 不担保汇率字段）
 
     # 标记缺失
     for k in ["WTI原油","COMEX黄金","CN10Y","US10Y"]:
@@ -430,7 +379,7 @@ def fetch_valuation():
     """A股7大指数价格 + 美股估值 + 恒生科技 + 且慢PE/PB分位"""
     result = {}
 
-    # ── A股指数价格（akshare新浪 → 腾讯API兜底）──
+    # ── A股指数价格（akshare新浪，单一来源）──
     a_indices = [("上证指数","000001"),("深证成指","399001"),("沪深300","000300"),
                  ("科创50","000688"),("创业板指","399006"),
                  ("中证A500","000510"),("中证红利","000922")]
@@ -447,16 +396,7 @@ def fetch_valuation():
                 a_list.append({"指数":name,"代码":code,"最新价":_num(r.get("最新价")),
                                "涨跌幅":pct})
 
-    if len(a_list) < 5:
-        codes = "sh000001,sz399001,sh000300,sh000688,sz399006,sh000510,sh000922"
-        raw = _tencent_quote(codes)
-        name_map = {"上证指数":"000001","深证成指":"399001","沪深300":"000300",
-                    "科创50":"000688","创业板指":"399006","中证A500":"000510","中证红利":"000922"}
-        a_list = [{"指数":v["name"],"代码":name_map[v["name"]],
-                   "最新价":v["price"],"涨跌幅":v["change_pct"]}
-                  for qc,v in raw.items() if v["name"] in name_map]
-
-    result["a_share"] = a_list if a_list else {"error": "无数据"}
+    result["a_share"] = a_list if a_list else {"error": "新浪API无数据"}
 
     # ── 美股估值（akshare新浪 NDX + SPX）──
     us_list = []
@@ -604,31 +544,22 @@ def fetch_industry():
 # 🆕 v22 数据源: 新浪汇率 + akshare资金面 + Google News RSS(英+中) + 宏观扩展(核心PCE/BDI/SOX等)
 # ═══════════════════════════════════════════════════════════════
 
-# ─── 数据源G: 新浪USD/CNH 即期汇率 ─────────────────────────
-def _sina_fx_usdcnh():
-    """获取USD/CNH离岸人民币即期汇率"""
-    try:
-        r = requests.get("https://hq.sinajs.cn/list=fx_susdcnh",
-            headers={"Referer": "https://finance.sina.com.cn/", "User-Agent": UA}, timeout=10)
-        r.encoding = "gbk"
-        # var hq_str_fx_susdcnh="时间,最新价,昨收,开盘,成交量,最高,最低,今开,..."
-        m = re.search(r'"([^"]*)"', r.text)
-        if m:
-            parts = m.group(1).split(",")
-            if len(parts) >= 2:
-                return {"USD_CNH": float(parts[1])} if parts[1] else None
-    except: pass
-    return None
-
-
 def fetch_extra():
     """v22: 汇率+资金面+涨跌(保留) + 美国宏观18+项 + 全球央行利率 + QDII溢价 + 欧洲CPI + BDI/SOX"""
     import akshare as ak
     result = {}
     today_str = datetime.now(TZ_CN).strftime("%Y%m%d")
 
-    # ── 1. USD/CNH 汇率（新浪，保留）──
-    fx = _sina_fx_usdcnh()
+    # ── 1. USD/CNH 汇率（akshare currency_usd_cnh_sina）──
+    try:
+        _df_fx = ak.currency_usd_cnh_sina()
+        if _df_fx is not None and len(_df_fx) > 0:
+            result["USD_CNH"] = round(float(_df_fx.iloc[-1]['最新价']), 4)
+        else:
+            result["USD_CNH"] = None
+    except Exception as e:
+        print(f"    currency_usd_cnh_sina 失败: {e}")
+        result["USD_CNH"] = None
     result["USD_CNH"] = fx["USD_CNH"] if fx else None
 
     # ── 2. 南下/北向资金 + 涨跌家数（保留）──
@@ -752,42 +683,53 @@ def fetch_extra():
             global_rates[label] = {'error': str(e)[:100]}
     result['全球央行利率'] = global_rates
 
-    # ── 🆕 v24: QDII监测 — 场内ETF溢价率（腾讯API+东方财富净值）+ 场外申购额度（东方财富）──
+    # ── 🆕 v25: QDII监测 — 场内ETF溢价率（akshare fund_etf_spot_em自带溢价率）+ 场外申购额度（东方财富）──
     qdii_data = {"场内ETF": [], "场外QDII": []}
-    _etf_list = ["513100","513500","159941","159659","159612","513650"]
+    _etf_set = {"513100","513500","159941","159659","159612","513650"}
     _etf_names = {
         "513100":"纳指ETF国泰","513500":"标普500ETF博时",
         "159941":"纳指ETF广发","159659":"纳斯达克100ETF招商",
         "159612":"标普500ETF国泰","513650":"标普500ETF南方",
     }
-    # 腾讯API批量查询ETF实时价
-    _etf_q = ",".join(
-        f"sh{c}" if c.startswith(("51","56","58")) else f"sz{c}" for c in _etf_list
-    )
-    _etf_raw = _tencent_quote(_etf_q)
-    for _code in _etf_list:
-        _mp = None; _cp = None
-        if _code in _etf_raw:
-            _mp = _etf_raw[_code]["price"]
-            _cp = _etf_raw[_code]["change_pct"]
-        else:
-            # 兜底: 可能带后缀
-            for _k, _v in _etf_raw.items():
-                if _k.startswith(_code):
+    # akshare fund_etf_spot_em 一次性返回实时价+溢价率
+    try:
+        _df_etf = ak.fund_etf_spot_em()
+        if _df_etf is not None and len(_df_etf) > 0:
+            for _, _r in _df_etf.iterrows():
+                _c = str(_r['代码']).strip()
+                if _c in _etf_set:
+                    qdii_data["场内ETF"].append({
+                        "代码": _c,
+                        "名称": _etf_names.get(_c, str(_r.get('名称',''))),
+                        "最新价": _num(_r.get('最新价')),
+                        "涨跌幅": _num(_r.get('涨跌幅')),
+                        "最新净值": _num(_r.get('最新净值')),
+                        "净值日期": str(_r.get('净值日期','')),
+                        "溢价率": _num(_r.get('溢价率')),
+                    })
+    except Exception as e:
+        print(f"    fund_etf_spot_em 失败: {e}")
+        # 兜底: 逐个查询腾讯API+东方财富净值
+        for _code in _etf_set:
+            _q = f"sh{_code}" if _code.startswith(("51","56","58")) else f"sz{_code}"
+            _raw = _tencent_quote(_q)
+            _mp = None; _cp = None
+            for _k, _v in _raw.items():
+                if _k == _code or _k.startswith(_code):
                     _mp = _v["price"]; _cp = _v["change_pct"]; break
-        _nav = None; _nav_d = None
-        try:
-            _df_nav = ak.fund_open_fund_info_em(symbol=_code, indicator="单位净值走势")
-            if _df_nav is not None and len(_df_nav) > 0:
-                _nav = round(float(_df_nav.iloc[-1]['单位净值']), 4)
-                _nav_d = str(_df_nav.iloc[-1]['净值日期'])
-        except: pass
-        _pr = round((_mp - _nav) / _nav * 100, 2) if _mp and _nav and _nav > 0 else None
-        qdii_data["场内ETF"].append({
-            "代码": _code, "名称": _etf_names.get(_code,""),
-            "最新价": _mp, "涨跌幅": _cp,
-            "最新净值": _nav, "净值日期": _nav_d, "溢价率": _pr,
-        })
+            _nav = None; _nav_d = None
+            try:
+                _df_nav = ak.fund_open_fund_info_em(symbol=_code, indicator="单位净值走势")
+                if _df_nav is not None and len(_df_nav) > 0:
+                    _nav = round(float(_df_nav.iloc[-1]['单位净值']), 4)
+                    _nav_d = str(_df_nav.iloc[-1]['净值日期'])
+            except: pass
+            _pr = round((_mp - _nav) / _nav * 100, 2) if _mp and _nav and _nav > 0 else None
+            qdii_data["场内ETF"].append({
+                "代码": _code, "名称": _etf_names.get(_code,""),
+                "最新价": _mp, "涨跌幅": _cp,
+                "最新净值": _nav, "净值日期": _nav_d, "溢价率": _pr,
+            })
     # 场外QDII申购额度
     try:
         import pandas as pd
@@ -957,25 +899,6 @@ def fetch_holdings():
     for code, info in stock_map.items():
         if code not in result:
             result[code] = {**info, "error": "腾讯API无数据"}
-
-    # ── yfinance兜底QQQM/SPY（GitHub Actions US IP可用）──
-    try:
-        import yfinance as yf
-        for code in ("QQQM", "SPY"):
-            if code not in result or "error" in result[code]:
-                try:
-                    h = yf.Ticker(code).history(period="2d")
-                    if h is not None and len(h) >= 1:
-                        last, prev = h.iloc[-1], (h.iloc[-2] if len(h) >= 2 else h.iloc[-1])
-                        chg = (last["Close"]/prev["Close"] - 1) * 100 if prev["Close"] else None
-                        result[code] = {**stock_map[code],
-                                        "最新价": round(float(last["Close"]), 2),
-                                        "涨跌幅": round(float(chg), 2) if chg is not None else None,
-                                        "source": "yfinance"}
-                except Exception as e:
-                    print(f"    yfinance {code} 失败: {e}")
-    except ImportError:
-        print("    yfinance 未安装，跳过QQQM/SPY兜底")
 
     # 🆕 v21: A股分红历史
     dividend_a = {}
