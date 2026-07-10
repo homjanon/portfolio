@@ -43,7 +43,7 @@ python3 /workspace/prefetch_data.py
 | 🆕 行业+资金 | `data_industry.json` | akshare(申万+同花顺+乐咕乐股) | 31行业涨跌幅TOP3/BOTTOM3+90行业资金净流入+全市场PE日更 |
 | 🆕 持仓+分红+监督池 | `data_holdings.json` | 腾讯API+akshare(分红+研报) | 招行A/H/长电/563020/QQQM/SPY行情+54只监督池行情+分红日历+研报评级 |
 | 全球TOP10新闻 | `data_news_rss.json` | Google News RSS 英文(9外媒白名单)+中文(国内财经媒体) | 当日英文15条财经头条+中文15条国内财经头条 |
-| 🆕 全球宏观+QDII | `data_extra.json` | akshare(美国宏观+全球利率+QDII溢价)+新浪汇率 | 美国18+项宏观/全球央行利率/40只QDII溢价/欧元区CPI/资金流/涨跌/BDI/SOX |
+| 🆕 全球宏观+QDII | `data_extra.json` | akshare(美国宏观+全球利率+东方财富)+新浪汇率 | 美国18+项宏观/全球央行利率/QDII申购额度+6只场内ETF溢价/欧元区CPI/资金流/涨跌/BDI/SOX |
 | 🆕 中国宏观 | `data_macro.json` | akshare宏观数据 | LPR/PMI/CPI/M2/社融/GDP/贸易差额 |
 
 **使用规则**：
@@ -183,9 +183,22 @@ python3 /workspace/prefetch_data.py
 从中挑选 **5 只最值得分析**的标的（优先考虑当日异动幅度大、近期有事件催化、与持仓行业相关的标的），
 各给出未来1周的关键催化事件（政策动向/财报预期/行业事件），每只1句话。自然叙述，进入朗读版。
 
-#### QDII ETF 溢价监测
+#### QDII 溢价与申购额度监测
 
-📊 先读取 `data_extra.json` → "QDII_溢价"字段获取40只QDII ETF溢价率（集思录JSL数据）。**仅列示溢价>3%或折价>2%的异常品种**（常态下≤3只），正常品种无需列出。若无异常，注明「QDII溢价整体正常，最高溢价约x.xx%（xx ETF）」。纳指ETF（513100/159941等）JSL未覆盖，需联网搜索补充。
+📊 先读取 `data_extra.json` → "QDII_监测"字段获取场内ETF溢价率 + 场外QDII申购额度。
+
+**场内ETF溢价率**：关注6只核心ETF，溢价率=（腾讯API实时价-最新净值）/最新净值×100%。**仅列示溢价>3%或折价>2%的异常品种**。若无异常，注明「QDII溢价整体正常，最高溢价约x.xx%（xx ETF）」。
+
+| ETF | 代码 | 跟踪指数 |
+|-----|------|---------|
+| 纳指ETF国泰 | 513100 | 纳斯达克100 |
+| 纳指ETF广发 | 159941 | 纳斯达克100 |
+| 纳斯达克100ETF招商 | 159659 | 纳斯达克100 |
+| 标普500ETF博时 | 513500 | 标普500 |
+| 标普500ETF国泰 | 159612 | 标普500 |
+| 标普500ETF南方 | 513650 | 标普500 |
+
+**场外QDII申购额度**：自动筛选纳指/标普/纳斯达克相关的指数型海外基金，列出申购状态和日累计限定金额。重点关注限购品种。
 
 - 溢价判定：±1%正常 / >3%明显溢价 / 折价>2%关注
 - 仅异常品种用表格展示，格式：`|代码|名称|溢价率|评估|`
@@ -254,7 +267,7 @@ v22: +申万实时涨跌幅+同花顺资金流+中美宏观+全球央行利率+Q
   data_industry.json        🆕 申万31行业涨跌幅+同花顺90行业资金流+全市场PE  akshare(申万+同花顺+乐咕乐股)
   data_holdings.json        🆕 个人持仓+监督池行情+分红+研报  腾讯API + akshare(分红+研报)
   data_news_rss.json        全球TOP10新闻源          Google News RSS 英文(9外媒白名单) + 中文(国内财经媒体)
-  data_extra.json           🆕 全球宏观+QDII+资金面   akshare(美国18+项宏观+全球央行利率+QDII溢价+欧洲CPI+BDI/SOX)
+  data_extra.json           🆕 全球宏观+QDII+资金面   akshare(美国18+项宏观+全球央行利率+东方财富QDII申购/溢价+欧洲CPI+BDI/SOX)
   data_macro.json           🆕 中国宏观数据           akshare(LPR/PMI/CPI/M2/社融/GDP/贸易差额)
 
 每个文件：{"ts":"...", "ok":true/false, "data":..., "error":"..."}
@@ -959,31 +972,66 @@ def fetch_extra():
             global_rates[label] = {'error': str(e)[:100]}
     result['全球央行利率'] = global_rates
 
-    # ── 🆕 7. QDII ETF溢价率（集思录 JSL）──
+    # ── 🆕 v24: QDII监测 — 场内ETF溢价率（腾讯API+东方财富净值）+ 场外申购额度（东方财富）──
+    qdii_data = {"场内ETF": [], "场外QDII": []}
+    _etf_list = ["513100","513500","159941","159659","159612","513650"]
+    _etf_names = {
+        "513100":"纳指ETF国泰","513500":"标普500ETF博时",
+        "159941":"纳指ETF广发","159659":"纳斯达克100ETF招商",
+        "159612":"标普500ETF国泰","513650":"标普500ETF南方",
+    }
+    # 腾讯API批量查询ETF实时价
+    _etf_q = ",".join(
+        f"sh{c}" if c.startswith(("51","56","58")) else f"sz{c}" for c in _etf_list
+    )
+    _etf_raw = _tencent_quote(_etf_q)
+    for _code in _etf_list:
+        _mp = None; _cp = None
+        if _code in _etf_raw:
+            _mp = _etf_raw[_code]["price"]
+            _cp = _etf_raw[_code]["change_pct"]
+        else:
+            # 兜底: 可能带后缀
+            for _k, _v in _etf_raw.items():
+                if _k.startswith(_code):
+                    _mp = _v["price"]; _cp = _v["change_pct"]; break
+        _nav = None; _nav_d = None
+        try:
+            _df_nav = ak.fund_open_fund_info_em(symbol=_code, indicator="单位净值走势")
+            if _df_nav is not None and len(_df_nav) > 0:
+                _nav = round(float(_df_nav.iloc[-1]['单位净值']), 4)
+                _nav_d = str(_df_nav.iloc[-1]['净值日期'])
+        except: pass
+        _pr = round((_mp - _nav) / _nav * 100, 2) if _mp and _nav and _nav > 0 else None
+        qdii_data["场内ETF"].append({
+            "代码": _code, "名称": _etf_names.get(_code,""),
+            "最新价": _mp, "涨跌幅": _cp,
+            "最新净值": _nav, "净值日期": _nav_d, "溢价率": _pr,
+        })
+    # 场外QDII申购额度
     try:
         import pandas as pd
-        df_a = ak.qdii_a_index_jsl()
-        df_e = ak.qdii_e_index_jsl()
-        df_all = pd.concat([df_a, df_e])
-        qdii_list = []
-        for _, r in df_all.iterrows():
-            premium = r.get('溢价率')
-            if premium is None or premium == '-' or (isinstance(premium, float) and pd.isna(premium)):
-                premium = r.get('T-1溢价率', 'N/A')
-            qdii_list.append({
-                '代码': str(r['代码']),
-                '名称': str(r['名称']),
-                '现价': str(r.get('现价', '')),
-                '净值': str(r.get('净值', r.get('T-2净值', ''))),
-                '净值日期': str(r.get('净值日期', r.get('估值日期', ''))),
-                '溢价率': str(premium) if premium is not None else 'N/A',
-                '涨幅': str(r.get('涨幅', '')),
-            })
-        result['QDII_溢价'] = qdii_list
-        result['QDII_总数'] = len(qdii_list)
+        _df = ak.fund_purchase_em()
+        _qdii_kw = ["纳指","纳斯达克","标普500","标普"]
+        _seen = set()
+        for _kw in _qdii_kw:
+            _mask = _df['基金简称'].str.contains(_kw, na=False) & _df['基金类型'].str.contains('海外', na=False)
+            for _, _r in _df[_mask].iterrows():
+                _c = str(_r['基金代码'])
+                if _c in _seen: continue
+                _seen.add(_c)
+                _lim = _r['日累计限定金额']
+                qdii_data["场外QDII"].append({
+                    "代码": _c,
+                    "简称": str(_r['基金简称']),
+                    "最新净值": str(_r['最新净值/万份收益']),
+                    "净值日期": str(_r['最新净值/万份收益-报告时间']),
+                    "申购状态": str(_r['申购状态']),
+                    "日累计限定金额": round(float(_lim), 2) if pd.notna(_lim) and _lim else 0,
+                })
     except Exception as e:
-        result['_QDII_error'] = str(e)[:100]
-        result['QDII_溢价'] = []
+        qdii_data["_场外_error"] = str(e)[:100]
+    result['QDII_监测'] = qdii_data
 
     # ── 🆕 8. 欧洲CPI/GDP ──
     eu_macro = {}

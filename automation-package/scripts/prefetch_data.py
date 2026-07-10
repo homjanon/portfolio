@@ -718,31 +718,66 @@ def fetch_extra():
             global_rates[label] = {'error': str(e)[:100]}
     result['全球央行利率'] = global_rates
 
-    # ── 🆕 7. QDII ETF溢价率（集思录 JSL）──
+    # ── 🆕 v24: QDII监测 — 场内ETF溢价率（腾讯API+东方财富净值）+ 场外申购额度（东方财富）──
+    qdii_data = {"场内ETF": [], "场外QDII": []}
+    _etf_list = ["513100","513500","159941","159659","159612","513650"]
+    _etf_names = {
+        "513100":"纳指ETF国泰","513500":"标普500ETF博时",
+        "159941":"纳指ETF广发","159659":"纳斯达克100ETF招商",
+        "159612":"标普500ETF国泰","513650":"标普500ETF南方",
+    }
+    # 腾讯API批量查询ETF实时价
+    _etf_q = ",".join(
+        f"sh{c}" if c.startswith(("51","56","58")) else f"sz{c}" for c in _etf_list
+    )
+    _etf_raw = _tencent_quote(_etf_q)
+    for _code in _etf_list:
+        _mp = None; _cp = None
+        if _code in _etf_raw:
+            _mp = _etf_raw[_code]["price"]
+            _cp = _etf_raw[_code]["change_pct"]
+        else:
+            # 兜底: 可能带后缀
+            for _k, _v in _etf_raw.items():
+                if _k.startswith(_code):
+                    _mp = _v["price"]; _cp = _v["change_pct"]; break
+        _nav = None; _nav_d = None
+        try:
+            _df_nav = ak.fund_open_fund_info_em(symbol=_code, indicator="单位净值走势")
+            if _df_nav is not None and len(_df_nav) > 0:
+                _nav = round(float(_df_nav.iloc[-1]['单位净值']), 4)
+                _nav_d = str(_df_nav.iloc[-1]['净值日期'])
+        except: pass
+        _pr = round((_mp - _nav) / _nav * 100, 2) if _mp and _nav and _nav > 0 else None
+        qdii_data["场内ETF"].append({
+            "代码": _code, "名称": _etf_names.get(_code,""),
+            "最新价": _mp, "涨跌幅": _cp,
+            "最新净值": _nav, "净值日期": _nav_d, "溢价率": _pr,
+        })
+    # 场外QDII申购额度
     try:
         import pandas as pd
-        df_a = ak.qdii_a_index_jsl()
-        df_e = ak.qdii_e_index_jsl()
-        df_all = pd.concat([df_a, df_e])
-        qdii_list = []
-        for _, r in df_all.iterrows():
-            premium = r.get('溢价率')
-            if premium is None or premium == '-' or (isinstance(premium, float) and pd.isna(premium)):
-                premium = r.get('T-1溢价率', 'N/A')
-            qdii_list.append({
-                '代码': str(r['代码']),
-                '名称': str(r['名称']),
-                '现价': str(r.get('现价', '')),
-                '净值': str(r.get('净值', r.get('T-2净值', ''))),
-                '净值日期': str(r.get('净值日期', r.get('估值日期', ''))),
-                '溢价率': str(premium) if premium is not None else 'N/A',
-                '涨幅': str(r.get('涨幅', '')),
-            })
-        result['QDII_溢价'] = qdii_list
-        result['QDII_总数'] = len(qdii_list)
+        _df = ak.fund_purchase_em()
+        _qdii_kw = ["纳指","纳斯达克","标普500","标普"]
+        _seen = set()
+        for _kw in _qdii_kw:
+            _mask = _df['基金简称'].str.contains(_kw, na=False) & _df['基金类型'].str.contains('海外', na=False)
+            for _, _r in _df[_mask].iterrows():
+                _c = str(_r['基金代码'])
+                if _c in _seen: continue
+                _seen.add(_c)
+                _lim = _r['日累计限定金额']
+                qdii_data["场外QDII"].append({
+                    "代码": _c,
+                    "简称": str(_r['基金简称']),
+                    "最新净值": str(_r['最新净值/万份收益']),
+                    "净值日期": str(_r['最新净值/万份收益-报告时间']),
+                    "申购状态": str(_r['申购状态']),
+                    "日累计限定金额": round(float(_lim), 2) if pd.notna(_lim) and _lim else 0,
+                })
     except Exception as e:
-        result['_QDII_error'] = str(e)[:100]
-        result['QDII_溢价'] = []
+        qdii_data["_场外_error"] = str(e)[:100]
+    result['QDII_监测'] = qdii_data
 
     # ── 🆕 8. 欧洲CPI/GDP ──
     eu_macro = {}
