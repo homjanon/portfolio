@@ -1,7 +1,7 @@
 __pycache__/
 *.pyc
 data_*.json
-report.md
-daily-report.html
-daily-report.mp3
+/report.md
+/daily-report.html
+/daily-report.mp3
 automation-package.zip
