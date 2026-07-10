@@ -21,6 +21,7 @@ jobs:
     permissions:
       contents: write
       pages: write
+      models: read
 
     steps:
       - name: 检出代码

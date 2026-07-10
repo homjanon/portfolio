@@ -15,9 +15,13 @@ PROMPT_PATH = os.path.join(os.path.dirname(__file__), "..", "prompt", "daily_rep
 LLM_CONFIGS = [
     {
         "name": "GitHub Models GPT-4.1",
-        "api_url": "https://models.github.ai/v1/chat/completions",
+        "api_url": "https://models.github.ai/inference/chat/completions",
         "api_key_env": "GITHUB_TOKEN",
-        "model": "gpt-4.1",
+        "model": "openai/gpt-4.1",
+        "extra_headers": {
+            "Accept": "application/vnd.github+json",
+            "X-GitHub-Api-Version": "2022-11-28",
+        },
     },
     {
         "name": "Zhipu GLM-4.7-Flash",
@@ -28,8 +32,11 @@ LLM_CONFIGS = [
 ]
 
 
-def _call_llm(api_url, api_key, model, system, user, timeout=180):
+def _call_llm(api_url, api_key, model, system, user, timeout=180, extra_headers=None):
     """通用 OpenAI 兼容 LLM 调用器，含指数退避重试。"""
+    headers = {"Authorization": f"Bearer {api_key}"}
+    if extra_headers:
+        headers.update(extra_headers)
     payload = {
         "model": model,
         "temperature": 0.3,
@@ -43,7 +50,7 @@ def _call_llm(api_url, api_key, model, system, user, timeout=180):
         try:
             resp = requests.post(
                 api_url,
-                headers={"Authorization": f"Bearer {api_key}"},
+                headers=headers,
                 json=payload,
                 timeout=timeout,
             )
@@ -106,7 +113,8 @@ def main():
         print(f"🤖 调用 {llm['name']} ({llm['model']})...")
         try:
             content = _call_llm(
-                llm["api_url"], api_key, llm["model"], system, user
+                llm["api_url"], api_key, llm["model"], system, user,
+                extra_headers=llm.get("extra_headers"),
             )
             print(f"✅ {llm['name']} 成功")
             break
