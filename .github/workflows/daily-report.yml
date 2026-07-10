@@ -2,8 +2,8 @@ name: 每日金融日报
 
 on:
   schedule:
-    # 北京时间 06:50 = UTC 前一日 22:50
-    - cron: '50 22 * * *'
+    # 北京时间 07:30 = UTC 前一日 23:30
+    - cron: '30 23 * * *'
   workflow_dispatch:
     inputs:
       skip_mp3:
@@ -21,7 +21,6 @@ jobs:
     timeout-minutes: 15
     permissions:
       contents: write
-      pages: write
 
     steps:
       - name: 检出代码
@@ -84,23 +83,18 @@ jobs:
           echo "▶ 生成 MP3 音频..."
           python3 scripts/md_to_mp3.py
 
-      - name: 准备部署文件
-        id: prepare_deploy
+      - name: 部署到主分支 docs/ 目录
         if: always()
         run: |
-          mkdir -p _site
-          cp daily-report.html _site/ 2>/dev/null || true
-          cp report.md _site/daily-report.md 2>/dev/null || true
-          cp daily-report.mp3 _site/ 2>/dev/null || true
-          cp web/sw.js _site/ 2>/dev/null || true
-          echo "部署目录 _site 内容:"
-          ls -la _site/
+          mkdir -p docs
+          cp daily-report.html docs/ 2>/dev/null || true
+          cp report.md docs/daily-report.md 2>/dev/null || true
+          cp daily-report.mp3 docs/ 2>/dev/null || true
+          cp web/sw.js docs/ 2>/dev/null || true
 
-      - name: 部署到 GitHub Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
-          publish_branch: gh-pages
-          force_orphan: true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/
+          # 只有内容有变化时才提交+推送（避免空提交循环）
+          git diff --staged --quiet || git commit -m "每日日报 $(date +%Y-%m-%d)"
+          git push
