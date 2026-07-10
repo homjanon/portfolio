@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 """
 预抓取金融市场数据 — 按板块切分为结构化 JSON 文件。
-v25: 精简数据源架构：akshare 主覆盖(~90%) + 雪球蛋卷(估值分位) + 腾讯API(实时个股) + Google RSS(新闻)
-     - 移除 yfinance（东财+腾讯已够）
-     - 移除新浪直连（统一 akshare currency_usd_cnh_sina）
-     - QDII ETF 改用 akshare fund_etf_spot_em（自带溢价率）
-     - 指数数据单一来源 akshare，去掉腾讯兜底
+v26: 新增统一 yfinance 兜底函数，在其他数据源失败时自动调用
+     - _yf_fallback() 覆盖外围指数/US10Y/美股持仓/A股/港股
+     - 不影响主数据源流程，仅当主源返回空/错误时触发
 
 输出文件（11个，均在 data_*.json，默认当前目录）：
   data_market_cn.json       A股5大指数行情           akshare新浪
@@ -195,6 +193,53 @@ def _fetch_danjuan_valuation():
         return {}
 
 
+# ─── 数据源E: yfinance 统一兜底 ──────────────────────────────
+def _yf_fallback(ticker_map):
+    """统一 yfinance 兜底函数，在其他数据源返回空/错误时调用。
+    
+    ticker_map: dict {输出key: yfinance ticker字符串}
+      如 {"日经225": "^N225", "KOSPI": "^KS11", "QQQM": "QQQM"}
+    
+    返回 dict {输出key: {"最新价": float, "涨跌幅": float}} 
+    全部失败返回空dict，永不抛异常。
+    
+    yfinance Ticker.history() 输出列: Open, High, Low, Close, Volume
+    需 ≥2 个交易日计算涨跌幅。
+    """
+    if not ticker_map:
+        return {}
+    try:
+        import yfinance as yf
+    except ImportError:
+        return {}
+    
+    result = {}
+    for idx, (key, ticker) in enumerate(ticker_map.items()):
+        try:
+            if idx > 0:
+                time.sleep(1.5)  # 避免 yfinance 频率限制
+            tk = yf.Ticker(ticker)
+            hist = tk.history(period="5d", auto_adjust=True)
+            if hist is None or hist.empty:
+                continue
+            close = hist['Close'].dropna()
+            if len(close) >= 2:
+                price = round(float(close.iloc[-1]), 2)
+                prev = round(float(close.iloc[-2]), 2)
+                chg_pct = round((price - prev) / prev * 100, 2)
+                result[key] = {"最新价": price, "涨跌幅": chg_pct}
+            elif len(close) == 1:
+                price = round(float(close.iloc[-1]), 2)
+                result[key] = {"最新价": price, "涨跌幅": None}
+        except:
+            pass
+    
+    if result:
+        items_str = ", ".join(f"{k}={v.get('最新价', '?')}" for k, v in result.items())
+        print(f"    yfinance兜底[{', '.join(result.keys())}]: {items_str}")
+    return result
+
+
 # ═══════════════════════════════════════════════════════════════
 # 业务模块
 # ═══════════════════════════════════════════════════════════════
@@ -228,8 +273,18 @@ def fetch_market_cn():
         if len(rows) >= 4:
             return _ok(rows)
 
-    # 新浪API失败时直接标注（腾讯兜底相比新浪无增量，不再重复抓取）
-    return _ok([{"指数": n, "代码": c, "error": "新浪API无数据"} for n, c in WANTED])
+    # 新浪API失败 → yfinance 兜底（只兜底上证指数 000001.SS）
+    yf_cn = _yf_fallback({"上证指数": "000001.SS"})
+    rows = []
+    for n, c in WANTED:
+        if n == "上证指数" and yf_cn.get("上证指数"):
+            d = yf_cn["上证指数"]
+            rows.append({"指数": n, "代码": c,
+                        "最新价": d["最新价"], "涨跌幅": d["涨跌幅"],
+                        "source": "yfinance兜底"})
+        else:
+            rows.append({"指数": n, "代码": c, "error": "新浪API无数据"})
+    return _ok(rows)
 
 
 # ─── 2. 港股指数行情（不变）──────────────────────────────────
@@ -255,7 +310,18 @@ def fetch_market_hk():
         if len(rows) >= 2:
             return _ok(rows)
 
-    return _fail("港股指数数据全部不可用（新浪API无数据）")
+    # 新浪API失败 → yfinance 兜底
+    yf_hk = _yf_fallback({"恒生指数": "^HSI", "恒生中国企业指数": "^HSCE"})
+    rows = []
+    for name, yf_key in [("恒生指数", "恒生指数"), ("恒生中国企业指数", "恒生中国企业指数")]:
+        if yf_hk.get(yf_key):
+            d = yf_hk[yf_key]
+            rows.append({"指数": name, "代码": yf_key,
+                        "最新价": d["最新价"], "涨跌幅": d["涨跌幅"],
+                        "source": "yfinance兜底"})
+        else:
+            rows.append({"指数": name, "code": name, "error": "全部数据源不可用"})
+    return _ok(rows)
 
 
 # ─── 3. 全球主要指数（akshare新浪美股 + 东财全球）──
@@ -263,8 +329,9 @@ def fetch_market_global():
     """美股(DJI/SPX/IXIC) + 日经/KOSPI/STOXX"""
     result = {}
 
-    # ── 美股三大指数: akshare新浪（单一来源，无需腾讯兜底）──
+    # ── 美股三大指数: akshare新浪 → yfinance兜底 ──
     us_map = {".DJI": "道琼斯工业", ".INX": "标普500", ".IXIC": "纳斯达克综合"}
+    us_yf = {"道琼斯工业": "^DJI", "标普500": "^GSPC", "纳斯达克综合": "^IXIC"}
     for sym, name in us_map.items():
         data = _akshare_sina_us_index(sym)
         if data:
@@ -274,8 +341,17 @@ def fetch_market_global():
         else:
             result[name] = {"代码": sym, "error": "新浪API无数据"}
 
-    # ── 全球指数: akshare东财 ──
+    # ── 美股 yfinance 兜底 ──
+    us_missing = {n: us_yf[n] for n in us_map.values()
+                  if n in result and result[n].get("error")}
+    if us_missing:
+        for label, data in _yf_fallback(us_missing).items():
+            result[label] = {"代码": us_yf[label], "最新价": data["最新价"],
+                            "涨跌幅": data["涨跌幅"], "source": "yfinance兜底"}
+
+    # ── 全球指数: akshare东财 → yfinance兜底 ──
     df = _ak_eastmoney("index_global_spot_em")
+    global_yf = {"日经225": "^N225", "KOSPI": "^KS11", "STOXX": "^STOXX"}
     global_targets = {"日经225": "日经225", "韩国KOSPI": "KOSPI", "STOXX": "STOXX 600"}
     if df is not None and len(df) > 0:
         for _, r in df.iterrows():
@@ -289,10 +365,21 @@ def fetch_market_global():
                         break
             except: pass
 
-    # 标记缺失（东财已覆盖，无需 yfinance 兜底）
-    for label in global_targets.values():
+    # 外围 yfinance 兜底
+    global_missing = {label: global_yf[label] for label in global_yf
+                      if label not in result
+                      or (label in result and result[label].get("error"))
+                      or result[label].get("最新价") is None}
+    if global_missing:
+        for label, data in _yf_fallback(global_missing).items():
+            result[label] = {"名称": label, "最新价": data["最新价"],
+                            "涨跌幅": data["涨跌幅"], "source": "yfinance兜底"}
+
+    # 标记完全缺失
+    all_labels = list(us_map.values()) + list(global_targets.values())
+    for label in all_labels:
         if label not in result:
-            result[label] = {"名称": label, "error": "东财API无数据"}
+            result[label] = {"名称": label, "error": "全部数据源不可用"}
 
     return _ok(result)
 
@@ -346,6 +433,7 @@ def fetch_forex_rate():
     except: pass
 
     # US10Y via FRED DGS10（直连文本文件，无需API Key）
+    us10y_ok = False
     try:
         r = requests.get("https://fred.stlouisfed.org/data/DGS10.txt", timeout=20)
         for line in reversed([l for l in r.text.splitlines() if l and not l.startswith("#")]):
@@ -354,11 +442,19 @@ def fetch_forex_rate():
                 result["US10Y"] = {"名称": "10Y美国国债收益率",
                                    "最新值": _num(parts[1]), "日期": parts[0],
                                    "source": "FRED DGS10"}
+                us10y_ok = True
                 break
     except Exception as e:
         print(f"    FRED DGS10 失败: {e}")
-        if "US10Y" not in result:
-            result.setdefault("US10Y", {})["note"] = "FRED获取失败"
+
+    # US10Y yfinance 兜底（^TNX，值为收益率如4.54）
+    if not us10y_ok:
+        yf_us10y = _yf_fallback({"US10Y": "^TNX"})
+        if yf_us10y.get("US10Y"):
+            result["US10Y"] = {"名称": "10Y美国国债收益率",
+                               "最新值": yf_us10y["US10Y"]["最新价"],
+                               "涨跌幅": yf_us10y["US10Y"]["涨跌幅"],
+                               "source": "yfinance兜底(^TNX)"}
 
     # ── USD/CNH: 由 fetch_extra 通过 akshare currency_usd_cnh_sina 获取 ──
     #（此处不重复拉取，fetch_forex_rate 不担保汇率字段）
@@ -899,6 +995,20 @@ def fetch_holdings():
     for code, info in stock_map.items():
         if code not in result:
             result[code] = {**info, "error": "腾讯API无数据"}
+
+    # QQQM/SPY yfinance 兜底
+    yf_needed = {}
+    for code in ["QQQM", "SPY"]:
+        if code in result and result[code].get("error"):
+            yf_needed[code] = code  # yfinance ticker 与 code 相同
+    if yf_needed:
+        yf_data = _yf_fallback(yf_needed)
+        for code, data in yf_data.items():
+            if code in stock_map:
+                result[code] = {**stock_map[code],
+                                "最新价": data["最新价"],
+                                "涨跌幅": data["涨跌幅"],
+                                "source": "yfinance兜底"}
 
     # 🆕 v21: A股分红历史
     dividend_a = {}
