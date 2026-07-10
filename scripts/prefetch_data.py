@@ -18,7 +18,7 @@ v29: QDII场外纳指100/标普500可申购大额度 + RSS desc截断600
 每个文件：{"ts":"...", "ok":true/false, "data":..., "error":"..."}
 """
 
-import json, os, sys, traceback, time, re, requests, xml.etree.ElementTree as ET
+import json, os, sys, signal, traceback, time, re, requests, xml.etree.ElementTree as ET
 from datetime import datetime, timezone, timedelta
 
 # 全局抑制 tqdm 进度条，避免 GitHub Actions 日志超限
@@ -1129,6 +1129,16 @@ def fetch_macro():
     return _ok(result)
 
 
+# ─── 每模块超时机制（防止单个 API 卡死整条流水线）───
+_MODULE_TIMEOUT = 120  # 秒
+
+class _ModuleTimeout(Exception):
+    pass
+
+def _timeout_handler(signum, frame):
+    raise _ModuleTimeout("模块执行超时")
+
+
 # ═══════════════════════════════════════════════════════════════
 # 主流程
 # ═══════════════════════════════════════════════════════════════
@@ -1150,18 +1160,28 @@ def main():
     ]
 
     successes = 0
+    signal.signal(signal.SIGALRM, _timeout_handler)
+
     for fname, func, label in modules:
         print(f"▶ [{label}] {fname} ...", end=" ", flush=True)
+        signal.alarm(_MODULE_TIMEOUT)
         try:
             result = func()
+            signal.alarm(0)
             _write(fname, result)
             if result.get("ok"): successes += 1
             else: print("  ⚠️")
+        except _ModuleTimeout:
+            signal.alarm(0)
+            print(f"  ⏰ 超时（>{_MODULE_TIMEOUT}s）")
+            _write(fname, _fail(f"模块执行超过{_MODULE_TIMEOUT}s，已跳过"))
         except Exception as e:
+            signal.alarm(0)
             print("  ❌")
             traceback.print_exc()
             _write(fname, _fail(e))
         time.sleep(1)
+        signal.alarm(0)  # 确保清理
 
     total = len(modules)
     print(f"\n═══ 完成: {successes}/{total} 个文件成功 ═══")
