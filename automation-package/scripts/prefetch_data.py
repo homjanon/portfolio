@@ -853,7 +853,8 @@ def _fetch_rss_news():
 
 # ─── 8. 个人持仓标的行情 + 监督池行情（v23: +563020 + 监督池批量）───
 def fetch_holdings():
-    """个人持仓(招行A/H/长电/563020/QQQM/SPY) + 监督池批量行情"""
+    """个人持仓(招行A/H/长电/563020/QQQM/SPY) + 监督池批量行情
+    美股通过腾讯API获取，自动截取交易所后缀(.OQ/.AM等)匹配stock_map"""
     raw = _tencent_quote("sh600036,hk03968,sh600900,sh563020,usQQQM,usSPY")
     result = {}
 
@@ -866,12 +867,22 @@ def fetch_holdings():
         "SPY":    {"名称":"SPY","市场":"美股","备注":"标普500 ETF"},
     }
     for qc, v in raw.items():
+        # 直接匹配（A股/港股）
         if qc in stock_map:
             result[qc] = {
                 **stock_map[qc],
                 "最新价": v["price"],
                 "涨跌幅": v["change_pct"],
             }
+        # 美股后缀截取: "QQQM.OQ"→"QQQM", "SPY.AM"→"SPY"
+        elif "." in qc:
+            _bare = qc.split(".")[0]
+            if _bare in stock_map:
+                result[_bare] = {
+                    **stock_map[_bare],
+                    "最新价": v["price"],
+                    "涨跌幅": v["change_pct"],
+                }
 
     # 标记缺失
     for code, info in stock_map.items():
