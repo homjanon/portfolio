@@ -26,11 +26,10 @@ jobs:
       - name: 检出代码
         uses: actions/checkout@v4
 
-      - name: 设置 Python
+      - name: 设置 Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: pip
 
       - name: 安装依赖
         run: |
@@ -74,12 +73,22 @@ jobs:
           echo "▶ 生成 MP3 音频..."
           python3 scripts/md_to_mp3.py report.md daily-report.mp3
 
-      - name: 部署到 GitHub Pages
+      - name: 准备部署文件
+        id: prepare_deploy
         if: always()
+        run: |
+          mkdir -p _site
+          cp daily-report.html _site/ 2>/dev/null || true
+          cp daily-report.mp3 _site/ 2>/dev/null || true
+          cp web/sw.js _site/ 2>/dev/null || true
+          echo "部署目录 _site 内容:"
+          ls -la _site/
+
+      - name: 部署到 GitHub Pages
+        if: always() && steps.prepare_deploy.outputs.run != 'skipped'
         uses: peaceiris/actions-gh-pages@v4
         with:
           personal_token: ${{ secrets.GH_PAGES_TOKEN }}
-          publish_dir: ./
+          publish_dir: ./_site
           publish_branch: gh-pages
           force_orphan: true
-          file_pattern: 'daily-report.html daily-report.mp3 web/sw.js'
