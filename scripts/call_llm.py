@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 调用 LLM 生成日报：
-  主模型: NVIDIA Nemotron-Ultra-253B (NVIDIA_API_KEY)
+  主模型: NVIDIA Nemotron-3-Super-120B (NVIDIA_API_KEY)
   兜底: NVIDIA GLM-5.2 (NVIDIA_API_KEY)
   最后兜底: 商汤 DeepSeek-V4-Flash (SENSENOVA_API_KEY)
 
@@ -16,10 +16,10 @@ from datetime import datetime, timezone, timedelta
 PROMPT_PATH = os.path.join(os.path.dirname(__file__), "..", "prompt", "daily_report_prompt.txt")
 LLM_CONFIGS = [
     {
-        "name": "NVIDIA Nemotron-Ultra-253B",
+        "name": "NVIDIA Nemotron-3-Super-120B",
         "api_url": "https://integrate.api.nvidia.com/v1",
         "api_key_env": "NVIDIA_API_KEY",
-        "model": "nvidia/llama-3.1-nemotron-ultra-253b-v1",
+        "model": "nvidia/nemotron-3-super-120b-a12b",
     },
     {
         "name": "NVIDIA GLM-5.2",
