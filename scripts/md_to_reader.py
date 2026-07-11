@@ -459,6 +459,12 @@ def _render_text_line(line):
     if plain.startswith('数据来源') or plain.startswith('来源声明'):
         return ''
 
+    # 过滤各板块的数据时间戳（已由 call_llm.py 后处理清除，此处双重保险）
+    if re.match(r'>\s*数据时间[：:]\s*\d{4}-\d{2}-\d{2}', stripped):
+        return ''
+    if re.match(r'\*\*查询时间\*\*[：:]', stripped):
+        return ''
+
     # 引用块
     if stripped.startswith('> '):
         content = stripped[2:].strip()
