@@ -179,13 +179,14 @@ hr{border:none;border-top:1px solid var(--border);margin:20px 0}
 <div class="article">
 <h2>一、市场全景</h2>
 
-<h3>A股收盘（前一日）</h3>
+<h3>A股收盘</h3>
 <div class="table-wrap"><table class="data-table">
 <thead><tr>
 <th class="">指数</th>
 <th class="num">代码</th>
 <th class="num">最新价</th>
 <th class="num">涨跌幅</th>
+<th class="num">成交额</th>
 </tr></thead>
 <tbody>
 <tr>
@@ -193,40 +194,43 @@ hr{border:none;border-top:1px solid var(--border);margin:20px 0}
 <td class="num">000001</td>
 <td class="num">3996.16</td>
 <td class="num"><strong class="down">↓1.00%</strong></td>
+<td class="num">1.56万亿</td>
 </tr>
 <tr>
 <td class="label">深证成指</td>
 <td class="num">399001</td>
 <td class="num">15046.67</td>
 <td class="num"><strong class="down">↓2.29%</strong></td>
+<td class="num">1.83万亿</td>
 </tr>
 <tr>
 <td class="label">沪深300</td>
 <td class="num">000300</td>
 <td class="num">4780.79</td>
 <td class="num"><strong class="down">↓1.96%</strong></td>
+<td class="num">1.08万亿</td>
 </tr>
 <tr>
 <td class="label">科创50</td>
 <td class="num">000688</td>
 <td class="num">2064.98</td>
 <td class="num"><strong class="down">↓5.53%</strong></td>
+<td class="num">2350.96亿</td>
 </tr>
 <tr>
 <td class="label">创业板指</td>
 <td class="num">399006</td>
 <td class="num">3842.73</td>
 <td class="num"><strong class="down">↓4.37%</strong></td>
+<td class="num">8539.43亿</td>
 </tr>
 </tbody>
 </table>
 </div>
 
-<p>📊 数据来源：`data_market_cn.json` / `data_extra.json` / `data_industry.json`</p>
-<p>附加行情描述：</p>
-<p>A股全天呈普跌格局，两市总成交额约1.56万亿，较前日有所萎缩。市场涨跌家数比为1.85，上涨3004家，下跌1622家，涨停92只，跌停仅4只。申万一级行业数据暂不可得，但从细分资金流向看，主力资金呈现明显的高低切换：全市场净流出930.47亿。科技板块遭大幅抛售，半导体净流出310.20亿，通信设备、光学光电子分别流出132.22亿和112.14亿；而医药与消费成避风港，医疗服务、白酒、化学制药分别净流入28.33亿、28.70亿和23.84亿。板块轮动风格由成长科技切向防御与白马消费。</p>
+<p>两市合计成交额约 3.39万亿，较前期放量明显。全市场上涨家数 3004 家，下跌家数 1622 家，涨跌比为 1.85，涨停 92 家，跌停仅 4 家。尽管主要指数重挫，但上涨家数多于下跌家数，呈现显著的“指数杀跌、个股普涨”格局，核心源于高权重科技股拖累指数。主力资金全天净流出 930.47亿，其中半导体板块遭遇 310.20亿 巨额流出，通信设备、光学光电子分别流出 132.22亿 和 112.14亿；而医疗服务（流入 28.33亿）、白酒（流入 28.70亿）与计算机设备（流入 34.25亿）成为资金避风港。市场风格从高估值科技成长切向防御与消费医药。</p>
 
-<h3>美股收盘（当日凌晨）</h3>
+<h3>美股收盘</h3>
 <div class="table-wrap"><table class="data-table">
 <thead><tr>
 <th class="">指数</th>
@@ -257,11 +261,9 @@ hr{border:none;border-top:1px solid var(--border);margin:20px 0}
 </table>
 </div>
 
-<p>📊 数据来源：`data_market_global.json` / `data_news_rss.json`</p>
-<p>附加描述：</p>
-<p>美股三大指数小幅收涨，延续高位运行态势。宏观层面，美联储半年度货币政策报告指出通胀显著升温，并提及AI在推高价格的同时支撑了经济增长，暗示降息路径依然谨慎。主要驱动因素来自科技巨头IPO与产业突破：SK海力士创纪录IPO募资并登陆纳斯达克，提振了半导体与AI硬件板块情绪；此外，GLP-1长效植入剂型合作消息刺激了医疗保健板块。标普500十一大板块中，科技、医疗保健领涨，而受白宫施压零售商降价影响，必需消费品板块承压。</p>
+<p>美股三大指数小幅收涨，续创历史新高。宏观层面，美联储半年度政策报告警示关税和中东地缘局势推高通胀，并特别指出AI是一把“双刃剑”——既推动经济增长，又因算力需求推高电力与内存价格从而加剧通胀压力。主要驱动因素来自科技巨头的产业突破：SK海力士创海外赴美最大IPO首秀收涨 13%，Meta因数据中心扩张及AI模型商业化预期转涨。标普500十一大板块中，信息技术与通讯服务领涨，受AI硬件与软件双轮驱动；而受特朗普政府施压降低物价影响，必需消费品板块承压。</p>
 
-<h3>港股收盘（前一日）</h3>
+<h3>港股收盘</h3>
 <div class="table-wrap"><table class="data-table">
 <thead><tr>
 <th class="">指数</th>
@@ -286,47 +288,37 @@ hr{border:none;border-top:1px solid var(--border);margin:20px 0}
 </table>
 </div>
 
-<p>📊 数据来源：`data_market_hk.json` / `data_extra.json`</p>
-<p>恒生指数与国企指数小幅收涨，但南下资金转向净卖出，当日净流出59.95亿港元，显示机构资金在高位兑现部分AI硬件与科技股获利。</p>
+<p>恒生指数与国企指数小幅收涨，但南下资金转向净卖出 59.95亿 港元，盈富基金遭净卖出 46.98亿 港元，机构资金在高位出现兑现迹象，同时抛售部分AI硬件股，转向抢筹AI软件及大模型标的。</p>
 
-<h3>全球其他市场（欧股 / 日经 / 韩股）</h3>
-<p>📊 数据来源：`data_market_global.json`</p>
-<p>亚太市场表现强劲，日经225指数大涨<strong class="up">↑1.20%</strong>收于68557.73点，韩国KOSPI指数飙升<strong class="up">↑2.52%</strong>至7475.94点，主要受SK海力士历史性IPO及强劲需求预期提振。欧洲STOXX 600指数基本持平，微涨<strong class="up">↑0.04%</strong>，市场在等待更多美联储政策路径的明确信号。</p>
+<h3>全球其他市场</h3>
+<p>亚太及欧洲市场表现分化。日经225指数大涨 <strong class="up">↑1.20%</strong> 收于 68557.73 点，受半导体产业景气度回升提振；韩国KOSPI指数飙升 <strong class="up">↑2.52%</strong> 至 7475.94 点，主因SK海力士赴美上市火爆带动本土科技股估值重估。欧洲STOXX 600指数基本持平，微涨 <strong class="up">↑0.04%</strong>，市场观望美国通胀数据及美联储政策路径。</p>
 
 <h3>大宗商品与汇率</h3>
-<p>📊 数据来源：`data_forex_rate.json` / `data_extra.json`</p>
-<p>原油价格回落，WTI原油下跌<strong class="down">↓0.79%</strong>至71.51美元，布伦特原油下跌<strong class="down">↓1.19%</strong>至71.36美元。贵金属小幅回调，COMEX黄金下跌<strong class="down">↓0.29%</strong>至4128.90美元，白银下跌<strong class="down">↓0.74%</strong>至60.30美元。汇率方面，美元兑离岸人民币中间价为6.7989。中美利差方面，中国10年期国债收益率报1.7398%，美国10年期国债收益率报4.56%，利差维持深度倒挂。中美利差深度倒挂格局延续，对中债利率下行空间形成一定约束，但国内基本面弱修复仍支撑债市偏强运行。</p>
+<p>大宗商品市场普遍回调。NYMEX原油报 71.51 美元/桶，<strong class="down">↓0.79%</strong>；布伦特原油报 71.36 美元/桶，<strong class="down">↓1.19%</strong>。贵金属同步走弱，COMEX黄金报 4128.9 美元/盎司，<strong class="down">↓0.29%</strong>；COMEX白银报 60.3 美元/盎司，<strong class="down">↓0.74%</strong>。汇率方面，美元兑离岸人民币报 6.7989。中美利差方面，10年期美债收益率报 4.56%，10年期中债收益率报 1.7398%，利差走阔至 282.02 个基点。中美利差持续走阔对中债利率构成外部下行压力，但国内宽松基调下中债收益率仍维持低位震荡。</p>
 <hr>
 
 <h3>估值水位与情绪</h3>
-<ul>
-<p>📊 数据来源：`data_valuation.json`</p>
-<li>红利低波：股息率约5.76%，处于高位配置区间，高股息防御价值显著。</li>
-<li>标普500：PE 28.62，PB 5.80，历史分位分别达82.40%与99.68%，处于极高估值风险区，需警惕回调风险。</li>
-<li>创业板指：PE 48.82，PB 6.50，PB分位高达79.52%，近期科技杀跌后仍需消化高估值。</li>
-<li>恒生科技：PE 23.06，PB 2.58，分位约35.22%，处于中等偏低价值区间。</li>
-<li>沪深300：PE 14.35，PB 1.45，PE分位86.44%，估值处于相对高位。</li>
+<p>红利低波（563020）股息率约 5.76%，处于高位区间，高股息配置价值显著。</p>
+<p>5个核心指数中，标普500 PE达 28.62，PB高达 5.8，PB分位触及 99.68% 极高风险区；沪深300 PE为 14.35，PE分位升至 86.44% 高位区间，需警惕大盘蓝筹估值透支风险。其余指数中，恒生科技处于 35.22% 适中分位，创业板指处于 61.92% 中位偏上区间，整体结构分化明显。</p>
 <hr>
-</ul>
 
 <h2>二、行业洞察</h2>
-<blockquote>科技板块动态：A股科技板块遭遇资金大幅抛售，半导体、光模块龙头集体杀跌；而美股受SK海力士创纪录IPO提振，AI硬件需求预期依然强劲，全球科技股呈现冰火两重天。</blockquote>
 
-<h4>🆕 全球 TOP 10</h4>
+<h3>全球 TOP 10</h3>
 <ol class="news-list">
-<li>SK海力士创纪录IPO登陆纳斯达克：SK海力士完成美国历史上第二大IPO，募资265亿美元，首秀股价涨近13%。CEO称2027年将迎来史上最严重存储芯片短缺，供不应求或持续至2030年。→ 影响方向，利好全球存储芯片产业链与AI硬件算力基础设施。</li>
-<li>美联储货币政策报告预警通胀：美联储发布报告指出通胀显著升温，并提及AI在推高价格的同时支撑了经济增长，暗示高利率环境将维持更久。→ 影响方向，利空高估值成长股，利好顺周期与防御板块。</li>
-<li>特朗普施压美国企业降价：前总统特朗普加大力度要求美国企业降低物价，白宫直接施压顶级杂货商削减牛肉价格，沃尔玛等零售商被动回应。→ 影响方向，利空必需消费品零售商利润率。</li>
-<li>诺和诺德探索长效GLP-1植入剂：诺和诺德与Vivani达成协议，开发可维持长达一年药效的GLP-1植入剂，以解决患者长期减重依从性问题。→ 影响方向，利好创新给药技术与减重药概念股。</li>
-<li>全球科技巨头加速布局能源基建：随着AI算力中心电耗走高，阳光电源等企业推出固态变压器（SST），预计2028年进入大规模商用部署阶段。→ 影响方向，利好储能、电网设备及新型变压器产业链。</li>
-<li>A股科技板块遭主力资金高位抛售：本周沪深两市主力资金净流出590.34亿，光模块、存储龙头被抛售，半导体板块单日净流出超310亿，资金高低切换明显。→ 影响方向，利空短期科技股估值，利好医药白酒等防御板块。</li>
-<li>全国用电负荷创历史纪录：全国用电负荷达15.18亿千瓦创新高，空调负荷占比近30%，国家能源局全力保障电力供应平稳有序。→ 影响方向，利好电力运营商与虚拟电厂、电网设备产业链。</li>
-<li>洛阳钼业半年报业绩大幅预增：洛阳钼业预计上半年净利润同比增长78.76%到90.29，最高预盈165亿元，受益于铜金共舞及钼钨价格走高。→ 影响方向，利好有色金属资源股与中报业绩预增主线。</li>
-<li>商业航天概念股集体涨停：受利好消息刺激，A股商业航天概念板块异动拉升，航天环宇等多股涨停，资金挖掘低空与航天新赛道。→ 影响方向，利好商业航天、卫星互联网及军工电子板块。</li>
-<li>能源节能降碳新政释放产业机遇：国家发布能源节能降碳新政策，推动产业新机遇，重点聚焦传统工业节能改造与新能源消纳。→ 影响方向，利好节能环保设备、工业自动化及绿电运营板块。</li>
+<li>SK海力士创海外赴美最大IPO，首秀收涨13%：SK海力士在纳斯达克完成规模超越阿里的IPO，首日股价大涨约13%。CEO称2027年将是内存最短缺年份，缺货或持续至2030年，彰显AI算力对存储芯片的庞大需求。 → 利好全球AI硬件及存储产业链，强化算力景气周期预期。（<a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxPUF9OaktsU3NBZWNESUFtNUNuMFFnTkdCQjVtYUQzUHYxQkYwVmxkZ1J5azV5a3Y3aXI0SGc5cnhZM3pPeVBwRkRDSXdXeG5yTmU4TkExbVlCRHA5TUJnVUFxRzhPZjhVbWZnU2JzcllfZ2ZMekZhbnZaN2ZKbUVZQ3FHaXBuUHRRcXdiZGpOOEZ2dWlseHVpMnhTb18tZ1NjN3U5VVF5ckVhSThVNXgzZG53?oc=5" target="_blank" rel="noopener">Fortune</a>）</li>
+<li>美联储半年度报告警示关税与AI推高通胀：美联储发布政策报告，指出关税和中东地缘局势正推高通胀，同时AI既是增长动力，又因推升电力、内存等成本而成为通胀“双刃剑”。高盛预计AI涨价或推高核心PCE 0.5个百分点。 → 影响偏鹰，利空美债，延缓美联储降息节奏。（<a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE9hMGlTRC1TOTd2LXk5N3ptd1RGeU8zTERPR1ZXTUtuRGZtaW9HTXZEaEJpSUNId2VIR3JoVWlSQk5kdHRKSUxiTEFSc0dXY1B4cExF?oc=5" target="_blank" rel="noopener">第一财经</a>）</li>
+<li>特朗普向美国企业施压以降低物价：白宫正向沃尔玛等顶级杂货商施压，要求其降低牛肉等商品价格。特朗普政府试图通过政治压力对抗通胀，企业利润率面临考验。 → 利空必需消费品板块，企业定价权与毛利率或受挤压。（<a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxPbENPZFUweEF4dWhKLTBPMHNQelBMeHNxTXg4MVNQUm5UTFR6dmlLSDZEQnh5bFNpN3JJZVBkWUFYQm1BUHA5dEhFUDNYdmRlQVMtUHQxSjZxSURJZVhrMTBYaVJ1Tmh5SjZlU0hwWHlkTDFQeDFtNlZYczUxMVk4azZRaDc?oc=5" target="_blank" rel="noopener">Financial Times</a>）</li>
+<li>大众汽车大幅削减产品线以应对中国销量下滑：大众汽车宣布将裁减一半产品线并缩减产能，因在中国市场销量暴跌及电动车转型压力剧增。公司未明确提及裁员计划。 → 利空传统车企，反映中国市场竞争对海外巨头冲击加剧。（<a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE15YVkzZTZOVUFSSC1lV005dDJhU29xUWh0SHdOTmZjVTRoOGN4RnlzSGZMellvWTN0QmFqSlBHR1p2aE9ibnNTTGVJR2JSSEo0Mms0U3YxY2ZpRUdzVnRueFhJdm5WZ3lFY1BmaXA4Zy1TaXBNVXNtZkxoYm9sZ9IBgwFBVV95cUxPQWJma19acW5QY3pSZXJjeGJuam9YekRXRS1QZTlEeXNhYkVXNTJCSjV3WWxWNGUtQl9IUjFoZUpfN0FhZ3czN1dSTWhXUnlwbHY1aEVWdl9DNFc3cG9NNVl4VUZqUWt0OWpuNW9Bei12NWpiT0toWVJvTjFJRnh1dXVpZw?oc=5" target="_blank" rel="noopener">CNBC</a>）</li>
+<li>Meta探索AI云业务，股价转涨：Meta宣布探索AI云业务并公布数据中心扩张计划及新AI模型定价策略，扎克伯格称进军AI云业务“顺理成章”，推动股价年内转涨。 → 利好AI算力与云服务板块，加剧科技巨头AI军备竞赛。（<a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxNZS1oS0dnS3FydjFvM0NTaTVlYWQxeklBcWJZSTJndzJ6SUREcDZ3Q0ZZNGIyUVdNUlo0T2U4cFBCMm9JNTEyclBzdlZhYlMxS0lDNmRldU41X0xqNFcySDFaUGc0VDl5eHNHSlYwXzl6cWoxQW90OFNvOXZTNkZBdG90dG9vcjhJa28tWDlEa3dxWl8yb2Rv?oc=5" target="_blank" rel="noopener">Yahoo Finance</a>）</li>
+<li>阿里合计持股长鑫科技近5%，成重要股东：阿里巴巴合计持股长鑫科技近5%，持股比例超过董事长朱一明。长鑫科技作为A股年内最大IPO，发行价定为4.41元，引发市场对产业资本与散户博弈的热议。 → 利好国产存储芯片产业，凸显互联网巨头加码硬科技投资趋势。（<a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE1WM2wzVktzOUFQZHJ4cHNxR0VleGtZLUhBRFFoYkpuODVpR2pGQ3VjdG0zV1Ywd3JZbDdlblN1T0dRamlaOUdLYVZXSEJ6ZWtVajlr?oc=5" target="_blank" rel="noopener">华尔街见闻</a>）</li>
+<li>阳光电源发布EnerNeo固态变压器，瞄准AI数据中心：阳光电源签定SST战略协议，管理层预计2028年进入大规模商用部署。公司针对AI算力中心高电耗痛点，推出800V直流架构固态变压器，争取2026年实现订单落地。 → 利好储能与算力供电设备赛道，打开光储企业新增长曲线。（<a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE05bHR4aEpnOHNjNVFxSVNiS2htUUFQNnNnMkp5RzRkSGpsU2pTUzdJSGxuOEczckstOFFGRThBLWIxMmZNZXM1dDFlVHBBOElqZzhz?oc=5" target="_blank" rel="noopener">第一财经</a>）</li>
+<li>洛阳钼业半年净利预增最高90%：洛阳钼业发布业绩预告，预计上半年净利润最高达165亿元，同比增长 78.76% 至 90.29%。铜金价格共舞，钼、钨价格显著走高是核心驱动。 → 利好有色金属及上游资源板块，验证大宗商品景气周期。（<a href="https://news.google.com/rss/articles/CBMiXEFVX3lxTE8zTmI2X0UwRnBCaFZ0NDhESW4waDdlQVpuZ1ZIT2puV0hFX0xfclkwaGkzcVpzY0w0dWpVc1AtMzc2TmJXOFAzWVFmY2ZQdUhMQWRiVUdJWER0T1JK?oc=5" target="_blank" rel="noopener">证券时报</a>）</li>
+<li>商业航天迎利好，概念股集体涨停：受行业重大利好刺激，A股航天装备概念板块异动拉升，航天环宇20%涨停，航天电子触及涨停板，资金加速涌入商业航天产业链。 → 利好商业航天及卫星互联网板块，主题催化特征显著。（<a href="https://news.google.com/rss/articles/CBMiXEFVX3lxTFB4eUpaaXZSX3FvczFyb3RCQ0RVbmZFMndCU3FSdEJBRXFXYU9EY2Fxc29OZ0U1SW5tWDRUVnZTSzQwdHJEQTJkZzJGckloUXFRcnc5ZV9VbHAtT09I?oc=5" target="_blank" rel="noopener">证券时报</a>）</li>
+<li>诺和诺德联手Vivani研发长效GLP-1植入物：诺和诺德与Vivani达成协议，评估长效GLP-1植入物，该植入物可维持长达一年的药效，旨在改善患者长期减重依从性。 → 利好创新药与减重药赛道，GLP-1给药方式革新提升竞争壁垒。（<a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxPSU9tam9BcVhwakhRWS1hN0tPRFZHc0JhSDJTWklDWDN2QUx5ekRkUF9uSUtXQ1lEWVo1VmpqQTdieUo4Zmdid0xNcmM2M2lXVDk3R0h4a01haXJpSkoteHhXcFNiRkxtNzY2Yk1IajByMWQtM05FT2xUN3ZON20ySjR0UnFtR1BCUDI3ZjlkVkpkXzJuSmZrRjhWVWR6MWpBSmdxMmNRRDV0X1pQTmg00gG0AUFVX3lxTE5yb0FJbGFJMExjcjQzNVpHZkZzTS10Mjh6QWc3amhMYURnMl9PQ3JJc0hvR1I1dE1DemtjNnRWOWZmOEpPakM3QkZ0MFUzNUctY0todl9LRUtsU2lxY1lvZHRuZlY3SlJsSk8xaVgzWDBHNktDRHpfR3I0ZV9NOEhMUjJJeUd4VGtTckZuVUppMEpjWWNXVkMwRjczZlFyTUpmenh0eVNmblhRQ21GZzRuSm1HSg?oc=5" target="_blank" rel="noopener">CNBC</a>）</li>
 </ol>
 
-<h4>QDII 溢价与申购额度监测</h4>
+<h3>QDII 溢价与申购额度监测</h3>
 <div class="table-wrap"><table class="data-table">
 <thead><tr>
 <th class="">代码</th>
@@ -339,37 +331,37 @@ hr{border:none;border-top:1px solid var(--border);margin:20px 0}
 <td class="label">513100</td>
 <td class="num">纳指ETF国泰</td>
 <td class="num">9.45%</td>
-<td class="num">⚠️ 极高溢价，严禁买入</td>
+<td class="num">严重溢价</td>
 </tr>
 <tr>
 <td class="label">159941</td>
 <td class="num">纳指ETF广发</td>
 <td class="num">8.75%</td>
-<td class="num">⚠️ 极高溢价，严禁买入</td>
+<td class="num">严重溢价</td>
 </tr>
 <tr>
 <td class="label">159659</td>
 <td class="num">纳斯达克100ETF招商</td>
 <td class="num">7.25%</td>
-<td class="num">⚠️ 极高溢价，严禁买入</td>
-</tr>
-<tr>
-<td class="label">159612</td>
-<td class="num">标普500ETF国泰</td>
-<td class="num">5.14%</td>
-<td class="num">⚠️ 明显溢价，谨慎操作</td>
+<td class="num">严重溢价</td>
 </tr>
 <tr>
 <td class="label">513500</td>
 <td class="num">标普500ETF博时</td>
 <td class="num">4.89%</td>
-<td class="num">⚠️ 明显溢价，谨慎操作</td>
+<td class="num">明显溢价</td>
+</tr>
+<tr>
+<td class="label">159612</td>
+<td class="num">标普500ETF国泰</td>
+<td class="num">5.14%</td>
+<td class="num">明显溢价</td>
 </tr>
 <tr>
 <td class="label">513650</td>
 <td class="num">标普500ETF南方</td>
 <td class="num">3.82%</td>
-<td class="num">⚠️ 明显溢价，谨慎操作</td>
+<td class="num">明显溢价</td>
 </tr>
 </tbody>
 </table>
@@ -389,51 +381,49 @@ hr{border:none;border-top:1px solid var(--border);margin:20px 0}
 <td class="num">建信纳斯达克100指数(QDII)C人民币</td>
 <td class="num">3.3701</td>
 <td class="num">限大额</td>
-<td class="num">100.0元</td>
+<td class="num">100.0</td>
 </tr>
 <tr>
 <td class="label">023422</td>
 <td class="num">建信纳斯达克100指数(QDII)D人民币</td>
 <td class="num">3.3861</td>
 <td class="num">限大额</td>
-<td class="num">100.0元</td>
+<td class="num">100.0</td>
 </tr>
 <tr>
 <td class="label">539001</td>
 <td class="num">建信纳斯达克100指数(QDII)A人民币</td>
 <td class="num">3.4814</td>
 <td class="num">限大额</td>
-<td class="num">100.0元</td>
+<td class="num">100.0</td>
 </tr>
 <tr>
 <td class="label">018966</td>
 <td class="num">汇添富纳斯达克100ETF发起式联接(QDII)人民币A</td>
 <td class="num">1.6631</td>
 <td class="num">限大额</td>
-<td class="num">50.0元</td>
+<td class="num">50.0</td>
 </tr>
 <tr>
 <td class="label">018967</td>
 <td class="num">汇添富纳斯达克100ETF发起式联接(QDII)人民币C</td>
 <td class="num">1.6440</td>
 <td class="num">限大额</td>
-<td class="num">50.0元</td>
+<td class="num">50.0</td>
 </tr>
 <tr>
 <td class="label">021773</td>
 <td class="num">汇添富纳斯达克100ETF发起式联接(QDII)人民币E</td>
 <td class="num">1.6599</td>
 <td class="num">限大额</td>
-<td class="num">50.0元</td>
+<td class="num">50.0</td>
 </tr>
 </tbody>
 </table>
 </div>
 
-<p>📊 数据来源：`data_extra.json`</p>
-<p>场内ETF溢价率：QDII溢价出现全面异常，6只核心ETF溢价率均超过3%，纳指与标普500场内基金遭资金疯抢。</p>
-<p>场外QDII申购额度：场外申购额度依然紧张，多只基金限制大额申购。</p>
-<hr>
+<p>场内ETF溢价率出现全面异常，纳指与标普500相关ETF因外汇额度限制持续高溢价：</p>
+<p>场外QDII申购额度（按日累计限额降序）：</p>
 </div>
 <div class="player">
 <div class="player-row">
