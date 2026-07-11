@@ -2,8 +2,8 @@ name: 每日金融日报
 
 on:
   schedule:
-    # 每日 09:00 北京 = 01:00 UTC | 2026-07-11 触碰提交强制重新注册定时任务
-    - cron: '0 1 * * *'
+    # 每日 14:00 北京 = 06:00 UTC | 临时调早验证schedule触发，验证后改回01:00
+    - cron: '0 6 * * *'
   workflow_dispatch:
     inputs:
       skip_mp3:
