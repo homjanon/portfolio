@@ -152,6 +152,12 @@ def main():
     if _heading_match and _heading_match.start() > 0:
         content = content[_heading_match.start():]
 
+    # 删除各板块开头的数据时间戳行（> 数据时间：YYYY-MM-DD HH:MM）
+    content = re.sub(r'>\s*数据时间[：:]\s*\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}\s*\n?', '', content)
+
+    # 删除顶部的查询时间行（**查询时间**：...）
+    content = re.sub(r'\*\*查询时间\*\*[：:][^\n]*\n?', '', content)
+
     # 5. 写入 report.md
     out_path = "report.md"
     with open(out_path, "w", encoding="utf-8") as f:
