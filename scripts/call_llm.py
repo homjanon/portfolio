@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 调用 LLM 生成日报：
-  主模型: 商汤日日新 DeepSeek-V4-Flash (SENSENOVA_API_KEY)
-  兜底: 智谱 GLM-4.7-Flash (ZHIPU_API_KEY)
+  主模型: NVIDIA Nemotron-Ultra-253B (NVIDIA_API_KEY)
+  兜底: NVIDIA GLM-5.2 (NVIDIA_API_KEY)
+  最后兜底: 商汤 DeepSeek-V4-Flash (SENSENOVA_API_KEY)
 
 用法: python3 scripts/call_llm.py
   读取 prompt/daily_report_prompt.txt (system) + data_*.json (user)
@@ -15,16 +16,22 @@ from datetime import datetime, timezone, timedelta
 PROMPT_PATH = os.path.join(os.path.dirname(__file__), "..", "prompt", "daily_report_prompt.txt")
 LLM_CONFIGS = [
     {
+        "name": "NVIDIA Nemotron-Ultra-253B",
+        "api_url": "https://integrate.api.nvidia.com/v1",
+        "api_key_env": "NVIDIA_API_KEY",
+        "model": "nvidia/llama-3.1-nemotron-ultra-253b-v1",
+    },
+    {
+        "name": "NVIDIA GLM-5.2",
+        "api_url": "https://integrate.api.nvidia.com/v1",
+        "api_key_env": "NVIDIA_API_KEY",
+        "model": "z-ai/glm-5.2",
+    },
+    {
         "name": "SenseTime DeepSeek-V4-Flash",
         "api_url": "https://token.sensenova.cn/v1/chat/completions",
         "api_key_env": "SENSENOVA_API_KEY",
         "model": "deepseek-v4-flash",
-    },
-    {
-        "name": "Zhipu GLM-4.7-Flash",
-        "api_url": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
-        "api_key_env": "ZHIPU_API_KEY",
-        "model": "glm-4.7-flash",
     },
 ]
 
