@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 调用 LLM 生成日报：
-  主模型: 智谱 GLM-4.7-Flash (ZHIPU_API_KEY)
-  兜底: 商汤日日新 DeepSeek-V4-Flash (SENSENOVA_API_KEY)
+  主模型: 商汤日日新 DeepSeek-V4-Flash (SENSENOVA_API_KEY)
+  兜底: 智谱 GLM-4.7-Flash (ZHIPU_API_KEY)
 
 用法: python3 scripts/call_llm.py
   读取 prompt/daily_report_prompt.txt (system) + data_*.json (user)
@@ -80,11 +80,11 @@ def main():
     system = open(PROMPT_PATH, encoding="utf-8").read()
     print(f"📄 读取 prompt: {len(system)} 字符")
 
-    # 1b. 模式自动判定（北京时间）：周一~周六=完整模式，周日=精简模式
+    # 1b. 模式自动判定（北京时间）：周二~周六=完整，周日/周一=精简
     beijing = timezone(timedelta(hours=8))
     now = datetime.now(beijing)
     w = now.weekday()  # 0=Mon, 6=Sun
-    mode = "精简模式" if w == 6 else "完整模式"
+    mode = "精简模式" if w in (6, 0) else "完整模式"
     system = system.replace("__MODE__", mode)
     print(f"📋 执行模式: {mode}（星期{'一二三四五六日'[w]}, {now.strftime('%H:%M')}）")
 
