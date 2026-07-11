@@ -1,75 +1,43 @@
-# 全球金融资讯日报 | 2026年7月12日（星期日）
+# 全球金融资讯日报｜2026年7月12日（星期日）
 
+> 查询时间：北京时间 2026年7月12日 07:16
 
-**今日定性导语**：风险偏好分化，美股受美联储鸽派信号与科技巨头提振续创新高，A股则因半导体与新能源板块高位回调遭遇显著调整。市场主线聚焦于AI算力通胀逻辑与防御性高股息资产，关键风险在于中美利差持续走阔对中债利率的扰动，以及下周超千亿限售股解禁带来的阶段性流动性压力。
-
----
-
-### 一、行业洞察
-
-#### 科技板块动态
-周末科技要闻密集，海外聚焦SK海力士美股首秀大涨**13%**及白宫扶持英特尔初见成效，国内则关注京东全球首个RoboBase机器人产业基地落地广州。AI算力高景气与具身智能产业化落地构成双主线，但需警惕美联储对AI推升通胀的担忧引发的高位科技股波动。
-
-#### 🆕 全球 TOP 10
-
-1. **SK海力士纳斯达克首秀大涨13%，CEO称2027年将现最严重内存短缺**：韩国存储芯片巨头SK海力士ADR在纳斯达克挂牌首日大涨，董事长承诺将在美国进行更大规模投资，并预计需求将远超供应直至2030年后。 → 利好全球存储芯片产业链，强化AI算力高景气预期。（[Yahoo Finance](https://news.google.com/rss/articles/CBMimAFBVV95cUxOSlVWR1V6ZE1pQmdZcTllUlE4OWNGSjYtSGxMX2V4dGUyUXhPaW84dzBTXzJiVzVFMS1fR2NncjR5aHFLTHAzUUJZQkJ2dUo4SFFLd1N1OXUwRTcwMzlPcXFkLXV2dVdmS19jQVo4Q2ZmdWxtYmhYaW1RMWw2SVF6Z3pjUm9ZejNyRENKTmo4bkU2WFo4QTA4OA?oc=5)）
-
-2. **白宫将拯救英特尔作为重点项目，成效正逐步显现**：美国政府主导的芯片复兴战略初见成效，苹果计划采用英特尔18A工艺生产iPhone 18的A20芯片，帮助其规避半导体关税。 → 利好英特尔代工业务，重塑全球半导体制造格局。（[WSJ](https://news.google.com/rss/articles/CBMidkFVX3lxTE51MVJOcmhOX2lRTVFBSmozTDNjYUxwR1JmNFB3bnJsZUpMSHd0UUJHa3ExaEhXNVNuV0pMdUpQNWtiUk00SDNfTEdtRU53NlhtUHljbTRUYzJESmtCVFNyZXFJVHNvYU5RTU1Oa2Q3NXV2S0RZMVE?oc=5)）
-
-3. **美伊冲突加剧推高油价，美国加油站汽油价格再度攀升**：近期美伊军事摩擦升级导致原油价格上行，美国国内汽油价格逆转跌势开始上涨，加剧消费者痛感。 → 利空消费端，推升通胀预期。（[Reuters](https://news.google.com/rss/articles/CBMiuAFBVV95cUxNNmRTRTU1SVQyc05BT2JHSGRkZ0JQaFI5WjVraUplNlJaQVUzUk1jeHp2eE9WQ191SkRkSDRZZjJiVWtBZHg2VXdCWW9jV0xNLXR4QzhQak5NSDd6QVp5dWtFbl95TGVwVDhBRGV3V05CWGV0U2JVeU52OW1XSHhkVENveUdMSEF4Um8yc1B0cVphckZzd0dOZ0l5VHlVdHdEYXRrem4tNzlmSEJKZUNkRDJCMjhBSG5x?oc=5)）
-
-4. **诺和诺德联手Vivani开发长效GLP-1植入物，维持减重效果**：两家公司签署协议，评估可持续长达一年的GLP-1植入物，以改善长期减重依从性。 → 利好创新药与减重药赛道，拓展给药新技术方向。（[CNBC](https://news.google.com/rss/articles/CBMirwFBVV95cUxPSU9tam9BcVhwakhRWS1hN0tPRFZHc0JhSDJTWklDWDN2QUx5ekRkUF9uSUtXQ1lEWVo1VmpqQTdieUo4Zmdid0xNcmM2M2lXVDk3R0h4a01haXJpSkoteHhXcFNiRkxtNzY2Yk1IajByMWQtM05FT2xUN3ZON20ySjR0UnFtR1BCUDI3ZjlkVkpkXzJuSmZrRjhWVWR6MWpBSmdxMmNRRDV0X1pQTmg00gG0AUFVX3lxTE5yb0FJbGFJMExjcjQzNVpHZkZzTS10Mjh6QWc3amhMYURnMl9PQ3JJc0hvR1I1dE1DemtjNnRWOWZmOEpPakM3QkZ0MFUzNUctY0todl9LRUtsU2lxY1lvZHRuZlY3SlJsSk8xaVgzWDBHNktDRHpfR3I0ZV9NOEhMUjJJeUd4VGtTckZuVUppMEpjWWNXVkMwRjczZlFyTUpmenh0eVNmblhRQ21GZzRuSm1HSg?oc=5)）
-
-5. **马斯克Neuralink仍在钻头骨，中国BrainCo押注可穿戴脑机接口**：与侵入式路线不同，中国脑机接口企业BrainCo押注可穿戴设备，全球脑机接口领域融资激增。 → 利好国内脑机接口与消费级医疗器械赛道。（[CNBC](https://news.google.com/rss/articles/CBMihgFBVV95cUxOYTY4R0RrSnBfamViVTdFUkYxOU5JYzQ5M25ZV1kxSGpRdW41SXhrY3NEeFRubFJqODQ5MmtUczIxNlRaWFNUTXBUX2lZOFRxVHFQdUt0UkQyZHhuY3VERlE0dGZyUzdlZUlHakNCNFRSQWJDOGtBdmpNNmJZZXNDU01XR0cwQdIBiwFBVV95cUxQVUxFRURxanpXVEljN3gyRUxiek1qU3FhbnhjWk92b0xQMkVmSGpEMzFHNEI3dTBOX0JpbzVTajBBQ3VPT2pRdTNIV0EwSmhhNW1OUkdFeEpXNTdWeWNJT2t3bWlrSnU0MjZjVWpRQ2NGdEdoVzR4aDhQSmhpMUQ2SUF3cnlBalNab0Y4?oc=5)）
-
-6. **AI加剧美国通胀？高盛称内存电力软件涨价或推高核心PCE 0.5个百分点**：高盛指出AI投资推升内存、电力和软件价格，美联储报告亦关注AI通胀风险，或被迫加息应对。 → 利空科技成长股估值，强化美联储鹰派预期。（[华尔街见闻](https://news.google.com/rss/articles/CBMiU0FVX3lxTE00UWJBMlBicENpZ0VGNmhTcENLbkJOZnlTaUw4VFVmenhVREJ5MlE2ZTZvTlBCTWFvVVNiY1dqcm02YmxnRVpkeGR6d1dpZWtfbVRN?oc=5)）
-
-7. **下周超40股限售解禁，7股解禁比例超10%**：下周A股解禁市值超**1000亿**，其中半导体龙头占近三分之二，下半年A股解禁规模超**2万亿**。 → 短期利空相关个股与板块流动性，或带来阶段性抛压。（[东方财富](https://news.google.com/rss/articles/CBMiYEFVX3lxTE5CV3Z6dTVDaG9pM3c4Ymo3MWVwanlsLTh2VWNfMkxkYUlXc0FmWF9tZHN1cmo0THFNN1JsWG42Slk2enVtWElWd1JDcXBpQ1BZQWZSWFFZVUVmMU9nTG5yVA?oc=5)）
-
-8. **洛阳钼业上半年预盈最高165亿元，同比增超九成**：受铜金共舞及钼、钨价格显著走高带动，洛阳钼业上半年归母净利预计同比增长**79%-90%**。 → 利好有色金属资源股，印证顺周期盈利改善逻辑。（[证券时报](https://news.google.com/rss/articles/CBMiXEFVX3lxTE8zTmI2X0UwRnBCaFZ0NDhESW4waDdlQVpuZ1ZIT2puV0hFX0xfclkwaGkzcVpzY0w0dWpVc1AtMzc2TmJXOFAzWVFmY2ZQdUhMQWRiVUdJWER0T1JK?oc=5)）
-
-9. **日科化学拟收购亘元新材70.75%股份，下周一复牌**：公司拟购买VC和FEC厂商亘元新材控股权，涉及电解液添加剂产业链重大资产重组。 → 利好锂电池材料细分赛道，复牌或迎补涨。（[第一财经](https://news.google.com/rss/articles/CBMiU0FVX3lxTE1VNG5kQ1VzYUhjWjMxVXpnVnlGQXFuYy1xX2o2N3JTcTNHMThrVlI4cmlGeFFOaFp6X3hEMTR6dncwNFFkcDBxbUVRRWtaNzZjSUIw?oc=5)）
-
-10. **京东全球首个RoboBase项目广州黄埔开工，打造机器人之城**：京东与广东省签署战略合作协议，建筑面积**19万平米**的机器人产业基地同日开工。 → 利好具身智能与机器人产业链，加速规模化商业落地。（[东方财富](https://news.google.com/rss/articles/CBMiYEFVX3lxTE5JN0Y4MjMzZmNiNkw0SnNpYmVndzFBVDRzLVVRUEd4QlFPeG5xNXJISlZfY2I4VkY1d1NaN1hSUVEwWnRwU2tzVXZqdlBSM0NZUGxmQU5xb29yUS1XOV9QUg?oc=5)）
-
-#### A股资金流向回顾
-周五全市场主力资金净流出**930.47亿**，呈现显著的"高低切换"特征。资金大幅流出前期高热的科技成长板块，半导体板块净流出高达**310.2亿**，通信设备、光学光电子、元件分别净流出**132.22亿**、**112.14亿**和**98.78亿**，电池板块净流出**71.88亿**。与此同时，资金涌入防御与超跌修复方向：计算机设备净流入**34.25亿**，白酒净流入**28.7亿**，医疗服务净流入**28.33亿**，化学制药净流入**23.84亿**。这反映出在半导体等高位板块获利了结后，市场风险偏好显著回落，资金向医药、消费等低位防御品种轮动。
-
-#### QDII溢价与申购额度监测
-跨境ETF溢价率维持高位，6只核心场内ETF全线溢价超过**3%**的警戒线。其中，纳指ETF国泰（513100）溢价率高达**9.45%**，纳指ETF广发（159941）溢价**8.75%**，纳斯达克100ETF招商（159659）溢价**7.25%**；标普500相关ETF溢价同样严重，标普500ETF国泰（159612）溢价**5.14%**，标普500ETF博时（513500）溢价**4.89%**，标普500ETF南方（513650）溢价**3.82%**。高溢价意味着场内买入存在较大估值回归风险。
-
-| 代码 | 名称 | 溢价率 | 评估 |
-|------|------|--------|------|
-| 513100 | 纳指ETF国泰 | 9.45% | 严重溢价，回避 |
-| 159941 | 纳指ETF广发 | 8.75% | 严重溢价，回避 |
-| 159659 | 纳斯达克100ETF招商 | 7.25% | 严重溢价，回避 |
-| 159612 | 标普500ETF国泰 | 5.14% | 明显溢价，回避 |
-| 513500 | 标普500ETF博时 | 4.89% | 明显溢价，回避 |
-| 513650 | 标普500ETF南方 | 3.82% | 明显溢价，回避 |
-
-场外QDII申购额度方面，建信纳斯达克100指数A/C/D份额（539001/012752/023422）均限大额，日累计限额为**100元**；汇添富纳斯达克100ETF联接A/C/E份额（018966/018967/021773）日累计限额为**50元**。
-
-| 代码 | 简称 | 最新净值 | 申购状态 | 日累计限额 |
-|------|------|---------|---------|----------|
-| 012752 | 建信纳斯达克100指数(QDII)C人民币 | 3.3701 | 限大额 | 100.0 |
-| 023422 | 建信纳斯达克100指数(QDII)D人民币 | 3.3861 | 限大额 | 100.0 |
-| 539001 | 建信纳斯达克100指数(QDII)A人民币 | 3.4814 | 限大额 | 100.0 |
-| 018966 | 汇添富纳斯达克100ETF发起式联接(QDII)人民币A | 1.6631 | 限大额 | 50.0 |
-| 018967 | 汇添富纳斯达克100ETF发起式联接(QDII)人民币C | 1.644 | 限大额 | 50.0 |
-| 021773 | 汇添富纳斯达克100ETF发起式联接(QDII)人民币E | 1.6599 | 限大额 | 50.0 |
+**今日定性导语**：全球市场风险偏好分化，AI硬件与地缘风险主导主线。SK海力士美股首秀大涨引爆存储芯片热度，但美伊冲突推升油价、美联储警示关税与AI双刃剑通胀风险，短期需警惕能源价格扰动与海外流动性预期波动。
 
 ---
 
-### 二、深度观察专栏
+## 一、全球 TOP 10 新闻
 
-#### 美联储AI通胀逻辑与A股高低切换的共振
+1. **SK海力士美股首秀大涨，AI硬件热潮持续**：韩国存储芯片巨头SK海力士在纳斯达克完成历史性首秀，股价首日飙升约13%，CEO称需求极其庞大，并预计最严重的内存短缺将在2027年出现，需求将超越供应至2030年以后。 → 利好全球半导体及存储产业链，强化AI算力硬件景气预期。（[Reuters](https://news.google.com/rss/articles/CBMiowFBVV95cUxOSWhFRmx4bEZ1MW5rMXlkYmN0d0RqeXR6XzhQOXpiTlJBUGhub1gtWDhkb0hrM1RteDhnTmxacklUTXQ3UjRJb3laeEJoSFZXV0ljWklqMTVTYlpnNzMyLXRTd2xzWTB1QkZkNlI1RnFnWE1FX2kzNkVCTlNLMWpKUDhCVUJ5ZGxoQU1DalJLNFhvTVRZN0ZuSDVDZW1LR0duc3pZ?oc=5)）
 
-**事件概述**：
-近期全球宏观出现一条隐秘但关键的线索：高盛与美联储相继警告AI投资正成为通胀推手。高盛指出，内存、电力和软件涨价年底或推高核心PCE **0.5个百分点**；美联储货币政策报告亦显著关注AI通胀风险，纽约联储主席甚至暗示若AI驱动的电力与算力成本持续上行，可能被迫加息应对。受此影响，美股科技股高位震荡但凭借龙头业绩韧性续创新高，而A股周五则出现剧烈的高低切换：科创50暴跌**5.53%**，创业板指重挫**4.37%**，半导体板块主力资金净流出高达**310.2亿**。
+2. **美联储半年度报告：关税与中东推高通胀，AI成双刃剑**：美联储发布政策报告指出，关税政策和中东地缘局势正在推升通胀风险，同时AI技术在推动经济增长的同时也可能加剧价格压力，高盛测算年底AI或推高核心PCE 0.5个百分点。 → 中性偏鹰，通胀粘性或制约美联储降息空间，利空短债。（[第一财经](https://news.google.com/rss/articles/CBMiU0FVX3lxTE9hMGlTRC1TOTd2LXk5N3ptd1RGeU8zTERPR1ZXTUtuRGZtaW9HTXZEaEJpSUNId2VIR3JoVWlSQk5kdHRKSUxiTEFSc0dXY1B4cExF?oc=5)）
 
-**深层分析**：
-1. **通胀粘性与利率预期的闭环**：AI算力建设对电力、高端存储芯片的实物需求，正在转化为服务业与硬件端的成本推升。这与传统认知中"AI提效降本"的逻辑相悖，意味着若美联储因AI通胀而维持高利率，全球流动性宽松预期将受挫。这直接导致对利率极度敏感的A股高估值成长板块（如半导体PE分位极高）遭遇估值杀。
-2. **资金避险与高低切换**：A股周五全市场净流出**930.47亿**，但白酒、医疗服务、化学制药等板块逆势获资金流入。这表明在科技主线受阻时，资金并未全面撤退，而是向业绩确定性高、受宏观利率扰动相对较小的低位防御品种转移。同时，中美10年期国债利差走阔至**282.02bp**（美债**4.56%** vs 中债**1.74%**），进一步压制了国内高估值成长股的吸引力。
+3. **美伊冲突加剧推升油价，美国汽油价格再度攀升**：随着美国与伊朗之间冲突再起，原油价格受到提振上行，美国加油站汽油价格随之逆转下行趋势并开始上涨，消费者加油成本负担加重。 → 利空消费端情绪，利好原油及能源板块。（[Reuters](https://news.google.com/rss/articles/CBMiuAFBVV95cUxNNmRTRTU1SVQyc05BT2JHSGRkZ0JQaFI5WjVraUplNlJaQVUzUk1jeHp2eE9WQ191SkRkSDRZZjJiVWtBZHg2VXdCWW9jV0xNLXR4QzhQak5NSDd6QVp5dWtFbl95TGVwVDhBRGV3V05CWGV0U2JVeU52OW1XSHhkVENveUdMSEF4Um8yc1B0cVphckZzd0dOZ0l5VHlVdHdEYXRrem4tNzlmSEJKZUNkRDJCMjhBSG5x?oc=5)）
 
-**影响与前瞻**：
-短期内，AI算力相关板块在经历大幅回调后或有技术性反抽，但宏观利率预期的压制使其难以迅速重拾升势。下周A股面临超**1000亿**市值解禁，其中半导体板块承压最重，需警惕龙头解禁带来的流动性冲击。策略上，在美联储利率路径明确前，应继续维持"防御+高股息"底仓（如红利低波股息率**5.76%**），同时利用场外限购渠道定投纳斯达克100，回避高溢价的场内QDII ETF。
+4. **白宫施压美国企业降价，特朗普要求降低物价**：特朗普政府加大对美国企业的施压力度以推动降价，白宫特别针对顶级杂货商的牛肉价格施压，部分超市已开始下调商品价格以应对消费者支出放缓。 → 短期利好消费者信心，但或压缩零售及食品企业利润率。（[Financial Times](https://news.google.com/rss/articles/CBMihAFBVV95cUxPbENPZFUweEF4dWhKLTBPMHNQelBMeHNxTXg4MVNQUm5UTFR6dmlLSDZEQnh5bFNpN3JJZVBkWUFYQm1BUHA5dEhFUDNYdmRlQVMtUHQxSjZxSURJZVhrMTBYaVJ1Tmh5SjZlU0hwWHlkTDFQeDFtNlZYczUxMVk4azZRaDc?oc=5)）
+
+5. **Meta股价大涨，扎克伯格探索AI云业务**：Meta股价转涨并受投资者追捧，公司宣布数据中心扩建计划及新AI模型定价策略，扎克伯格表示探索进军AI云业务具有商业意义，市场看多情绪回升。 → 利好Meta及AI云服务竞争格局，加剧科技巨头AI军备竞赛。（[Yahoo Finance](https://news.google.com/rss/articles/CBMilwFBVV95cUxNZS1oS0dnS3FydjFvM0NTaTVlYWQxeklBcWJZSTJndzJ6SUREcDZ3Q0ZZNGIyUVdNUlo0T2U4cFBCMm9JNTEyclBzdlZhYlMxS0lDNmRldU41X0xqNFcySDFaUGc0VDl5eHNHSlYwXzl6cWoxQW90OFNvOXZTNkZBdG90dG9vcjhJa28tWDlEa3dxWl8yb2Rv?oc=5)）
+
+6. **海光信息宣布全国产十万卡AI超集群落地，进军嵌入式AI**：光合组织智能计算应用大会上，国内首个全国产十万卡AI超集群正式落地，海光信息宣布进军嵌入式AI市场，标志我国AI算力从规模上半场转向应用下半场。 → 利好国产算力及嵌入式AI产业链，强化自主可控逻辑。（[东方财富](https://news.google.com/rss/articles/CBMiYEFVX3lxTE5EWVlxd0lSQU5MTnUwOF9iS1hlN2lLN1VtU3FzYjFTRGdSWnRrSkZWZS1nbUx2UWRlWUVwclVXeTNoaTA4V2lud0RnNU83Z01PU280cTNtZkxQamNrT1Z3VA?oc=5)）
+
+7. **洛阳钼业上半年预盈最高165亿元，同比增超90%**：洛阳钼业发布业绩预告，预计上半年归母净利润同比增长78.76%到90.29%，最高达165亿元，受益于铜金价格共舞及钼、钨价格显著走高。 → 利好有色金属及资源板块，验证大宗商品景气逻辑。（[证券时报](https://news.google.com/rss/articles/CBMiXEFVX3lxTE8zTmI2X0UwRnBCaFZ0NDhESW4waDdlQVpuZ1ZIT2puV0hFX0xfclkwaGkzcVpzY0w0dWpVc1AtMzc2TmJXOFAzWVFmY2ZQdUhMQWRiVUdJWER0T1JK?oc=5)）
+
+8. **牧原股份上半年预亏超57亿元，猪周期底部徘徊**：牧原股份预告上半年归母净利润预亏57亿至67亿元，遭遇业绩与股价双杀，公司降本与屠宰业务提供一定缓冲，但行业何时走出底部仍存疑。 → 利空生猪养殖板块，周期反转仍待产能去化信号。（[华尔街见闻](https://news.google.com/rss/articles/CBMiU0FVX3lxTE53cENyVWdBSy1OTXNEM2x4cHhpY0JfRU5sR0JNaXdvalh3Q0lJZm8tMEFaYXV4ejY3ZDhNZ3p4dUV4VU9LN24tRVlqcDRocDhZNHZr?oc=5)）
+
+9. **日本财相点名养老基金引发日元脉冲跳涨**：日本财务大臣提及引导1.8万亿日元GPIF增持本土资产，日元及日债应声大涨，但高盛与道富质疑其持续性，认为市场需要更强有力的政策承诺。 → 短期利好日元，但持续性存疑，关注日央行后续政策落地。（[华尔街见闻](https://news.google.com/rss/articles/CBMiU0FVX3lxTE56N3NGSkxBMEFDUlo4YVJZb1lYNGlmZ2p6S3ppY0JJaGk0RlNCUjRNU3hlcXhJSUZ3clc5RHFRWTZzYVhLMlF3NXRFVjZWS1JnaWYw?oc=5)）
+
+10. **A股下周超40股限售解禁，半导体龙头占近三分之二**：下周A股市场将有超40只股票限售解禁，7股解禁比例超10%，其中一家半导体龙头解禁市值占近三分之二，下半年A股解禁总规模超2万亿元。 → 短期或对相关个股及板块形成流动性压力，需关注解禁减持风险。（[东方财富](https://news.google.com/rss/articles/CBMiYEFVX3lxTE5CV3Z6dTVDaG9pM3c4Ymo3MWVwanlsLTh2VWNfMkxkYUlXc0FmWF9tZHN1cmo0THFNN1JsWG42Slk2enVtWElWd1JDcXBpQ1BZQWZSWFFZVUVmMU9nTG5yVA?oc=5)）
+
+---
+
+## 二、深度观察专栏
+
+### AI算力军备竞赛进入下半场：从硬件紧缺到应用落地
+
+本周全球科技与资本市场最核心的叙事主线，毫无争议地落在了AI算力产业链上。路透社、华尔街日报、CNBC等多家外媒密集报道了SK海力士在纳斯达克的历史性首秀，其股价首日大涨约13%，CEO公开宣称"需求极其庞大"并预警2027年将出现最严重的内存短缺。与此同时，雅虎财经与彭博社报道了Meta股价大涨并宣布进军AI云业务，扎克伯格明确表示探索AI云商业逻辑"具有意义"。国内方面，东方财富、新浪财经等多家媒体聚焦光合组织智能计算应用大会，国内首个全国产十万卡AI超集群正式落地，海光信息宣布进军嵌入式AI市场。
+
+**从硬件紧缺到应用变现的产业逻辑切换**。SK海力士的火爆首秀与Meta的AI云布局，表面看是两条独立的新闻线，实则共同指向同一个产业拐点：AI算力军备竞赛正从"规模上半场"切换至"应用下半场"。SK海力士CEO对2027年内存短缺的预警，说明AI训练侧的硬件瓶颈远未缓解，HBM等高带宽存储需求将持续超越供应。但Meta的动向更具风向标意义——科技巨头不再单纯比拼GPU囤货量，而是开始构建AI云服务的商业闭环，这意味着AI投资正从纯资本开支向收入变现过渡。国内十万卡全国产超集群的落地，则标志着国产算力在规模上已具备对标能力，海光信息进军嵌入式AI更是将战场从云端向边缘侧延伸。
+
+**通胀与地缘政治的扰动变量**。第一财经报道的美联储半年度政策报告为这场AI盛宴泼了一盆冷水：关税政策和中东局势正在推升通胀，而AI本身可能成为"双刃剑"——既推动增长，也通过内存、电力和软件涨价加剧通胀压力。高盛测算AI年底或推高核心PCE 0.5个百分点。这意味着，AI的繁荣并非没有宏观代价：算力扩张带来的电力与硬件涨价，正在反向传导至通胀端，可能制约美联储的降息节奏。叠加美伊冲突推升油价的外部冲击，全球宏观流动性环境对科技估值的支撑并非无上限。
+
+**前瞻与影响**。综合来看，AI产业链的投资逻辑正在分化：硬件端（存储、先进封装、电力设备）仍处于景气上行通道，但需警惕通胀粘性导致的流动性预期反转风险；应用端（AI云服务、嵌入式AI）则进入商业模型验证期，谁能率先跑通"算力投入—收入回报"的闭环，谁就能在下半场占据主动。对于中国市场而言，国产十万卡超集群的落地与嵌入式AI的拓展，提供了独立于海外周期的结构性机会，但下周A股超40股限售解禁的流动性压力，短期仍需警惕。
