@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """把 Markdown 日报转为 HTML — 保留5个核心表格、智能去粗、简洁设计"""
-import sys, re, os, datetime
+import sys, re, os, datetime, subprocess
 
 # ============================================================
 # CSS + HTML 模板（完全重设计）
@@ -193,7 +193,7 @@ __CONTENT__
 <div class="progress-wrap" id="progressWrap">
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 </div>
-<span class="player-time" id="totalTime">00:00</span>
+<span class="player-time" id="totalTime" data-duration="__DURATION__">__DURATION_FMT__</span>
 </div>
 <div class="player-sub">
 <button class="speed-btn" data-speed="0.8">0.8x</button>
@@ -217,6 +217,10 @@ var pw=document.getElementById('progressWrap');
 var speeds=document.querySelectorAll('.speed-btn');
 
 function fmt(t){var m=Math.floor(t/60),s=Math.floor(t%60);return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
+
+// 从 data-duration 预取编译时的真实时长（ffprobe），不依赖 loadedmetadata
+var pd=tf.getAttribute('data-duration');
+if(pd&&!isNaN(pd)){dur=parseFloat(pd);tf.textContent=fmt(dur)}
 
 function upd(){if(!dur)return;
 var p=dur?pos/dur:0;pf.style.width=(p*100)+'%';cf.textContent=fmt(pos)}
@@ -458,6 +462,9 @@ def _render_text_line(line):
     plain = re.sub(r'\*{1,3}', '', stripped).strip()
     if plain.startswith('数据来源') or plain.startswith('来源声明'):
         return ''
+    # 跳过注说明段落（如 *注：涨跌幅使用...*）
+    if re.match(r'\*?注[：:]', stripped):
+        return ''
 
     # 过滤各板块的数据时间戳（已由 call_llm.py 后处理清除，此处双重保险）
     if re.match(r'>\s*数据时间[：:]\s*\d{4}-\d{2}-\d{2}', stripped):
@@ -468,6 +475,10 @@ def _render_text_line(line):
     # 引用块
     if stripped.startswith('> '):
         content = stripped[2:].strip()
+        # 跳过数据来源/注说明的引用块
+        content_plain = re.sub(r'\*{1,3}', '', content).strip()
+        if content_plain.startswith('数据来源') or content_plain.startswith('来源声明') or content_plain.startswith('注：') or content_plain.startswith('注:'):
+            return ''
         content = _smart_inline(content)
         content = _markdown_to_html_inline(content)
         return f'<blockquote>{content}</blockquote>'
@@ -672,14 +683,28 @@ def md_to_html(md_file):
 
     body_html = '\n\n'.join(body_parts)
 
-    # 数据来源脚注（含数据时效）
-    source = '数据来源：akshare/雪球蛋卷/腾讯API/东方财富等'
-    if data_time:
-        source += f'，数据时效截至 {data_time} 北京时间'
-    body_html += f'\n<p class="source-note">{source}</p>\n'
+    # 用 ffprobe 预读 MP3 时长
+    mp3_path = md_file.replace('report.md', 'daily-report.mp3')
+    dur_sec = 0.0
+    if not os.path.exists(mp3_path):
+        mp3_path = 'daily-report.mp3'
+    if os.path.exists(mp3_path):
+        try:
+            r = subprocess.run(
+                ['ffprobe', '-v', 'error', '-show_entries', 'format=duration',
+                 '-of', 'csv=p=0', mp3_path],
+                capture_output=True, text=True, timeout=5
+            )
+            if r.returncode == 0 and r.stdout.strip():
+                dur_sec = float(r.stdout.strip())
+        except Exception:
+            pass
+    dur_fmt = f'{int(dur_sec//60):02d}:{int(dur_sec%60):02d}'
 
     html = TEMPLATE
     html = html.replace('__DATE__', date_str)
+    html = html.replace('__DURATION__', f'{dur_sec:.1f}')
+    html = html.replace('__DURATION_FMT__', dur_fmt)
     html = html.replace('__CONTENT__', body_html)
     html = html.replace('__PLAYER_SCRIPT__', PLAYER_JS)
 
