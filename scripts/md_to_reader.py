@@ -208,36 +208,32 @@ __PLAYER_SCRIPT__
 
 PLAYER_JS = r'''<script>
 (function(){
-var a=null,ctx=null,src=null,playing=false,dur=0,pos=0,rate=1;
 var btn=document.getElementById('btnPlay');
 var cf=document.getElementById('currentTime');
 var tf=document.getElementById('totalTime');
 var pf=document.getElementById('progressFill');
 var pw=document.getElementById('progressWrap');
 var speeds=document.querySelectorAll('.speed-btn');
+var playing=false,pos=0,rate=1;
 
 function fmt(t){var m=Math.floor(t/60),s=Math.floor(t%60);return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
 
-// 从 data-duration 预取编译时的真实时长（ffprobe），不依赖 loadedmetadata
-var pd=tf.getAttribute('data-duration');
-if(pd&&!isNaN(pd)){dur=parseFloat(pd);tf.textContent=fmt(dur)}
+// 从 data-duration 取编译时预读的时长（ffprobe），若为0则后续靠 loadedmetadata 更新
+var dur=parseFloat(tf.getAttribute('data-duration'))||0;
+if(dur>0){tf.textContent=fmt(dur)}
 
-function upd(){if(!dur)return;
-var p=dur?pos/dur:0;pf.style.width=(p*100)+'%';cf.textContent=fmt(pos)}
-
-function tick(){if(!playing)return;
-pos=a.currentTime;upd();if(pos>=dur-0.1){pause();pos=dur;upd()}}
-
-function play(){
-if(!a){a=new Audio();a.src='daily-report.mp3';a.preload='auto';
+// 提前创建 Audio 并加载元数据，不依赖点击播放
+var a=new Audio();a.src='daily-report.mp3';a.preload='metadata';
 a.addEventListener('loadedmetadata',function(){dur=a.duration;tf.textContent=fmt(dur);upd()});
-a.addEventListener('timeupdate',tick);
-a.addEventListener('ended',function(){playing=false;btn.textContent='\u25B6';pos=dur;upd()})}
-a.playbackRate=rate;a.currentTime=pos;a.play().then(function(){playing=true;btn.textContent='\u23F8'}).catch(function(){})}
+a.addEventListener('timeupdate',function(){if(!playing)return;pos=a.currentTime;upd();if(pos>=dur-0.1){pause();pos=dur;upd()}});
+a.addEventListener('ended',function(){playing=false;btn.textContent='\u25B6';pos=dur;upd()});
 
+function upd(){if(!dur)return;var p=pos/dur;pf.style.width=(p*100)+'%';cf.textContent=fmt(pos)}
+
+function doPlay(){a.playbackRate=rate;a.currentTime=pos;a.play().then(function(){playing=true;btn.textContent='\u23F8'}).catch(function(){})}
 function pause(){a.pause();playing=false;btn.textContent='\u25B6'}
 
-btn.addEventListener('click',function(){if(playing)pause();else play()});
+btn.addEventListener('click',function(){if(playing)pause();else doPlay()});
 
 pw.addEventListener('click',function(e){
 if(!dur)return;var rect=pw.getBoundingClientRect();
@@ -247,7 +243,7 @@ pos=p*dur;a.currentTime=pos;upd()});
 speeds.forEach(function(b){b.addEventListener('click',function(){
 speeds.forEach(function(s){s.classList.remove('active')});
 b.classList.add('active');rate=parseFloat(b.dataset.speed);
-if(a){a.playbackRate=rate;if(!playing)try{play()}catch(e){}}})});
+if(a){a.playbackRate=rate}})});
 
 setInterval(function(){if(!playing)return;pos=a.currentTime;upd()},250)
 })();</script>'''
