@@ -665,6 +665,9 @@ def md_to_html(md_file):
         md_text = f.read()
 
     date_str = _extract_date(md_text)
+    # 追加生成时间（TZ=Asia/Shanghai 已由 workflow 设置）
+    now = datetime.datetime.now()
+    date_str += f' {now.hour}点{now.minute}分'
     data_time = _extract_data_time(md_text)  # 从 LLM 来源行提取数据抓取时间戳
     blocks = parse_md_sections(md_text)
 

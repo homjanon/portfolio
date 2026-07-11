@@ -62,13 +62,6 @@ jobs:
           NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
           SENSENOVA_API_KEY: ${{ secrets.SENSENOVA_API_KEY }}
 
-      - name: 转换 MD → HTML
-        id: md_to_html
-        run: |
-          echo "转换 MD → HTML..."
-          python3 scripts/md_to_reader.py report.md daily-report.html
-          echo "HTML 生成完成"
-
       - name: 转换日报为广播稿
         id: md_to_script
         continue-on-error: true
@@ -86,6 +79,13 @@ jobs:
         run: |
           echo "生成 MP3 音频..."
           python3 scripts/md_to_mp3.py
+
+      - name: 转换 MD → HTML
+        id: md_to_html
+        run: |
+          echo "转换 MD → HTML..."
+          python3 scripts/md_to_reader.py report.md daily-report.html
+          echo "HTML 生成完成"
 
       - name: 部署到主分支 docs/ 目录
         if: always()
