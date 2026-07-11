@@ -31,9 +31,9 @@ schedule / workflow_dispatch
 
 | 优先级 | 模型 | API 端点 | 环境变量 |
 |--------|------|----------|---------|
-| ① 主模型 | **NVIDIA Nemotron-3-Super-120B** (`nvidia/nemotron-3-super-120b-a12b`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
-| ② 兜底 | **NVIDIA GLM-5.2** (`z-ai/glm-5.2`) | 同上 | `NVIDIA_API_KEY` |
-| ③ 最终兜底 | **商汤 DeepSeek-V4-Flash** (`deepseek-v4-flash`) | `token.sensenova.cn/v1` | `SENSENOVA_API_KEY` |
+| ① 主模型 | **NVIDIA GLM-5.2** (`z-ai/glm-5.2`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
+| ② 兜底 | **商汤 DeepSeek-V4-Flash** (`deepseek-v4-flash`) | `token.sensenova.cn/v1` | `SENSENOVA_API_KEY` |
+| ③ 最终兜底 | **NVIDIA Nemotron-3-Ultra-550B** (`nvidia/nemotron-3-ultra-550b-a55b`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
 
 - 三个模型依次尝试，前一个失败自动切换到下一个
 - 失败时自动重试 3 次（指数退避）

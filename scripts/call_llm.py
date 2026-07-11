@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
 调用 LLM 生成日报：
-  主模型: NVIDIA Nemotron-3-Super-120B (NVIDIA_API_KEY)
-  兜底: NVIDIA GLM-5.2 (NVIDIA_API_KEY)
-  最后兜底: 商汤 DeepSeek-V4-Flash (SENSENOVA_API_KEY)
+  主模型: NVIDIA GLM-5.2 (NVIDIA_API_KEY)
+  兜底: 商汤 DeepSeek-V4-Flash (SENSENOVA_API_KEY)
+  最后兜底: NVIDIA Nemotron-3-Ultra-550B (NVIDIA_API_KEY)
 
 用法: python3 scripts/call_llm.py
   读取 prompt/daily_report_prompt.txt (system) + data_*.json (user)
@@ -16,12 +16,6 @@ from datetime import datetime, timezone, timedelta
 PROMPT_PATH = os.path.join(os.path.dirname(__file__), "..", "prompt", "daily_report_prompt.txt")
 LLM_CONFIGS = [
     {
-        "name": "NVIDIA Nemotron-3-Super-120B",
-        "api_url": "https://integrate.api.nvidia.com/v1/chat/completions",
-        "api_key_env": "NVIDIA_API_KEY",
-        "model": "nvidia/nemotron-3-super-120b-a12b",
-    },
-    {
         "name": "NVIDIA GLM-5.2",
         "api_url": "https://integrate.api.nvidia.com/v1/chat/completions",
         "api_key_env": "NVIDIA_API_KEY",
@@ -32,6 +26,12 @@ LLM_CONFIGS = [
         "api_url": "https://token.sensenova.cn/v1/chat/completions",
         "api_key_env": "SENSENOVA_API_KEY",
         "model": "deepseek-v4-flash",
+    },
+    {
+        "name": "NVIDIA Nemotron-3-Ultra-550B",
+        "api_url": "https://integrate.api.nvidia.com/v1/chat/completions",
+        "api_key_env": "NVIDIA_API_KEY",
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
     },
 ]
 
