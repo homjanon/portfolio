@@ -454,6 +454,11 @@ def _render_text_line(line):
     if not stripped:
         return ''
 
+    # 过滤来源声明行（硬编码 source-note 替代，避免重复）
+    plain = re.sub(r'\*{1,3}', '', stripped).strip()
+    if plain.startswith('数据来源') or plain.startswith('来源声明'):
+        return ''
+
     # 引用块
     if stripped.startswith('> '):
         content = stripped[2:].strip()
@@ -647,7 +652,7 @@ def md_to_html(md_file):
     body_html = '\n\n'.join(body_parts)
 
     # 数据来源脚注
-    body_html += '\n<p class="source-note">数据来源：预抓取结构化行情（akshare / 腾讯 / 雪球蛋卷 / 东方财富等）</p>\n'
+    body_html += '\n<p class="source-note">数据来源：akshare / 腾讯 / 雪球蛋卷 / 东方财富等</p>\n'
 
     html = TEMPLATE
     html = html.replace('__DATE__', date_str)
