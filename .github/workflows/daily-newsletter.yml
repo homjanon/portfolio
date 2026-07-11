@@ -2,7 +2,7 @@ name: 每日金融日报
 
 on:
   schedule:
-    # 北京时间 09:00 = UTC 01:00
+    # 每日 09:00 北京 = 01:00 UTC | 2026-07-11 触碰提交强制重新注册定时任务
     - cron: '0 1 * * *'
   workflow_dispatch:
     inputs:
@@ -11,6 +11,10 @@ on:
         required: false
         default: false
         type: boolean
+
+concurrency:
+  group: daily-report
+  cancel-in-progress: false
 
 env:
   TZ: Asia/Shanghai
