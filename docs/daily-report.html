@@ -8,7 +8,7 @@
 <meta http-equiv="Expires" content="0">
 <link rel="icon" href="data:,">
 <title>全球金融市场日报</title>
-<!-- build=202607110946 -->
+<!-- build=202607110952 -->
 <style>
 :root{--bg:#f8f9fa;--card:#fff;--text:#1a1a2e;--sub:#6b7280;--border:#e5e7eb;--accent:#2563eb;--note-bg:#f0f4ff}
 @media(prefers-color-scheme:dark){:root{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--sub:#94a3b8;--border:#334155;--accent:#3b82f6;--note-bg:#1e293b}}
@@ -65,59 +65,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 <button class="refresh-btn" id="refreshBtn" onclick="window.location.href=window.location.pathname+'?_='+Date.now()">刷新</button>
 </div>
 <div class="article" id="articleContent">
-<h3>一、市场全景</h3>
-<h3>A股收盘</h3>
-<p class="no-indent">📊 昨日A股主要指数全线调整。上证指数收于3996.16点，<strong><span class="down">下跌1.00%</span></strong>；深证成指收于15046.67点，<strong><span class="down">下跌2.29%</span></strong>；沪深300收于4780.79点，<strong><span class="down">下跌1.96%</span></strong>；科创50收于2064.98点，<strong><span class="down">下跌5.53%</span></strong>；创业板指收于3842.73点，<strong><span class="down">下跌4.37%</span></strong>。</p>
-<p class=""><strong>附加行情描述</strong>：两市成交额合计约3380亿元（上证+深成指），量能较前日显著放大。上涨家数3004家，下跌1622家，涨跌比1.85：1；涨停92家，跌停仅4家，市场赚钱效应尚存。申万一级行业板块驱动数据暂不可得（`data_industry.json`申万板块字段缺失），但据同花顺90个行业板块资金流向显示，<strong>白酒</strong>（<strong><span class="up">上涨3.77%</span></strong>）、<strong>医疗服务</strong>（<strong><span class="up">上涨5.59%</span></strong>）、<strong>化学制药</strong>（<strong><span class="up">上涨3.2%</span></strong>）领涨，资金净流入居前；而<strong>半导体</strong>（<strong><span class="down">下跌5.28%</span></strong>）、<strong>光学光电子</strong>（<strong><span class="down">下跌1.25%</span></strong>）、<strong>元件</strong>（<strong><span class="down">下跌3.76%</span></strong>）跌幅居前，资金大幅净流出。全市场主力资金净流出<strong>约-930.47亿元</strong>。板块轮动风格判断：防御性板块（医疗、白酒）获资金青睐，科技股（半导体、电池）大幅调整。（数据来源：akshare新浪 + 同花顺90行业资金流）</p>
-<h3>美股收盘（当日凌晨）</h3>
-<p class="">📊 美股三大指数小幅收涨。道琼斯工业指数收于52637.01点，<strong><span class="up">上涨0.29%</span></strong>；标普500指数收于7575.39点，<strong><span class="up">上涨0.42%</span></strong>；纳斯达克综合指数收于26281.61点，<strong><span class="up">上涨0.29%</span></strong>。</p>
-<p class=""><strong>附加描述</strong>：因RSS新闻抓取失败，宏观环境要点及主要驱动因素数据暂不可得。标普500十一大板块涨跌概况同样无法获取。整体市场温和上扬，反映市场在等待下周通胀数据前保持观望。（数据来源：akshare新浪 + yfinance兜底）</p>
-<h3>港股收盘（前一日）</h3>
-<p class="">📊 港股恒生指数收于24175.12点，<strong><span class="up">上涨0.60%</span></strong>；恒生中国企业指数收于8039.19点，<strong><span class="up">上涨0.52%</span></strong>。南下资金全天净卖出59.95亿元，机构交投偏向谨慎。（数据来源：akshare新浪 + akshare资金流）</p>
-<h3>全球其他市场</h3>
-<p class="">欧股STOXX指数微跌<strong>0.04%</strong>，日经225指数走强，收于68557.73点，<strong><span class="up">上涨1.20%</span></strong>；韩股KOSPI指数大涨<strong>2.52%</strong>，收于7475.94点。亚太科技股情绪普遍回暖。（数据来源：yfinance兜底）</p>
-<h3>大宗商品与汇率</h3>
-<p class="">WTI原油收于71.51美元/桶，<strong><span class="down">下跌0.79%</span></strong>；布伦特原油收于71.36美元/桶，<strong><span class="down">下跌1.19%</span></strong>。COMEX黄金收于4128.9美元/盎司，<strong><span class="down">下跌0.29%</span></strong>。美元兑离岸人民币（USD/CNH）报6.7989。中国10年期国债收益率为1.7398%，美国10年期国债收益率为4.56%，中美利差倒挂约<strong>2.82个百分点</strong>。<strong>中美利差解读</strong>：利差倒挂水平进一步加深，对中债利率形成承压，中短期中债收益率面临一定上行压力。（数据来源：akshare期货 + akshare债券利率 + 外汇局中间价）</p>
-<h3>估值水位与情绪</h3>
-<p class="">从`data_valuation.json`获取的蛋卷基金估值数据显示：</p>
-<ul>
-<li><strong>红利低波（CSIH30269）</strong>：股息率5.76%，处于历史高股息区间，<strong>高股息配置价值显著</strong>。</li>
-<li><strong>标普500（SP500）</strong>：PE为28.62，PB为5.80，PB分位高达<strong>99.68%</strong>，处于极端高位风险区。该指数估值溢价显著，需警惕回调风险。</li>
-<li>其余指数（沪深300、创业板指、恒生科技）PE/PB分位均处于30%-86%区间，未进入极端区域。其中恒生科技PE分位35.22%，估值相对合理。（数据来源：雪球蛋卷API）</li>
-</ul>
-<h3>二、行业洞察</h3>
-<blockquote>
-<p class="no-indent"><strong>科技板块动态</strong>：半导体板块昨日重挫<strong>5.28%</strong>，成为拖累指数的主要力量。芯片、算力等概念股集体回调，寒武纪、中际旭创等龙头个股跌幅超8%。</p>
-</blockquote>
+<h2>行业洞察</h2>
 <h3>全球 TOP 10（RSS驱动）</h3>
-<p class="">⚠️ 今日RSS新闻抓取失败（`data_news_rss.json`状态为false），按规则此处标注为<strong>数据暂不可得</strong>。无可用新闻源提供全球或国内财经头条。</p>
-<h3>持仓动态与聚焦</h3>
-<h3>个人持仓行情快照</h3>
-<ul>
-<li><strong>招商银行A（600036）</strong>：价格<strong>36.88元</strong>，<strong><span class="up">上涨0.90%</span></strong></li>
-<li><strong>招商银行H（03968）</strong>：价格<strong>45.72港元</strong>，<strong><span class="up">上涨1.65%</span></strong></li>
-<li><strong>长江电力（600900）</strong>：价格<strong>28.03元</strong>，<strong><span class="up">上涨0.94%</span></strong></li>
-<li><strong>红利低波ETF易方达（563020）</strong>：价格<strong>1.104元</strong>，<strong><span class="up">上涨0.36%</span></strong></li>
-<li><strong>QQQM</strong>：价格<strong>298.72美元</strong>，<strong><span class="up">上涨0.32%</span></strong></li>
-<li><strong>SPY</strong>：价格<strong>754.95美元</strong>，<strong><span class="up">上涨0.43%</span></strong></li>
-</ul>
-<p class=""><strong>分红动态</strong>：招商银行A股分红已于7月10日除权除息（每股派1.003元），填权行情关注后续股价表现。长江电力A股将于7月17日除权除息（每股派0.79元）。</p>
-<h3>持仓聚焦（未来催化）</h3>
 <ol>
-<li><strong>寒武纪（异动）</strong>：监督池显示大跌<strong>8.80%</strong>，与半导体板块整体回调共振。作为AI算力龙头，近期股价高位震荡，短期资金获利了结压力较大。→ 未来1周关键节点：关注AI产业链需求预期变化及公司年报预披露。</li>
-<li><strong>长江电力（协同）</strong>：个人持仓标的，作为防御+高股息代表，昨日股价上涨<strong>0.94%</strong>，逆势跑赢指数。除息日（7月17日）临近，若市场风险偏好延续低迷，高股息防御属性有望进一步突显。→ 未来1周关键节点：7月17日除权除息，分红效应持续发酵。</li>
-<li><strong>中信证券（事件催化）</strong>：监督池中券商龙头，股价微跌<strong>0.98%</strong>。近期市场成交活跃度提升，对券商构成潜在利好。→ 未来1周关键节点：关注下周市场成交额能否持续放量，以及行业政策催化。</li>
+<li><strong>SK Hynix股价在美国首日上市大涨约13%，AI热度持续</strong>：SK Hynix在纳斯达克首日交易收涨约13%，显示AI需求推动存储芯片景气。→ 利好全球存储芯片供应链，提升相关概念股预期。（来源：Reuters）</li>
+<li><strong>大众计划削减一半车型产线以应对中国及电动车压力</strong>：大众宣布将砍掉半数车型并压缩产能以降低成本，因中国市场销售下滑及电动车竞争加剧。→ 提示传统车企转型压力加大，利空燃油车相关板块。（来源：Yahoo Finance）</li>
+<li><strong>OpenAI权力集中在联合创始人Greg Brockman，为潜在IPO做准备</strong>：OpenAI内部权力向联合创始人Greg Brockman集中，为可能的上市铺路。→ 加强公司治理稳定性，利好长期融资预期。（来源：CNBC）</li>
+<li><strong>Circle获批成立加密聚焦的全国性信托银行，股价应声上涨</strong>：美国货币监管署批准Circle成立加密银行，股价随之上涨约5%。→ 加密合规化进程加速，利好数字资产基础设施。（来源：WSJ）</li>
+<li><strong>中国暂停氦气出口，因美伊紧张局势升级</strong>：中国出于美伊紧张关系，暂停对美国的氦气出口。→ 可能推高全球氦气价格，对半导体及光纤行业形成成本压力。（来源：Reuters）</li>
+<li><strong>“十五五”期间零碳园区和零碳工厂建设将提速</strong>：中国规划在“十五五”期间加快零碳园区和零碳工厂建设，以实现碳达峰目标。→ 利好绿色能源、节能环保及相关产业链。（来源：东方财富）</li>
+<li><strong>华北制药子公司产品纳入国家基本药物目录</strong>：华北制药及下属子公司多款药品进入2026年版国家基本药物目录。→ 有望提升公司药品销量及医保覆盖，利好医药板块。（来源：金融界）</li>
+<li><strong>洛阳钼业上半年净利润预盈最高165亿元</strong>：洛阳钼业预计2026年上半年净利润达155-165亿元，同比增长78.8%-90.3%。→ 显示有色金属板块景气回暖，利好相关采矿及冶炼股。（来源：证券时报）</li>
+<li><strong>国际油价10日微跌</strong>：布伦特及WTI原油价格小幅下跌，市场认为中东局势可控。→ 短期利好油价下行，利空能源开采股。（来源：新华网）</li>
+<li><strong>段永平再度增持泡泡玛特 Labubu世界杯联名产品</strong>：知名投资者段永平继续增持泡泡玛特，其Labubu世界杯联名产品已进入促销阶段。→ 反映消费者对潮玩IP的持续热度，利好玩具及IP授权相关公司。（来源：财联社）</li>
 </ol>
-<h3>QDII 溢价与申购额度监测</h3>
-<p class="">📊 <strong>场内ETF溢价率</strong>：监控的6只美股相关ETF溢价均显著高于正常范围，全部处于异常状态，具体如下：</p>
-<div class="table-text">513100，代码纳指ETF国泰，溢价率9.45%。159941，代码纳指ETF广发，溢价率8.75%。159659，代码纳斯达克100ETF招商，溢价率7.25%。159612，代码标普500ETF国泰，溢价率5.14%。513500，代码标普500ETF博时，溢价率4.89%。513650，代码标普500ETF南方，溢价率3.82%。</div>
-<p class="">所有场内ETF溢价率均&gt;3.8%，追高需警惕溢价回落风险。</p>
-<p class=""><strong>场外QDII申购额度</strong>：限大额状态，日累计限额较低的6只代表性产品如下：</p>
-<div class="table-text">012752，价格建信纳斯达克100指数(QDII)C人民币，3.3701。023422，价格建信纳斯达克100指数(QDII)D人民币，3.3861。539001，价格建信纳斯达克100指数(QDII)A人民币，3.4814。018966，价格汇添富纳斯达克100ETF发起式联接(QDII)人民币A，1.6631。018967，价格汇添富纳斯达克100ETF发起式联接(QDII)人民币C，1.644。021773，价格汇添富纳斯达克100ETF发起式联接(QDII)人民币E，1.6599。</div>
-<p class=""><strong>附注：以下为预抓取数据来源分类声明</strong></p>
-<blockquote>
-<p class="no-indent">本报告数据来源涵盖：akshare（含akshare新浪、akshare期货、akshare债券利率、akshare同花顺90行业资金流）、雪球蛋卷API、外汇局中间价、yfinance、腾讯API。RSS新闻抓取失败。所有数据均以预抓取JSON文件（截至2026-07-11 09:45）为准，缺失项已标注。</p>
-</blockquote>
+<h3>A 股资金流向回顾</h3>
+<ul>
+<li>今日资金净流入前五的板块为：<strong>计算机设备</strong>（净流入 <strong>34.25亿</strong>，涨跌幅 <strong>+1.26%</strong>）、<strong>白酒</strong>（净流入 <strong>28.7亿</strong>，涨跌幅 <strong>+3.77%</strong>）、<strong>医疗服务</strong>（净流入 <strong>28.33亿</strong>，涨跌幅 <strong>+5.59%</strong>）、<strong>化学制药</strong>（净流入 <strong>23.84亿</strong>，涨跌幅 <strong>+3.20%</strong>）、<strong>文化传媒</strong>（净流入 <strong>18.18亿</strong>，涨跌幅 <strong>+2.91%</strong>）。</li>
+<li>全市场资金净流出达 <strong>‑930.47亿</strong>，表明整体资金呈现大幅撤离，但上述板块逆流而上，显示资金对科技、消费及医疗的结构性偏好。</li>
+</ul>
+<h3>科技板块动态</h3>
+<p class="no-indent">除了顶级新闻中的存储芯片与AI热度外，本周科技板块还呈现以下动向：AI竞赛正从追求更大模型转向更廉价、更智能的系统；美国对阿联酋的AI芯片出口管制有所放宽，利于相关厂商拓展中东市场；半导体设备板块活跃，深科达等实现 <strong>20cm</strong> 连板，表明设备需求回暖；Meta股价因AI战略乐观而实现近年最佳周表现。整体来看，科技板块在结构性机遇与政策微调下呈现分化但整体偏强的格局。</p>
 </div>
 <div class="player">
 <div class="player-row">
@@ -136,7 +104,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 <button class="speed-btn" data-speed="1.5">1.5×</button>
 </div>
 </div>
-<audio id="audioPlayer" preload="auto" src="daily-report.mp3?20260711094640"></audio>
+<audio id="audioPlayer" preload="auto" src="daily-report.mp3?20260711095222"></audio>
 <script>
 (function(){var p=document.getElementById("btnPlay"),a=document.getElementById("audioPlayer"),c=document.getElementById("progressFill"),t=document.getElementById("progressThumb"),w=document.getElementById("progressWrap"),ct=document.getElementById("currentTime"),tt=document.getElementById("totalTime"),sb=document.querySelectorAll(".speed-btn");
 function fmt(s){if(!s||!isFinite(s))return"00:00";var m=Math.floor(s/60),sec=Math.floor(s%60);return(m<10?"0":"")+m+":"+(sec<10?"0":"")+sec}
