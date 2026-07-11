@@ -10,20 +10,21 @@
 """
 
 import os, sys, json, glob, time, requests, re
+from datetime import datetime, timezone, timedelta
 
 PROMPT_PATH = os.path.join(os.path.dirname(__file__), "..", "prompt", "daily_report_prompt.txt")
 LLM_CONFIGS = [
-    {
-        "name": "Zhipu GLM-4.7-Flash",
-        "api_url": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
-        "api_key_env": "ZHIPU_API_KEY",
-        "model": "glm-4.7-flash",
-    },
     {
         "name": "SenseTime DeepSeek-V4-Flash",
         "api_url": "https://token.sensenova.cn/v1/chat/completions",
         "api_key_env": "SENSENOVA_API_KEY",
         "model": "deepseek-v4-flash",
+    },
+    {
+        "name": "Zhipu GLM-4.7-Flash",
+        "api_url": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+        "api_key_env": "ZHIPU_API_KEY",
+        "model": "glm-4.7-flash",
     },
 ]
 
@@ -78,6 +79,14 @@ def main():
         sys.exit(1)
     system = open(PROMPT_PATH, encoding="utf-8").read()
     print(f"📄 读取 prompt: {len(system)} 字符")
+
+    # 1b. 模式自动判定（北京时间）：周一~周六=完整模式，周日=精简模式
+    beijing = timezone(timedelta(hours=8))
+    now = datetime.now(beijing)
+    w = now.weekday()  # 0=Mon, 6=Sun
+    mode = "精简模式" if w == 6 else "完整模式"
+    system = system.replace("__MODE__", mode)
+    print(f"📋 执行模式: {mode}（星期{'一二三四五六日'[w]}, {now.strftime('%H:%M')}）")
 
     # 2. 读取所有 data_*.json 作为 user 消息
     blocks = []
