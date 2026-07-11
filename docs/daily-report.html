@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<link rel="icon" href="data:,">
+<title>全球金融市场日报</title>
+<!-- build=202607110801 -->
+<style>
+:root{--bg:#f8f9fa;--card:#fff;--text:#1a1a2e;--sub:#6b7280;--border:#e5e7eb;--accent:#2563eb;--note-bg:#f0f4ff}
+@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--sub:#94a3b8;--border:#334155;--accent:#3b82f6;--note-bg:#1e293b}}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:18px;line-height:2.0;min-height:100dvh;padding:0 0 150px;-webkit-text-size-adjust:100%}
+.header{background:var(--card);border-bottom:1px solid var(--border);padding:18px 16px;text-align:center;position:relative}
+.header h1{font-size:20px;font-weight:700;margin-bottom:4px}
+.header .date{font-size:13px;color:var(--sub);margin-bottom:8px}
+.refresh-btn{position:absolute;right:16px;top:14px;background:var(--accent);color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;display:none}
+.refresh-btn.show{display:block}
+.stale-banner{background:#fef3c7;color:#92400e;font-size:13px;padding:6px 14px;text-align:center;display:none}
+.stale-banner.show{display:block}
+@media(prefers-color-scheme:dark){.stale-banner{background:#422006;color:#fde68a}}
+.tip{background:#e8f5e9;color:#2e7d32;font-size:13px;padding:6px 14px;text-align:center;border-bottom:1px solid #c8e6c9}
+@media(prefers-color-scheme:dark){.tip{background:#1b3a1b;color:#81c784;border-color:#2e4a2e}}
+.article{max-width:700px;margin:0 auto;padding:20px 16px}
+.article h2{font-size:20px;margin:38px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--accent)}
+.article h3{font-size:17px;margin:26px 0 8px;color:var(--accent)}
+.article p{margin:14px 0;text-indent:0}
+.article p.no-indent{text-indent:0}
+.article .table-text{margin:8px 0;padding:8px 12px;background:var(--note-bg);border-radius:8px;font-size:15px;line-height:2;text-indent:0}
+.article strong{color:var(--accent);font-weight:700}
+.article blockquote{border-left:4px solid var(--accent);padding:10px 16px;margin:14px 0;background:var(--note-bg);border-radius:0 10px 10px 0;color:var(--sub);font-size:15px;line-height:1.8}
+.article .source{font-size:13px;color:var(--sub);margin:4px 0 12px;text-indent:0;font-style:normal}
+.article ul,.article ol{padding-left:22px;margin:8px 0}
+.article li{margin:6px 0;line-height:1.8}
+.article hr{border:none;border-top:1px solid var(--border);margin:24px 0}
+.up{color:#059669;font-weight:600}.down{color:#dc2626;font-weight:600}
+@media(prefers-color-scheme:dark){.up{color:#34d399}.down{color:#f87171}}
+.player{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--card);border-top:1px solid var(--border);padding:10px 16px max(10px,env(safe-area-inset-bottom,10px));box-shadow:0 -2px 12px rgba(0,0,0,.08)}
+.player-row{display:flex;align-items:center;gap:8px;max-width:700px;margin:0 auto}
+.btn-play{width:48px;height:48px;border-radius:50%;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;-webkit-tap-highlight-color:transparent;background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(37,99,235,.25)}
+.btn-play:active{transform:scale(.92)}
+.player-time{font-size:11px;color:var(--sub);min-width:36px;text-align:center;white-space:nowrap;font-variant-numeric:tabular-nums}
+.progress-wrap{flex:1;height:32px;display:flex;align-items:center;cursor:pointer;position:relative;min-width:60px}
+.progress-track{width:100%;height:4px;background:var(--border);border-radius:2px;overflow:hidden;position:relative}
+.progress-fill{height:100%;background:var(--accent);border-radius:2px;width:0;transition:none}
+.progress-thumb{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;background:var(--accent);border:2px solid #fff;transform:translate(-50%,-50%);opacity:0;transition:opacity .12s;pointer-events:none;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.progress-wrap:hover .progress-thumb,.progress-wrap:active .progress-thumb{opacity:1}
+@media(prefers-color-scheme:dark){.progress-thumb{border-color:var(--card)}}
+.player-sub{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:2px}
+.speed-btn{background:none;border:none;color:var(--sub);font-size:11px;cursor:pointer;padding:2px 6px;border-radius:3px;transition:all .12s}
+.speed-btn.active{color:var(--accent);font-weight:600}
+.speed-btn:hover{background:var(--note-bg)}
+.voice-label{font-size:10px;color:var(--sub);padding:2px 4px}
+</style>
+</head>
+<body>
+<div class="stale-banner" id="staleBanner"></div>
+<div class="tip">点击 ▶ 播放音频日报（微软 AI 语音播报），暂停/续播/拖动进度条均可</div>
+<div class="header">
+<h1>全球金融市场日报</h1>
+<div class="date" id="reportDate">2026年07月11日</div>
+<button class="refresh-btn" id="refreshBtn" onclick="window.location.href=window.location.pathname+'?_='+Date.now()">刷新</button>
+</div>
+<div class="article" id="articleContent">
+<h3>一、行业洞察</h3>
+<h3>🆕 全球 TOP 10（RSS驱动）</h3>
+<p class="no-indent"><strong>【重大新闻】</strong></p>
+<ol>
+<li><strong>苹果起诉OpenAI，指控窃取商业机密</strong>：苹果起诉OpenAI及其员工，称其窃取商业机密，并指控OpenAI在招聘时要求员工带苹果原型机参加面试 → 科技竞争加剧，OpenAI生态面临法律风险。</li>
+<li><strong>SK海力士美股上市首日大涨13%</strong>：SK海力士在纳斯达克上市首日收盘上涨13%，市值一度超美光近2000亿美元，董事长称AI需求巨大 → AI存储需求旺盛，半导体产业链景气度提升。</li>
+<li><strong>Circle获准建立美国信托银行，股价上涨5%</strong>：稳定币发行商Circle获得美国货币监理署（OCC）最终批准，可运营国家信托银行 → 加密货币合规化进程加速，利好稳定币生态。</li>
+<li><strong>OpenAI权力结构重组，为IPO做准备</strong>：OpenAI联合创始人Greg Brockman权力集中，高管Fidji Simo离职 → 公司治理变动，关注未来战略方向及IPO时间表。</li>
+<li><strong>瑞安航空乘客被吸出窗外</strong>：瑞安航空一架飞机在希腊飞行时，一名乘客被吸出窗外，机上人员将其拉回 → 地缘政治外溢风险，航空安全受关注。</li>
+</ol>
+<p class=""><strong>【普通新闻】</strong></p>
+<ol>
+<li><strong>美股收盘：三大指数小幅收涨，标普500连涨两周</strong>：美股三大指数收涨，科技、能源股走强，SK海力士上市首日大涨，阿里巴巴五连涨 → 市场风险偏好回升，科技股领涨。</li>
+<li><strong>华北制药产品纳入国家基本药物目录</strong>：华北制药及子公司产品纳入新版国家基本药物目录 → 医药政策利好，提升公司市场地位。</li>
+<li><strong>SK海力士CEO预计存储芯片短缺将持续至2030年后</strong>：SK海力士首席执行官预计存储芯片短缺将持续到下一个十年 → 行业景气度长期向好，利好上游设备厂商。</li>
+<li><strong>大众集团计划裁员10万-12万人，削减产能</strong>：大众集团“自救”计划，将裁员并砍掉半数车型以削减成本 → 汽车行业深度调整，关注转型成本及欧洲市场影响。</li>
+<li><strong>全国用电负荷创15.18亿千瓦历史新高</strong>：全国用电负荷创历史新高 → 能源需求旺盛，利好电力及新能源板块。</li>
+</ol>
+<h3>A股资金流向回顾</h3>
+<p class="">资金流向呈现明显分化，<strong>计算机设备</strong>、<strong>白酒</strong>、<strong>医疗服务</strong>及<strong>化学制药</strong>板块获主力资金大幅净流入，而<strong>电池</strong>、<strong>元件</strong>、<strong>光学光电子</strong>及<strong>半导体</strong>板块则出现显著资金流出。全市场净流出约<strong>930亿元</strong>，显示市场内部结构性调整剧烈，资金从高估值成长板块向防御性及政策受益板块轮动。</p>
+<h3>科技板块动态</h3>
+<p class="">无明显异动。</p>
+<hr>
+<h3>二、深度观察专栏</h3>
+<p class=""><strong>主题：半导体设备“超级时代”与存储扩产周期</strong></p>
+<p class=""><strong>1. 事件概述</strong></p>
+<p class="">SK海力士在美上市首日大涨<strong>13%</strong>，市值一度逼近美光，显示出市场对存储芯片行业景气的极高认可。与此同时，SK海力士CEO公开表示存储芯片短缺可能持续至<strong>2030年以后</strong>。国内市场亦传来积极信号，半导体设备ETF易方达（159558）半日获超<strong>10亿份</strong>净申购，资金大幅涌入设备端。</p>
+<p class=""><strong>2. 深层分析</strong></p>
+<p class="">*   <strong>AI驱动的长周期景气</strong>：当前存储芯片的涨价与扩产并非短期周期波动，而是由AI算力需求带来的结构性短缺。SK海力士CEO的表态暗示，在AI大模型向更便宜、更智能系统演进的过程中，高性能存储芯片（如HBM）的需求将持续刚性。</p>
+<p class="">*   <strong>国产替代与设备红利</strong>：国内半导体设备厂商（如北方华创、中微公司等）在国产替代逻辑下，有望承接SK海力士等海外巨头扩产带来的订单增量。资金流向数据中，虽然半导体板块整体承压，但设备端获大额净申购，表明市场资金已开始提前布局产业链上游。</p>
+<p class=""><strong>3. 影响与前瞻</strong></p>
+<p class="">存储芯片的“超级扩产周期”正在开启，这将直接利好半导体设备与材料环节。建议关注具备技术壁垒、能切入主流制程产线的国产设备龙头，以及受益于行业集中度提升的存储模组厂商。</p>
+</div>
+<div class="player">
+<div class="player-row">
+<button class="btn-play" id="btnPlay">▶</button>
+<span class="player-time" id="currentTime">00:00</span>
+<div class="progress-wrap" id="progressWrap">
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+<div class="progress-thumb" id="progressThumb"></div>
+</div>
+<span class="player-time" id="totalTime">00:00</span>
+</div>
+<div class="player-sub">
+<button class="speed-btn" data-speed="0.8">0.8×</button>
+<button class="speed-btn active" data-speed="1">1×</button>
+<button class="speed-btn" data-speed="1.2">1.2×</button>
+<button class="speed-btn" data-speed="1.5">1.5×</button>
+</div>
+</div>
+<audio id="audioPlayer" preload="auto" src="daily-report.mp3?20260711080156"></audio>
+<script>
+(function(){var p=document.getElementById("btnPlay"),a=document.getElementById("audioPlayer"),c=document.getElementById("progressFill"),t=document.getElementById("progressThumb"),w=document.getElementById("progressWrap"),ct=document.getElementById("currentTime"),tt=document.getElementById("totalTime"),sb=document.querySelectorAll(".speed-btn");
+function fmt(s){if(!s||!isFinite(s))return"00:00";var m=Math.floor(s/60),sec=Math.floor(s%60);return(m<10?"0":"")+m+":"+(sec<10?"0":"")+sec}
+function upd(){var d=a.duration||0,n=a.currentTime||0;var pct=d>0?(n/d*100):0;c.style.width=pct+"%";if(t)t.style.left=pct+"%";ct.textContent=fmt(n);if(d)tt.textContent=fmt(d)}
+a.addEventListener("loadedmetadata",function(){tt.textContent=fmt(a.duration||0);upd()});
+a.addEventListener("timeupdate",upd);
+a.addEventListener("ended",function(){p.textContent="▶"});
+a.addEventListener("pause",function(){p.textContent="▶"});
+a.addEventListener("play",function(){p.textContent="⏸"});
+p.addEventListener("click",function(){if(a.paused){a.play()["catch"](function(e){console.warn(e)})}else{a.pause()}});
+function doSeek(e){var r=w.getBoundingClientRect(),x=(e.clientX||0)-r.left,pct=Math.max(0,Math.min(1,x/r.width));c.style.width=(pct*100)+"%";if(t)t.style.left=(pct*100)+"%";if(a.duration){a.currentTime=pct*a.duration;ct.textContent=fmt(a.currentTime)}}
+w.addEventListener("click",function(e){doSeek(e)});
+var drag=false;
+w.addEventListener("mousedown",function(e){drag=true;doSeek(e)});
+document.addEventListener("mousemove",function(e){if(drag){doSeek(e)}});
+document.addEventListener("mouseup",function(){drag=false});
+w.addEventListener("touchstart",function(e){drag=true;var touch=e.touches[0];doSeek({clientX:touch.clientX})});
+document.addEventListener("touchmove",function(e){if(drag){var touch=e.touches[0];doSeek({clientX:touch.clientX});e["default"]()}},{passive:false});
+document.addEventListener("touchend",function(){drag=false});
+// 倍速切换
+sb.forEach(function(btn){btn.addEventListener("click",function(){sb.forEach(function(b){b.classList.remove("active")});btn.classList.add("active");a.playbackRate=parseFloat(btn.getAttribute("data-speed"))})});
+// 键盘快捷键
+document.addEventListener("keydown",function(e){if(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA")return;if(e.key===" "){e["default"]();if(a.paused){a.play()["catch"](function(){})}else{a.pause()}}else if(e.key==="ArrowRight"){a.currentTime=Math.min(a.currentTime+10,a.duration||a.currentTime)}else if(e.key==="ArrowLeft"){a.currentTime=Math.max(a.currentTime-10,0)}});
+// 过期检测
+(function(){var q=document.getElementById("reportDate");if(!q)return;var r=q.textContent.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);if(!r)return;var s=new Date(r[1],r[2]-1,r[3]);var d=new Date();d.setHours(0,0,0,0);if(s<d){var b=document.getElementById("staleBanner"),btn=document.getElementById("refreshBtn");b.textContent="已检测旧版内容，正在自动刷新...";b.classList.add("show");btn.classList.add("show");setTimeout(function(){window.location.href=window.location.pathname+"?_="+Date.now()},1500)}})();
+})();
+</script>
+</body>
+</html>
