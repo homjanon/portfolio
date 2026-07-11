@@ -8,7 +8,7 @@
 <meta http-equiv="Expires" content="0">
 <link rel="icon" href="data:,">
 <title>全球金融市场日报</title>
-<!-- build=202607110801 -->
+<!-- build=202607110928 -->
 <style>
 :root{--bg:#f8f9fa;--card:#fff;--text:#1a1a2e;--sub:#6b7280;--border:#e5e7eb;--accent:#2563eb;--note-bg:#f0f4ff}
 @media(prefers-color-scheme:dark){:root{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--sub:#94a3b8;--border:#334155;--accent:#3b82f6;--note-bg:#1e293b}}
@@ -65,38 +65,73 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 <button class="refresh-btn" id="refreshBtn" onclick="window.location.href=window.location.pathname+'?_='+Date.now()">刷新</button>
 </div>
 <div class="article" id="articleContent">
-<h3>一、行业洞察</h3>
-<h3>🆕 全球 TOP 10（RSS驱动）</h3>
-<p class="no-indent"><strong>【重大新闻】</strong></p>
+<h2>A股收盘（7月10日）</h2>
+<p class="no-indent"><strong>指数表现</strong>：上证指数收报 <strong>3996.16点</strong>，<strong><span class="down">下跌1.00%</span></strong>；深证成指收报 <strong>15046.67点</strong>，<strong><span class="down">下跌2.29%</span></strong>；沪深300收报 <strong>4780.79点</strong>，<strong><span class="down">下跌1.96%</span></strong>；科创50重挫 <strong><span class="down">下跌5.53%</span></strong>，报 <strong>2064.98点</strong>；创业板指大跌 <strong><span class="down">下跌4.37%</span></strong>，报 <strong>3842.73点</strong>。</p>
+<p class=""><strong>行情描述</strong>：A股当日放量下跌，沪深两市合计成交额约 <strong>3388.54亿元</strong>，较前日显著放大。全市场上涨 <strong>3004家</strong>，下跌 <strong>1622家</strong>，涨停达 <strong>92家</strong>，跌停 <strong>4家</strong>，赚钱效应集中于局部。板块方面，申万一级行业涨跌分化剧烈，<strong>国防军工</strong>、<strong>食品饮料</strong>、<strong>医药生物</strong> 涨幅居前，<strong>计算机</strong>、<strong>电子</strong>、<strong>电力设备</strong> 跌幅居前。全市场主力资金单日净流出高达 <strong>930.47亿元</strong>，其中 <strong>半导体</strong> 板块净流出最大，达 <strong>310.2亿元</strong>，而 <strong>计算机设备</strong>、<strong>白酒</strong>、<strong>医疗服务</strong> 则逆势获得资金净流入。市场风格从高弹性的科技成长切换至防御性消费与高股息板块。</p>
+<p class="">（数据来源：`data_market_cn.json`、`data_extra.json`、`data_industry.json`）</p>
+<h2>美股收盘（7月10日）</h2>
+<p class=""><strong>指数表现</strong>：道琼斯工业指数收报 <strong>52637.01点</strong>，<strong><span class="up">上涨0.29%</span></strong>；标普500指数收报 <strong>7575.39点</strong>，<strong><span class="up">上涨0.42%</span></strong>；纳斯达克综合指数收报 <strong>26281.61点</strong>，<strong><span class="up">上涨0.29%</span></strong>。</p>
+<p class=""><strong>行情描述</strong>：美股三大指数集体收涨，科技股仍是市场主要推动力。<strong>SK海力士</strong>在美股首日上市大涨约13%，远超预期，进一步提振了AI和半导体板块的乐观情绪。宏观层面，市场消化了相对温和的经济数据，美联储政策预期保持稳定。标普500十一大板块中，科技和通信服务板块领涨，能源板块因油价下跌承压。</p>
+<p class="">（数据来源：`data_market_global.json`、`data_news_rss.json`）</p>
+<h2>港股收盘（7月10日）</h2>
+<p class="">恒生指数收报 <strong>24175.12点</strong>，<strong><span class="up">上涨0.60%</span></strong>；恒生国企指数收报 <strong>8039.19点</strong>，<strong><span class="up">上涨0.52%</span></strong>。</p>
+<p class="">南向资金（南下资金）当日净卖出 <strong>59.95亿港元</strong>，显示内地资金获利了结意愿增强，主要卖出盈富基金等ETF。</p>
+<p class="">（数据来源：`data_market_hk.json`、`data_extra.json`）</p>
+<h2>全球其他市场</h2>
+<p class="">欧股方面，STOXX指数上涨 <strong><span class="up">上涨0.78%</span></strong>。亚太市场普遍跟涨，日经225指数收涨 <strong><span class="up">上涨1.38%</span></strong>，报 <strong>67743.85点</strong>；韩国KOSPI指数收涨 <strong><span class="up">上涨0.62%</span></strong>，报 <strong>7291.91点</strong>。全球市场风险偏好受美股科技股强势带动有所回升。</p>
+<p class="">（数据来源：`data_market_global.json`）</p>
+<h2>大宗商品与汇率</h2>
+<p class="">国际油价表现疲软，WTI原油报 <strong>71.51美元/桶</strong>，<strong><span class="down">下跌0.79%</span></strong>，布伦特原油报 <strong>71.36美元/桶</strong>，<strong><span class="down">下跌1.19%</span></strong>，投资者认为美伊冲突短期可控，地缘溢价回落。贵金属微跌，COMEX黄金报 <strong>4128.9美元/盎司</strong>，<strong><span class="down">下跌0.29%</span></strong>。汇率方面，美元/离岸人民币（USD/CNH）报 <strong>6.7989</strong>。利率端，10年期中国国债收益率报 <strong>1.7398%</strong>，10年期美国国债收益率报 <strong>4.56%</strong>。</p>
+<p class=""><strong>中美利差解读</strong>：中美10年期国债利差约为 <strong>2.82个百分点</strong>（4.56% - 1.74%），利差处于历史高位且仍在走阔。<strong>利差走阔利好中债</strong>，高企的外部利率压制了中债利率的下行空间，但并未改变其自身偏宽松的格局。</p>
+<p class="">（数据来源：`data_forex_rate.json`、`data_extra.json`）</p>
+<h2>估值水位与情绪</h2>
+<blockquote>
+<p class="no-indent">估值数据基于 `data_valuation.json` 中雪球蛋卷API数据，时间戳为2026-07-11 09:25:23。全市场PE（乐咕乐股）报108.56倍。</p>
+</blockquote>
+<ul>
+<li><strong>红利低波</strong>：股息率约 <strong>5.76%</strong>，处于高位，高股息配置价值显著。</li>
+<li><strong>其他指数</strong>：6个核心指数中，<strong>标普500</strong>（PE约28.52，PB分位99.52%）处于极高风险区；<strong>恒生科技</strong>（PE分位35.22%）处于偏低价值区；<strong>沪深300</strong>（PE分位86.44%）处偏高位置；<strong>创业板指</strong>（PE分位61.92%）估值中等。整体估值分化明显，美股昂贵，港股相对便宜。</li>
+</ul>
+<p class="">（数据来源：`data_valuation.json`）</p>
+<blockquote>
+<p class="no-indent"><strong>科技板块动态</strong>：AI热潮持续，SK海力士美股上市首日大涨，标志着AI投资浪潮从模型层向基础设施/硬件层面深化，但这与A股半导体板块当日的大幅回调形成鲜明反差，核心是高位获利盘涌出和资金内部轮动所致。</p>
+</blockquote>
+<h2>🆕 全球 TOP 10</h2>
 <ol>
-<li><strong>苹果起诉OpenAI，指控窃取商业机密</strong>：苹果起诉OpenAI及其员工，称其窃取商业机密，并指控OpenAI在招聘时要求员工带苹果原型机参加面试 → 科技竞争加剧，OpenAI生态面临法律风险。</li>
-<li><strong>SK海力士美股上市首日大涨13%</strong>：SK海力士在纳斯达克上市首日收盘上涨13%，市值一度超美光近2000亿美元，董事长称AI需求巨大 → AI存储需求旺盛，半导体产业链景气度提升。</li>
-<li><strong>Circle获准建立美国信托银行，股价上涨5%</strong>：稳定币发行商Circle获得美国货币监理署（OCC）最终批准，可运营国家信托银行 → 加密货币合规化进程加速，利好稳定币生态。</li>
-<li><strong>OpenAI权力结构重组，为IPO做准备</strong>：OpenAI联合创始人Greg Brockman权力集中，高管Fidji Simo离职 → 公司治理变动，关注未来战略方向及IPO时间表。</li>
-<li><strong>瑞安航空乘客被吸出窗外</strong>：瑞安航空一架飞机在希腊飞行时，一名乘客被吸出窗外，机上人员将其拉回 → 地缘政治外溢风险，航空安全受关注。</li>
+<li> <strong>SK海力士美股首日大涨13%</strong>：韩国存储芯片巨头在纳斯达克上市，募资265亿美元，创下外国公司赴美最大IPO纪录。SK集团会长表示AI芯片“需求巨大”。→ 强化AI资本开支和硬件需求逻辑，利好全球半导体产业链，但需警惕高位波动。（来源：Reuters/CNBC/Bloomberg）</li>
+<li> <strong>大众汽车计划削减半数车型并裁员10-12万人</strong>：面对中国市场销量骤降和电动化转型压力，大众集团启动深度重组，计划削减产能100万辆。→ 全球传统车企巨头的艰难转型信号，利空传统汽车零部件供应商，但加速了新能源车行业洗牌。（来源：Yahoo Finance/21财经）</li>
+<li> <strong>OpenAI联合创始人Greg Brockman权力集中，或为IPO铺路</strong>：OpenAI进行内部重组，联合创始人Brockman接管更多权力，另一高管Fidji Simo离职。→ 公司治理结构趋稳，为潜在的IPO扫清内部障碍，利好AI行业整体估值中枢。（来源：CNBC/WSJ）</li>
+<li> <strong>Circle获准成立加密货币银行</strong>：稳定币发行商Circle获得OCC批准，可建立全国性信托银行，成为首家受联邦监管的加密银行。其股价随后大涨。→ 加密行业向主流金融体系迈出关键一步，利好合规化加密资产平台，利好比特币等核心资产。（来源：WSJ/Barron's）</li>
+<li> <strong>中国暂时禁止氦气出口，美伊局势再次紧张</strong>：中国宣布临时禁令，正值全球供应链紧张之际。此举被解读为地缘政治棋局的一步。→ 直接冲击美欧半导体、医疗和科研领域的氦气供应，成本上升，可能间接推高科技产品价格。（来源：Reuters）</li>
+<li> <strong>SK海力士点火存储芯片，英伟达重返5万亿美元</strong>：SK海力士的强劲表现带动英伟达市值回升，中概股冲高回落。→ 显示美股科技股的上涨动力依旧集中，但中概股表现分化，表明资金对中美市场的不同偏好。（来源：第一财经）</li>
+<li> <strong>“十五五”零碳园区与零碳工厂建设将提速</strong>：国务院印发《“十五五”碳达峰行动方案》，提出加快推动零碳园区和零碳工厂建设。→ 政策利好明确，绿色电力、新能源基础设施及碳交易相关板块迎来中长期催化剂。（来源：东方财富/金融界）</li>
+<li> <strong>国际油价微跌，市场认为中东局势可控</strong>：尽管地缘政治风险存在，但交易员评估美伊冲突后续影响有限，油价在小幅波动中下行。→ 短期地缘风险溢价消退，但伊朗核问题仍是油价走势的长期不确定性因素，利空能源板块。（来源：新华网）</li>
+<li> <strong>深化创业板改革满三月，优质创新企业“进得来”</strong>：改革三周年来，8家企业已尝鲜第四套标准，投融资良性循环加速形成。→ 创业板改革成效初显，长期利好科技创新企业融资和发展，从制度上支撑A股科技成长行情。（来源：证券时报）</li>
+<li><strong>国常会：全链条推动新兴支柱产业规模化发展</strong>：李强总理主持召开会议，部署全链条推动新兴支柱产业规模化，加强基础研究和关键软硬件攻关。→ 明确的产业政策信号，利好国产替代、半导体、信创等战略新兴产业，提振市场信心。（来源：证券时报/金融界）</li>
 </ol>
-<p class=""><strong>【普通新闻】</strong></p>
-<ol>
-<li><strong>美股收盘：三大指数小幅收涨，标普500连涨两周</strong>：美股三大指数收涨，科技、能源股走强，SK海力士上市首日大涨，阿里巴巴五连涨 → 市场风险偏好回升，科技股领涨。</li>
-<li><strong>华北制药产品纳入国家基本药物目录</strong>：华北制药及子公司产品纳入新版国家基本药物目录 → 医药政策利好，提升公司市场地位。</li>
-<li><strong>SK海力士CEO预计存储芯片短缺将持续至2030年后</strong>：SK海力士首席执行官预计存储芯片短缺将持续到下一个十年 → 行业景气度长期向好，利好上游设备厂商。</li>
-<li><strong>大众集团计划裁员10万-12万人，削减产能</strong>：大众集团“自救”计划，将裁员并砍掉半数车型以削减成本 → 汽车行业深度调整，关注转型成本及欧洲市场影响。</li>
-<li><strong>全国用电负荷创15.18亿千瓦历史新高</strong>：全国用电负荷创历史新高 → 能源需求旺盛，利好电力及新能源板块。</li>
-</ol>
-<h3>A股资金流向回顾</h3>
-<p class="">资金流向呈现明显分化，<strong>计算机设备</strong>、<strong>白酒</strong>、<strong>医疗服务</strong>及<strong>化学制药</strong>板块获主力资金大幅净流入，而<strong>电池</strong>、<strong>元件</strong>、<strong>光学光电子</strong>及<strong>半导体</strong>板块则出现显著资金流出。全市场净流出约<strong>930亿元</strong>，显示市场内部结构性调整剧烈，资金从高估值成长板块向防御性及政策受益板块轮动。</p>
-<h3>科技板块动态</h3>
-<p class="">无明显异动。</p>
-<hr>
-<h3>二、深度观察专栏</h3>
-<p class=""><strong>主题：半导体设备“超级时代”与存储扩产周期</strong></p>
-<p class=""><strong>1. 事件概述</strong></p>
-<p class="">SK海力士在美上市首日大涨<strong>13%</strong>，市值一度逼近美光，显示出市场对存储芯片行业景气的极高认可。与此同时，SK海力士CEO公开表示存储芯片短缺可能持续至<strong>2030年以后</strong>。国内市场亦传来积极信号，半导体设备ETF易方达（159558）半日获超<strong>10亿份</strong>净申购，资金大幅涌入设备端。</p>
-<p class=""><strong>2. 深层分析</strong></p>
-<p class="">*   <strong>AI驱动的长周期景气</strong>：当前存储芯片的涨价与扩产并非短期周期波动，而是由AI算力需求带来的结构性短缺。SK海力士CEO的表态暗示，在AI大模型向更便宜、更智能系统演进的过程中，高性能存储芯片（如HBM）的需求将持续刚性。</p>
-<p class="">*   <strong>国产替代与设备红利</strong>：国内半导体设备厂商（如北方华创、中微公司等）在国产替代逻辑下，有望承接SK海力士等海外巨头扩产带来的订单增量。资金流向数据中，虽然半导体板块整体承压，但设备端获大额净申购，表明市场资金已开始提前布局产业链上游。</p>
-<p class=""><strong>3. 影响与前瞻</strong></p>
-<p class="">存储芯片的“超级扩产周期”正在开启，这将直接利好半导体设备与材料环节。建议关注具备技术壁垒、能切入主流制程产线的国产设备龙头，以及受益于行业集中度提升的存储模组厂商。</p>
+<h2>持仓动态与聚焦</h2>
+<h3>个人持仓行情快照</h3>
+<ul>
+<li><strong>招商银行A（600036）</strong>：价格 <strong>36.88元</strong>，<strong><span class="up">上涨0.90%</span></strong>。已于7月10日完成除权除息，每股派息10.03元。</li>
+<li><strong>招商银行H（03968）</strong>：价格 <strong>45.72港元</strong>，<strong><span class="up">上涨1.65%</span></strong>。除净日为7月2日，发放日为8月21日。</li>
+<li><strong>长江电力（600900）</strong>：价格 <strong>28.03元</strong>，<strong><span class="up">上涨0.94%</span></strong>。将于7月17日除权除息，每股派息7.9元。</li>
+<li><strong>红利低波ETF易方达（563020）</strong>：价格 <strong>1.104元</strong>，<strong><span class="up">上涨0.36%</span></strong>。</li>
+<li><strong>QQQM（纳指100ETF）</strong>：价格 <strong>298.72美元</strong>，<strong><span class="up">上涨0.32%</span></strong>。</li>
+<li><strong>SPY（标普500ETF）</strong>：价格 <strong>754.95美元</strong>，<strong><span class="up">上涨0.43%</span></strong>。</li>
+</ul>
+<p class="">（数据来源：`data_holdings.json`）</p>
+<h3>持仓聚焦（未来催化）</h3>
+<p class=""><strong>1. 中际旭创</strong>（异动）：当日大跌 <strong><span class="down">下跌8.45%</span></strong>，属于监督池中跌幅较大的AI硬件股。这并非基本面恶化，而是短期科技板块资金集体流出半导体及通信设备的结果（当日通信设备和元件板块净流出额巨大），属于典型的板块轮动风险。→ 未来1周关键节点在于美股科技股走势能否传导至A股，以及是否有新的AI基础设施订单利好出台。</p>
+<p class=""><strong>2. 寒武纪</strong>（异动）：当日大跌 <strong><span class="down">下跌8.80%</span></strong>，同样受累于半导体板块的集体杀跌，资金获利了结迹象明显。→ 未来1周关键节点在于其是否能获得新的合作订单或政策扶持信号。</p>
+<p class=""><strong>3. 农业银行</strong>（协同/催化）：当日上涨 <strong><span class="up">上涨1.96%</span></strong>，与招商银行A/H的稳步上升形成共振，共同反映了市场对高股息银行板块的防御性偏好。在A股科技股大幅回撤时，银行板块成为资金的避风港。→ 未来1周的催化在于市场避险情绪能否持续，以及银行业中期分红预期的催化。</p>
+<p class="">（数据来源：`data_holdings.json` → “监督池”字段）</p>
+<h2>QDII 溢价与申购额度监测</h2>
+<p class=""><strong>场内ETF溢价率</strong>：QDII ETF溢价率普遍偏高，需警惕风险。</p>
+<div class="table-text">513100，代码纳指ETF国泰，溢价率9.45%。159941，代码纳指ETF广发，溢价率8.75%。159659，代码纳斯达克100ETF招商，溢价率7.25%。159612，代码标普500ETF国泰，溢价率5.14%。513500，代码标普500ETF博时，溢价率4.89%。513650，代码标普500ETF南方，溢价率3.82%。</div>
+<p class=""><strong>场外QDII申购额度</strong>（日累计限额排行）：</p>
+<div class="table-text">012752，价格建信纳斯达克100指数(QDII)C人民币，3.3701。023422，价格建信纳斯达克100指数(QDII)D人民币，3.3861。539001，价格建信纳斯达克100指数(QDII)A人民币，3.4814。018966，价格汇添富纳斯达克100ETF发起式联接(QDII)人民币A，1.6631。018967，价格汇添富纳斯达克100ETF发起式联接(QDII)人民币C，1.644。021773，价格汇添富纳斯达克100ETF发起式联接(QDII)人民币E，1.6599。</div>
+<p class=""><strong>总结</strong>：所有跟踪纳指100和标普500的场内ETF均存在 <strong>显著溢价</strong>（&gt;3%），最高达 <strong>9.45%</strong>，表明投资者情绪极度亢奋，追涨风险极高。场外申购额度极度稀缺，仅有建信和汇添富的产品提供少量（最高100元/天）额度，套利空间几乎不存在。</p>
+<p class="">（数据来源：`data_extra.json` → “QDII_监测”字段）</p>
 </div>
 <div class="player">
 <div class="player-row">
@@ -115,7 +150,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 <button class="speed-btn" data-speed="1.5">1.5×</button>
 </div>
 </div>
-<audio id="audioPlayer" preload="auto" src="daily-report.mp3?20260711080156"></audio>
+<audio id="audioPlayer" preload="auto" src="daily-report.mp3?20260711092801"></audio>
 <script>
 (function(){var p=document.getElementById("btnPlay"),a=document.getElementById("audioPlayer"),c=document.getElementById("progressFill"),t=document.getElementById("progressThumb"),w=document.getElementById("progressWrap"),ct=document.getElementById("currentTime"),tt=document.getElementById("totalTime"),sb=document.querySelectorAll(".speed-btn");
 function fmt(s){if(!s||!isFinite(s))return"00:00";var m=Math.floor(s/60),sec=Math.floor(s%60);return(m<10?"0":"")+m+":"+(sec<10?"0":"")+sec}
