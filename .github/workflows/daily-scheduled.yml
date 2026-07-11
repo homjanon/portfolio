@@ -2,8 +2,8 @@ name: 每日金融日报（定时）
 
 on:
   schedule:
-    # 每日 09:00 北京 = 01:00 UTC
-    - cron: "15 8 * * *"
+    # 每日 09:00 北京 = 01:00 UTC | 测试cron=UTC 09:00(北京17:00)验证后改回01:00
+    - cron: "0 9 * * *"
   workflow_dispatch:
     inputs:
       skip_mp3:
