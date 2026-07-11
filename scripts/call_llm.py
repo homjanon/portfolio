@@ -17,13 +17,13 @@ PROMPT_PATH = os.path.join(os.path.dirname(__file__), "..", "prompt", "daily_rep
 LLM_CONFIGS = [
     {
         "name": "NVIDIA Nemotron-3-Super-120B",
-        "api_url": "https://integrate.api.nvidia.com/v1",
+        "api_url": "https://integrate.api.nvidia.com/v1/chat/completions",
         "api_key_env": "NVIDIA_API_KEY",
         "model": "nvidia/nemotron-3-super-120b-a12b",
     },
     {
         "name": "NVIDIA GLM-5.2",
-        "api_url": "https://integrate.api.nvidia.com/v1",
+        "api_url": "https://integrate.api.nvidia.com/v1/chat/completions",
         "api_key_env": "NVIDIA_API_KEY",
         "model": "z-ai/glm-5.2",
     },
