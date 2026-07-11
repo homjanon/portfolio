@@ -1148,18 +1148,32 @@ def main():
     print(f"═══ 预抓取金融市场数据（v30: 每模块120s超时 | QDII场外纳指100/标普500） ═══")
     print(f"时间: {_ts()}\n")
 
-    modules = [
-        ("data_market_cn.json",      fetch_market_cn,      "A股指数"),
-        ("data_market_hk.json",      fetch_market_hk,      "港股指数"),
-        ("data_market_global.json",  fetch_market_global,  "全球指数"),
-        ("data_forex_rate.json",     fetch_forex_rate,     "汇率/商品/债券"),
-        ("data_valuation.json",      fetch_valuation,      "估值数据"),
-        ("data_fund.json",           fetch_fund,           "基金净值/溢价"),
-        ("data_industry.json",       fetch_industry,       "申万+同花顺行业"),
-        ("data_holdings.json",       fetch_holdings,       "持仓行情+分红+研报"),
-        ("data_news_rss.json",       _fetch_rss_news,      "全球TOP10 RSS新闻(英+中)"),
-        ("data_extra.json",          fetch_extra,          "资金面+QDII+涨停/跌停"),
-    ]
+    # 北京时间模式判定：周日(6)/周一(0) → 精简模式，仅抓 RSS 新闻
+    beijing = timezone(timedelta(hours=8))
+    now = datetime.now(beijing)
+    w = now.weekday()
+    is_simple = w in (6, 0)
+
+    if is_simple:
+        # 精简模式：周日/周一，仅执行 RSS 新闻模块
+        modules = [
+            ("data_news_rss.json", _fetch_rss_news, "全球TOP10 RSS新闻(英+中)"),
+        ]
+        print(f"📋 精简模式（周日/周一）: 仅执行 {len(modules)} 个模块（纯新闻）")
+    else:
+        modules = [
+            ("data_market_cn.json",      fetch_market_cn,      "A股指数"),
+            ("data_market_hk.json",      fetch_market_hk,      "港股指数"),
+            ("data_market_global.json",  fetch_market_global,  "全球指数"),
+            ("data_forex_rate.json",     fetch_forex_rate,     "汇率/商品/债券"),
+            ("data_valuation.json",      fetch_valuation,      "估值数据"),
+            ("data_fund.json",           fetch_fund,           "基金净值/溢价"),
+            ("data_industry.json",       fetch_industry,       "申万+同花顺行业"),
+            ("data_holdings.json",       fetch_holdings,       "持仓行情+分红+研报"),
+            ("data_news_rss.json",       _fetch_rss_news,      "全球TOP10 RSS新闻(英+中)"),
+            ("data_extra.json",          fetch_extra,          "资金面+QDII+涨停/跌停"),
+        ]
+        print(f"📋 完整模式: 执行全部 {len(modules)} 个模块")
 
     successes = 0
     signal.signal(signal.SIGALRM, _timeout_handler)
