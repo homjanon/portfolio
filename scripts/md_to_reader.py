@@ -342,12 +342,14 @@ def _strip_source_url(text):
 
 
 def _inline(text):
-    """行内元素：**加粗** → <strong>，↑↓ → 上涨/下跌（无箭头，适合朗读）"""
+    """行内元素：**加粗** → <strong>，↑↓ → 上涨/下跌，[链接](url) → <a>（适合朗读）"""
     text = re.sub(r'↑([\d.]+%?)', r'<span class="up">上涨\1</span>', text)
     text = re.sub(r'↓([\d.]+%?)', r'<span class="down">下跌\1</span>', text)
     text = re.sub(r'(?<!上涨)(?<!下跌)↑(?![\d.])', '上涨', text)
     text = re.sub(r'(?<!上涨)(?<!下跌)↓(?![\d.])', '下跌', text)
     text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
+    # Markdown 链接 [text](url) → <a> 标签
+    text = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" target="_blank" rel="noopener">\1</a>', text)
     idx = 0
     protected = []
     def _protect(m):
@@ -356,7 +358,7 @@ def _inline(text):
         protected.append(m.group(0))
         idx += 1
         return ph
-    text = re.sub(r'</?(?:strong|span)(?:\s[^>]*)?>', _protect, text)
+    text = re.sub(r'</?(?:strong|span|a)(?:\s[^>]*)?>', _protect, text)
     text = text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
     for i, tag in enumerate(protected):
         text = text.replace(f'\x00{i}\x00', tag)

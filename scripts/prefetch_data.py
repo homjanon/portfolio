@@ -813,6 +813,7 @@ def _fetch_rss_news():
                 continue
             title_el = item.find("title")
             desc_el = item.find("description")
+            link_el = item.find("link")
             pub_el = item.find("pubDate")
             title = title_el.text if title_el is not None else ""
             title = re.sub(r"\s*[-–|]\s*" + re.escape(source) + r"\s*$", "", title).strip()[:100]
@@ -822,6 +823,7 @@ def _fetch_rss_news():
                 "title": title,
                 "desc": desc,
                 "source": source,
+                "link": link_el.text if link_el is not None else "",
                 "pubDate": pub_el.text if pub_el is not None else "",
             })
             if len(result) >= max_items:
