@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
-"""把 Markdown 日报转为纯文本叙述 HTML（内嵌原生音频播放器，播放预生成的 MP3）"""
+"""把 Markdown 日报转为 HTML — 保留5个核心表格、智能去粗、简洁设计"""
 import sys, re, os, datetime
 
+# ============================================================
+# CSS + HTML 模板（完全重设计）
+# ============================================================
 TEMPLATE = r'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -12,63 +15,175 @@ TEMPLATE = r'''<!DOCTYPE html>
 <meta http-equiv="Expires" content="0">
 <link rel="icon" href="data:,">
 <title>全球金融市场日报</title>
-<!-- build=__BUILD__ -->
 <style>
-:root{--bg:#f8f9fa;--card:#fff;--text:#1a1a2e;--sub:#6b7280;--border:#e5e7eb;--accent:#2563eb;--note-bg:#f0f4ff}
-@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--sub:#94a3b8;--border:#334155;--accent:#3b82f6;--note-bg:#1e293b}}
+:root{
+  --bg:#fafafa;--card:#fff;--text:#1a1a2e;--sub:#6b7280;--muted:#9ca3af;
+  --border:#e5e7eb;--accent:#2563eb;--note-bg:#f4f6fb;
+  --table-hdr:#f1f5f9;--table-stripe:#fafbfc;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--sub:#94a3b8;--muted:#64748b;
+    --border:#334155;--accent:#3b82f6;--note-bg:#1e293b;
+    --table-hdr:#1e293b;--table-stripe:#1a2332;
+  }
+}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:18px;line-height:2.0;min-height:100dvh;padding:0 0 150px;-webkit-text-size-adjust:100%}
-.header{background:var(--card);border-bottom:1px solid var(--border);padding:18px 16px;text-align:center;position:relative}
-.header h1{font-size:20px;font-weight:700;margin-bottom:4px}
-.header .date{font-size:13px;color:var(--sub);margin-bottom:8px}
-.refresh-btn{position:absolute;right:16px;top:14px;background:var(--accent);color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;display:none}
-.refresh-btn.show{display:block}
-.stale-banner{background:#fef3c7;color:#92400e;font-size:13px;padding:6px 14px;text-align:center;display:none}
-.stale-banner.show{display:block}
-@media(prefers-color-scheme:dark){.stale-banner{background:#422006;color:#fde68a}}
-.tip{background:#e8f5e9;color:#2e7d32;font-size:13px;padding:6px 14px;text-align:center;border-bottom:1px solid #c8e6c9}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--bg);color:var(--text);font-size:16px;line-height:1.7;
+  min-height:100dvh;padding:0 0 150px;-webkit-text-size-adjust:100%
+}
+.header{
+  background:var(--card);border-bottom:1px solid var(--border);
+  padding:18px 16px;text-align:center
+}
+.header h1{font-size:18px;font-weight:600;margin-bottom:2px;letter-spacing:.02em}
+.header .date{font-size:12px;color:var(--sub)}
+
+.article{max-width:680px;margin:0 auto;padding:16px 16px}
+
+.article h2{
+  font-size:17px;font-weight:600;margin:32px 0 10px;
+  padding-bottom:4px;border-bottom:2px solid var(--accent);color:var(--text)
+}
+.article h3{
+  font-size:15px;font-weight:600;margin:22px 0 6px;color:var(--accent)
+}
+.article h4{font-size:14px;font-weight:600;margin:16px 0 4px;color:var(--text)}
+
+.article p{margin:10px 0}
+.article p.lede{
+  font-size:15px;line-height:1.8;padding:10px 14px;
+  background:var(--note-bg);border-radius:10px;border-left:3px solid var(--accent)
+}
+.article p.lede strong{color:var(--accent)}
+
+.article blockquote{
+  border-left:3px solid var(--border);padding:6px 14px;margin:8px 0;
+  color:var(--sub);font-size:14px;line-height:1.7;border-radius:0 8px 8px 0
+}
+
+/* ---- 表格 ---- */
+.data-table{
+  width:100%;border-collapse:collapse;font-size:13px;margin:10px 0 16px;
+  border-radius:8px;overflow:hidden;border:1px solid var(--border)
+}
+.data-table thead th{
+  background:var(--table-hdr);padding:7px 9px;text-align:left;
+  font-weight:500;color:var(--sub);font-size:12px;border-bottom:2px solid var(--border);
+  white-space:nowrap
+}
+.data-table thead th:first-child{text-align:left}
+.data-table tbody td{
+  padding:6px 9px;border-bottom:1px solid var(--border);vertical-align:middle
+}
+.data-table tbody tr:last-child td{border-bottom:none}
+.data-table tbody tr:nth-child(even){background:var(--table-stripe)}
+.data-table .num{text-align:right;font-variant-numeric:tabular-nums}
+.data-table .label{color:var(--sub);font-size:12px}
+
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px}
+
+/* ---- 涨跌颜色 ---- */
+.up{color:#dc2626!important;font-weight:600}
+.down{color:#059669!important;font-weight:600}
+@media(prefers-color-scheme:dark){.up{color:#f87171!important}.down{color:#34d399!important}}
+
+/* ---- 卡片 ---- */
+.card{
+  background:var(--note-bg);border-radius:10px;padding:12px 14px;margin:12px 0;
+  border:1px solid var(--border);font-size:14px;line-height:1.7
+}
+.card .card-title{font-size:13px;font-weight:600;color:var(--accent);margin-bottom:6px}
+.card p{margin:4px 0}
+
+/* ---- 新闻列表 ---- */
+.news-list{counter-reset:news;list-style:none;padding:0;margin:10px 0}
+.news-list li{
+  counter-increment:news;padding:8px 0 8px 32px;position:relative;
+  border-bottom:1px solid var(--border);font-size:14px;line-height:1.7
+}
+.news-list li:last-child{border-bottom:none}
+.news-list li::before{
+  content:counter(news);position:absolute;left:0;top:9px;
+  width:20px;height:20px;border-radius:50%;background:var(--accent);
+  color:#fff;font-size:11px;font-weight:600;text-align:center;line-height:20px
+}
+@media(prefers-color-scheme:dark){.news-list li::before{color:var(--bg)}}
+
+.news-list li strong{font-weight:600;color:var(--text)}
+.news-list .tag{
+  display:inline-block;font-size:11px;padding:1px 6px;border-radius:3px;
+  margin-left:4px;font-weight:500
+}
+.tag-bullish{background:#fef2f2;color:#dc2626}
+.tag-bearish{background:#ecfdf5;color:#059669}
+@media(prefers-color-scheme:dark){
+  .tag-bullish{background:#3b1111;color:#f87171}
+  .tag-bearish{background:#0a2e1a;color:#34d399}
+}
+
+/* ---- 持仓 ---- */
+.holding-item{
+  display:flex;align-items:baseline;gap:6px;padding:4px 0;
+  font-size:14px;flex-wrap:wrap
+}
+.holding-item .name{font-weight:500;min-width:80px}
+.holding-item .price{color:var(--sub);font-variant-numeric:tabular-nums}
+.holding-item .chg{font-weight:600;font-variant-numeric:tabular-nums}
+
+/* ---- 分隔 ---- */
+hr{border:none;border-top:1px solid var(--border);margin:20px 0}
+
+.source-note{font-size:12px;color:var(--muted);margin:16px 0 8px;text-align:center}
+
+/* ---- 提示条 ---- */
+.tip{
+  background:#e8f5e9;color:#2e7d32;font-size:12px;padding:5px 14px;
+  text-align:center;border-bottom:1px solid #c8e6c9
+}
 @media(prefers-color-scheme:dark){.tip{background:#1b3a1b;color:#81c784;border-color:#2e4a2e}}
-.article{max-width:700px;margin:0 auto;padding:20px 16px}
-.article h2{font-size:20px;margin:38px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--accent)}
-.article h3{font-size:17px;margin:26px 0 8px;color:var(--accent)}
-.article p{margin:14px 0;text-indent:0}
-.article p.no-indent{text-indent:0}
-.article .table-text{margin:8px 0;padding:8px 12px;background:var(--note-bg);border-radius:8px;font-size:15px;line-height:2;text-indent:0}
-.article strong{color:var(--accent);font-weight:700}
-.article blockquote{border-left:4px solid var(--accent);padding:10px 16px;margin:14px 0;background:var(--note-bg);border-radius:0 10px 10px 0;color:var(--sub);font-size:15px;line-height:1.8}
-.article .source{font-size:13px;color:var(--sub);margin:4px 0 12px;text-indent:0;font-style:normal}
-.article ul,.article ol{padding-left:22px;margin:8px 0}
-.article li{margin:6px 0;line-height:1.8}
-.article hr{border:none;border-top:1px solid var(--border);margin:24px 0}
-.up{color:#059669;font-weight:600}.down{color:#dc2626;font-weight:600}
-@media(prefers-color-scheme:dark){.up{color:#34d399}.down{color:#f87171}}
-.player{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--card);border-top:1px solid var(--border);padding:10px 16px max(10px,env(safe-area-inset-bottom,10px));box-shadow:0 -2px 12px rgba(0,0,0,.08)}
-.player-row{display:flex;align-items:center;gap:8px;max-width:700px;margin:0 auto}
-.btn-play{width:48px;height:48px;border-radius:50%;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;-webkit-tap-highlight-color:transparent;background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(37,99,235,.25)}
+
+/* ---- 音频播放器 ---- */
+.player{
+  position:fixed;bottom:0;left:0;right:0;z-index:200;
+  background:var(--card);border-top:1px solid var(--border);
+  padding:8px 16px max(8px,env(safe-area-inset-bottom,8px));
+  box-shadow:0 -2px 12px rgba(0,0,0,.06)
+}
+.player-row{display:flex;align-items:center;gap:8px;max-width:680px;margin:0 auto}
+.btn-play{
+  width:44px;height:44px;border-radius:50%;border:none;font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+  background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(37,99,235,.2)
+}
 .btn-play:active{transform:scale(.92)}
-.player-time{font-size:11px;color:var(--sub);min-width:36px;text-align:center;white-space:nowrap;font-variant-numeric:tabular-nums}
-.progress-wrap{flex:1;height:32px;display:flex;align-items:center;cursor:pointer;position:relative;min-width:60px}
-.progress-track{width:100%;height:4px;background:var(--border);border-radius:2px;overflow:hidden;position:relative}
-.progress-fill{height:100%;background:var(--accent);border-radius:2px;width:0;transition:none}
-.progress-thumb{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;background:var(--accent);border:2px solid #fff;transform:translate(-50%,-50%);opacity:0;transition:opacity .12s;pointer-events:none;box-shadow:0 1px 4px rgba(0,0,0,.2)}
-.progress-wrap:hover .progress-thumb,.progress-wrap:active .progress-thumb{opacity:1}
+.player-time{font-size:11px;color:var(--sub);min-width:34px;text-align:center;font-variant-numeric:tabular-nums}
+.progress-wrap{flex:1;height:28px;display:flex;align-items:center;cursor:pointer;min-width:50px}
+.progress-track{width:100%;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--accent);border-radius:2px;width:0}
+.progress-thumb{
+  position:absolute;top:50%;width:14px;height:14px;border-radius:50%;
+  background:var(--accent);border:2px solid #fff;transform:translate(-50%,-50%);
+  opacity:0;transition:opacity .12s;pointer-events:none;box-shadow:0 1px 4px rgba(0,0,0,.2)
+}
+.progress-wrap:active .progress-thumb{opacity:1}
 @media(prefers-color-scheme:dark){.progress-thumb{border-color:var(--card)}}
-.player-sub{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:2px}
-.speed-btn{background:none;border:none;color:var(--sub);font-size:11px;cursor:pointer;padding:2px 6px;border-radius:3px;transition:all .12s}
+.player-sub{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:2px}
+.speed-btn{background:none;border:none;color:var(--sub);font-size:11px;cursor:pointer;padding:2px 5px;border-radius:3px}
 .speed-btn.active{color:var(--accent);font-weight:600}
-.speed-btn:hover{background:var(--note-bg)}
-.voice-label{font-size:10px;color:var(--sub);padding:2px 4px}
+.voice-label{font-size:10px;color:var(--sub)}
 </style>
 </head>
 <body>
-<div class="stale-banner" id="staleBanner"></div>
-<div class="tip">点击 ▶ 播放音频日报（微软 AI 语音播报），暂停/续播/拖动进度条均可</div>
+<div class="tip">点击 ▶ 播放音频日报（微软 AI 语音播报）</div>
 <div class="header">
 <h1>全球金融市场日报</h1>
-<div class="date" id="reportDate">__DATE__</div>
-<button class="refresh-btn" id="refreshBtn" onclick="window.location.href=window.location.pathname+'?_='+Date.now()">刷新</button>
+<div class="date">__DATE__</div>
 </div>
-<div class="article" id="articleContent">
+<div class="article">
 __CONTENT__
 </div>
 <div class="player">
@@ -77,506 +192,488 @@ __CONTENT__
 <span class="player-time" id="currentTime">00:00</span>
 <div class="progress-wrap" id="progressWrap">
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-<div class="progress-thumb" id="progressThumb"></div>
 </div>
 <span class="player-time" id="totalTime">00:00</span>
 </div>
 <div class="player-sub">
-<button class="speed-btn" data-speed="0.8">0.8×</button>
-<button class="speed-btn active" data-speed="1">1×</button>
-<button class="speed-btn" data-speed="1.2">1.2×</button>
-<button class="speed-btn" data-speed="1.5">1.5×</button>
+<button class="speed-btn" data-speed="0.8">0.8x</button>
+<button class="speed-btn active" data-speed="1.0">1x</button>
+<button class="speed-btn" data-speed="1.25">1.25x</button>
+<button class="speed-btn" data-speed="1.5">1.5x</button>
 </div>
 </div>
-<audio id="audioPlayer" preload="auto" src="daily-report.mp3?__MP3VER__"></audio>
-<script>
-(function(){var p=document.getElementById("btnPlay"),a=document.getElementById("audioPlayer"),c=document.getElementById("progressFill"),t=document.getElementById("progressThumb"),w=document.getElementById("progressWrap"),ct=document.getElementById("currentTime"),tt=document.getElementById("totalTime"),sb=document.querySelectorAll(".speed-btn");
-function fmt(s){if(!s||!isFinite(s))return"00:00";var m=Math.floor(s/60),sec=Math.floor(s%60);return(m<10?"0":"")+m+":"+(sec<10?"0":"")+sec}
-function upd(){var d=a.duration||0,n=a.currentTime||0;var pct=d>0?(n/d*100):0;c.style.width=pct+"%";if(t)t.style.left=pct+"%";ct.textContent=fmt(n);if(d)tt.textContent=fmt(d)}
-a.addEventListener("loadedmetadata",function(){tt.textContent=fmt(a.duration||0);upd()});
-a.addEventListener("timeupdate",upd);
-a.addEventListener("ended",function(){p.textContent="▶"});
-a.addEventListener("pause",function(){p.textContent="▶"});
-a.addEventListener("play",function(){p.textContent="⏸"});
-p.addEventListener("click",function(){if(a.paused){a.play()["catch"](function(e){console.warn(e)})}else{a.pause()}});
-function doSeek(e){var r=w.getBoundingClientRect(),x=(e.clientX||0)-r.left,pct=Math.max(0,Math.min(1,x/r.width));c.style.width=(pct*100)+"%";if(t)t.style.left=(pct*100)+"%";if(a.duration){a.currentTime=pct*a.duration;ct.textContent=fmt(a.currentTime)}}
-w.addEventListener("click",function(e){doSeek(e)});
-var drag=false;
-w.addEventListener("mousedown",function(e){drag=true;doSeek(e)});
-document.addEventListener("mousemove",function(e){if(drag){doSeek(e)}});
-document.addEventListener("mouseup",function(){drag=false});
-w.addEventListener("touchstart",function(e){drag=true;var touch=e.touches[0];doSeek({clientX:touch.clientX})});
-document.addEventListener("touchmove",function(e){if(drag){var touch=e.touches[0];doSeek({clientX:touch.clientX});e["default"]()}},{passive:false});
-document.addEventListener("touchend",function(){drag=false});
-// 倍速切换
-sb.forEach(function(btn){btn.addEventListener("click",function(){sb.forEach(function(b){b.classList.remove("active")});btn.classList.add("active");a.playbackRate=parseFloat(btn.getAttribute("data-speed"))})});
-// 键盘快捷键
-document.addEventListener("keydown",function(e){if(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA")return;if(e.key===" "){e["default"]();if(a.paused){a.play()["catch"](function(){})}else{a.pause()}}else if(e.key==="ArrowRight"){a.currentTime=Math.min(a.currentTime+10,a.duration||a.currentTime)}else if(e.key==="ArrowLeft"){a.currentTime=Math.max(a.currentTime-10,0)}});
-// 过期检测
-(function(){var q=document.getElementById("reportDate");if(!q)return;var r=q.textContent.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);if(!r)return;var s=new Date(r[1],r[2]-1,r[3]);var d=new Date();d.setHours(0,0,0,0);if(s<d){var b=document.getElementById("staleBanner"),btn=document.getElementById("refreshBtn");b.textContent="已检测旧版内容，正在自动刷新...";b.classList.add("show");btn.classList.add("show");setTimeout(function(){window.location.href=window.location.pathname+"?_="+Date.now()},1500)}})();
-})();
-</script>
+__PLAYER_SCRIPT__
 </body>
 </html>'''
 
+PLAYER_JS = r'''<script>
+(function(){
+var a=null,ctx=null,src=null,playing=false,dur=0,pos=0,rate=1;
+var btn=document.getElementById('btnPlay');
+var cf=document.getElementById('currentTime');
+var tf=document.getElementById('totalTime');
+var pf=document.getElementById('progressFill');
+var pw=document.getElementById('progressWrap');
+var speeds=document.querySelectorAll('.speed-btn');
 
-def _safe(val):
-    """过滤缺失值"""
-    v = val.replace('**', '').strip()
-    if not v or v in ('—', '-', '--', '...', '—', '－', '――'):
-        return None
-    if re.match(r'^[─\-–—\s]+$', v):
-        return None
-    return v
+function fmt(t){var m=Math.floor(t/60),s=Math.floor(t%60);return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
+
+function upd(){if(!dur)return;
+var p=dur?pos/dur:0;pf.style.width=(p*100)+'%';cf.textContent=fmt(pos)}
+
+function tick(){if(!playing)return;
+pos=a.currentTime;upd();if(pos>=dur-0.1){pause();pos=dur;upd()}}
+
+function play(){
+if(!a){a=new Audio();a.src='daily-report.mp3';a.preload='auto';
+a.addEventListener('loadedmetadata',function(){dur=a.duration;tf.textContent=fmt(dur);upd()});
+a.addEventListener('timeupdate',tick);
+a.addEventListener('ended',function(){playing=false;btn.textContent='\u25B6';pos=dur;upd()})}
+a.playbackRate=rate;a.currentTime=pos;a.play().then(function(){playing=true;btn.textContent='\u23F8'}).catch(function(){})}
+
+function pause(){a.pause();playing=false;btn.textContent='\u25B6'}
+
+btn.addEventListener('click',function(){if(playing)pause();else play()});
+
+pw.addEventListener('click',function(e){
+if(!dur)return;var rect=pw.getBoundingClientRect();
+var x=e.clientX-rect.left;var p=Math.max(0,Math.min(1,x/rect.width));
+pos=p*dur;a.currentTime=pos;upd()});
+
+speeds.forEach(function(b){b.addEventListener('click',function(){
+speeds.forEach(function(s){s.classList.remove('active')});
+b.classList.add('active');rate=parseFloat(b.dataset.speed);
+if(a){a.playbackRate=rate;if(!playing)try{play()}catch(e){}}})});
+
+setInterval(function(){if(!playing)return;pos=a.currentTime;upd()},250)
+})();</script>'''
+
+# ============================================================
+# 表格识别：这些标题下的表格渲染为 HTML <table>
+# ============================================================
+TABLE_SECTION_KW = [
+    'A股收盘', '美股收盘', '港股收盘',
+    '场内ETF溢价率', '场外QDII申购额度', 'QDII',
+]
 
 
-def _clean(text):
-    """清理 markdown：去加粗、↑→上涨、↓→下跌"""
-    text = text.replace('**', '')
-    text = text.replace('↑', '上涨').replace('↓', '下跌')
+# ============================================================
+# Smart Debold: 只保留涨跌方向加粗，其余去粗
+# ============================================================
+def _smart_inline(text):
+    """处理行内 **加粗**：仅保留涨跌方向，其余去粗返回纯文本"""
+
+    def _replace(m):
+        content = m.group(1).strip()
+
+        # 保留：↑/↓ + 百分比 方向标记
+        if re.search(r'[↑↓][\d.]+%', content):
+            cls = 'up' if '↑' in content else 'down'
+            return f'<strong class="{cls}">{content}</strong>'
+
+        # 保留：涨/跌 + 百分比（中文方向）
+        if re.search(r'(上涨|涨幅|大涨|飙升)[\d.]+%', content):
+            return f'<strong class="up">{content}</strong>'
+        if re.search(r'(下跌|跌幅|重挫|暴跌)[\d.]+%', content):
+            return f'<strong class="down">{content}</strong>'
+
+        # 保留：独立方向词
+        if content in ('上涨', '下跌', '大涨', '重挫', '飙升', '暴跌',
+                       '净买入', '净卖出', '领涨', '领跌'):
+            cls = 'up' if content in ('上涨', '大涨', '飙升', '净买入', '领涨') else 'down'
+            return f'<strong class="{cls}">{content}</strong>'
+
+        # 保留：QDII 溢价评估标签
+        if content in ('极高溢价，严禁买入', '高溢价，警惕风险', '明显溢价，谨慎参与'):
+            return f'<strong class="down">{content}</strong>'
+
+        # 去粗：纯数字、名称、普通百分比等
+        return content
+
+    return re.sub(r'\*\*(.+?)\*\*', _replace, text)
+
+
+def _markdown_to_html_inline(text):
+    """将已去粗的文本中残余 ** 转为 <strong>，处理链接等"""
+    # 残余 ** 转为 strong（不分类，因为方向类已在 _smart_inline 中处理并保留 class）
+    text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
+    # 处理 markdown 链接 [text](url) → <a>
+    text = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" target="_blank" rel="noopener">\1</a>', text)
     return text
 
 
-def _table_to_text(rows):
-    """表格 → 自然叙述文本（通过表头关键词智能映射列位置）"""
-    if len(rows) < 2:
-        return ""
-    headers = [h.replace('**', '') for h in rows[0]]
+# ============================================================
+# 表格渲染
+# ============================================================
+def _parse_table_rows(lines):
+    """从 markdown 表格行列表解析出 [header_row, ...data_rows]"""
+    rows = []
+    for line in lines:
+        line = line.strip()
+        if not line.startswith('|'):
+            continue
+        cells = [c.strip() for c in line.strip('|').split('|')]
+        # 跳过全分隔符行 (|:---|:---|)
+        if all(re.match(r'^[-:\s]+$', c) for c in cells):
+            continue
+        rows.append(cells)
+    return rows
+
+
+def _table_to_html(rows):
+    """渲染为 HTML <table>"""
+    if not rows:
+        return ''
+
+    headers = rows[0]
     data_rows = rows[1:]
-    all_headers = " ".join(headers)
-    first_header = headers[0] if headers else ""
 
-    def _col_idx(keywords, exclude_kw=None):
-        """在 headers 中查找包含某关键词的列索引"""
-        kws = keywords if isinstance(keywords, (list, tuple)) else [keywords]
-        for i, h in enumerate(headers):
-            if all(k in h for k in kws):
-                if exclude_kw and exclude_kw in h:
-                    continue
-                return i
-        return None
+    html = '<div class="table-wrap"><table class="data-table">\n'
+    html += '<thead><tr>\n'
+    for i, h in enumerate(headers):
+        # 表头自身也去粗（不含涨跌方向）
+        h_clean = re.sub(r'\*\*(.+?)\*\*', r'\1', h)
+        align = 'num' if i >= 1 else ''
+        html += f'<th class="{align}">{h_clean}</th>\n'
+    html += '</tr></thead>\n<tbody>\n'
 
-    # ── 估值表（PE/PB 多列格式）── 简化为一句话汇总，适合朗读
-    if any(kw in all_headers for kw in ['PE', 'PB', '估值', '市盈率', '市净率']):
-        pe_pct_col = _col_idx(['PE', '分位']) or _col_idx(['PE', '历史']) or None
-        pb_pct_col = _col_idx(['PB', '分位']) or _col_idx(['PB', '历史']) or None
-        assess_col = _col_idx('评估') or _col_idx('备注') or None
+    for row in data_rows:
+        html += '<tr>\n'
+        for i, cell in enumerate(row):
+            # 智能去粗
+            cell_html = _smart_inline(cell)
+            # 残余 ** 转 strong
+            cell_html = _markdown_to_html_inline(cell_html)
+            # QDII 风险评估标签：加粗+红色警示
+            if cell_html.strip() in ('极高溢价，严禁买入', '高溢价，警惕风险', '明显溢价，谨慎参与'):
+                cell_html = f'<strong class="down">{cell_html}</strong>'
+            # 对齐
+            cls = 'label' if i == 0 else 'num'
+            html += f'<td class="{cls}">{cell_html}</td>\n'
+        html += '</tr>\n'
 
-        total = 0
-        high_risk = []    # 极高风险 / 高估
-        high_watch = []   # 偏高
-        low_value = []    # 极低价值 / 低估
-        dividend = []     # 股息率
-        normal = []       # 适中 / 其余
+    html += '</tbody>\n</table>\n</div>\n'
+    return html
 
-        for row in data_rows:
-            if len(row) < 2:
-                continue
-            total += 1
-            name = row[0].replace('**', '').strip()
-            # 简化名称：去掉括号内英文代码
-            name_simple = re.sub(r'[（(][^)）]*[)）]', '', name).strip()
 
-            assess = ''
-            if assess_col is not None and assess_col < len(row):
-                assess = _safe(row[assess_col]) or ''
-            assess = assess.replace('**', '').strip()
+def _table_to_div(rows):
+    """表格 → 文字叙述（非保留表格的兜底渲染）"""
+    if not rows:
+        return ''
+    headers = rows[0]
+    data_rows = rows[1:]
 
-            # 提取股息率数字（如"股息率约5.32%"）
-            div_match = re.search(r'股息率约?([\d.]+%)', assess)
-            if div_match:
-                dividend.append(f"{name_simple}股息率约{div_match.group(1)}")
-                continue
-
-            # 按评估文字分类
-            if '极高风险' in assess or '极高估' in assess:
-                high_risk.append(name_simple)
-            elif '估值偏高' in assess:
-                high_watch.append(name_simple)
-            elif '偏高' in assess:
-                high_watch.append(name_simple)
-            elif '极低价值' in assess or '低估' in assess:
-                low_value.append(name_simple)
-            elif '适中' in assess or '中位' in assess or '正常' in assess:
-                normal.append(name_simple)
-            else:
-                normal.append(name_simple)
-
-        # 组装一句话（每类之间用逗号分隔，同类多名用顿号分隔）
-        segments = []
-        if high_risk:
-            segments.append(f"{'、'.join(high_risk)}极高风险")
-        if high_watch:
-            segments.append(f"{'、'.join(high_watch)}估值偏高")
-        if low_value:
-            segments.append(f"{'、'.join(low_value)}极低价值区")
-        if dividend:
-            segments.append('，'.join(dividend))
-        if normal:
-            segments.append(f"{'、'.join(normal)}估值适中")
-
-        text = '估值异动预警：' + '，'.join(segments) + '。'
-        # 清理多余逗号
-        text = re.sub(r'，+', '，', text)
-        return text
-
-    # ── 恐慌指数（VIX/VXN）──
-    if (headers and len(headers) >= 3
-            and any(kw in headers[2] for kw in ['解读', '状态', '区间'])):
-        val_col = _col_idx('数值') or _col_idx('最新值') or 1
-        desc_col = _col_idx('解读') or _col_idx('状态') or _col_idx('区间') or 2
-        sentences = []
-        for row in data_rows:
-            name = row[0].replace('**', '') if len(row) > 0 else ''
-            val = _safe(row[val_col]) if len(row) > val_col else None
-            desc = _safe(row[desc_col]) if len(row) > desc_col else None
-            if val and desc:
-                sentences.append(f"{name}报{val}，{desc}")
-            elif val:
-                sentences.append(f"{name}报{val}")
-        if sentences:
-            return "。".join(sentences) + "。"
-
-    # ── QDII/ETF溢价表 ──
-    if any(kw in all_headers for kw in ['ETF', '溢价率']):
-        code_col = _col_idx('代码') or _col_idx('ETF代码') or 1
-        premium_col = _col_idx('溢价') or _col_idx('溢价率') or 2
-        parts = []
-        for row in data_rows:
-            name = row[0].replace('**', '') if len(row) > 0 else ''
-            code = _safe(row[code_col]) if len(row) > code_col else None
-            premium = _safe(row[premium_col]) if len(row) > premium_col else None
-            text_parts = [name]
-            if code: text_parts.append(f"代码{code}")
-            if premium: text_parts.append(f"溢价率{_clean(premium)}")
-            if len(text_parts) > 1:
-                parts.append("，".join(text_parts))
-        if parts:
-            return "。".join(parts) + "。"
-
-    # ── 场外基金表（代码 + 名称 + 净值）──
-    code_col = _col_idx('代码')
-    name_col = _col_idx('名称') or _col_idx('基金')
-    if code_col is not None and code_col == 0 and name_col is not None:
-        nav_col = _col_idx('净值') or _col_idx('最新净值') or 2
-        change_col = _col_idx('日涨跌') or _col_idx('涨跌幅') or _col_idx('涨跌') or 3
-        parts = []
-        for row in data_rows:
-            code = row[0].replace('**', '') if len(row) > 0 else ''
-            fname = _safe(row[1]) if len(row) > 1 else None
-            nav = _safe(row[nav_col]) if len(row) > nav_col else None
-            change = _safe(row[change_col]) if len(row) > change_col else None
-            text = fname if fname else code
-            if code and fname:
-                text = f"{fname}（{code}）"
-            if nav: text += f"，净值{nav}"
-            if change: text += f"，近周{_clean(change)}"
-            if nav or change: parts.append(text)
-        if parts:
-            return "。".join(parts) + "。"
-
-    # ── 个股持仓表 ──
-    code_col = _col_idx('代码')
-    price_col = _col_idx('价') or _col_idx('收盘价') or _col_idx('价格') or _col_idx('最新价') or 1
-    change_col = _col_idx('涨跌') or _col_idx('涨跌幅') or (price_col + 1 if price_col is not None else 2)
-    if '标的' in first_header or '持仓' in first_header or ('代码' in all_headers and price_col != 0):
-        parts = []
-        for row in data_rows:
-            if len(row) < 2: continue
-            name = row[0].replace('**', '')
-            if code_col is not None and code_col > 0 and code_col < len(row):
-                code = row[code_col].replace('**', '')
-                name = f"{name}（{code}）"
-            price = _safe(row[price_col]) if len(row) > price_col else None
-            change = _safe(row[change_col]) if len(row) > change_col else None
-            text = name
-            if price: text += f"，价格{price}"
-            if change: text += f"，{_clean(change)}"
-            if price or change: parts.append(text)
-        if parts:
-            return "。".join(parts) + "。"
-
-    # ── 指数收盘表（A股/美股指数）──
-    if any(kw in first_header for kw in ['指数', '标的']):
-        val_col = _col_idx('点位') or _col_idx('收盘价') or _col_idx('收盘点位') or _col_idx('价格') or 1
-        change_col = _col_idx('涨跌') or _col_idx('涨跌幅') or 2
-        sentences = []
-        for row in data_rows:
-            if len(row) < 2: continue
-            name = row[0].replace('**', '')
-            val = _safe(row[val_col]) if len(row) > val_col else None
-            change = _safe(row[change_col]) if len(row) > change_col else None
-            if val and change:
-                c = _clean(change)
-                if re.search(r'\d', val):
-                    sentences.append(f"{name}报收{val}，{c}")
-                else:
-                    sentences.append(f"{name}，{val}，{c}")
-            elif val:
-                sentences.append(f"{name}报收{val}")
-            elif change:
-                sentences.append(f"{name}{_clean(change)}")
-        if sentences:
-            return "。".join(sentences) + "。"
-
-    # ── 通用表 ──
     parts = []
     for row in data_rows:
-        snippet = []
-        for i, cell in enumerate(row):
-            v = _safe(cell)
-            if v and i < len(headers):
-                snippet.append(f"{headers[i]}{v}")
-        if snippet:
-            parts.append("，".join(snippet))
-    if parts:
-        return "。".join(parts) + "。"
-    return ""
-
-
-def _strip_source_url(text):
-    """去掉数据来源中的网址部分，如「英为财情(Investing.com)」→「英为财情」"""
-    # 中文名(英文域名) 格式
-    text = re.sub(r'([\u4e00-\u9fff]+)\((?:[a-zA-Z0-9][-a-zA-Z0-9]*\.[a-zA-Z]{2,})\)', r'\1', text)
-    return text
-
-
-def _inline(text):
-    """行内元素：**加粗** → <strong>，↑↓ → 上涨/下跌，[链接](url) → <a>（适合朗读）"""
-    text = re.sub(r'↑([\d.]+%?)', r'<span class="up">上涨\1</span>', text)
-    text = re.sub(r'↓([\d.]+%?)', r'<span class="down">下跌\1</span>', text)
-    text = re.sub(r'(?<!上涨)(?<!下跌)↑(?![\d.])', '上涨', text)
-    text = re.sub(r'(?<!上涨)(?<!下跌)↓(?![\d.])', '下跌', text)
-    text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
-    # Markdown 链接 [text](url) → <a> 标签
-    text = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" target="_blank" rel="noopener">\1</a>', text)
-    idx = 0
-    protected = []
-    def _protect(m):
-        nonlocal idx
-        ph = f'\x00{idx}\x00'
-        protected.append(m.group(0))
-        idx += 1
-        return ph
-    text = re.sub(r'</?(?:strong|span|a)(?:\s[^>]*)?>', _protect, text)
-    text = text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
-    for i, tag in enumerate(protected):
-        text = text.replace(f'\x00{i}\x00', tag)
-    return text
-
-
-def _collapse_list_blank_lines(text):
-    """合并列表项之间的空行以及数据来源行（MD 中列表项之间有空行或来源行时会被拆成多个列表）"""
-    lines = text.split('\n')
-    result = []
-    i = 0
-    while i < len(lines):
-        result.append(lines[i])
-        current = lines[i].strip()
-        # 当前行为列表项
-        if re.match(r'^\d+\.\s', current) or current.startswith('- '):
-            current_is_ol = bool(re.match(r'^\d+\.\s', current))
-            current_is_ul = current.startswith('- ')
-            # 查看后续空行或数据来源行后的下一行是否同类列表项
-            j = i + 1
-            while j < len(lines) and (not lines[j].strip() or re.match(r'^\s+\*?数据来源', lines[j]) or re.match(r'^\s+\*?来源[：:]', lines[j])):
-                j += 1
-            if j < len(lines):
-                next_line = lines[j].strip()
-                next_is_ol = bool(re.match(r'^\d+\.\s', next_line))
-                next_is_ul = next_line.startswith('- ')
-                if (current_is_ol and next_is_ol) or (current_is_ul and next_is_ul):
-                    # 跳过中间的空白行和来源行，让两个列表项连在同一个列表中
-                    i = j
-                    continue
-        i += 1
-    return '\n'.join(result)
-
-
-def md_to_html(text):
-    """Markdown → 纯文本叙述 HTML（表格全部转为段落文字）"""
-    # 先预处理：将续行（以空格开头的内容行）并入编号项行
-    _merged = []
-    for line in text.split('\n'):
-        if _merged and line.startswith(' ') and line.strip():
-            _merged[-1] = _merged[-1].rstrip() + ' ' + line.strip()
-        else:
-            _merged.append(line)
-    text = '\n'.join(_merged)
-
-    # 再预处理：合并被空行分隔的同类列表项
-    text = _collapse_list_blank_lines(text)
-    lines = text.split('\n')
-    out = []
-    in_table = False
-    table_lines = []
-    in_list = False
-    list_type = 'ul'
-    in_quote = False
-    first_para = True
-
-    def flush_table():
-        nonlocal in_table, table_lines
-        if not table_lines:
-            return
-        rows = []
-        for line in table_lines:
-            line = line.strip()
-            if not line.startswith('|'):
+        name = re.sub(r'\*\*', '', row[0]) if row else ''
+        if not name:
+            continue
+        values = []
+        for i in range(1, min(len(row), len(headers))):
+            cell = row[i]
+            h = headers[i]
+            # 去粗
+            cell = re.sub(r'\*\*(.+?)\*\*', r'\1', cell)
+            if not cell or cell in ('—', '-', '--', '...'):
                 continue
-            cells = [c.strip() for c in line.strip('|').split('|')]
-            if all(re.match(r'^[-:]+$', c) for c in cells):
-                continue
-            rows.append(cells)
-        table_lines = []
-        in_table = False
-        if rows:
-            tts = _table_to_text(rows)
-            if tts:
-                if isinstance(tts, list):
-                    # 估值表：每个指数独立 div
-                    for item in tts:
-                        tts_safe = item.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
-                        out.append(f'<div class="table-text">{tts_safe}</div>')
-                else:
-                    tts_safe = tts.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
-                    out.append(f'<div class="table-text">{tts_safe}</div>')
+            values.append(f'{h} {cell}')
+        if values:
+            parts.append(f'{name}：{"，".join(values)}')
 
-    def flush_list():
-        nonlocal in_list, list_type
-        if in_list:
-            out.append(f'</{list_type}>')
-            in_list = False
+    if not parts:
+        return ''
+    return '<p class="no-indent">' + '；'.join(parts) + '</p>'
 
-    def flush_quote():
-        nonlocal in_quote
-        if in_quote:
-            out.append('</blockquote>')
-            in_quote = False
 
-    # 板块跳过开关：HTML 不展示 QDII 和个人持仓板块（MD 保留）
-    _SKIP_SECTIONS = []
-    # 跳过的行内关键词：查询时间等元信息块不展示在朗读版
-    _SKIP_LINE_KW = ['查询时间']
-    skip_section = False
+def _should_render_table(title):
+    """判断该板块是否应渲染为 HTML 表格"""
+    title_clean = re.sub(r'\*\*', '', title)
+    for kw in TABLE_SECTION_KW:
+        if kw in title_clean:
+            return True
+    return False
+
+
+# ============================================================
+# MD 解析
+# ============================================================
+def parse_md_sections(md_text):
+    """解析 MD 为 (type, title, lines) 板块列表"""
+    lines = md_text.split('\n')
+    blocks = []
+    buf = []
+    cur_title = ''
+    cur_type = 'preamble'
 
     for line in lines:
-        stripped = line.strip()
-        if not stripped:
-            flush_quote(); flush_table(); flush_list()
-            continue
-
-        # 跳过含特定关键词的整行（如 查询时间 blockquote 行）
-        if any(kw in stripped for kw in _SKIP_LINE_KW):
-            flush_quote()  # 如果正在 blockquote 内则关闭
-            continue
-
-        # 通用标题处理：支持 # ~ ######（v24 修复 #### 漏渲染）
-        _hm = re.match(r'^(#{1,6})\s+(.*)', stripped)
-        if _hm:
-            flush_quote(); flush_table(); flush_list()
-            _level = len(_hm.group(1))
-            _text = _hm.group(2)
-            if _level == 1:
-                # 跳过顶层标题：模板 .header 区域已显示标题+日期
-                continue
-            skip_section = any(kw in stripped for kw in _SKIP_SECTIONS)
-            if skip_section:
-                continue
-            # h4+ 降级为 h3 样式，避免引入新样式
-            _tag = f'h{min(_level, 3)}'
-            out.append(f'<{_tag}>{_inline(_text)}</{_tag}>')
-        elif skip_section:
-            # 跳过整个板块的所有内容行（包括表格、列表、段落）
-            continue
-
-        elif stripped.startswith('> '):
-            flush_list(); flush_table()
-            if not in_quote:
-                out.append('<blockquote>')
-                in_quote = True
-            out.append(f'<p class="no-indent">{_inline(_strip_source_url(stripped[2:]))}</p>')
-
-        elif stripped.startswith('|'):
-            flush_list(); flush_quote()
-            table_lines.append(stripped)
-            in_table = True
-
-        elif stripped.startswith('- '):
-            flush_table(); flush_quote()
-            if not in_list:
-                out.append('<ul>')
-                list_type = 'ul'; in_list = True
-            out.append(f'<li>{_inline(stripped[2:])}</li>')
-
-        elif re.match(r'^\d+\.\s', stripped):
-            flush_table(); flush_quote()
-            if not in_list:
-                out.append('<ol>')
-                list_type = 'ol'; in_list = True
-            content = re.sub(r'^\d+\.\s', '', stripped)
-            out.append(f'<li>{_inline(content)}</li>')
-
-        elif stripped in ('---', '***', '___'):
-            flush_quote(); flush_table(); flush_list()
-            out.append('<hr>')
-
-        elif not stripped.startswith('**') and stripped.startswith('*') and ('数据来源' in stripped or stripped.startswith('*来源：') or stripped.startswith('*来源:')):
-            flush_table(); flush_list(); flush_quote()
-            content = stripped.strip('* ').strip()
-            content = _strip_source_url(content)
-            out.append(f'<p class="source">{content}</p>')
-
-        # 跳过估值异动预警的头部数据来源行（已经固化到模板尾部）
-        elif stripped.startswith('**数据来源**') or stripped.startswith('**来源声明**'):
-            flush_table(); flush_list(); flush_quote()
-            continue
-
-        # 隐私过滤：不展示内部信息
-        elif any(kw in stripped for kw in ['MD 已同步', '朗读链接', 'IMA 知识库']):
-            flush_table(); flush_list(); flush_quote()
-            # 完全跳过，不输出
-
+        if line.startswith('# ') and not line.startswith('## '):
+            if buf:
+                blocks.append((cur_type, cur_title, buf))
+            cur_title = line[2:].strip()
+            cur_type = 'title'
+            buf = []
+        elif line.startswith('## '):
+            if buf:
+                blocks.append((cur_type, cur_title, buf))
+            cur_title = line[3:].strip()
+            cur_type = 'section'
+            buf = []
+        elif line.startswith('### '):
+            if buf:
+                blocks.append((cur_type, cur_title, buf))
+                buf = []
+            cur_title = line[4:].strip()
+            cur_type = 'subsection'
+        elif line.startswith('#### '):
+            if buf:
+                blocks.append((cur_type, cur_title, buf))
+                buf = []
+            cur_title = line[5:].strip()
+            cur_type = 'subsubsection'
+        elif line.startswith('##### '):
+            if buf:
+                blocks.append((cur_type, cur_title, buf))
+                buf = []
+            cur_title = line[6:].strip()
+            cur_type = 'subsubsection'
         else:
-            flush_table(); flush_quote(); flush_list()
-            cls = 'no-indent' if first_para else ''
-            out.append(f'<p class="{cls}">{_inline(stripped)}</p>')
-            first_para = False
+            buf.append(line)
 
-    flush_quote(); flush_table(); flush_list()
-    return '\n'.join(out)
+    if buf:
+        blocks.append((cur_type, cur_title, buf))
+
+    return blocks
+
+
+# ============================================================
+# 板块 → HTML 渲染
+# ============================================================
+def _render_text_line(line):
+    """渲染单行文本为 HTML"""
+    stripped = line.strip()
+    if not stripped:
+        return ''
+
+    # 引用块
+    if stripped.startswith('> '):
+        content = stripped[2:].strip()
+        content = _smart_inline(content)
+        content = _markdown_to_html_inline(content)
+        return f'<blockquote>{content}</blockquote>'
+
+    # 无序列表
+    if stripped.startswith('- ') or stripped.startswith('* '):
+        content = stripped[2:].strip()
+        content = _smart_inline(content)
+        content = _markdown_to_html_inline(content)
+        return f'<li>{content}</li>'
+
+    # 有序列表
+    m = re.match(r'^(\d+)\.\s+(.*)', stripped)
+    if m:
+        content = m.group(2)
+        content = _smart_inline(content)
+        content = _markdown_to_html_inline(content)
+        return f'<li>{content}</li>'
+
+    # 水平线
+    if stripped in ('---', '***', '___'):
+        return '<hr>'
+
+    # 普通段落
+    content = _smart_inline(stripped)
+    content = _markdown_to_html_inline(content)
+    return f'<p>{content}</p>'
+
+
+def _is_table_line(line):
+    return line.strip().startswith('|')
+
+
+def block_to_html(lines, title='', level='section'):
+    """板块 → HTML 片段"""
+    if not lines:
+        return ''
+
+    # 收集表格和文本行
+    table_groups = []  # [(table_lines, preceding_title)]
+    text_groups = []   # [list of text lines]
+    current_text = []
+    current_table = []
+
+    for line in lines:
+        if _is_table_line(line):
+            if current_text:
+                text_groups.append(current_text)
+                current_text = []
+            current_table.append(line)
+        else:
+            if current_table:
+                table_groups.append((current_table, title))
+                current_table = []
+            current_text.append(line)
+
+    if current_table:
+        table_groups.append((current_table, title))
+    if current_text:
+        text_groups.append(current_text)
+
+    html_parts = []
+
+    # 处理标题
+    tag_map = {
+        'section': 'h2', 'subsection': 'h3',
+        'subsubsection': 'h4', 'title': 'h1',
+    }
+    tag = tag_map.get(level, 'h2')
+    title_clean = re.sub(r'\*\*', '', title).strip()
+
+    # 跳过 QDII 和个人持仓板块的标题（HTML 不公开个人持仓）
+    _SKIP_HTML_SECTIONS = ['个人持仓', '持仓']
+
+    if title_clean:
+        if any(kw in title_clean for kw in _SKIP_HTML_SECTIONS):
+            return ''  # 整块跳过
+        html_parts.append(f'<{tag}>{title_clean}</{tag}>')
+
+    # 交错渲染：表格和文本按它们在 MD 中的顺序出现
+    # 简化：先渲染表格组，再渲染文本组
+    for tbl_lines, tbl_title in table_groups:
+        rows = _parse_table_rows(tbl_lines)
+        if not rows:
+            continue
+        if _should_render_table(tbl_title):
+            html_parts.append(_table_to_html(rows))
+        else:
+            html_parts.append(_table_to_div(rows))
+
+    for text_group in text_groups:
+        # 检测有序列表块
+        is_ordered_list = any(
+            re.match(r'^\d+\.\s', l.strip()) for l in text_group if l.strip()
+        )
+        is_unordered_list = any(
+            l.strip().startswith(('- ', '* ')) for l in text_group if l.strip()
+        )
+
+        if is_ordered_list:
+            html_parts.append('<ol class="news-list">')
+            for line in text_group:
+                rendered = _render_text_line(line)
+                if rendered:
+                    html_parts.append(rendered)
+            html_parts.append('</ol>')
+        elif is_unordered_list:
+            # 个人持仓特殊处理：转为卡片样式
+            if any('持仓' in kw for kw in [title_clean]):
+                html_parts.append('<div class="card">')
+                html_parts.append('<div class="card-title">持仓快照</div>')
+                for line in text_group:
+                    stripped = line.strip()
+                    if stripped.startswith('- '):
+                        content = stripped[2:]
+                        content = _smart_inline(content)
+                        content = _markdown_to_html_inline(content)
+                        html_parts.append(f'<div class="holding-item">{content}</div>')
+                    else:
+                        rendered = _render_text_line(line)
+                        if rendered:
+                            html_parts.append(rendered)
+                html_parts.append('</div>')
+            else:
+                html_parts.append('<ul>')
+                for line in text_group:
+                    rendered = _render_text_line(line)
+                    if rendered:
+                        html_parts.append(rendered)
+                html_parts.append('</ul>')
+        else:
+            in_lede = False
+            for i, line in enumerate(text_group):
+                rendered = _render_text_line(line)
+                if not rendered:
+                    continue
+                stripped = line.strip()
+                # 定性导语段落特殊处理：标签行跳过，下一行作lede卡片
+                if '定性导语' in stripped:
+                    in_lede = True
+                    continue
+                if in_lede:
+                    content = _smart_inline(stripped)
+                    content = _markdown_to_html_inline(content)
+                    html_parts.append(f'<p class="lede">{content}</p>')
+                    in_lede = False
+                else:
+                    html_parts.append(rendered)
+
+    return '\n'.join(html_parts)
+
+
+# ============================================================
+# 主流程
+# ============================================================
+def _extract_date(md_text):
+    """从 MD 中提取日期"""
+    m = re.search(
+        r'(\d{4})年(\d{1,2})月(\d{1,2})日.*?(?:星期([一二三四五六日])|[（(]周([一二三四五六日])[）)])',
+        md_text
+    )
+    if m:
+        weekday = m.group(4) or m.group(5)
+        return f'{m.group(1)}年{m.group(2)}月{m.group(3)}日 星期{weekday}'
+    m2 = re.search(r'(\d{4})年(\d{1,2})月(\d{1,2})日', md_text)
+    if m2:
+        return f'{m2.group(1)}年{m2.group(2)}月{m2.group(3)}日'
+    return datetime.datetime.now().strftime('%Y年%m月%d日')
+
+
+def md_to_html(md_file):
+    """读取 MD 文件，返回完整 HTML 字符串"""
+    with open(md_file, 'r', encoding='utf-8') as f:
+        md_text = f.read()
+
+    date_str = _extract_date(md_text)
+    blocks = parse_md_sections(md_text)
+
+    body_parts = []
+    for typ, title, block_lines in blocks:
+        # 跳过 H1 标题块（已在 HTML header 模板中显示）
+        if typ == 'title' or typ == 'preamble':
+            continue
+        fragment = block_to_html(block_lines, title, typ)
+        if fragment:
+            body_parts.append(fragment)
+
+    body_html = '\n\n'.join(body_parts)
+
+    # 数据来源脚注
+    body_html += '\n<p class="source-note">数据来源：预抓取结构化行情（akshare / 腾讯 / 雪球蛋卷 / 东方财富等）</p>\n'
+
+    html = TEMPLATE
+    html = html.replace('__DATE__', date_str)
+    html = html.replace('__CONTENT__', body_html)
+    html = html.replace('__PLAYER_SCRIPT__', PLAYER_JS)
+
+    return html
 
 
 def main():
     if len(sys.argv) < 2:
-        print("用法: python3 md_to_reader.py <input.md> [output.html]")
+        print("用法: python3 md_to_reader.py <report.md> [daily-report.html]")
         sys.exit(1)
 
     md_file = sys.argv[1]
-    html_file = sys.argv[2] if len(sys.argv) > 2 else md_file.rsplit('.', 1)[0] + '.html'
+    html_file = sys.argv[2] if len(sys.argv) > 2 else 'daily-report.html'
 
-    with open(md_file, 'r', encoding='utf-8') as f:
-        md_text = f.read()
+    if not os.path.exists(md_file):
+        print(f"❌ 文件不存在: {md_file}")
+        sys.exit(1)
 
-    date_match = re.search(r'(\d{4})年(\d{1,2})月(\d{1,2})日.*?星期([一二三四五六日])', md_text)
-    if date_match:
-        date_str = f'{date_match.group(1)}年{date_match.group(2)}月{date_match.group(3)}日 星期{date_match.group(4)}'
-        date_tag = f'{date_match.group(1)}{date_match.group(2).zfill(2)}{date_match.group(3).zfill(2)}'
-    else:
-        now = datetime.datetime.now()
-        date_str = now.strftime('%Y年%m月%d日')
-        date_tag = now.strftime('%Y%m%d')
-
-    html_content = md_to_html(md_text)
-    html_output = TEMPLATE.replace('__DATE__', date_str).replace('__CONTENT__', html_content)
-    html_output = html_output.replace('__MP3VER__', datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
-    html_output = html_output.replace('__BUILD__', datetime.datetime.now().strftime('%Y%m%d%H%M'))
-
+    print(f"📖 读取: {md_file}")
+    html = md_to_html(md_file)
     with open(html_file, 'w', encoding='utf-8') as f:
-        f.write(html_output)
-
-    tables_converted = html_output.count('table-text')
-    print(f"✅ 生成朗读用 HTML: {html_file} ({len(html_output)} 字节, {tables_converted} 段表格叙述)")
+        f.write(html)
+    print(f"✅ 输出: {html_file} ({len(html)} 字符)")
 
 
 if __name__ == '__main__':
