@@ -632,12 +632,27 @@ def _extract_date(md_text):
     return datetime.datetime.now().strftime('%Y年%m月%d日')
 
 
+def _extract_data_time(md_text):
+    """从 LLM 来源行提取数据抓取时间戳，转为 ISO 日期格式。
+    匹配: '数据获取时间：北京时间 2026年7月11日 18:22'
+           '查询时间：北京时间 2026年7月11日 18:22'"""
+    m = re.search(
+        r'(?:数据获取时间|查询时间)[：:]\s*(?:北京时间\s*)?'
+        r'(\d{4})年(\d{1,2})月(\d{1,2})日\s*(\d{1,2}):(\d{2})',
+        md_text
+    )
+    if m:
+        return f'{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d} {int(m.group(4)):02d}:{int(m.group(5)):02d}'
+    return ''
+
+
 def md_to_html(md_file):
     """读取 MD 文件，返回完整 HTML 字符串"""
     with open(md_file, 'r', encoding='utf-8') as f:
         md_text = f.read()
 
     date_str = _extract_date(md_text)
+    data_time = _extract_data_time(md_text)  # 从 LLM 来源行提取数据抓取时间戳
     blocks = parse_md_sections(md_text)
 
     body_parts = []
@@ -651,8 +666,11 @@ def md_to_html(md_file):
 
     body_html = '\n\n'.join(body_parts)
 
-    # 数据来源脚注
-    body_html += '\n<p class="source-note">数据来源：akshare / 腾讯 / 雪球蛋卷 / 东方财富等</p>\n'
+    # 数据来源脚注（含数据时效）
+    source = '数据来源：akshare/雪球蛋卷/腾讯API/东方财富等'
+    if data_time:
+        source += f'，数据时效截至 {data_time} 北京时间'
+    body_html += f'\n<p class="source-note">{source}</p>\n'
 
     html = TEMPLATE
     html = html.replace('__DATE__', date_str)
