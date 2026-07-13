@@ -87,13 +87,19 @@ def main():
     system = open(PROMPT_PATH, encoding="utf-8").read()
     print(f"📄 读取 prompt: {len(system)} 字符")
 
-    # 1b. 模式自动判定（北京时间）：周二~周六=完整，周日/周一=精简
-    beijing = timezone(timedelta(hours=8))
-    now = datetime.now(beijing)
-    w = now.weekday()  # 0=Mon, 6=Sun
-    mode = "精简模式" if w in (6, 0) else "完整模式"
+    # 1b. 模式自动判定（三市场交易日历）
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from trading_calendar import market_flags
+    flags = market_flags()
+    mode = flags["mode"]
     system = system.replace("__MODE__", mode)
-    print(f"📋 执行模式: {mode}（星期{'一二三四五六日'[w]}, {now.strftime('%H:%M')}）")
+    # 注入三市场开市标志，供 prompt 感知哪些市场有数据
+    system = system.replace("__A_OPEN__",  "是" if flags["a_open"]  else "否")
+    system = system.replace("__U_OPEN__",  "是" if flags["u_open"]  else "否")
+    system = system.replace("__HK_OPEN__", "是" if flags["hk_open"] else "否")
+    y = flags["yesterday"]
+    print(f"📋 执行模式: {mode}（参考日 {y} 星期{'一二三四五六日'[y.weekday()]}，"
+          f"A股:{'✅' if flags['a_open'] else '❌'} 美股:{'✅' if flags['u_open'] else '❌'} 港股:{'✅' if flags['hk_open'] else '❌'}）")
 
     # 2. 读取所有 data_*.json 作为 user 消息
     blocks = []

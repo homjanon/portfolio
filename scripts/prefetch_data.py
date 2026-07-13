@@ -21,6 +21,25 @@ v30: 每模块120s超时机制 + QDII场外纳指100/标普500可申购大额度
 import json, os, sys, signal, traceback, time, re, requests, xml.etree.ElementTree as ET
 from datetime import datetime, timezone, timedelta
 
+# ── 方案C: curl_cffi HTTP/2 补丁 ──
+# 东财 push2 端点需要 HTTP/2，标准 requests 仅支持 HTTP/1.1 会静默断连
+# 仅对 eastmoney push2 域名使用 curl_cffi 浏览器模拟，其余请求不受影响
+try:
+    from curl_cffi import requests as _cffi_req
+    _orig_get = requests.get
+    _H2_DOMAINS = ("push2.eastmoney.com", "push2his.eastmoney.com")
+    def _patched_get(url, **kw):
+        if any(d in url for d in _H2_DOMAINS):
+            try:
+                return _cffi_req.get(url, impersonate="chrome", **kw)
+            except Exception:
+                pass
+        return _orig_get(url, **kw)
+    requests.get = _patched_get
+    print("✅ curl_cffi HTTP/2 补丁已启用（东财 push2 端点）")
+except ImportError:
+    print("⚠️ curl_cffi 未安装，东财全球指数可能降级到 yfinance")
+
 # 全局抑制 tqdm 进度条，避免 GitHub Actions 日志超限
 os.environ["AKSHARE_DISABLE_PROGRESS"] = "1"
 os.environ["TQDM_DISABLE"] = "1"
@@ -1148,32 +1167,46 @@ def main():
     print(f"═══ 预抓取金融市场数据（v30: 每模块120s超时 | QDII场外纳指100/标普500） ═══")
     print(f"时间: {_ts()}\n")
 
-    # 北京时间模式判定：周日(6)/周一(0) → 精简模式，仅抓 RSS 新闻
-    beijing = timezone(timedelta(hours=8))
-    now = datetime.now(beijing)
-    w = now.weekday()
-    is_simple = w in (6, 0)
+    # 三市场交易日历判定（共享模块）
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from trading_calendar import market_flags
+    flags = market_flags()
+    a_open = flags["a_open"]
+    u_open = flags["u_open"]
+    hk_open = flags["hk_open"]
+    is_simple = (flags["mode"] == "精简模式")
 
     if is_simple:
-        # 精简模式：周日/周一，仅执行 RSS 新闻模块
+        # 精简模式：三市场均休市，仅执行 RSS 新闻模块
         modules = [
             ("data_news_rss.json", _fetch_rss_news, "全球TOP10 RSS新闻(英+中)"),
         ]
-        print(f"📋 精简模式（周日/周一）: 仅执行 {len(modules)} 个模块（纯新闻）")
+        print(f"📋 精简模式（三市场均休市）: 仅执行 {len(modules)} 个模块（纯新闻）")
     else:
-        modules = [
-            ("data_market_cn.json",      fetch_market_cn,      "A股指数"),
-            ("data_market_hk.json",      fetch_market_hk,      "港股指数"),
-            ("data_market_global.json",  fetch_market_global,  "全球指数"),
-            ("data_forex_rate.json",     fetch_forex_rate,     "汇率/商品/债券"),
-            ("data_valuation.json",      fetch_valuation,      "估值数据"),
-            ("data_fund.json",           fetch_fund,           "基金净值/溢价"),
-            ("data_industry.json",       fetch_industry,       "申万+同花顺行业"),
-            ("data_holdings.json",       fetch_holdings,       "持仓行情+分红+研报"),
-            ("data_news_rss.json",       _fetch_rss_news,      "全球TOP10 RSS新闻(英+中)"),
-            ("data_extra.json",          fetch_extra,          "资金面+QDII+涨停/跌停"),
-        ]
-        print(f"📋 完整模式: 执行全部 {len(modules)} 个模块")
+        # 完整模式：按市场开市情况逐模块门控
+        modules = []
+        if a_open:
+            modules.append(("data_market_cn.json",   fetch_market_cn,   "A股指数"))
+        if hk_open:
+            modules.append(("data_market_hk.json",   fetch_market_hk,   "港股指数"))
+        if u_open:
+            modules.append(("data_market_global.json", fetch_market_global, "全球指数"))
+        # 汇率/商品/债券：24h 市场，完整模式即抓
+        modules.append(("data_forex_rate.json",  fetch_forex_rate,  "汇率/商品/债券"))
+        if a_open:
+            modules.append(("data_valuation.json", fetch_valuation,  "估值数据"))
+        if a_open or u_open:
+            modules.append(("data_fund.json",       fetch_fund,       "基金净值/溢价"))
+        if a_open:
+            modules.append(("data_industry.json",    fetch_industry,   "申万+同花顺行业"))
+        if a_open or u_open:
+            modules.append(("data_holdings.json",    fetch_holdings,   "持仓行情+分红+研报"))
+        # RSS 新闻：始终抓取
+        modules.append(("data_news_rss.json",       _fetch_rss_news,  "全球TOP10 RSS新闻(英+中)"))
+        if a_open:
+            modules.append(("data_extra.json",       fetch_extra,      "资金面+QDII+涨停/跌停"))
+        status = f"A股:{'✅' if a_open else '❌'} 美股:{'✅' if u_open else '❌'} 港股:{'✅' if hk_open else '❌'}"
+        print(f"📋 完整模式: 执行 {len(modules)} 个模块 ({status})")
 
     successes = 0
     signal.signal(signal.SIGALRM, _timeout_handler)

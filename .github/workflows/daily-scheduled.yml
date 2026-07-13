@@ -37,7 +37,7 @@ jobs:
 
       - name: 安装依赖
         run: |
-          pip install akshare requests pandas yfinance edge-tts lxml
+          pip install akshare requests pandas yfinance edge-tts lxml curl_cffi pandas_market_calendars
 
       - name: 预抓取数据
         id: prefetch
