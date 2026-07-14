@@ -86,6 +86,10 @@ schedule / workflow_dispatch
 - 链接为 Google News 重定向链接，自动跳转至原始文章
 - 精简模式与完整模式均支持此功能
 
+## 今日定性导语（HTML 朗读版）
+
+Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H1 标题块内）会在 `md_to_reader.py` 中被单独抽取，渲染为文章顶部带左侧强调色边框的高亮卡片 `<p class="lede">`，并保留粗体标签。该段落在主流程中随 `title` 块被跳过，故由 `_extract_lede()` 置顶注入，避免 HTML 朗读版丢失导语（与 Markdown 报告保持一致）。
+
 ## 汇率转换
 
 - 自动抓取 USD/CNH 汇率，首次刷新后缓存当日汇率

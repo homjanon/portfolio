@@ -606,25 +606,30 @@ def block_to_html(lines, title='', level='section'):
                         html_parts.append(rendered)
                 html_parts.append('</ul>')
         else:
-            in_lede = False
-            for i, line in enumerate(text_group):
+            for line in text_group:
                 rendered = _render_text_line(line)
-                if not rendered:
-                    continue
-                stripped = line.strip()
-                # 定性导语段落特殊处理：标签行跳过，下一行作lede卡片
-                if '定性导语' in stripped:
-                    in_lede = True
-                    continue
-                if in_lede:
-                    content = _smart_inline(stripped)
-                    content = _markdown_to_html_inline(content)
-                    html_parts.append(f'<p class="lede">{content}</p>')
-                    in_lede = False
-                else:
+                if rendered:
                     html_parts.append(rendered)
 
     return '\n'.join(html_parts)
+
+
+def _extract_lede(blocks):
+    """从所有区块抽取"定性导语"，返回 <p class="lede">…</p> 或 ''。
+
+    MD 格式为单行：'**今日定性导语**：<正文>'。该段通常位于 H1 标题块
+    内（parse_md_sections 将其归入 typ='title'），而主流程会跳过
+    title/preamble 块，故在此单独抽取并置顶渲染，避免导语在 HTML 中丢失。
+    """
+    for _typ, _title, block_lines in blocks:
+        for line in block_lines:
+            stripped = line.strip()
+            if '定性导语' in stripped:
+                # 导语为展示元素，用 markdown 内联转换保留 **粗体** 标签
+                # （不走 _smart_inline，避免 TTS 清理把 ** 剥掉）
+                content = _markdown_to_html_inline(stripped)
+                return f'<p class="lede">{content}</p>'
+    return ''
 
 
 # ============================================================
@@ -672,10 +677,16 @@ def md_to_html(md_file):
     blocks = parse_md_sections(md_text)
 
     body_parts = []
+    lede_html = _extract_lede(blocks)  # 导语在 title/preamble 块内被跳过，单独置顶
+    if lede_html:
+        body_parts.append(lede_html)
     for typ, title, block_lines in blocks:
         # 跳过 H1 标题块（已在 HTML header 模板中显示）
         if typ == 'title' or typ == 'preamble':
             continue
+        # 防御：若导语落在会被渲染的区块内，剔除该行避免重复渲染为普通段落
+        if lede_html:
+            block_lines = [l for l in block_lines if '定性导语' not in l.strip()]
         fragment = block_to_html(block_lines, title, typ)
         if fragment:
             body_parts.append(fragment)
