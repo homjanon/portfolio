@@ -5,3 +5,4 @@ data_*.json
 /daily-report.html
 /daily-report.mp3
 automation-package.zip
+.cache/

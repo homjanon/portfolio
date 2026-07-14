@@ -154,6 +154,7 @@ def _akshare_sina_us_index(symbol):
                 "change_pct": round((c - p) / p * 100, 2),
                 "open": float(last["open"]), "high": float(last["high"]),
                 "low": float(last["low"]), "volume": int(last["volume"]),
+                "date": str(last["date"]) if "date" in df.columns else None,
             }
     except:
         pass
@@ -359,12 +360,29 @@ def fetch_market_global():
     # ── 美股三大指数: akshare新浪 → yfinance兜底 ──
     us_map = {".DJI": "道琼斯工业", ".INX": "标普500", ".IXIC": "纳斯达克综合"}
     us_yf = {"道琼斯工业": "^DJI", "标普500": "^GSPC", "纳斯达克综合": "^IXIC"}
+
+    # P2: 美股业务日期新鲜度校验（解析预期业务日期，与 akshare 实际返回日期比对）
+    _us_resolver = None
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from market_date_resolver import MarketDateResolver
+        _us_resolver = MarketDateResolver()
+    except Exception as e:
+        print(f"    (美股新鲜度校验初始化失败，跳过: {e})")
+
     for sym, name in us_map.items():
         data = _akshare_sina_us_index(sym)
         if data:
             result[name] = {"代码": sym, "最新价": data["close"], "涨跌幅": data["change_pct"],
                            "今开": data["open"], "最高": data["high"], "最低": data["low"],
                            "source": "akshare新浪"}
+            # 新鲜度校验：仅对 akshare 新浪源（含明确日期）比对；实际日期早于预期 → 滞后
+            if _us_resolver and data.get("date"):
+                _expected = str(_us_resolver.get_business_date("us"))
+                if data["date"] < _expected:
+                    result[name]["_stale"] = True
+                    result[name]["_expected_date"] = _expected
+                    print(f"    ⚠️ 美股 {name} 数据日期 {data['date']} < 预期 {_expected}（可能滞后）")
         else:
             result[name] = {"代码": sym, "error": "新浪API无数据"}
 

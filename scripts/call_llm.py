@@ -97,6 +97,32 @@ def main():
     system = system.replace("__A_OPEN__",  "是" if flags["a_open"]  else "否")
     system = system.replace("__U_OPEN__",  "是" if flags["u_open"]  else "否")
     system = system.replace("__HK_OPEN__", "是" if flags["hk_open"] else "否")
+
+    # 1c. 收盘日期标注（MarketDateResolver：按市场解析业务日期 + 北京时间收盘标注）
+    _labels = {
+        "A_CLOSE": "前一日", "HK_CLOSE": "前一日",
+        "US_CLOSE": "当日凌晨", "GLOBAL_CLOSE": "前一日",
+        "REPORT_DATE": flags["yesterday"].strftime("%Y年%m月%d日"),
+    }
+    try:
+        from market_date_resolver import MarketDateResolver
+        _resolver = MarketDateResolver()
+        _labels.update({
+            "A_CLOSE": _resolver.get_close_label("cn"),
+            "HK_CLOSE": _resolver.get_close_label("hk"),
+            "US_CLOSE": _resolver.get_close_label("us"),
+            "GLOBAL_CLOSE": _resolver.get_close_label("jp"),  # 日经/韩国/欧洲同为前一日
+            "REPORT_DATE": _resolver.report_beijing_str(),
+        })
+    except Exception as e:
+        print(f"  ⚠️ 收盘标注解析失败({e})，使用兜底标注")
+    system = system.replace("__A_CLOSE__", _labels["A_CLOSE"])
+    system = system.replace("__HK_CLOSE__", _labels["HK_CLOSE"])
+    system = system.replace("__US_CLOSE__", _labels["US_CLOSE"])
+    system = system.replace("__GLOBAL_CLOSE__", _labels["GLOBAL_CLOSE"])
+    system = system.replace("__REPORT_DATE__", _labels["REPORT_DATE"])
+    print(f"🏷️ 收盘标注: A={_labels['A_CLOSE']} HK={_labels['HK_CLOSE']} US={_labels['US_CLOSE']} 全球={_labels['GLOBAL_CLOSE']} | 报告日期={_labels['REPORT_DATE']}")
+
     y = flags["yesterday"]
     print(f"📋 执行模式: {mode}（参考日 {y} 星期{'一二三四五六日'[y.weekday()]}，"
           f"A股:{'✅' if flags['a_open'] else '❌'} 美股:{'✅' if flags['u_open'] else '❌'} 港股:{'✅' if flags['hk_open'] else '❌'}）")

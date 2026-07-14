@@ -58,6 +58,8 @@ schedule / workflow_dispatch
 
 > 任一日历网络获取失败时降级为"看昨天星期几 ≤4 即视为开市"。
 
+> **收盘日期标注（MarketDateResolver）**：报告「一、市场全景」各市场收盘均按真实交易日历标注业务日期与北京时间收盘时刻，由 `scripts/market_date_resolver.py` 的 `MarketDateResolver` 在 LLM 调用前注入。A股/港股/日经/韩国/欧洲取上一交易日（如 `A股收盘（7月13日）`），美股取美东前一交易日但于北京时间今天凌晨收盘（如 `美股收盘（7月14日凌晨）`）。海外用 `pandas_market_calendars`（DST 自动适配，禁止手写时区偏移），A股用 `tool_trade_date_hist_sina`（本地文件缓存，避免每次网络请求）。美股另做新鲜度校验：若 akshare 实际返回日期早于解析业务日期，置 `_stale` 提示数据可能滞后。
+
 ## 数据源路由
 
 | 数据类型 | 主数据源 | 门控条件 | 兜底 |
@@ -105,6 +107,7 @@ schedule / workflow_dispatch
 │   └── daily_report_prompt.txt             # LLM 系统提示词（含完整/精简模式指令 + 市场门控硬规则）
 ├── scripts/
 │   ├── prefetch_data.py                     # 数据抓取（v30，三市场门控 + curl_cffi HTTP/2 补丁）
+│   ├── market_date_resolver.py             # 按市场解析业务日期 + 北京时间收盘标注（MarketDateResolver）
 │   ├── trading_calendar.py                  # 三市场交易日历判定（A股/美股/港股）
 │   ├── call_llm.py                          # LLM 调用（含模式判定 + 模型切换 + 市场标志注入）
 │   ├── md_to_reader.py                      # Markdown → HTML（朗读版）
