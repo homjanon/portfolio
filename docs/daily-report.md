@@ -1,74 +1,96 @@
-# 全球金融资讯日报
+# 全球金融资讯日报 | 2026年7月14日 星期二
 
 
-**今日定性导语**：全球市场遭遇“黑色星期一”，风险偏好显著回落，中东地缘冲突升温推升油价，美联储鹰派言论重燃加息担忧。A股大幅回调，科技与制造板块领跌，大金融与红利防御板块彰显韧性；南下资金逆势净买入港股近90亿港元。关注今晚美国6月CPI数据对降息预期的进一步修正。
-
----
-
-### 一、市场全景
-
-#### A股收盘
-上证指数收报 **3913.79** 点（**↓2.06%**），深证成指 **14522.85** 点（**↓3.48%**），沪深300 **4695.38** 点（**↓1.79%**），科创50 **1994.32** 点（**↓3.42%**），创业板指 **3723.52** 点（**↓3.10%**）。两市总成交额约 **2.82** 万亿元。全市场下跌家数达 **3594** 家，仅 **1042** 家上涨，涨停 **29** 家，跌停高达 **172** 家，市场呈现普跌格局。主力资金全市场净流出约 **905.98** 亿元，申万行业资金流向上，银行板块获 **65.77** 亿净流入居首，中药、食品加工亦有小幅流入；而光学光电子（**-79.95** 亿）、通信设备（**-64.85** 亿）、通用设备（**-53.42** 亿）遭遇大幅抛售。板块轮动风格上，资金显著向高股息防御板块及大金融避险，成长科技与中游制造承压。
-
-#### 美股收盘
-道琼斯工业指数收报 **52637.01** 点（**↑0.29%**），标普500 **7575.39** 点（**↑0.42%**），纳斯达克综合 **26281.61** 点（**↑0.29%**）。美股周一收盘涨跌互现，美联储理事沃勒警告若核心通胀持续高企可能需要加息，叠加霍尔木兹海峡地缘局势紧张推升油价，市场情绪受挫。科技股受存储芯片抛售潮拖累，SK海力士ADR上市第二日大跌。标普500十一大板块中，能源板块受油价飙升提振领涨，科技与材料板块承压。
-
-#### 港股收盘
-恒生指数收报 **24213.72** 点（**↑0.16%**），恒生国企指数 **8065.97** 点（**↑0.33%**）。蓝筹股受青睐而科技股回调，南下资金净买入 **90.38** 亿港元，主要加仓大模型龙头及网易，抛售建滔系。
-
-#### 全球其他市场
-亚太市场分化，日经225指数上涨 **1.20%** 至 **68557.73** 点，韩国KOSPI指数大涨 **2.52%** 至 **7475.94** 点。欧洲STOXX 600指数微涨 **0.04%** 至 **641.10** 点，整体波动有限。
-
-#### 大宗商品与汇率
-NYMEX原油报 **77.96** 美元/桶（**↓0.23%**），布伦特原油报 **74.40** 美元/桶（**↑3.18%**），受中东局势紧张影响大幅拉升。COMEX黄金报 **4012.8** 美元/盎司（**↑0.18%**），白银报 **58.03** 美元/盎司（**↑0.10%**）。汇率方面，美元兑离岸人民币报 **6.7972** 。10年期美债收益率升至 **4.62%** ，10年期中债收益率报 **1.7442%** 。中美利差走阔至约 **287** 个基点，对中债利率走势构成一定承压。
-
-#### 估值水位与情绪
-红利低波股息率约 **5.32%** ，高股息配置价值显著。标普500 PE分位达 **82.4%** ，PB分位高达 **99.68%** ，处于极高风险区；沪深300 PE分位 **83.96%** ，亦处于相对高位；恒生科技PE分位 **34.16%** ，处于中等偏低价值区间；创业板指PE分位 **59.32%** ，估值基本持平。
+**今日定性导语**：全球市场避险情绪升温，美伊冲突升级推升油价，科技与存储芯片板块重挫拖累主要指数；A股科创50领跌，高股息防御板块相对抗跌。关注本周美国通胀数据与美股大行财报密集披露，短期地缘风险与业绩兑现压力交织。
 
 ---
 
-### 二、行业洞察
+## 一、市场全景
 
-#### 全球 TOP 10 新闻
+### A股收盘（7月13日）
 
-1. **霍尔木兹海峡交通降至两月低低，美伊冲突升级推升油价**：也门胡塞武装袭击沙特机场，美、布两油日内涨超6%，霍尔木兹海峡交通因安全风险降至两个月低点。 → 避险情绪升温，利好原油/利空全球航运。（[Reuters](https://news.google.com/rss/articles/CBMiywFBVV95cUxQVVJyVWNDbGpUSGtYdm1NUzhqZmpSVFp2SnEtS0N4VzBJZnJTeDZ5X21NN0I4SGJ6V2lYZDBLM3FvSkNTbFRNTkkxWlhtNjRqakpmRGotN3lub0RMZkxmOUlWSUU4WEdBVUZrU09lNzl2d0xMT09aVEw3aU5KNkJaZmpEYlllTTZfMl9ULXg4cDBHZkd4MVJ4OEo0SzNwYkxRUjIta0tONkVJb2puQnhNN0g1WTQwcjZaX0ZYZG85dnZWT0pyUHZFbUY2TQ?oc=5)）
-2. **美联储理事沃勒放鹰：若通胀居高不下，美联储或需加息**：沃勒表示不应“打上一场战争”，但警告若核心通胀持续高企，仍可能考虑加息，2年期美债收益率升至16个月新高。 → 利空美股科技成长/利多美元资产。（[CNBC](https://news.google.com/rss/articles/CBMiwgFBVV95cUxQenJXdjdSVHgwaTZZZHdTNGVqdWNnS0N0UEFhRnBmSzlWekM4X3F4NG4yajlmWXB4b21uV01lRjRVRWxvbWNCTmNMLXM1VVJCUkp2d3BOeHlNcThuNklaclFwUDYwYVpCeDh2OWFhX3JyaVhzOVdfRV82UEhwWHBaZVZ6YkowLXVhNHFWa3lvUy1ZcjI0UFdYSk9WSktTTkt1c1BaeVMxOEZ3dEpHRGI1SEJtZ1NLNUpYN201UGQ2a09tQdIBxwFBVV95cUxOcEdkaU1lcTFTYUZwWDBfVE85aDROZXNtcmV5NEZoZDdIUzVyWXRRYUdHOVNrVlhmb0JDVFpvZDRjUDBZRExEMmE4OVhuNmNhM21IWDViY2FERmhIeExjX0M1X0kzUWNHd2VMMjlhTVVZd3o5aXZfMHdUSVRuVGI5WjdTM2phMmdRQjVRVUE0Y0lybkR6M1I0b3BBaV9OWS1xdnUyXzR0cS1HbkZrRUV0Um1CRTNXZ2JxMUFoLWZZUW5XdTZKWmNv?oc=5)）
-3. **SK海力士上市第二日暴跌，存储芯片狂欢遇冷**：SK海力士在纳斯达克上市第二日大跌，融资265亿美元创史上第二大IPO，但市场对存储芯片周期见顶担忧加剧。 → 利空半导体存储板块。（[Reuters](https://news.google.com/rss/articles/CBMitgFBVV95cUxOb0RGSUR2QnZDb0VoSlZLUklaU0RqVEpseEtkZFZTQ0hzenRMcDRzdWFwNjJIMTZSN2xuYXZlcF9wQ0xPYTNhRTIzVElQUVZCUWZURjdYazJTU2NqNlgybkZJX1pCek5scjNpaUNpTGNSLXZndnZZZXpTQ0N3VGxZVnowYkNvbm80bWpDSW4wMVV1VUZKaEZacWF1WTN3MUJxY0dSdWpCdllvN2JIR3lfTGM3NnlOdw?oc=5)）
-4. **SpaceX股价持续下跌，逼近IPO发行价**：SpaceX在纳斯达克100首秀后股价连跌两日，逼近135美元的IPO发行价，中国火箭里程碑与油价飙升双重打击太空股。 → 利空商业航天概念估值。（[Yahoo Finance](https://news.google.com/rss/articles/CBMipAFBVV95cUxPY3hhUjhPSjM2T201a2VBaGwwM2M3NjJkWm5JUHEzWml2c3ctYUFyRkJFbDlhbGhFVHZBcXhLS0I4cW51LURoa1dDbnBfYlFvQktEUmhPclNPSVc0di1XYWdPckpLM1liWFY1eG84aUl5dkx1QkxFUVl4aGJ0OWRvRkJGMnIzRHVodkJQMDZuRHp6RC04X0w0Rmsyekg4eVJXMmNsaA?oc=5)）
-5. **Meta斥资500亿美元扩容路易斯安那州数据中心**：Meta将路易斯安那州数据中心扩容至5吉瓦，投资总额超500亿美元，成为史上最大数据中心之一。 → 利好AI算力与基础设施建设。（[Reuters](https://news.google.com/rss/articles/CBMirAFBVV95cUxPQnJpUGtNQXFzaExPZlhub1lVWlM1S01ya3VLVlo1dUlFMzZBcWF5Mm1KdXhPdmg0b0NJMVlseTNlMGRsWksxUnQ4UXFmQWpySGhOWEpiaGk5bHhsSFZ5X1VtRXVCQ0dLTG9FWGNlVDhKT1Z6c1F4TnRKaVNVVGw5dmxLOFdRTm5KdWc4VUM3dGR1LV8yanp2eDlRR2ZHU19ZMDJfcmxzN2RkZHlW?oc=5)）
-6. **国务院批复《扩大消费“十五五”规划》**：规划提出深入推进“人工智能+消费”，目标到2030年社会消费品零售总额达60万亿元，支持金融机构扩大消费领域信贷投放。 → 政策利好大消费与AI应用端。（[东方财富](https://news.google.com/rss/articles/CBMiYEFVX3lxTFBTaWFUVktRZ1JzM1hQTV9uWkxadGJyd0xOY0g3RVh2N1B5eHhNcUdBQjFRM3M5WVVpdFFCZlkyZXIwLWQtNVJBa01XRWxjZlJFbU1DSlpoZkVFdWRhbWp4dQ?oc=5)）
-7. **欧佩克下调今年全球石油需求增长预期**：欧佩克再次下调2026年全球石油需求增长预期，但警告霍尔木兹海峡进一步冲突可能颠覆明年石油市场供应反弹预测。 → 中长期偏空油价，短期地缘溢价仍存。（[新华网](https://news.google.com/rss/articles/CBMiiAFBVV95cUxOd3VDaUVaNjlyaHBFdC1qeDU3SGxCTWljM005MjlYTEVCRkNYakNFa1pheUNsQUZqOGxKaGpvODNxRExnaVEyR00yOFM2akZaQW9FNmNkYlluYllCLVhtTE5BVmMxcEpUdExFOTRSeGpERHVRVUVsRG80TlJjZlRQV210cmhKX1lZ?oc=5)）
-8. **美股大型银行Q2财报料迎开门红**：受SpaceX IPO及伊朗战争波动带来的交易业务提振，摩根大通等美国大型银行预计将报告Q2营收大幅增长。 → 利好华尔街金融股估值修复。（[CNBC](https://news.google.com/rss/articles/CBMimwFBVV95cUxOODgyV1JDSDU5WS1UOVM0WVItaGRva0FmQWZUOGRKdENDdXBDUm84UmtQV013RUUwbGl5ZEJaZWxjalpIOWxYR0h1NGlYZ2liUnA3aUF5VG9mOGNRZS1LOUxOTGhCRHBKNUVaQUdSRE1VYUxpTU9oME9OSktvMzROc3hLN1kwclNoeGxjQ0k4ZllNb1R3c2cxbG1ISdIBoAFBVV95cUxQM1QyVU5DRUpDQzMxUXpoanE4RzA5VC02bmlxSWhmNGt3Z3N6NnJlbm5UQ2UwWnFmZ1piQnQ5Zmlsei1EV0dwUmN3MFNLbmVqN09PV0N0dTJXSTNBN1l4bWRyWDRkSXBYTzFGQWpraDJBakl5OVpXTHQxdW5OajZ2TUNxRlJsUVNvdnJCb2RLUlk1bEJjQUQwMk03S2tNcmJm?oc=5)）
-9. **拓荆科技复牌巨震，单日振幅达27%**：半导体设备龙头拓荆科技复牌后从大跌18%拉升至大涨，公司拟收购无锡尚积100%股权以补齐PVD与刻蚀短板。 → 利好半导体设备国产替代逻辑。（[财联社](https://news.google.com/rss/articles/CBMiSEFVX3lxTFA2ZUdmR2RGaG5DS2o4VlhOaWRKOW9GYzM0NEpmX0Y4MUF3ZVBQelVHV2tGR21pNWRzYjlVY1V5S3NSd1FDc3JHYw?oc=5)）
-10. **特朗普呼吁国会通过加密法案并投资加密收益**：特朗普呼吁参议院通过Clarity Act加密法案，并披露其将加密收益投资于股票和债券。 → 政策预期利好加密货币及区块链板块。（[CNBC](https://news.google.com/rss/articles/CBMilAFBVV95cUxQUnlsT0RIS19oNmg3MUdFajM2elphbnVJVWtZOGhCZFNWZW1GY0J4TFNiZ1NRV2Y5aWVmNlJDbTJwS1I0ZVROZlFFWTNTWElvdGRWZHpCaWhqTTNaTFFIS1FCSmNEMnZlc3FkRkZNY3JpRnBqQ1pqaS14emVMMExEOVZiYUdlN0pld21vNFp0ZDc3LUNl0gGaAUFVX3lxTE8yeFgxc0JQZ0dRLU5Yek9KalN4WS14XzBxRzdQLWRfYndWc1pTOGNjc2FzOVBaVjRkWlpURl9GQXF4WWNpZnN0YnVXUHJVSXVTc0gzelhsZWNxc2NDTkNpVk5xQmNXREswOXlkYkZqT1JnaWhHbzE0Qmcta1hyUWQ1REUxZnQyRHc1c0tXcW0tUEFfV0hQaUtKTmc?oc=5)）
+A股三大指数集体回调，上证指数收报**3887.92**点，下跌**↓0.66%**；深证成指收报**14461.20**点，下跌**↓0.42%**；创业板指收报**3712.74**点，下跌**↓0.29%**；沪深300收报**4677.31**点，下跌**↓0.39%**；科创50大幅调整，收报**1925.43**点，下跌**↓3.45%**。两市合计成交额约**1.63**万亿元。全市场上涨家数**1854**家，下跌家数**2749**家，涨跌比为**0.67**，涨停**30**家，跌停**35**家。融资融券余额方面，沪市**14712.65**亿元，深市**14300.33**亿元。申万一级行业涨跌及主力资金流向数据暂不可得。板块轮动呈现明显的避险特征，科技成长板块承压，防御性高股息板块相对抗跌。
 
-#### 持仓动态与聚焦
+### 美股收盘（7月14日凌晨）
 
-##### 个人持仓行情快照
-- **招商银行A（600036）**：价格 **37.25** 元，上涨 **1.00%** 。
-- **招商银行H（03968）**：价格 **45.98** 港元，上涨 **0.57%** 。
-- **长江电力（600900）**：价格 **28.42** 元，上涨 **1.39%** 。
-- **红利低波ETF易方达（563020）**：价格 **1.119** 元，上涨 **1.36%** 。
-- **QQQM**：价格 **293.06** 美元，下跌 **1.89%** 。
-- **SPY**：价格 **749.17** 美元，下跌 **0.77%** 。
+美股三大指数全线收跌，道琼斯工业指数收报**52498.64**点，下跌**↓0.26%**；标普500收报**7515.34**点，下跌**↓0.79%**；纳斯达克综合指数收报**25873.18**点，下跌**↓1.55%**。主要驱动因素来自中东地缘局势骤然升级，美国与伊朗在霍尔木兹海峡冲突加剧推动油价跳涨，通胀回升担忧压制风险偏好。同时，AI与存储芯片板块恐慌情绪蔓延，SK海力士暴跌引发全球科技股抛售潮。标普500十一大板块中，能源板块受油价提振逆势上涨，科技、通信服务及非必需消费品板块领跌。
 
-##### 持仓聚焦（未来催化）
-- **长江电力（协同）**：作为防御+高股息核心标的，与红利低波ETF同受益于市场避险情绪升温。公司将于 **7月16日** 进行股权登记， **7月17日** 除权除息（每股派息 **7.9** 元），资金抢权意愿明显。 → 未来1周关注除息后股价填权效应。
-- **宁波银行（002142）（协同）**：大金融板块整体获资金逆势加仓，宁波银行大涨 **5.08%** ，与持仓招行形成强烈板块共振。 → 关注本周金融板块中报业绩预告窗口。
-- **领益智造（002600）（异动）**：消费电子及苹果产业链个股领跌，领益智造放量跌停（ **-10.03%** ），反映市场对果链三季报展望悲观。 → 关注本月下旬美股科技巨头财报对产业链指引。
+### 港股收盘（7月13日）
 
-#### QDII 溢价与申购额度监测
-场内ETF溢价率出现大面积异常，多只纳指与标普500相关ETF溢价超3%：
+恒生指数收报**24032.45**点，下跌**↓0.75%**；恒生国企指数收报**8009.28**点，下跌**↓0.70%**。南下资金净买入**48.0**亿元，机构资金逆势加仓。
+
+### 全球其他市场（欧股 / 日经 / 韩股）（7月13日）
+
+全球风险资产普遍承压。日经225指数收报**66678.36**点，下跌**↓0.84%**；韩国KOSPI指数遭遇重挫，收报**6522.08**点，暴跌**↓4.18%**，年内已第七次触发熔断机制；欧洲STOXX指数收报**641.01**点，微跌**↓0.01%**，相对抗跌。韩股崩跌主要受外资抛售及单股杠杆ETF监管不确定性冲击。
+
+### 大宗商品与汇率
+
+地缘冲突推升避险资产，WTI原油报**79.72**美元/桶，上涨**↑2.02%**；布伦特原油报**74.53**美元/桶，微跌**↓0.16%**。COMEX黄金报**4022.0**美元/盎司，上涨**↑0.41%**；COMEX白银报**57.81**美元/盎司，下跌**↓0.28%**。汇率方面，美元兑离岸人民币报**6.799**。中美国债收益率方面，10年期中国国债收益率报**1.7442%**，10年期美国国债收益率报**4.62%%。中美利差维持深度倒挂格局，对中债利率走势构成外部约束，利差走阔趋势下中债短期承压。
+
+### 估值水位与情绪
+
+红利低波股息率约**5.32%**，处于高位区间，高股息配置价值显著。标普500 PB分位高达**99.24%**，处于极端高估区域；沪深300 PE分位达**83.96%**，进入偏高区间。恒生科技处于**34.16%**分位，估值处于合理偏低区域。
+
+---
+
+## 二、行业洞察
+
+### 全球 TOP 10 新闻
+
+1. **美伊冲突升级推高油价，全球避险情绪蔓延**：美国与伊朗在霍尔木兹海峡的军事冲突加剧，国际油价暴涨近**9%**，美股全线杀跌，纳指深夜大跌超**400**点。→ 利空全球科技股及风险资产，利好能源与避险资产。（[财联社](https://news.google.com/rss/articles/CBMiSEFVX3lxTE1zOWZrMzJlZldGbTNIV21haTU2TUlyNF9meDZwZUtsc24xWWhsdzM3ZkRkbHYtNDB6TmFodWhqQV9relVTVlVYbg?oc=5)）
+
+2. **SK海力士IPO首秀暴跌，全球存储芯片股迎黑色星期一**：SK海力士在纳斯达克首秀后暴跌近**10%**，创近**20**年来最惨表现，长协锁价下业绩增速不及预期引发市场对AI存储芯片周期的恐慌。→ 利空存储芯片及AI算力链，短期情绪修复需待财报验证。（[东方财富](https://news.google.com/rss/articles/CBMiZkFVX3lxTE9WckFHMjk1a2JTWEZiQXVLNUUwRjlaUmUzZ2EwTTBNS3RjdmhFQlJXbm0wYlV3VVRRc1NGV1JjSER3VURqa0ZRRjBJQXo1UzIyWlJ6NWEwb2lyX3pVVjBjQkpVRHRXZw?oc=5)）
+
+3. **SpaceX纳斯达克100指数首日表现低迷，逼近IPO价格**：SpaceX加入纳斯达克100指数后股价连续第二日下挫，逐步逼近**135**美元的IPO发行价，市场对高估值科技股的信心出现动摇。→ 反映科技股估值泡沫承压，短期利空科技板块情绪。（[Yahoo Finance](https://news.google.com/rss/articles/CBMipAFBVV95cUxPY3hhUjhPSjM2T201a2VBaGwwM2M3NjJkWm5JUHEzWml2c3ctYUFyRkJFbDlhbGhFVHZBcXhLS0I4cW51LURoa1dDbnBfYlFvQktEUmhPclNPSVc0di1XYWdPckpLM1liWFY1eG84aUl5dkx1QkxFUVl4aGJ0OWRvRkJGMnIzRHVodkJQMDZuRHp6RC04X0w0Rmsyekg4eVJXMmNsaA?oc=5)）
+
+4. **华尔街大行本周密集财报，交易收入有望激增**：摩根大通等四大行将于同日发布财报，受SpaceX IPO及地缘战争波动带来的交易业务提振，华尔街预计从交易业务中获利近**390**亿美元。→ 利好金融板块，财报表现或成市场短期定海神针。（[CNBC](https://news.google.com/rss/articles/CBMimwFBVV95cUxOODgyV1JDSDU5WS1UOVM0WVItaGRva0FmQWZUOGRKdENDdXBDUm84UmtQV013RUUwbGl5ZEJaZWxjalpIOWxYR0h1NGlYZ2liUnA3aUF5VG9mOGNRZS1LOUxOTGhCRHBKNUVaQUdSRE1VYUxpTU9oME9OSktvMzROc3hLN1kwclNoeGxjQ0k4ZllNb1R3c2cxbG1ISdIBoAFBVV95cUxQM1QyVU5DRUpDQzMxUXpoanE4RzA5VC02bmlxSWhmNGt3Z3N6NnJlbm5UQ2UwWnFmZ1piQnQ5Zmlsei1EV0dwUmN3MFNLbmVqN09PV0N0dTJXSTNBN1l4bWRyWDRkSXBYTzFGQWpraDJBakl5OVpXTHQxdW5OajZ2TUNxRlJsUVNvdnJCb2RLUlk1bEJjQUQwMk03S2tNcmJm?oc=5)）
+
+5. **Meta斥资超500亿美元扩建路易斯安那州数据中心**：Meta宣布将路易斯安那州数据中心园区扩建至**5**吉瓦，总投资额超**500**亿美元，成为历史上最大的数据中心之一。→ 利好AI基础设施与算力产业链，彰显科技巨头长期投入决心。（[Reuters](https://news.google.com/rss/articles/CBMirAFBVV95cUxPQnJpUGtNQXFzaExPZlhub1lVWlM1S01ya3VLVlo1dUlFMzZBcWF5Mm1KdXhPdmg0b0NJMVlseTNlMGRsWksxUnQ4UXFmQWpySGhOWEpiaGk5bHhsSFZ5X1VtRXVCQ0dLTG9FWGNlVDhKT1Z6c1F4TnRKaVNVVGw5dmxLOFdRTm5KdWc4VUM3dGR1LV8yanp2eDlRR2ZHU19ZMDJfcmxzN2RkZHlW?oc=5)）
+
+6. **沪指险守3900点，存储龙头一天5次跌停**：A股三大指数均跌超**1%**，科创50重挫**3.45%**，存储芯片板块集体调整，兆易创新跌停，市场出现"二冰"情绪。→ 利空科技成长板块，短期资金避险意愿增强。（[21财经](https://news.google.com/rss/articles/CBMijAFBVV95cUxQa2kzQUV2TkVTcWtEamhqR1ZXMS1PdmxBd08zS0hncURWWkp6WHFQZm1Xdk1VVkdWSG5ZNDVxUlVtc1dCek9SWkZQWllWWVpNLUxtU2IwcDJYeFBVVWV4U0tXa1ZPYUNSa0kxNzZlVm9la094aVFaM3h1Q0lhM2VGOE56TERzQURUR2c2Ug?oc=5)）
+
+7. **韩国股市年内第七次熔断，高盛质疑抛售何时休**：韩国综合指数较高位回调**27%**，单股杠杆ETF监管引发市场恐慌，外资疯狂出逃导致韩股带崩全球新兴市场。→ 利空韩国及新兴市场资产，资金或进一步回流成熟市场。（[华尔街见闻](https://news.google.com/rss/articles/CBMiU0FVX3lxTE5kRldLRlJHRmlLckZmbnd3Vy16WDVUQjc0TkRhcmtsdE9VVXoxWE5mbnRkR3VkNXJnRnBiaGhtTDhMV2ZBcU1qemlkdFJSNnVtTkZV?oc=5)）
+
+8. **国务院批复扩大消费"十五五"规划**：国务院批复同意《扩大消费"十五五"规划》，华泰证券指出该规划有望激发中长期增长活力，持续巩固资本市场稳中向好态势。→ 利好大消费板块及市场长期预期。（[第一财经](https://news.google.com/rss/articles/CBMiU0FVX3lxTFBRc0psdFFmcDJRN21tSV9fcGZSek12dkg0MXZYOFdNUWNwa0FhalQzVUJHcXMxNkRlamZSYlEzakhQdEk5SURHZUpjV1ZhN2lNdHFj?oc=5)）
+
+9. **央行开展2240亿元7天期逆回购操作**：中国央行在公开市场开展**2240**亿元7天期逆回购操作，本周共有**620**亿元逆回购到期，维持市场流动性合理充裕。→ 利好债市情绪，短端利率平稳支撑资产价格。（[新华网](https://news.google.com/rss/articles/CBMif0FVX3lxTE5sV1YtcTJfU1pMaVRrZGdBZ3I5a3l5M0xHbG9Mam04Q2NHcUlhQXF1Slk1VFFXNzFFOVlIbkVkc194eEhpVnI2bmlSbks1a3FyaDR5VnIyMi1FYUpFWmM2RkFIMlNqVGJqOFNEc2NLTERyTXNuYTBXMW5nWlQ5ODg?oc=5)）
+
+10. **造船业高景气兑现，两家船企上半年业绩大增**：中国船舶上半年归母净利同比预增超两倍，松发股份扣非净利暴增**29**倍，全球造船景气周期持续托底业绩。→ 利好船舶制造及海工装备板块，周期红利加速释放。（[第一财经](https://news.google.com/rss/articles/CBMiU0FVX3lxTE1GMUtTbFBzRTByUTdzNGRsZmRKN1JwdXAwaU84MWY4UGhNa0VGTm5zMy1SamRpbVh5MUZoNTM4Mi1FNmt5MWV6VG41bkNXOU5jd3Vr?oc=5)）
+
+### 持仓动态与聚焦
+
+#### 个人持仓行情快照
+
+- 「招商银行A（600036），价格**37.04**元，下跌**↓0.56**%。」
+- 「招商银行H（03968），价格**45.94**港元，下跌**↓0.09**%。」
+- 「长江电力（600900），价格**28.36**元，下跌**↓0.21**%。」
+- 「红利低波ETF易方达（563020），价格**1.126**元，上涨**↑0.63**%。」
+- 「QQQM，价格**293.06**美元，下跌**↓1.89**%。」
+- 「SPY，价格**749.17**美元，下跌**↓0.77**%。」
+
+分红动态：长江电力将于**7月17日**除权除息，每股派息**7.9**元；招商银行A已于**7月10日**完成除权除息，每股派息**10.03**元。研报方面，招商银行A近期获东海证券"买入"评级，万联证券与国信证券均给予"增持"评级。
+
+#### 持仓聚焦（未来催化）
+
+**新易盛**（异动）：价格**537.09**元，上涨**↑4.80**%。在存储芯片板块集体重挫的背景下，光通信模块龙头逆势走强，资金高低切换明显，反映市场对AI算力网络前端需求的差异化定价。→ 关注本周光模块行业订单兑现情况。
+
+**中芯国际**（异动）：价格**153.22**元，下跌**↓6.33**%。受全球存储芯片恐慌情绪及SK海力士暴跌拖累，半导体晶圆代工板块遭遇情绪杀跌。→ 关注下周二季度业绩指引及产能利用率披露。
+
+**中国神华**（协同）：价格**43.82**元，上涨**↑2.74**。与红利低波ETF同属防御+高股息口径，在地缘风险升温及油价跳涨背景下，煤炭等能源板块获资金避险青睐，高股息防御逻辑持续强化。→ 关注本周动力煤价格及夏季用电高峰数据。
+
+### QDII 溢价与申购额度监测
+
+场内ETF溢价率出现大面积异常，多只纳指与标普500相关ETF溢价超过**3%**：
 
 | 代码 | 名称 | 溢价率 | 评估 |
 |------|------|--------|------|
-| 513100 | 纳指ETF国泰 | **7.48%** | 明显溢价 |
-| 159941 | 纳指ETF广发 | **6.34%** | 明显溢价 |
-| 159659 | 纳斯达克100ETF招商 | **5.01%** | 明显溢价 |
-| 159612 | 标普500ETF国泰 | **4.08%** | 明显溢价 |
-| 513500 | 标普500ETF博时 | **3.88%** | 明显溢价 |
+| 513100 | 纳指ETF国泰 | **6.09%** | 明显溢价 |
+| 159941 | 纳指ETF广发 | **5.22%** | 明显溢价 |
+| 159659 | 纳斯达克100ETF招商 | **4.05%** | 明显溢价 |
+| 513500 | 标普500ETF博时 | **3.76%** | 明显溢价 |
+| 159612 | 标普500ETF国泰 | **3.24%** | 明显溢价 |
 
-场外QDII申购额度方面，多只纳指100相关基金限大额，单日累计限额多为50-100元：
+场外QDII申购额度方面，多只产品维持限大额状态：
 
 | 代码 | 简称 | 最新净值 | 申购状态 | 日累计限额 |
 |------|------|---------|---------|----------|
