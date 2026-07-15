@@ -2,8 +2,8 @@ name: 每日金融日报（定时）
 
 on:
   schedule:
-    # 北京 05:30 = UTC 21:30(前日) | 预留~80min调度延迟 目标07:10前出报告
-    - cron: "30 21 * * *"
+    # 北京 05:47 = UTC 21:47(前日) | 预留~80min调度延迟 目标07:10前出报告
+    - cron: "47 21 * * *"
   workflow_dispatch:
     inputs:
       skip_mp3:
