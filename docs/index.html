@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<link rel="icon" href="data:,">
+<title>全球金融市场日报</title>
+<style>
+:root{
+  --bg:#fafafa;--card:#fff;--text:#1a1a2e;--sub:#6b7280;--muted:#9ca3af;
+  --border:#e5e7eb;--accent:#2563eb;--note-bg:#f4f6fb;
+  --table-hdr:#f1f5f9;--table-stripe:#fafbfc;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--sub:#94a3b8;--muted:#64748b;
+    --border:#334155;--accent:#3b82f6;--note-bg:#1e293b;
+    --table-hdr:#1e293b;--table-stripe:#1a2332;
+  }
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--bg);color:var(--text);font-size:16px;line-height:1.7;
+  min-height:100dvh;padding:0 0 150px;-webkit-text-size-adjust:100%
+}
+.header{
+  background:var(--card);border-bottom:1px solid var(--border);
+  padding:18px 16px;text-align:center
+}
+.header h1{font-size:18px;font-weight:600;margin-bottom:2px;letter-spacing:.02em}
+.header .date{font-size:12px;color:var(--sub)}
+
+.article{max-width:680px;margin:0 auto;padding:16px 16px}
+
+.article h2{
+  font-size:17px;font-weight:600;margin:32px 0 10px;
+  padding-bottom:4px;border-bottom:2px solid var(--accent);color:var(--text)
+}
+.article h3{
+  font-size:15px;font-weight:600;margin:22px 0 6px;color:var(--accent)
+}
+.article h4{font-size:14px;font-weight:600;margin:16px 0 4px;color:var(--text)}
+
+.article p{margin:10px 0}
+.article p.lede{
+  font-size:15px;line-height:1.8;padding:10px 14px;
+  background:var(--note-bg);border-radius:10px;border-left:3px solid var(--accent)
+}
+.article p.lede strong{color:var(--accent)}
+
+.article blockquote{
+  border-left:3px solid var(--border);padding:6px 14px;margin:8px 0;
+  color:var(--sub);font-size:14px;line-height:1.7;border-radius:0 8px 8px 0
+}
+
+/* ---- 表格 ---- */
+.data-table{
+  width:100%;border-collapse:collapse;font-size:13px;margin:10px 0 16px;
+  border-radius:8px;overflow:hidden;border:1px solid var(--border)
+}
+.data-table thead th{
+  background:var(--table-hdr);padding:7px 9px;text-align:left;
+  font-weight:500;color:var(--sub);font-size:12px;border-bottom:2px solid var(--border);
+  white-space:nowrap
+}
+.data-table thead th:first-child{text-align:left}
+.data-table tbody td{
+  padding:6px 9px;border-bottom:1px solid var(--border);vertical-align:middle
+}
+.data-table tbody tr:last-child td{border-bottom:none}
+.data-table tbody tr:nth-child(even){background:var(--table-stripe)}
+.data-table .num{text-align:right;font-variant-numeric:tabular-nums}
+.data-table .label{color:var(--sub);font-size:12px}
+
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px}
+
+/* ---- 涨跌颜色 ---- */
+.up{color:#dc2626!important;font-weight:600}
+.down{color:#059669!important;font-weight:600}
+@media(prefers-color-scheme:dark){.up{color:#f87171!important}.down{color:#34d399!important}}
+
+/* ---- 卡片 ---- */
+.card{
+  background:var(--note-bg);border-radius:10px;padding:12px 14px;margin:12px 0;
+  border:1px solid var(--border);font-size:14px;line-height:1.7
+}
+.card .card-title{font-size:13px;font-weight:600;color:var(--accent);margin-bottom:6px}
+.card p{margin:4px 0}
+
+/* ---- 新闻列表 ---- */
+.news-list{counter-reset:news;list-style:none;padding:0;margin:10px 0}
+.news-list li{
+  counter-increment:news;padding:8px 0 8px 32px;position:relative;
+  border-bottom:1px solid var(--border);font-size:14px;line-height:1.7
+}
+.news-list li:last-child{border-bottom:none}
+.news-list li::before{
+  content:counter(news);position:absolute;left:0;top:9px;
+  width:20px;height:20px;border-radius:50%;background:var(--accent);
+  color:#fff;font-size:11px;font-weight:600;text-align:center;line-height:20px
+}
+@media(prefers-color-scheme:dark){.news-list li::before{color:var(--bg)}}
+
+.news-list li strong{font-weight:600;color:var(--text)}
+.news-list .tag{
+  display:inline-block;font-size:11px;padding:1px 6px;border-radius:3px;
+  margin-left:4px;font-weight:500
+}
+.tag-bullish{background:#fef2f2;color:#dc2626}
+.tag-bearish{background:#ecfdf5;color:#059669}
+@media(prefers-color-scheme:dark){
+  .tag-bullish{background:#3b1111;color:#f87171}
+  .tag-bearish{background:#0a2e1a;color:#34d399}
+}
+
+/* ---- 持仓 ---- */
+.holding-item{
+  display:flex;align-items:baseline;gap:6px;padding:4px 0;
+  font-size:14px;flex-wrap:wrap
+}
+.holding-item .name{font-weight:500;min-width:80px}
+.holding-item .price{color:var(--sub);font-variant-numeric:tabular-nums}
+.holding-item .chg{font-weight:600;font-variant-numeric:tabular-nums}
+
+/* ---- 分隔 ---- */
+hr{border:none;border-top:1px solid var(--border);margin:20px 0}
+
+.source-note{font-size:12px;color:var(--muted);margin:16px 0 8px;text-align:center}
+
+/* ---- 提示条 ---- */
+.tip{
+  background:#e8f5e9;color:#2e7d32;font-size:12px;padding:5px 14px;
+  text-align:center;border-bottom:1px solid #c8e6c9
+}
+@media(prefers-color-scheme:dark){.tip{background:#1b3a1b;color:#81c784;border-color:#2e4a2e}}
+
+/* ---- 音频播放器 ---- */
+.player{
+  position:fixed;bottom:0;left:0;right:0;z-index:200;
+  background:var(--card);border-top:1px solid var(--border);
+  padding:8px 16px max(8px,env(safe-area-inset-bottom,8px));
+  box-shadow:0 -2px 12px rgba(0,0,0,.06)
+}
+.player-row{display:flex;align-items:center;gap:8px;max-width:680px;margin:0 auto}
+.btn-play{
+  width:44px;height:44px;border-radius:50%;border:none;font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+  background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(37,99,235,.2)
+}
+.btn-play:active{transform:scale(.92)}
+.player-time{font-size:11px;color:var(--sub);min-width:34px;text-align:center;font-variant-numeric:tabular-nums}
+.progress-wrap{flex:1;height:28px;display:flex;align-items:center;cursor:pointer;min-width:50px}
+.progress-track{width:100%;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--accent);border-radius:2px;width:0}
+.progress-thumb{
+  position:absolute;top:50%;width:14px;height:14px;border-radius:50%;
+  background:var(--accent);border:2px solid #fff;transform:translate(-50%,-50%);
+  opacity:0;transition:opacity .12s;pointer-events:none;box-shadow:0 1px 4px rgba(0,0,0,.2)
+}
+.progress-wrap:active .progress-thumb{opacity:1}
+@media(prefers-color-scheme:dark){.progress-thumb{border-color:var(--card)}}
+.player-sub{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:2px}
+.speed-btn{background:none;border:none;color:var(--sub);font-size:11px;cursor:pointer;padding:2px 5px;border-radius:3px}
+.speed-btn.active{color:var(--accent);font-weight:600}
+.voice-label{font-size:10px;color:var(--sub)}
+</style>
+</head>
+<body>
+<div class="tip">点击 ▶ 播放音频日报（微软 AI 语音播报）</div>
+<div class="header">
+<h1>全球金融市场日报</h1>
+<div class="date">2026年7月17日 星期五 7点6分</div>
+</div>
+<div class="article">
+<p class="lede"><strong>今日定性导语</strong>：全球市场风险偏好显著回落，AI与半导体板块遭遇全球性抛售潮，成为拖累各市场的主要主线。A股科创50重挫、美股纳指领跌，防御性的港股高股息及部分消费板块相对抗跌。关键风险在于半导体周期见顶担忧加剧，同时需关注美联储官员偏鹰派言论对降息预期的压制。</p>
+
+<h2>一、市场全景</h2>
+
+<h3>A股收盘（7月16日）</h3>
+<div class="table-wrap"><table class="data-table">
+<thead><tr>
+<th class="">指数</th>
+<th class="num">代码</th>
+<th class="num">最新价</th>
+<th class="num">涨跌幅</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="label">上证指数</td>
+<td class="num">000001</td>
+<td class="num">3882.41</td>
+<td class="num">↓1.85%</td>
+</tr>
+<tr>
+<td class="label">深证成指</td>
+<td class="num">399001</td>
+<td class="num">14488.65</td>
+<td class="num">↓1.97%</td>
+</tr>
+<tr>
+<td class="label">沪深300</td>
+<td class="num">000300</td>
+<td class="num">4698.43</td>
+<td class="num">↓1.85%</td>
+</tr>
+<tr>
+<td class="label">科创50</td>
+<td class="num">000688</td>
+<td class="num">1846.88</td>
+<td class="num">↓4.02%</td>
+</tr>
+<tr>
+<td class="label">创业板指</td>
+<td class="num">399006</td>
+<td class="num">3692.46</td>
+<td class="num">↓2.95%</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>沪深两市合计成交额约 1.12万亿 元，市场交投维持活跃。全市场上涨家数 2218 家，下跌家数 2375 家，涨停 42 家，跌停 33 家，市场呈现普跌格局但跌停家数尚在可控范围。申万一级行业数据暂不可得，但从概念板块来看，半导体板块虽大跌 5.35% 却获主力资金净流入 42.88亿 元，文化传媒、消费电子等亦获资金青睐；而光学光电子、通信设备、元件板块净流出居前，全市场主力资金净流出 153.94亿 元。板块轮动呈现明显的“高切低”防御特征，科技硬件承压而应用端及消费板块逆势吸金。</p>
+
+<h3>美股收盘（7月17日凌晨）</h3>
+<div class="table-wrap"><table class="data-table">
+<thead><tr>
+<th class="">指数</th>
+<th class="num">代码</th>
+<th class="num">最新价</th>
+<th class="num">涨跌幅</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="label">道琼斯工业</td>
+<td class="num">^DJI</td>
+<td class="num">52552.97</td>
+<td class="num">↓0.20%</td>
+</tr>
+<tr>
+<td class="label">标普500</td>
+<td class="num">^GSPC</td>
+<td class="num">7533.77</td>
+<td class="num">↓0.51%</td>
+</tr>
+<tr>
+<td class="label">纳斯达克综合</td>
+<td class="num">^IXIC</td>
+<td class="num">25881.95</td>
+<td class="num">↓1.47%</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>美股三大指数收跌，纳指领跌超 1.47%。宏观层面，6月PPI意外下降 0.3%，CPI同比上涨 3.5% 均低于预期，但达拉斯联储主席Logan仍呼吁“适度”提高利率以对抗通胀，美联储政策预期博弈加剧。主要驱动因素方面，全球半导体与存储芯片抛售潮重创科技股，台积电利润大增 77% 但股价仍下挫，IBM因CEO承认落后暴跌 25%，AI硬件担忧蔓延。标普500十一大板块中，科技与通信服务板块领跌，而联合健康业绩超预期带动医疗保健板块逆势上涨。</p>
+
+<h3>港股收盘（7月16日）</h3>
+<div class="table-wrap"><table class="data-table">
+<thead><tr>
+<th class="">指数</th>
+<th class="num">代码</th>
+<th class="num">最新价</th>
+<th class="num">涨跌幅</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="label">恒生指数</td>
+<td class="num">HSI</td>
+<td class="num">25008.60</td>
+<td class="num">↑1.33%</td>
+</tr>
+<tr>
+<td class="label">恒生国企指数</td>
+<td class="num">HSCEI</td>
+<td class="num">8318.14</td>
+<td class="num">↑1.63%</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>恒生指数收复 25000 点整数关口，南下资金净买入 50.39亿 港元，主要流向互联网龙头及大模型标的，而AI硬件股遭抛售。</p>
+
+<h3>全球其他市场（7月16日）</h3>
+<p>欧洲STOXX 600指数微涨 0.10%，表现相对平稳。亚太市场分化剧烈，日经225指数上涨 1.49%，而韩国KOSPI指数暴跌 6.24%，韩国央行时隔三年半意外加息 25 个基点引发杠杆资金爆仓，芯片巨头重挫拖累大盘。</p>
+
+<h3>大宗商品与汇率</h3>
+<p>大宗商品方面，NYMEX原油报 79.01 美元/桶（↑0.93%），布伦特原油报 74.75 美元/桶（↑0.31%）；COMEX黄金回落至 3978.60 美元/盎司（↓0.34%），白银大跌 0.78%。汇率方面，美元/离岸人民币报 6.7909。中美利差方面，10年期美债收益率报 4.57%，10年期中债收益率报 1.7437%，利差维持深度倒挂；当前利差水平对中债利率走势形成持续下行牵引，利差走阔趋势下利好中债长端配置。</p>
+
+<h3>估值水位与情绪</h3>
+<p>红利低波股息率约 5.03%，高股息配置价值显著。5个核心指数中，标普500处于 80.8% 高估值风险区，恒生科技处于 41.82% 中等价值区，其余指数基本持平。</p>
+<hr>
+
+<h2>二、行业洞察</h2>
+
+<h4>🆕 全球 TOP 10</h4>
+<ol class="news-list">
+<li><strong class="down">IBM股价暴跌25%创史上最差单日表现</strong>：IBM CEO承认在AI领域落后，引发市场对传统软件企业被AI颠覆的恐慌，软件板块承压。→ 利空传统科技股，加剧AI分化。（<a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxQZi1hZkRiYXp2M21YMXN1ZGdYeEswUWFJaEFqdy00bDlvRW5HUU9jVnVBbUpQWGc3MGhVQlR6T3lQYVdfQlUzb2ZSNG50UERGejNMME0ybU5iOGhzV0FnZUl0bnZRVHdyY3djNGJXZTgwQXF2cV93M2htU18tcGhKa25kVVBTX0g4?oc=5" target="_blank" rel="noopener">Fortune</a>）</li>
+<li><strong class="up">台积电利润飙升77%但股价仍下挫</strong>：台积电二季度利润大涨，并宣布将在亚利桑那州追加 1000亿 美元投资，但全球半导体抛售潮掩盖了业绩利好。→ 业绩利好被市场情绪对冲，利空短期股价。（<a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxOLS01QU5rVFVFUUQxWC1sckF3OFlsMUZEZmlqaU55blQzek13dEtxQlVadEROTUprSWNkZjRyaVBDMjNpUERnX1pMYk5LNWRQLWl5czFDd20tSnlUVGpDUXNCbDJpZXZfMFlZR2d0RkRYaURjUE10b0lYOGt5cVBFSFJGM3BCdWxQQjhsLXVvN25QV2tjakhB?oc=5" target="_blank" rel="noopener">Yahoo Finance</a>）</li>
+<li>SpaceX股价跌至IPO价格，做空者获利87亿美元：SpaceX股价回落至IPO发行价，做空者大赚 87亿 美元，马斯克失去万亿富翁地位。→ 利空太空探索概念，反映一级市场估值泡沫挤压。（<a href="https://news.google.com/rss/articles/CBMiyAFBVV95cUxOdHdsRkVXay1pdUdiNG4wNjlIaWpvOU9NQ3Vpci1UZVlycHZDWG1XdXB0NVFJVDFZSFFfZ0pZZWoyb0J2SG1RYi11eV92dUltUFFsM2VEWlR6d2ZwdUxhRHBNUXRBcVBPQVQ5NXdzUElGdEpCQXdsdlhzcFc1ckF2NTNNMjlVRFZfR0JtNGZtb2VFRHBkMTlfLXRISkRtSWU2SXRUMTRnUXBtUUFDUnFmTmFteEdNOGx0ejhBVjI3SEFnaWw4dU93aQ?oc=5" target="_blank" rel="noopener">Reuters</a>）</li>
+<li>达拉斯联储主席Logan呼吁适度提高利率：尽管6月PPI意外下降 0.3%，CPI涨幅低于预期，Logan仍认为经济表现稳健，应适度提高利率以对抗通胀。→ 鹰派言论压制降息预期，利空成长股估值。（<a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxPWmhwaDU3WFNMZFl5T05PX25qcHFhYWJWNlNoNENreFpoS1VpZHJsWUxXOFc2WkRmWk5jTzdOMDBreG1aSS1NQ2h2bEVVM21UZ3lqMEtZLTBxazE5UkIya28zSDN0aG5HVDRmeDVrUmNobnB2MVI2enZabmllNkw2SV8zZWIwV3ZiSjV5T0kxdkQ1VEtkajBLSjdOdV82SUlZcGF1VHM3d9IBrAFBVV95cUxQTnhlMXVtMVBmOENCMm41cU9sMlROZ0c1TGtDR09fbEc1TV9CTEpIV0F6Vm45X0k4QWxNdGlnYVJ0YVRwUGdqbnhVdjZyM2ZrVFVhV2hvTURpU2ExMVNiWWtCNkdKSnRlWjFyMDVzaGpfdHY4WG04SVJqZ180cWhxNDZaNGt3aTEySjVJN0RscjB3NUtCWjBUTFNKdDhhZVNDYldGQjJqUWptdGFj?oc=5" target="_blank" rel="noopener">CNBC</a>）</li>
+<li>Netflix营收不及预期，股价盘后下挫：Netflix三季度盈利预测低于华尔街预期，公司表示将减少用户互动数据更新，并承诺增加节目和AI投入以扭转放缓趋势。→ 利空流媒体板块，引发内容增长见顶担忧。（<a href="https://news.google.com/rss/articles/CBMiekFVX3lxTE9fSEw5bWh4Uk9hWV9BZEJUWnJ2OXdxR1hNbGZPVFhNdmd2UVg5SDQzLXptRVNnR0V1V0tya2JHV2VlREhSRUItdnZkVGlHOWk5aWd5SWJVdjVRd091cTJoWXNRczRvY01kbXZ1NkNCWTNpREhseVhyeHFn?oc=5" target="_blank" rel="noopener">Barron's</a>）</li>
+<li>世界人工智能大会(WAIC)聚焦智能体，产业链布局提速：WAIC 2026在上海举行，智能体站上C位，多家科创板公司将携最新成果亮相，世界人工智能合作组织协定签署。→ 利好AI应用端与智能体产业链。（<a href="https://news.google.com/rss/articles/CBMiZkFVX3lxTFBSWTVKOEhTS25wTHpRUTZXeERfY1ozekdVeGx3bTM2cHp5dnNNYnJlOUsydWt2dzIzRy15Mmktc1ZUaFl1djVFVFNtbVFWelVnaV8xTUpvZ3JNcTNDZmp3MmlxdnZyUQ?oc=5" target="_blank" rel="noopener">东方财富</a>）</li>
+<li>国产创新药半年出海超千亿美元，加速突围：国产创新药出海势头强劲，半年金额超千亿美元，公募机构频频举牌港股创新药企业，产业拐点逐渐明确。→ 利好创新药产业链及港股医药板块。（<a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE1aejRPZzNrMG5HcmFIbnJIN3FsUDBxM0d1WGljYmpOTDNUM2c5WXBNU0V3YUhFaHZEQXhmRTdBRXVNYUtfLUsyQ0c1TWhQSVdJVG50UVc1RzJoSF84a2czMjFCajhlNXVrcm5VNEZB?oc=5" target="_blank" rel="noopener">人民网财经</a>）</li>
+<li>首批18只主动ETF试点产品名单出炉：境内首批 18只 主动管理ETF正式上报证监会，摩根、华泰柏瑞等18家公募入选，产品主打稳健策略。→ 利好公募行业产品创新，丰富场内投资工具。（<a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTFBnTmt4elVGcS0yR3c2bUJnRG1iYjdydF9ZOFZyc2FTSUQ0N0FaTGVvUXlDeTcwdlJYQzhNdTA3UVdqeEFQZUJUeU9jTXdSNDlOT3hn?oc=5" target="_blank" rel="noopener">第一财经</a>）</li>
+<li>韩国央行时隔三年半加息25个基点，股市暴跌：韩国央行上调基准利率 25 个基点至 3.75%，意在给股市降温，引发杠杆资金爆仓，KOSPI指数暴跌。→ 利空韩国股市及高估值科技股，引发亚太区域波动。（<a href="https://news.google.com/rss/articles/CBMiZkFVX3lxTFBPbk1OcVRfeDZSOW9mclhmVnhpR0ZHTkhYUEJYSGV1TXl1V3ozc3lKM0FyLXZWaXlES3czRDZwNWtkTmZsa252UlJlNmJZOEJCQUNmVzRELVdwYVJGNzRHTGZlZ1RSQQ?oc=5" target="_blank" rel="noopener">东方财富</a>）</li>
+<li>央行研究逐步增加隔夜逆回购操作频率：央行表示将优化短端利率调控举措，研究逐步增加隔夜逆回购操作频率，加大逆周期和跨周期调节力度。→ 利好流动性预期，完善短端利率传导机制。（<a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE9XaUlLNE9reXZxdGE3eWZPbktwVW1LcUowR0stM0dPaF9ZaGtncjU2UmhvWUVTV3FPam9vNGV4QWN4TjA0X2xZR2t6bmF3NUtYemhRMG5pbTgwM3VKY3ZiVURCdVZ6LTFFTGVGcHRXTUZ4TjZsdkE2R0wxbmVMeEE?oc=5" target="_blank" rel="noopener">新华网</a>）</li>
+</ol>
+
+<h4>持仓动态与聚焦</h4>
+
+<h4>个人持仓行情快照</h4>
+<div class="table-wrap"><table class="data-table">
+<thead><tr>
+<th class="">标的</th>
+<th class="num">代码</th>
+<th class="num">市场</th>
+<th class="num">最新价</th>
+<th class="num">涨跌幅</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="label">招商银行A</td>
+<td class="num">600036</td>
+<td class="num">A股</td>
+<td class="num">37.67 元</td>
+<td class="num">↓0.24%</td>
+</tr>
+<tr>
+<td class="label">招商银行H</td>
+<td class="num">03968</td>
+<td class="num">港股</td>
+<td class="num">46.30 港元</td>
+<td class="num">↑0.22%</td>
+</tr>
+<tr>
+<td class="label">长江电力</td>
+<td class="num">600900</td>
+<td class="num">A股</td>
+<td class="num">28.24 元</td>
+<td class="num">↓1.53%</td>
+</tr>
+<tr>
+<td class="label">红利低波ETF易方达</td>
+<td class="num">563020</td>
+<td class="num">A股</td>
+<td class="num">1.136 元</td>
+<td class="num">↓0.70%</td>
+</tr>
+<tr>
+<td class="label">QQQM</td>
+<td class="num">QQQM</td>
+<td class="num">美股</td>
+<td class="num">290.68 美元</td>
+<td class="num">↓1.65%</td>
+</tr>
+<tr>
+<td class="label">SPY</td>
+<td class="num">SPY</td>
+<td class="num">美股</td>
+<td class="num">750.72 美元</td>
+<td class="num">↓0.54%</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<blockquote>分红与研报动态：</blockquote>
+<blockquote>长江电力（600900）派息 7.9 元/10股，今日（7月17日）为除权除息日，股权登记日为7月16日。</blockquote>
+<blockquote>招商银行A（600036）近期获东海证券“买入”、万联证券与国信证券“增持”评级。</blockquote>
+
+<h4>持仓聚焦（未来催化）</h4>
+<p>澜起科技（异动）：港股澜起科技暴跌 22.95%，作为内存接口芯片龙头，受全球存储芯片抛售潮直接冲击，市场担忧半导体周期见顶。短期需关注中报业绩能否证伪悲观预期。</p>
+<p>兆易创新（异动）：A股兆易创新跌停 10.00%，与澜起科技同属半导体存储链条，反映市场对存储芯片高景气持续性的怀疑。未来1周需紧盯存储现货价格及台积电法说会指引。</p>
+<p>三花智控（协同）：逆势上涨 0.80%，在新能源与AI硬件普跌中展现韧性，其热管理业务与AI数据中心散热需求高度协同，有望受益于“AI+能源”加速落地趋势。</p>
+
+<h4>QDII 溢价与申购额度监测</h4>
+<div class="table-wrap"><table class="data-table">
+<thead><tr>
+<th class="">代码</th>
+<th class="num">名称</th>
+<th class="num">溢价率</th>
+<th class="num">评估</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="label">513100</td>
+<td class="num">纳指ETF国泰</td>
+<td class="num">8.02%</td>
+<td class="num">明显溢价</td>
+</tr>
+<tr>
+<td class="label">159941</td>
+<td class="num">纳指ETF广发</td>
+<td class="num">7.08%</td>
+<td class="num">明显溢价</td>
+</tr>
+<tr>
+<td class="label">159612</td>
+<td class="num">标普500ETF国泰</td>
+<td class="num">5.72%</td>
+<td class="num">明显溢价</td>
+</tr>
+<tr>
+<td class="label">159659</td>
+<td class="num">纳斯达克100ETF招商</td>
+<td class="num">5.90%</td>
+<td class="num">明显溢价</td>
+</tr>
+<tr>
+<td class="label">513500</td>
+<td class="num">标普500ETF博时</td>
+<td class="num">6.22%</td>
+<td class="num">明显溢价</td>
+</tr>
+<tr>
+<td class="label">513650</td>
+<td class="num">标普500ETF南方</td>
+<td class="num">5.28%</td>
+<td class="num">明显溢价</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="table-wrap"><table class="data-table">
+<thead><tr>
+<th class="">代码</th>
+<th class="num">简称</th>
+<th class="num">最新净值</th>
+<th class="num">申购状态</th>
+<th class="num">日累计限额</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="label">012752</td>
+<td class="num">建信纳斯达克100指数(QDII)C人民币</td>
+<td class="num">3.3439</td>
+<td class="num">限大额</td>
+<td class="num">100.0</td>
+</tr>
+<tr>
+<td class="label">023422</td>
+<td class="num">建信纳斯达克100指数(QDII)D人民币</td>
+<td class="num">3.3598</td>
+<td class="num">限大额</td>
+<td class="num">100.0</td>
+</tr>
+<tr>
+<td class="label">539001</td>
+<td class="num">建信纳斯达克100指数(QDII)A人民币</td>
+<td class="num">3.4545</td>
+<td class="num">限大额</td>
+<td class="num">100.0</td>
+</tr>
+<tr>
+<td class="label">000834</td>
+<td class="num">大成纳斯达克100ETF联接(QDII)A</td>
+<td class="num">6.3332</td>
+<td class="num">限大额</td>
+<td class="num">10.0</td>
+</tr>
+<tr>
+<td class="label">006479</td>
+<td class="num">广发纳斯达克100ETF联接人民币(QDII)C</td>
+<td class="num">8.0647</td>
+<td class="num">限大额</td>
+<td class="num">10.0</td>
+</tr>
+<tr>
+<td class="label">008971</td>
+<td class="num">大成纳斯达克100ETF联接(QDII)C</td>
+<td class="num">6.2761</td>
+<td class="num">限大额</td>
+<td class="num">10.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>场内ETF溢价率出现全面异常，6只核心ETF溢价率均超 5%，最高为纳指ETF国泰溢价 8.02%，需警惕溢价回落风险。</p>
+<p>场外QDII申购额度方面，建信纳斯达克100指数多份额限大额 100元，大成纳斯达克100ETF联接及广发纳斯达克100ETF联接限大额 10元，整体申购额度维持紧缩。</p>
+</div>
+<div class="player">
+<div class="player-row">
+<button class="btn-play" id="btnPlay">▶</button>
+<span class="player-time" id="currentTime">00:00</span>
+<div class="progress-wrap" id="progressWrap">
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+<span class="player-time" id="totalTime" data-duration="0.0">00:00</span>
+</div>
+<div class="player-sub">
+<button class="speed-btn" data-speed="0.8">0.8x</button>
+<button class="speed-btn active" data-speed="1.0">1x</button>
+<button class="speed-btn" data-speed="1.25">1.25x</button>
+<button class="speed-btn" data-speed="1.5">1.5x</button>
+</div>
+</div>
+<script>
+(function(){
+var btn=document.getElementById('btnPlay');
+var cf=document.getElementById('currentTime');
+var tf=document.getElementById('totalTime');
+var pf=document.getElementById('progressFill');
+var pw=document.getElementById('progressWrap');
+var speeds=document.querySelectorAll('.speed-btn');
+var playing=false,pos=0,rate=1;
+
+function fmt(t){var m=Math.floor(t/60),s=Math.floor(t%60);return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
+
+// 从 data-duration 取编译时预读的时长（ffprobe），若为0则后续靠 loadedmetadata 更新
+var dur=parseFloat(tf.getAttribute('data-duration'))||0;
+if(dur>0){tf.textContent=fmt(dur)}
+
+// 提前创建 Audio 并加载元数据，不依赖点击播放
+var a=new Audio();a.src='daily-report.mp3';a.preload='metadata';
+a.addEventListener('loadedmetadata',function(){dur=a.duration;tf.textContent=fmt(dur);upd()});
+a.addEventListener('timeupdate',function(){if(!playing)return;pos=a.currentTime;upd();if(pos>=dur-0.1){pause();pos=dur;upd()}});
+a.addEventListener('ended',function(){playing=false;btn.textContent='\u25B6';pos=dur;upd()});
+
+function upd(){if(!dur)return;var p=pos/dur;pf.style.width=(p*100)+'%';cf.textContent=fmt(pos)}
+
+function doPlay(){a.playbackRate=rate;a.currentTime=pos;a.play().then(function(){playing=true;btn.textContent='\u23F8'}).catch(function(){})}
+function pause(){a.pause();playing=false;btn.textContent='\u25B6'}
+
+btn.addEventListener('click',function(){if(playing)pause();else doPlay()});
+
+pw.addEventListener('click',function(e){
+if(!dur)return;var rect=pw.getBoundingClientRect();
+var x=e.clientX-rect.left;var p=Math.max(0,Math.min(1,x/rect.width));
+pos=p*dur;a.currentTime=pos;upd()});
+
+speeds.forEach(function(b){b.addEventListener('click',function(){
+speeds.forEach(function(s){s.classList.remove('active')});
+b.classList.add('active');rate=parseFloat(b.dataset.speed);
+if(a){a.playbackRate=rate}})});
+
+setInterval(function(){if(!playing)return;pos=a.currentTime;upd()},250)
+})();</script>
+</body>
+</html>

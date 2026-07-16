@@ -95,6 +95,8 @@ jobs:
           cp report.md docs/daily-report.md 2>/dev/null || true
           cp daily-report.mp3 docs/ 2>/dev/null || true
           cp web/sw.js docs/ 2>/dev/null || true
+          cp daily-report.html docs/index.html 2>/dev/null || true
+          touch docs/.nojekyll
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs/
