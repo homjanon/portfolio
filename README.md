@@ -1,6 +1,6 @@
 # 每日金融日报
 
-基于 GitHub Actions 自动运行的全球金融市场日报生成系统。每日（北京时间 05:47）抓取行情数据后调用 LLM 生成结构化日报，同步输出 Markdown 报告、HTML 朗读版和 MP3 音频，自动部署至 `docs/` 目录并发布到 GitHub Pages。
+基于 GitHub Actions 自动运行的全球金融市场日报生成系统。每日（北京时间约 07:00 自动生成，Actions 计划 05:59 触发）抓取行情数据后调用 LLM 生成结构化日报，同步输出 Markdown 报告、HTML 朗读版和 MP3 音频，自动部署至 `docs/` 目录并发布到 GitHub Pages。
 
 ## 工作流程
 
@@ -22,7 +22,7 @@ schedule / workflow_dispatch
 
 | 方式 | 说明 |
 |------|------|
-| **schedule（定时）** | 每日 `47 21 * * *`（UTC 21:47 = 北京时间次日 05:47）— 预留约 80 分钟调度延迟，目标 07:10 前出报告 |
+| **schedule（定时）** | 每日 `59 21 * * *`（UTC 21:59 = 北京时间次日 05:59）— 叠加约 52 分钟调度延迟，实际约 06:51（≈07:00）出报告 |
 | **workflow_dispatch（手动）** | 支持手动触发，可选 `skip_mp3=true` 跳过音频生成 |
 
 > ⚠️ GitHub Actions schedule 事件存在注册延迟（首次启用或改 cron 后可能延迟数十分钟至 1 小时），若定时未触发可手动运行一次。
@@ -41,7 +41,7 @@ schedule / workflow_dispatch
 
 ## 模式自动判定（三市场交易日历）
 
-报告在北京时间 05:47 触发，覆盖"昨日（D-1）收盘 + 今晨美股凌晨收盘"。由 `scripts/trading_calendar.py` 用真·交易日历判定昨日各市场是否开市（不靠周几二分，可正确处理节假日/调休）：
+报告在北京时间约 07:00 生成（Actions 计划 05:59 触发，含约 52 分钟调度延迟），覆盖"昨日（D-1）收盘 + 今晨美股凌晨收盘"。由 `scripts/trading_calendar.py` 用真·交易日历判定昨日各市场是否开市（不靠周几二分，可正确处理节假日/调休）：
 
 | 市场 | 日历来源 | 开市判定 |
 |------|----------|----------|
@@ -106,7 +106,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 ```
 .
-├── .github/workflows/daily-scheduled.yml   # GitHub Actions 工作流（cron 47 21 * * *）
+├── .github/workflows/daily-scheduled.yml   # GitHub Actions 工作流（cron 59 21 * * *）
 ├── prompt/
 │   └── daily_report_prompt.txt             # LLM 系统提示词（含完整/精简模式指令 + 市场门控硬规则）
 ├── scripts/

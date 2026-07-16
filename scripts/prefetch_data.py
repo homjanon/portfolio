@@ -357,7 +357,7 @@ def fetch_market_global():
     """美股(DJI/SPX/IXIC) + 日经/KOSPI/STOXX"""
     result = {}
 
-    # ── 美股三大指数: akshare新浪 → yfinance兜底 ──
+    # ── 美股三大指数: yfinance 优先 → akshare新浪兜底 ──
     us_map = {".DJI": "道琼斯工业", ".INX": "标普500", ".IXIC": "纳斯达克综合"}
     us_yf = {"道琼斯工业": "^DJI", "标普500": "^GSPC", "纳斯达克综合": "^IXIC"}
 
@@ -370,29 +370,32 @@ def fetch_market_global():
     except Exception as e:
         print(f"    (美股新鲜度校验初始化失败，跳过: {e})")
 
+    # 一次性取三大指数 yfinance（美东收盘后约 2-3h 即有完整日线，早报时段应已就绪）
+    _us_yf_data = _yf_fallback(us_yf)
+
     for sym, name in us_map.items():
+        # ① 优先 yfinance
+        if name in _us_yf_data:
+            d = _us_yf_data[name]
+            result[name] = {"代码": us_yf[name], "最新价": d["最新价"], "涨跌幅": d["涨跌幅"],
+                           "source": "yfinance"}
+            continue
+        # ② 兜底 akshare 新浪
         data = _akshare_sina_us_index(sym)
         if data:
-            result[name] = {"代码": sym, "最新价": data["close"], "涨跌幅": data["change_pct"],
-                           "今开": data["open"], "最高": data["high"], "最低": data["low"],
-                           "source": "akshare新浪"}
-            # 新鲜度校验：仅对 akshare 新浪源（含明确日期）比对；实际日期早于预期 → 滞后
+            entry = {"代码": sym, "最新价": data["close"], "涨跌幅": data["change_pct"],
+                     "今开": data["open"], "最高": data["high"], "最低": data["low"],
+                     "source": "akshare新浪兜底"}
+            # 新鲜度校验：新浪源（含明确日期）比对；实际日期早于预期 → 滞后
             if _us_resolver and data.get("date"):
                 _expected = str(_us_resolver.get_business_date("us"))
                 if data["date"] < _expected:
-                    result[name]["_stale"] = True
-                    result[name]["_expected_date"] = _expected
-                    print(f"    ⚠️ 美股 {name} 数据日期 {data['date']} < 预期 {_expected}（可能滞后）")
+                    entry["_stale"] = True
+                    entry["_expected_date"] = _expected
+                    print(f"    ⚠️ 美股 {name} 新浪兜底数据日期 {data['date']} < 预期 {_expected}（滞后）")
+            result[name] = entry
         else:
-            result[name] = {"代码": sym, "error": "新浪API无数据"}
-
-    # ── 美股 yfinance 兜底 ──
-    us_missing = {n: us_yf[n] for n in us_map.values()
-                  if n in result and result[n].get("error")}
-    if us_missing:
-        for label, data in _yf_fallback(us_missing).items():
-            result[label] = {"代码": us_yf[label], "最新价": data["最新价"],
-                            "涨跌幅": data["涨跌幅"], "source": "yfinance兜底"}
+            result[name] = {"代码": sym, "error": "美股数据源均不可用"}
 
     # ── 全球指数: akshare东财 → yfinance兜底 ──
     df = _ak_eastmoney("index_global_spot_em")
@@ -521,18 +524,26 @@ def fetch_valuation():
 
     result["a_share"] = a_list if a_list else {"error": "新浪API无数据"}
 
-    # ── 美股估值（akshare新浪 NDX + SPX）──
+    # ── 美股估值（yfinance 优先 → akshare新浪兜底）──
     us_list = []
     us_targets = [(".NDX","纳斯达克100"), (".INX","标普500")]
+    us_val_yf = {"纳斯达克100": "^NDX", "标普500": "^GSPC"}
+    _us_val_yf = _yf_fallback(us_val_yf)
     for sym, name in us_targets:
-        data = _akshare_sina_us_index(sym)
         entry = {"指数": name, "ticker": sym}
-        if data:
-            entry["最新价"] = data["close"]
-            entry["涨跌幅"] = data["change_pct"]
+        if name in _us_val_yf:
+            d = _us_val_yf[name]
+            entry["最新价"] = d["最新价"]
+            entry["涨跌幅"] = d["涨跌幅"]
+            entry["source"] = "yfinance"
         else:
-            entry["note"] = "数据暂不可得"
-        entry["source"] = "akshare新浪"
+            data = _akshare_sina_us_index(sym)
+            if data:
+                entry["最新价"] = data["close"]
+                entry["涨跌幅"] = data["change_pct"]
+                entry["source"] = "akshare新浪兜底"
+            else:
+                entry["note"] = "数据暂不可得"
         us_list.append(entry)
     result["us"] = us_list
 

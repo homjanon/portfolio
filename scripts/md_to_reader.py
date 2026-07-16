@@ -254,6 +254,7 @@ setInterval(function(){if(!playing)return;pos=a.currentTime;upd()},250)
 TABLE_SECTION_KW = [
     'A股收盘', '美股收盘', '港股收盘',
     '场内ETF溢价率', '场外QDII申购额度', 'QDII',
+    '持仓',          # 个人持仓行情快照 → 与 A股/美股 收盘一致渲染为 .data-table
 ]
 
 
@@ -546,8 +547,8 @@ def block_to_html(lines, title='', level='section'):
     tag = tag_map.get(level, 'h2')
     title_clean = re.sub(r'\*\*', '', title).strip()
 
-    # 跳过 QDII 和个人持仓板块的标题（HTML 不公开个人持仓）
-    _SKIP_HTML_SECTIONS = ['个人持仓', '持仓']
+    # 持仓板块按需求恢复显示（个人持仓/持仓动态不再隐藏）
+    _SKIP_HTML_SECTIONS = []
 
     if title_clean:
         if any(kw in title_clean for kw in _SKIP_HTML_SECTIONS):
