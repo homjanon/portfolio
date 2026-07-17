@@ -115,7 +115,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 │   ├── trading_calendar.py                  # 三市场交易日历判定（A股/美股/港股）
 │   ├── call_llm.py                          # LLM 调用（含模式判定 + 模型切换 + 市场标志注入）
 │   ├── md_to_reader.py                      # Markdown → HTML（朗读版）
-│   ├── md_to_script.py                      # Markdown → 广播稿
+│   ├── md_to_script.py                      # Markdown → 广播稿（注入 __TODAY_DATE__ 防日期错）
 │   └── md_to_mp3.py                         # 广播稿 → MP3（Edge TTS）
 ├── web/
 │   └── sw.js                                # Service Worker（离线缓存）
