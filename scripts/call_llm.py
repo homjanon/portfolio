@@ -14,6 +14,8 @@ import os, sys, json, glob, time, requests, re
 from datetime import datetime, timezone, timedelta
 
 PROMPT_PATH = os.path.join(os.path.dirname(__file__), "..", "prompt", "daily_report_prompt.txt")
+BEIJING = timezone(timedelta(hours=8))
+_WEEKDAYS = ["一", "二", "三", "四", "五", "六", "日"]
 LLM_CONFIGS = [
     {
         "name": "NVIDIA GLM-5.2",
@@ -87,6 +89,11 @@ def main():
     system = open(PROMPT_PATH, encoding="utf-8").read()
     print(f"📄 读取 prompt: {len(system)} 字符")
 
+    # 1a. 注入当前报告日期（今天，不是昨天）到 prompt
+    _now = datetime.now(BEIJING)
+    _report_date_str = f"{_now.year}年{_now.month}月{_now.day}日 星期{_WEEKDAYS[_now.weekday()]}"
+    system = system.replace("__REPORT_DATE__", _report_date_str)
+
     # 1b. 模式自动判定（三市场交易日历）
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     from trading_calendar import market_flags
@@ -102,7 +109,6 @@ def main():
     _labels = {
         "A_CLOSE": "前一日", "HK_CLOSE": "前一日",
         "US_CLOSE": "当日凌晨", "GLOBAL_CLOSE": "前一日",
-        "REPORT_DATE": flags["yesterday"].strftime("%Y年%m月%d日"),
     }
     try:
         from market_date_resolver import MarketDateResolver
@@ -112,7 +118,6 @@ def main():
             "HK_CLOSE": _resolver.get_close_label("hk"),
             "US_CLOSE": _resolver.get_close_label("us"),
             "GLOBAL_CLOSE": _resolver.get_close_label("jp"),  # 日经/韩国/欧洲同为前一日
-            "REPORT_DATE": _resolver.report_beijing_str(),
         })
     except Exception as e:
         print(f"  ⚠️ 收盘标注解析失败({e})，使用兜底标注")
@@ -120,8 +125,7 @@ def main():
     system = system.replace("__HK_CLOSE__", _labels["HK_CLOSE"])
     system = system.replace("__US_CLOSE__", _labels["US_CLOSE"])
     system = system.replace("__GLOBAL_CLOSE__", _labels["GLOBAL_CLOSE"])
-    system = system.replace("__REPORT_DATE__", _labels["REPORT_DATE"])
-    print(f"🏷️ 收盘标注: A={_labels['A_CLOSE']} HK={_labels['HK_CLOSE']} US={_labels['US_CLOSE']} 全球={_labels['GLOBAL_CLOSE']} | 报告日期={_labels['REPORT_DATE']}")
+    print(f"🏷️ 收盘标注: A={_labels['A_CLOSE']} HK={_labels['HK_CLOSE']} US={_labels['US_CLOSE']} 全球={_labels['GLOBAL_CLOSE']} | 报告日期={_report_date_str}")
 
     y = flags["yesterday"]
     print(f"📋 执行模式: {mode}（参考日 {y} 星期{'一二三四五六日'[y.weekday()]}，"
