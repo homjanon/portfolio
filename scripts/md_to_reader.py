@@ -81,7 +81,7 @@ body{
 .data-table tbody tr:last-child td{border-bottom:none}
 .data-table tbody tr:nth-child(even){background:var(--table-stripe)}
 .data-table .num{text-align:right;font-variant-numeric:tabular-nums}
-.data-table .label{color:var(--sub);font-size:12px}
+.data-table .label{color:var(--sub);font-size:12px;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px}
 

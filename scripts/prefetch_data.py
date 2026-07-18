@@ -104,6 +104,40 @@ def _save_qdii_snapshot(qdii_data):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(snap, f, ensure_ascii=False, indent=2)
 
+def _shorten_qdii_name(full_name):
+    """将东财场外 QDII 基金全称缩写为短名（≤12字符）。
+    规则：提取份额字母 + 指数名标准化 + 清括号/币种后缀；
+         基金公司名（易方达/建信/广发…）**完整保留，绝不缩写**。
+    纯规则驱动、零硬编码映射，动态列表可复用。"""
+    if not full_name:
+        return ""
+    s = full_name.strip()
+    # ① 提取 (QDII)X / (LOF)X 份额后缀字母（A/B/C/D，可能后接币种）
+    _suffix = ""
+    _m = re.search(r'\((?:QDII|LOF)[^)]*\)\s*([A-D])', s)
+    if _m:
+        _suffix = _m.group(1)
+    # ② 指数名称标准化（最长优先匹配）
+    _idx_map = [
+        ("纳斯达克100指数", "纳指100"),
+        ("标普500指数",     "标普500"),
+        ("纳斯达克指数",    "纳指综"),
+        ("道琼斯指数",      "道指"),
+    ]
+    for _long, _short in _idx_map:
+        if _long in s:
+            s = s.replace(_long, _short)
+            break
+    # ③ 清理 (QDII)/(LOF) 括号 + 份额字母 + 币种后缀（一次移除）；
+    #    我们的筛选已排除美元，实际仅人民币；仍兼容清理任意币种。
+    #    ★ 基金公司名（易方达/建信/广发…）保持完整，不缩写
+    s = re.sub(r'\s*\((?:QDII|LOF)[^)]*\)\s*[A-D]?\s*(?:人民币|美元|港元)?', '', s)
+    s = re.sub(r'\s*指数\s*$', '', s)
+    s = re.sub(r'\s+', '', s)
+    # ④ 拼接份额字母
+    result = s + _suffix
+    return result[:12] + '…' if len(result) > 14 else result
+
 # ═══════════════════════════════════════════════════════════════
 # 数据源层
 # ═══════════════════════════════════════════════════════════════
@@ -849,6 +883,7 @@ def fetch_extra():
                 qdii_data["场外QDII"].append({
                     "代码": _c,
                     "简称": str(_r['基金简称']),
+                    "名称_短": _shorten_qdii_name(str(_r['基金简称'])),
                     "最新净值": str(_r['最新净值/万份收益']),
                     "净值日期": str(_r['最新净值/万份收益-报告时间']),
                     "申购状态": str(_r['申购状态']),
