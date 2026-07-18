@@ -13,9 +13,20 @@ from datetime import datetime, timezone, timedelta
 
 REPORT_PATH = sys.argv[1] if len(sys.argv) > 1 else "report.md"
 OUTPUT_PATH = sys.argv[2] if len(sys.argv) > 2 else "script.txt"
-API_URL = "https://token.sensenova.cn/v1/chat/completions"
-API_KEY = os.environ.get("SENSENOVA_API_KEY")
-MODEL = "deepseek-v4-flash"
+
+# 复用日报生成的模型链与通用调用器（单一数据源，避免重复维护）
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from call_llm import LLM_CONFIGS, _call_llm
+
+# 广播稿专用顺序：DeepSeek 主用 → GLM 兜底 → Nemotron 最后兜底
+# （与 call_llm.py 日报生成顺序刻意相反：广播稿保持 DeepSeek 主用）
+_SCRIPT_ORDER = [
+    "SenseTime DeepSeek-V4-Flash",
+    "NVIDIA GLM-5.2",
+    "NVIDIA Nemotron-3-Ultra-550B",
+]
+_MODEL_CHAIN = [c for name in _SCRIPT_ORDER
+               for c in LLM_CONFIGS if c["name"] == name]
 
 BEIJING = timezone(timedelta(hours=8))
 _WEEKDAYS = ["一", "二", "三", "四", "五", "六", "日"]
@@ -43,11 +54,35 @@ def _today_str():
     return f"{now.month}月{now.day}日 星期{_WEEKDAYS[now.weekday()]}"
 
 
-def main():
-    if not API_KEY:
-        print("⚠️ SENSENOVA_API_KEY 未设置，直接复制原文")
-        return _fallback()
+def _convert(system, report):
+    """依次尝试模型链，首个成功即返回广播稿文本；全失败返回 None。
 
+    _call_llm 内部已含 2 次重试（range(2)），故某模型连续报错 2 次即视为
+    失败并切下一模型——天然实现「报错两次切换」语义（如 DeepSeek 报错两次切 GLM）。
+    """
+    user = f"请转换以下日报为广播稿：\n\n{report}"
+    for cfg in _MODEL_CHAIN:
+        api_key = os.environ.get(cfg["api_key_env"])
+        if not api_key:
+            print(f"  ⏭️  跳过 {cfg['name']}: 环境变量 {cfg['api_key_env']} 未设置")
+            continue
+        try:
+            print(f"  🔄 尝试 {cfg['name']}...")
+            text = _call_llm(cfg["api_url"], api_key, cfg["model"],
+                             system, user, timeout=300)
+            # 去除可能的代码围栏
+            if text.startswith("```"):
+                text = text.split("\n", 1)[-1] if "\n" in text else text[3:]
+            if text.endswith("```"):
+                text = text.rsplit("```", 1)[0].strip()
+            return text.strip()
+        except Exception as e:
+            print(f"  ❌ {cfg['name']} 失败({e})，切换下一模型")
+            continue
+    return None
+
+
+def main():
     if not os.path.exists(REPORT_PATH):
         print(f"❌ 未找到 {REPORT_PATH}")
         sys.exit(1)
@@ -59,38 +94,13 @@ def main():
     system = SYSTEM.replace("__TODAY_DATE__", _today_str())
     print(f"📅 注入当日问候日期: {_today_str()}")
 
-    try:
-        resp = requests.post(
-            API_URL,
-            headers={"Authorization": f"Bearer {API_KEY}"},
-            json={
-                "model": MODEL,
-                "temperature": 0.3,
-                "max_tokens": 2048,
-                "messages": [
-                    {"role": "system", "content": system},
-                    {"role": "user", "content": f"请转换以下日报为广播稿：\n\n{report}"},
-                ],
-            },
-            timeout=300,
-        )
-        if resp.status_code != 200:
-            print(f"❌ LLM 失败({resp.status_code})，原文兜底")
-            return _fallback()
-
-        script = resp.json()["choices"][0]["message"]["content"].strip()
-        # 去掉可能的代码围栏
-        if script.startswith("```"):
-            script = script.split("\n", 1)[-1] if "\n" in script else script[3:]
-        if script.endswith("```"):
-            script = script.rsplit("```", 1)[0].strip()
-
+    script = _convert(system, report)
+    if script:
         with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
             f.write(script)
         print(f"✅ 广播稿已生成: {len(script)} 字符 → {OUTPUT_PATH}")
-
-    except Exception as e:
-        print(f"❌ 转换失败: {e}，原文兜底")
+    else:
+        print("⚠️ 所有模型均失败，原文兜底")
         _fallback()
 
 

@@ -123,8 +123,21 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 | Secret | 用途 |
 |--------|------|
-| `NVIDIA_API_KEY` | NVIDIA NIM API Key（免费） |
-| `SENSENOVA_API_KEY` | 商汤科技 API Key（免费） |
+| `NVIDIA_API_KEY` | NVIDIA NIM API Key（免费）；日报主模型 GLM-5.2 / 最后兜底 Nemotron，以及广播稿转换的 GLM/Nemotron 兜底 |
+| `SENSENOVA_API_KEY` | 商汤科技 API Key（免费）；广播稿转换主模型 DeepSeek-V4-Flash |
+
+## 广播稿转换（md_to_script）模型链
+
+`scripts/md_to_script.py` 将 `report.md` 转为口语化广播稿 `script.txt`，复用 `call_llm.py` 的 `LLM_CONFIGS` 与 `_call_llm`（单一数据源）：
+
+| 优先级 | 模型 | 密钥 | 说明 |
+|--------|------|------|------|
+| ① 主用 | SenseTime DeepSeek-V4-Flash | `SENSENOVA_API_KEY` | 默认主模型 |
+| ② 兜底 | NVIDIA GLM-5.2 | `NVIDIA_API_KEY` | DeepSeek 连续报错 2 次（`_call_llm` 内部重试）即切换 |
+| ③ 最后兜底 | NVIDIA Nemotron-3-Ultra-550B | `NVIDIA_API_KEY` | GLM 亦失败则启用 |
+| 末路 | 复制原文 | — | 三模型全失败，直接复制 `report.md` 为 `script.txt`，避免 workflow 中断 |
+
+> 顺序与日报生成（GLM 主 → DeepSeek 兜 → Nemotron）刻意相反：广播稿保持 DeepSeek 主用。
 
 ## 文件结构
 
