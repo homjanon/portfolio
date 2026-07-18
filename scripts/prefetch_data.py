@@ -105,22 +105,30 @@ def _save_qdii_snapshot(qdii_data):
         json.dump(snap, f, ensure_ascii=False, indent=2)
 
 def _shorten_qdii_name(full_name):
-    """将东财场外 QDII 基金全称缩写为短名（≤12字符）。
-    规则：提取份额字母 + 指数名标准化 + 清括号/币种后缀；
+    """将东财场外 QDII 基金全称缩写为短名。
+
+    统一格式：公司名 + 纳指100/标普500 + 小写份额字母(a/c/d)。
+    例：建信纳斯达克100指数(QDII)C人民币 → 建信纳指100c
+        大成纳斯达克100ETF联接(QDII)A人民币 → 大成纳指100a
+
+    规则：提取份额字母(转小写) + 指数名标准化 + 清括号/ETF联接/币种后缀；
          基金公司名（易方达/建信/广发…）**完整保留，绝不缩写**。
     纯规则驱动、零硬编码映射，动态列表可复用。"""
     if not full_name:
         return ""
     s = full_name.strip()
-    # ① 提取 (QDII)X / (LOF)X 份额后缀字母（A/B/C/D，可能后接币种）
+    # ① 提取 (QDII)X / (LOF)X 份额后缀字母（任意英文份额 A/B/C/D/E…，转小写）
     _suffix = ""
-    _m = re.search(r'\((?:QDII|LOF)[^)]*\)\s*([A-D])', s)
+    _m = re.search(r'\((?:QDII|LOF)[^)]*\)\s*([A-Za-z])', s)
     if _m:
-        _suffix = _m.group(1)
-    # ② 指数名称标准化（最长优先匹配）
+        _suffix = _m.group(1).lower()
+    # ② 指数名称标准化（带「指数」后缀优先，break 后不再重复匹配）
+    #    同时覆盖裸词（如联接基金全称「纳斯达克100ETF联接」不含「指数」二字）
     _idx_map = [
         ("纳斯达克100指数", "纳指100"),
+        ("纳斯达克100",     "纳指100"),
         ("标普500指数",     "标普500"),
+        ("标普500",         "标普500"),
         ("纳斯达克指数",    "纳指综"),
         ("道琼斯指数",      "道指"),
     ]
@@ -129,14 +137,16 @@ def _shorten_qdii_name(full_name):
             s = s.replace(_long, _short)
             break
     # ③ 清理 (QDII)/(LOF) 括号 + 份额字母 + 币种后缀（一次移除）；
+    #    清理 "ETF联接"/"ETF" 等多余词（东财联接基金全称含此，否则会残留导致超长）；
     #    我们的筛选已排除美元，实际仅人民币；仍兼容清理任意币种。
     #    ★ 基金公司名（易方达/建信/广发…）保持完整，不缩写
-    s = re.sub(r'\s*\((?:QDII|LOF)[^)]*\)\s*[A-D]?\s*(?:人民币|美元|港元)?', '', s)
+    s = re.sub(r'\s*\((?:QDII|LOF)[^)]*\)\s*[A-Za-z]?\s*(?:人民币|美元|港元)?', '', s)
+    s = re.sub(r'\s*ETF\s*联接\s*', '', s)
+    s = re.sub(r'\s*ETF\s*', '', s)
     s = re.sub(r'\s*指数\s*$', '', s)
     s = re.sub(r'\s+', '', s)
-    # ④ 拼接份额字母
-    result = s + _suffix
-    return result[:12] + '…' if len(result) > 14 else result
+    # ④ 拼接份额字母（清理后均 ≤10 字符，无需截断）
+    return s + _suffix
 
 # ═══════════════════════════════════════════════════════════════
 # 数据源层
@@ -377,13 +387,13 @@ def fetch_market_cn():
 
 # ─── 2. 港股指数行情（不变）──────────────────────────────────
 def fetch_market_hk():
-    """恒生指数 + 恒生中国企业指数"""
+    """恒生指数 + 恒生中国企业指数 + 恒生科技指数（数据源直接返回，零额外开销）"""
     df = _akshare_sina_hk_index()
     if df is not None:
         rows = []
         for _, r in df.iterrows():
             name = str(r.get("名称","")).strip()
-            if name in ("恒生指数","恒生中国企业指数"):
+            if name in ("恒生指数","恒生中国企业指数","恒生科技指数"):
                 prev = _num(r.get("昨收"))
                 chg = _num(r.get("涨跌额"))
                 pct = round((float(chg)/float(prev))*100,2) if chg and prev and float(prev)>0 else None
@@ -395,13 +405,13 @@ def fetch_market_hk():
                     "最高": _num(r.get("最高")),
                     "最低": _num(r.get("最低")),
                 })
-        if len(rows) >= 2:
+        if len(rows) >= 3:
             return _ok(rows)
 
     # 新浪API失败 → yfinance 兜底
-    yf_hk = _yf_fallback({"恒生指数": "^HSI", "恒生中国企业指数": "^HSCE"})
+    yf_hk = _yf_fallback({"恒生指数": "^HSI", "恒生中国企业指数": "^HSCE", "恒生科技指数": "^HSTECH"})
     rows = []
-    for name, yf_key in [("恒生指数", "恒生指数"), ("恒生中国企业指数", "恒生中国企业指数")]:
+    for name, yf_key in [("恒生指数", "恒生指数"), ("恒生中国企业指数", "恒生中国企业指数"), ("恒生科技指数", "恒生科技指数")]:
         if yf_hk.get(yf_key):
             d = yf_hk[yf_key]
             rows.append({"指数": name, "代码": yf_key,

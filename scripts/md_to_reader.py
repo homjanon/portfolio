@@ -289,9 +289,14 @@ def _smart_inline(text):
             cls = 'up' if content in ('上涨', '大涨', '飙升', '净买入', '领涨') else 'down'
             return f'<strong class="{cls}">{content}</strong>'
 
-        # 保留：QDII 溢价评估标签
+        # 保留：QDII 溢价评估标签（长句，历史兼容）
         if content in ('极高溢价，严禁买入', '高溢价，警惕风险', '明显溢价，谨慎参与'):
             return f'<strong class="down">{content}</strong>'
+
+        # 保留：QDII 溢价评估短标签（✓ / △溢价 / ▽折价）
+        if content in ('✓', '△溢价', '▽折价'):
+            cls = 'up' if content == '✓' else 'down'
+            return f'<strong class="{cls}">{content}</strong>'
 
         # 去粗：纯数字、名称、普通百分比等
         return content

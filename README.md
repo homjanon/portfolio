@@ -65,7 +65,7 @@ schedule / workflow_dispatch
 | 数据类型 | 主数据源 | 门控条件 | 兜底 |
 |---------|---------|----------|------|
 | A 股指数 | akshare 新浪 `stock_zh_index_spot_sina` | `a_open` | 腾讯财经 / yfinance |
-| 港股指数 | akshare 新浪 `stock_hk_index_spot_sina` | `hk_open` | 腾讯财经 / yfinance |
+| 港股指数 | akshare 新浪 `stock_hk_index_spot_sina`（直接返回 38 个指数，取恒生/国企/**恒生科技** 3 个） | `hk_open` | 腾讯财经 / yfinance（`^HSTECH` 兜底） |
 | 美股+全球指数 | akshare 新浪（美股）+ 东财（外围） | `u_open` | 东财走 curl_cffi HTTP/2；否则 yfinance |
 | 汇率/商品/债券 | akshare 期货 + 中美债收益率 | 完整模式 | — |
 | 估值/PE 分位（6 指数） | 雪球蛋卷 API `danjuanfunds.com/djapi/index_eva/dj` | `a_open` | — |
@@ -76,6 +76,30 @@ schedule / workflow_dispatch
 | **全球 TOP 10 新闻** | **Google News RSS** | 始终抓 | — |
 
 > **方案 C（curl_cffi HTTP/2 补丁）**：东方财富 `push2.eastmoney.com` / `push2his.eastmoney.com` 需 HTTP/2，标准 `requests` 仅 HTTP/1.1 会静默断连。脚本在顶部注入 `curl_cffi` 浏览器模拟，仅对这两个域名生效，修复全球指数静默降级；其余请求不受影响。运行依赖已包含 `curl_cffi` 与 `pandas_market_calendars`。
+
+## QDII 与 ETF 监测板块格式规范
+
+日报「QDII 溢价与申购额度监测」子板块呈现两张表，格式约定如下：
+
+### 场内 ETF 溢价率表（5 列）
+
+| ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
+|-----|------|-------|------------|------|
+
+- 始终列 6 只核心 ETF（纳指/标普 500 各 3 只），代码写死于 `prefetch_data.py`。
+- **「跟踪指数」列已删除**（ETF 名称自带跟踪标的，无需重复）。
+- `对比昨日溢价`：今日溢价率 − 昨日溢价率，由代码计算（`qdii_prev.json` 跨运行快照留存昨日基准），首日留空。
+- `评估` 列用短标签：**✓**（±1% 内）/ **△溢价**（>3%）/ **▽折价**（>2%），严禁长句。
+
+### 场外 QDII 申购额度表（简称列）
+
+| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
+|------|------|---------|---------|-----------|------------|
+
+- 「简称」列由 `prefetch_data.py::_shorten_qdii_name()` 自动生成（字段 `名称_短`），**基金公司名完整保留**。
+- **统一短名格式**：`公司名 + 纳指100/标普500 + 小写份额字母`，例：`建信纳指100c`、`大成纳指100a`、`易方达标普500a`。
+- 纯规则驱动（清理 `(QDII)`/币种/`ETF联接` 等），零硬编码映射，动态列表可复用；份额字母支持 A–Z（覆盖 A/C/D/E 等）。
+- `对比昨日限额`：今日限额 − 昨日限额（单位元），由 `qdii_prev.json` 跨运行计算，首日/新进前 6 留空。
 
 ## 新闻原文链接
 
