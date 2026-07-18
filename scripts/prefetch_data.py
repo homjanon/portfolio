@@ -78,6 +78,32 @@ def _num(v):
     try: v = float(v); return round(v, 4) if abs(v) < 1e6 else round(v, 2)
     except: return None
 
+def _load_qdii_prev():
+    """读取上一运行日的 QDII 快照（对比昨日用）。不存在/损坏返回 None。
+    注意：data_*.json 被 .gitignore 排除、不跨运行留存，故独立文件 qdii_prev.json
+    承担跨运行持久化职责（由 _save_qdii_snapshot 写入、工作流提交）。"""
+    path = os.path.join(OUT_DIR, "qdii_prev.json")
+    if not os.path.exists(path):
+        return None
+    try:
+        with open(path, encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return None
+
+def _save_qdii_snapshot(qdii_data):
+    """把当日 QDII 基准存为快照，供下一运行日作为「昨天」对比基准。"""
+    snap = {
+        "ts": _ts(),
+        "场内ETF": [{"代码": e.get("代码"), "溢价率": e.get("溢价率")}
+                    for e in qdii_data.get("场内ETF", [])],
+        "场外QDII": [{"代码": e.get("代码"), "日累计限定金额": e.get("日累计限定金额")}
+                     for e in qdii_data.get("场外QDII", [])],
+    }
+    path = os.path.join(OUT_DIR, "qdii_prev.json")
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(snap, f, ensure_ascii=False, indent=2)
+
 # ═══════════════════════════════════════════════════════════════
 # 数据源层
 # ═══════════════════════════════════════════════════════════════
@@ -752,6 +778,10 @@ def fetch_extra():
 
     # ── v24方案: QDII监测 — 腾讯API实时价 + 东方财富HTTP净值（不依赖 fund_etf_spot_em）──
     qdii_data = {"场内ETF": [], "场外QDII": []}
+    # 加载昨日 QDII 基准，用于计算「对比昨日」列（跨运行快照）
+    _prev = _load_qdii_prev() or {}
+    _prev_etf = {e["代码"]: e.get("溢价率") for e in _prev.get("场内ETF", []) if e.get("代码")}
+    _prev_qdii = {e["代码"]: e.get("日累计限定金额") for e in _prev.get("场外QDII", []) if e.get("代码")}
     _etf_set = {"513100","513500","159941","159659","159612","513650"}
     _etf_names = {
         "513100":"纳指ETF国泰","513500":"标普500ETF博时",
@@ -788,10 +818,13 @@ def fetch_extra():
         except Exception as _nav_e:
             print(f"      东方财富净值API失败({_code}): {_nav_e}")
         _pr = round((_mp - _nav) / _nav * 100, 2) if _mp and _nav and _nav > 0 else None
+        _prev_pr = _prev_etf.get(_code)
+        _pr_delta = round(_pr - _prev_pr, 2) if (_pr is not None and _prev_pr is not None) else None
         qdii_data["场内ETF"].append({
             "代码": _code, "名称": _etf_names.get(_code,""),
             "最新价": _mp, "涨跌幅": _cp,
             "最新净值": _nav, "净值日期": _nav_d, "溢价率": _pr,
+            "溢价率对比昨日": _pr_delta,
             "溢价率来源": "腾讯价+东方财富净值",
         })
     # 场外QDII申购额度（纳指100/标普500，可申购且额度较大的6条）
@@ -827,7 +860,14 @@ def fetch_extra():
     if qdii_data["场外QDII"]:
         qdii_data["场外QDII"].sort(key=lambda x: x["日累计限定金额"], reverse=True)
         qdii_data["场外QDII"] = qdii_data["场外QDII"][:6]
+    # 计算每只场外QDII相对昨日的限额变化（按代码匹配，今日有/昨日无则留空）
+    for _e in qdii_data["场外QDII"]:
+        _c = _e.get("代码"); _lim = _e.get("日累计限定金额")
+        _prev_lim = _prev_qdii.get(_c)
+        _e["限额对比昨日"] = round(_lim - _prev_lim, 2) if (_lim is not None and _prev_lim is not None) else None
     result['QDII_监测'] = qdii_data
+    # 留存当日 QDII 基准，供下一运行日对比（跨运行持久化）
+    _save_qdii_snapshot(qdii_data)
 
     return _ok(result)
 

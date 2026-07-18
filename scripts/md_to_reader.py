@@ -272,6 +272,11 @@ def _smart_inline(text):
             cls = 'up' if '↑' in content else 'down'
             return f'<strong class="{cls}">{content}</strong>'
 
+        # 保留：↑/↓ + 数字（QDII 额度 delta，可带 元/万/亿 单位，无 %）
+        if re.search(r'[↑↓]\s*[\d,]+\.?\d*\s*(?:元|万|亿)?', content):
+            cls = 'up' if '↑' in content else 'down'
+            return f'<strong class="{cls}">{content}</strong>'
+
         # 保留：涨/跌 + 百分比（中文方向）
         if re.search(r'(上涨|涨幅|大涨|飙升)[\d.]+%', content):
             return f'<strong class="up">{content}</strong>'
@@ -348,6 +353,12 @@ def _table_to_html(rows):
             # QDII 风险评估标签：加粗+红色警示
             if cell_html.strip() in ('极高溢价，严禁买入', '高溢价，警惕风险', '明显溢价，谨慎参与'):
                 cell_html = f'<strong class="down">{cell_html}</strong>'
+            # 表格内方向性变化（↑/↓ + 数字/单位）上色：即使未加粗也生效（QDII 对比列）
+            # (?<!>) 防止对 _smart_inline 已加粗的内容重复包裹
+            cell_html = re.sub(r'(?<!>)↑\s*[\d,]+\.?\d*\s*(?:%|元|万|亿)?',
+                               r'<strong class="up">\g<0></strong>', cell_html)
+            cell_html = re.sub(r'(?<!>)↓\s*[\d,]+\.?\d*\s*(?:%|元|万|亿)?',
+                               r'<strong class="down">\g<0></strong>', cell_html)
             # 对齐
             cls = 'label' if i == 0 else 'num'
             html += f'<td class="{cls}">{cell_html}</td>\n'
