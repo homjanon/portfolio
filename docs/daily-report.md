@@ -1,41 +1,45 @@
-# 全球金融资讯日报
+# 全球金融资讯日报｜2026年7月20日 星期一
 
-> 周末休市期间全球消息面频发，科技巨头AI算力合作与航天巨头估值回调主导外围情绪；国内聚焦高技术制造业动能转换与国产算力系统级突破。关注下周开盘后科技板块的预期分化及超跌反弹动能。
+
+**今日定性导语**：全球市场休市，地缘风险显著升温。美伊冲突升级推动油价突破**90美元**，中东局势成为当前核心风险；同时，美股科技巨头财报周即将开启，AI交易面临关键验证。中国政策端聚焦经济刺激需求，但AI虚拟伴侣监管趋严引发市场关注。
 
 ---
 
 ### 一、全球 TOP 10 新闻（RSS 驱动）
 
-1. **Meta与Anthropic洽谈百亿美元算力租赁合作**：Meta正与Anthropic进行早期谈判，计划向其租赁价值高达**100亿美元**的AI计算能力。此举标志着大型科技公司开始将自建的庞大AI基础设施转化为外部收入来源 → 影响深远，利好AI算力租赁与云服务商业模式创新。（[Reuters](https://news.google.com/rss/articles/CBMipgFBVV95cUxNS2NqN2VtZFNDLWpDUGxnTXlpZmdWRmI3QlJyeTZSS2cwOEdyVEVGY0NGd3F4UGdqYkVoTjVaUWR0bzJVcW8yY0N1dG1zUnl0UUVDa2dKYVhKU2F5OWJPTWFfSGdZWlRfMjZZdEVxUTRiVDE1LXhMSjR0a0FOMFItVHA3V3FTYlVjU0Mzcy12VG9JbVlORGF2bXBFa1BIUjBNaHR6ZnBn?oc=5)）
+1. **美伊敌对行动加剧，海湾股市回落，油价突破90美元**：美国与伊朗冲突扩大，原油价格突破**90美元/桶**。国际能源署（IEA）负责人警告，霍尔木兹海峡危机正威胁全球能源安全，海湾国家股市首当其冲下跌。 → 风险偏好急剧降温，利好原油/避险资产，利空全球航运与制造业。（[Reuters](https://news.google.com/rss/articles/CBMipgFBVV95cUxQTzIxWFlrMnEyMFZoNHBRTjFybFYyNWtmNktvMlRFaGM0X2RBeWNzZzhycWxlVl9rSTlpdnBGVzY2dlZzWkFGUThqbkZPQUREak85NUREUjFkalExaHBJSk53aEFScDA0dFY2b1NwMlNiRVNkWndZanEzM05HVF9NNktScnUyNDdESkY5VlBTZDNsU3c0ZVY4aG1aaWZlZi1iQ3J2Y1Rn?oc=5)）
 
-2. **SpaceX上市后股价暴跌，市值一月蒸发万亿美元**：SpaceX在加入纳斯达克100指数后股价重挫近**23%**，甚至跌至IPO发行价附近。华尔街分析师虽给出“通往星辰的超级高速公路”等华丽目标价，但著名投资人Jeremy Grantham称其为“人类历史上最疯狂的IPO”，做空者已获利**87亿美元** → 影响负面，警示AI与太空科技概念的估值泡沫风险。（[Fortune](https://news.google.com/rss/articles/CBMijgFBVV95cUxNU1rWUNBOWJzQm1pUEpVeTVuTmVKTHJOZTZiRTFCY05BTDMzSEdmSFJ5eW9Yb3Q3SWJWLWtLYUFXVFF2SnM3c1RmT3hSY3c1RTgxWlJweDByR1ZzZnpwVWhwaDhyWTRGVEwtX3NBc2pSb1NSb2xLU1gwVEE4YVhnS1RrVDVXaldhZ2JsUnpB?oc=5)）
+2. **美国PCE通胀指标即将进行统计方法大修，或降低关键通胀读数**：美国经济分析局（BEA）正准备对核心PCE价格指数的计算方法进行全面改革，这一变动可能直接降低美联储最青睐的通胀指标读数。同时，堪萨斯城联储与圣路易斯联储的研究也呼吁重新审视核心通胀的衡量方式。 → 若通胀数据因统计调整而降温，将强化美联储降息预期，利好美股流动性。（[WSJ](https://news.google.com/rss/articles/CBMihgFBVV95cUxQVGJ3eDJ0X1JSRGZFSkpSQ2NSRXNUejVIQUU5bnJNekJ2UXZxS0F5UGhmMEk1cWRPNkhmanF2bUl4OHY2R0daLXpnV045eTVkZEpaV1lmYmFqN2p1blVSSEdQWHkwRFBiNUFFOG9qbXRKSXY0dkpYLWlFTThPUGlkd0Mtd3Y4dw?oc=5)）
 
-3. **SpaceX星舰第13次试飞因引擎异常中止**：SpaceX星舰在第13次飞行测试中因点火后部分引擎未启动而被迫中止发射，公司计划下周进行下一次尝试。此次发射失败进一步加剧了其股价的短期抛压 → 影响偏空，短期利空商业航天与太空探索板块情绪。（[Reuters](https://news.google.com/rss/articles/CBMizwFBVV95cUxNWGtOV1BXNFVRbFBRd1l5MFR0WTlDVWxDQ1piUUhNNVVGVWVzY0FrNUNlQVFRaWZmXzViZHNLb0pKZFhuMVllNXM1aHR0aWtTY1A4YjBmbzRfaHRVTG5RUWpXTEpVUmw5YW9waXpIYVZlRUh1ellsN2VHbHRUYTc3R2lEbFl4Z0l2THFJazd1c3p3UXNxVG1GNXc3aVRfMzIxUUtueTAwUDVyb29nVVdVc3d1YmdBOUthRnFtTXBmcTBuVFZrZzZJdTJ3Zi1SVmc?oc=5)）
+3. **中国领导层聚焦经济刺激需求，经济增长不及预期**：据多家国际媒体报道，中国二季度经济增速大幅下滑，未达官方目标，贸易顺差虽在收窄但出现新变化。高层正将政策焦点集中于推出新一轮经济刺激措施，以应对经济放缓带来的挑战。 → 政策预期升温，利好中国资产与内需板块估值修复。（[Financial Times](https://news.google.com/rss/articles/CBMihAFBVV95cUxOWDZLYy1UdXBSb0VIN0NIM0ktN3lHZ0hsaTlWMGVqU1I4TUhROXlHTi04UkxINk1fQlBuNVBkR3UtUUhhbU9XeHB5RmVTZkt0THJwSzU5YVVIRVd5V3h6Q2RjMHdBZFpPLVlTWjNuVWlLbGs3ZWRUQm5oWEFNU1BweWdZeng?oc=5)）
 
-4. **SpaceX与五角大楼洽谈数十亿美元数据中心合同**：在股价承压之际，SpaceX正向五角大楼推销价值数十亿美元的AI计算能力，试图通过国防军事订单开辟新的收入增长曲线 → 影响正面，利好国防AI算力与军工航天融合产业链。（[WSJ](https://news.google.com/rss/articles/CBMikgFBVV95cUxQWTZudU41MERhcWNoYVRDdDNsOUVWUEIzeEhPcFhkSEVnMFczSEI2d2ZnbWFZbHdWbXp1LUY3ZWxDSEYzMTdwM0FqNGJZbVpGOWlGYWtiZ0NjTDZpbjVEN3UzekhEWDMxb1ZUdGhZd2dKVHJxdnc2RE82UUI5NHhHVHprYnFrUkl4WnpyUWlKMGh1QQ?oc=5)）
+4. **科技巨头财报周来临，AI交易面临关键验证**：本周Alphabet、特斯拉与英特尔等将密集发布财报，这被视为对近期科技股板块大轮动的关键测试。市场正密切关注AI债务浪潮与AI泡沫担忧，以判断资金是否会继续留在大型科技股。 → 财报指引将决定科技股短期方向，若超预期将利好AI硬件与软件产业链。（[Yahoo Finance](https://news.google.com/rss/articles/CBMivwFBVV95cUxNN3ZISzktMVBmM1NIUms1NFZmZmZZb1JhZVBHSENFTGNRTTloVkUxZ2trQU5YcDc1VE1XUzVLVHpPZl9GN0JoUWM2QTNsQkVBdV9KQkc3cl9CNlVRWXR1ZklIZUxIcDV5QjFXZG9uNnNZbFJ0Q2F3U2Q1OGRXajExUHBhOXgyMFctVm1mNDFsSFdjdW9OQ2dmTWo2UVRZZHNhZU9uZy1WTWZBdzFhamRmZ3FqOHlaY2hnZjBvQ2EyRQ?oc=5)）
 
-5. **美国房屋止赎率创2019年以来最高水平**：2026年上半年，美国房屋止赎申请量激增**21%**，其中佛罗里达州情况最为严重。FHA和VA抵押贷款的违约压力上升是主要推手，不过已有抄底客开始关注折价房产 → 影响偏空，反映高利率环境下居民资产负债表承压，利空美国房地产及相关信贷市场。（[Yahoo Finance](https://news.google.com/rss/articles/CBMi2AFBVV95cUxNQWlVZlBLUGNxbDd5aXRiOE0xVXM1Vmxmbjh4S0lhOTEwRTV3WlNMaXltMjRIV0pMSXNsZkZCVVhzVlR3emRoQzU1Q1pPQ2QyNC1TQ0FrSkVQVmZTd045LTYtaURMLXUwblp0eElnbzBjSzNvd0lXRlVBWnVlM2JwcmVoOEFTaGt6dVBVZGwwWlVZLVV1dDVScElyVTBDY0VZdDFqb1hVdUNyYTQ0R1JfeUFvRV9DNzlvaEcxYURiQTVmRlBVc0Q3MmFMN2ZfdXpRTUV1eFZLc08?oc=5)）
+5. **波音CEO称需先巩固财务，预计2030年才能资助新机型**：波音公司新任CEO表示，在启动新飞机设计之前，公司必须先修复其资产负债表。波音预计要到**2030年**才能准备好为新飞机项目提供资金，这标志着该飞机制造商的战略重心转向财务修复。 → 短期利好波音现金流改善预期，利空航空制造供应链长期增长预期。（[WSJ](https://news.google.com/rss/articles/CBMixAFBVV95cUxQNFY1OEo1RkxhVTJOZkFjb2lQRlNXLVJBdlg0OHZINHVlWFpRWHRTVWFsbHJ3c0o1anp4ZE1feVVDRG1ibzBvVmtuWHMtemhGR0NSR0hsRWJBQWhXYnM0c1lpTGNYSUFMZEhJNm5lZUt0ZTl6Z25rZU5wZHVjU0NOSlp0VW5tM2tsWi1HLW9ITi1YYUlhM2J3aV94cHBBbGdhdkxfMHA4YUowVktad0trVFVGeE9DQmJjMTdFZE5vTENCWnNm?oc=5)）
 
-6. **高技术制造业绽放澎湃动能，新旧动能转换撑起中国经济底盘**：国内媒体报道指出，上半年高技术制造业展现强劲动能，新旧动能快速转换为中国经济行稳致远提供底气。上半年经济同比增长**4.7%**，产业稳步向新、提质升级 → 影响正面，利好国内高端制造、新质生产力相关板块。（[人民网财经](https://news.google.com/rss/articles/CBMibkFVX3lxTE05SzBFTzZSTjZXVDFFaDdTc3NmSS13QVFtb2tNVnFyendNWEJpcnlsYy01Tzc0OExnNW1rc0thdXlyaS1mUEpBcDM2SDItd3gtUzVIY2NJd3VfNHNwWjBCdm1scExReGl4UlZUbDZ3?oc=5)）
+6. **世界人工智能大会揭示AI产业发展新趋势**：2026世界人工智能大会（WAIC）在上海闭幕，密集首发首秀前沿AI创新成果。云深处科技等企业展示具身智能全矩阵新品与标准化方案，推动具身智能从理念走向规模化落地，全球AI治理体系亦加速从理念迈向行动。 → 利好国内具身智能与人形机器人产业链，加速标准化进程。（[东方财富](https://news.google.com/rss/articles/CBMiZkFVX3lxTE5QVHBXZnJJWEt3ZXowLWhZakJZbVRGYlkxRnEzUHdaTHdJZ2dsY2VHeHlGbFZZa1M4ZUZ1amlIVW1MUzlraWpEbkl1Y0xyaVJGVERIM3dWYjktbEZleGJZTmljaUV6dw?oc=5)）
 
-7. **华为阿里集体亮剑WAIC，国产算力向系统集成延伸**：在2026世界人工智能大会上，华为、阿里等国内科技巨头展示多项超节点成果，国产算力正从单点突破向互联和系统集成方向深度延伸 → 影响正面，利好国产算力基础设施、AI芯片及系统集成产业链。（[财联社](https://news.google.com/rss/articles/CBMiSEFVX3lxTE02TEhFVzdEek5oaGFzdU9HREdKc2NlWnZBTXg2c1NWZ00yUklzNW9wbEFiTHdZSDVGU3FaUGxVWTd2X2ZucG8wRQ?oc=5)）
+7. **礼来斥资最高38亿美元收购迷幻药生物科技公司**：礼来宣布将以最高**38亿美元**收购迷幻药生物科技公司AtaiBeckley，正式进军迷幻药治疗精神健康疾病赛道。此举被视为该细分市场获得重大买入信号，GLP-1龙头正加速拓展精神类药物版图。 → 利好精神健康与迷幻药研发赛道，利空礼来竞争对手如辉瑞等在该领域的布局。（[CNBC](https://news.google.com/rss/articles/CBMid0FVX3lxTE5LcVI2T2tZZk1ZOXJrMV9Ed19SeXNaMkhBbWRkaVVzR1gtVGk5dHpmSFBISzNrc3Z0QUNuZ09WYWZZSklkdnhaWFVoZWVELWUtWlkxU1pieEdVcTR0UjlsVE55dm1QVWYzRUZhcFVOSFk4bGszS2lZ0gF8QVVfeXFMTlBqd3lvQXVjbl9Ta2lMaFNkUmZ5ek96bjY3QlB6bzZDa2hLMlAwNUkwOGM4Z0hpeUtjd0NEZkwzNHZ5eDNGaGd5c29ZM2F3S0RxUHgyTG9pRWpTMWxaOFdidjYwSURJbGxOMTVwWmxzUWYwSEozMVJZZkZMbg?oc=5)）
 
-8. **IBM盈利暴雷股价重挫25%，AI巨额资本开支引发收入下滑**：IBM发布令人震惊的盈利预警，CEO承认公司在技术竞争中落后。公司向AI领域的大规模资本开支转移导致传统业务收入大幅下滑，股价暴跌**25%**，引发市场对传统科技巨头转型阵痛的担忧 → 影响负面，警示传统IT企业在AI转型期的财务风险。（[Barron's](https://news.google.com/rss/articles/CBMidkFVX3lxTE9lNkg4cmh0YlZsMEJvWE1IWVVuaC10MEx3RlNXQWJqTHgwZDFnOWJSZEJ5dDVLOFJQSHdMNWhNLWNMOWFpeGhUMHpqamZBd092V3lQUmZQYVZrRllJN3Vvc191QmhYOG9sUE9lQXlJLTFXX3NHeFE?oc=5)）
+8. **SpaceX上市后股价回落，做空者狂赚87亿美元**：SpaceX在IPO后股价迅速回落，华尔街分析师此前发布的极高目标价未能支撑估值。做空者在此次股价下跌中获利**87亿美元**，交易员正加大押注该股进一步下跌的力度。 → 利空SpaceX短期估值，反映市场对未盈利高估值科技股的分歧加剧。（[Fortune](https://news.google.com/rss/articles/CBMijgFBVV95cUxQNU1rWUNBOWJzQm1pUEpVeTVuTmVKTHJOZTZiRTFCY05BTDMzSEdmSFJ5eW9Yb3Q3SWJWLWtLYUFXVFF2SnM3c1RmT3hSY3c1RTgxWlJweDByR1ZzZnpwVWhwaDhyWTRGVEwtX3NBc2pSb1NSb2xLU1gwVEE4YVhnS1RrVDVXaldhZ2JsUnpB?oc=5)）
 
-9. **Netflix财报指引令华尔街失望，股价跌至52周新低**：Netflix因财报展望不及预期，股价跌至52周新低。公司同时宣布将减少用户参与度的披露频率，进一步加剧了投资者的焦虑情绪 → 影响偏空，反映流媒体行业增长瓶颈，利空传媒娱乐板块。（[Fortune](https://news.google.com/rss/articles/CBMiwAFBVV95cUxNdnQ2RlF2ZUhzaElZdXRnOFQ4ODY5TVBYRV9XQlZlX2hJRmN1X0JkenpLcEdHXzZ0RWNtZW96X2xQb2FjRk1QSW1LNUd1eUt3OFJDUjBjbllBbXZLajVFZ19PRkVqUWhvUVZKS3hzOTRjN3pORC10NVFuOGZocnJmbWs3S1hKYWlsdGRyX3pJVWV0UTZhMGhvWlRZQXc3Ul85amFNVmNzZ0RNZzNsajU1THZBOE1jWEFfWTQ1c2JxcE8?oc=5)）
+9. **特朗普媒体公司拟向交易机构出售总统发帖优先访问权**：特朗普媒体公司计划向交易机构收取每月**10万美元**的费用，以获取美国总统社交媒体帖子的最快推送权限。此举被批评者指责为“公然腐败”，凸显了总统发帖对股票走势的巨大影响力。 → 引发市场公平性质疑，利空特朗普媒体公司声誉，但可能短期推升其营收预期。（[CNBC](https://news.google.com/rss/articles/CBMiqAFBVV95cUxOLWxuQ1JBdEdrNC1Ld3Y0RjlmNzJHVXpqWUd6MzlyMHlCbUJxdHg0U1ZxUGtGcF9OV2VrQ1VuQmJQSDVCMFZKQjkybzN1dU1EdjdlOVpwX3pFM3NuZkY4clhwRVBnMlg0VFRfa2ozbm9IeGdBZXZpeG9FSkJlc2RscklhNkRpOUJpcXhnb05peXk1TU04d3JMQWtPS2JqQXNtSDBBUUlZeHDSAa4BQVVfeXFMT3dFYWJ4Y1VUMG16SENGTExPNXZ1ZFUweWFVbjNKVWY4X1lTVmxVSzREcEtBVGVpLVdiMy1ORU11WFBIVXV6YlRfbzBTZFBpSFlpMk5zeHJjWERUT19YekRiTDZObnRQVkZuSWlZSXlCRmprZDV2NDRtZEtRendDVGwzaF83ZzNBZFo1bThFY1VxVlhUOUE5Z2hGYnp2d2tTNVBJdW93aWJ4SkFWZDZ3?oc=5)）
 
-10. **FAA恢复波音737 MAX及787客机适航认证权**：美国联邦航空管理局（FAA）宣布，允许波音公司恢复自行认证737 MAX和787客机的适航性。这标志着波音在质量控制和安全监管方面取得阶段性进展 → 影响正面，利好波音产业链修复及航空制造板块情绪回暖。（[Reuters](https://news.google.com/rss/articles/CBMivwFBVV95cUxNYTlDV0tMX2FuX2tob2ZJOGdscjgyV2JxSnI1WDdncjdKMV9nMjF6c01ublFWNndKencxcHdRcDQwSGRJUTJhODVhOVltRXhWaVVqZV9kRnBKRkVNQWhZc2R1QkQ4SFhRZjViSmVkeTNmVnVTVlpQYy1qNDNvVzlxUWE1WjN3eGstSnVuQnFnUHpFZV9TSGdIQmo1R3NUZGhCLXI1YWRLdHFLSXAwUlBjWi1GYjhSZFhVM3VqdllTSQ?oc=5)）
+10. **“WarshGPT”：华尔街正适应美联储沟通新时代**：华尔街正在适应美联储新主席Warsh领导下减少公开指引的沟通新模式。美联储近期的政策反复使得市场呼吁官员减少发声，市场正试图用“WarshGPT”来预测这种“马拉多纳式”的利率管理风格。 → 减少前瞻指引将加剧市场短期波动，利好利率衍生品交易量，利空依赖政策透明度的资产配置。（[CNBC](https://news.google.com/rss/articles/CBMimAFBVV95cUxPaW5BeHpmRUs0aGt0RThSdU1YaEQ1LXdRSTRyc0hhaGhjQldxR0o4LURIYVZpYkktdEZfbG1LSWZHRzRaV3pfaE5hZURoOFNtYnljTklUaU5RdkJScXA4Z285bktCOXk4dFZ1cjZabUE0QUl0NkQ2TXVQemgyUTNyWnVDU2xYN3d2NTBFUUM5enotbzFSREo3TNIBngFBVV95cUxPVUtIb2RCdVg4Z2VHcEQ4eVJ1ZEJzZjBFRnNTNWstelM4cDhlcTE5WGJJai16ZHRUc010ZFVjVHdxYkx5MXhsV200VWtHTUd1eUlXdmd2YmJVS3pYSGkwVVdnME5RU3g0OU5BaTdRWTFZZGJtMVEzbVdpT25fYTQ3aGhlV0tRM3JiTUxWQVR0blRVTVA3QkJ3MmctUjVfUQ?oc=5)）
 
 ---
 
 ### 二、深度观察专栏
 
-#### AI算力军备竞赛的下半场：从“自建垄断”走向“租赁共享”
+#### 中东冲突升级与科技财报季：全球市场面临“避险与验证”双重考验
 
-本周末，多条重磅科技新闻均指向同一个核心议题——AI算力市场的商业模式正在发生深刻重构。路透社、纽约时报、CNN等多家媒体报道称，Meta正与Anthropic洽谈一项价值高达**100亿美元**的算力租赁协议；与此同时，华尔街日报与雅虎财经披露，SpaceX也在向五角大楼推销其庞大的AI计算能力。这两起事件虽分属商业与国防领域，却共同揭示了一个趋势：科技巨头们正试图将沉淀在自有基础设施上的巨额算力资本，转化为可对外租赁的服务收入。
+本周末，全球金融市场正处于两个重大变量的交汇点：一方面是美伊冲突急剧升温带来的地缘政治避险情绪，另一方面是即将开启的美股科技巨头财报季对AI叙事的终极验证。路透社、彭博社、华尔街日报等多家媒体均对此进行了重点报道。
 
-**经济逻辑：重资产模式的边际变现**。过去两年，头部科技企业在AI算力基础设施上的资本开支呈指数级增长，但这种“重资产、高投入”的模式正面临严峻的财务压力。IBM最新发布的盈利预警便是一记警钟——其CEO承认，向AI领域的大规模资本开支转移导致传统业务收入大幅下滑，股价单日重挫**25%**。在传统业务造血能力受损的背景下，如何让已建成的算力中心产生正向现金流，成为巨头们的当务之急。Meta向Anthropic出租算力，本质上是一种算力层面的“共享经济”，通过提升GPU集群的利用率和满载时间，缩短算力投资的回报周期。
+**地缘政治与能源安全的连锁反应**
+美伊敌对行动的升级已直接传导至大宗商品市场。据路透社和彭博社报道，原油价格已突破**90美元/桶**大关，海湾国家股市率先回落。国际能源署（IEA）负责人发出严厉警告，称霍尔木兹海峡的危机正威胁全球能源安全。霍尔木兹海峡承载着全球约五分之一的石油运输量，任何形式的实质性封锁或中断，都将导致能源价格瞬间飙升，进而推高全球制造业成本并重新点燃通胀压力。这种宏观环境的变化将直接干扰美联储的降息路径，若能源价格持续走高，核心通胀的回落趋势可能被逆转，迫使央行在“防衰退”与“抗通胀”之间再次陷入两难。
 
-**行业格局：算力寡头化与生态分层**。这种算力租赁模式若大规模落地，将深刻改变AI行业的竞争格局。一方面，拥有雄厚资金和基础设施的巨头（如Meta、微软、SpaceX）将演变为“算力提供商”，在产业链上游形成寡头垄断；另一方面，以Anthropic为代表的AI模型开发商可以轻资产运营，无需重复建设数据中心即可获得顶尖算力，从而将资源集中于算法迭代。这种分层将加速AI应用层的繁荣，但也可能加剧中小型初创企业获取算力的成本压力。
+**AI交易面临基本面“大考”**
+在地缘风险加剧的同时，市场对科技股的估值也正面临关键节点。雅虎财经和路透社指出，本周Alphabet、特斯拉和英特尔等巨头将密集发布财报，这被视为对近期科技股板块大轮动的关键测试。过去数月，AI叙事支撑了纳斯达克指数的飙升，但也引发了关于“AI债务浪潮”和“AI泡沫”的广泛担忧。SpaceX上市后股价回落、做空者狂赚**87亿美元**的现象，已暴露出市场对高估值科技股的容忍度正在下降。若本周科技巨头财报中的AI资本开支转化率（ROI）不及预期，或云收入增速放缓，可能引发资金从科技板块向防御性板块的加速轮动。
 
-**影响与前瞻**。从资本市场视角来看，这一趋势具有双重含义。利好层面，算力租赁市场的兴起将直接增厚云服务提供商的营收预期，同时带动液冷、光模块等数据中心配套产业链的持续景气。利空层面，IBM的暴雷与SpaceX上市后市值蒸发**1万亿美元**的惨状，警示投资者需重新审视AI概念股的估值泡沫。当“AI叙事”无法迅速转化为利润表上的数字时，市场的容忍度正在快速下降。下周开盘后，A股与美股的科技板块预计将围绕“算力变现”与“估值挤泡沫”两条主线展开激烈博弈。
+**影响与前瞻**
+当前全球市场正处于“避险与验证”的双重考验期。中东局势的不可预测性意味着能源溢价将长期存在，短期内原油及避险资产（如黄金、美债）可能继续受益。与此同时，科技股财报季将决定AI主线的持久性。若财报超预期，科技股有望对冲地缘风险带来的避险情绪；若财报不及预期，全球股市可能面临估值与风险偏好的双重下杀。投资者需密切关注霍尔木兹海峡航运动态及本周科技巨头的资本开支指引。
