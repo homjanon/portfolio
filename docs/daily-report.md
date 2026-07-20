@@ -1,45 +1,114 @@
-# 全球金融资讯日报｜2026年7月20日 星期一
+# 全球金融资讯日报
 
 
-**今日定性导语**：全球市场休市，地缘风险显著升温。美伊冲突升级推动油价突破**90美元**，中东局势成为当前核心风险；同时，美股科技巨头财报周即将开启，AI交易面临关键验证。中国政策端聚焦经济刺激需求，但AI虚拟伴侣监管趋严引发市场关注。
-
----
-
-### 一、全球 TOP 10 新闻（RSS 驱动）
-
-1. **美伊敌对行动加剧，海湾股市回落，油价突破90美元**：美国与伊朗冲突扩大，原油价格突破**90美元/桶**。国际能源署（IEA）负责人警告，霍尔木兹海峡危机正威胁全球能源安全，海湾国家股市首当其冲下跌。 → 风险偏好急剧降温，利好原油/避险资产，利空全球航运与制造业。（[Reuters](https://news.google.com/rss/articles/CBMipgFBVV95cUxQTzIxWFlrMnEyMFZoNHBRTjFybFYyNWtmNktvMlRFaGM0X2RBeWNzZzhycWxlVl9rSTlpdnBGVzY2dlZzWkFGUThqbkZPQUREak85NUREUjFkalExaHBJSk53aEFScDA0dFY2b1NwMlNiRVNkWndZanEzM05HVF9NNktScnUyNDdESkY5VlBTZDNsU3c0ZVY4aG1aaWZlZi1iQ3J2Y1Rn?oc=5)）
-
-2. **美国PCE通胀指标即将进行统计方法大修，或降低关键通胀读数**：美国经济分析局（BEA）正准备对核心PCE价格指数的计算方法进行全面改革，这一变动可能直接降低美联储最青睐的通胀指标读数。同时，堪萨斯城联储与圣路易斯联储的研究也呼吁重新审视核心通胀的衡量方式。 → 若通胀数据因统计调整而降温，将强化美联储降息预期，利好美股流动性。（[WSJ](https://news.google.com/rss/articles/CBMihgFBVV95cUxQVGJ3eDJ0X1JSRGZFSkpSQ2NSRXNUejVIQUU5bnJNekJ2UXZxS0F5UGhmMEk1cWRPNkhmanF2bUl4OHY2R0daLXpnV045eTVkZEpaV1lmYmFqN2p1blVSSEdQWHkwRFBiNUFFOG9qbXRKSXY0dkpYLWlFTThPUGlkd0Mtd3Y4dw?oc=5)）
-
-3. **中国领导层聚焦经济刺激需求，经济增长不及预期**：据多家国际媒体报道，中国二季度经济增速大幅下滑，未达官方目标，贸易顺差虽在收窄但出现新变化。高层正将政策焦点集中于推出新一轮经济刺激措施，以应对经济放缓带来的挑战。 → 政策预期升温，利好中国资产与内需板块估值修复。（[Financial Times](https://news.google.com/rss/articles/CBMihAFBVV95cUxOWDZLYy1UdXBSb0VIN0NIM0ktN3lHZ0hsaTlWMGVqU1I4TUhROXlHTi04UkxINk1fQlBuNVBkR3UtUUhhbU9XeHB5RmVTZkt0THJwSzU5YVVIRVd5V3h6Q2RjMHdBZFpPLVlTWjNuVWlLbGs3ZWRUQm5oWEFNU1BweWdZeng?oc=5)）
-
-4. **科技巨头财报周来临，AI交易面临关键验证**：本周Alphabet、特斯拉与英特尔等将密集发布财报，这被视为对近期科技股板块大轮动的关键测试。市场正密切关注AI债务浪潮与AI泡沫担忧，以判断资金是否会继续留在大型科技股。 → 财报指引将决定科技股短期方向，若超预期将利好AI硬件与软件产业链。（[Yahoo Finance](https://news.google.com/rss/articles/CBMivwFBVV95cUxNN3ZISzktMVBmM1NIUms1NFZmZmZZb1JhZVBHSENFTGNRTTloVkUxZ2trQU5YcDc1VE1XUzVLVHpPZl9GN0JoUWM2QTNsQkVBdV9KQkc3cl9CNlVRWXR1ZklIZUxIcDV5QjFXZG9uNnNZbFJ0Q2F3U2Q1OGRXajExUHBhOXgyMFctVm1mNDFsSFdjdW9OQ2dmTWo2UVRZZHNhZU9uZy1WTWZBdzFhamRmZ3FqOHlaY2hnZjBvQ2EyRQ?oc=5)）
-
-5. **波音CEO称需先巩固财务，预计2030年才能资助新机型**：波音公司新任CEO表示，在启动新飞机设计之前，公司必须先修复其资产负债表。波音预计要到**2030年**才能准备好为新飞机项目提供资金，这标志着该飞机制造商的战略重心转向财务修复。 → 短期利好波音现金流改善预期，利空航空制造供应链长期增长预期。（[WSJ](https://news.google.com/rss/articles/CBMixAFBVV95cUxQNFY1OEo1RkxhVTJOZkFjb2lQRlNXLVJBdlg0OHZINHVlWFpRWHRTVWFsbHJ3c0o1anp4ZE1feVVDRG1ibzBvVmtuWHMtemhGR0NSR0hsRWJBQWhXYnM0c1lpTGNYSUFMZEhJNm5lZUt0ZTl6Z25rZU5wZHVjU0NOSlp0VW5tM2tsWi1HLW9ITi1YYUlhM2J3aV94cHBBbGdhdkxfMHA4YUowVktad0trVFVGeE9DQmJjMTdFZE5vTENCWnNm?oc=5)）
-
-6. **世界人工智能大会揭示AI产业发展新趋势**：2026世界人工智能大会（WAIC）在上海闭幕，密集首发首秀前沿AI创新成果。云深处科技等企业展示具身智能全矩阵新品与标准化方案，推动具身智能从理念走向规模化落地，全球AI治理体系亦加速从理念迈向行动。 → 利好国内具身智能与人形机器人产业链，加速标准化进程。（[东方财富](https://news.google.com/rss/articles/CBMiZkFVX3lxTE5QVHBXZnJJWEt3ZXowLWhZakJZbVRGYlkxRnEzUHdaTHdJZ2dsY2VHeHlGbFZZa1M4ZUZ1amlIVW1MUzlraWpEbkl1Y0xyaVJGVERIM3dWYjktbEZleGJZTmljaUV6dw?oc=5)）
-
-7. **礼来斥资最高38亿美元收购迷幻药生物科技公司**：礼来宣布将以最高**38亿美元**收购迷幻药生物科技公司AtaiBeckley，正式进军迷幻药治疗精神健康疾病赛道。此举被视为该细分市场获得重大买入信号，GLP-1龙头正加速拓展精神类药物版图。 → 利好精神健康与迷幻药研发赛道，利空礼来竞争对手如辉瑞等在该领域的布局。（[CNBC](https://news.google.com/rss/articles/CBMid0FVX3lxTE5LcVI2T2tZZk1ZOXJrMV9Ed19SeXNaMkhBbWRkaVVzR1gtVGk5dHpmSFBISzNrc3Z0QUNuZ09WYWZZSklkdnhaWFVoZWVELWUtWlkxU1pieEdVcTR0UjlsVE55dm1QVWYzRUZhcFVOSFk4bGszS2lZ0gF8QVVfeXFMTlBqd3lvQXVjbl9Ta2lMaFNkUmZ5ek96bjY3QlB6bzZDa2hLMlAwNUkwOGM4Z0hpeUtjd0NEZkwzNHZ5eDNGaGd5c29ZM2F3S0RxUHgyTG9pRWpTMWxaOFdidjYwSURJbGxOMTVwWmxzUWYwSEozMVJZZkZMbg?oc=5)）
-
-8. **SpaceX上市后股价回落，做空者狂赚87亿美元**：SpaceX在IPO后股价迅速回落，华尔街分析师此前发布的极高目标价未能支撑估值。做空者在此次股价下跌中获利**87亿美元**，交易员正加大押注该股进一步下跌的力度。 → 利空SpaceX短期估值，反映市场对未盈利高估值科技股的分歧加剧。（[Fortune](https://news.google.com/rss/articles/CBMijgFBVV95cUxQNU1rWUNBOWJzQm1pUEpVeTVuTmVKTHJOZTZiRTFCY05BTDMzSEdmSFJ5eW9Yb3Q3SWJWLWtLYUFXVFF2SnM3c1RmT3hSY3c1RTgxWlJweDByR1ZzZnpwVWhwaDhyWTRGVEwtX3NBc2pSb1NSb2xLU1gwVEE4YVhnS1RrVDVXaldhZ2JsUnpB?oc=5)）
-
-9. **特朗普媒体公司拟向交易机构出售总统发帖优先访问权**：特朗普媒体公司计划向交易机构收取每月**10万美元**的费用，以获取美国总统社交媒体帖子的最快推送权限。此举被批评者指责为“公然腐败”，凸显了总统发帖对股票走势的巨大影响力。 → 引发市场公平性质疑，利空特朗普媒体公司声誉，但可能短期推升其营收预期。（[CNBC](https://news.google.com/rss/articles/CBMiqAFBVV95cUxOLWxuQ1JBdEdrNC1Ld3Y0RjlmNzJHVXpqWUd6MzlyMHlCbUJxdHg0U1ZxUGtGcF9OV2VrQ1VuQmJQSDVCMFZKQjkybzN1dU1EdjdlOVpwX3pFM3NuZkY4clhwRVBnMlg0VFRfa2ozbm9IeGdBZXZpeG9FSkJlc2RscklhNkRpOUJpcXhnb05peXk1TU04d3JMQWtPS2JqQXNtSDBBUUlZeHDSAa4BQVVfeXFMT3dFYWJ4Y1VUMG16SENGTExPNXZ1ZFUweWFVbjNKVWY4X1lTVmxVSzREcEtBVGVpLVdiMy1ORU11WFBIVXV6YlRfbzBTZFBpSFlpMk5zeHJjWERUT19YekRiTDZObnRQVkZuSWlZSXlCRmprZDV2NDRtZEtRendDVGwzaF83ZzNBZFo1bThFY1VxVlhUOUE5Z2hGYnp2d2tTNVBJdW93aWJ4SkFWZDZ3?oc=5)）
-
-10. **“WarshGPT”：华尔街正适应美联储沟通新时代**：华尔街正在适应美联储新主席Warsh领导下减少公开指引的沟通新模式。美联储近期的政策反复使得市场呼吁官员减少发声，市场正试图用“WarshGPT”来预测这种“马拉多纳式”的利率管理风格。 → 减少前瞻指引将加剧市场短期波动，利好利率衍生品交易量，利空依赖政策透明度的资产配置。（[CNBC](https://news.google.com/rss/articles/CBMimAFBVV95cUxPaW5BeHpmRUs0aGt0RThSdU1YaEQ1LXdRSTRyc0hhaGhjQldxR0o4LURIYVZpYkktdEZfbG1LSWZHRzRaV3pfaE5hZURoOFNtYnljTklUaU5RdkJScXA4Z285bktCOXk4dFZ1cjZabUE0QUl0NkQ2TXVQemgyUTNyWnVDU2xYN3d2NTBFUUM5enotbzFSREo3TNIBngFBVV95cUxPVUtIb2RCdVg4Z2VHcEQ4eVJ1ZEJzZjBFRnNTNWstelM4cDhlcTE5WGJJai16ZHRUc010ZFVjVHdxYkx5MXhsV200VWtHTUd1eUlXdmd2YmJVS3pYSGkwVVdnME5RU3g0OU5BaTdRWTFZZGJtMVEzbVdpT25fYTQ3aGhlV0tRM3JiTUxWQVR0blRVTVA3QkJ3MmctUjVfUQ?oc=5)）
+**今日定性导语**：全球市场呈现显著的“高低切换”特征，A股蓝筹与港股科网领涨，而日韩股市重挫。主线为资金涌入低位价值板块（煤炭、石油、电力、白酒）及央企回购增持潮，同时中东地缘冲突推升油价。关键风险关注美伊局势升级对全球通胀的二次冲击，以及美股大型科技股财报密集发布对高估值板块的考验。
 
 ---
 
-### 二、深度观察专栏
+## 一、市场全景
 
-#### 中东冲突升级与科技财报季：全球市场面临“避险与验证”双重考验
+### A股收盘（7月20日）
 
-本周末，全球金融市场正处于两个重大变量的交汇点：一方面是美伊冲突急剧升温带来的地缘政治避险情绪，另一方面是即将开启的美股科技巨头财报季对AI叙事的终极验证。路透社、彭博社、华尔街日报等多家媒体均对此进行了重点报道。
+| 指数 | 代码 | 最新价 | 涨跌幅 |
+|------|------|--------|--------|
+| 上证指数 | 000001 | 3796.28 | ↑0.85% |
+| 深证成指 | 399001 | 13610.23 | ↓0.71% |
+| 沪深300 | 000300 | 4598.32 | ↑1.53% |
+| 科创50 | 000688 | 1718.69 | ↑0.19% |
+| 创业板指 | 399006 | 3443.10 | ↑0.42% |
 
-**地缘政治与能源安全的连锁反应**
-美伊敌对行动的升级已直接传导至大宗商品市场。据路透社和彭博社报道，原油价格已突破**90美元/桶**大关，海湾国家股市率先回落。国际能源署（IEA）负责人发出严厉警告，称霍尔木兹海峡的危机正威胁全球能源安全。霍尔木兹海峡承载着全球约五分之一的石油运输量，任何形式的实质性封锁或中断，都将导致能源价格瞬间飙升，进而推高全球制造业成本并重新点燃通胀压力。这种宏观环境的变化将直接干扰美联储的降息路径，若能源价格持续走高，核心通胀的回落趋势可能被逆转，迫使央行在“防衰退”与“抗通胀”之间再次陷入两难。
+上证指数全天成交额约**1.29万亿元**，市场分化极为显著。全市场上涨家数**2506**家，下跌家数**2147**家，涨停**53**家，跌停数高达**211**家。申万一级行业呈现极致的“价值占优”风格：煤炭（**↑5.38%**）、石油石化（**↑5.01%**）、食品饮料（**↑3.74%**）领涨；而综合（**↓5.60%**）、建筑材料（**↓5.45%**）、电子（**↓4.89%**）大幅下挫。主力资金面数据暂不可得，但盘面呈现明显的存量博弈下资金从科技向低位蓝筹转移的轮动特征。
 
-**AI交易面临基本面“大考”**
-在地缘风险加剧的同时，市场对科技股的估值也正面临关键节点。雅虎财经和路透社指出，本周Alphabet、特斯拉和英特尔等巨头将密集发布财报，这被视为对近期科技股板块大轮动的关键测试。过去数月，AI叙事支撑了纳斯达克指数的飙升，但也引发了关于“AI债务浪潮”和“AI泡沫”的广泛担忧。SpaceX上市后股价回落、做空者狂赚**87亿美元**的现象，已暴露出市场对高估值科技股的容忍度正在下降。若本周科技巨头财报中的AI资本开支转化率（ROI）不及预期，或云收入增速放缓，可能引发资金从科技板块向防御性板块的加速轮动。
+### 美股收盘（7月21日凌晨）
 
-**影响与前瞻**
-当前全球市场正处于“避险与验证”的双重考验期。中东局势的不可预测性意味着能源溢价将长期存在，短期内原油及避险资产（如黄金、美债）可能继续受益。与此同时，科技股财报季将决定AI主线的持久性。若财报超预期，科技股有望对冲地缘风险带来的避险情绪；若财报不及预期，全球股市可能面临估值与风险偏好的双重下杀。投资者需密切关注霍尔木兹海峡航运动态及本周科技巨头的资本开支指引。
+| 指数 | 代码 | 最新价 | 涨跌幅 |
+|------|------|--------|--------|
+| 道琼斯工业 | DJI | 51839.26 | ↓0.59% |
+| 标普500 | SPX | 7443.28 | ↓0.19% |
+| 纳斯达克综合 | IXIC | 25508.07 | ↓0.05% |
+
+美股三大指数小幅收跌，市场受中东地缘局势紧张及财报季开启双重影响。原油价格因美伊冲突持续走高，压制市场风险偏好。主要驱动因素包括特朗普言论引发的市场波动及SpaceX股价持续回落。投资者等待特斯拉与谷歌等大型科技股财报，芯片股在AMD发布新品及微软利好带动下逆势反弹。标普500十一大板块中，能源板块受油价提振领涨，科技板块走势分化。
+
+### 港股收盘（7月20日）
+
+| 指数 | 代码 | 最新价 | 涨跌幅 |
+|------|------|--------|--------|
+| 恒生指数 | HSI | 25143.05 | ↑2.36% |
+| 恒生国企指数 | HSCEI | 8381.90 | ↑3.01% |
+| 恒生科技指数 | HSTECH | 4752.15 | ↑2.79% |
+
+恒指与恒生科技指数大幅反弹，南下资金净卖出约**59.62亿**港元，机构资金呈现逢高兑现态势。恒生科技指数领涨全球，科网权重股集体回暖，与招行H股等核心资产形成共振。
+
+### 全球其他市场（欧股 / 日经 / 韩股）（7月17日）
+
+欧洲STOXX指数收跌**0.34%**至641.53点。亚太市场遭遇重挫，日经225指数大跌**4.03%**至64141.12点，韩国KOSPI指数暴跌**6.37%**至6820.60点，主要受地缘政治风险外溢及全球资金避险情绪升温驱动。
+
+### 大宗商品与汇率
+
+WTI原油报**82.61**美元/桶（**↑0.16%**），布伦特原油报**75.29**美元/桶（**↓0.30%**），中东冲突对油价形成底部支撑。COMEX黄金微跌至**4010.70**美元/盎司（**↓0.13%**），地缘风险未能推升金价突破。中美利差方面，10年期美债收益率报**4.60%**，10年期中债收益率报**1.7453%**，利差维持深度倒挂。离岸人民币报**6.7948**。**中美利差深度倒挂格局延续，对中债利率下行空间形成一定制约。**
+
+### 估值水位与情绪
+
+5个核心指数中，标普500 PE分位达**76.4%**，PB分位高达**98.36%**，处于极高风险区；恒生科技PE分位仅**35.91%**，处于相对低价值区。其余指数整体持平。中证红利低波股息率约**4.42%**，高股息配置价值显著。
+
+---
+
+## 二、行业洞察
+
+### 全球 TOP 10 新闻
+
+1. **华尔街下跌，聚焦伊朗局势与财报季**：美股周一收跌，油价因地缘冲突上涨施压市场，投资者关注大型科技股财报。 → 利空科技股估值，利好能源板块。 ([Reuters](https://news.google.com/rss/articles/CBMixgFBVV95cUxOakxUc2hmUzNWRUJsczdpQTNsVHY4ZURqeFpTOEZkSFlGMk8zRFZxZHE5aHNIRUtTYzAwejgweG55eXNZQTc5S083Vm9HbGQ4T1E1S1RBbjcxQVJGdGFwcnNJM0pIbzRZZGtSV3hBQUZLSVp4V0pXUFRKMGZyZ0xqY0VIaHBtUjItQUY5dXgzREZYT0xUNWJJTkxlSUhrUS1FczhIYkV6VDJHQndKOFJJUm5zYy1OdVV3dVlUWGFrQjB2OGN0TUE?oc=5))
+2. **AMD推出Helios机架AI系统挑战英伟达**：AMD发布首款机架级AI系统，微软成为最新客户，扩大双方战略合作。 → 利好AMD产业链，加剧AI芯片竞争。 ([CNBC](https://news.google.com/rss/articles/CBMidkFVX3lxTE0tRlF5bzh6NUI5VmZKRW9oTzljR3pJbjVLSl9Yb0NqeEtfMVlTQU5TcHl2dU10YkNtN1ZYb0pCWHl1RHhVd1hNZkZDQ21GSTN0NXZTVXRwalhsWk1tNjlYejF5SUF0TTNLdXVqZnROaWV6R3JfZ2fSAXtBVV95cUxPSE4wRDExampVaGU0bDg4VUVIVDFxOEo1QkxXelFLQ2RwTGpzWHJrOV9vb1l3dWIwUWtEWlU5THY0My1HTUlEMVFpRVFCOURkTUVWQXQ0aktqTzdqN3luZkZVZC05eXRwN2otTFVuSHVLdS1kVEtpNU9WT1E?oc=5))
+3. **分析师称“七巨头”概念已过时**：花旗等机构策略师指出，AI股票赢家格局已变，“七巨头”标签不再适用。 → 中性，反映科技股内部结构分化加剧。 ([Yahoo Finance](https://news.google.com/rss/articles/CBMiswFBVV95cUxNQ0FZWnZGN1hrbERzRGIyR0JPSklyQlJaWXcwQlNEdG1wZEU3R0xWQVZoQVFxQUpCOE9HSUtYb3Z6c0Jza01qWkZ5ZEU2dVEyTHZyVkNRbFlxWGZYUlF2TVFlZ1ZHQ0VzbUVaVXJiQS1hem1DUGZEWUxiY25ta016aThMMWlYLXNiZXpCMjJZOW82Q1FFV0xMNm1qR0ItS1BHM3I1OVd4Y1Y1Q0dkZGhOTGJhaw?oc=5))
+4. **SpaceX市值已蒸发1.4万亿美元**：SpaceX股价连续第七个交易日下跌，较历史高点回落45%。 → 利空SpaceX及相关概念，反映估值回调压力。 ([Barron's](https://news.google.com/rss/articles/CBMijgFBVV95cUxNbDRKc0RrSXZmTGRKREhJcXhybEsxRVhaY2pNYWxJQzFKQUlWUTVvaloyZmVTZmRqVlM2aktqa0FTaThwOHVLOEdTUUduWjh3Y3RMU1o5T3VQSEtiV3lxZlM1YWI4ajJWSWtWcl82ZTZKd0d1SkdLRDhoY0NsZFh6ZmliS1NwaV9LSXFQcW1n?oc=5))
+5. **波音CEO称需数年修复财务再推新机型**：波音表示需再等几年修复财务后，才能启动全新飞机设计项目。 → 中性偏空，反映波音短期扩张能力受限。 ([WSJ](https://news.google.com/rss/articles/CBMixAFBVV95cUxQNFY1OEo1RkxhVTJOZkFjb2lQRlNXLVJBdlg0OHZINHVlWFpRWHRTVWFsbHJ3c0o1anp4ZE1feVVDRG1ibzBvVmtuWHMtemhGR0NSR0hsRWJBQWhXYnM0c1lpTGNYSUFMZEhJNm5lZUt0ZTl6Z25rZU5wZHVjU0NOSlp0VW5tM2tsWi1HLW9ITi1YYUlhM2J3aV94cHBBbGdhdkxfMHA4YUowVktad0trVFVGeE9DQmJjMTdFZE5vTENCWnNm?oc=5))
+6. **北京上半年GDP同比增长5.4%**：北京市上半年实现地区生产总值26411.9亿元，经济运行稳中提质。 → 利好宏观预期，提振市场信心。 ([东方财富](https://news.google.com/rss/articles/CBMiZkFVX3lxTE95U29hWmlwMGJsWXVRZWVnR1UyWHU3M2FLeFctblZIV29kajBFRGMwY2F2UUl5NWVJQktjemp2cEEzaEwyWGFuS3RyZjZON0F6MmJwTms5VTlqUkNMcTVfX0lOMG1pZw?oc=5))
+7. **央企领衔，一日百余家公司公告回购增持**：多家央企及金融机构宣布增持回购，释放利好提振市场信心。 → 利好A股稳市情绪，提振蓝筹估值。 ([第一财经](https://news.google.com/rss/articles/CBMiU0FVX3lxTE8ybTkyWWJpbjBKTmdYcjliOWdvanNsNVBhRnZQSWowVF9mUnlrY1R0MUdUMTJVR2trcmJON0RTeFJfV19XajhFQ05vWDAtMENjbjl3?oc=5))
+8. **五大险企同日发声力挺资本市场**：平安、太保、新华等险企宣布加大权益资产投资强度，提高股东回报。 → 利好险资重仓股及红利资产。 ([新华网](https://news.google.com/rss/articles/CBMid0FVX3lxTE5UaTk3YmZEM2ZiQzFWX1Z0TEczQzhXcHRFa3hUM0R0ejd3YWNlbDMyb0tUdkRLamFKVGwxb3JMRXBQNk1ucW4xWkJQRWNSaTZVd0V3MUdkWHNiZWtGMDY1RTlUQV85aXN1bUprelZoeVROTlZxeWFR?oc=5))
+9. **WAIC具身智能真机扎堆进厂**：世界人工智能大会上，具身智能机器人产业链提速，多家企业方案落地500强工厂。 → 利好机器人及智能制造产业链。 ([第一财经](https://news.google.com/rss/articles/CBMiU0FVX3lxTFBKSUh3OEpWWjRLNE5vd3FYQUZkVU9Vbm44MUNKRlBBTUpaZ2pWUnBGWW5vSms4SW1pWktRczl4emJJN0xmMVFfWk1jbmI2eDdVWGp3?oc=5))
+10. **应对低利率，理财子公司加大“打新”力度**：长鑫科技中签结果出炉，社保、险资、公募齐聚，打新力度持续加大。 → 利好新股市场及低利率下的资产配置。 ([东方财富](https://news.google.com/rss/articles/CBMiZkFVX3lxTE1GZm1kVmJtWDlUZHppeWF4NEE3MXM4U1hISzluQ21jOTh0Z1c4LXlNMEw5U2ZrTXZIeE1aeE5vVmxoRzJHbzNSY2FidVZXa3dGaTAwV2g3YkNGbm1pLWh0NUZQQmdfdw?oc=5))
+
+### 持仓动态与聚焦
+
+#### 个人持仓行情快照
+
+| 标的 | 代码 | 市场 | 最新价 | 涨跌幅 |
+|------|------|------|--------|--------|
+| 招商银行A | 600036 | A股 | 38.91 元 | ↑2.34% |
+| 招商银行H | 03968 | 港股 | 48.76 港元 | ↑3.57% |
+| 长江电力 | 600900 | A股 | 28.98 元 | ↑3.54% |
+| 红利低波ETF易方达 | 563020 | A股 | 1.166 元 | ↑2.37% |
+| QQQM | QQQM | 美股 | 286.58 美元 | ↑0.09% |
+| SPY | SPY | 美股 | 742.09 美元 | ↓0.16% |
+
+> **分红与研报动态**：招商银行A于7月10日完成除权除息（10派10.03元）；长江电力于7月17日完成除权除息（7.9元）。招商银行H股分红将于8月21日发放。研报方面，东海证券维持“买入”，万联证券与国信证券维持“增持”评级。
+
+##### 持仓聚焦（未来催化）
+
+**泸州老窖**（协同）：白酒板块今日集体爆发，泸州老窖大涨**6.33%**，与持仓中食品饮料及红利防御逻辑形成共振。在险资发声力挺权益资产背景下，高股息消费龙头获资金回补 → 关注本周白酒板块半年报业绩预告窗口。
+
+**新易盛**（异动）：光通信板块回暖，新易盛大涨**5.62%**。尽管电子板块整体承压，但算力光模块细分领域在海外存储芯片反弹带动下出现修复 → 关注美股科技巨头财报对资本开支预期的指引。
+
+**扬农化工**（异动）：基础化工板块整体下挫，但扬农化工逆势大涨**7.86%**，呈现明显的个股独立行情，可能受中报业绩超预期或产品价格拐点催化 → 关注本周农药价格指数变动及中报披露进度。
+
+#### QDII 溢价与申购额度监测
+
+| ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
+|-----|------|-------|------------|------|
+| 纳指ETF国泰 | 513100 | 6.62% | ↑1.17% | △溢价 |
+| 纳指ETF广发 | 159941 | 5.30% | ↑1.05% | △溢价 |
+| 纳斯达克100ETF招商 | 159659 | 4.87% | ↑1.70% | △溢价 |
+| 标普500ETF博时 | 513500 | 3.21% | ↑0.32% | △溢价 |
+| 标普500ETF国泰 | 159612 | 3.03% | 0.00% | △溢价 |
+| 标普500ETF南方 | 513650 | 2.07% | ↑0.36% | △溢价 |
+
+QDII溢价整体偏高，最高溢价达**6.62%**（纳指ETF国泰），多只纳指相关ETF溢价超5%，需警惕场内追高风险。
+
+| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
+|------|------|---------|---------|-----------|------------|
+| 建信纳指100c | 012752 | 3.255 | 限大额 | 100元 | — |
+| 建信纳指100d | 023422 | 3.2705 | 限大额 | 100元 | — |
+| 建信纳指100a | 539001 | 3.3628 | 限大额 | 100元 | — |
+| 大成纳指100a | 000834 | 6.1402 | 限大额 | 10元 | — |
+| 大成纳指100c | 008971 | 6.0847 | 限大额 | 10元 | — |
+| 华安纳指100c | 014978 | 7.8384 | 限大额 | 10元 | — |
