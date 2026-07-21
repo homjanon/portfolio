@@ -78,76 +78,6 @@ def _num(v):
     try: v = float(v); return round(v, 4) if abs(v) < 1e6 else round(v, 2)
     except: return None
 
-def _load_qdii_prev():
-    """读取上一运行日的 QDII 快照（对比昨日用）。不存在/损坏返回 None。
-    注意：data_*.json 被 .gitignore 排除、不跨运行留存，故独立文件 qdii_prev.json
-    承担跨运行持久化职责（由 _save_qdii_snapshot 写入、工作流提交）。"""
-    path = os.path.join(OUT_DIR, "qdii_prev.json")
-    if not os.path.exists(path):
-        return None
-    try:
-        with open(path, encoding="utf-8") as f:
-            return json.load(f)
-    except Exception:
-        return None
-
-def _save_qdii_snapshot(qdii_data):
-    """把当日 QDII 基准存为快照，供下一运行日作为「昨天」对比基准。"""
-    snap = {
-        "ts": _ts(),
-        "场内ETF": [{"代码": e.get("代码"), "溢价率": e.get("溢价率")}
-                    for e in qdii_data.get("场内ETF", [])],
-        "场外QDII": [{"代码": e.get("代码"), "日累计限定金额": e.get("日累计限定金额")}
-                     for e in qdii_data.get("场外QDII", [])],
-    }
-    path = os.path.join(OUT_DIR, "qdii_prev.json")
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(snap, f, ensure_ascii=False, indent=2)
-
-def _shorten_qdii_name(full_name):
-    """将东财场外 QDII 基金全称缩写为短名。
-
-    统一格式：公司名 + 纳指100/标普500 + 小写份额字母(a/c/d)。
-    例：建信纳斯达克100指数(QDII)C人民币 → 建信纳指100c
-        大成纳斯达克100ETF联接(QDII)A人民币 → 大成纳指100a
-
-    规则：提取份额字母(转小写) + 指数名标准化 + 清括号/ETF联接/币种后缀；
-         基金公司名（易方达/建信/广发…）**完整保留，绝不缩写**。
-    纯规则驱动、零硬编码映射，动态列表可复用。"""
-    if not full_name:
-        return ""
-    s = full_name.strip()
-    # ① 提取 (QDII)X / (LOF)X 份额后缀字母（任意英文份额 A/B/C/D/E…，转小写）
-    _suffix = ""
-    _m = re.search(r'\((?:QDII|LOF)[^)]*\)\s*([A-Za-z])', s)
-    if _m:
-        _suffix = _m.group(1).lower()
-    # ② 指数名称标准化（带「指数」后缀优先，break 后不再重复匹配）
-    #    同时覆盖裸词（如联接基金全称「纳斯达克100ETF联接」不含「指数」二字）
-    _idx_map = [
-        ("纳斯达克100指数", "纳指100"),
-        ("纳斯达克100",     "纳指100"),
-        ("标普500指数",     "标普500"),
-        ("标普500",         "标普500"),
-        ("纳斯达克指数",    "纳指综"),
-        ("道琼斯指数",      "道指"),
-    ]
-    for _long, _short in _idx_map:
-        if _long in s:
-            s = s.replace(_long, _short)
-            break
-    # ③ 清理 (QDII)/(LOF) 括号 + 份额字母 + 币种后缀（一次移除）；
-    #    清理 "ETF联接"/"ETF" 等多余词（东财联接基金全称含此，否则会残留导致超长）；
-    #    我们的筛选已排除美元，实际仅人民币；仍兼容清理任意币种。
-    #    ★ 基金公司名（易方达/建信/广发…）保持完整，不缩写
-    s = re.sub(r'\s*\((?:QDII|LOF)[^)]*\)\s*[A-Za-z]?\s*(?:人民币|美元|港元)?', '', s)
-    s = re.sub(r'\s*ETF\s*联接\s*', '', s)
-    s = re.sub(r'\s*ETF\s*', '', s)
-    s = re.sub(r'\s*指数\s*$', '', s)
-    s = re.sub(r'\s+', '', s)
-    # ④ 拼接份额字母（清理后均 ≤10 字符，无需截断）
-    return s + _suffix
-
 # ═══════════════════════════════════════════════════════════════
 # 数据源层
 # ═══════════════════════════════════════════════════════════════
@@ -325,10 +255,14 @@ def _yf_fallback(ticker_map):
                 price = round(float(close.iloc[-1]), 2)
                 prev = round(float(close.iloc[-2]), 2)
                 chg_pct = round((price - prev) / prev * 100, 2)
-                result[key] = {"最新价": price, "涨跌幅": chg_pct}
+                _d = hist.index[-1]
+                result[key] = {"最新价": price, "涨跌幅": chg_pct,
+                               "日期": _d.strftime("%Y-%m-%d")}
             elif len(close) == 1:
                 price = round(float(close.iloc[-1]), 2)
-                result[key] = {"最新价": price, "涨跌幅": None}
+                _d = hist.index[-1]
+                result[key] = {"最新价": price, "涨跌幅": None,
+                               "日期": _d.strftime("%Y-%m-%d")}
         except:
             pass
     
@@ -387,13 +321,13 @@ def fetch_market_cn():
 
 # ─── 2. 港股指数行情（不变）──────────────────────────────────
 def fetch_market_hk():
-    """恒生指数 + 恒生中国企业指数 + 恒生科技指数（数据源直接返回，零额外开销）"""
+    """恒生指数 + 恒生中国企业指数"""
     df = _akshare_sina_hk_index()
     if df is not None:
         rows = []
         for _, r in df.iterrows():
             name = str(r.get("名称","")).strip()
-            if name in ("恒生指数","恒生中国企业指数","恒生科技指数"):
+            if name in ("恒生指数","恒生中国企业指数"):
                 prev = _num(r.get("昨收"))
                 chg = _num(r.get("涨跌额"))
                 pct = round((float(chg)/float(prev))*100,2) if chg and prev and float(prev)>0 else None
@@ -405,13 +339,13 @@ def fetch_market_hk():
                     "最高": _num(r.get("最高")),
                     "最低": _num(r.get("最低")),
                 })
-        if len(rows) >= 3:
+        if len(rows) >= 2:
             return _ok(rows)
 
     # 新浪API失败 → yfinance 兜底
-    yf_hk = _yf_fallback({"恒生指数": "^HSI", "恒生中国企业指数": "^HSCE", "恒生科技指数": "^HSTECH"})
+    yf_hk = _yf_fallback({"恒生指数": "^HSI", "恒生中国企业指数": "^HSCE"})
     rows = []
-    for name, yf_key in [("恒生指数", "恒生指数"), ("恒生中国企业指数", "恒生中国企业指数"), ("恒生科技指数", "恒生科技指数")]:
+    for name, yf_key in [("恒生指数", "恒生指数"), ("恒生中国企业指数", "恒生中国企业指数")]:
         if yf_hk.get(yf_key):
             d = yf_hk[yf_key]
             rows.append({"指数": name, "代码": yf_key,
@@ -467,31 +401,44 @@ def fetch_market_global():
         else:
             result[name] = {"代码": sym, "error": "美股数据源均不可用"}
 
-    # ── 全球指数: akshare东财 → yfinance兜底 ──
-    df = _ak_eastmoney("index_global_spot_em")
-    global_yf = {"日经225": "^N225", "KOSPI": "^KS11", "STOXX": "^STOXX"}
+    # ── 全球指数: yfinance 优先（真实最新收盘）→ akshare东财兜底 ──
+    # 与美股分支一致：yfinance history 返回最新一个已收盘交易日，规避
+    # akshare 现货在休市时段「冻结」于上一交易日的问题（曾导致显示周一而非周二）。
+    global_yf = {"日经225": "^N225", "KOSPI": "^KS11", "STOXX 600": "^STOXX"}
+    global_market = {"日经225": "jp", "KOSPI": "kr", "STOXX 600": "eu"}
     global_targets = {"日经225": "日经225", "韩国KOSPI": "KOSPI", "STOXX": "STOXX 600"}
+
+    # ① yfinance 优先（含新鲜度校验）
+    _global_yf = _yf_fallback(global_yf)
+    for label, data in _global_yf.items():
+        entry = {"名称": label, "最新价": data["最新价"], "涨跌幅": data["涨跌幅"],
+                 "source": "yfinance"}
+        if _us_resolver and data.get("日期"):
+            _mkt = global_market.get(label)
+            if _mkt:
+                _expected = str(_us_resolver.get_business_date(_mkt))
+                if str(data["日期"]) < _expected:
+                    entry["_stale"] = True
+                    entry["_expected_date"] = _expected
+                    print(f"    ⚠️ 全球 {label} yfinance 数据日期 {data['日期']} < 预期 {_expected}（滞后）")
+        result[label] = entry
+
+    # ② akshare 东财兜底（仅 yfinance 缺失/失败时）
+    df = _ak_eastmoney("index_global_spot_em")
     if df is not None and len(df) > 0:
         for _, r in df.iterrows():
             try:
                 n = str(r.iloc[1]) if len(r.columns) > 1 else str(r.iloc[0])
                 for kw, label in global_targets.items():
+                    # 已有 yfinance 有效数据则跳过
+                    if label in result and result[label].get("最新价") is not None:
+                        continue
                     if kw in n:
                         result[label] = {"名称": n, "最新价": _num(r.iloc[2]) if len(r.columns) > 2 else None,
                                         "涨跌幅": _num(r.iloc[3]) if len(r.columns) > 3 else None,
-                                        "source": "akshare东财"}
+                                        "source": "akshare东财兜底"}
                         break
             except: pass
-
-    # 外围 yfinance 兜底
-    global_missing = {label: global_yf[label] for label in global_yf
-                      if label not in result
-                      or (label in result and result[label].get("error"))
-                      or result[label].get("最新价") is None}
-    if global_missing:
-        for label, data in _yf_fallback(global_missing).items():
-            result[label] = {"名称": label, "最新价": data["最新价"],
-                            "涨跌幅": data["涨跌幅"], "source": "yfinance兜底"}
 
     # 标记完全缺失
     all_labels = list(us_map.values()) + list(global_targets.values())
@@ -822,10 +769,6 @@ def fetch_extra():
 
     # ── v24方案: QDII监测 — 腾讯API实时价 + 东方财富HTTP净值（不依赖 fund_etf_spot_em）──
     qdii_data = {"场内ETF": [], "场外QDII": []}
-    # 加载昨日 QDII 基准，用于计算「对比昨日」列（跨运行快照）
-    _prev = _load_qdii_prev() or {}
-    _prev_etf = {e["代码"]: e.get("溢价率") for e in _prev.get("场内ETF", []) if e.get("代码")}
-    _prev_qdii = {e["代码"]: e.get("日累计限定金额") for e in _prev.get("场外QDII", []) if e.get("代码")}
     _etf_set = {"513100","513500","159941","159659","159612","513650"}
     _etf_names = {
         "513100":"纳指ETF国泰","513500":"标普500ETF博时",
@@ -862,13 +805,10 @@ def fetch_extra():
         except Exception as _nav_e:
             print(f"      东方财富净值API失败({_code}): {_nav_e}")
         _pr = round((_mp - _nav) / _nav * 100, 2) if _mp and _nav and _nav > 0 else None
-        _prev_pr = _prev_etf.get(_code)
-        _pr_delta = round(_pr - _prev_pr, 2) if (_pr is not None and _prev_pr is not None) else None
         qdii_data["场内ETF"].append({
             "代码": _code, "名称": _etf_names.get(_code,""),
             "最新价": _mp, "涨跌幅": _cp,
             "最新净值": _nav, "净值日期": _nav_d, "溢价率": _pr,
-            "溢价率对比昨日": _pr_delta,
             "溢价率来源": "腾讯价+东方财富净值",
         })
     # 场外QDII申购额度（纳指100/标普500，可申购且额度较大的6条）
@@ -893,7 +833,6 @@ def fetch_extra():
                 qdii_data["场外QDII"].append({
                     "代码": _c,
                     "简称": str(_r['基金简称']),
-                    "名称_短": _shorten_qdii_name(str(_r['基金简称'])),
                     "最新净值": str(_r['最新净值/万份收益']),
                     "净值日期": str(_r['最新净值/万份收益-报告时间']),
                     "申购状态": str(_r['申购状态']),
@@ -905,14 +844,7 @@ def fetch_extra():
     if qdii_data["场外QDII"]:
         qdii_data["场外QDII"].sort(key=lambda x: x["日累计限定金额"], reverse=True)
         qdii_data["场外QDII"] = qdii_data["场外QDII"][:6]
-    # 计算每只场外QDII相对昨日的限额变化（按代码匹配，今日有/昨日无则留空）
-    for _e in qdii_data["场外QDII"]:
-        _c = _e.get("代码"); _lim = _e.get("日累计限定金额")
-        _prev_lim = _prev_qdii.get(_c)
-        _e["限额对比昨日"] = round(_lim - _prev_lim, 2) if (_lim is not None and _prev_lim is not None) else None
     result['QDII_监测'] = qdii_data
-    # 留存当日 QDII 基准，供下一运行日对比（跨运行持久化）
-    _save_qdii_snapshot(qdii_data)
 
     return _ok(result)
 
