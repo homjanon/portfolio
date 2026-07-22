@@ -124,12 +124,12 @@ python3 scripts/prefetch_data.py
 
 📊 先读取 `data_forex_rate.json` 获取原油/黄金现货数据，再读取 `data_extra.json` 获取 USD/CNH 汇率（美元/离岸人民币），填表后用一段话概述。
 
-| 品种 | 最新价 | 涨跌幅 | 数据来源 |
-|------|--------|--------|---------|
-| WTI原油 | （读JSON） | （读JSON） | akshare期货 |
-| COMEX黄金 | （读JSON） | （读JSON） | akshare期货 |
-| 布伦特原油 | （读JSON） | （读JSON） | akshare期货 |
-| 美元/离岸人民币 | （读JSON） | （读JSON） | data_extra |
+| 品种 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| WTI原油 | （读JSON） | （读JSON） |
+| COMEX黄金 | （读JSON） | （读JSON） |
+| 布伦特原油 | （读JSON） | （读JSON） |
+| 美元/离岸人民币 | （读JSON） | （读JSON） |
 
 **中美利差解读（必须输出）**：在利率板块末尾，用一句话结合当日中美利差水平，点明对中债利率走势的影响方向（利差走阔→利好中债/利差收窄→承压），简洁有力。
 

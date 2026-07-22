@@ -253,6 +253,7 @@ setInterval(function(){if(!playing)return;pos=a.currentTime;upd()},250)
 # ============================================================
 TABLE_SECTION_KW = [
     'A股收盘', '美股收盘', '港股收盘',
+    '全球其他市场', '大宗商品与汇率', '估值水位与情绪',
     '场内ETF溢价率', '场外QDII申购额度', 'QDII',
     '持仓',          # 个人持仓行情快照 → 与 A股/美股 收盘一致渲染为 .data-table
 ]
