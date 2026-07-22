@@ -401,44 +401,59 @@ def fetch_market_global():
         else:
             result[name] = {"代码": sym, "error": "美股数据源均不可用"}
 
-    # ── 全球指数: yfinance 优先（真实最新收盘）→ akshare东财兜底 ──
-    # 与美股分支一致：yfinance history 返回最新一个已收盘交易日，规避
-    # akshare 现货在休市时段「冻结」于上一交易日的问题（曾导致显示周一而非周二）。
+    # ── 全球指数: yfinance 优先（含当日新鲜度校验）→ akshare东财兜底 ──
+    # 与美股分支一致：yfinance history 返回最新一个已收盘交易日。
+    # 优化：yfinance 返回「陈旧但存在」的数据时不再照显示，改取东财实时现货；
+    #       仅当 yfinance 陈旧 且 东财也不可用 时才置 _stale 触发滞后告警。
+    #       （报告固定于北京时间约07:00跑，此时全球市场均收盘/盘前，东财现货=上一交易日收盘）
     global_yf = {"日经225": "^N225", "KOSPI": "^KS11", "STOXX 600": "^STOXX"}
     global_market = {"日经225": "jp", "KOSPI": "kr", "STOXX 600": "eu"}
     global_targets = {"日经225": "日经225", "韩国KOSPI": "KOSPI", "STOXX": "STOXX 600"}
 
-    # ① yfinance 优先（含新鲜度校验）
+    # ① yfinance 优先，并记录每标的是否「当日新鲜」
     _global_yf = _yf_fallback(global_yf)
+    yf_fresh = {}
     for label, data in _global_yf.items():
         entry = {"名称": label, "最新价": data["最新价"], "涨跌幅": data["涨跌幅"],
                  "source": "yfinance"}
+        fresh = True
         if _us_resolver and data.get("日期"):
             _mkt = global_market.get(label)
             if _mkt:
                 _expected = str(_us_resolver.get_business_date(_mkt))
                 if str(data["日期"]) < _expected:
-                    entry["_stale"] = True
-                    entry["_expected_date"] = _expected
-                    print(f"    ⚠️ 全球 {label} yfinance 数据日期 {data['日期']} < 预期 {_expected}（滞后）")
+                    fresh = False
+                    print(f"    ⚠️ 全球 {label} yfinance 数据日期 {data['日期']} < 预期 {_expected}（陈旧，将改取东财）")
+        yf_fresh[label] = fresh
         result[label] = entry
 
-    # ② akshare 东财兜底（仅 yfinance 缺失/失败时）
+    # ② akshare 东财兜底：仅当 yfinance 陈旧/缺失 时覆盖（不再仅限完全缺失）
     df = _ak_eastmoney("index_global_spot_em")
     if df is not None and len(df) > 0:
         for _, r in df.iterrows():
             try:
                 n = str(r.iloc[1]) if len(r.columns) > 1 else str(r.iloc[0])
                 for kw, label in global_targets.items():
-                    # 已有 yfinance 有效数据则跳过
-                    if label in result and result[label].get("最新价") is not None:
+                    # yfinance 当日已新鲜 → 保留 yfinance，跳过东财
+                    if yf_fresh.get(label):
                         continue
                     if kw in n:
-                        result[label] = {"名称": n, "最新价": _num(r.iloc[2]) if len(r.columns) > 2 else None,
+                        result[label] = {"名称": n,
+                                        "最新价": _num(r.iloc[2]) if len(r.columns) > 2 else None,
                                         "涨跌幅": _num(r.iloc[3]) if len(r.columns) > 3 else None,
-                                        "source": "akshare东财兜底"}
+                                        "source": "akshare东财实时"}
                         break
             except: pass
+
+    # ③ 滞后告警：仅 yfinance 陈旧 且 东财也未补齐 时才置 _stale
+    for label in list(global_targets.values()):
+        if label in result and not yf_fresh.get(label) \
+           and result[label].get("source") != "akshare东财实时":
+            _mkt = global_market.get(label)
+            _expected = str(_us_resolver.get_business_date(_mkt)) if (_us_resolver and _mkt) else ""
+            result[label]["_stale"] = True
+            result[label]["_expected_date"] = _expected
+            print(f"    ⚠️ 全球 {label} yfinance 与东财均不可用/陈旧（预期 {_expected}）")
 
     # 标记完全缺失
     all_labels = list(us_map.values()) + list(global_targets.values())
