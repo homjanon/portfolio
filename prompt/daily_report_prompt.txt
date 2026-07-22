@@ -34,11 +34,11 @@ python3 scripts/prefetch_data.py
 
 | 板块 | JSON 文件 | 主要数据来源 | 覆盖内容 |
 |------|-----------|-------------|---------|
-| A股市场 | `data_market_cn.json` | akshare新浪→腾讯兜底 | 上证/深成/沪深300/科创50/创业板指（含成交额） |
-| 港股市场 | `data_market_hk.json` | akshare新浪港股→腾讯兜底 | 恒生指数、恒生国企、恒生科技 |
-| 美股+全球 | `data_market_global.json` | akshare新浪(美股)+东财(全球)→腾讯兜底 | 美股三大指数、日经/STOXX/KOSPI |
+| A股市场 | `data_market_cn.json` | 东财push2→yfinance兜底 | 上证/深成/沪深300/科创50/创业板指（含成交额） |
+| 港股市场 | `data_market_hk.json` | 东财push2→yfinance兜底 | 恒生指数、恒生国企 |
+| 美股+全球 | `data_market_global.json` | 东财push2→yfinance兜底 | 美股三大指数、日经/STOXX/KOSPI |
 | 汇率/商品/债券 | `data_forex_rate.json` | akshare期货+债券利率 | 原油/黄金/中美债收益率 |
-| 估值/PE分位 | `data_valuation.json` | 雪球蛋卷API+akshare新浪 | 沪深300/创业板/红利低波/恒生科技/标普500 PE/PB/分位/股息率 |
+| 估值/PE分位 | `data_valuation.json` | 雪球蛋卷API+东财push2 | 沪深300/创业板/红利低波/恒生科技/标普500 PE/PB/分位/股息率 |
 | 基金估值 | `data_fund.json` | akshare天天基金净值估算 | QDII ETF净值估算参考 |
 | 🆕 行业+资金 | `data_industry.json` | akshare(申万+同花顺+乐咕乐股) | 31行业涨跌幅TOP3/BOTTOM3+90行业资金净流入+全市场PE日更 |
 | 🆕 持仓+分红+监督池 | `data_holdings.json` | 腾讯API+akshare(分红+研报) | 招行A/H/长电/563020/QQQM/SPY行情+54只监督池行情+分红日历+研报评级 |
@@ -81,7 +81,7 @@ python3 scripts/prefetch_data.py
 
 #### 美股收盘（__US_CLOSE__）【仅当 `data_market_global.json` 存在时输出，否则整节跳过】
 
-> **数据时效提示**：若 `data_market_global.json` 中美股数据含 `_stale: true`，须在本节开头注明「⚠️ 美股数据可能滞后（预期 `_expected_date` 收盘），以最新可得为准」，再写行情。
+> **数据时效提示**：若 `data_market_global.json` 中美股数据含 `_stale: true`，须在本节开头注明「⚠️ 美股数据可能滞后（东财与 yfinance 均暂不可得），以最新可得为准」，再写行情。
 
 📊 先读取 `data_market_global.json` 获取 DJI/SPX/IXIC 点位+涨跌幅，然后补充以下行情描述：
 
@@ -110,7 +110,7 @@ python3 scripts/prefetch_data.py
 
 #### 全球其他市场（欧股 / 日经 / 韩股）（__GLOBAL_CLOSE__）【仅当 `data_market_global.json` 存在时输出，否则整节跳过】
 
-> **数据时效提示**：若 `data_market_global.json` 中日经225 / KOSPI / STOXX 600 任一含 `_stale: true`，须在本节开头注明「⚠️ 全球数据可能滞后（预期 `_expected_date` 收盘），以最新可得为准」，再写行情。
+> **数据时效提示**：若 `data_market_global.json` 中日经225 / KOSPI / STOXX 600 任一含 `_stale: true`，须在本节开头注明「⚠️ 全球数据可能滞后（东财与 yfinance 均暂不可得），以最新可得为准」，再写行情。
 
 📊 先读取 `data_market_global.json` 获取 STOXX 600/日经225/KOSPI 点位+涨跌幅，填表后用一段话概述主要驱动。
 
