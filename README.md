@@ -68,7 +68,7 @@ schedule / workflow_dispatch
 | 港股指数 | 东财 push2（`100.HSI` / `100.HSCEI`） | `hk_open` | yfinance（`^HSI` / `^HSCE`） |
 | 美股+全球指数 | 东财 push2（`100.DJIA`/`100.SPX`/`100.NDX`/`100.NDX100`/`100.N225`/`100.KS11`/`100.SXXP`） | `u_open` | yfinance（`^DJI`/`^GSPC`/`^IXIC`/`^NDX`/`^N225`/`^KS11`/`^SXXP`） |
 | 汇率/商品/债券 | akshare 期货 + 中美债收益率 | 完整模式 | — |
-| 估值/PE 分位（6 指数） | 雪球蛋卷 API `danjuanfunds.com/djapi/index_eva/dj` | `a_open` | — |
+| 估值/PE 分位（11 指数，固定顺序） | 雪球蛋卷 API `danjuanfunds.com/djapi/index_eva/dj`（1 次返回 63，白名单 11） | `a_open` | — |
 | 基金净值/溢价 | akshare 天天基金 + 东方财富净值 HTTP | `a_open OR u_open` | — |
 | 行业轮动+资金流 | akshare（申万+同花顺+乐咕乐股） | `a_open` | — |
 | 个人持仓行情 | 腾讯财经 `qt.gtimg.cn` | `a_open OR u_open` | yfinance |
@@ -98,7 +98,7 @@ schedule / workflow_dispatch
 
 - 「简称」列由 `prefetch_data.py::_shorten_qdii_name()` 自动生成（字段 `名称_短`），**基金公司名完整保留**。
 - **统一短名格式**：`公司名 + 纳指100/标普500 + 小写份额字母`，例：`建信纳指100c`、`大成纳指100a`、`易方达标普500a`。
-- 纯规则驱动（清理 `(QDII)`/币种/`ETF联接` 等），零硬编码映射，动态列表可复用；份额字母支持 A–Z（覆盖 A/C/D/E 等）。
+- 纯规则驱动（清理 `(QDII)`/币种/`ETF联接` 等），零硬编码映射；份额字母锚定**末尾或"X类"**提取（避开 QDII/ETF 内部字母误判），**小写置末尾**，支持 A–E（覆盖 A/C/D/E 等）。
 - `对比昨日限额`：今日限额 − 昨日限额（单位元），由 `qdii_prev.json` 跨运行计算，首日/新进前 6 留空。
 
 ## 新闻原文链接
