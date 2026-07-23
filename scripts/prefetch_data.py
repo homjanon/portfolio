@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 预抓取金融市场数据 — 按板块切分为结构化 JSON 文件。
-v32: 修正东财push2主源secid(恒生国企100.HSCEI/纳综100.NDX/纳指100 100.NDX100)；yfinance兜底不变；删新浪；每模块120s超时
+v33: 修复QDII"对比昨日"溢价/限额（跨运行qdii_prev.json快照+读回）；新增场外QDII"名称_短"字段；东财push2主源secid修正/yfinance兜底不变
 
 输出文件（10个，均在 data_*.json，默认当前目录）：
   data_market_cn.json       A股5大指数行情           东财push2 + yfinance兜底
@@ -601,6 +601,28 @@ def fetch_industry():
 # 🆕 v22 数据源: 新浪汇率 + akshare资金面 + Google News RSS(英+中) + 宏观扩展(核心PCE/BDI/SOX等)
 # ═══════════════════════════════════════════════════════════════
 
+def _shorten_qdii_name(name):
+    """场外QDII短名：公司名 + 纳指100/标普500 + 小写份额字母（规则驱动，零硬编码）。"""
+    s = str(name)
+    _m = re.search(r"([A-Za-z])\s*$", s)
+    _letter = _m.group(1).lower() if _m else ""
+    if _m:
+        s = s[:_m.start()].strip()
+    if re.search(r"纳斯达克100|纳指100", s, re.I):
+        _core = "纳指100"
+    elif re.search(r"纳斯达克", s, re.I):
+        _core = "纳指"
+    elif re.search(r"标普500|标普", s, re.I):
+        _core = "标普500"
+    else:
+        _core = ""
+    _company = re.sub(r"纳斯达克100|纳指100|纳斯达克|标普500|标普|QDII|美元|\(.*?\)|（.*?）|ETF|联接|基金|指数|证券|投资", "", s, flags=re.I)
+    _company = re.sub(r"\s+", "", _company).strip()[:4]
+    if not _core:
+        return _company or s
+    return f"{_company}{_core}{_letter}"
+
+
 def fetch_extra():
     """v29: 资金面 + QDII监测(腾讯API实时价+东方财富HTTP净值) + 场外申购额度(Nasdaq100/S&P500可申购大额度)"""
     import akshare as ak
@@ -675,6 +697,17 @@ def fetch_extra():
 
     # ── v24方案: QDII监测 — 腾讯API实时价 + 东方财富HTTP净值（不依赖 fund_etf_spot_em）──
     qdii_data = {"场内ETF": [], "场外QDII": []}
+    # ── 跨运行昨日基准（qdii_prev.json；工作流已 git add 持久化）──
+    _repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    _prev_path = os.path.join(_repo_root, "qdii_prev.json")
+    _prev = {}
+    try:
+        with open(_prev_path, encoding="utf-8") as _f:
+            _prev = json.load(_f)
+    except Exception:
+        _prev = {}
+    _prev_etf = _prev.get("场内ETF", {})
+    _prev_qdii = _prev.get("场外QDII", {})
     _etf_set = {"513100","513500","159941","159659","159612","513650"}
     _etf_names = {
         "513100":"纳指ETF国泰","513500":"标普500ETF博时",
@@ -711,10 +744,13 @@ def fetch_extra():
         except Exception as _nav_e:
             print(f"      东方财富净值API失败({_code}): {_nav_e}")
         _pr = round((_mp - _nav) / _nav * 100, 2) if _mp and _nav and _nav > 0 else None
+        _prev_pr = _prev_etf.get(_code, {}).get("溢价率")
+        _pr_diff = round(_pr - _prev_pr, 2) if (_pr is not None and _prev_pr is not None) else None
         qdii_data["场内ETF"].append({
             "代码": _code, "名称": _etf_names.get(_code,""),
             "最新价": _mp, "涨跌幅": _cp,
             "最新净值": _nav, "净值日期": _nav_d, "溢价率": _pr,
+            "溢价率对比昨日": _pr_diff,
             "溢价率来源": "腾讯价+东方财富净值",
         })
     # 场外QDII申购额度（纳指100/标普500，可申购且额度较大的6条）
@@ -736,13 +772,18 @@ def fetch_extra():
                 if _c in _seen: continue
                 _seen.add(_c)
                 _lim = _r['日累计限定金额']
+                _lim_val = round(float(_lim), 2) if pd.notna(_lim) and _lim else 0
+                _prev_lim = _prev_qdii.get(_c, {}).get("日累计限定金额")
+                _lim_diff = round(_lim_val - float(_prev_lim), 2) if _prev_lim is not None else None
                 qdii_data["场外QDII"].append({
                     "代码": _c,
                     "简称": str(_r['基金简称']),
+                    "名称_短": _shorten_qdii_name(str(_r['基金简称'])),
                     "最新净值": str(_r['最新净值/万份收益']),
                     "净值日期": str(_r['最新净值/万份收益-报告时间']),
                     "申购状态": str(_r['申购状态']),
-                    "日累计限定金额": round(float(_lim), 2) if pd.notna(_lim) and _lim else 0,
+                    "日累计限定金额": _lim_val,
+                    "限额对比昨日": _lim_diff,
                 })
     except Exception as e:
         qdii_data["_场外_error"] = str(e)[:100]
@@ -750,6 +791,17 @@ def fetch_extra():
     if qdii_data["场外QDII"]:
         qdii_data["场外QDII"].sort(key=lambda x: x["日累计限定金额"], reverse=True)
         qdii_data["场外QDII"] = qdii_data["场外QDII"][:6]
+    # ── 写回昨日基准快照（供下次运行对比；工作流已 commit 持久化）──
+    try:
+        _snap = {
+            "日期": today_str,
+            "场内ETF": {e["代码"]: {"溢价率": e.get("溢价率"), "日期": today_str} for e in qdii_data["场内ETF"]},
+            "场外QDII": {f["代码"]: {"日累计限定金额": f.get("日累计限定金额"), "日期": today_str} for f in qdii_data["场外QDII"]},
+        }
+        with open(_prev_path, "w", encoding="utf-8") as _f:
+            json.dump(_snap, _f, ensure_ascii=False, indent=2)
+    except Exception as _e:
+        print(f"    qdii_prev.json 写回失败: {_e}")
     result['QDII_监测'] = qdii_data
 
     return _ok(result)
@@ -1116,7 +1168,7 @@ def _timeout_handler(signum, frame):
 # 主流程
 # ═══════════════════════════════════════════════════════════════
 def main():
-    print(f"═══ 预抓取金融市场数据（v32: 东财push2主源secid修正+yfinance兜底 | QDII场外纳指100/标普500） ═══")
+    print(f"═══ 预抓取金融市场数据（v33: QDII对比昨日修复+名称_短 | 东财push2主源secid修正+yfinance兜底） ═══")
     print(f"时间: {_ts()}\n")
 
     # 三市场交易日历判定（共享模块）
