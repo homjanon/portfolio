@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 预抓取金融市场数据 — 按板块切分为结构化 JSON 文件。
-v33: 修复QDII"对比昨日"溢价/限额（跨运行qdii_prev.json快照+读回）；新增场外QDII"名称_短"字段；东财push2主源secid修正/yfinance兜底不变
+v34: 修复v33读取qdii_prev.json兼容性(旧list格式残留致list.get()崩溃)；新增_normalize_qdii_prev兼容新旧结构；QDII对比昨日+名称_短保持
 
 输出文件（10个，均在 data_*.json，默认当前目录）：
   data_market_cn.json       A股5大指数行情           东财push2 + yfinance兜底
@@ -623,6 +623,29 @@ def _shorten_qdii_name(name):
     return f"{_company}{_core}{_letter}"
 
 
+def _normalize_qdii_prev(prev):
+    """兼容新旧两种 qdii_prev.json 结构，统一规整为 {代码: {...}} 字典。
+
+    旧格式(历史残留, v23~v29 前写入): {"ts":..., "场内ETF":[{代码,溢价率}...], "场外QDII":[{代码,日累计限定金额}...]}
+    新格式(v33+ 写入):               {"日期":..., "场内ETF":{代码:{溢价率,日期}}, "场外QDII":{代码:{日累计限定金额,日期}}}
+    旧格式的写逻辑已在重构中丢失，仅残留文件；读取端必须兼容，否则 list.get() 会崩。
+    """
+    _etf_raw = (prev or {}).get("场内ETF", {})
+    _qdii_raw = (prev or {}).get("场外QDII", {})
+
+    def _to_dict(raw, key_field="代码"):
+        if isinstance(raw, dict):
+            return raw
+        _out = {}
+        if isinstance(raw, list):
+            for _item in raw:
+                if isinstance(_item, dict) and key_field in _item:
+                    _out[_item[key_field]] = _item
+        return _out
+
+    return _to_dict(_etf_raw), _to_dict(_qdii_raw)
+
+
 def fetch_extra():
     """v29: 资金面 + QDII监测(腾讯API实时价+东方财富HTTP净值) + 场外申购额度(Nasdaq100/S&P500可申购大额度)"""
     import akshare as ak
@@ -706,8 +729,7 @@ def fetch_extra():
             _prev = json.load(_f)
     except Exception:
         _prev = {}
-    _prev_etf = _prev.get("场内ETF", {})
-    _prev_qdii = _prev.get("场外QDII", {})
+    _prev_etf, _prev_qdii = _normalize_qdii_prev(_prev)  # 兼容新旧两种结构
     _etf_set = {"513100","513500","159941","159659","159612","513650"}
     _etf_names = {
         "513100":"纳指ETF国泰","513500":"标普500ETF博时",
@@ -1168,7 +1190,7 @@ def _timeout_handler(signum, frame):
 # 主流程
 # ═══════════════════════════════════════════════════════════════
 def main():
-    print(f"═══ 预抓取金融市场数据（v33: QDII对比昨日修复+名称_短 | 东财push2主源secid修正+yfinance兜底） ═══")
+    print(f"═══ 预抓取金融市场数据（v34: QDII对比昨日读取兼容旧格式+名称_短 | 东财push2主源secid修正+yfinance兜底） ═══")
     print(f"时间: {_ts()}\n")
 
     # 三市场交易日历判定（共享模块）

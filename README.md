@@ -147,7 +147,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 ├── prompt/
 │   └── daily_report_prompt.txt             # LLM 系统提示词（含完整/精简模式指令 + 市场门控硬规则）
 ├── scripts/
-│   ├── prefetch_data.py                     # 数据抓取（v33，东财push2主源 + yfinance兜底，secid已修正：HSCEI/NDX/NDX100；QDII对比昨日修复+名称_短）
+│   ├── prefetch_data.py                     # 数据抓取（v34，东财push2主源 + yfinance兜底，secid已修正：HSCEI/NDX/NDX100；QDII对比昨日读取兼容旧格式+名称_短）
 │   ├── market_date_resolver.py             # 按市场解析业务日期 + 北京时间收盘标注（MarketDateResolver）
 │   ├── trading_calendar.py                  # 三市场交易日历判定（A股/美股/港股）
 │   ├── call_llm.py                          # LLM 调用（含模式判定 + 模型切换 + 市场标志注入）
