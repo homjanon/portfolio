@@ -38,8 +38,12 @@ LLM_CONFIGS = [
 ]
 
 
-def _call_llm(api_url, api_key, model, system, user, timeout=180, extra_headers=None):
-    """通用 OpenAI 兼容 LLM 调用器，含指数退避重试。"""
+def _call_llm(api_url, api_key, model, system, user, timeout=90, extra_headers=None):
+    """通用 OpenAI 兼容 LLM 调用器，含快速退避重试。
+
+    单模型最多尝试 MAX_ATTEMPTS=2 次（失败2次即切下一个模型）；
+    重试间隔短（2s/4s），请求超时 90s，避免单次挂起拖慢整体生成。
+    """
     headers = {"Authorization": f"Bearer {api_key}"}
     if extra_headers:
         headers.update(extra_headers)
@@ -52,7 +56,8 @@ def _call_llm(api_url, api_key, model, system, user, timeout=180, extra_headers=
         ],
     }
     last_exc = None
-    for attempt in range(2):
+    MAX_ATTEMPTS = 2  # 失败2次即切下一模型
+    for attempt in range(MAX_ATTEMPTS):
         try:
             resp = requests.post(
                 api_url,
@@ -63,22 +68,23 @@ def _call_llm(api_url, api_key, model, system, user, timeout=180, extra_headers=
             if resp.status_code == 200:
                 return resp.json()["choices"][0]["message"]["content"]
             elif resp.status_code == 429:
-                wait = int(resp.headers.get("Retry-After", 5 * (attempt + 1)))
+                wait = int(resp.headers.get("Retry-After", 2 * (attempt + 1)))
                 print(f"    429 限流，等待 {wait}s...")
                 time.sleep(wait)
             else:
                 resp.raise_for_status()
         except requests.exceptions.Timeout:
             last_exc = "Timeout"
-            print(f"    超时 (attempt {attempt+1}/3)")
-            if attempt < 2:
-                time.sleep(5 * (attempt + 1))
+            print(f"    ⏱ 超时 (attempt {attempt+1}/{MAX_ATTEMPTS}, 请求超时 {timeout}s)")
         except Exception as e:
             last_exc = str(e)
-            print(f"    失败: {e} (attempt {attempt+1}/3)")
-            if attempt < 2:
-                time.sleep(5 * (attempt + 1))
-    raise RuntimeError(f"LLM 调用失败（3次重试后）: {last_exc}")
+            print(f"    ⚠️ 失败: {e} (attempt {attempt+1}/{MAX_ATTEMPTS})")
+        # 仅非末次尝试后退避，避免最终失败后多余等待
+        if attempt < MAX_ATTEMPTS - 1:
+            _backoff = 2 * (attempt + 1)  # 2s, 4s
+            print(f"    ↳ {_backoff}s 后重试")
+            time.sleep(_backoff)
+    raise RuntimeError(f"LLM 调用失败（{MAX_ATTEMPTS}次后切换下一模型）: {last_exc}")
 
 
 def main():
