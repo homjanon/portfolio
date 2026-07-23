@@ -85,6 +85,14 @@ body{
 
 .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px}
 
+/* 窄屏（手机）表格缩字，参考大宗商品与汇率表观感，避免估值等多列表过高 */
+@media(max-width:480px){
+  .data-table{font-size:11px}
+  .data-table thead th,.data-table tbody td{padding:5px 6px}
+  .data-table .label{max-width:92px}
+  .data-table thead th{font-size:10px}
+}
+
 /* ---- 涨跌颜色 ---- */
 .up{color:#dc2626!important;font-weight:600}
 .down{color:#059669!important;font-weight:600}
