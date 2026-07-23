@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 预抓取金融市场数据 — 按板块切分为结构化 JSON 文件。
-v31: 指数统一改东财 push2（push2delay）主源 + yfinance 兜底；删新浪；每模块120s超时
+v32: 修正东财push2主源secid(恒生国企100.HSCEI/纳综100.NDX/纳指100 100.NDX100)；yfinance兜底不变；删新浪；每模块120s超时
 
 输出文件（10个，均在 data_*.json，默认当前目录）：
   data_market_cn.json       A股5大指数行情           东财push2 + yfinance兜底
@@ -306,7 +306,7 @@ def fetch_market_hk():
     """恒生指数 + 恒生中国企业指数 — 东财push2主源 + yfinance兜底"""
     WANTED = [
         ("恒生指数", "100.HSI", "^HSI"),
-        ("恒生中国企业指数", "100.HSCE", "^HSCE"),
+        ("恒生中国企业指数", "100.HSCEI", "^HSCE"),
     ]
     rows, yf_map = [], {}
     for name, secid, yf_tk in WANTED:
@@ -340,7 +340,7 @@ def fetch_market_global():
     WANTED = [
         ("道琼斯工业",   "100.DJIA", "^DJI"),
         ("标普500",      "100.SPX",   "^GSPC"),
-        ("纳斯达克综合", "100.IXIC",  "^IXIC"),
+        ("纳斯达克综合", "100.NDX",  "^IXIC"),
         ("日经225",      "100.N225",  "^N225"),
         ("KOSPI",        "100.KS11",   "^KS11"),
         ("STOXX 600",    "100.SXXP",   "^SXXP"),
@@ -456,7 +456,7 @@ def fetch_valuation():
     result["a_share"] = a_list if a_list else {"error": "东财push2无数据"}
 
     # ── 美股估值（东财push2主源 → yfinance兜底）──
-    us_val_secids = {"纳斯达克100": "100.NDX", "标普500": "100.SPX"}
+    us_val_secids = {"纳斯达克100": "100.NDX100", "标普500": "100.SPX"}
     us_val_yf = {"纳斯达克100": "^NDX", "标普500": "^GSPC"}
     _us_val_yf = _yf_fallback(us_val_yf)
     us_list = []
@@ -1116,7 +1116,7 @@ def _timeout_handler(signum, frame):
 # 主流程
 # ═══════════════════════════════════════════════════════════════
 def main():
-    print(f"═══ 预抓取金融市场数据（v31: 指数东财push2主源+yfinance兜底 | QDII场外纳指100/标普500） ═══")
+    print(f"═══ 预抓取金融市场数据（v32: 东财push2主源secid修正+yfinance兜底 | QDII场外纳指100/标普500） ═══")
     print(f"时间: {_ts()}\n")
 
     # 三市场交易日历判定（共享模块）

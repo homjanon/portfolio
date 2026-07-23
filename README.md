@@ -58,15 +58,15 @@ schedule / workflow_dispatch
 
 > 任一日历网络获取失败时降级为"看昨天星期几 ≤4 即视为开市"。
 
-> **收盘日期标注（MarketDateResolver）**：报告「一、市场全景」各市场收盘均按真实交易日历标注业务日期与北京时间收盘时刻，由 `scripts/market_date_resolver.py` 的 `MarketDateResolver` 在 LLM 调用前注入。A股/港股/日经/韩国/欧洲取上一交易日（如 `A股收盘（7月13日）`），美股取美东前一交易日但于北京时间今天凌晨收盘（如 `美股收盘（7月14日凌晨）`）。海外用 `pandas_market_calendars`（DST 自动适配，禁止手写时区偏移），A股用 `tool_trade_date_hist_sina`（本地文件缓存，避免每次网络请求）。美股另做新鲜度校验：若 akshare 实际返回日期早于解析业务日期，置 `_stale` 提示数据可能滞后。**全球指数（日经225 / KOSPI / STOXX 600）同样做新鲜度校验**：yfinance 返回当日最新收盘则采用，陈旧/缺失时改取东财实时现货（`index_global_spot_em`）覆盖；仅当 yfinance 与东财均不可用/陈旧才置 `_stale` 触发滞后告警（报告固定于约 07:00 跑，东财现货即上一交易日收盘）。
+> **收盘日期标注（MarketDateResolver）**：报告「一、市场全景」各市场收盘均按真实交易日历标注业务日期与北京时间收盘时刻，由 `scripts/market_date_resolver.py` 的 `MarketDateResolver` 在 LLM 调用前注入。A股/港股/日经/韩国/欧洲取上一交易日（如 `A股收盘（7月13日）`），美股取美东前一交易日但于北京时间今天凌晨收盘（如 `美股收盘（7月14日凌晨）`）。海外用 `pandas_market_calendars`（DST 自动适配，禁止手写时区偏移），A股用 `tool_trade_date_hist_sina`（本地文件缓存，避免每次网络请求）。美股另做新鲜度校验：若 akshare 实际返回日期早于解析业务日期，置 `_stale` 提示数据可能滞后。**全球/港股指数新鲜度校验**：以东财 push2（push2delay）为主源取最新收盘（恒生国企 `100.HSCEI`、纳综 `100.NDX`、纳指100 `100.NDX100`，道指/标普/日经/KOSPI/STOXX 均直连），yfinance 兜底；仅当东财与 yfinance 均不可用才置 `_stale` 触发滞后告警（报告固定于约 07:00 跑，东财主源即上一交易日收盘）。
 
 ## 数据源路由
 
 | 数据类型 | 主数据源 | 门控条件 | 兜底 |
 |---------|---------|----------|------|
-| A 股指数 | akshare 新浪 `stock_zh_index_spot_sina` | `a_open` | 腾讯财经 / yfinance |
-| 港股指数 | akshare 新浪 `stock_hk_index_spot_sina`（直接返回 38 个指数，取恒生/国企/**恒生科技** 3 个） | `hk_open` | 腾讯财经 / yfinance（`^HSTECH` 兜底） |
-| 美股+全球指数 | 美股：akshare 新浪；全球：yfinance（`^N225`/`^KS11`/`^STOXX`） | `u_open` | 美股 yfinance 兜底；全球 yfinance 陈旧时改取东财 `index_global_spot_em` 实时现货 |
+| A 股指数 | 东财 push2（push2delay）`stock/get` | `a_open` | yfinance（`000001.SS` 等） |
+| 港股指数 | 东财 push2（`100.HSI` / `100.HSCEI`） | `hk_open` | yfinance（`^HSI` / `^HSCE`） |
+| 美股+全球指数 | 东财 push2（`100.DJIA`/`100.SPX`/`100.NDX`/`100.NDX100`/`100.N225`/`100.KS11`/`100.SXXP`） | `u_open` | yfinance（`^DJI`/`^GSPC`/`^IXIC`/`^NDX`/`^N225`/`^KS11`/`^SXXP`） |
 | 汇率/商品/债券 | akshare 期货 + 中美债收益率 | 完整模式 | — |
 | 估值/PE 分位（6 指数） | 雪球蛋卷 API `danjuanfunds.com/djapi/index_eva/dj` | `a_open` | — |
 | 基金净值/溢价 | akshare 天天基金 + 东方财富净值 HTTP | `a_open OR u_open` | — |
@@ -75,7 +75,7 @@ schedule / workflow_dispatch
 | 资金面+QDII+涨停/跌停+LPR/PMI | akshare + 东方财富 | `a_open` | — |
 | **全球 TOP 10 新闻** | **Google News RSS** | 始终抓 | — |
 
-> **方案 C（curl_cffi HTTP/2 补丁）**：东方财富 `push2.eastmoney.com` / `push2his.eastmoney.com` 需 HTTP/2，标准 `requests` 仅 HTTP/1.1 会静默断连。脚本在顶部注入 `curl_cffi` 浏览器模拟，仅对这两个域名生效，修复全球指数静默降级；其余请求不受影响。运行依赖已包含 `curl_cffi` 与 `pandas_market_calendars`。
+> **方案 C（curl_cffi HTTP/2 补丁）**：东方财富 `push2.eastmoney.com` / `push2delay.eastmoney.com` / `push2his.eastmoney.com` 需 HTTP/2，标准 `requests` 仅 HTTP/1.1 会静默断连。脚本在顶部注入 `curl_cffi` 浏览器模拟，仅对这些域名生效，保障指数主源稳定；其余请求不受影响。运行依赖已包含 `curl_cffi` 与 `pandas_market_calendars`。
 
 ## QDII 与 ETF 监测板块格式规范
 
@@ -147,7 +147,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 ├── prompt/
 │   └── daily_report_prompt.txt             # LLM 系统提示词（含完整/精简模式指令 + 市场门控硬规则）
 ├── scripts/
-│   ├── prefetch_data.py                     # 数据抓取（v31，三市场门控 + 全球指数新鲜度校验 + curl_cffi HTTP/2 补丁）
+│   ├── prefetch_data.py                     # 数据抓取（v32，东财push2主源 + yfinance兜底，secid已修正：HSCEI/NDX/NDX100）
 │   ├── market_date_resolver.py             # 按市场解析业务日期 + 北京时间收盘标注（MarketDateResolver）
 │   ├── trading_calendar.py                  # 三市场交易日历判定（A股/美股/港股）
 │   ├── call_llm.py                          # LLM 调用（含模式判定 + 模型切换 + 市场标志注入）
