@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 预抓取金融市场数据 — 按板块切分为结构化 JSON 文件。
-v34: 修复v33读取qdii_prev.json兼容性(旧list格式残留致list.get()崩溃)；新增_normalize_qdii_prev兼容新旧结构；QDII对比昨日+名称_短保持
+v35: 估值段蛋卷targets扩至12指数(新增纳指100/恒生指数/科创50/恒生国企/中证500/中证1000,零额外网络)；prompt估值表改动态遍历danjuan_valuation；QDII对比昨日+名称_短保持
 
 输出文件（10个，均在 data_*.json，默认当前目录）：
   data_market_cn.json       A股5大指数行情           东财push2 + yfinance兜底
@@ -168,9 +168,11 @@ def _fetch_danjuan_valuation():
     API: danjuanfunds.com/djapi/index_eva/dj
     返回 63 个指数，字段: pe, pb, pe_percentile, pb_percentile, yeild(股息率), eva_type
     
-    覆盖目标 6 指数:
+    覆盖目标 12 指数(蛋卷1次返回63个, 仅白名单过滤, 新增零额外网络):
       沪深300(SH000300), 创业板(SZ399006), 红利低波(CSIH30269),
-      恒生科技(HKHSTECH), 标普500(SP500), 中证红利(SH000922)
+      恒生科技(HKHSTECH), 标普500(SP500), 中证红利(SH000922),
+      纳斯达克100(NDX), 恒生指数(HKHSI), 科创50(SH000688),
+      恒生国企(HKHSCEI), 中证500(SH000905), 中证1000(SH000852)
     """
     try:
         r = requests.get("https://danjuanfunds.com/djapi/index_eva/dj",
@@ -184,6 +186,12 @@ def _fetch_danjuan_valuation():
             "HKHSTECH":  "恒生科技",
             "SP500":     "标普500",
             "SH000922":  "中证红利",
+            "NDX":       "纳斯达克100",   # 新增: 补齐纳指100估值(当前仅有价格)
+            "HKHSI":     "恒生指数",      # 新增: 港股估值补漏
+            "SH000688":  "科创50",        # 新增: 当前有价格无估值
+            "HKHSCEI":   "恒生国企",      # 新增(可选): 港股估值补全
+            "SH000905":  "中证500",       # 新增(可选): A股中盘估值
+            "SH000852":  "中证1000",      # 新增(可选): A股小盘估值
         }
         
         result = {}
@@ -1190,7 +1198,7 @@ def _timeout_handler(signum, frame):
 # 主流程
 # ═══════════════════════════════════════════════════════════════
 def main():
-    print(f"═══ 预抓取金融市场数据（v34: QDII对比昨日读取兼容旧格式+名称_短 | 东财push2主源secid修正+yfinance兜底） ═══")
+    print(f"═══ 预抓取金融市场数据（v35: 估值段蛋卷targets扩至12指数 | QDII对比昨日读取兼容旧格式+名称_短 | 东财push2主源secid修正+yfinance兜底） ═══")
     print(f"时间: {_ts()}\n")
 
     # 三市场交易日历判定（共享模块）
