@@ -31,7 +31,7 @@ schedule / workflow_dispatch
 
 | 优先级 | 模型 | API 端点 | 环境变量 |
 |--------|------|----------|---------|
-| ① 主模型 | **NVIDIA GLM-5.2** (`z-ai/glm-5.2`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
+| ① 主模型 | **NVIDIA MiniMax-M2.7** (`minimaxai/minimax-m2.7`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
 | ② 兜底 | **商汤 DeepSeek-V4-Flash** (`deepseek-v4-flash`) | `token.sensenova.cn/v1` | `SENSENOVA_API_KEY` |
 | ③ 最终兜底 | **NVIDIA Nemotron-3-Ultra-550B** (`nvidia/nemotron-3-ultra-550b-a55b`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
 
@@ -123,7 +123,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 | Secret | 用途 |
 |--------|------|
-| `NVIDIA_API_KEY` | NVIDIA NIM API Key（免费）；日报主模型 GLM-5.2 / 最后兜底 Nemotron，以及广播稿转换的 GLM/Nemotron 兜底 |
+| `NVIDIA_API_KEY` | NVIDIA NIM API Key（免费）；日报主模型 MiniMax-M2.7 / 最后兜底 Nemotron，以及广播稿转换的 MiniMax/Nemotron 兜底 |
 | `SENSENOVA_API_KEY` | 商汤科技 API Key（免费）；广播稿转换主模型 DeepSeek-V4-Flash |
 
 ## 广播稿转换（md_to_script）模型链
@@ -133,11 +133,11 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 | 优先级 | 模型 | 密钥 | 说明 |
 |--------|------|------|------|
 | ① 主用 | SenseTime DeepSeek-V4-Flash | `SENSENOVA_API_KEY` | 默认主模型 |
-| ② 兜底 | NVIDIA GLM-5.2 | `NVIDIA_API_KEY` | DeepSeek 连续报错 2 次（`_call_llm` 内部重试）即切换 |
-| ③ 最后兜底 | NVIDIA Nemotron-3-Ultra-550B | `NVIDIA_API_KEY` | GLM 亦失败则启用 |
+| ② 兜底 | NVIDIA MiniMax-M2.7 | `NVIDIA_API_KEY` | DeepSeek 连续报错 2 次（`_call_llm` 内部重试）即切换 |
+| ③ 最后兜底 | NVIDIA Nemotron-3-Ultra-550B | `NVIDIA_API_KEY` | MiniMax 亦失败则启用 |
 | 末路 | 复制原文 | — | 三模型全失败，直接复制 `report.md` 为 `script.txt`，避免 workflow 中断 |
 
-> 顺序与日报生成（GLM 主 → DeepSeek 兜 → Nemotron）刻意相反：广播稿保持 DeepSeek 主用。
+> 顺序与日报生成（MiniMax 主 → DeepSeek 兜 → Nemotron）刻意相反：广播稿保持 DeepSeek 主用。
 
 ## 文件结构
 
