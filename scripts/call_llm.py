@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 调用 LLM 生成日报：
-  主模型: NVIDIA GLM-5.2 (NVIDIA_API_KEY)
+  主模型: NVIDIA MiniMax-M2.7 (NVIDIA_API_KEY)
   兜底: 商汤 DeepSeek-V4-Flash (SENSENOVA_API_KEY)
   最后兜底: NVIDIA Nemotron-3-Ultra-550B (NVIDIA_API_KEY)
 
@@ -18,10 +18,10 @@ BEIJING = timezone(timedelta(hours=8))
 _WEEKDAYS = ["一", "二", "三", "四", "五", "六", "日"]
 LLM_CONFIGS = [
     {
-        "name": "NVIDIA GLM-5.2",
+        "name": "NVIDIA MiniMax-M2.7",
         "api_url": "https://integrate.api.nvidia.com/v1/chat/completions",
         "api_key_env": "NVIDIA_API_KEY",
-        "model": "z-ai/glm-5.2",
+        "model": "minimaxai/minimax-m2.7",
     },
     {
         "name": "SenseTime DeepSeek-V4-Flash",
