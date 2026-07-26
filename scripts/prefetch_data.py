@@ -927,12 +927,12 @@ def _fetch_rss_other():
         {"gl": "US", "hl": "en-US", "ceid": "US:en",     "name": "美国"},
         {"gl": "HK", "hl": "zh-HK", "ceid": "HK:zh-Hant", "name": "香港"},
         {"gl": "TW", "hl": "zh-TW", "ceid": "TW:zh-Hant", "name": "台湾"},
-        {"gl": "CN", "hl": "zh-CN", "ceid": "CN:zh-Hans", "name": "大陆"},
-        {"gl": "GB", "hl": "en-GB", "ceid": "GB:en",     "name": "英国"},
+        {"gl": "CN", "hl": "zh-CN", "ceid": "CN:zh-CN", "name": "大陆"},
+
         {"gl": "SG", "hl": "en-SG", "ceid": "SG:en",     "name": "新加坡"},
     ]
     TOPIC = "CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx6TVdZU0FtVnVHZ0pWVXlnQVAB"
-    MAX_PER = 15
+    MAX_PER = 8
 
     def _parse(url, region_name):
         r = requests.get(url, headers={"User-Agent": UA}, timeout=30)
