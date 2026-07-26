@@ -31,8 +31,8 @@ schedule / workflow_dispatch
 
 | 优先级 | 模型 | API 端点 | 环境变量 |
 |--------|------|----------|---------|
-| ① 主模型 | **NVIDIA MiniMax-M2.7** (`minimaxai/minimax-m2.7`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
-| ② 兜底 | **商汤 DeepSeek-V4-Flash** (`deepseek-v4-flash`) | `token.sensenova.cn/v1` | `SENSENOVA_API_KEY` |
+| ① 主模型 | **商汤 DeepSeek-V4-Flash** (`deepseek-v4-flash`) | `token.sensenova.cn/v1` | `SENSENOVA_API_KEY` |
+| ② 兜底 | **NVIDIA MiniMax-M2.7** (`minimaxai/minimax-m2.7`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
 | ③ 最终兜底 | **NVIDIA Nemotron-3-Ultra-550B** (`nvidia/nemotron-3-ultra-550b-a55b`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
 
 - 三个模型依次尝试，前一个失败自动切换到下一个
@@ -54,7 +54,7 @@ schedule / workflow_dispatch
 | 条件 | 执行模式 | 抓取模块 |
 |------|----------|----------|
 | `A股开市 OR 美股开市 OR 港股开市` | **完整模式** | 按开市市场逐模块抓取（休市市场 JSON 不生成）+ 始终抓 RSS 新闻 |
-| 三市场均休市（通常周日/周一） | **精简模式** | 仅抓 `data_news_rss.json`（纯新闻：全球 TOP 10 + 深度观察专栏） |
+| 三市场均休市（通常周日/周一） | **精简模式** | 仅抓 `data_news.json`（纯新闻：全球 Top20 + 深度观察专栏） |
 
 > 任一日历网络获取失败时降级为"看昨天星期几 ≤4 即视为开市"。
 
@@ -73,7 +73,7 @@ schedule / workflow_dispatch
 | 行业轮动+资金流 | akshare（申万+同花顺+乐咕乐股） | `a_open` | — |
 | 个人持仓行情 | 腾讯财经 `qt.gtimg.cn` | `a_open OR u_open` | yfinance |
 | 资金面+QDII+涨停/跌停+LPR/PMI | akshare + 东方财富 | `a_open` | — |
-| **全球 TOP 10 新闻** | **Google News RSS** | 始终抓 | — |
+| **全球 Top20 新闻** | **Google News RSS 美/港/台/大陆/新（无白名单，5地区×12条池）** | 始终抓 | — |
 
 > **方案 C（curl_cffi HTTP/2 补丁）**：东方财富 `push2.eastmoney.com` / `push2delay.eastmoney.com` / `push2his.eastmoney.com` 需 HTTP/2，标准 `requests` 仅 HTTP/1.1 会静默断连。脚本在顶部注入 `curl_cffi` 浏览器模拟，仅对这些域名生效，保障指数主源稳定；其余请求不受影响。运行依赖已包含 `curl_cffi` 与 `pandas_market_calendars`。
 
@@ -123,8 +123,8 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 | Secret | 用途 |
 |--------|------|
-| `NVIDIA_API_KEY` | NVIDIA NIM API Key（免费）；日报主模型 MiniMax-M2.7 / 最后兜底 Nemotron，以及广播稿转换的 MiniMax/Nemotron 兜底 |
-| `SENSENOVA_API_KEY` | 商汤科技 API Key（免费）；广播稿转换主模型 DeepSeek-V4-Flash |
+| `NVIDIA_API_KEY` | NVIDIA NIM API Key（免费）；日报兜底模型 MiniMax-M2.7 / 最后兜底 Nemotron，以及广播稿的 MiniMax/Nemotron 兜底 |
+| `SENSENOVA_API_KEY` | 商汤科技 API Key（免费）；日报+广播稿主模型 DeepSeek-V4-Flash |
 
 ## 广播稿转换（md_to_script）模型链
 
@@ -137,7 +137,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 | ③ 最后兜底 | NVIDIA Nemotron-3-Ultra-550B | `NVIDIA_API_KEY` | MiniMax 亦失败则启用 |
 | 末路 | 复制原文 | — | 三模型全失败，直接复制 `report.md` 为 `script.txt`，避免 workflow 中断 |
 
-> 顺序与日报生成（MiniMax 主 → DeepSeek 兜 → Nemotron）刻意相反：广播稿保持 DeepSeek 主用。
+> 日报生成与广播稿统一为 DeepSeek 主 → MiniMax 兜 → Nemotron 最后兜底。
 
 ## 文件结构
 
@@ -147,10 +147,10 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 ├── prompt/
 │   └── daily_report_prompt.txt             # LLM 系统提示词（含完整/精简模式指令 + 市场门控硬规则）
 ├── scripts/
-│   ├── prefetch_data.py                     # 数据抓取（v37，市场全景A股/美股/港股改先表格后叙述；估值快照删顺序列+结论极简2-4字；md_to_reader窄屏缩字；QDII简称修复(建信C人→建信纳指100c)；11指数固定顺序；QDII对比昨日读取兼容旧格式+名称_短；东财push2主源 + yfinance兜底，secid已修正：HSCEI/NDX/NDX100）
+│   ├── prefetch_data.py                     # 数据抓取（市场全景+估值+QFII/ETF+个人持仓+新闻；新闻：Google News RSS 无白名单5地区×12条统一池，LLM选20条）
 │   ├── market_date_resolver.py             # 按市场解析业务日期 + 北京时间收盘标注（MarketDateResolver）
 │   ├── trading_calendar.py                  # 三市场交易日历判定（A股/美股/港股）
-│   ├── call_llm.py                          # LLM 调用（含模式判定 + 模型切换 + 市场标志注入）
+│   ├── call_llm.py                          # LLM 调用（含模式判定 + 模型切换 + 市场标志注入 + 输入体积护栏）
 │   ├── md_to_reader.py                      # Markdown → HTML（朗读版；市场全景 6 子版块均渲染为表格）
 │   ├── md_to_script.py                      # Markdown → 广播稿（注入 __TODAY_DATE__ 防日期错）
 │   └── md_to_mp3.py                         # 广播稿 → MP3（Edge TTS）
