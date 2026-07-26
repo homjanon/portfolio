@@ -18,16 +18,16 @@ BEIJING = timezone(timedelta(hours=8))
 _WEEKDAYS = ["一", "二", "三", "四", "五", "六", "日"]
 LLM_CONFIGS = [
     {
-        "name": "NVIDIA MiniMax-M2.7",
-        "api_url": "https://integrate.api.nvidia.com/v1/chat/completions",
-        "api_key_env": "NVIDIA_API_KEY",
-        "model": "minimaxai/minimax-m2.7",
-    },
-    {
         "name": "SenseTime DeepSeek-V4-Flash",
         "api_url": "https://token.sensenova.cn/v1/chat/completions",
         "api_key_env": "SENSENOVA_API_KEY",
         "model": "deepseek-v4-flash",
+    },
+    {
+        "name": "NVIDIA MiniMax-M2.7",
+        "api_url": "https://integrate.api.nvidia.com/v1/chat/completions",
+        "api_key_env": "NVIDIA_API_KEY",
+        "model": "minimaxai/minimax-m2.7",
     },
     {
         "name": "NVIDIA Nemotron-3-Ultra-550B",
