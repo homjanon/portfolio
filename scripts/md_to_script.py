@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from call_llm import LLM_CONFIGS, _call_llm
 
 # 广播稿专用顺序：DeepSeek 主用 → MiniMax 兜底 → Nemotron 最后兜底
-# （与 call_llm.py 日报生成顺序刻意相反：广播稿保持 DeepSeek 主用）
+# （与 call_llm.py 日报生成顺序相互独立：日报已改为 Nemotron 主用 → DeepSeek 兜 → MiniMax 最后兜底，广播稿保持 DeepSeek 主用）
 _SCRIPT_ORDER = [
     "SenseTime DeepSeek-V4-Flash",
     "NVIDIA MiniMax-M2.7",

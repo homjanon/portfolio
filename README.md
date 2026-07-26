@@ -27,13 +27,13 @@ schedule / workflow_dispatch
 
 > ⚠️ GitHub Actions schedule 事件存在注册延迟（首次启用或改 cron 后可能延迟数十分钟至 1 小时），若定时未触发可手动运行一次。
 
-## LLM 模型优先级
+## 日报 LLM 模型优先级
 
 | 优先级 | 模型 | API 端点 | 环境变量 |
 |--------|------|----------|---------|
-| ① 主模型 | **商汤 DeepSeek-V4-Flash** (`deepseek-v4-flash`) | `token.sensenova.cn/v1` | `SENSENOVA_API_KEY` |
-| ② 兜底 | **NVIDIA MiniMax-M2.7** (`minimaxai/minimax-m2.7`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
-| ③ 最终兜底 | **NVIDIA Nemotron-3-Ultra-550B** (`nvidia/nemotron-3-ultra-550b-a55b`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
+| ① 主模型 | **NVIDIA Nemotron-3-Ultra-550B** (`nvidia/nemotron-3-ultra-550b-a55b`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
+| ② 兜底 | **商汤 DeepSeek-V4-Flash** (`deepseek-v4-flash`) | `token.sensenova.cn/v1` | `SENSENOVA_API_KEY` |
+| ③ 最终兜底 | **NVIDIA MiniMax-M2.7** (`minimaxai/minimax-m2.7`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
 
 - 三个模型依次尝试，前一个失败自动切换到下一个
 - 失败时自动重试（指数退避）
@@ -123,8 +123,8 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 | Secret | 用途 |
 |--------|------|
-| `NVIDIA_API_KEY` | NVIDIA NIM API Key（免费）；日报兜底模型 MiniMax-M2.7 / 最后兜底 Nemotron，以及广播稿的 MiniMax/Nemotron 兜底 |
-| `SENSENOVA_API_KEY` | 商汤科技 API Key（免费）；日报+广播稿主模型 DeepSeek-V4-Flash |
+| `NVIDIA_API_KEY` | NVIDIA NIM API Key（免费）；日报主模型 Nemotron-3-Ultra-550B / 兜底 MiniMax-M2.7，以及广播稿的 MiniMax/Nemotron 兜底 |
+| `SENSENOVA_API_KEY` | 商汤科技 API Key（免费）；日报兜底 DeepSeek-V4-Flash / 广播稿主模型 DeepSeek-V4-Flash |
 
 ## 广播稿转换（md_to_script）模型链
 
@@ -137,7 +137,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 | ③ 最后兜底 | NVIDIA Nemotron-3-Ultra-550B | `NVIDIA_API_KEY` | MiniMax 亦失败则启用 |
 | 末路 | 复制原文 | — | 三模型全失败，直接复制 `report.md` 为 `script.txt`，避免 workflow 中断 |
 
-> 日报生成与广播稿统一为 DeepSeek 主 → MiniMax 兜 → Nemotron 最后兜底。
+> 日报与广播稿模型链相互独立：日报为 **Nemotron 主 → DeepSeek 兜 → MiniMax 最后兜底**；广播稿保持 **DeepSeek 主 → MiniMax 兜 → Nemotron 最后兜底**（见 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
 
 ## 文件结构
 
