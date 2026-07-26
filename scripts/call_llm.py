@@ -50,6 +50,7 @@ def _call_llm(api_url, api_key, model, system, user, timeout=90, extra_headers=N
     payload = {
         "model": model,
         "temperature": 0.3,
+            "max_tokens": 12000,
         "messages": [
             {"role": "system", "content": system},
             {"role": "user", "content": user},
@@ -155,6 +156,31 @@ def main():
             print(f"  ⚠️  {fp} 读取失败: {e}")
 
     user = "\n\n".join(blocks)
+    # input-size guardrail: if over threshold, drop least-critical blocks by priority (graceful degrade)
+    _MAX_USER = 120000
+    if len(user) > _MAX_USER:
+        import re as _re
+        def _pri(b):
+            for k, v in (("data_market", 100), ("data_valuation", 95), ("data_fund", 90),
+                          ("data_industry", 90), ("data_holdings", 90), ("data_news_rss", 85),
+                          ("data_extra", 60), ("data_news_other", 50)):
+                if k in b:
+                    return v
+            return 80
+        def _bn(b):
+            m = _re.search(r"## 预抓取数据: (\S+)", b)
+            return m.group(1) if m else "?"
+        _sorted = sorted(blocks, key=_pri)
+        _kept, _cur, _drop = [], 0, []
+        for b in _sorted:
+            if _cur + len(b) <= _MAX_USER or not _kept:
+                _kept.append(b); _cur += len(b)
+            else:
+                _drop.append(_bn(b))
+        if _drop:
+            print(f"  [warn] input > {_MAX_USER} chars, dropped low-priority blocks: {', '.join(_drop)}")
+        blocks = sorted(_kept, key=lambda x: user.find(x))
+        user = "\n\n".join(blocks)
     print(f"📦 user 消息: {len(user)} 字符，来自 {len(json_files)} 个 JSON 文件")
 
     # 3. 主 LLM → 兜底 LLM
