@@ -18,12 +18,10 @@ OUTPUT_PATH = sys.argv[2] if len(sys.argv) > 2 else "script.txt"
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from call_llm import LLM_CONFIGS, _call_llm
 
-# 广播稿专用顺序：DeepSeek 主用 → MiniMax 兜底 → Nemotron 最后兜底
-# （与 call_llm.py 日报生成顺序相互独立：日报已改为 Nemotron 主用 → DeepSeek 兜 → MiniMax 最后兜底，广播稿保持 DeepSeek 主用）
+# 广播稿专用顺序：DeepSeek 主用 → Agnes 兜底（与日报一致：主力 DeepSeek，兜底 Agnes）
 _SCRIPT_ORDER = [
     "SenseTime DeepSeek-V4-Flash",
-    "NVIDIA MiniMax-M2.7",
-    "NVIDIA Nemotron-3-Ultra-550B",
+    "Agnes agnes-2.0-flash",
 ]
 _MODEL_CHAIN = [c for name in _SCRIPT_ORDER
                for c in LLM_CONFIGS if c["name"] == name]
@@ -58,7 +56,7 @@ def _convert(system, report):
     """依次尝试模型链，首个成功即返回广播稿文本；全失败返回 None。
 
     _call_llm 内部已含 2 次重试（range(2)），故某模型连续报错 2 次即视为
-    失败并切下一模型——天然实现「报错两次切换」语义（如 DeepSeek 报错两次切 MiniMax）。
+    失败并切下一模型——天然实现「报错两次切换」语义（如 DeepSeek 报错两次切 Agnes）。
     """
     user = f"请转换以下日报为广播稿：\n\n{report}"
     for cfg in _MODEL_CHAIN:

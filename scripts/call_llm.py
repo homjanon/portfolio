@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """
 调用 LLM 生成日报：
-  主模型: NVIDIA Nemotron-3-Ultra-550B (NVIDIA_API_KEY)
-  兜底: 商汤 DeepSeek-V4-Flash (SENSENOVA_API_KEY)
-  最后兜底: NVIDIA MiniMax-M2.7 (NVIDIA_API_KEY)
+  主模型: 商汤 DeepSeek-V4-Flash (SENSENOVA_API_KEY)
+  兜底: Agnes agnes-2.0-flash (AGNES_API_KEY)
 
 用法: python3 scripts/call_llm.py
   读取 prompt/daily_report_prompt.txt (system) + data_*.json (user)
@@ -18,22 +17,16 @@ BEIJING = timezone(timedelta(hours=8))
 _WEEKDAYS = ["一", "二", "三", "四", "五", "六", "日"]
 LLM_CONFIGS = [
     {
-        "name": "NVIDIA Nemotron-3-Ultra-550B",
-        "api_url": "https://integrate.api.nvidia.com/v1/chat/completions",
-        "api_key_env": "NVIDIA_API_KEY",
-        "model": "nvidia/nemotron-3-ultra-550b-a55b",
-    },
-    {
         "name": "SenseTime DeepSeek-V4-Flash",
         "api_url": "https://token.sensenova.cn/v1/chat/completions",
         "api_key_env": "SENSENOVA_API_KEY",
         "model": "deepseek-v4-flash",
     },
     {
-        "name": "NVIDIA MiniMax-M2.7",
-        "api_url": "https://integrate.api.nvidia.com/v1/chat/completions",
-        "api_key_env": "NVIDIA_API_KEY",
-        "model": "minimaxai/minimax-m2.7",
+        "name": "Agnes agnes-2.0-flash",
+        "api_url": "https://apihub.agnes-ai.com/v1/chat/completions",
+        "api_key_env": "AGNES_API_KEY",
+        "model": "agnes-2.0-flash",
     },
 ]
 
