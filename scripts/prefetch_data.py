@@ -13,7 +13,7 @@ v37: 市场全景A股/美股/港股改先表格后叙述(与全球/大宗/估值
   data_industry.json        申万31行业涨跌幅+同花顺90行业资金流+全市场PE  akshare
   data_holdings.json        个人持仓+监督池行情+分红+研报  腾讯API + akshare(分红+研报)
   data_news_rss.json        全球TOP10新闻源          Google News RSS 英文+中文
-  data_news_other.json   全球其他类TOP10新闻源    Google News RSS 美/港/台/世界(无白名单)
+  data_news_other.json   全球其他类TOP10新闻源    Google News RSS 美/港/台/大陆/英/新(无白名单)
   data_extra.json           资金面+QDII+涨停/跌停  akshare(汇率/资金流/QDII)  v29: 场外QDII纳指100/标普500可申购大额度
 
 每个文件：{"ts":"...", "ok":true/false, "data":..., "error":"..."}
@@ -927,7 +927,9 @@ def _fetch_rss_other():
         {"gl": "US", "hl": "en-US", "ceid": "US:en",     "name": "美国"},
         {"gl": "HK", "hl": "zh-HK", "ceid": "HK:zh-Hant", "name": "香港"},
         {"gl": "TW", "hl": "zh-TW", "ceid": "TW:zh-Hant", "name": "台湾"},
-        {"gl": "GB", "hl": "en-GB", "ceid": "GB:en",     "name": "世界"},
+        {"gl": "CN", "hl": "zh-CN", "ceid": "CN:zh-Hans", "name": "大陆"},
+        {"gl": "GB", "hl": "en-GB", "ceid": "GB:en",     "name": "英国"},
+        {"gl": "SG", "hl": "en-SG", "ceid": "SG:en",     "name": "新加坡"},
     ]
     TOPIC = "CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx6TVdZU0FtVnVHZ0pWVXlnQVAB"
     MAX_PER = 15
