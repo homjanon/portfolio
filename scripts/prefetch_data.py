@@ -12,7 +12,7 @@ v37: 市场全景A股/美股/港股改先表格后叙述(与全球/大宗/估值
   data_fund.json            基金净值+净值估算+ETF溢价  akshare天天基金
   data_industry.json        申万31行业涨跌幅+同花顺90行业资金流+全市场PE  akshare
   data_holdings.json        个人持仓+监督池行情+分红+研报  腾讯API + akshare(分红+研报)
-  data_news.json   全球TOP10新闻源    Google News RSS 美/港/台/大陆/新(无白名单)
+  data_news.json   全球Top20新闻源    Google News RSS 美/港/台/大陆/新(无白名单)
   data_extra.json           资金面+QDII+涨停/跌停  akshare(汇率/资金流/QDII)  v29: 场外QDII纳指100/标普500可申购大额度
 
 每个文件：{"ts":"...", "ok":true/false, "data":..., "error":"..."}
@@ -1240,7 +1240,7 @@ def main():
     if is_simple:
         # 精简模式：三市场均休市，仅执行 RSS 新闻模块
         modules = [
-            ("data_news.json", _fetch_rss_other, "全球TOP10 RSS(美/港/台/大陆/新)"),
+            ("data_news.json", _fetch_rss_other, "全球Top20 RSS(美/港/台/大陆/新)"),
         ]
         print(f"📋 精简模式（三市场均休市）: 仅执行 {len(modules)} 个模块（纯新闻）")
     else:
@@ -1263,7 +1263,7 @@ def main():
         if a_open or u_open:
             modules.append(("data_holdings.json",    fetch_holdings,   "持仓行情+分红+研报"))
         # RSS 新闻：始终抓取
-        modules.append(("data_news.json", _fetch_rss_other, "全球TOP10 RSS(美/港/台/大陆/新)"))
+        modules.append(("data_news.json", _fetch_rss_other, "全球Top20 RSS(美/港/台/大陆/新)"))
         if a_open:
             modules.append(("data_extra.json",       fetch_extra,      "资金面+QDII+涨停/跌停"))
         status = f"A股:{'✅' if a_open else '❌'} 美股:{'✅' if u_open else '❌'} 港股:{'✅' if hk_open else '❌'}"
