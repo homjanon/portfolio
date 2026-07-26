@@ -13,6 +13,7 @@ v37: 市场全景A股/美股/港股改先表格后叙述(与全球/大宗/估值
   data_industry.json        申万31行业涨跌幅+同花顺90行业资金流+全市场PE  akshare
   data_holdings.json        个人持仓+监督池行情+分红+研报  腾讯API + akshare(分红+研报)
   data_news_rss.json        全球TOP10新闻源          Google News RSS 英文+中文
+  data_news_other.json   全球其他类TOP10新闻源    Google News RSS 美/港/台/世界(无白名单)
   data_extra.json           资金面+QDII+涨停/跌停  akshare(汇率/资金流/QDII)  v29: 场外QDII纳指100/标普500可申购大额度
 
 每个文件：{"ts":"...", "ok":true/false, "data":..., "error":"..."}
@@ -875,7 +876,7 @@ def _fetch_rss_news():
               "?hl=zh-CN&gl=CN")
 
     def _parse(url, allowed, max_items=15):
-        r = requests.get(url, headers={"User-Agent": UA}, timeout=15)
+        r = requests.get(url, headers={"User-Agent": UA}, timeout=30)
         tree = ET.fromstring(r.content)
         result = []
         for item in tree.findall(".//item"):
@@ -916,6 +917,73 @@ def _fetch_rss_news():
 
 
 # ─── 8. 个人持仓标的行情 + 监督池行情（v23: +563020 + 监督池批量）───
+
+# ─── 数据源: Google News RSS 多地区版 ─── 全球其他类 TOP10 新闻源 (无白名单) ───
+def _fetch_rss_other():
+    """vX: 全球其他类TOP10新闻 — 多地区 Google News RSS 头条 (美/港/台/世界各15条, 无白名单, 多语言)
+    复用同一 Top Stories topic ID, 仅切换 gl/hl/ceid 地区参数获取不同区域头条;
+    不做媒体白名单过滤, 由 LLM 从中筛选 10 条非财经新闻并翻译为简体中文 (含>=1-2条港澳台)."""
+    REGIONS = [
+        {"gl": "US", "hl": "en-US", "ceid": "US:en",     "name": "美国"},
+        {"gl": "HK", "hl": "zh-HK", "ceid": "HK:zh-Hant", "name": "香港"},
+        {"gl": "TW", "hl": "zh-TW", "ceid": "TW:zh-Hant", "name": "台湾"},
+        {"gl": "GB", "hl": "en-GB", "ceid": "GB:en",     "name": "世界"},
+    ]
+    TOPIC = "CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx6TVdZU0FtVnVHZ0pWVXlnQVAB"
+    MAX_PER = 15
+
+    def _parse(url, region_name):
+        r = requests.get(url, headers={"User-Agent": UA}, timeout=30)
+        tree = ET.fromstring(r.content)
+        out = []
+        for item in tree.findall(".//item"):
+            source_el = item.find("source")
+            source = source_el.text if source_el is not None else ""
+            title_el = item.find("title")
+            desc_el = item.find("description")
+            link_el = item.find("link")
+            pub_el = item.find("pubDate")
+            title = title_el.text if title_el is not None else ""
+            title = re.sub(r"\s*[-–]\s*" + re.escape(source) + r"\s*$", "", title).strip()[:100]
+            desc = desc_el.text if desc_el is not None else ""
+            desc = re.sub(r"<[^>]+>", " ", desc).strip()[:600]
+            out.append({
+                "title": title,
+                "desc": desc,
+                "source": source,
+                "link": link_el.text if link_el is not None else "",
+                "pubDate": pub_el.text if pub_el is not None else "",
+                "region": region_name,
+            })
+            if len(out) >= MAX_PER:
+                break
+        return out
+
+    items_other = []
+    try:
+        for reg in REGIONS:
+            url = (f"https://news.google.com/rss/topics/{TOPIC}"
+                   f"?hl={reg['hl']}&gl={reg['gl']}&ceid={reg['ceid']}")
+            try:
+                items_other.extend(_parse(url, reg["name"]))
+            except Exception as _e:
+                print(f"    [其他新闻] {reg['name']} RSS 获取失败: {_e}")
+        # 简单去重 (标题归一化)
+        seen, deduped = set(), []
+        for it in items_other:
+            key = re.sub(r"\s+", "", it["title"]).lower()
+            if key and key not in seen:
+                seen.add(key)
+                deduped.append(it)
+        return _ok({
+            "total": len(deduped),
+            "regions": [r["name"] for r in REGIONS],
+            "items_other": deduped,
+        })
+    except Exception as e:
+        return _fail(f"其他类RSS新闻抓取失败: {e}")
+
+
 def fetch_holdings():
     """个人持仓(招行A/H/长电/563020/QQQM/SPY) + 监督池批量行情
     美股通过腾讯API获取，自动截取交易所后缀(.OQ/.AM等)匹配stock_map"""
@@ -1233,6 +1301,7 @@ def main():
         # 精简模式：三市场均休市，仅执行 RSS 新闻模块
         modules = [
             ("data_news_rss.json", _fetch_rss_news, "全球TOP10 RSS新闻(英+中)"),
+            ("data_news_other.json", _fetch_rss_other, "全球其他类TOP10 RSS(美/港/台/世界)"),
         ]
         print(f"📋 精简模式（三市场均休市）: 仅执行 {len(modules)} 个模块（纯新闻）")
     else:
@@ -1256,6 +1325,7 @@ def main():
             modules.append(("data_holdings.json",    fetch_holdings,   "持仓行情+分红+研报"))
         # RSS 新闻：始终抓取
         modules.append(("data_news_rss.json",       _fetch_rss_news,  "全球TOP10 RSS新闻(英+中)"))
+        modules.append(("data_news_other.json", _fetch_rss_other, "全球其他类TOP10 RSS(美/港/台/世界)"))
         if a_open:
             modules.append(("data_extra.json",       fetch_extra,      "资金面+QDII+涨停/跌停"))
         status = f"A股:{'✅' if a_open else '❌'} 美股:{'✅' if u_open else '❌'} 港股:{'✅' if hk_open else '❌'}"
