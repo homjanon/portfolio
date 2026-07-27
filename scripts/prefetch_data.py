@@ -18,7 +18,7 @@ v37: 市场全景A股/美股/港股改先表格后叙述(与全球/大宗/估值
 每个文件：{"ts":"...", "ok":true/false, "data":..., "error":"..."}
 """
 
-import json, os, sys, signal, traceback, time, re, requests, xml.etree.ElementTree as ET
+import json, os, sys, signal, traceback, time, re, requests, xml.etree.ElementTree as ET, html
 from datetime import datetime, timezone, timedelta
 
 # ── 方案C: curl_cffi HTTP/2 补丁 ──
@@ -856,23 +856,65 @@ def fetch_extra():
     return _ok(result)
 
 
-# ─── 数据源H: Google News RSS → 英文9外媒 + 中文国内财经 ──────
+# ─── 数据源H/I: Top20 双源(谷歌美国主流+联合早报) + 深度观察(联合早报长文) ──────
+# 联合早报 RSS 仅抓取一次并缓存，Top20 后10 与 深度专栏(数据源I) 复用
+_ZAOBAI_CACHE = None
+
+def _fetch_zaobao_raw():
+    """抓取联合早报·中港台即时 RSS 一次并缓存（Top20 后10 与 深度专栏复用）。"""
+    global _ZAOBAI_CACHE
+    if _ZAOBAI_CACHE is not None:
+        return _ZAOBAI_CACHE
+    url = "https://plink.anyfeeder.com/zaobao/realtime/china"
+    try:
+        r = requests.get(url, headers={"User-Agent": UA}, timeout=30)
+        r.raise_for_status()
+        tree = ET.fromstring(r.content)
+        out = []
+        for item in tree.findall(".//item"):
+            title_el = item.find("title")
+            desc_el = item.find("description")
+            link_el = item.find("link")
+            pub_el = item.find("pubDate")
+            title = title_el.text if title_el is not None else ""
+            title = re.sub(r"\s+", " ", title).strip()[:100]
+            desc = desc_el.text if desc_el is not None else ""
+            desc = re.sub(r"<[^>]+>", " ", desc)
+            desc = html.unescape(desc)
+            desc = re.sub(r"\s+", " ", desc).strip()
+            out.append({
+                "title": title,
+                "desc": desc,
+                "source": "联合早报",
+                "link": link_el.text if link_el is not None else "",
+                "pubDate": pub_el.text if pub_el is not None else "",
+            })
+        _ZAOBAI_CACHE = out
+        return out
+    except Exception as _e:
+        print(f"    [联合早报] RSS 获取失败: {_e}")
+        _ZAOBAI_CACHE = []
+        return []
+
+
+# 主流媒体白名单（Google News 美国区 <source> 为英文媒体名）
+MAINSTREAM = {
+    "Reuters", "Associated Press", "AP", "Bloomberg", "CNBC",
+    "The Wall Street Journal", "The New York Times", "CNN", "NBC News",
+    "ABC News", "CBS News", "NPR", "The Washington Post", "The Guardian",
+    "BBC", "Financial Times", "Politico", "Axios", "USA Today",
+    "Los Angeles Times", "Fox News", "The Economist",
+}
+
+
 def _fetch_rss_other():
-    """vX: 全球其他类TOP10新闻 — 多地区 Google News RSS 头条 (美/港/台/世界各15条, 无白名单, 多语言)
-    复用同一 Top Stories topic ID, 仅切换 gl/hl/ceid 地区参数获取不同区域头条;
-    不做媒体白名单过滤, 由 LLM 从中筛选 10 条非财经新闻并翻译为简体中文 (含>=1-2条港澳台)."""
-    REGIONS = [
-        {"gl": "US", "hl": "en-US", "ceid": "US:en",     "name": "美国"},
-        {"gl": "HK", "hl": "zh-HK", "ceid": "HK:zh-Hant", "name": "香港"},
-        {"gl": "TW", "hl": "zh-TW", "ceid": "TW:zh-Hant", "name": "台湾"},
-        {"gl": "CN", "hl": "zh-CN", "ceid": "CN:zh-CN", "name": "大陆"},
-
-        {"gl": "SG", "hl": "en-SG", "ceid": "SG:en",     "name": "新加坡"},
-    ]
+    """Top20 双源：前10 谷歌美国主流 + 后10 联合早报最新。
+    谷歌：仅美国一地(hl=en-US)一次抓 40 条，按主流媒体白名单过滤；
+    早报：联合早报中港台即时，取最新 10 条。"""
     TOPIC = "CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx6TVdZU0FtVnVHZ0pWVXlnQVAB"
-    MAX_PER = 12
+    MAX_PER = 40
 
-    def _parse(url, region_name):
+    def _parse(url):
         r = requests.get(url, headers={"User-Agent": UA}, timeout=30)
         tree = ET.fromstring(r.content)
         out = []
@@ -893,37 +935,81 @@ def _fetch_rss_other():
                 "source": source,
                 "link": link_el.text if link_el is not None else "",
                 "pubDate": pub_el.text if pub_el is not None else "",
-                "region": region_name,
+                "region": "美国",
             })
             if len(out) >= MAX_PER:
                 break
         return out
 
-    items_other = []
+    items_google = []
     try:
-        for reg in REGIONS:
-            url = (f"https://news.google.com/rss/topics/{TOPIC}"
-                   f"?hl={reg['hl']}&gl={reg['gl']}&ceid={reg['ceid']}")
-            try:
-                items_other.extend(_parse(url, reg["name"]))
-            except Exception as _e:
-                print(f"    [其他新闻] {reg['name']} RSS 获取失败: {_e}")
-        # 简单去重 (标题归一化)
-        seen, deduped = set(), []
-        for it in items_other:
-            key = re.sub(r"\s+", "", it["title"]).lower()
-            if key and key not in seen:
-                seen.add(key)
-                deduped.append(it)
-        return _ok({
-            "total": len(deduped),
-            "regions": [r["name"] for r in REGIONS],
-            "items_other": deduped,
-        })
-    except Exception as e:
-        return _fail(f"其他类RSS新闻抓取失败: {e}")
+        url = (f"https://news.google.com/rss/topics/{TOPIC}"
+               f"?hl=en-US&gl=US&ceid=US:en")
+        items_google = _parse(url)
+    except Exception as _e:
+        print(f"    [谷歌新闻·美国] RSS 获取失败: {_e}")
+
+    # 主流媒体白名单过滤（不足 10 条则放宽至全量）
+    filtered = [it for it in items_google if it["source"] in MAINSTREAM]
+    if len(filtered) >= 10:
+        items_google = filtered
+    # 标题去重
+    seen, deduped = set(), []
+    for it in items_google:
+        key = re.sub(r"\s+", "", it["title"]).lower()
+        if key and key not in seen:
+            seen.add(key)
+            deduped.append(it)
+    items_google = deduped
+
+    # 联合早报：最新 10 条（feed 已按时间倒序）
+    items_zaobao = _fetch_zaobao_raw()[:10]
+
+    return _ok({
+        "total": len(items_google) + len(items_zaobao),
+        "google_total": len(items_google),
+        "zaobao_total": len(items_zaobao),
+        "items_google": items_google,
+        "items_zaobao": items_zaobao,
+    })
 
 
+# ─── 数据源I: 联合早报长文 → 深度观察专栏独立源 ──────
+def _fetch_rss_deep():
+    """深度观察专栏独立源：取联合早报长文(>700字)按长度排序前6作为候选，
+    由 LLM 选取与当日 Top20 关联性最低的一篇写成专栏。早报长文不足则回退财新。"""
+    zaobao = _fetch_zaobao_raw()
+    long_items = [it for it in zaobao if len(it.get("desc", "")) > 700]
+    long_items.sort(key=lambda x: len(x.get("desc", "")), reverse=True)
+    items_deep = long_items[:6]
+    if not items_deep:
+        # 兜底：财新最新
+        try:
+            r = requests.get("https://rsshub.rssforever.com/caixin/latest",
+                             headers={"User-Agent": UA}, timeout=30)
+            tree = ET.fromstring(r.content)
+            cand = []
+            for item in tree.findall(".//item"):
+                title_el = item.find("title")
+                desc_el = item.find("description")
+                link_el = item.find("link")
+                desc = desc_el.text if desc_el is not None else ""
+                desc = re.sub(r"<[^>]+>", " ", desc)
+                desc = html.unescape(desc)
+                desc = re.sub(r"\s+", " ", desc).strip()
+                if len(desc) > 700:
+                    cand.append({
+                        "title": (title_el.text or "").strip()[:100],
+                        "desc": desc,
+                        "source": "财新",
+                        "link": link_el.text if link_el is not None else "",
+                        "pubDate": "",
+                    })
+            cand.sort(key=lambda x: len(x["desc"]), reverse=True)
+            items_deep = cand[:6]
+        except Exception as _e:
+            print(f"    [深度专栏·财新兜底] 获取失败: {_e}")
+    return _ok({"total": len(items_deep), "items_deep": items_deep})
 def fetch_holdings():
     """个人持仓(招行A/H/长电/563020/QQQM/SPY) + 监督池批量行情
     美股通过腾讯API获取，自动截取交易所后缀(.OQ/.AM等)匹配stock_map"""
@@ -1240,7 +1326,8 @@ def main():
     if is_simple:
         # 精简模式：三市场均休市，仅执行 RSS 新闻模块
         modules = [
-            ("data_news.json", _fetch_rss_other, "全球Top20 RSS(美/港/台/大陆/新)"),
+            ("data_news.json", _fetch_rss_other, "全球Top20 RSS(美国主流+联合早报)"),
+            ("data_deep.json", _fetch_rss_deep, "深度观察源(联合早报长文)"),
         ]
         print(f"📋 精简模式（三市场均休市）: 仅执行 {len(modules)} 个模块（纯新闻）")
     else:
@@ -1263,7 +1350,8 @@ def main():
         if a_open or u_open:
             modules.append(("data_holdings.json",    fetch_holdings,   "持仓行情+分红+研报"))
         # RSS 新闻：始终抓取
-        modules.append(("data_news.json", _fetch_rss_other, "全球Top20 RSS(美/港/台/大陆/新)"))
+        modules.append(("data_news.json", _fetch_rss_other, "全球Top20 RSS(美国主流+联合早报)"))
+        modules.append(("data_deep.json", _fetch_rss_deep, "深度观察源(联合早报长文)"))
         if a_open:
             modules.append(("data_extra.json",       fetch_extra,      "资金面+QDII+涨停/跌停"))
         status = f"A股:{'✅' if a_open else '❌'} 美股:{'✅' if u_open else '❌'} 港股:{'✅' if hk_open else '❌'}"
