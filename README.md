@@ -32,9 +32,10 @@ schedule / workflow_dispatch
 | 优先级 | 模型 | API 端点 | 环境变量 |
 |--------|------|----------|---------|
 | ① 主模型 | **商汤 DeepSeek-V4-Flash** (`deepseek-v4-flash`) | `token.sensenova.cn/v1` | `SENSENOVA_API_KEY` |
-| ② 兜底 | **Agnes agnes-2.0-flash** (`agnes-2.0-flash`) | `apihub.agnes-ai.com/v1` | `AGNES_API_KEY` |
+| ② 次选 | **NVIDIA DeepSeek-V4-Pro** (`deepseek-ai/deepseek-v4-pro`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
+| ③ 兜底 | **Agnes agnes-2.0-flash** (`agnes-2.0-flash`) | `apihub.agnes-ai.com/v1` | `AGNES_API_KEY` |
 
-- 三个模型依次尝试，前一个失败自动切换到下一个
+- 三个模型依次尝试，前一个失败（异常或输出 <500 字符判为近空）自动切换到下一个
 - 失败时自动重试（指数退避）
 - **LLM 仅基于预抓取的 `data_*.json` 加工，不联网搜索、不调用工具**
 
@@ -126,6 +127,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 | Secret | 用途 |
 |--------|------|
 | `SENSENOVA_API_KEY` | 商汤科技 API Key（免费）；日报+广播稿主模型 DeepSeek-V4-Flash |
+| `NVIDIA_API_KEY` | NVIDIA API Key；日报+广播稿次选 DeepSeek-V4-Pro（`integrate.api.nvidia.com/v1`，模型 `deepseek-ai/deepseek-v4-pro`） |
 | `AGNES_API_KEY` | Agnes API Key（免费）；日报+广播稿兜底 Agnes agnes-2.0-flash（`apihub.agnes-ai.com/v1`） |
 
 ## 广播稿转换（md_to_script）模型链
@@ -135,10 +137,11 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 | 优先级 | 模型 | 密钥 | 说明 |
 |--------|------|------|------|
 | ① 主用 | SenseTime DeepSeek-V4-Flash | `SENSENOVA_API_KEY` | 默认主模型 |
-| ② 兜底 | Agnes agnes-2.0-flash | `AGNES_API_KEY` | DeepSeek 连续报错 2 次（`_call_llm` 内部重试）即切换 |
-| 末路 | 复制原文 | — | 两模型全失败，直接复制 `report.md` 为 `script.txt`，避免 workflow 中断 |
+| ② 次选 | NVIDIA DeepSeek-V4-Pro | `NVIDIA_API_KEY` | 主模型异常或近空（<500字符）即切换 |
+| ③ 兜底 | Agnes agnes-2.0-flash | `AGNES_API_KEY` | 前两者连续报错 2 次（`_call_llm` 内部重试）仍未产出有效内容即切换 |
+| 末路 | 复制原文 | — | 三模型全失败，直接复制 `report.md` 为 `script.txt`，避免 workflow 中断 |
 
-> 日报与广播稿模型链相互独立、结构一致：均为 **DeepSeek 主 → Agnes 兜**（见 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
+> 日报与广播稿模型链相互独立、结构一致：均为 **DeepSeek-Flash 主 → DeepSeek-Pro(NVIDIA) 次 → Agnes 兜**（见 `scripts/call_llm.py` 的 `LLM_CONFIGS` 与 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
 
 ## 文件结构
 

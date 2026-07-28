@@ -23,6 +23,12 @@ LLM_CONFIGS = [
         "model": "deepseek-v4-flash",
     },
     {
+        "name": "NVIDIA DeepSeek-V4-Pro",
+        "api_url": "https://integrate.api.nvidia.com/v1/chat/completions",
+        "api_key_env": "NVIDIA_API_KEY",
+        "model": "deepseek-ai/deepseek-v4-pro",
+    },
+    {
         "name": "Agnes agnes-2.0-flash",
         "api_url": "https://apihub.agnes-ai.com/v1/chat/completions",
         "api_key_env": "AGNES_API_KEY",

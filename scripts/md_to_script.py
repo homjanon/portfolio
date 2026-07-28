@@ -18,9 +18,10 @@ OUTPUT_PATH = sys.argv[2] if len(sys.argv) > 2 else "script.txt"
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from call_llm import LLM_CONFIGS, _call_llm
 
-# 广播稿专用顺序：DeepSeek 主用 → Agnes 兜底（与日报一致：主力 DeepSeek，兜底 Agnes）
+# 广播稿专用顺序：DeepSeek-Flash 主用 → DeepSeek-Pro(NVIDIA) → Agnes 兜底（与日报一致）
 _SCRIPT_ORDER = [
     "SenseTime DeepSeek-V4-Flash",
+    "NVIDIA DeepSeek-V4-Pro",
     "Agnes agnes-2.0-flash",
 ]
 _MODEL_CHAIN = [c for name in _SCRIPT_ORDER
@@ -53,12 +54,14 @@ def _today_str():
 
 
 def _convert(system, report):
-    """依次尝试模型链，首个成功即返回广播稿文本；全失败返回 None。
+    """依次尝试模型链，首个「有效（≥500字符且非异常）」即返回广播稿文本；全失败返回 None。
 
     _call_llm 内部已含 2 次重试（range(2)），故某模型连续报错 2 次即视为
-    失败并切下一模型——天然实现「报错两次切换」语义（如 DeepSeek 报错两次切 Agnes）。
+    失败并切下一模型。此外对「近空输出」( < 500 字符 ) 也判失败切下一模型，
+    与日报 call_llm.py 行为一致，避免广播稿被空壳内容占用。
     """
     user = f"请转换以下日报为广播稿：\n\n{report}"
+    _MIN = 500
     for cfg in _MODEL_CHAIN:
         api_key = os.environ.get(cfg["api_key_env"])
         if not api_key:
@@ -73,7 +76,11 @@ def _convert(system, report):
                 text = text.split("\n", 1)[-1] if "\n" in text else text[3:]
             if text.endswith("```"):
                 text = text.rsplit("```", 1)[0].strip()
-            return text.strip()
+            text = text.strip()
+            if len(text) < _MIN:
+                print(f"  ❌ {cfg['name']} 输出过短 ({len(text)} 字符 < {_MIN})，切换下一模型")
+                continue
+            return text
         except Exception as e:
             print(f"  ❌ {cfg['name']} 失败({e})，切换下一模型")
             continue
