@@ -72,7 +72,8 @@ schedule / workflow_dispatch
 | 行业轮动+资金流 | akshare（申万+同花顺+乐咕乐股） | `a_open` | — |
 | 个人持仓行情 | 腾讯财经 `qt.gtimg.cn` | `a_open OR u_open` | yfinance |
 | 资金面+QDII+涨停/跌停+LPR/PMI | akshare + 东方财富 | `a_open` | — |
-| **全球 Top20 新闻** | **Google News 美国一地（主流媒体白名单，40条→过滤）+ 联合早报 RSS（最新10条）** | 始终抓 | `data_news.json` / `data_deep.json`（深度观察·联合早报长文） |
+| **全球 Top20 新闻** | **Google News 美国一地（主流媒体白名单，40条→过滤）+ 联合早报 RSS（最新10条）** | 始终抓 | `data_news.json` |
+| **深度观察专栏** | 联合早报 RSS 长文（>700字）按长度排序前6，由 LLM 选与 Top20 关联性最低一篇 | 仅精简模式 | `data_deep.json` |
 
 > **方案 C（curl_cffi HTTP/2 补丁）**：东方财富 `push2.eastmoney.com` / `push2delay.eastmoney.com` / `push2his.eastmoney.com` 需 HTTP/2，标准 `requests` 仅 HTTP/1.1 会静默断连。脚本在顶部注入 `curl_cffi` 浏览器模拟，仅对这些域名生效，保障指数主源稳定；其余请求不受影响。运行依赖已包含 `curl_cffi` 与 `pandas_market_calendars`。
 

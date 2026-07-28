@@ -155,8 +155,8 @@ def main():
         import re as _re
         def _pri(b):
             for k, v in (("data_market", 100), ("data_valuation", 95), ("data_fund", 90),
-                          ("data_industry", 90), ("data_holdings", 90), ("data_news_rss", 85),
-                          ("data_extra", 60), ("data_news_other", 50)):
+                          ("data_industry", 90), ("data_holdings", 90), ("data_news", 85),
+                          ("data_extra", 60), ("data_deep", 50)):
                 if k in b:
                     return v
             return 80
@@ -176,7 +176,8 @@ def main():
         user = "\n\n".join(blocks)
     print(f"📦 user 消息: {len(user)} 字符，来自 {len(json_files)} 个 JSON 文件")
 
-    # 3. 主 LLM → 兜底 LLM
+    # 3. 主 LLM → 兜底 LLM（含"近空输出"校验：过短视为失败，自动切下一模型）
+    MIN_CHARS = 500  # 报告有效最低字符数；低于此判定为失败，避免空白被静默提交
     content = None
     for llm in LLM_CONFIGS:
         api_key = os.environ.get(llm["api_key_env"])
@@ -185,41 +186,47 @@ def main():
             continue
         print(f"🤖 调用 {llm['name']} ({llm['model']})...")
         try:
-            content = _call_llm(
+            raw = _call_llm(
                 llm["api_url"], api_key, llm["model"], system, user,
                 extra_headers=llm.get("extra_headers"),
             )
-            print(f"✅ {llm['name']} 成功")
-            break
         except Exception as e:
-            print(f"❌ {llm['name']} 失败: {e}")
+            print(f"❌ {llm['name']} 调用异常: {e}")
             content = None
             continue
+        if not raw or not raw.strip():
+            print(f"❌ {llm['name']} 返回空内容，视为失败")
+            content = None
+            continue
+        # 后处理: 移除 markdown 代码块围栏 和 LLM 前置废话
+        c = raw.strip()
+        if c.startswith("```markdown"):
+            c = c[len("```markdown"):].strip()
+        elif c.startswith("```"):
+            c = c[3:].strip()
+        if c.endswith("```"):
+            c = c[:-3].strip()
+        # 删除第一个 # 或 ## 标题之前的所有文字（去掉 LLM 的输出前确认语等废话）
+        _heading_match = re.search(r'^#{1,6}\s', c, re.MULTILINE)
+        if _heading_match and _heading_match.start() > 0:
+            c = c[_heading_match.start():]
+        # 删除各板块开头的数据时间戳行（> 数据时间：YYYY-MM-DD HH:MM）
+        c = re.sub(r'>\s*数据时间[：:]\s*\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}\s*\n?', '', c)
+        # 删除顶部的查询时间行（**查询时间**：...）
+        c = re.sub(r'\*\*查询时间\*\*[：:][^\n]*\n?', '', c)
+        if len(c) < MIN_CHARS:
+            print(f"❌ {llm['name']} 输出过短 ({len(c)} 字符 < {MIN_CHARS})，视为失败，切换下一模型")
+            content = None
+            continue
+        content = c
+        print(f"✅ {llm['name']} 成功（{len(content)} 字符）")
+        break
 
     if content is None:
-        print("❌ 所有 LLM 均失败，无法生成报告")
+        print("❌ 所有 LLM 均失败或输出过短，无法生成报告，终止以免提交空白")
         sys.exit(1)
 
-    # 4. 后处理: 移除 markdown 代码块围栏 和 LLM 前置废话
-    content = content.strip()
-    if content.startswith("```markdown"):
-        content = content[len("```markdown"):].strip()
-    elif content.startswith("```"):
-        content = content[3:].strip()
-    if content.endswith("```"):
-        content = content[:-3].strip()
-    # 删除第一个 # 或 ## 标题之前的所有文字（去掉 LLM 的输出前确认语等废话）
-    _heading_match = re.search(r'^#{1,6}\s', content, re.MULTILINE)
-    if _heading_match and _heading_match.start() > 0:
-        content = content[_heading_match.start():]
-
-    # 删除各板块开头的数据时间戳行（> 数据时间：YYYY-MM-DD HH:MM）
-    content = re.sub(r'>\s*数据时间[：:]\s*\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}\s*\n?', '', content)
-
-    # 删除顶部的查询时间行（**查询时间**：...）
-    content = re.sub(r'\*\*查询时间\*\*[：:][^\n]*\n?', '', content)
-
-    # 5. 写入 report.md
+    # 4. 写入 report.md
     out_path = "report.md"
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(content)

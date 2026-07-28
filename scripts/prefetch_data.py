@@ -964,6 +964,10 @@ def _fetch_rss_other():
 
     # 联合早报：最新 10 条（feed 已按时间倒序）
     items_zaobao = _fetch_zaobao_raw()[:10]
+    # 截断早报 desc（Top20 仅需短摘要，长文留给深度专栏独立源）
+    for _z in items_zaobao:
+        if len(_z.get("desc", "")) > 300:
+            _z["desc"] = _z["desc"][:300] + "…"
 
     return _ok({
         "total": len(items_google) + len(items_zaobao),
@@ -1349,9 +1353,8 @@ def main():
             modules.append(("data_industry.json",    fetch_industry,   "申万+同花顺行业"))
         if a_open or u_open:
             modules.append(("data_holdings.json",    fetch_holdings,   "持仓行情+分红+研报"))
-        # RSS 新闻：始终抓取
+        # RSS 新闻：始终抓取（深度观察专栏仅精简模式，完整模式不抓 data_deep）
         modules.append(("data_news.json", _fetch_rss_other, "全球Top20 RSS(美国主流+联合早报)"))
-        modules.append(("data_deep.json", _fetch_rss_deep, "深度观察源(联合早报长文)"))
         if a_open:
             modules.append(("data_extra.json",       fetch_extra,      "资金面+QDII+涨停/跌停"))
         status = f"A股:{'✅' if a_open else '❌'} 美股:{'✅' if u_open else '❌'} 港股:{'✅' if hk_open else '❌'}"
