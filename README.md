@@ -73,7 +73,7 @@ schedule / workflow_dispatch
 | 行业轮动+资金流 | akshare（申万+同花顺+乐咕乐股） | `a_open` | — |
 | 个人持仓行情 | 腾讯财经 `qt.gtimg.cn` | `a_open OR u_open` | yfinance |
 | 资金面+QDII+涨停/跌停+LPR/PMI | akshare + 东方财富 | `a_open` | — |
-| **全球 Top20 新闻** | **Google News 美国一地（主流媒体白名单，40条→过滤）+ 联合早报 RSS（最新10条）** | 始终抓 | `data_news.json` |
+| **全球 Top20 新闻** | **Google News 美国一地（30条→去重,LLM选≤10）+ 联合早报 RSS（按缺口补齐至20）** | 始终抓 | `data_news.json` |
 | **深度观察专栏** | 联合早报 RSS 长文（>700字）按长度排序前6，由 LLM 选与 Top20 关联性最低一篇 | 仅精简模式 | `data_deep.json` |
 
 > **方案 C（curl_cffi HTTP/2 补丁）**：东方财富 `push2.eastmoney.com` / `push2delay.eastmoney.com` / `push2his.eastmoney.com` 需 HTTP/2，标准 `requests` 仅 HTTP/1.1 会静默断连。脚本在顶部注入 `curl_cffi` 浏览器模拟，仅对这些域名生效，保障指数主源稳定；其余请求不受影响。运行依赖已包含 `curl_cffi` 与 `pandas_market_calendars`。
@@ -151,7 +151,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 ├── prompt/
 │   └── daily_report_prompt.txt             # LLM 系统提示词（含完整/精简模式指令 + 市场门控硬规则）
 ├── scripts/
-│   ├── prefetch_data.py                     # 数据抓取（市场全景+估值+QFII/ETF+个人持仓+新闻；新闻：Google News 美国单地40条→主流媒体白名单 + 联合早报最新10条 双源 Top20；data_deep.json 取联合早报>700字长文供深度观察专栏）
+│   ├── prefetch_data.py                     # 数据抓取（市场全景+估值+QFII/ETF+个人持仓+新闻；新闻：Google News 美国单地30条→去重,LLM选≤10 + 联合早报按缺口补齐至20 双源 Top20；data_deep.json 取联合早报>700字长文供深度观察专栏）
 │   ├── market_date_resolver.py             # 按市场解析业务日期 + 北京时间收盘标注（MarketDateResolver）
 │   ├── trading_calendar.py                  # 三市场交易日历判定（A股/美股/港股）
 │   ├── call_llm.py                          # LLM 调用（含模式判定 + 模型切换 + 市场标志注入 + 输入体积护栏）

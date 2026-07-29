@@ -12,7 +12,7 @@ v37: 市场全景A股/美股/港股改先表格后叙述(与全球/大宗/估值
   data_fund.json            基金净值+净值估算+ETF溢价  akshare天天基金
   data_industry.json        申万31行业涨跌幅+同花顺90行业资金流+全市场PE  akshare
   data_holdings.json        个人持仓+监督池行情+分红+研报  腾讯API + akshare(分红+研报)
-  data_news.json   全球Top20新闻源    Google News RSS 美/港/台/大陆/新(无白名单)
+  data_news.json   全球Top20新闻源    Google News RSS 美国一地(30条→去重,LLM选≤10) + 联合早报(按缺口补齐至20)
   data_extra.json           资金面+QDII+涨停/跌停  akshare(汇率/资金流/QDII)  v29: 场外QDII纳指100/标普500可申购大额度
 
 每个文件：{"ts":"...", "ok":true/false, "data":..., "error":"..."}
@@ -897,22 +897,12 @@ def _fetch_zaobao_raw():
         return []
 
 
-# 主流媒体白名单（Google News 美国区 <source> 为英文媒体名）
-MAINSTREAM = {
-    "Reuters", "Associated Press", "AP", "Bloomberg", "CNBC",
-    "The Wall Street Journal", "The New York Times", "CNN", "NBC News",
-    "ABC News", "CBS News", "NPR", "The Washington Post", "The Guardian",
-    "BBC", "Financial Times", "Politico", "Axios", "USA Today",
-    "Los Angeles Times", "Fox News", "The Economist",
-}
-
-
 def _fetch_rss_other():
-    """Top20 双源：前10 谷歌美国主流 + 后10 联合早报最新。
-    谷歌：仅美国一地(hl=en-US)一次抓 40 条，按主流媒体白名单过滤；
-    早报：联合早报中港台即时，取最新 10 条。"""
+    """Top20 双源：谷歌美国一地抓30条(去重) + 联合早报按缺口补齐至20。
+    谷歌：仅美国一地(hl=en-US)一次抓30条，Python去重后交给LLM按角度精选≤10(英译中)；
+    早报：联合早报中港台即时，取最新20条作为补齐池，由LLM按需取最新若干条凑齐20。"""
     TOPIC = "CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx6TVdZU0FtVnVHZ0pWVXlnQVAB"
-    MAX_PER = 40
+    MAX_PER = 30
 
     def _parse(url):
         r = requests.get(url, headers={"User-Agent": UA}, timeout=30)
@@ -928,7 +918,7 @@ def _fetch_rss_other():
             title = title_el.text if title_el is not None else ""
             title = re.sub(r"\s*[-–]\s*" + re.escape(source) + r"\s*$", "", title).strip()[:100]
             desc = desc_el.text if desc_el is not None else ""
-            desc = re.sub(r"<[^>]+>", " ", desc).strip()[:600]
+            desc = re.sub(r"<[^>]+>", " ", desc).strip()[:250]
             out.append({
                 "title": title,
                 "desc": desc,
@@ -941,6 +931,7 @@ def _fetch_rss_other():
                 break
         return out
 
+    # 谷歌：美国一地 30 条
     items_google = []
     try:
         url = (f"https://news.google.com/rss/topics/{TOPIC}"
@@ -949,22 +940,21 @@ def _fetch_rss_other():
     except Exception as _e:
         print(f"    [谷歌新闻·美国] RSS 获取失败: {_e}")
 
-    # 主流媒体白名单过滤（不足 10 条则放宽至全量）
-    filtered = [it for it in items_google if it["source"] in MAINSTREAM]
-    if len(filtered) >= 10:
-        items_google = filtered
-    # 标题去重
+    # 标题去重（归一化：去源后缀/标点，仅留字母数字与汉字后小写比对）
+    def _norm(t):
+        t = re.sub(r"<[^>]+>", " ", t)
+        t = re.sub(r"[^\w\u4e00-\u9fff]+", "", t).lower()
+        return t
     seen, deduped = set(), []
     for it in items_google:
-        key = re.sub(r"\s+", "", it["title"]).lower()
+        key = _norm(it["title"])
         if key and key not in seen:
             seen.add(key)
             deduped.append(it)
     items_google = deduped
 
-    # 联合早报：最新 10 条（feed 已按时间倒序）
-    items_zaobao = _fetch_zaobao_raw()[:10]
-    # 截断早报 desc（Top20 仅需短摘要，长文留给深度专栏独立源）
+    # 联合早报：取最新 20 条作为补齐池（feed 已按时间倒序；长文留给深度专栏独立源）
+    items_zaobao = _fetch_zaobao_raw()[:20]
     for _z in items_zaobao:
         if len(_z.get("desc", "")) > 300:
             _z["desc"] = _z["desc"][:300] + "…"
