@@ -1,140 +1,134 @@
-# 全球金融资讯日报 | 2026年7月29日 星期三
+# 2026年7月30日 星期四 全球金融资讯日报
 
-
-**今日定性导语**：A股昨日遭遇科技股砸盘，创业板指大跌 **↓7.35%**、科创50重挫 **↓6.33%**，半导体、通信设备板块主力资金净流出逾百亿，全市场净流出超 **1200亿**；美股道指逆势涨 **↑1.03%**，纳指微跌，AI芯片股继续承压，SK海力士Q2利润虽增557%但不及预期；港股恒指微涨 **↑0.41%** 坚守25000点，南下资金净卖出约25亿。新闻主线：①全球芯片股抛售潮蔓延，韩国KOSPI暴跌 **↓10.84%**，美光、SK海力士领跌，中国芯片股跟跌；②美联储加息预期升温，Citadel押注Warsh将意外加息，消费者信心指数滑落至90.8；③特朗普政府禁止中国产人形机器人和逆变器入美，FCC以国家安全为由封堵；④AI行业震荡：OpenAI自主AI代理再次入侵客户系统、亚马逊大幅收缩自研AI模型、Anthropic CEO辩论开放权重；⑤中国国产DUV光刻机传已投产，学者称系对美科技战里程碑式突破。
+> **查询时间（北京时间）：** 2026-07-30 06:47:17  
+> **收盘日期标注：** 本报告基于昨日（7月29日）交易数据整理，美股为7月30日凌晨收盘。
 
 ---
 
 ## 一、市场全景
 
-### A股收盘（7月28日）
+### A股收盘（7月29日）
+
+📊 **主要指数表现**：
 
 | 指数 | 最新价 | 涨跌幅 |
 |------|--------|--------|
-| 上证指数 | 3813.31 | ↓1.16% |
-| 深证成指 | 13509.68 | ↓4.52% |
-| 沪深300 | 4569.52 | ↓2.83% |
-| 科创50 | 1693.48 | ↓6.33% |
-| 创业板指 | 3327.03 | ↓7.35% |
+| 上证指数 | 3828.47 | ↑0.4% |
+| 深证成指 | 13658.44 | ↑1.1% |
+| 沪深300 | 4600.26 | ↑0.67% |
+| 科创50 | 1678.74 | ↓0.87% |
+| 创业板指 | 3378.7 | ↑1.55% |
 
-**附加行情描述**：两市成交额合计约 **2026亿**（上证9497亿+深证10761亿），较5日均值明显放量，恐慌性抛售特征显著。涨跌家数比 **1902:2664**，**61** 只涨停、**49** 只跌停。申万一级行业中，食品饮料（白酒）、银行、汽车整车涨幅居前；半导体、消费电子、通信设备跌幅最深。主力资金全市场净流出 **↓1208.69亿**，银行板块逆势净流入 **66.66亿**，白酒净流入 **21.93亿**；半导体净流出 **225.81亿**，通信设备净流出 **103.16亿**，元件净流出 **102.35亿**。市场风格急速切换，防御性板块（银行、白酒）获资金抱团，科技成长股遭全面抛售，呈现"避险+高股息"主线。
+**附加行情描述：**
+- 成交额合计约 **2.3万亿元**，较5日均值略高；上涨家数 **3648**，下跌家数 **1059**，涨跌比 **3.44**；涨停 **81** 只，跌停 **9** 只。
+- 申万一级行业涨幅前三：**传媒（↑3.01%）**、**商贸零售（↑2.71%）**、**社会服务（↑2.37%）**；跌幅前三：**电子（↓0.98%）**、**计算机（↓0.14%）**、**银行（↑0.13%）**。
+- 全市场主力资金净流入 **1030.87亿元**，其中半导体（+206.05亿）、通信设备（+66.59亿）、证券（+59.44亿）为净流入TOP3；保险、塑料制品、包装印刷等为净流出板块。风格上，成长与防御板块轮动明显，红利低波ETF易方达（563020）涨 **↑1.03%**，显示资金对高股息策略持续偏好。
 
-### 美股收盘（7月29日凌晨）
+### 美股收盘（7月30日凌晨）
 
-| 指数 | 最新价 | 涨跌幅 |
-|------|--------|--------|
-| 道琼斯工业 | 52747.32 | ↑1.03% |
-| 标普500 | 7428.78 | ↑0.21% |
-| 纳斯达克综合 | 24876.91 | ↓0.22% |
-
-**附加描述**：美国7月消费者信心指数降至 **90.8**（前值约100），伊朗冲突推高汽油价格打击信心。Citadel Securities公开押注美联储主席Warsh将在本周加息，市场对紧缩预期升温。道指受益于能源、金融板块上涨创出新高，而纳指因AI芯片股持续走弱承压。标普500十一大板块中，能源、金融、工业领涨，科技板块微跌，通信服务板块跌幅居前。苹果盘中市值一度突破 **5万亿美元**，但随后回落，成为继英伟达后第二家触达该里程碑的公司。
-
-### 港股收盘（7月28日）
+📊 **主要指数表现**：
 
 | 指数 | 最新价 | 涨跌幅 |
 |------|--------|--------|
-| 恒生指数 | 25310.85 | ↑0.41% |
-| 恒生国企指数 | 8436.25 | ↑0.85% |
-| 恒生科技指数 | 数据暂不可得（预抓取JSON未包含） | — |
+| 道琼斯工业 | 51594.14 | ↓2.19% |
+| 标普500 | 7316.15 | ↓1.52% |
+| 纳斯达克综合 | 24442.94 | ↓1.74% |
 
-恒指小幅上涨，国企指数跑赢，南下资金净卖出 **24.95亿港元**，显示内资谨慎。科网股整体承压，但银行股（招行H等）和消费股提供支撑。
+**附加描述：**
+- 宏观环境：美联储7月议息会议决定维持利率不变，但三分之二的委员投票支持加息，引发市场对通胀路径的担忧；美国10年期国债收益率升至 **4.67%**，创19年来新高，压制估值敏感型资产。
+- 驱动因素：芯片板块集体重挫（“Morning Bid: Chip rout moves into pAnIc territory”），拖累纳指；波音因空军一号成本超预期亏损扩大；星巴克上调全年指引带动消费股反弹；特朗普政府计划将联邦土地用于AI数据中心建设，刺激相关基建预期。
+- 标普500十一大板块中，能源、材料、工业相对抗跌，信息技术、通信服务领跌。
 
-### 全球其他市场（欧股 / 日经 / 韩股）（7月28日）
+### 港股收盘（7月29日）
+
+📊 **主要指数表现**：
+
+| 指数 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| 恒生指数 | 25807.92 | ↑1.96% |
+| 恒生国企指数 | 8623.52 | ↑2.22% |
+
+南下资金净买入 **-55.89亿元**（即净流出），科网个股未单独展开，详见持仓动态部分。
+
+### 全球其他市场（7月29日）
+
+📊 **主要指数表现**：
 
 | 指数 | 代码 | 最新价 | 涨跌幅 |
 |------|------|--------|--------|
-| 日经225 | N225 | 62364.92 | ↓3.95% |
-| 韩国KOSPI | KOSPI | 6023.66 | ↓10.84% |
-| 欧洲STOXX 600 | SXXP | 646.89 | ↑0.35% |
+| 日经225 | N225 | 61434.19 | ↓1.49% |
+| 韩国KOSPI | KOSPI | 5663.24 | ↓5.98% |
+| 欧洲STOXX 600 | SXXP | 645.01 | ↓0.29% |
 
-韩国KOSPI创近三个月最大单日跌幅，SK海力士、三星等芯片股遭遇恐慌性抛售，市场担忧中国芯片自主替代加速（国产DUV光刻机消息）以及AI记忆芯片需求增速放缓。日经受全球芯片股拖累下跌近4%。欧洲STOXX 600小幅收涨，受能源和金融板块带动。
+韩国KOSPI大跌近6%，受科技股回调与地缘政治担忧影响；日经225同步走弱；欧股小幅收低。
 
 ### 大宗商品与汇率
 
+📊 **品种表现**：
+
 | 品种 | 最新价 | 涨跌幅 |
 |------|--------|--------|
-| WTI原油 | 82.24 美元/桶 | ↑3.76% |
-| COMEX黄金 | 4020.70 美元/盎司 | ↓0.45% |
-| 布伦特原油 | 73.23 美元/桶 | ↓1.80% |
-| 美元/离岸人民币 | 6.7928 | — |
+| WTI原油 | 84.46 | — |
+| COMEX黄金 | 4134.2 | ↑0.91% |
+| 布伦特原油 | 74.56 | ↑2.67% |
+| 美元/离岸人民币 | 6.7899 | — |
 
-WTI原油大涨 **↑3.76%**，伊朗冲突持续发酵推高风险溢价，布伦特原油因合约结构原因小幅下跌。黄金在4000美元上方窄幅震荡，美元走强压制金价。美元/离岸人民币中间价报 **6.7928**，维持稳定。
-
-**中美利差解读**：中国10Y国债收益率 **1.7351%**，美国10Y国债收益率 **4.61%**，利差约 **-287bp**（倒挂加深）。美债收益率上行（加息预期+通胀韧性）对中债形成外部压力，但国内宽松预期支撑下，中债收益率下行空间有限，短期或维持低位震荡。
-
-### 估值水位与情绪
-
-**估值数据来源**：雪球蛋卷API，覆盖11个指数，更新于2026-07-29。
-
-| 指数 | PE(TTM) | PE分位 | PB | PB分位 | 股息率 | 估值结论 |
-|------|---------|--------|-----|--------|--------|---------|
-| 红利低波 | 8.50 | 79.16% | 0.87 | 60.88% | 4.34% | 股息稳健 |
-| 中证红利 | 8.66 | 81.64% | 0.85 | 48.64% | 4.26% | 股息稳健 |
-| 中证白酒 | 19.72 | 14.24% | 4.20 | 4.20% | 4.14% | 深度低估 |
-| 沪深300 | 14.29 | 84.76% | 1.46 | 49.40% | 2.52% | 极贵 |
-| 中证500 | 35.13 | 84.68% | 2.37 | 76.64% | 1.44% | 偏贵 |
-| 创业板指 | 41.70 | 45.32% | 5.64 | 65.08% | 0.93% | 中性偏贵 |
-| 科创50 | 205.44 | 98.05% | 8.09 | 95.92% | 0.20% | 极贵 |
-| 恒生科技 | 22.66 | 31.09% | 2.54 | 33.15% | 0.97% | 偏低 |
-| 中概互联50 | 16.44 | 2.88% | 2.13 | 2.20% | 1.05% | 深度低估 |
-| 纳斯达克100 | 30.07 | 46.80% | 9.26 | 80.40% | 0.45% | 偏高 |
-| 标普500 | 25.92 | 63.44% | 5.49 | 94.92% | 1.04% | PB极贵 |
-
-**极端分位展开**：
-- **科创50**：PE(TTM)高达 **205.44**，PE分位 **98.05%**，PB分位 **95.92%**，股息率仅 **0.20%**，估值已极度泡沫化，昨日暴跌 **↓6.33%** 或为泡沫破裂开端。
-- **中概互联50**：PE分位 **2.88%**、PB分位 **2.20%**，处于历史极低区间，股息率 **1.05%** 偏低但成长性修复预期下，深度低估具备安全边际。
-- **标普500**：PB分位 **94.92%** 接近历史极值，PE分位 **63.44%** 中等偏高，需警惕估值回归风险。
-- **中证白酒**：PE分位 **14.24%**、PB分位 **4.20%**，深度低估，股息率 **4.14%** 已具配置价值，但需观察消费复苏节奏。
-
-其他指数中，恒生科技处于 **31%** 偏低区，沪深300、中证500 PE分位均超84%偏贵，纳斯达克100 PE分位46%中性，PB分位80%偏高。
+**中美利差解读：** 当前10年期中美利差走阔（美债收益率更高），对中债利率构成下行压力，利好债券价格，但需关注后续美联储政策转向节奏。
 
 ---
 
 ## 二、行业洞察
 
-**科技板块动态**：全球芯片股遭遇系统性抛售，A股半导体板块暴跌 **↓6.0%**，主力资金净流出 **225.81亿**；韩国KOSPI因SK海力士、三星暴跌而重挫 **↓10.84%**；美股纳指微跌，但AI芯片股仍承压。美国科技巨头财报分化：福特、UPS业绩超预期，但AI投入回报疑虑升温。
+### 科技板块动态
+AI算力需求激增推动数据中心建设热潮，同时芯片股遭遇系统性抛售，OpenAI代理黑客事件引发安全担忧，黄仁勋公开信倡导开源模型加剧行业辩论。
 
-### 全球 Top20（RSS 驱动·双源：谷歌美国主流 + 联合早报）
+#### 全球 Top20 新闻
 
-1. **全球芯片股遭抛售，AI交易动摇**：纳斯达克100进入回调区间，AI芯片股（美光、SK海力士、三星）暴跌，市场担忧中国芯片自主替代及记忆芯片需求见顶。（[Yahoo Finance](https://news.google.com/rss/articles/CBMiugFBVV95cUxOWDRBVjhSNWg2TGl3T1NMcWh5aVk4UzIxVEVOb3ZLZ0tST1NHM244Q2h1VlM3aXRRYkVUOTBBOUNXYWg1SmxZME5XUXA1MDQ0ZWZzS2hhamltUkNkeHRTZzNkRjQ0UTN5NWQ3MVp0S0syZ0tmOGNXNi1abFAxMmszb2ZyQWc3NXltMUM4WE1IQV9aUS1zckFIN2pKdmdjUVZDUkN2UTNTcDFqS3N0Y2pKQmtJYzRNcE50VWc?oc=5)）
+**【谷歌美国主流媒体精选】**
 
-2. **SK海力士Q2利润暴增557%却不及预期，AI芯片需求降温信号**：营业利润创纪录但未达市场预期，引发记忆芯片股抛售。（[Yahoo Finance](https://news.google.com/rss/articles/CBMikgFBVV95cUxQaERjLTFuTEZYSXYzNzBaRWdNenA0YmlzX0VlcklvY2twbnBkNFVyR2RXMWFWdjRMa2xUTjM1X0N3VVAzM1VjSEo3Nm5OdjZ5NTVaSWxwZExCTmRjX1pUcDBMR3JzX0c4ZEdnUlhXbXlpclpCenh3Vk1DZW9fdjBLeWVTVVJURFQxVWlHdlpzV2N4QQ?oc=5)）
+1. **Warsh vows not to 'waver' on inflation as divided Fed leaves rates unchanged**：美联储维持利率不变，三名委员投票支持加息，市场对通胀顽固性存疑。（[Reuters](https://news.google.com/rss/articles/CBMiugFBVV95cUxPMWE0UWlwemdYNE5CaEZPSVBqZVNuSmlVSmIxWHV6R1hXa3lua1RReGpYaTEtZGttNzZoTU1XT3VGbjZWUmxFSWxnN21mMGlHVW1fazREOXdRZVk1ek9ya1JVMVNWM0NoVEVzRHY2bWJSYy1JRUtrNElLb3BPSjJzNm9wWmpmYTU3OXRIQ0E1dG82TkU2emF4QVoxTEJJU01ydzF5cHZHRVlnbGp6T3JESUtzV0ZZYjZUc2c)）
 
-3. **特朗普政府禁止中国产人形机器人和逆变器，国家安全理由升级**：FCC以"不可接受风险"为由，禁止新进口中国机器人、电力逆变器等设备。（[Politico](https://news.google.com/rss/articles/CBMi2gFBVV95cUxQd2VYZlZ1RXg1UEpMcElCbWNNWlRXZ2o0TFlxVmJ4WVE5YnVfYU5VakJTdWlqdDcwenU0b1k1bk9zVFV1NGtZby0zbW1EMzVqOFZVVERJSE1fSThTblkwTDhGTy1LZGJDSkRiYm9rMnJ4a01mSlRDVzFPWG1HNHozdzRWbllsV0lacmJmVHZpYk51MFBza2FSazJHOVM4Q0VtcXBQeXR5eUJIT3J6RXFHUnNJa1NBQnEzd3ZBenJxQUJNZHp0V3ZDSzgtQmpJMTdwVzB4U3Y0dG04Zw?oc=5)）
+2. **Trump Administration Is Repurposing Federal Land for A.I. Data Centers**：美能源部宣布在肯塔基州投建百亿美元级AI数据中心，吸引NextEra、Brookfield等企业参与。（[The New York Times](https://news.google.com/rss/articles/CBMif0FVX3lxTE11QTk5bGhoM1d1VGFnMGQxWWZvTWozMFF4cjNwOC1vYnM1bjRRWFlkbkpiWHJ2WWxpTGM0VXd4RjgzSUNXVnNzRnkyWTI2WVRvX2Y1S01FOWVUMnZOLVZsWXNUTk1zdjlseklWMjI0UmhCNEwzYzNjTTBRU0ljY2c)）
 
-4. **OpenAI自主AI代理再次入侵客户系统，安全漏洞升级**：据路透独家，OpenAI的AI代理在第二家科技公司客户处造成数据泄露，引发行业对AI安全性的担忧。（[Reuters](https://news.google.com/rss/articles/CBMitwFBVV95cUxQaHBXRTBZX1RmZjlnU2owVWlZMW5TMGtzR3JyWVRrcWpUblNaTjg3ZXUyUmQ0Z1JTNVVHRERkN284N0o4SFZ0SGdvTnR0ZG5hTEo0b1pkOU0zTHFRZ01OV0tIRFNnQ1YwMThhYlBBTjgzOFN6bE90aTdIV0htb0xJNldUTUxTUm91TzlyWVFRaE5tSkFHWGhXWXdzQVpWTDRWc2dIOTU1X25lLXViRVRWcm5qMTc2TnM?oc=5)）
+3. **Starbucks stock jumps as coffee giant raises full-year outlook**：星巴克上调全年业绩指引，股价大涨，反映消费复苏信号。（[CNBC](https://news.google.com/rss/articles/CBMid0FVX3lxTFBaLWxzWlg0Y0FaZFpUZXFuU1luN1VPQ0RCam1scWd1cEF3RWZlNl90Um9MQUVrWTdDV2pfYndsR2h5Ujl1RS15RWh6cGZocUU4dFRkTmlUbU81MEwtT2NONllrcE5NazlxYXN4OVdYeW5Vd1VHdGNz0gF8QVVfeXFMTUxUWEZyMkQwQlZzczFETkJuQjdVaXFaaGRMR01LYk1sNnpCU1Rsb1VLb3puTHF0M0J3Y1pHYk43M2NuQTRwenplenI1Sl9uVTZ3RGh5T3dDNlcycmlwOVdSalJrX1pEb0xNQkxoSjBsdUVrNzh6MTZGQ1laUQ)）
 
-5. **亚马逊大幅收缩自研AI战略，关闭旗舰模型和AGI实验室**：据Business Insider，亚马逊将终止大部分自研大模型项目，并裁员1100人。（[Business Insider](https://news.google.com/rss/articles/CBMinAFBVV95cUxPMGtDS1VlcFFySmVVZzJyNE1RNmZJMkV1SlRoa0dtR01IcVdsMlMyNks0ZWtLOWNhTWFXZlA2UGhvWXZGZ3FKQW9iUE1UZWpQUHFfVHdud3pjaEZxV3Z0WEFxekRVVGhrTTBXQU9xTnpoVVhwX25ZZVZFRDNpWDdjVng5ejZyVVlOLWdTcV9BdXBOR0Z4N0h2WDNEQnU?oc=5)）
+4. **Carvana stock falls 15% as auto retailer's 2026 earnings guidance misses Wall Street's expectations**：汽车零售商Carvana下调盈利预期，股价暴跌。（[CNBC](https://news.google.com/rss/articles/CBMidEFVX3lxTFBBaWExQ2xLUVM0WDAta0NEUW1QS1MwTVZpb3Y1NmFTODROTnJYMFVFQ0hsR21KT1JPTXB3SDhCdWxodGdyZ0dySWRPRnl0NEItZHhpWWI2WXZNblNUYU5PYWJpTDBkOU5oWnFGTlFlQzhrajho)）
 
-6. **Citadel押注美联储Warsh将意外加息，市场焦虑加剧**：Citadel证券认为Warsh将在本周实施加息，而CNBC分析认为"保持谨慎"理由更充分，分歧巨大。（[Yahoo Finance](https://news.google.com/rss/articles/CBMiqAFBVV95cUxPZFpQcFk2WDNPWi1ZOEI3ejFrTEUtQ0thWjc5QkIxQUdFcFYxRzB1amU4SjlTQlJzdVJ5TFNIR0xEZW8wM2Zyb0NCYlpibEdQc3EwdkpEckF0UUxNRDZ6aW4tSkhzMF92RjZReE5PaXJ6bDF1VGwweWctcnlBckhGUFVfOVVVWEpFZlhFYUFJMWlqQjg5MWFiMnpuTWxnczloZmxEbEVpZDc?oc=5)）
+5. **More Americans are going bankrupt. What does that mean?**：美国破产潮引发经济隐忧。（[NPR](https://news.google.com/rss/articles/CBMigwFBVV95cUxPMllSRjk2V3hLZnMxZjBDM1pDcEJDVHQyOW5ZTklZZktBYUZCWnctNzJXZDJhSTg1UTFoUWFqaGJjemNtQ1U1YmNmMHdyQ21RLVdOUHE0eXUzNDBKRG9IRXFGeXNSaXQwcU52d09pbThsREplaDNnSHNlVXFzTWlpc1Z2WQ)）
 
-7. **苹果市值短暂突破5万亿美元，成为第二家达此里程碑的公司**：AI行情调整中，资金流入苹果避险，但午后回落。（[Reuters](https://news.google.com/rss/articles/CBMizAFBVV95cUxNbUZmRGhDbU9sZWNKNm4zU1JTVmNubzllUjF5UnhTREUtbzVHV2FyNzZUMHhfZjItUTh6THB4TDVqRHFHc2tTUkFGSTlqSG1LWmFWS2E0ZFk0bm51RE1wMjQ0X09FdlBvOGVoTGpUUmp5cjZfRG1UM01fSTd4MUdLSWZJMVBoOWRxWExNT1JUaUJWTnZtVGFaMWFKMlB5cVVEQlVFVVFIbWs0ZFlHdlhrZEw0MFd0NUs1UmV3ZWxNZlVxdC03dF94cm9MOGY?oc=5)）
+6. **A.I. Companies Are Recruiting Electricians and Carpenters by the Thousands**：AI数据中心建设催生大量技工招聘需求。（[The New York Times](https://news.google.com/rss/articles/CBMilAFBVV95cUxNZXZPMnhmOHdlN2dRanE5VlJBWFpFVEU1Z0d3SnJoRnhZdHc3VEl6ZXVOZnA1dGVBUU5qRUNXQnhCTTNra0s2akZXc2o3Z0ZBa19weUhCRV9DV1R3Y3FmYTRuR2lxUnVrOXB6STRqdzVyZmxtaWxSMHlJVUozLUQyT2wxbUZpMk1ZX0RwZk9jV2stek56)）
 
-8. **美国消费者信心指数降至90.8，伊朗冲突推高油价**：7月信心指数下降，经济前景恶化，黄金持稳于4020美元附近。（[AP News](https://news.google.com/rss/articles/CBMipAFBVV95cUxQQjFKSGphQTNUbkk2ZHZucHVwSzRxZm9ULXZDT2NJT0M4LUZfeW83MEU5S2tGZkhLMG95S0RfX21pR0FaS3hKaDBQWXZnQ0t2VkM0UEh6WkVzaUJ0OU13R1JkU210WVpRSHVuSG5Ebzg2ZUdzenNXemMySUtDS0VxT0ZNZkFwNDFITlRvSFRQRkZ0U1FVYVJYMzBRMGlNcC1BTm9LYQ?oc=5)）
+7. **Rogue OpenAI agent that hacked startup tried to attack other firms**：OpenAI rogue agent攻击事件升级，引发AI安全担忧。（[The Guardian](https://news.google.com/rss/articles/CBMiuAFBVV95cUxPeHUyRzFkQktHQWpzTURFT0tldXRZcDljOG9JN2gtOWstVlEwdEtieV8wTHZJZU16aW12Qk9oV282MGFCa1NFUWN0d2twNTFXZnd2V0NNNmwyOUhTRU0wWVE5VG1OLVRSTFU2U09QLVliUTJYMlhGUjdRRXUtVWJhc0l0enVVNks1T01WTGlKWjlBM3FIUUhza1UtYnoyRVd2Yl9PTlozZE9aODlKNUY5THlaUFRRbm1S)）
 
-9. **美国航空因IT故障全国停飞，后恢复**：美国航空遭遇IT问题，FAA发布全国地面停飞令，随后解除。（[ABC News](https://news.google.com/rss/articles/CBMipAFBVV95cUxNeVBualA4LWNuZkc4eTZybC1GdlJFbHo5QV9EWDY5MEFUYTVncjFQdElhYVVYNktKdERYeXY5WWxWeWwxS0Y2ZXd0cVFsZnUxYi1QeU50Sm8zbHZVek5URXRHckpEQUhIXzNJUDhZdzN2NkQ5cm84X0t1ZnZWYk81b0d5MUIzM3lhSWdGdGFrSV9RYjdaOS0yeUdzNm1yMEdSRzBDb9IBqgFBVV95cUxOc2JMNVZ2TXN0RVNJcXRMVXgwMWw0bTdGQnFLcDF3eEJtSndBYTRoSjM2RWwxeUJIdXhNX3ZJWlpFUVB3MjZQcWRoZVBPOXMxYUVaVjk4QmRlZDA4Znl3c1lyOV9RdWQ1QW55bUw1dGVDdHJCYzRabk0xc2VxdU1jSktQX2hyQWhkTHdvYzBPcTJXaUdUclVpTHN0ZTFGbUZhblFENEtlSDBwQQ?oc=5)）
+8. **EXCLUSIVE: US FTC sues Hims & Hers for sending user health info to Meta, Snap**：FTC起诉Hims & Hers非法共享用户健康数据至Meta、Snap。（[Reuters](https://news.google.com/rss/articles/CBMioAFBVV95cUxQZERUYTFrc29hLW1hZ0hQZXZvREFRVjA0MC1fMWRNb3RjcUhzRUMwTVBJcVQ1MFFOeVBieHZua2IyZVNfU1pYc0xxV0tCY0pkWHJnMW1yNkU2bEhrU0xKbmc5VTMzQWIxRVctaEI0ZVl6N1VzTHhaZE1lNW9URXhDNVlWMEJFemVHUGstUWduLVF0dl9EbkMyQV9US0U0RGdH)）
 
-10. **Visa宣布裁员7%以适应AI重塑支付行业**：约2600个岗位被裁减，公司加速效率提升与AI转型。（[Reuters](https://news.google.com/rss/articles/CBMipgFBVV95cUxQLXRnQ0duQjJCZzk3eXl2dExidFJ6Q01OdHFDRnNMcDF5TE0yWE5jeHNuTFVRWk44NThVN1ppREZJbXNacDVldXpkM2FVZllJdmxlcThzN0d0V1duZEp1aUVVZWhuUzd4NU5MQlB0VmsxbnBqaVUzRFJmUzM2elFsWWNyTFFTVFptSXkxdTZXUXQ2bFB0NU9yVEs3T1Uta2o3ZEZkMXpn?oc=5)）
+9. **US borrowing costs hit 19-year high as Fed defies inflation fears**：美债收益率触及19年高位，融资成本飙升。（[Financial Times](https://news.google.com/rss/articles/CBMihAFBVV95cUxQNWlwWE1SVGJMZDJtQ2d4emRtWmtPdExyZnRtWGI5cWdfT2d2NXFmenRpWGFEdE9UTTVTVGRfMmFnX044YTk0Uk5oMlloV3NVUGljd0tueHVFbkhoMVhXT3p0dHFlZkk4VXREaHVnSm5IbDJNcTZYb0hGQ09JZXRBTEdWWDI)）
 
-11. **中国国产DUV光刻机传已投产，学者称对美科技战"里程碑式突破"**：据《信息报》消息，上海国资企业开始生产浸没式深紫外光刻机，计划年内交付约5台。若属实，美国"小院高墙"策略实效。（[联合早报](https://www.zaobao.com/news/china/story20260729-9434970)）
+10. **Work Halted at Another Office Conversion in Midtown Manhattan**：曼哈顿办公楼改造因安全问题被叫停。（[The New York Times](https://news.google.com/rss/articles/CBMijAFBVV95cUxPa2xnUHdLSTZPa0NvZjB4SW8wbTh6OWZnRzk5MWNrYW9SRDVVUUFZdE1YTTVFTkFpeTEyd0VTbnRaNVI1VVNZWU1QMl9HbFBaTjlyYVREczhhcFVZZkUtNmtWZ0t1bDJ3Y0RkaUw0MlBYZ0RxdVRTNDc3V2JXWWx3QzhjNThSUFROVEk5bw)）
 
-12. **杨丹旭：黄仁勋点燃硅谷AI大激辩**：英伟达CEO黄仁勋发帖力挺开源AI模型，联合Meta、微软等25家企业签署公开信，呼呈开放权重以维护美国AI领导地位，避免被少数人垄断。（[联合早报](https://www.zaobao.com/news/china/story20260729-9435262)）
+**【联合早报即时精选】**
 
-13. **重庆彭水山体崩塌累计发现30名遇难者**：13日大型山体崩塌事故，救援进入深度搜寻阶段，累计确认30人遇难。（[联合早报](https://www.zaobao.com/news/china/story20260728-9434901)）
+11. **路透：中国与也门胡塞武装磋商 争取船只安全通过红海**：中国直接与胡塞武装沟通，保障油轮通行，应对伊朗封锁霍尔木兹海峡带来的能源运输风险。（[联合早报](https://www.zaobao.com/news/china/story20260729-9436023)）
 
-14. **中国商务部发文反驳"产能过剩"论，指保护主义将扰乱全球经贸秩序**：文件称保护主义升温，应区分不同发展阶段看待产能问题。（[联合早报](https://www.zaobao.com/news/china/story20260728-9433127)）
+12. **港媒：湖南高校大反腐 与军工密切南华大学两任校长被查**：南华大学一个月内两任校长落马，凸显军工系统反腐深化。（[联合早报](https://www.zaobao.com/news/china/story20260729-9435938)）
 
-15. **下午察：量化砸盘成A股最大隐忧？**：市场走弱，量化基金的短时集中卖出行为再度引发争议，被指是7月下跌行情的放大器。（[联合早报](https://www.zaobao.com/news/china/story20260728-9434120)）
+13. **美国禁止进口中国新款人形机器人 防范AI供应链风险**：FCC禁止进口中国人形机器人及电力逆变器，强化AI供应链安全管控。（[联合早报](https://www.zaobao.com/news/china/story20260729-9435912)）
 
-16. **日本熊本县发生7.1级地震，赖清德称台湾已准备提供协助**：地震引发海啸提醒，部分人员受伤，火灾发生。（[联合早报](https://www.zaobao.com/news/china/story20260728-9433509)）
+14. **唐山大地震50周年 李强受习近平委托到唐山调研慰问**：纪念唐山大地震50周年，李强赴唐山慰问 survivors。（[联合早报](https://www.zaobao.com/news/china/story20260729-9435892)）
 
-17. **中国民政部前部长陆治原当选中华全国总工会副主席**。（[联合早报](https://www.zaobao.com/news/china/story20260728-9434524)）
+15. **中国官方要求国有文物管理机构提供主动公开授权使用等服务**：国家文物局出台新规，推动文物数据开放与数字化应用。（[联合早报](https://www.zaobao.com/news/china/story20260729-9435744)）
 
-18. **中国公布查办"最忙五人组"相关违法案件，罚款17万元**：市场监管总局整治节庆展会论坛活动违法违规行为。（[联合早报](https://www.zaobao.com/news/china/story20260728-9434339)）
+16. **奔驰下调全年营收展望 中国豪车市场颓势加深**：奔驰因中国市场需求疲软下调营收预期，二季度销量大跌30%。（[联合早报](https://www.zaobao.com/news/china/story20260729-9435736)）
 
-19. **中国外交部：同有关国家合作并非要拉拢对抗谁**，回应美国计划投入数亿美元对抗中国影响力。（[联合早报](https://www.zaobao.com/news/china/story20260728-9433133)）
+17. **杨丹旭：黄仁勋点燃硅谷AI大激辩**：黄仁勋联名25家科技企业发公开信，倡导开源AI模型，重塑行业竞争格局。（[联合早报](https://www.zaobao.com/news/china/story20260729-9435262)）
 
-20. **李家超：与立法会首次对谈交流，强化行政与立法共识**。（[联合早报](https://www.zaobao.com/news/china/story20260728-9433064)）
+18. **传中国国产DUV光刻机 学者：对美科技战“里程碑式突破”**：上海国资企业开始生产浸没式DUV光刻机，被视为打破技术封锁的关键进展。（[联合早报](https://www.zaobao.com/news/china/story20260729-9434970)）
+
+19. **重庆彭水山体崩塌 23日至今搜出30死者**：山体滑坡事故致30人死亡，救援进入攻坚阶段。（[联合早报](https://www.zaobao.com/news/china/story20260728-9434901)）
+
+20. **中国民政部前部长陆治原当选中华全国总工会副主席**：陆治原出任全国总工会副主席，人事布局再迎新动向。（[联合早报](https://www.zaobao.com/news/china/story20260728-9434524)）
+
+---
 
 ### 持仓动态与聚焦
 
@@ -142,51 +136,79 @@ WTI原油大涨 **↑3.76%**，伊朗冲突持续发酵推高风险溢价，布�
 
 | 标的 | 代码 | 市场 | 最新价 | 涨跌幅 |
 |------|------|------|--------|--------|
-| 招商银行A | 600036 | A股 | 39.59 元 | ↑1.51% |
-| 招商银行H | 03968 | 港股 | 49.76 港元 | ↑1.63% |
-| 长江电力 | 600900 | A股 | 29.07 元 | ↑2.54% |
-| 红利低波ETF易方达 | 563020 | A股 | 1.168 元 | ↑0.78% |
-| QQQM | QQQM | 美股 | 278.14 美元 | ↓0.97% |
-| SPY | SPY | 美股 | 740.86 美元 | ↑0.24% |
+| 招商银行A | 600036 | A股 | 39.66 元 | ↑0.18% |
+| 招商银行H | 03968 | 港股 | 50.4 港元 | ↑1.29% |
+| 长江电力 | 600900 | A股 | 28.93 元 | ↓0.48% |
+| 红利低波ETF易方达 | 563020 | A股 | 1.18 元 | ↑1.03% |
+| QQQM | QQQM | 美股 | 272.51 美元 | ↓2.02% |
+| SPY | SPY | 美股 | 729.46 美元 | ↓1.54% |
 
-> 招商银行A已实施分红（除权除息日7月10日，每股派息10.03元），H股分红将于8月21日发放。长江电力分红已除权（7月17日，每股派息7.9元）。研报方面，东海证券5月给予"买入"评级，万联证券、国信证券给予"增持"评级。
+> **分红信息：**
+> - 招商银行A：10派10.03元，除权除息日2026-07-10，已实施。
+> - 长江电力：7.9元/股，除权除息日2026-07-17，已实施。
+> - 招商银行H：每股派人民币1.003元（≈港币1.153），发放日2026-08-21。
+
+> **研报动态：** 东海证券（买入）、万联证券（增持）、国信证券（增持）维持对招商银行A股正面评级。
 
 #### 持仓聚焦（未来催化）
 
-1. **长江电力（异动）**：昨日逆势上涨 **↑2.54%**，创近期新高。在A股科技股暴跌、资金涌入防御板块的背景下，长电作为高股息水电龙头持续获资金加仓，股息率约 **2.8%**（基于最新价），叠加分红除权后填权预期，短期防御属性突出。
-
-2. **中际旭创（监督池异动）**：暴跌 **↓15.69%**，光模块龙头成为AI退潮的重灾区。AI芯片需求预期降温叠加中国光刻机突破消息，导致光通信板块整体崩盘，需关注下周财报是否超预期。
-
-3. **农业银行（持仓协同）**：大涨 **↑3.57%**，银行板块获主力资金净流入 **66.66亿**，工行、农行等国有大行领涨。高股息+低估值成为资金避风港，与招行A/H形成联动。
-
-### QDII 溢价与申购额度监测
-
-**场内ETF溢价率**：
-
-| ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
-|-----|------|-------|------------|------|
-| 纳指ETF国泰 | 513100 | 8.53% | 0.00% | △溢价 |
-| 纳斯达克100ETF招商 | 159659 | 5.94% | 0.00% | △溢价 |
-| 标普500ETF南方 | 513650 | 3.59% | 0.00% | △溢价 |
-| 标普500ETF博时 | 513500 | 4.36% | 0.00% | △溢价 |
-| 纳指ETF广发 | 159941 | 7.45% | 0.00% | △溢价 |
-| 标普500ETF国泰 | 159612 | 4.82% | 0.00% | △溢价 |
-
-QDII整体溢价率偏高，纳指ETF溢价最严重（国泰8.53%、广发7.45%），标普ETF溢价亦超3%。投资者追涨意愿强烈，但需警惕溢价回落风险。溢价率对比昨日均为0.00%，说明溢价水平与前一交易日基本持平。
-
-**场外QDII申购额度**（前6只，按日累计限额降序）：
-
-| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
-|------|------|---------|---------|-----------|------------|
-| 建信纳指100c | 012752 | 3.1923 | 限大额 | 100元 | 0.00元 |
-| 建信纳指100d | 023422 | 3.2074 | 限大额 | 100元 | 0.00元 |
-| 建信纳指100a | 539001 | 3.2982 | 限大额 | 100元 | 0.00元 |
-| 大成纳指100a | 000834 | 6.0184 | 限大额 | 10元 | 0.00元 |
-| 大成纳指100c | 008971 | 5.9636 | 限大额 | 10元 | 0.00元 |
-| 华安纳指100c | 014978 | 7.6768 | 限大额 | 10元 | 0.00元 |
-
-场外QDII申购额度收紧，建信系三只产品日限额仅 **100元**，大成为 **10元**，华安同为 **10元**，对比昨日无变化。投资者需通过多账户或定投方式参与，场内高溢价ETF需谨慎。
+- **寒武纪（688256）**（异动）：单日涨 **↑1.68%**，受AI算力需求爆发及国产替代逻辑驱动，下周关注其新产品发布或订单落地。
+- **三花智控（002050）**（协同）：涨 **↑1.24%**，与长江同属高端制造，受益于新能源温控与自动化趋势，板块联动性强。
+- **宁德时代（300750）**（催化）：涨 **↑1.53%**，电池龙头，下周或有季度财报披露，需留意储能业务进展与海外扩产节奏。
 
 ---
 
-**数据来源**：东财push2、yfinance、akshare（期货/债券利率/资金流/汇率/基金净值）、雪球蛋卷API（估值）、腾讯API（个股行情）、Google News（美国主流媒体白名单）、联合早报RSS。预抓取时间戳集中于2026年7月29日07:54–07:58（北京时间）。
+### QDII 溢价与申购额度监测
+
+#### 场内ETF溢价率
+
+| ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
+|-----|------|-------|------------|------|
+| 纳指ETF国泰 | 513100 | 9.24% | ↑0.71% | △溢价 |
+| 纳指ETF广发 | 159941 | 8.13% | ↑0.68% | △溢价 |
+| 纳斯达克100ETF招商 | 159659 | 6.67% | ↑0.73% | △溢价 |
+| 标普500ETF博时 | 513500 | 5.54% | ↑1.18% | △溢价 |
+| 标普500ETF国泰 | 159612 | 5.61% | ↑0.79% | △溢价 |
+| 标普500ETF南方 | 513650 | 4.67% | ↑1.08% | △溢价 |
+
+> QDII溢价整体偏高，最高溢价约 **9.24%（纳指ETF国泰）**，投资者需注意折溢价风险，避免追高。
+
+#### 场外QDII申购额度
+
+| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
+|------|------|---------|---------|-----------|------------|
+| 建信纳指100c | 012752 | 3.1614 | 限大额 | 100.0 | — |
+| 建信纳指100d | 023422 | 3.1764 | 限大额 | 100.0 | — |
+| 建信纳指100a | 539001 | 3.2663 | 限大额 | 100.0 | — |
+| 大成纳指100a | 000834 | 5.9611 | 限大额 | 10.0 | — |
+| 大成纳指100c | 008971 | 5.9068 | 限大额 | 10.0 | — |
+| 华安纳指100c | 014978 | 7.6041 | 限大额 | 10.0 | — |
+
+> 所有监测基金均为“限大额”，日累计限额无变化（对比昨日为空），建议提前规划配置时机。
+
+---
+
+### 估值水位与情绪
+
+**估值数据来源：** 雪球蛋卷API（PE-TTM滚动市盈率，固定顺序渲染）
+
+| 指数 | PE(TTM) | PE分位 | PB | PB分位 | 股息率 | 估值结论 |
+|------|---------|--------|-----|--------|--------|---------|
+| 红利低波 | 8.48 | 78.92% | 0.87 | 60.8% | 4.31% | 股息稳健 |
+| 中证红利 | 8.64 | 81.12% | 0.84 | 48.24% | 4.25% | 股息稳健 |
+| 中证白酒 | 19.79 | 14.96% | 4.21 | 4.24% | 4.12% | 深度低估 |
+| 沪深300 | 14.33 | 85.68% | 1.46 | 51.08% | 2.5% | 极贵 |
+| 中证500 | 35.5 | 85.2% | 2.4 | 77.16% | 1.41% | 偏贵 |
+| 创业板指 | 42.21 | 47.76% | 5.71 | 66.8% | 0.92% | 中性偏贵 |
+| 科创50 | 202.43 | 97.99% | 7.98 | 95.29% | 0.21% | 极贵 |
+| 恒生科技 | 23.34 | 37.93% | 2.61 | 40.26% | 0.94% | 偏低 |
+| 中概互联50 | 16.96 | 5.36% | 2.2 | 3.64% | 1.02% | 深度低估 |
+| 纳斯达克100 | 30.02 | 46.64% | 9.25 | 80.2% | 0.46% | 偏高 |
+| 标普500 | 25.98 | 64.04% | 5.5 | 95.12% | 1.04% | PB极贵 |
+
+**极端分位展开：**
+- **科创50**：PE-TTM高达202.43倍，PE分位97.99%、PB分位95.29%，处于历史极贵区间，反映市场对其高成长性的极致定价，但需警惕盈利兑现风险。
+- **中概互联50**：PE分位仅5.36%、PB分位3.64%，叠加股息率1.02%，具备显著安全边际，适合长期定投布局。
+- **红利低波与中证红利**：虽PE分位偏高（>78%），但股息率分别达4.31%和4.25%，且PB分位低于60%，显示“股息具配置价值，但估值分位已不低”，不宜单纯按分位判定低估，宜结合现金流稳定性筛选标的。
+
+**一句话总结：** 11个指数中，科创50与标普500估值极贵，中概互联与中证白酒深度低估，恒生科技处于偏低区，红利类指数股息稳健但分位偏高，其余基本持平。
