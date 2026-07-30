@@ -161,7 +161,7 @@ def main():
         import re as _re
         def _pri(b):
             for k, v in (("data_market", 100), ("data_valuation", 95), ("data_news", 85),
-                          ("data_extra", 60), ("data_deep", 50)):
+                          ("data_holdings", 70), ("data_extra", 60), ("data_deep", 50)):
                 if k in b:
                     return v
             return 80

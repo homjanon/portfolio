@@ -494,112 +494,6 @@ def fetch_valuation():
     return _ok(result)
 
 
-# ─── 6. 基金净值+估值+ETF溢价（v23: 删020602，保留QDII参考）───
-def fetch_fund():
-    """QDII ETF净值估算参考（020602已换为563020场内ETF，走腾讯API）"""
-    result = {}
-
-    try:
-        import akshare as ak
-        df_est = ak.fund_value_estimation_em(symbol="QDII")
-        if df_est is not None and len(df_est) > 0:
-            qdii_list = []
-            for _, r in df_est.iterrows():
-                name = str(r.iloc[2]) if len(r) > 2 else ""
-                if any(kw in name for kw in ["纳指","纳斯达克","标普500","标普"]):
-                    qdii_list.append({
-                        "基金名称": name,
-                        "基金代码": str(r.iloc[1]) if len(r) > 1 else "",
-                        "估算净值": _num(r.iloc[3] if len(r) > 3 else None),
-                        "估算增长率": _num(r.iloc[4] if len(r) > 4 else None),
-                        "公布净值": _num(r.iloc[5] if len(r) > 5 else None),
-                    })
-            if qdii_list:
-                result["qdii_etf_reference"] = qdii_list
-    except: pass
-
-    return _ok(result)
-
-
-# ─── 7. 申万行业+资金流+全市场PE（v21重写）─────────────────
-def fetch_industry():
-    """v21: 申万31行业实时涨跌幅 + 同花顺90行业资金流 + 全市场PE"""
-    import akshare as ak
-    result = {}
-
-    # 1. 申万一级行业实时行情 → 计算涨跌幅TOP3/BOTTOM3
-    try:
-        df_sw = ak.index_realtime_sw(symbol='一级行业')
-        if df_sw is not None and len(df_sw) > 0:
-            df_sw['涨跌幅'] = ((df_sw['最新价'] - df_sw['昨收盘']) / df_sw['昨收盘'] * 100).round(2)
-            df_sorted = df_sw.sort_values('涨跌幅', ascending=False)
-
-            industries = []
-            for _, row in df_sorted.iterrows():
-                industries.append({
-                    '名称': row['指数名称'],
-                    '代码': row['指数代码'],
-                    '最新价': round(float(row['最新价']), 2),
-                    '涨跌幅': row['涨跌幅'],
-                    '成交额_亿': round(float(row['成交额']), 2),
-                })
-            result['申万行业'] = industries
-            result['申万TOP3'] = industries[:3]
-            result['申万BOTTOM3'] = industries[-3:][::-1]
-    except Exception as e:
-        result['申万行业'] = []
-        result['_申万_error'] = str(e)
-
-    # 2. 同花顺行业板块 → 资金流向净流入TOP5/BOTTOM5
-    try:
-        df_ths = ak.stock_board_industry_summary_ths()
-        if df_ths is not None and len(df_ths) > 0:
-            df_by_inflow = df_ths.sort_values('净流入', ascending=False)
-
-            top5 = []
-            for _, r in df_by_inflow.head(5).iterrows():
-                top5.append({
-                    '板块': r['板块'],
-                    '涨跌幅': round(float(r['涨跌幅']), 2),
-                    '净流入_亿': round(float(r['净流入']), 2),
-                    '总成交额_亿': round(float(r['总成交额']), 2),
-                })
-
-            bottom5 = []
-            for _, r in df_by_inflow.tail(5).iterrows():
-                bottom5.append({
-                    '板块': r['板块'],
-                    '涨跌幅': round(float(r['涨跌幅']), 2),
-                    '净流入_亿': round(float(r['净流入']), 2),
-                    '总成交额_亿': round(float(r['总成交额']), 2),
-                })
-
-            total_inflow = round(float(df_ths['净流入'].sum()), 2)
-
-            result['资金_净流入TOP5'] = top5
-            result['资金_净流出TOP5'] = bottom5
-            result['资金_全市场净流入_亿'] = total_inflow
-            result['资金_行业总数'] = len(df_ths)
-    except Exception as e:
-        result['_资金流_error'] = str(e)
-
-    # 3. 全市场PE（乐咕乐股，日更）
-    try:
-        df_pe = ak.stock_market_pe_lg(symbol='上证A股')
-        if df_pe is not None and len(df_pe) > 0:
-            latest_pe = df_pe.dropna(subset=['市盈率']).tail(1)
-            if len(latest_pe) > 0:
-                r = latest_pe.iloc[0]
-                result['全市场PE'] = {
-                    'PE': round(float(r['市盈率']), 2),
-                    '总市值_亿': round(float(r['总市值']), 2),
-                    '日期': str(r['日期']),
-                    '来源': '乐咕乐股(日更)',
-                }
-    except Exception as e:
-        result['_PE_error'] = str(e)
-
-    return _ok(result)
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -1450,7 +1344,9 @@ def main():
         modules.append(("data_forex_rate.json",  fetch_forex_rate,  "汇率/商品/债券"))
         if a_open:
             modules.append(("data_valuation.json", fetch_valuation,  "估值数据"))
-        # 注：data_fund / data_industry / data_holdings 已停抓（prompt 不再消费，LLM 输入 JSON 由 11→8）
+        if a_open or u_open:
+            modules.append(("data_holdings.json", fetch_holdings, "持仓行情+分红+研报"))
+        # 注：data_fund / data_industry 已停抓（prompt 不再消费）；data_holdings 已恢复（LLM 输入 JSON 11→9）
         # RSS 新闻：始终抓取（深度观察专栏仅精简模式，完整模式不抓 data_deep）
         modules.append(("data_news.json", _fetch_rss_other, "全球Top20 RSS(美国主流+联合早报)"))
         # 财联社当天新闻：供市场全景各板块一句话简述（严格当天，无则留空）
