@@ -1002,9 +1002,10 @@ def _fetch_rss_deep():
             print(f"    [深度专栏·财新兜底] 获取失败: {_e}")
     return _ok({"total": len(items_deep), "items_deep": items_deep})
 
-# ─── 数据源J: 财联社 RSS（双源：主 rsshub.rssforever/cls/telegraph + 兜底 hub.slarker.me/cls/depth/1000）────
+# ─── 数据源J: 财联社 RSS（多实例兜底：hub.slarker.me 主 + 多个 RSSHub 公共实例备用）────
 def _fetch_cls_rss_once(url):
-    """抓取单个财联社 RSS 源，解析全部 <item>（不过滤当天）。返回 (items, ok)。失败返回 ([], False)。"""
+    """抓取单个财联社 RSS 源，解析全部 <item>（不过滤当天）。
+    返回 (items, ok, note)：ok=True 表示成功取到 <item>；note 用于日志诊断（HTTP状态/异常原因）。"""
     def _local(tag):
         return tag.split('}')[-1] if '}' in tag else tag
 
@@ -1015,7 +1016,11 @@ def _fetch_cls_rss_once(url):
         return ''
 
     try:
-        r = requests.get(url, headers={"User-Agent": UA}, timeout=15)
+        # 连接 8s / 读取 25s，避免云环境对不可达主机长时间挂起
+        r = requests.get(url, headers={"User-Agent": UA}, timeout=(8, 25))
+        if r.status_code != 200:
+            # 非 200（如 503 宕机页、403 屏蔽）记为失败，便于日志定位
+            return [], False, f"HTTP {r.status_code}"
         r.encoding = "utf-8"
         root = ET.fromstring(r.content)
         out = []
@@ -1037,26 +1042,46 @@ def _fetch_cls_rss_once(url):
                 "link": link,
                 "category": cat,
             })
-        return out, True
+        if not out:
+            # 返回了 200 但无 <item>（多半是 RSSHub 欢迎页/HTML 错误页）
+            return [], False, "200但无<item>(疑似HTML错误页)"
+        return out, True, f"OK({len(out)})"
     except Exception as e:
-        print(f"    [财联社RSS] 单源抓取失败 {url}: {e}")
-        return [], False
+        return [], False, f"{type(e).__name__}: {e}"
 
 
 def fetch_cls_zaobao():
-    """v39: 财联社 RSS 双源（主 rsshub.rssforever/cls/telegraph + 兜底 hub.slarker.me/cls/depth/1000）。
-    两源都抓、合并去重（按 title+link），统一按「北京时间当天」筛选；
-    供 LLM 自行提炼 A股/港股/美股/全球/大宗 各板块一句话简述；无当天条目则 items 为空（简述留空）。
-    两源均不可达才返回 _fail（日报对应板块简述自动留空，不崩）。"""
+    """v40: 财联社 RSS 多实例兜底（hub.slarker.me 主 + 多个 RSSHub 公共实例备用）。
+    依次尝试候选源，任一成功即取其全部 <item>，合并去重（按 title+link），统一按「北京时间当天」筛选；
+    供 LLM 提炼 A股/港股/美股/全球/大宗 各板块一句话简述 + 持仓聚焦新闻驱动；无当天条目则 items 为空（简述留空）。
+    全部源失败才返回 _fail（日报对应板块简述自动留空，不崩）。每个源的成败与原因都会打印到日志便于定位。"""
     import email.utils as _eu
-    PRIMARY = "https://rsshub.rssforever/cls/telegraph"
-    FALLBACK = "https://hub.slarker.me/cls/depth/1000"
+    # 候选源：实测 hub.slarker.me 稳定（两条路由均返回 200 RSS）；
+    # 其余 RSSHub 公共实例随可用性波动（社区实例常屏蔽云服务器 IP），仅作兜底补充
+    SOURCES = [
+        "https://hub.slarker.me/cls/depth/1000",
+        "https://hub.slarker.me/cls/telegraph",
+        "https://rsshub.app/cls/telegraph",
+        "https://rsshub.rssforever.com/cls/telegraph",
+    ]
     MAX_ITEMS = 80  # 保护：当天条目过多时仅取最新 80 条
     today_cn = datetime.now(TZ_CN).date()
 
-    raw, ok1 = _fetch_cls_rss_once(PRIMARY)
-    raw2, ok2 = _fetch_cls_rss_once(FALLBACK)
-    raw += raw2
+    raw = []
+    notes = []
+    for url in SOURCES:
+        items, ok, note = _fetch_cls_rss_once(url)
+        notes.append(f"{'✅' if ok else '❌'} {url} → {note}")
+        if ok:
+            raw += items
+        if len(raw) >= MAX_ITEMS:  # 已抓到足够条目，提前结束
+            break
+
+    if not raw:
+        print("    [财联社RSS] 全部候选源失败：")
+        for n in notes:
+            print("      " + n)
+        return _fail(Exception("财联社全部RSS源均不可达；" + " | ".join(notes)))
 
     # 合并去重（按 title+link）
     seen = set()
@@ -1088,11 +1113,9 @@ def fetch_cls_zaobao():
     items.sort(key=lambda x: x.get("pubDate", ""), reverse=True)
     items = items[:MAX_ITEMS]
 
-    if not (ok1 or ok2):
-        print("    fetch_cls_zaobao 双源均失败")
-        return _fail(Exception("财联社双源RSS均不可达"))
+    print("    [财联社RSS] 源状态: " + " | ".join(notes))
     return _ok({"date": today_cn.isoformat(), "total": len(items),
-                "sources": {"primary": PRIMARY, "fallback": FALLBACK}, "items": items})
+                "sources": SOURCES, "items": items})
 
 def fetch_holdings():
     """个人持仓(招行A/H/长电/563020/QQQM/SPY) + 监督池批量行情
