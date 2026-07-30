@@ -565,7 +565,7 @@ def _normalize_qdii_prev(prev):
 
 
 def fetch_extra():
-    """v29: 资金面 + QDII监测(腾讯API实时价+东方财富HTTP净值) + 场外申购额度(Nasdaq100/S&P500可申购大额度)"""
+    """QDII监测(腾讯API实时价+东方财富HTTP净值) + 场外申购额度(Nasdaq100/S&P500可申购大额度) + USD/CNH汇率；资金面/两融/涨跌停已移除"""
     import akshare as ak
     result = {}
     today_str = datetime.now(TZ_CN).strftime("%Y%m%d")
@@ -592,49 +592,7 @@ def fetch_extra():
             result["USD_CNH"] = yf_fx["USD_CNH"]["最新价"]
             result["USD_CNH_来源"] = "yfinance兜底"
 
-    # ── 2. 南下/北向资金 + 涨跌家数（保留）──
-    try:
-        df = ak.stock_hsgt_fund_flow_summary_em()
-        if df is not None and len(df) > 0:
-            latest = df[df["交易日"] == today_str]
-            if len(latest) == 0:
-                latest = df.tail(4)
-            south_sum = 0.0; north_sum = 0.0; up_cnt = 0; down_cnt = 0
-            for _, r in latest.iterrows():
-                direction = str(r.get("资金方向", ""))
-                net = float(r.get("成交净买额", 0) or 0)
-                if direction == "南向": south_sum += net
-                elif direction == "北向": north_sum += net
-                up_cnt += int(r.get("上涨数", 0) or 0)
-                down_cnt += int(r.get("下跌数", 0) or 0)
-            result["南下资金_净买入_亿"] = round(south_sum, 2) if south_sum else None
-            result["北向资金_净买入_亿"] = round(north_sum, 2) if north_sum else None
-            result["上涨家数"] = up_cnt if up_cnt else None
-            result["下跌家数"] = down_cnt if down_cnt else None
-            if up_cnt and down_cnt:
-                result["涨跌比"] = round(up_cnt / max(down_cnt, 1), 2)
-    except Exception as e:
-        result["_资金流_error"] = str(e)
-
-    # ── 3. 两融余额（保留）──
-    try:
-        sh = ak.macro_china_market_margin_sh()
-        sz = ak.macro_china_market_margin_sz()
-        if sh is not None and len(sh) > 0:
-            result["沪市_融资融券余额_亿"] = round(float(sh.iloc[-1]["融资融券余额"]) / 1e8, 2)
-        if sz is not None and len(sz) > 0:
-            result["深市_融资融券余额_亿"] = round(float(sz.iloc[-1]["融资融券余额"]) / 1e8, 2)
-    except: pass
-
-    # ── 4. 涨停/跌停数（保留）──
-    try:
-        zt = ak.stock_zt_pool_em(date=today_str)
-        result["涨停数"] = len(zt) if zt is not None else None
-    except: result["涨停数"] = None
-    try:
-        dt = ak.stock_zt_pool_dtgc_em(date=today_str)
-        result["跌停数"] = len(dt) if dt is not None else None
-    except: result["跌停数"] = None
+    # 注：资金面(南下/北向/涨跌家数)、两融、涨停/跌停 已移除（prompt 不再消费，且为卡顿主因）
 
     # ── v24方案: QDII监测 — 腾讯API实时价 + 东方财富HTTP净值（不依赖 fund_etf_spot_em）──
     qdii_data = {"场内ETF": [], "场外QDII": []}
