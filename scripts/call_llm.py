@@ -160,8 +160,7 @@ def main():
     if len(user) > _MAX_USER:
         import re as _re
         def _pri(b):
-            for k, v in (("data_market", 100), ("data_valuation", 95), ("data_fund", 90),
-                          ("data_industry", 90), ("data_holdings", 90), ("data_news", 85),
+            for k, v in (("data_market", 100), ("data_valuation", 95), ("data_news", 85),
                           ("data_extra", 60), ("data_deep", 50)):
                 if k in b:
                     return v

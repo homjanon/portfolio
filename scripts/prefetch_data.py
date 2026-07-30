@@ -9,9 +9,6 @@ v37: 市场全景A股/美股/港股改先表格后叙述(与全球/大宗/估值
   data_market_global.json   美股+全球主要指数         东财push2 + yfinance兜底
   data_forex_rate.json      汇率/商品/中美债券        akshare期货 + 中美债收益率
   data_valuation.json       中美核心指数估值+PE/PB分位 雪球蛋卷API
-  data_fund.json            基金净值+净值估算+ETF溢价  akshare天天基金
-  data_industry.json        申万31行业涨跌幅+同花顺90行业资金流+全市场PE  akshare
-  data_holdings.json        个人持仓+监督池行情+分红+研报  腾讯API + akshare(分红+研报)
   data_news.json   全球Top20新闻源    Google News RSS 美国一地(30条→去重,LLM选≤10) + 联合早报(按缺口补齐至20)
   data_extra.json           资金面+QDII+涨停/跌停  akshare(汇率/资金流/QDII)  v29: 场外QDII纳指100/标普500可申购大额度
 
@@ -1005,17 +1002,9 @@ def _fetch_rss_deep():
             print(f"    [深度专栏·财新兜底] 获取失败: {_e}")
     return _ok({"total": len(items_deep), "items_deep": items_deep})
 
-# ─── 数据源J: 财联社 depth/1000 RSS（当天新闻，供 LLM 提炼各市场一句话简述） ──────
-def fetch_cls_zaobao():
-    """v38: 财联社-头条 RSS（https://hub.slarker.me/cls/depth/1000）。
-    抓「当天」（北京时间）全部新闻条目，供 LLM 自行提炼 A股/港股/美股/全球/大宗 各板块一句话简述；
-    严格按当天筛选，无当天条目则 items 为空（日报对应板块简述留空）。"""
-    import email.utils as _eu
-    RSS_URL = "https://hub.slarker.me/cls/depth/1000"
-    MAX_ITEMS = 80  # 保护：当天条目过多时仅取最新 80 条
-    today_cn = datetime.now(TZ_CN).date()
-    items = []
-
+# ─── 数据源J: 财联社 RSS（双源：主 rsshub.rssforever/cls/telegraph + 兜底 hub.slarker.me/cls/depth/1000）────
+def _fetch_cls_rss_once(url):
+    """抓取单个财联社 RSS 源，解析全部 <item>（不过滤当天）。返回 (items, ok)。失败返回 ([], False)。"""
     def _local(tag):
         return tag.split('}')[-1] if '}' in tag else tag
 
@@ -1026,9 +1015,10 @@ def fetch_cls_zaobao():
         return ''
 
     try:
-        r = requests.get(RSS_URL, headers={"User-Agent": UA}, timeout=15)
+        r = requests.get(url, headers={"User-Agent": UA}, timeout=15)
         r.encoding = "utf-8"
         root = ET.fromstring(r.content)
+        out = []
         for item in root.iter():
             if _local(item.tag) != 'item':
                 continue
@@ -1037,36 +1027,72 @@ def fetch_cls_zaobao():
             pub = _field(item, 'pubDate')
             link = _field(item, 'link')
             cat = _field(item, 'category')
-            # 清洗 HTML 标签 + 反转义 + 折叠空白
             summary = re.sub(r"<[^>]+>", " ", desc)
             summary = html.unescape(summary)
             summary = re.sub(r"\s+", " ", summary).strip()
-            # pubDate → 北京日期，严格当天
-            bj_date = None
-            try:
-                dt = _eu.parsedate_to_datetime(pub)
-                if dt is not None:
-                    if dt.tzinfo is None:
-                        dt = dt.replace(tzinfo=timezone.utc)
-                    bj_date = dt.astimezone(TZ_CN).date()
-            except Exception:
-                bj_date = None
-            if bj_date != today_cn:
-                continue
-            items.append({
+            out.append({
                 "title": title[:120],
                 "summary": summary[:400],
                 "pubDate": pub,
                 "link": link,
                 "category": cat,
             })
-        # 按发布时间倒序，取最新 MAX_ITEMS
-        items.sort(key=lambda x: x.get("pubDate", ""), reverse=True)
-        items = items[:MAX_ITEMS]
+        return out, True
     except Exception as e:
-        print(f"    fetch_cls_zaobao 失败: {e}")
-        return _fail(e)
-    return _ok({"date": today_cn.isoformat(), "total": len(items), "items": items})
+        print(f"    [财联社RSS] 单源抓取失败 {url}: {e}")
+        return [], False
+
+
+def fetch_cls_zaobao():
+    """v39: 财联社 RSS 双源（主 rsshub.rssforever/cls/telegraph + 兜底 hub.slarker.me/cls/depth/1000）。
+    两源都抓、合并去重（按 title+link），统一按「北京时间当天」筛选；
+    供 LLM 自行提炼 A股/港股/美股/全球/大宗 各板块一句话简述；无当天条目则 items 为空（简述留空）。
+    两源均不可达才返回 _fail（日报对应板块简述自动留空，不崩）。"""
+    import email.utils as _eu
+    PRIMARY = "https://rsshub.rssforever/cls/telegraph"
+    FALLBACK = "https://hub.slarker.me/cls/depth/1000"
+    MAX_ITEMS = 80  # 保护：当天条目过多时仅取最新 80 条
+    today_cn = datetime.now(TZ_CN).date()
+
+    raw, ok1 = _fetch_cls_rss_once(PRIMARY)
+    raw2, ok2 = _fetch_cls_rss_once(FALLBACK)
+    raw += raw2
+
+    # 合并去重（按 title+link）
+    seen = set()
+    merged = []
+    for it in raw:
+        key = (it.get("title", ""), it.get("link", ""))
+        if key in seen:
+            continue
+        seen.add(key)
+        merged.append(it)
+
+    # 严格按北京时间「当天」筛选
+    items = []
+    for it in merged:
+        bj_date = None
+        try:
+            dt = _eu.parsedate_to_datetime(it.get("pubDate", ""))
+            if dt is not None:
+                if dt.tzinfo is None:
+                    dt = dt.replace(tzinfo=timezone.utc)
+                bj_date = dt.astimezone(TZ_CN).date()
+        except Exception:
+            bj_date = None
+        if bj_date != today_cn:
+            continue
+        items.append(it)
+
+    # 按发布时间倒序，取最新 MAX_ITEMS
+    items.sort(key=lambda x: x.get("pubDate", ""), reverse=True)
+    items = items[:MAX_ITEMS]
+
+    if not (ok1 or ok2):
+        print("    fetch_cls_zaobao 双源均失败")
+        return _fail(Exception("财联社双源RSS均不可达"))
+    return _ok({"date": today_cn.isoformat(), "total": len(items),
+                "sources": {"primary": PRIMARY, "fallback": FALLBACK}, "items": items})
 
 def fetch_holdings():
     """个人持仓(招行A/H/长电/563020/QQQM/SPY) + 监督池批量行情
@@ -1401,12 +1427,7 @@ def main():
         modules.append(("data_forex_rate.json",  fetch_forex_rate,  "汇率/商品/债券"))
         if a_open:
             modules.append(("data_valuation.json", fetch_valuation,  "估值数据"))
-        if a_open or u_open:
-            modules.append(("data_fund.json",       fetch_fund,       "基金净值/溢价"))
-        if a_open:
-            modules.append(("data_industry.json",    fetch_industry,   "申万+同花顺行业"))
-        if a_open or u_open:
-            modules.append(("data_holdings.json",    fetch_holdings,   "持仓行情+分红+研报"))
+        # 注：data_fund / data_industry / data_holdings 已停抓（prompt 不再消费，LLM 输入 JSON 由 11→8）
         # RSS 新闻：始终抓取（深度观察专栏仅精简模式，完整模式不抓 data_deep）
         modules.append(("data_news.json", _fetch_rss_other, "全球Top20 RSS(美国主流+联合早报)"))
         # 财联社当天新闻：供市场全景各板块一句话简述（严格当天，无则留空）
