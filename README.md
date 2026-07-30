@@ -69,9 +69,6 @@ schedule / workflow_dispatch
 | 美股+全球指数 | 东财 push2（`100.DJIA`/`100.SPX`/`100.NDX`/`100.NDX100`/`100.N225`/`100.KS11`/`100.SXXP`） | `u_open` | yfinance（`^DJI`/`^GSPC`/`^IXIC`/`^NDX`/`^N225`/`^KS11`/`^SXXP`） |
 | 汇率/商品/债券 | akshare 期货 + 中美债收益率 | 完整模式 | — |
 | 估值/PE 分位（11 指数，固定顺序） | 雪球蛋卷 API `danjuanfunds.com/djapi/index_eva/dj`（1 次返回 63，白名单 11） | `a_open` | — |
-| 基金净值/溢价 | akshare 天天基金 + 东方财富净值 HTTP | `a_open OR u_open` | — |
-| 行业轮动+资金流 | akshare（申万+同花顺+乐咕乐股） | `a_open` | — |
-| 个人持仓行情 | 腾讯财经 `qt.gtimg.cn` | `a_open OR u_open` | yfinance |
 | 资金面+QDII+涨停/跌停+LPR/PMI | akshare + 东方财富 | `a_open` | — |
 | **全球 Top20 新闻** | **Google News 美国一地（30条→去重,LLM选≤10）+ 联合早报 RSS（按缺口补齐至20）** | 始终抓 | `data_news.json` |
 | **深度观察专栏** | 联合早报 RSS 长文（>700字）按长度排序前6，由 LLM 选与 Top20 关联性最低一篇 | 仅精简模式 | `data_deep.json` |
