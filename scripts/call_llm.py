@@ -145,7 +145,9 @@ def main():
         if os.path.exists(_holdings_path):
             with open(_holdings_path, encoding="utf-8") as f:
                 _holdings = json.load(f)
-            _wl = _holdings.get("监督池", {})
+            # data_holdings.json 由 _ok() 包装为 {"ts","ok","data":{...}}，监督池在 data 下；兼容裸结构
+            _payload = _holdings.get("data", _holdings)
+            _wl = _payload.get("监督池", {})
             _names = [v.get("名称", k) for k, v in _wl.items() if isinstance(v, dict)]
             if _names:
                 _watchlist_names = "、".join(_names)
