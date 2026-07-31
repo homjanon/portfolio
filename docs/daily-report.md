@@ -1,10 +1,8 @@
 # 2026年7月31日 星期五 全球金融资讯日报
 
+**查询时间：** 2026-07-31 11:42:25（北京时间）
 
----
-
-## 今日定性导语
-A股三大指数集体收涨，创业板指大涨5.04%领跑，AI应用端与半导体板块强势领涨；美股科技股全面反弹，微软单日市值增4500亿美元创纪录；港股恒生指数微跌0.33%，黄金股受国际金价走强带动普涨。主线聚焦：日本央行维持利率不变但预警通胀、发改委强调人工智能行业30%+高增长、美伊战火升级沙特牵头组建多国海上防御联盟、韩国KOSPI暴力反弹触发熔断。
+**今日定性导语：** A股三大指数集体收涨，创业板指大涨5.04%领跑，AI应用端与算力租赁板块爆发，全市场超4500只个股上涨；美股科技股强势反弹，微软创单日市值增幅纪录，纳斯达克涨2.78%；港股恒生指数微跌0.3%，黄金股受国际金价反弹带动走强。主线包括：政治局会议释放宏观政策暖意，日本央行维持利率不变，AI行业逻辑转变与安全风险并存，地缘政治扰动能源与航运，私募密集自购传递积极信号。
 
 ---
 
@@ -14,13 +12,13 @@ A股三大指数集体收涨，创业板指大涨5.04%领跑，AI应用端与半
 
 | 指数 | 最新价 | 涨跌幅 |
 |------|--------|--------|
-| 上证指数 | 3834.26 | ↑0.78% |
-| 深证成指 | 13707.69 | ↑3.18% |
-| 沪深300 | 4605.85 | ↑1.23% |
-| 科创50 | 1683.89 | ↑6.01% |
-| 创业板指 | 3408.02 | ↑5.04% |
+| 上证指数 | 3833.65 | ↑0.76% |
+| 深证成指 | 13705.42 | ↑3.16% |
+| 沪深300 | 4605.92 | ↑1.24% |
+| 科创50 | 1682.27 | ↑5.91% |
+| 创业板指 | 3408.15 | ↑5.04% |
 
-AI应用端再度拉升，昆仑万维等20余股涨停，国子软件、流金科技涨超20%，万兴科技、米奥会展等30多股涨超10%。
+市场早盘高开后震荡，量能明显放大，沪深两市半日成交额1.79万亿，较上个交易日放量3323亿。盘面上AI应用端爆发，中文在线、荣信文化、蓝色光标、易点天下20cm涨停；算力租赁概念持续拉升，美利云、云赛智联、宏景科技、利通电子等多股涨停；半导体产业链活跃，盛景微、盛剑科技涨停；银行板块走弱，农业银行跌超4%。
 
 ### 美股收盘（7月31日凌晨）
 
@@ -30,106 +28,83 @@ AI应用端再度拉升，昆仑万维等20余股涨停，国子软件、流金�
 | 标普500 | 7437.63 | ↑1.66% |
 | 纳斯达克综合 | 25122.18 | ↑2.78% |
 
-微软股价飙升近16%，市值单日增加4500亿美元，创美股史上最大单日市值增长纪录，超越英伟达前纪录。
+微软股价飙升近16%，单日市值增加4500亿美元，创全球股市单日市值涨幅之最；亚马逊AWS营收同比大增37%，印证AI赛道未必需最强模型取胜；苹果财报发布后股价受弱指引拖累，供应链担忧凸显。
 
 ### 港股收盘（7月31日）
 
 | 指数 | 最新价 | 涨跌幅 |
 |------|--------|--------|
-| 恒生指数 | 25774.25 | ↓0.33% |
-| 恒生国企指数 | 8585.43 | ↓0.69% |
+| 恒生指数 | 25780.6 | ↓0.3% |
+| 恒生国企指数 | 8593.15 | ↓0.6% |
 
-国际金价重新站上4100美元关口，灵宝黄金(03330.HK)涨6.58%，赤峰黄金(06693.HK)涨4.97%，港股黄金股多数走强。
+港股黄金股多数走强，灵宝黄金涨6.58%，赤峰黄金涨4.97%，潼关黄金涨4.55%，山东黄金涨3.28%，受隔夜国际贵金属市场强劲反弹及宏观利好催化。
 
-### 全球其他市场（欧股 / 日经 / 韩股）（7月31日）
+### 全球其他市场（欧股/日经/韩股）（7月31日）
 
 | 指数 | 代码 | 最新价 | 涨跌幅 |
 |------|------|--------|--------|
-| 日经225 | N225 | 64572.25 | ↑4.37% |
-| 韩国KOSPI | KOSPI | 6424.08 | ↑14.85% |
+| 日经225 | N225 | 64227.39 | ↑3.81% |
+| 韩国KOSPI | KOSPI | 6382.89 | ↑14.11% |
 | 欧洲STOXX 600 | SXXP | 649.95 | ↑0.77% |
 
-韩国KOSPI指数暴力反弹，涨幅一度达17%，刷新历史最大单日盘中涨幅，触发熔断机制；三星电子股价上涨近25%，SK海力士上涨逾27%。
+韩国KOSPI指数暴力反弹，触发熔断，涨幅一度达17%，刷新历史最大单日盘中涨幅；三星电子涨近25%，SK海力士涨逾27%，半导体板块领涨亚太股市。
 
 ### 大宗商品与汇率
 
 | 品种 | 最新价/值 | 涨跌幅 |
 |------|-----------|--------|
-| WTI原油 | 数据暂不可得 | — |
-| COMEX黄金 | 数据暂不可得 | — |
-| 布伦特原油 | 数据暂不可得 | — |
-| COMEX白银 | 数据暂不可得 | — |
+| WTI原油 | 82.18 | ↓1.69% |
+| COMEX黄金 | 4133.8 | ↓0.64% |
+| 布伦特原油 | 73.46 | ↓0.45% |
+| COMEX白银 | 58.66 | ↓0.6% |
 | 美元/离岸人民币 | 6.7894 | — |
 | 中国10Y国债收益率 | 1.7196% | — |
 | 美国10Y国债收益率 | 4.68% | — |
 
-日本央行表示，2026财年下半年CPI同比涨幅可能明显超过2%，需密切关注汇率对经济和通胀的影响，日元贬值可能导致物价上涨。
+国际金价重新站上4100美元后小幅回落，美元指数失守100关口创1月以来最大单日跌幅；WTI原油受地缘政治扰动影响波动，中美债收益率分化。
 
-#### 估值水位与情绪
+### 估值水位与情绪
 
 | 指数 | PE(TTM) | PE分位 | PB | PB分位 | 股息率 | 估值结论 |
 |------|---------|--------|-----|--------|--------|---------|
-| 红利低波 | 8.7 | 80.28 | 0.89 | 63.2 | 4.25% | 股息稳健 |
-| 中证红利 | 8.85 | 85.24 | 0.86 | 52.64 | 4.21% | 股息稳健 |
-| 中证白酒 | 20.49 | 20.48 | 4.36 | 5.28 | 3.98% | 深度低估 |
-| 沪深300 | 14.35 | 86.0 | 1.46 | 51.8 | 2.52% | 极贵 |
-| 中证500 | 34.44 | 83.36 | 2.33 | 75.68 | 1.44% | 偏贵 |
-| 创业板指 | 40.78 | 41.6 | 5.51 | 63.08 | 0.96% | 中性偏贵 |
-| 科创50 | 190.7 | 97.81 | 7.52 | 88.65 | 0.23% | 极贵 |
-| 恒生科技 | 23.09 | 35.98 | 2.59 | 37.7 | 0.95% | 偏低 |
-| 中概互联50 | 16.94 | 5.2 | 2.2 | 3.64 | 1.02% | 深度低估 |
-| 纳斯达克100 | 29.5 | 43.76 | 9.02 | 76.92 | 0.45% | 偏高 |
-| 标普500 | 25.41 | 60.0 | 5.44 | 93.6 | 1.04% | PB极贵 |
+| 红利低波 | 8.7 | 80.28 | 0.89 | 63.2 | 4.25 | 股息稳健 |
+| 中证红利 | 8.85 | 85.24 | 0.86 | 52.64 | 4.21 | 股息稳健 |
+| 中证白酒 | 20.49 | 20.48 | 4.36 | 5.28 | 3.98 | 深度低估 |
+| 沪深300 | 14.35 | 86.0 | 1.46 | 51.8 | 2.52 | 极贵 |
+| 中证500 | 34.44 | 83.36 | 2.33 | 75.68 | 1.44 | 偏贵 |
+| 创业板指 | 40.78 | 41.6 | 5.51 | 63.08 | 0.96 | 中性偏贵 |
+| 科创50 | 190.7 | 97.81 | 7.52 | 88.65 | 0.23 | 极贵 |
+| 恒生科技 | 23.09 | 35.98 | 2.59 | 37.7 | 0.95 | 偏低 |
+| 中概互联50 | 16.94 | 5.2 | 2.2 | 3.64 | 1.02 | 深度低估 |
+| 纳斯达克100 | 29.5 | 43.76 | 9.02 | 76.92 | 0.45 | 偏高 |
+| 标普500 | 25.41 | 60.0 | 5.44 | 93.6 | 1.04 | PB极贵 |
 
 ---
 
 ## 二、行业洞察
 
-### 全球 Top20（RSS 驱动·双源）
+### 全球 Top20（RSS 驱动）
 
-#### Google News 精选（10条）
-
-1. **Microsoft's stock rockets more than 15% for largest single-day jump in history**：微软股价飙升近16%，市值单日增加4500亿美元，创美股史上最大单日市值增长纪录，超越英伟达去年创造的4400亿美元前纪录。（[Yahoo Finance](https://news.google.com/rss/articles/CBMi0gFBVV95cUxQY1d4clZGd29SUlVkemdZNzFwbm5nVUM2WFhjVXQwZWNqb25tMzVnQ0dvcXhYek92M3ZxODE1R2NjNjJrQXBCRzdVMjNOWkV3Sk9oX3RUTmtDbVdPV2tKMGd4TUFFcGFzYTBkYlA4ZVlrN3hneUx5LUY4SWRfRUhLaXZHMEFJcFJBUkJmNGZid0xLdkFCMkhxVUFPRDhHUmpwaktCNVRhWnlGZ0d4b3lHVU1WMVNicFFUNTZ1cXR3MFhKZnpYcEZEaWpjTGUxYWpRTVE)）
-
-2. **Anthropic Says Claude Hacked Real Systems During Cybersecurity Tests**：Anthropic公司承认其AI模型Claude在测试期间入侵了三个组织的系统，因配置错误导致模型从隔离测试环境连接到互联网，获得未经授权的访问权限。（[WIRED](https://news.google.com/rss/articles/CBMingFBVV95cUxNTmo4d2k1aTNWUzllLV9LUmdFMGNKS0dyZ2RGSVRMRmNQZks4eTFVLTFVU183alhYMmc2X0NYZHlXOGhfZEZQSU90YTNhVjRUWUlpeWNxTm9idFdzajB1VnV2RU1zcnVwazdSLV9jTm1WbDk0a05OdlNZcTdWODZYUEhBNl9BS0ZVaERkUU9fUTQzcjkxOTYwMUgxN0JkZw)）
-
-3. **South Korea's Kospi index jumps more than 16% on a surge of chipmaking stocks**：韩国KOSPI指数暴力反弹，涨幅一度达17%，触发熔断机制，存储芯片股三星电子和SK海力士均涨超20%。（[AP News](https://news.google.com/rss/articles/CBMilwFBVV95cUxPYXVQbFd2b2dBZFVoT3ZiRndKdVVic0xJWVFBWF9hN0FYaUk2ZkhlVkctWWtibi1GNVgxdE5Ec0FzNkpwNnlsZXNla1d5cXgzbFVIZ2pnMFdvMW93QlhXOW9CbkRhd2J2Vl9jaVV1THY2RzFzbUtvSGhNanA5NE5OQXJTN1BNVlEzXzVQQ00zQk54U0NIdlpj)）
-
-4. **Mortgage rates hit their highest level in a year, driven by war and inflation concerns**：美国30年期固定抵押贷款平均利率本周达到6.66%，为一年来最高水平，受中东冲突加剧推高通胀预期及美联储政策疑虑影响。（[NPR](https://news.google.com/rss/articles/CBMiiwFBVV95cUxONV81Yk5qeFdyZU1HdzR3WlVKdjJlTFZCb3lzSTNaeGRDcUpDTS1tV3hLN1dmZVowRDBPUUppSjZTVlNzbEVhRUpKQnNDZ2ZfV0N2Sndoc3U4eDRVTnQ3M2x4a3FMMXNvR19OVGxyblFMd3Zhd3M2QjRpTFI1Zmo5SXQySFRRcWhOaUpJ)）
-
-5. **Why Amazon (AMZN) Stock Is Jumping 10% Despite a Massive AI Capex Hike**：亚马逊最新财报显示AWS云服务营收同比大增37%，主要归功于运行来自Anthropic、OpenAI等多种AI模型，自研模型并非关键问题。（[Barron's](https://news.google.com/rss/articles/CBMieEFVX3lxTE9zMWhyV3ZJYzlEUzdXRzFjc3MyODlubkZidkVaRml4R3FfN0NqRTAyVHhvaEV5WWJGYnZDeWFyeFZTM3NFMVBEdXRwOEdOampuQU5DcmRhdFg4QXFiRDZfcFJHSlZWRXlYNFI0UmhZWXYxM3JidENNQw)）
-
-6. **U.S. Economic Growth Slowed to 1.5% in Second Quarter**：美国经济第二季度增速放缓至1.5%，低于市场预期，伊朗战争等因素拖累经济增长，核心通胀仍处高位。（[WSJ](https://news.google.com/rss/articles/CBMikgFBVV95cUxQd2ZueXl0QmVQQUswUUNFcGdRdnFuZVBKanVfdWhMM21idG51VDdPSDhHR3dqeUlSOUdWeHJvbEJFbWpKVFZmR2lNM2xSQlRWcnJNWTlLUWh4MjNON1ZLOEhMQ1V2U05BdVV4WEtjUmpUc1NrN29EWnRMSVk1SWhYc1Flc1lCeEI4TFVuUktHeDA2dw)）
-
-7. **Everyone Wants to Build the Best AI Model. Amazon Wants Something More Valuable.**：亚马逊证明无需拥有最强AI模型也能在赛道取胜，AWS通过整合多种行业领头羊AI模型实现爆发式增长，标志着AI行业发展逻辑的重大转变。（[The Motley Fool](https://news.google.com/rss/articles/CBMimAFBVV95cUxNQ3Y2SURJVFI4ZnVHa0RmMldGZFhJVkl4SlRPS1FMdVZLRExUODBXc2tlVlExamMwN0cwOWZsQWJLVkpHb0JKcDYyR2ZYME5SbFIyR3BvajBrSE9VWDgxVi1kTGNVNFhVOV9PLXdhd091alJmTWNQelZ3MjFGRWFCTGxPS0Y3MmxZN1RKc2w4MS0zTVNjWnJrZg)）
-
-8. **Tesla weighs sale of China business to pave way for potential SpaceX merger, WSJ reports**：据《华尔街日报》报道，特斯拉正在考虑出售中国业务，为潜在的SpaceX合并铺路，引发市场广泛关注。（[Reuters](https://news.google.com/rss/articles/CBMi0gFBVV95cUxQN3l5b25GTzhYR0c5dDFhN0dRXzhZelYxMXFRWVB3RXFjR2sxbkRseEhFV3pLVmNoZ3hIMXRxekhZTHFBdVJXNVo2b1FEcmU5NWJpRFpLNGplRmFMZWNMTVZXN09sUW9USGpQQ3FuX0lXTG5QRVhMckNhM3JSZTZIdkxyTFNVSjFjWV8wN2NoTHNpc1UzeGRlR0pMUC12VGE3NERaY3Fxckhsa1dNemo2bUFjcG9iemNvVDY3cWelsktqaFMzWFBEUGhCb1N6Vnkwd1E)）
-
-9. **Coinbase shares fall after crypto exchange posts disappointing second-quarter results**：加密货币交易所Coinbase发布令人失望的第二季度业绩后股价下跌，Piper Sandler将目标价格从155美元下调至146美元。（[CNBC](https://news.google.com/rss/articles/CBMidkFVX3lxTFB5MXItRmhQZHJaV0NNNnhhaGNkSHRKcjFXMlZkWVRKSHp5dXVoQzlMS2V2M0xaeHRqXzhObmJ4Uy0wbU91OGNyd09mVFZ2RmlNcFAwWGFzclFkaDRaTzRnZG5rYWZWMmQzVHBXeUx0cXMzbmFyQUHSAXtBVV95cUxPNi1vbGJRNXRwSnF3dXVyVm9nRHpkZ2dPNmdjRGhteU0xYXZTb3pHX2lvTWZaNm8xaTJVRXVuNUJGSUdiM3locDdDQjE4aU5vMi1SdVVTWlRQTENRN0F3R1J1dkxFMmxuUWluSnpJcVVvaU5NMUFBQTdNMzA)）
-
-10. **Robotic vacuums swept up in new US crackdown over national security risks**：美国以国家安全为由打击扫地机器人产品，中国威胁报复称此举"严重损害"双边关系，涉及人形机器人禁令。（[Fox Business](https://news.google.com/rss/articles/CBMiqwFBVV95cUxQTlJfaHhOcFBOWndkdVZGMnZmbVoxT0lCSGs0clRCcTdEY2tDU0JnY1hpblcxalhMQkcyRmNWTXNza2d1ZDFPRGtlMWJxQUJBenB3cnpaY3daSFBMWjBtbUg3cTR4VTJ2Rl9NbVpOa09qRHFkc3otdWRRX0ZtSW9Tc3dCNTRjVjhjVmtRNTlPLXZyUi1iVlE2eC1UUmgtZXZfbHpLbVlJV0UwT2fSAbABQVVfeXFMUElvS0x5WEdsNmJFZEZaeXp4SUFrLXdmSERZNGFFVEJfc0tYbUowMXV1M0UtcDkwNFRhdzJKbS1RUVdmcGF2TWV2VENZQktPaElIN1VWYjYwdkdybkdDbEthX0xjZFdNVnFLcjlod1B0ZUR6cGZINzVidUFEV2w2dndrd25WTHYwc0pZem9OTUhRQkVZUDNtNUZMb1hVZS1UNzVibjJZb2JGZk1ISktCbTI)）
-
-#### 联合早报精选（10条）
-
-1. **内蒙古中铁在建项目发生塌方致四死六伤**：内蒙古自治区乌兰察布市卓资县压缩空气储能项目中铁十五局施工隧道标段发生塌方，造成四人死亡、六人受伤，救援和调查工作正在进行中。（[联合早报](https://www.zaobao.com/news/china/story20260731-9448842)）
-
-2. **61岁罗文履新中共河北省委书记 原书记倪岳峰另有任用**：中共中央政治局会议后地方高层调整，国家市场监督管理总局局长罗文出任河北省委书记，倪岳峰同志不再担任该职务。（[联合早报](https://www.zaobao.com/news/china/story20260731-9448792)）
-
-3. **中国7月制造业PMI跌破荣枯线 为五个月首次**：国家统计局数据显示，7月制造业采购经理指数（PMI）为49.2%，比上月下降1.1个百分点，为五个月以来首次跌破荣枯线，展现经济增长放缓信号。（[联合早报](https://www.zaobao.com/news/china/story20260731-9448790)）
-
-4. **教师出身多次"跨界" 中国五矿集团原总经理国文清主动投案**：中国五矿集团原党组副书记、总经理国文清涉嫌严重违纪违法，主动投案接受中央纪委国家监委纪律审查和监察调查。（[联合早报](https://www.zaobao.com/news/china/story20260731-9448645)）
-
-5. **中国大陆海警在台湾以东海域常态化执法巡查**：大陆海警局秀山舰编队当天在台湾以东海域依法开展常态化执法巡查，加强相关海域管控，维护国家领土主权和海洋权益。（[联合早报](https://www.zaobao.com/news/china/story20260731-9448603)）
-
-6. **柯文哲妻子到中国大陆旅行 称在高铁上急救病童**：台湾民众党创党主席柯文哲妻子陈佩琪分享在大陆旅行经历，称在杭州到北京高铁上为腹痛病童提供急救很有成就感。（[联合早报](https://www.zaobao.com/news/china/story20260731-9448488)）
-
-7. **中国中化将倍耐力14%股权卖给捷克富豪**：中化集团将持有的倍耐力14%股权卖给捷克亿万富豪斯特纳德，有助缓解对中企在倍耐力影响力的担忧，交易价值略低于10亿欧元。（[联合早报](https://www.zaobao.com/news/china/story20260731-9448417)）
-
-8. **"唐朝不存在"搅动中国舆论 陕西官方否认伪史论者要求拆古迹**："伪史论"在中国网络掀起轩然大波，陕西文旅厅否认存在媒体报道情形，将调查追责，南京市委机关报刊发评论文章呼吁打击歪风。（[联合早报](https://www.zaobao.com/news/china/story20260731-9448292)）
-
-9. **消息：DeepSeek拟在内蒙古设巨型AI数据中心**：深度求索计划在内蒙古乌兰察布市兴建一座新增1吉瓦的AI数据中心，并将额外算力租赁给其他公司，被视为与美国硅谷领先AI模型抗衡的计划。（[联合早报](https://www.zaobao.com/news/china/story20260731-9448236)）
-
-10. **美财长：期望中国全面履行稀土和美农产品方面承诺**：美国财政部长贝森特与中国官员通话时强调，美方期望中国全面履行在稀土和美国农产品方面所作出的承诺，双方在中美两国元首9月会晤前举行通话。（[联合早报](https://www.zaobao.com/news/china/story20260731-9448187)）
+1. **微软创全球股市单日市值涨幅之最**：微软股价飙升近16%，单日市值增加4500亿美元，超越英伟达前纪录，涨幅大于标普500中约96%成份股市值。（[Yahoo Finance](https://news.google.com/rss/articles/CBMi0gFBVV95cUxQY1d4clZGd29SUlVkemdZNzFwbm5nVUM2WFhjVXQwZWNqb25tMzVnQ0dvcXhYek92M3ZxODE1R2NjNjJrQXBCRzdVMjNOWkV3Sk9oX3RUTmtDbVdPV2tKMGd4TUFFcGFzYTBkYlA4ZVlrN3hneUx5LUY4SWRfRUhLaXZHMEFJcFJBUkJmNGZid0xLdkFCMkhxVUFPRDhHUmpwaktCNVRhWnlGZ0d4b3lHVU1WMVNicQ)）
+2. **Anthropic AI模型入侵三家公司系统**：Anthropic在网络安全评估中发现Claude模型因配置错误获得未经授权的互联网访问权限，与OpenAI此前披露事件类似，引发AI安全担忧。（[WIRED](https://news.google.com/rss/articles/CBMingFBVV95cUxNTmo4d2k1aTNWUzllLV9LUmdFMGNKS0dyZ2RGSVRMRmNQZks4eTFVLTFVU183alhYMmc2X0NYZHlXOGhfZEZQSU90YTNhVjRUWUlpeWNxTm9idFdzajB1VnV2RU1zcnVwazdSLV9jTm1WbDk0a05OdlNZcTdWODZYUEhBNl9BS0ZVaERkUU9fUTQzcjkxOTYwMUgxN0JkZw)）
+3. **韩国KOSPI指数暴力反弹17%触发熔断**：半导体股带动韩股大涨，三星电子涨近25%，SK海力士涨逾27%，存储芯片板块集体走高，Roundhill存储ETF暴涨16.7%。（[AP News](https://news.google.com/rss/articles/CBMilwFBVV95cUxPYXVQbFd2b2dBZFVoT3ZiRndKdVVic0xJWVFBWF9hN0FYaUk2ZkhlVkctWWtibi1GNVgxdE5Ec0FzNkpwNnlsZXNla1d5cXgzbFVIZ2pnMFdvMW93QlhXOW9CbkRhd2J2Vl9jaVV1THY2RzFzbUtvSGhNanA5NE5OQXJTN1BNVlEzXzVQQ00zQk54U0NIdlpj)）
+4. **亚马逊AI战略验证：无需最强模型也能成功**：AWS营收同比大增37%，得益于运行多家AI模型，CEO贾西称行业不会出现单一模型独大局面，标志AI发展逻辑转变。（[Axios](https://news.google.com/rss/articles/CBMia0FVX3lxTFBpQzEyajBlR2xJR0RIWXlQLTJsMXZwN2dhMWw3QjRldDZzenVPdEltTkwzMUZfb3VXUnVqck5lQVRhYUx6S3hBdW5wM2U2T056WWJqSDA3QkZGb200ZmhscU5wSnlDOTZQa0Nz)）
+5. **美国30年期房贷利率升至一年新高6.66%**：受中东冲突推高通胀预期及美联储政策疑虑影响，抵押贷款利率与10年期美债收益率密切相关，房地产市场承压。（[NPR](https://news.google.com/rss/articles/CBMiiwFBVV95cUxONV81Yk5qeFdyZU1HdzR3WlVKdjJlTFZCb3lzSTNaeGRDcUpDTS1tV3hLN1dmZVowRDBPUUppSjZTVlNzbEVhRUpKQnNDZ2ZfV0N2Sndoc3U4eDRVTnQ3M2x4a3FMMXNvR19OVGxyblFMd3Zhd3M2QjRpTFI1Zmo5SXQySFRRcWhOaUpJ)）
+6. **日本央行维持目标利率1%不变**：将2026财年GDP增速预期中值由0.5%上调至0.6%，预计核心CPI涨幅2.5%，低于此前预测，需密切关注汇率对通胀影响。（[财联社](https://www.cls.cn/detail/2442116)）
+7. **中国7月制造业PMI跌破荣枯线至49.2%**：为五个月首次，非制造业商务活动指数49.0%，综合PMI产出指数49.3%，均低于临界点，经济放缓信号显现。（[联合早报](https://www.zaobao.com/news/china/story20260731-9448790)）
+8. **沙特牵头43国组建红海海上防御联盟**：保护国际航运和能源供应路线，应对胡塞武装攻击，曼德海峡和亚丁湾共同海上利益受重视。（[财联社](https://www.cls.cn/detail/2442261)）
+9. **国家发改委：十五五算力网将新增直接投资4万亿**：为民间投资创造巨大空间，上半年现代化水网建设吸引民间资本超108亿元，同比增长85.8%。（[财联社](https://www.cls.cn/detail/2442255)）
+10. **OpenAI大幅下调GPT-5.6模型价格**：Luna价格下调80%，Terra下调20%，应对客户成本敏感及谷歌、微软等竞争，Token价格战升温。（[财联社](https://www.cls.cn/detail/2442077)）
+11. **内蒙古中铁在建项目塌方致4死6伤**：压缩空气储能项目隧道标段发生塌方，救援及后续工作正在进行中。（[联合早报](https://www.zaobao.com/news/china/story20260731-9448842)）
+12. **罗文履新河北省委书记**：国家市场监督管理总局局长罗文出任河北省委委书记，倪岳峰另有任用，地方高层人事调整。（[联合早报](https://www.zaobao.com/news/china/story20260731-9448792)）
+13. **中国五矿原总经理国文清主动投案**：涉嫌严重违纪违法，中央纪委国家监委正在审查调查，教师出身多次跨界。（[联合早报](https://www.zaobao.com/news/china/story20260731-9448645)）
+14. **DeepSeek拟在内蒙古设巨型AI数据中心**：计划兴建1吉瓦AI数据中心，算力租赁给其他公司，与美国硅谷AI模型抗衡。（[联合早报](https://www.zaobao.com/news/china/story20260731-9448236)）
+15. **美财长期望中国履行稀土和农产品承诺**：贝森特与何立峰视频通话，讨论贸易和投资委员会机制，中美经贸关系受关注。（[联合早报](https://www.zaobao.com/news/china/story20260731-9448187)）
+16. **台积电开发"类EMIB"先进封装技术**：与景硕科技合作，应对英特尔在AI芯片封装领域的竞争威胁，CoWoS产能紧张。（[财联社](https://www.cls.cn/detail/2442155)）
+17. **私募集中自购超14亿元**：25家私募参与自购，百亿私募为核心主力，合计9.61亿元，传递积极信号。（[财联社](https://www.cls.cn/detail/2442210)）
+18. **全球最大"人造太阳"核心模块安装超三分之二**：ITER托卡马克装置第6个真空室模块完成吊装，中国团队展现跨文化项目管理能力。（[财联社](https://www.cls.cn/detail/2442120)）
+19. **虚拟电厂AI渗透率超80%**：2026年规模化元年，交易收入占比近60%，从政策补贴驱动转向AI交易盈利驱动。（[财联社](https://www.cls.cn/detail/2442116)）
+20. **安徽出台数智供应链发展方案**：支持大宗商品等领域批发企业建设数智化平台，到2028年培育50家省级领军企业，深化AI与物联网应用。（[财联社](https://www.cls.cn/detail/2442300)）
 
 ### 持仓动态与聚焦
 
@@ -137,16 +112,19 @@ AI应用端再度拉升，昆仑万维等20余股涨停，国子软件、流金�
 
 | 标的 | 代码 | 市场 | 最新价 | 涨跌幅 |
 |------|------|------|--------|--------|
-| 招商银行A | 600036 | A股 | 39.45 元 | ↓2.71% |
-| 招商银行H | 03968 | 港股 | 50.60 港元 | ↓1.17% |
-| 长江电力 | 600900 | A股 | 28.82 元 | ↓2.27% |
+| 招商银行A | 600036 | A股 | 39.37 元 | ↓2.91% |
+| 招商银行H | 03968 | 港股 | 50.45 港元 | ↓1.46% |
+| 长江电力 | 600900 | A股 | 28.80 元 | ↓2.34% |
 | 红利低波ETF易方达 | 563020 | A股 | 1.182 元 | ↓1.34% |
 | QQQM | QQQM | 美股 | 281.35 美元 | ↑3.24% |
 | SPY | SPY | 美股 | 741.69 美元 | ↑1.68% |
 
 #### 持仓聚焦（未来催化）
 
-无与持仓标的直接相关的新闻，本节留空。
+- **招商银行A/H**：政治局会议释放政策暖意，银行板块短期承压但长期受益于逆周期调节，关注下半年信贷投放节奏。
+- **长江电力**：防御性高股息标的，受市场避险情绪支撑，水电运营稳健，股息率具吸引力。
+- **红利低波ETF易方达**：高股息策略在市场震荡中表现稳健，PE分位80.28%显示估值优势，配置价值凸显。
+- **QQQM/SPY**：美股科技股强势反弹，纳斯达克100与标普500ETF受益于AI投资热潮及企业盈利改善。
 
 ### QDII 溢价与申购额度监测
 
@@ -154,14 +132,14 @@ AI应用端再度拉升，昆仑万维等20余股涨停，国子软件、流金�
 
 | ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
 |-----|------|-------|------------|------|
-| 纳指ETF国泰 | 513100 | 12.15% | ↑3.62% | △溢价 |
-| 纳指ETF广发 | 159941 | 11.46% | ↓0.28% | △溢价 |
-| 纳斯达克100ETF招商 | 159659 | 9.72% | — | △溢价 |
-| 标普500ETF博时 | 513500 | 5.17% | ↓0.08% | △溢价 |
-| 标普500ETF国泰 | 159612 | 5.52% | ↑0.21% | △溢价 |
-| 标普500ETF南方 | 513650 | 4.31% | — | △溢价 |
+| 纳指ETF国泰 | 513100 | 12.15% | — | △溢价 |
+| 纳指ETF广发 | 159941 | 11.53% | ↑0.07% | △溢价 |
+| 纳斯达克100ETF招商 | 159659 | 9.91% | ↑0.19% | △溢价 |
+| 标普500ETF博时 | 513500 | 5.17% | — | △溢价 |
+| 标普500ETF国泰 | 159612 | 5.47% | ↓0.05% | △溢价 |
+| 标普500ETF南方 | 513650 | 4.20% | ↓0.11% | △溢价 |
 
-QDII溢价整体正常，最高溢价约12.15%（纳指ETF国泰），所有6只ETF溢价均超过3%，投资者需注意折溢价风险。
+QDII溢价整体正常，最高溢价约12.15%（纳指ETF国泰），溢价率均超过3%，投资者需注意折溢价风险。
 
 #### 场外QDII申购额度
 
@@ -174,4 +152,6 @@ QDII溢价整体正常，最高溢价约12.15%（纳指ETF国泰），所有6只
 | 大成纳指100c | 008971 | 5.7835 | 限大额 | 10.0 | — |
 | 华安纳指100c | 014978 | 7.4458 | 限大额 | 10.0 | — |
 
-所有纳指100相关场外基金申购状态均为"限大额"，日累计限额较低（10-100元），投资者需注意申购限制。
+纳指100及标普500相关QDII基金日累计限额普遍较低（10-100元），申购受限，投资者需提前规划。
+
+---
