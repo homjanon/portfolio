@@ -78,6 +78,9 @@ def _call_llm(api_url, api_key, model, system, user, timeout=90, extra_headers=N
                 print(f"    429 限流，等待 {wait}s...")
                 time.sleep(wait)
             else:
+                # 非 200：打印状态码与响应体前 600 字符，便于定位（如 401 密钥无效 / 404 模型不可用 / 模型已下线）
+                _body = resp.text[:600] if isinstance(resp.text, str) else ""
+                print(f"    ⚠️ HTTP {resp.status_code} 响应: {_body}")
                 resp.raise_for_status()
         except requests.exceptions.Timeout:
             last_exc = "Timeout"
@@ -225,6 +228,10 @@ def main():
         c = re.sub(r'>\s*数据时间[：:]\s*\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}\s*\n?', '', c)
         # 删除顶部的查询时间行（**查询时间**：...）
         c = re.sub(r'\*\*查询时间\*\*[：:][^\n]*\n?', '', c)
+        # 删除底部「数据来源」/「来源声明」声明行（prompt 已禁止输出，此处兜底，与阅读版 md_to_reader 对齐）
+        # 兼容 **数据来源**： 与 数据来源： 两种写法（粗体标记可能夹在关键词与冒号之间）
+        c = re.sub(r'(?m)^\s*\*?\*?数据来源\*?\*?\s*[：:].*$\n?', '', c)
+        c = re.sub(r'(?m)^\s*\*?\*?来源声明\*?\*?\s*[：:].*$\n?', '', c)
         if len(c) < MIN_CHARS:
             print(f"❌ {llm['name']} 输出过短 ({len(c)} 字符 < {MIN_CHARS})，视为失败，切换下一模型")
             content = None
