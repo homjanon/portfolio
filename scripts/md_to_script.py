@@ -18,9 +18,8 @@ OUTPUT_PATH = sys.argv[2] if len(sys.argv) > 2 else "script.txt"
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from call_llm import LLM_CONFIGS, _call_llm
 
-# 广播稿专用顺序：Zhipu GLM-4.5-Air 主用 → DeepSeek-Flash → DeepSeek-Pro(NVIDIA) → Agnes 兜底（与日报一致，均置 Zhipu 首位）
+# 广播稿专用顺序：DeepSeek-Flash 主用 → DeepSeek-Pro(NVIDIA) → Agnes 兜底（与日报一致）
 _SCRIPT_ORDER = [
-    "Zhipu GLM-4.5-Air",
     "SenseTime DeepSeek-V4-Flash",
     "NVIDIA DeepSeek-V4-Pro",
     "Agnes agnes-2.0-flash",

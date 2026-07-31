@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 调用 LLM 生成日报：
-  主模型: 商汤 DeepSeek-V4-Flash (SENSENOVA_API_KEY)
-  兜底: Agnes agnes-2.0-flash (AGNES_API_KEY)
+  主模型: Agnes agnes-2.0-flash (AGNES_API_KEY)
+  次选: 商汤 DeepSeek-V4-Flash (SENSENOVA_API_KEY)
+  兜底: NVIDIA DeepSeek-V4-Pro (NVIDIA_API_KEY)
 
 用法: python3 scripts/call_llm.py
   读取 prompt/daily_report_prompt.txt (system) + data_*.json (user)
@@ -16,12 +17,6 @@ PROMPT_PATH = os.path.join(os.path.dirname(__file__), "..", "prompt", "daily_rep
 BEIJING = timezone(timedelta(hours=8))
 _WEEKDAYS = ["一", "二", "三", "四", "五", "六", "日"]
 LLM_CONFIGS = [
-    {
-        "name": "Zhipu GLM-4.5-Air",
-        "api_url": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
-        "api_key_env": "ZHIPU_API_KEY",
-        "model": "glm-4.5-air",
-    },
     {
         "name": "Agnes agnes-2.0-flash",
         "api_url": "https://apihub.agnes-ai.com/v1/chat/completions",
