@@ -18,11 +18,11 @@ OUTPUT_PATH = sys.argv[2] if len(sys.argv) > 2 else "script.txt"
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from call_llm import LLM_CONFIGS, _call_llm
 
-# 广播稿专用顺序：DeepSeek-Flash 主用 → DeepSeek-Pro(NVIDIA) → Agnes 兜底（与日报一致）
+# 广播稿专用顺序：Agnes 主用 → DeepSeek-Flash → DeepSeek-Pro(NVIDIA) 兜底（与日报一致）
 _SCRIPT_ORDER = [
+    "Agnes agnes-2.0-flash",
     "SenseTime DeepSeek-V4-Flash",
     "NVIDIA DeepSeek-V4-Pro",
-    "Agnes agnes-2.0-flash",
 ]
 _MODEL_CHAIN = [c for name in _SCRIPT_ORDER
                for c in LLM_CONFIGS if c["name"] == name]
