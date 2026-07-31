@@ -59,9 +59,10 @@ jobs:
           python3 scripts/call_llm.py
           echo "报告生成完成"
         env:
+          ZHIPU_API_KEY:     ${{ secrets.ZHIPU_API_KEY }}
           SENSENOVA_API_KEY: ${{ secrets.SENSENOVA_API_KEY }}
-          AGNES_API_KEY: ${{ secrets.AGNES_API_KEY }}
-          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+          NVIDIA_API_KEY:    ${{ secrets.NVIDIA_API_KEY }}
+          AGNES_API_KEY:     ${{ secrets.AGNES_API_KEY }}
 
       - name: 转换日报为广播稿
         id: md_to_script
@@ -71,9 +72,10 @@ jobs:
           python3 scripts/md_to_script.py
           echo "广播稿生成完成"
         env:
+          ZHIPU_API_KEY:     ${{ secrets.ZHIPU_API_KEY }}
           SENSENOVA_API_KEY: ${{ secrets.SENSENOVA_API_KEY }}
-          AGNES_API_KEY: ${{ secrets.AGNES_API_KEY }}
-          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+          NVIDIA_API_KEY:    ${{ secrets.NVIDIA_API_KEY }}
+          AGNES_API_KEY:     ${{ secrets.AGNES_API_KEY }}
 
       - name: 生成 MP3 音频
         id: md_to_mp3
