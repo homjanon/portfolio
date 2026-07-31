@@ -31,11 +31,12 @@ schedule / workflow_dispatch
 
 | 优先级 | 模型 | API 端点 | 环境变量 |
 |--------|------|----------|---------|
-| ① 主模型 | **商汤 DeepSeek-V4-Flash** (`deepseek-v4-flash`) | `token.sensenova.cn/v1` | `SENSENOVA_API_KEY` |
-| ② 次选 | **NVIDIA DeepSeek-V4-Pro** (`deepseek-ai/deepseek-v4-pro`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
-| ③ 兜底 | **Agnes agnes-2.0-flash** (`agnes-2.0-flash`) | `apihub.agnes-ai.com/v1` | `AGNES_API_KEY` |
+| ① 主模型 | **智谱 GLM-4.5-Air** (`glm-4.5-air`) | `open.bigmodel.cn/api/paas/v4` | `ZHIPU_API_KEY` |
+| ② 次选 | **商汤 DeepSeek-V4-Flash** (`deepseek-v4-flash`) | `token.sensenova.cn/v1` | `SENSENOVA_API_KEY` |
+| ③ 三选 | **NVIDIA DeepSeek-V4-Pro** (`deepseek-ai/deepseek-v4-pro`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
+| ④ 兜底 | **Agnes agnes-2.0-flash** (`agnes-2.0-flash`) | `apihub.agnes-ai.com/v1` | `AGNES_API_KEY` |
 
-- 三个模型依次尝试，前一个失败（异常或输出 <500 字符判为近空）自动切换到下一个
+- 四个模型依次尝试，前一个失败（异常或输出 <500 字符判为近空）自动切换到下一个
 - 失败时自动重试（指数退避）
 - **LLM 仅基于预抓取的 `data_*.json` 加工，不联网搜索、不调用工具**
 
@@ -73,7 +74,7 @@ schedule / workflow_dispatch
 | QDII监测+USD/CNH汇率 | 腾讯API+东方财富(净值)+akshare(汇率) | `a_open` | — |
 | **全球 Top20 新闻** | **Google News 美国一地（20条→去重,LLM选≤10）+ 联合早报 RSS（hub.slarker.me 主 + rsshub.rssforever.com 备，最新10）** | 始终抓 | `data_news.json` |
 | **深度观察专栏** | 联合早报 RSS 长文（>700字）按长度排序前6，由 LLM 选与 Top20 关联性最低一篇 | 仅精简模式 | `data_deep.json` |
-| **市场全景各板块一句话简述** | **财联社 RSS 顺序兜底（hub.slarker.me/cls/telegraph 主 → rsshub.rssforever.com/cls/telegraph → hub.slarker.me/cls/depth/1000 → rsshub.rssforever.com/cls/depth/1000，单源命中即止；北京当天筛选；LLM 自行提炼 A股/港股/美股/全球/大宗 各一句）** | 完整模式 | 无当天新闻则留空（不编造） |
+| **市场全景各板块一句话简述** | **财联社 RSS 双组抓取（telegraph 快讯 + depth/1000 头条，各组 hub→rsshub 兜底，合并去重；北京当天筛选；LLM 自行提炼 A股/港股/美股/全球/大宗 各一句）** | 完整模式 | 无当天新闻则留空（不编造） |
 
 > **方案 C（curl_cffi HTTP/2 补丁）**：东方财富 `push2.eastmoney.com` / `push2delay.eastmoney.com` / `push2his.eastmoney.com` 需 HTTP/2，标准 `requests` 仅 HTTP/1.1 会静默断连。脚本在顶部注入 `curl_cffi` 浏览器模拟，仅对这些域名生效，保障指数主源稳定；其余请求不受影响。运行依赖已包含 `curl_cffi` 与 `pandas_market_calendars`。
 
@@ -125,8 +126,9 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 | Secret | 用途 |
 |--------|------|
-| `SENSENOVA_API_KEY` | 商汤科技 API Key（免费）；日报+广播稿主模型 DeepSeek-V4-Flash |
-| `NVIDIA_API_KEY` | NVIDIA API Key；日报+广播稿次选 DeepSeek-V4-Pro（`integrate.api.nvidia.com/v1`，模型 `deepseek-ai/deepseek-v4-pro`） |
+| `ZHIPU_API_KEY` | 智谱 AI API Key；日报+广播稿主模型 GLM-4.5-Air（`open.bigmodel.cn/api/paas/v4`，模型 `glm-4.5-air`） |
+| `SENSENOVA_API_KEY` | 商汤科技 API Key（免费）；日报+广播稿次选 DeepSeek-V4-Flash |
+| `NVIDIA_API_KEY` | NVIDIA API Key；日报+广播稿三选 DeepSeek-V4-Pro（`integrate.api.nvidia.com/v1`，模型 `deepseek-ai/deepseek-v4-pro`） |
 | `AGNES_API_KEY` | Agnes API Key（免费）；日报+广播稿兜底 Agnes agnes-2.0-flash（`apihub.agnes-ai.com/v1`） |
 
 ## 广播稿转换（md_to_script）模型链
@@ -135,12 +137,13 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 | 优先级 | 模型 | 密钥 | 说明 |
 |--------|------|------|------|
-| ① 主用 | SenseTime DeepSeek-V4-Flash | `SENSENOVA_API_KEY` | 默认主模型 |
-| ② 次选 | NVIDIA DeepSeek-V4-Pro | `NVIDIA_API_KEY` | 主模型异常或近空（<500字符）即切换 |
-| ③ 兜底 | Agnes agnes-2.0-flash | `AGNES_API_KEY` | 前两者连续报错 2 次（`_call_llm` 内部重试）仍未产出有效内容即切换 |
-| 末路 | 复制原文 | — | 三模型全失败，直接复制 `report.md` 为 `script.txt`，避免 workflow 中断 |
+| ① 主用 | Zhipu GLM-4.5-Air | `ZHIPU_API_KEY` | 默认主模型 |
+| ② 次选 | SenseTime DeepSeek-V4-Flash | `SENSENOVA_API_KEY` | 主模型异常或近空（<500字符）即切换 |
+| ③ 三选 | NVIDIA DeepSeek-V4-Pro | `NVIDIA_API_KEY` | 前序模型连续报错 2 次（`_call_llm` 内部重试）仍未产出有效内容即切换 |
+| ④ 兜底 | Agnes agnes-2.0-flash | `AGNES_API_KEY` | 前序模型均失败后的兜底 |
+| 末路 | 复制原文 | — | 四模型全失败，直接复制 `report.md` 为 `script.txt`，避免 workflow 中断 |
 
-> 日报与广播稿模型链相互独立、结构一致：均为 **DeepSeek-Flash 主 → DeepSeek-Pro(NVIDIA) 次 → Agnes 兜**（见 `scripts/call_llm.py` 的 `LLM_CONFIGS` 与 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
+> 日报与广播稿模型链相互独立、结构一致：均为 **Zhipu GLM-4.5-Air 主 → DeepSeek-Flash 次 → DeepSeek-Pro(NVIDIA) 三 → Agnes 兜**（见 `scripts/call_llm.py` 的 `LLM_CONFIGS` 与 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
 
 ## 文件结构
 
@@ -150,7 +153,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 ├── prompt/
 │   └── daily_report_prompt.txt             # LLM 系统提示词（含完整/精简模式指令 + 市场门控硬规则）
 ├── scripts/
-│   ├── prefetch_data.py                     # 数据抓取（市场全景+估值+QDII/ETF+新闻；新闻：Google News 美国单地20条→去重,LLM选≤10 + 联合早报最新10(双实例兜底:hub.slarker.me 主 → rsshub.rssforever.com 备) 双源 Top20；data_deep.json 取联合早报>700字长文供深度观察专栏；data_cls_zaobao.json 取财联社 RSS 顺序兜底(hub.slarker.me/cls/telegraph 主 → rsshub.rssforever.com/cls/telegraph → hub.slarker.me/cls/depth/1000 → rsshub.rssforever.com/cls/depth/1000，单源命中即止)当天新闻供市场全景各板块一句话简述+持仓聚焦）；data_holdings.json 取腾讯API持仓核心标的行情(价格+涨跌幅)+监督池供「持仓动态与聚焦」板块；已停抓 data_fund/data_industry（LLM 输入 JSON 由 11→9）
+│   ├── prefetch_data.py                     # 数据抓取（市场全景+估值+QDII/ETF+新闻；新闻：Google News 美国单地20条→去重,LLM选≤10 + 联合早报最新10(双实例兜底:hub.slarker.me 主 → rsshub.rssforever.com 备) 双源 Top20；data_deep.json 取联合早报>700字长文供深度观察专栏；data_cls_zaobao.json 取财联社 RSS 双组抓取(telegraph 快讯 + depth/1000 头条，各组 hub→rsshub 兜底，合并去重)当天新闻供市场全景各板块一句话简述+持仓聚焦）；data_holdings.json 取腾讯API持仓核心标的行情(价格+涨跌幅)+监督池供「持仓动态与聚焦」板块；已停抓 data_fund/data_industry（LLM 输入 JSON 由 11→9）
 │   ├── market_date_resolver.py             # 按市场解析业务日期 + 北京时间收盘标注（MarketDateResolver）
 │   ├── trading_calendar.py                  # 三市场交易日历判定（A股/美股/港股）
 │   ├── call_llm.py                          # LLM 调用（含模式判定 + 模型切换 + 市场标志注入 + 输入体积护栏）

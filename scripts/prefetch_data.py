@@ -919,42 +919,52 @@ def _fetch_cls_rss_once(url):
 
 
 def fetch_cls_zaobao():
-    """v41: 财联社 RSS 顺序兜底（单源命中即止，不重复抓同一数据源）。
-    优先级：hub.slarker.me/cls/telegraph → rsshub.rssforever.com/cls/telegraph
-            → hub.slarker.me/cls/depth/1000 → rsshub.rssforever.com/cls/depth/1000
-    依次尝试，第一个返回有效 <item> 的源即采用并立即停止（避免对同一个数据源用不同实例重复抓取）；
-    统一按「北京时间当天」筛选，供 LLM 提炼 A股/港股/美股/全球/大宗 各板块一句话简述 + 持仓聚焦新闻驱动；
-    全部失败才返回 _fail（日报对应板块简述自动留空，不崩）。每个源成败与原因打印到日志便于定位。"""
+    """财联社 RSS 双组抓取（telegraph 快讯 + depth/1000 头条），每组各自 hub 主 + rsshub 备兜底。
+    两组独立抓取后合并：telegraph 组优先 hub.slarker.me/cls/telegraph，失败切 rsshub.rssforever.com/cls/telegraph，
+    depth/1000 组同理；组内命中即止（hub 主 → rsshub 备），某组两级均失败则该组留空（不整体中断）。
+    合并后按 title+link 去重，再严格按「北京时间当天」筛选，供 LLM 提炼 A股/港股/美股/全球/大宗 各板块一句话简述 + 持仓聚焦新闻驱动；
+    两组均不可达才返回 _fail（日报对应板块简述自动留空，不崩）。每个源成败与原因打印到日志便于定位。"""
     import email.utils as _eu
-    # 顺序兜底：telegraph（快讯）优先，depth/1000（头条）兜底；每个数据源仅尝试一个可达实例
-    SOURCES = [
-        "https://hub.slarker.me/cls/telegraph",
-        "https://rsshub.rssforever.com/cls/telegraph",
-        "https://hub.slarker.me/cls/depth/1000",
-        "https://rsshub.rssforever.com/cls/depth/1000",
-    ]
+    # 双组：telegraph（快讯）+ depth/1000（头条）；每组 hub 主 → rsshub 备
+    GROUPS = {
+        "telegraph": [
+            "https://hub.slarker.me/cls/telegraph",
+            "https://rsshub.rssforever.com/cls/telegraph",
+        ],
+        "depth": [
+            "https://hub.slarker.me/cls/depth/1000",
+            "https://rsshub.rssforever.com/cls/depth/1000",
+        ],
+    }
     MAX_ITEMS = 80  # 保护：当天条目过多时仅取最新 80 条
     today_cn = datetime.now(TZ_CN).date()
 
     notes = []
-    adopted = None
-    for url in SOURCES:
-        items, ok, note = _fetch_cls_rss_once(url)
-        notes.append(f"{'✅' if ok else '❌'} {url} → {note}")
-        if ok and items:
-            adopted = items
-            break  # 命中即止，不重复抓同一数据源
+    raw_items = []
+    for gname, urls in GROUPS.items():
+        group_items = None
+        for url in urls:
+            items, ok, note = _fetch_cls_rss_once(url)
+            notes.append(f"{'✅' if ok else '❌'} [{gname}] {url} → {note}")
+            if ok and items:
+                group_items = items
+                break  # 组内命中即止（hub 主 → rsshub 备）
+        if group_items:
+            raw_items += group_items
+            notes.append(f"  ↳ {gname} 采纳 {len(group_items)} 条")
+        else:
+            notes.append(f"  ↳ {gname} 两组实例均失败，该组留空")
 
-    if adopted is None:
+    if not raw_items:
         print("    [财联社RSS] 全部候选源失败：")
         for n in notes:
             print("      " + n)
         return _fail(Exception("财联社全部RSS源均不可达；" + " | ".join(notes)))
 
-    # 单源内轻量去重（按 title+link，防 feed 内重复）
+    # 跨组轻量去重（按 title+link，防两组 feed 内/间重复）
     seen = set()
     merged = []
-    for it in adopted:
+    for it in raw_items:
         key = (it.get("title", ""), it.get("link", ""))
         if key in seen:
             continue
@@ -983,7 +993,7 @@ def fetch_cls_zaobao():
 
     print("    [财联社RSS] 源状态: " + " | ".join(notes))
     return _ok({"date": today_cn.isoformat(), "total": len(items),
-                "sources": SOURCES, "items": items})
+                "groups": GROUPS, "items": items})
 
 def fetch_holdings():
     """个人持仓(招行A/H/长电/563020/QQQM/SPY) + 监督池批量行情

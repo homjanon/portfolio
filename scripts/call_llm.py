@@ -17,6 +17,12 @@ BEIJING = timezone(timedelta(hours=8))
 _WEEKDAYS = ["一", "二", "三", "四", "五", "六", "日"]
 LLM_CONFIGS = [
     {
+        "name": "Zhipu GLM-4.5-Air",
+        "api_url": "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+        "api_key_env": "ZHIPU_API_KEY",
+        "model": "glm-4.5-air",
+    },
+    {
         "name": "Agnes agnes-2.0-flash",
         "api_url": "https://apihub.agnes-ai.com/v1/chat/completions",
         "api_key_env": "AGNES_API_KEY",
