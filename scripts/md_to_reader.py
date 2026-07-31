@@ -611,7 +611,6 @@ def block_to_html(lines, title='', level='section'):
                 # 持仓板块特殊处理：转为卡片样式（标题随实际小节名动态显示，原「持仓快照」已删除改为持仓聚焦）
             if any('持仓' in kw for kw in [title_clean]):
                 html_parts.append('<div class="card">')
-                html_parts.append(f'<div class="card-title">{title_clean}</div>')
                 for line in text_group:
                     stripped = line.strip()
                     if stripped.startswith('- '):

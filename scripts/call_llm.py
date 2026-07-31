@@ -17,6 +17,12 @@ BEIJING = timezone(timedelta(hours=8))
 _WEEKDAYS = ["一", "二", "三", "四", "五", "六", "日"]
 LLM_CONFIGS = [
     {
+        "name": "Agnes agnes-2.0-flash",
+        "api_url": "https://apihub.agnes-ai.com/v1/chat/completions",
+        "api_key_env": "AGNES_API_KEY",
+        "model": "agnes-2.0-flash",
+    },
+    {
         "name": "SenseTime DeepSeek-V4-Flash",
         "api_url": "https://token.sensenova.cn/v1/chat/completions",
         "api_key_env": "SENSENOVA_API_KEY",
@@ -27,12 +33,6 @@ LLM_CONFIGS = [
         "api_url": "https://integrate.api.nvidia.com/v1/chat/completions",
         "api_key_env": "NVIDIA_API_KEY",
         "model": "deepseek-ai/deepseek-v4-pro",
-    },
-    {
-        "name": "Agnes agnes-2.0-flash",
-        "api_url": "https://apihub.agnes-ai.com/v1/chat/completions",
-        "api_key_env": "AGNES_API_KEY",
-        "model": "agnes-2.0-flash",
     },
 ]
 

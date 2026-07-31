@@ -54,7 +54,7 @@ schedule / workflow_dispatch
 | 条件 | 执行模式 | 抓取模块 |
 |------|----------|----------|
 | `A股开市 OR 美股开市 OR 港股开市` | **完整模式** | 按开市市场逐模块抓取（休市市场 JSON 不生成）+ 始终抓 RSS 新闻 |
-| 三市场均休市（通常周日/周一） | **精简模式** | 仅抓 `data_news.json`（Top20：前10谷歌美国主流 + 后10联合早报）+ `data_deep.json`（深度观察专栏·联合早报长文） |
+| 三市场均休市（通常周日/周一） | **精简模式** | 仅抓 `data_news.json`（Top20：谷歌美国20条精选≤10 + 联合早报最新10，双实例兜底）+ `data_deep.json`（深度观察专栏·联合早报长文） |
 
 > 任一日历网络获取失败时降级为"看昨天星期几 ≤4 即视为开市"。
 
@@ -71,7 +71,7 @@ schedule / workflow_dispatch
 | 估值/PE 分位（11 指数，固定顺序） | 雪球蛋卷 API `danjuanfunds.com/djapi/index_eva/dj`（1 次返回 63，白名单 11） | `a_open` | — |
 | 个人持仓行情 | 腾讯财经 `qt.gtimg.cn` | `a_open OR u_open` | yfinance |
 | QDII监测+USD/CNH汇率 | 腾讯API+东方财富(净值)+akshare(汇率) | `a_open` | — |
-| **全球 Top20 新闻** | **Google News 美国一地（30条→去重,LLM选≤10）+ 联合早报 RSS（按缺口补齐至20）** | 始终抓 | `data_news.json` |
+| **全球 Top20 新闻** | **Google News 美国一地（20条→去重,LLM选≤10）+ 联合早报 RSS（hub.slarker.me 主 + rsshub.rssforever.com 备，最新10）** | 始终抓 | `data_news.json` |
 | **深度观察专栏** | 联合早报 RSS 长文（>700字）按长度排序前6，由 LLM 选与 Top20 关联性最低一篇 | 仅精简模式 | `data_deep.json` |
 | **市场全景各板块一句话简述** | **财联社 RSS 顺序兜底（hub.slarker.me/cls/telegraph 主 → rsshub.rssforever.com/cls/telegraph → hub.slarker.me/cls/depth/1000 → rsshub.rssforever.com/cls/depth/1000，单源命中即止；北京当天筛选；LLM 自行提炼 A股/港股/美股/全球/大宗 各一句）** | 完整模式 | 无当天新闻则留空（不编造） |
 
@@ -150,7 +150,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 ├── prompt/
 │   └── daily_report_prompt.txt             # LLM 系统提示词（含完整/精简模式指令 + 市场门控硬规则）
 ├── scripts/
-│   ├── prefetch_data.py                     # 数据抓取（市场全景+估值+QDII/ETF+新闻；新闻：Google News 美国单地30条→去重,LLM选≤10 + 联合早报按缺口补齐至20 双源 Top20；data_deep.json 取联合早报>700字长文供深度观察专栏；data_cls_zaobao.json 取财联社 RSS 顺序兜底(hub.slarker.me/cls/telegraph 主 → rsshub.rssforever.com/cls/telegraph → hub.slarker.me/cls/depth/1000 → rsshub.rssforever.com/cls/depth/1000，单源命中即止)当天新闻供市场全景各板块一句话简述+持仓聚焦）；data_holdings.json 取腾讯API持仓核心标的行情(价格+涨跌幅)+监督池供「持仓动态与聚焦」板块；已停抓 data_fund/data_industry（LLM 输入 JSON 由 11→9）
+│   ├── prefetch_data.py                     # 数据抓取（市场全景+估值+QDII/ETF+新闻；新闻：Google News 美国单地20条→去重,LLM选≤10 + 联合早报最新10(双实例兜底:hub.slarker.me 主 → rsshub.rssforever.com 备) 双源 Top20；data_deep.json 取联合早报>700字长文供深度观察专栏；data_cls_zaobao.json 取财联社 RSS 顺序兜底(hub.slarker.me/cls/telegraph 主 → rsshub.rssforever.com/cls/telegraph → hub.slarker.me/cls/depth/1000 → rsshub.rssforever.com/cls/depth/1000，单源命中即止)当天新闻供市场全景各板块一句话简述+持仓聚焦）；data_holdings.json 取腾讯API持仓核心标的行情(价格+涨跌幅)+监督池供「持仓动态与聚焦」板块；已停抓 data_fund/data_industry（LLM 输入 JSON 由 11→9）
 │   ├── market_date_resolver.py             # 按市场解析业务日期 + 北京时间收盘标注（MarketDateResolver）
 │   ├── trading_calendar.py                  # 三市场交易日历判定（A股/美股/港股）
 │   ├── call_llm.py                          # LLM 调用（含模式判定 + 模型切换 + 市场标志注入 + 输入体积护栏）

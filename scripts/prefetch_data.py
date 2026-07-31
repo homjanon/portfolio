@@ -710,48 +710,64 @@ def fetch_extra():
 _ZAOBAI_CACHE = None
 
 def _fetch_zaobao_raw():
-    """抓取联合早报·中港台即时 RSS 一次并缓存（Top20 后10 与 深度专栏复用）。"""
+    """抓取联合早报·中港台即时 RSS（多实例兜底：hub.slarker.me 主 + rsshub.rssforever.com 备；
+    Top20 与 深度观察专栏复用）。顺序尝试，第一个返回有效 <item> 的源即采用并停止。"""
     global _ZAOBAI_CACHE
     if _ZAOBAI_CACHE is not None:
         return _ZAOBAI_CACHE
-    url = "https://plink.anyfeeder.com/zaobao/realtime/china"
-    try:
-        r = requests.get(url, headers={"User-Agent": UA}, timeout=30)
-        r.raise_for_status()
-        tree = ET.fromstring(r.content)
-        out = []
-        for item in tree.findall(".//item"):
-            title_el = item.find("title")
-            desc_el = item.find("description")
-            link_el = item.find("link")
-            pub_el = item.find("pubDate")
-            title = title_el.text if title_el is not None else ""
-            title = re.sub(r"\s+", " ", title).strip()[:100]
-            desc = desc_el.text if desc_el is not None else ""
-            desc = re.sub(r"<[^>]+>", " ", desc)
-            desc = html.unescape(desc)
-            desc = re.sub(r"\s+", " ", desc).strip()
-            out.append({
-                "title": title,
-                "desc": desc,
-                "source": "联合早报",
-                "link": link_el.text if link_el is not None else "",
-                "pubDate": pub_el.text if pub_el is not None else "",
-            })
-        _ZAOBAI_CACHE = out
-        return out
-    except Exception as _e:
-        print(f"    [联合早报] RSS 获取失败: {_e}")
-        _ZAOBAI_CACHE = []
-        return []
+    # 双实例顺序兜底：hub.slarker.me 主，rsshub.rssforever.com 备（同路径换主机）
+    SOURCES = [
+        "https://hub.slarker.me/zaobao/realtime/china",
+        "https://rsshub.rssforever.com/zaobao/realtime/china",
+    ]
+    notes = []
+    for url in SOURCES:
+        try:
+            # 连接 8s / 读取 25s，避免云环境对不可达主机长时间挂起
+            r = requests.get(url, headers={"User-Agent": UA}, timeout=(8, 25))
+            if r.status_code != 200:
+                notes.append(f"❌ {url} → HTTP {r.status_code}")
+                continue
+            tree = ET.fromstring(r.content)
+            out = []
+            for item in tree.findall(".//item"):
+                title_el = item.find("title")
+                desc_el = item.find("description")
+                link_el = item.find("link")
+                pub_el = item.find("pubDate")
+                title = title_el.text if title_el is not None else ""
+                title = re.sub(r"\s+", " ", title).strip()[:100]
+                desc = desc_el.text if desc_el is not None else ""
+                desc = re.sub(r"<[^>]+>", " ", desc)
+                desc = html.unescape(desc)
+                desc = re.sub(r"\s+", " ", desc).strip()
+                out.append({
+                    "title": title,
+                    "desc": desc,
+                    "source": "联合早报",
+                    "link": link_el.text if link_el is not None else "",
+                    "pubDate": pub_el.text if pub_el is not None else "",
+                })
+            if not out:
+                notes.append(f"❌ {url} → 200但无<item>(疑似HTML错误页)")
+                continue
+            _ZAOBAI_CACHE = out
+            return out
+        except Exception as _e:
+            notes.append(f"❌ {url} → {type(_e).__name__}: {_e}")
+    print("    [联合早报] 全部候选源失败：")
+    for n in notes:
+        print("      " + n)
+    _ZAOBAI_CACHE = []
+    return []
 
 
 def _fetch_rss_other():
-    """Top20 双源：谷歌美国一地抓30条(去重) + 联合早报按缺口补齐至20。
-    谷歌：仅美国一地(hl=en-US)一次抓30条，Python去重后交给LLM按角度精选≤10(英译中)；
-    早报：联合早报中港台即时，取最新20条作为补齐池，由LLM按需取最新若干条凑齐20。"""
+    """Top20 双源：谷歌美国一地抓20条(去重,LLM精选≤10) + 联合早报最新10条。
+    谷歌：仅美国一地(hl=en-US)一次抓20条，Python去重后交给LLM按角度精选≤10(英译中)；
+    早报：联合早报中港台即时（hub.slarker.me 主 + rsshub.rssforever.com 备），取最新10条。"""
     TOPIC = "CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx6TVdZU0FtVnVHZ0pWVXlnQVAB"
-    MAX_PER = 30
+    MAX_PER = 20
 
     def _parse(url):
         r = requests.get(url, headers={"User-Agent": UA}, timeout=30)
@@ -802,8 +818,8 @@ def _fetch_rss_other():
             deduped.append(it)
     items_google = deduped
 
-    # 联合早报：取最新 20 条作为补齐池（feed 已按时间倒序；长文留给深度专栏独立源）
-    items_zaobao = _fetch_zaobao_raw()[:20]
+    # 联合早报：取最新 10 条（feed 已按时间倒序；长文留给深度专栏独立源）
+    items_zaobao = _fetch_zaobao_raw()[:10]
     for _z in items_zaobao:
         if len(_z.get("desc", "")) > 300:
             _z["desc"] = _z["desc"][:300] + "…"
@@ -1019,63 +1035,6 @@ def fetch_holdings():
                                 "最新价": data["最新价"],
                                 "涨跌幅": data["涨跌幅"],
                                 "source": "yfinance兜底"}
-
-    # 🆕 v21: A股分红历史
-    dividend_a = {}
-    try:
-        import akshare as ak
-        for code, label in [("600036", "招商银行A"), ("600900", "长江电力")]:
-            try:
-                df_div = ak.stock_history_dividend_detail(symbol=code, indicator='分红')
-                if df_div is not None and len(df_div) > 0:
-                    latest = df_div.iloc[0]
-                    div_info = {
-                        '公告日期': str(latest['公告日期']),
-                        '派息': str(latest['派息']),
-                        '进度': str(latest['进度']),
-                    }
-                    ex_date = latest.get('除权除息日')
-                    if ex_date and str(ex_date) != 'NaT':
-                        div_info['除权除息日'] = str(ex_date)
-                    reg_date = latest.get('股权登记日')
-                    if reg_date and str(reg_date) != 'NaT':
-                        div_info['股权登记日'] = str(reg_date)
-                    dividend_a[label] = div_info
-            except: pass
-    except: pass
-    result['分红_A股'] = dividend_a
-
-    # 🆕 v21: H股分红历史
-    dividend_h = {}
-    try:
-        import akshare as ak
-        df_hk = ak.stock_hk_dividend_payout_em(symbol='03968')
-        if df_hk is not None and len(df_hk) > 0:
-            latest = df_hk.iloc[0]
-            dividend_h['招商银行H'] = {
-                '公告日期': str(latest['最新公告日期']),
-                '分红方案': str(latest['分红方案']),
-                '分配类型': str(latest['分配类型']),
-                '除净日': str(latest['除净日']),
-                '发放日': str(latest.get('发放日', 'N/A')),
-            }
-    except: pass
-    result['分红_H股'] = dividend_h
-
-    # 🆕 v21: 研报评级（招商银行A，最新3份）
-    reports = []
-    try:
-        import akshare as ak
-        df_rpt = ak.stock_research_report_em(symbol='600036')
-        if df_rpt is not None and len(df_rpt) > 0:
-            for _, r in df_rpt.head(3).iterrows():
-                reports.append({
-                    '机构': str(r.get('机构', '')),
-                    '评级': str(r.get('东财评级', '')),
-                    '日期': str(r.get('日期', '')),
-                })
-    except: pass
-    result['研报_招商银行A'] = reports
 
     # ── 🆕 v23: 监督池批量行情（腾讯API）──
     _watchlist = {
@@ -1303,7 +1262,7 @@ def main():
         if a_open:
             modules.append(("data_valuation.json", fetch_valuation,  "估值数据"))
         if a_open or u_open:
-            modules.append(("data_holdings.json", fetch_holdings, "持仓行情+分红+研报"))
+            modules.append(("data_holdings.json", fetch_holdings, "持仓行情+监督池"))
         # 注：data_fund / data_industry 已停抓（prompt 不再消费）；data_holdings 已恢复（LLM 输入 JSON 11→9）
         # RSS 新闻：始终抓取（深度观察专栏仅精简模式，完整模式不抓 data_deep）
         modules.append(("data_news.json", _fetch_rss_other, "全球Top20 RSS(美国主流+联合早报)"))
