@@ -54,7 +54,7 @@ schedule / workflow_dispatch
 | 条件 | 执行模式 | 抓取模块 |
 |------|----------|----------|
 | `A股开市 OR 美股开市 OR 港股开市` | **完整模式** | 按开市市场逐模块抓取（休市市场 JSON 不生成）+ 始终抓 RSS 新闻 |
-| 三市场均休市（通常周日/周一） | **精简模式** | 仅抓 `data_news.json`（Top20：谷歌美国20条精选≤10 + 联合早报最新10，三实例兜底）+ `data_deep.json`（深度观察专栏·联合早报长文，三源均不可用则今日暂停） |
+| 三市场均休市（通常周日/周一） | **精简模式** | 仅抓 `data_news.json`（Top20：谷歌美国20条精选≤10 + 联合早报最新10，三实例兜底；联合早报宕机时以谷歌剩余候选→财联社/格隆汇补位至满20）+ `data_deep.json`（深度观察专栏·联合早报长文，三源均不可用则今日暂停） |
 
 > 任一日历网络获取失败时降级为"看昨天星期几 ≤4 即视为开市"。
 
@@ -71,9 +71,9 @@ schedule / workflow_dispatch
 | 估值/PE 分位（11 指数，固定顺序） | 雪球蛋卷 API `danjuanfunds.com/djapi/index_eva/dj`（1 次返回 63，白名单 11） | `a_open` | — |
 | 个人持仓行情 | 腾讯财经 `qt.gtimg.cn` | `a_open OR u_open` | yfinance |
 | QDII监测+USD/CNH汇率 | 腾讯API+东方财富(净值)+akshare(汇率) | `a_open` | — |
-| **全球 Top20 新闻** | **Google News 美国一地（20条→去重,LLM选≤10）+ 联合早报 RSS（三实例兜底：hub.slarker.me 主 → rsshub.rssforever.com 备1 → rsshub.ktachibana.party 备2，最新10）+ 财联社/格隆汇（补位，<20 时用谷歌剩余候选→财联社/格隆汇当天新闻补足）** | 始终抓 | `data_news.json` + `data_cls_zaobao.json` |
+| **全球 Top20 新闻** | **Google News 美国一地（20条→去重,LLM选≤10）+ 联合早报 RSS（三实例兜底：hub.slarker.me 主 → rsshub.rssforever.com 备1 → rsshub.ktachibana.party 备2，最新10）+ 财联社/格隆汇（补位，<20 时即联合早报宕机时用谷歌剩余候选→财联社/格隆汇当天新闻补足；日常联合早报正常时 财联社/格隆汇 不进入 Top20）** | 始终抓 | `data_news.json` + `data_cls_zaobao.json` |
 | **深度观察专栏** | 联合早报 RSS 长文（>700字）按长度排序前6，由 LLM 选与 Top20 关联性最低一篇（联合早报三实例兜底；三源均不可用则当日「今日暂停」） | 仅精简模式 | `data_deep.json` |
-| **市场全景各板块一句话简述 + 持仓聚焦** | **财联社 + 格隆汇 RSS 合并抓取（财联社 telegraph/depth 双组 hub→rsshub 兜底；格隆汇 rss.injahow.cn 主 → rsshub.rssforever.com 备；合并后标题归一化去重、北京当天筛选，格隆汇缺 pubDate 视为当日保留；LLM 优先采用标题含板块关键词的条目直接复用收盘情况）** | 完整模式 | 无当天新闻则留空（不编造） |
+| **市场全景各板块一段简述（50–100字）+ 持仓聚焦** | **财联社 + 格隆汇 RSS 合并抓取（财联社 telegraph/depth 双组 hub→rsshub 兜底；格隆汇 rss.injahow.cn 主 → rsshub.rssforever.com 备；合并后标题归一化去重、北京当天筛选，格隆汇缺 pubDate 视为当日保留；LLM 优先采用标题含板块关键词的条目直接复用收盘情况，否则综合最相关若干条写成 50–100 字一段、丰富该市场最新情况）** | 完整模式 | 无当天新闻则留空（不编造） |
 
 > **方案 C（curl_cffi HTTP/2 补丁）**：东方财富 `push2.eastmoney.com` / `push2delay.eastmoney.com` / `push2his.eastmoney.com` 需 HTTP/2，标准 `requests` 仅 HTTP/1.1 会静默断连。脚本在顶部注入 `curl_cffi` 浏览器模拟，仅对这些域名生效，保障指数主源稳定；其余请求不受影响。运行依赖已包含 `curl_cffi` 与 `pandas_market_calendars`。
 
@@ -150,7 +150,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 ├── prompt/
 │   └── daily_report_prompt.txt             # LLM 系统提示词（含完整/精简模式指令 + 市场门控硬规则）
 ├── scripts/
-│   ├── prefetch_data.py                     # 数据抓取（市场全景+估值+QDII/ETF+新闻；新闻：Google News 美国单地20条→去重,LLM选≤10 + 联合早报最新10(三实例兜底:hub.slarker.me 主 → rsshub.rssforever.com 备1 → rsshub.ktachibana.party 备2；非当天内容判源失败切备源) 双源 Top20，<20 时以谷歌剩余候选→财联社/格隆汇补位；data_deep.json 取联合早报>700字长文供深度观察专栏(三源均不可用则今日暂停)；data_cls_zaobao.json 取财联社+格隆汇 RSS 合并(财联社 telegraph/depth 双组 hub→rsshub 兜底；格隆汇 rss.injahow.cn 主→rsshub.rssforever.com 备；合并标题归一化去重+北京当天筛选,格隆汇缺pubDate保留)当天新闻供市场全景各板块一句话简述+持仓聚焦；data_holdings.json 取腾讯API持仓核心标的行情(价格+涨跌幅)+监督池供「持仓动态与聚焦」板块；已停抓 data_fund/data_industry（LLM 输入 JSON 由 11→9）
+│   ├── prefetch_data.py                     # 数据抓取（市场全景+估值+QDII/ETF+新闻；新闻：Google News 美国单地20条→去重,LLM选≤10 + 联合早报最新10(三实例兜底:hub.slarker.me 主 → rsshub.rssforever.com 备1 → rsshub.ktachibana.party 备2；非当天内容判源失败切备源) 双源 Top20，<20 时以谷歌剩余候选→财联社/格隆汇补位；data_deep.json 取联合早报>700字长文供深度观察专栏(三源均不可用则今日暂停)；data_cls_zaobao.json 取财联社+格隆汇 RSS 合并(财联社 telegraph/depth 双组 hub→rsshub 兜底；格隆汇 rss.injahow.cn 主→rsshub.rssforever.com 备；合并标题归一化去重+北京当天筛选,格隆汇缺pubDate保留)当天新闻供市场全景各板块一段简述（50–100字）+持仓聚焦；data_holdings.json 取腾讯API持仓核心标的行情(价格+涨跌幅)+监督池供「持仓动态与聚焦」板块；已停抓 data_fund/data_industry（LLM 输入 JSON 由 11→9）
 │   ├── market_date_resolver.py             # 按市场解析业务日期 + 北京时间收盘标注（MarketDateResolver）
 │   ├── trading_calendar.py                  # 三市场交易日历判定（A股/美股/港股）
 │   ├── call_llm.py                          # LLM 调用（含模式判定 + 模型切换 + 市场标志注入 + 输入体积护栏）
