@@ -710,16 +710,30 @@ def fetch_extra():
 _ZAOBAI_CACHE = None
 
 def _fetch_zaobao_raw():
-    """抓取联合早报·中港台即时 RSS（多实例兜底：hub.slarker.me 主 + rsshub.rssforever.com 备；
-    Top20 与 深度观察专栏复用）。顺序尝试，第一个返回有效 <item> 的源即采用并停止。"""
+    """抓取联合早报·中港台即时 RSS（三实例兜底：hub.slarker.me 主 → rsshub.rssforever.com 备1 → rsshub.ktachibana.party 备2；
+    Top20 与 深度观察专栏复用）。顺序尝试，第一个返回**当天内容**的源即采用并停止。
+    若某源返回的条目均非北京时间当天（疑似旧缓存/镜像），判该源失败并切下一备用源。"""
     global _ZAOBAI_CACHE
     if _ZAOBAI_CACHE is not None:
         return _ZAOBAI_CACHE
-    # 双实例顺序兜底：hub.slarker.me 主，rsshub.rssforever.com 备（同路径换主机）
+    import email.utils as _eu
+    def _bj_date(pub):
+        try:
+            dt = _eu.parsedate_to_datetime(pub or "")
+            if dt is not None:
+                if dt.tzinfo is None:
+                    dt = dt.replace(tzinfo=timezone.utc)
+                return dt.astimezone(TZ_CN).date()
+        except Exception:
+            return None
+        return None
+    # 三实例顺序兜底（同路径换主机）
     SOURCES = [
         "https://hub.slarker.me/zaobao/realtime/china",
         "https://rsshub.rssforever.com/zaobao/realtime/china",
+        "https://rsshub.ktachibana.party/zaobao/realtime/china",
     ]
+    today_cn = datetime.now(TZ_CN).date()
     notes = []
     for url in SOURCES:
         try:
@@ -750,6 +764,10 @@ def _fetch_zaobao_raw():
                 })
             if not out:
                 notes.append(f"❌ {url} → 200但无<item>(疑似HTML错误页)")
+                continue
+            # 日期校验：至少一个条目为北京时间当天，否则视为该源失效（旧缓存/镜像）→ 切备用源
+            if not any(_bj_date(it.get("pubDate", "")) == today_cn for it in out):
+                notes.append(f"❌ {url} → 无当天内容(疑似旧缓存/镜像)")
                 continue
             _ZAOBAI_CACHE = out
             return out
@@ -836,43 +854,18 @@ def _fetch_rss_other():
 # ─── 数据源I: 联合早报长文 → 深度观察专栏独立源 ──────
 def _fetch_rss_deep():
     """深度观察专栏独立源：取联合早报长文(>700字)按长度排序前6作为候选，
-    由 LLM 选取与当日 Top20 关联性最低的一篇写成专栏。早报长文不足则回退财新。"""
+    由 LLM 选取与当日 Top20 关联性最低的一篇写成专栏。联合早报 3 源均不可用则留空（prompt 输出「今日暂停」）。"""
     zaobao = _fetch_zaobao_raw()
     long_items = [it for it in zaobao if len(it.get("desc", "")) > 700]
     long_items.sort(key=lambda x: len(x.get("desc", "")), reverse=True)
     items_deep = long_items[:6]
-    if not items_deep:
-        # 兜底：财新最新
-        try:
-            r = requests.get("https://rsshub.rssforever.com/caixin/latest",
-                             headers={"User-Agent": UA}, timeout=30)
-            tree = ET.fromstring(r.content)
-            cand = []
-            for item in tree.findall(".//item"):
-                title_el = item.find("title")
-                desc_el = item.find("description")
-                link_el = item.find("link")
-                desc = desc_el.text if desc_el is not None else ""
-                desc = re.sub(r"<[^>]+>", " ", desc)
-                desc = html.unescape(desc)
-                desc = re.sub(r"\s+", " ", desc).strip()
-                if len(desc) > 700:
-                    cand.append({
-                        "title": (title_el.text or "").strip()[:100],
-                        "desc": desc,
-                        "source": "财新",
-                        "link": link_el.text if link_el is not None else "",
-                        "pubDate": "",
-                    })
-            cand.sort(key=lambda x: len(x["desc"]), reverse=True)
-            items_deep = cand[:6]
-        except Exception as _e:
-            print(f"    [深度专栏·财新兜底] 获取失败: {_e}")
+    # 联合早报（现 3 源主备）长文不足则当日深度专栏留空，由 prompt 输出「深度观察：今日暂停」（不回退财新/谷歌）
     return _ok({"total": len(items_deep), "items_deep": items_deep})
 
 # ─── 数据源J: 财联社 RSS（多实例兜底：hub.slarker.me 主 + 多个 RSSHub 公共实例备用）────
-def _fetch_cls_rss_once(url):
-    """抓取单个财联社 RSS 源，解析全部 <item>（不过滤当天）。
+def _fetch_cls_rss_once(url, source_name="财联社"):
+    """抓取单个 RSS 源（财联社 / 格隆汇通用），解析全部 <item>（不过滤当天）。
+    source_name 用于标记来源，便于合并后区分与当天过滤容错。
     返回 (items, ok, note)：ok=True 表示成功取到 <item>；note 用于日志诊断（HTTP状态/异常原因）。"""
     def _local(tag):
         return tag.split('}')[-1] if '}' in tag else tag
@@ -909,6 +902,7 @@ def _fetch_cls_rss_once(url):
                 "pubDate": pub,
                 "link": link,
                 "category": cat,
+                "source": source_name,
             })
         if not out:
             # 返回了 200 但无 <item>（多半是 RSSHub 欢迎页/HTML 错误页）
@@ -919,81 +913,95 @@ def _fetch_cls_rss_once(url):
 
 
 def fetch_cls_zaobao():
-    """财联社 RSS 双组抓取（telegraph 快讯 + depth/1000 头条），每组各自 hub 主 + rsshub 备兜底。
+    """财联社 + 格隆汇 RSS 抓取，合并去重后供市场全景简述 + 持仓聚焦。
     两组独立抓取后合并：telegraph 组优先 hub.slarker.me/cls/telegraph，失败切 rsshub.rssforever.com/cls/telegraph，
     depth/1000 组同理；组内命中即止（hub 主 → rsshub 备），某组两级均失败则该组留空（不整体中断）。
     合并后按 title+link 去重，再严格按「北京时间当天」筛选，供 LLM 提炼 A股/港股/美股/全球/大宗 各板块一句话简述 + 持仓聚焦新闻驱动；
     两组均不可达才返回 _fail（日报对应板块简述自动留空，不崩）。每个源成败与原因打印到日志便于定位。"""
     import email.utils as _eu
-    # 双组：telegraph（快讯）+ depth/1000（头条）；每组 hub 主 → rsshub 备
+    def _bj_date(pub):
+        """解析 RSS pubDate → 北京时间日期；解析失败返回 None。"""
+        try:
+            dt = _eu.parsedate_to_datetime(pub or "")
+            if dt is not None:
+                if dt.tzinfo is None:
+                    dt = dt.replace(tzinfo=timezone.utc)
+                return dt.astimezone(TZ_CN).date()
+        except Exception:
+            return None
+        return None
+    def _norm_title(t):
+        """标题归一化：去标点/空白，仅留字母数字与汉字后小写，用于跨源去重。"""
+        return re.sub(r"[^\w\u4e00-\u9fff]+", "", t or "").lower()
+    # 财联社双组 + 格隆汇单组（主备）；组名→来源标记（用于合并区分与当天过滤容错）
     GROUPS = {
-        "telegraph": [
+        "telegraph": ("财联社", [
             "https://hub.slarker.me/cls/telegraph",
             "https://rsshub.rssforever.com/cls/telegraph",
-        ],
-        "depth": [
+        ]),
+        "depth": ("财联社", [
             "https://hub.slarker.me/cls/depth/1000",
             "https://rsshub.rssforever.com/cls/depth/1000",
-        ],
+        ]),
+        "gelonghui": ("格隆汇", [
+            "https://rss.injahow.cn/gelonghui/live",
+            "https://rsshub.rssforever.com/gelonghui/live",
+        ]),
     }
     MAX_ITEMS = 80  # 保护：当天条目过多时仅取最新 80 条
     today_cn = datetime.now(TZ_CN).date()
 
     notes = []
     raw_items = []
-    for gname, urls in GROUPS.items():
+    for gname, (src_label, urls) in GROUPS.items():
         group_items = None
         for url in urls:
-            items, ok, note = _fetch_cls_rss_once(url)
+            items, ok, note = _fetch_cls_rss_once(url, src_label)
             notes.append(f"{'✅' if ok else '❌'} [{gname}] {url} → {note}")
             if ok and items:
                 group_items = items
-                break  # 组内命中即止（hub 主 → rsshub 备）
+                break  # 组内命中即止（主 → 备）
         if group_items:
             raw_items += group_items
-            notes.append(f"  ↳ {gname} 采纳 {len(group_items)} 条")
+            notes.append(f"  ↳ {gname}({src_label}) 采纳 {len(group_items)} 条")
         else:
-            notes.append(f"  ↳ {gname} 两组实例均失败，该组留空")
+            notes.append(f"  ↳ {gname}({src_label}) 主备均失败，该组留空")
 
     if not raw_items:
-        print("    [财联社RSS] 全部候选源失败：")
+        print("    [财联社/格隆汇RSS] 全部候选源失败：")
         for n in notes:
             print("      " + n)
-        return _fail(Exception("财联社全部RSS源均不可达；" + " | ".join(notes)))
+        return _fail(Exception("财联社/格隆汇全部RSS源均不可达；" + " | ".join(notes)))
 
-    # 跨组轻量去重（按 title+link，防两组 feed 内/间重复）
+    # 1) 严格按「北京时间当天」筛选（格隆汇缺 pubDate 视为当日保留，live 流天然当日）
+    filtered = []
+    for it in raw_items:
+        bj = _bj_date(it.get("pubDate", ""))
+        if bj is None:
+            if it.get("source") == "格隆汇":
+                filtered.append(it)
+            continue
+        if bj != today_cn:
+            continue
+        filtered.append(it)
+
+    # 2) 标题归一化去重（捕捉财联社/格隆汇说同一件事）
     seen = set()
     merged = []
-    for it in raw_items:
-        key = (it.get("title", ""), it.get("link", ""))
-        if key in seen:
+    for it in filtered:
+        k = _norm_title(it.get("title", ""))
+        if k and k in seen:
             continue
-        seen.add(key)
+        seen.add(k)
         merged.append(it)
 
-    # 严格按北京时间「当天」筛选
-    items = []
-    for it in merged:
-        bj_date = None
-        try:
-            dt = _eu.parsedate_to_datetime(it.get("pubDate", ""))
-            if dt is not None:
-                if dt.tzinfo is None:
-                    dt = dt.replace(tzinfo=timezone.utc)
-                bj_date = dt.astimezone(TZ_CN).date()
-        except Exception:
-            bj_date = None
-        if bj_date != today_cn:
-            continue
-        items.append(it)
+    # 3) 按发布时间倒序，取最新 MAX_ITEMS
+    merged.sort(key=lambda x: x.get("pubDate", ""), reverse=True)
+    items = merged[:MAX_ITEMS]
 
-    # 按发布时间倒序，取最新 MAX_ITEMS
-    items.sort(key=lambda x: x.get("pubDate", ""), reverse=True)
-    items = items[:MAX_ITEMS]
-
-    print("    [财联社RSS] 源状态: " + " | ".join(notes))
+    print("    [财联社/格隆汇RSS] 源状态: " + " | ".join(notes))
     return _ok({"date": today_cn.isoformat(), "total": len(items),
-                "groups": GROUPS, "items": items})
+                "groups": {k: v[1] for k, v in GROUPS.items()}, "items": items})
 
 def fetch_holdings():
     """个人持仓(招行A/H/长电/563020/QQQM/SPY) + 监督池批量行情
