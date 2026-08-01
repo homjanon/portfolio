@@ -59,7 +59,6 @@ jobs:
           python3 scripts/call_llm.py
           echo "报告生成完成"
         env:
-          SENSENOVA_API_KEY: ${{ secrets.SENSENOVA_API_KEY }}
           NVIDIA_API_KEY:    ${{ secrets.NVIDIA_API_KEY }}
           AGNES_API_KEY:     ${{ secrets.AGNES_API_KEY }}
 
@@ -71,7 +70,6 @@ jobs:
           python3 scripts/md_to_script.py
           echo "广播稿生成完成"
         env:
-          SENSENOVA_API_KEY: ${{ secrets.SENSENOVA_API_KEY }}
           NVIDIA_API_KEY:    ${{ secrets.NVIDIA_API_KEY }}
           AGNES_API_KEY:     ${{ secrets.AGNES_API_KEY }}
 

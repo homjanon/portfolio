@@ -2,8 +2,8 @@
 """
 调用 LLM 生成日报：
   主模型: Agnes agnes-2.0-flash (AGNES_API_KEY)
-  次选: 商汤 DeepSeek-V4-Flash (SENSENOVA_API_KEY)
-  兜底: NVIDIA DeepSeek-V4-Pro (NVIDIA_API_KEY)
+  次选: NVIDIA Llama 4 Maverick 17B (NVIDIA_API_KEY)
+  兜底: NVIDIA Nemotron-3 Ultra 550B (NVIDIA_API_KEY)
 
 用法: python3 scripts/call_llm.py
   读取 prompt/daily_report_prompt.txt (system) + data_*.json (user)
@@ -24,16 +24,16 @@ LLM_CONFIGS = [
         "model": "agnes-2.0-flash",
     },
     {
-        "name": "SenseTime DeepSeek-V4-Flash",
-        "api_url": "https://token.sensenova.cn/v1/chat/completions",
-        "api_key_env": "SENSENOVA_API_KEY",
-        "model": "deepseek-v4-flash",
-    },
-    {
-        "name": "NVIDIA DeepSeek-V4-Pro",
+        "name": "NVIDIA Llama 4 Maverick 17B",
         "api_url": "https://integrate.api.nvidia.com/v1/chat/completions",
         "api_key_env": "NVIDIA_API_KEY",
-        "model": "deepseek-ai/deepseek-v4-pro",
+        "model": "meta/llama-4-maverick-17b-128e-instruct",
+    },
+    {
+        "name": "NVIDIA Nemotron-3 Ultra 550B",
+        "api_url": "https://integrate.api.nvidia.com/v1/chat/completions",
+        "api_key_env": "NVIDIA_API_KEY",
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
     },
 ]
 
