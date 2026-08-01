@@ -1,7 +1,7 @@
 # 2026年8月1日 星期六 全球金融资讯日报
 
 
-**今日定性导语**：周五全球市场呈现分化格局——A股科技股领涨，科创50与创业板指均涨超3%，但招商银行与长江电力等防御标的回调；美股V型反转，纳指涨1%，亚马逊单日暴涨15%创2012年以来最大涨幅，苹果跌超7%失守"全球股王"；地缘风险升温，特朗普下令对伊朗发动新一轮袭击，伊朗警告将打击美以能源设施，油价应声大涨。市场主线聚焦：①美伊冲突升级推升能源与避险情绪；②苹果财报不及预期引发科技股分化；③OpenAI预览新模型Astra，AI竞赛持续白热化；④美联储沃什考虑减少议息会议频率，政策框架或迎重大变革；⑤美日联合干预日元，美元多头头寸创历史新高。
+**今日定性导语**：A股三大指数集体反弹，科创50与创业板指领涨超2.9%，港股微涨，美股隔夜V型反转收涨，日经与韩股强势反弹；中东局势升温推高油价，OpenAI推迟IPO、美伊冲突升级、韩国AI股暴涨、DeepSeek新模型发布成为市场焦点。
 
 ---
 
@@ -9,7 +9,7 @@
 
 ### A股收盘（7月31日）
 
-📊 数据来源：东财push2（ts: 2026-08-01 06:47:18）
+📊
 
 | 指数 | 最新价 | 涨跌幅 |
 |------|--------|--------|
@@ -19,11 +19,11 @@
 | 科创50 | 1635.96 | **↑2.99%** |
 | 创业板指 | 3343.96 | **↑3.06%** |
 
-富时A50期指夜盘收跌0.37%，报14751点。
+7月股票ETF净流入4778亿元创历史峰值，最后一个交易日转为净流出243.75亿元。
 
 ### 美股收盘（8月1日凌晨）
 
-📊 数据来源：东财push2 + yfinance（ts: 2026-08-01 06:47:26）
+📊
 
 | 指数 | 最新价 | 涨跌幅 |
 |------|--------|--------|
@@ -31,20 +31,22 @@
 | 标普500 | 7489.72 | **↑0.70%** |
 | 纳斯达克综合 | 25373.85 | **↑1.00%** |
 
-亚马逊涨超15%创2012年以来单日最大涨幅，微软涨超3%，英伟达涨近3%收回"全球股王"；苹果跌超7%，单日市值蒸发近3580亿美元。
+超级权重股托举指数V型反转，中国金龙指数五连阳。
 
 ### 港股收盘（7月31日）
 
-📊 数据来源：东财push2（ts: 2026-08-01 06:47:21）
+📊
 
 | 指数 | 最新价 | 涨跌幅 |
 |------|--------|--------|
 | 恒生指数 | 25884.43 | **↑0.10%** |
 | 恒生国企指数 | 8612.15 | **↓0.38%** |
 
-### 全球其他市场（欧股/日经/韩股）（7月31日）
+恒生指数7月涨超13%，领跑全球主要股指。
 
-📊 数据来源：东财push2（ts: 2026-08-01 06:47:26）
+### 全球其他市场（欧股 / 日经 / 韩股）（7月31日）
+
+📊
 
 | 指数 | 代码 | 最新价 | 涨跌幅 |
 |------|------|--------|--------|
@@ -52,25 +54,27 @@
 | 韩国KOSPI | KOSPI | 6595.45 | **↑17.91%** |
 | 欧洲STOXX 600 | SXXP | 649.19 | **↓0.12%** |
 
+韩国股市创历史最大单日涨幅，SK海力士涨停。
+
 ### 大宗商品与汇率
 
-📊 数据来源：akshare期货+债券利率（ts: 2026-08-01 06:48:10）；汇率：data_extra.json
+📊
 
 | 品种 | 最新价/值 | 涨跌幅 |
 |------|-----------|--------|
-| WTI原油 | 86.8 美元/桶 | **↑3.84%** |
-| COMEX黄金 | 4098.6 美元/盎司 | **↓1.49%** |
-| 布伦特原油 | 74.9 美元/桶 | **↑1.50%** |
-| COMEX白银 | 57.775 美元/盎司 | **↓2.10%** |
+| WTI原油 | 86.8 美元 | **↑3.84%** |
+| COMEX黄金 | 4098.6 美元 | **↓1.49%** |
+| 布伦特原油 | 74.9 美元 | **↑1.50%** |
+| COMEX白银 | 57.775 美元 | **↓2.10%** |
 | 美元/离岸人民币 | 6.7894 | — |
 | 中国10Y国债收益率 | 1.7141% | — |
 | 美国10Y国债收益率 | 4.75% | — |
 
-COMEX黄金本周累涨1.26%，7月累涨2.1%；COMEX白银本周累跌近1%，7月累跌1.82%。
+国际油价7月上涨超20%，中东局势推高能源价格。
 
-### 估值水位与情绪
+---
 
-📊 数据来源：雪球蛋卷API（ts: 2026-08-01 06:48:23）
+## 估值水位与情绪
 
 | 指数 | PE(TTM) | PE分位 | PB | PB分位 | 股息率 | 估值结论 |
 |------|---------|--------|-----|--------|--------|---------|
@@ -82,72 +86,66 @@ COMEX黄金本周累涨1.26%，7月累涨2.1%；COMEX白银本周累跌近1%，7
 | 创业板指 | 42.16 | 47.56% | 5.55 | 63.68% | 0.93% | 中性偏贵 |
 | 科创50 | 196.06 | 97.87% | 7.75 | 92.29% | 0.25% | 极贵 |
 | 恒生科技 | 23.41 | 38.84% | 2.62 | 40.96% | 0.91% | 偏低 |
-| 中概互联50 | 17.07 | 6.36% | 2.22 | 4.4% | 1.01% | 深度低估 |
-| 纳斯达克100 | 29.5 | 43.76% | 9.02 | 76.92% | 0.45% | 偏高 |
-| 标普500 | 25.41 | 60.0% | 5.44 | 93.6% | 1.04% | PB极贵 |
+| 中概互联50 | 17.09 | 6.56% | 2.22 | 4.56% | 1.01% | 深度低估 |
+| 纳斯达克100 | 29.98 | 46.32% | 9.17 | 79.36% | 0.44% | 偏高 |
+| 标普500 | 25.49 | 60.72% | 5.5 | 94.88% | 1.03% | PB极贵 |
 
 ---
 
 ## 二、行业洞察
 
-### 全球 Top20（RSS 驱动·双源：谷歌美国 + 联合早报，合计20条）
+### 全球 Top20（RSS 驱动·双源）
 
-📊 数据来源：Google News 美国 + 联合早报 RSS（ts: 2026-08-01 06:48:50）
+1. **OpenAI或将推迟至明年启动上市**：知情人士透露，OpenAI可能将IPO推迟至明年，此前希望抢在Anthropic之前完成上市。近几个月部分主要投资方私下表达对烧钱速度过快、营收增长难以匹配的担忧。（[格隆汇](https://www.gelonghui.com/live/2587237)）
 
-**谷歌精选（10条）：**
+2. **美伊冲突升级，特朗普下令新一轮袭击**：美国官员表示特朗普已下令对伊朗发动新一轮袭击，最早可能于本周末开始。伊朗官员回应称已制定全面计划，包括打击以色列关键基础设施及美国在中东能源设施。（[财联社](https://www.cls.cn/detail/2443172)）
 
-1. **特朗普下令对伊朗发动新一轮袭击，最早本周末开始**：美国官员表示，总统特朗普已下令对伊朗发动新一轮袭击，目的是迫使德黑兰方面投降。相关行动最早可能于本周末开始，并持续数天。伊朗警告若美以袭击其能源设施，将打击以色列关键基础设施及美国在本地区的能源设施。（[央视新闻](https://www.cls.cn/detail/2443155)）
+3. **韩国KOSPI创历史最大单日涨幅17.91%**：韩国股市7月31日大反弹，SK海力士涨停涨30%，南方两倍做多海力士暴涨67.67%。（[财联社](https://www.cls.cn/detail/2443184)）
 
-2. **亚马逊涨超15%创2012年以来单日最大涨幅**：亚马逊AWS云业务季度表现强劲，被称为"home run"季度。微软、亚马逊7月份市值合计增长超1万亿美元。微软7月累涨超24%，亚马逊7月累涨约14%。（[Reuters](https://news.google.com/rss/articles/CBMitAFBVV95cUxQdXM2OW82ZTlzUGZjWFdRTG9lbm9RWlBPaTR6czltYi1LSE5xZXE1YzFtOXB2ZF81U0gzaklsWDJaaWl3WG5rNWI3dk5QT3lsM1R4OHBfSmZZd3J6ZFcwSGR0aXoyZ3VZSkREdDFEZVJvSlpHcVVhdTZWdkttMDlvYmhxZk9nVHZVRkZUaXVfU0hMMUNMc1Y3Q08zX1VGVzR1ME04YThtaEpjTjloekZXZVpEQTE?oc=5)）
+4. **DeepSeek-V4-Flash正式版上线公测**：DeepSeek-V4-Flash正式版API上线，Agent能力大幅增强，在多项基准测试中表现远超V4-Pro-Preview、智谱GLM-5.2等模型。（[格隆汇](https://www.gelonghui.com/live/2587267)）
 
-3. **苹果跌超7%失守"全球股王"**：苹果发布财报后大跌，CEO蒂姆·库克警告内存芯片短缺的"百年一遇洪水"影响。苹果单日市值蒸发近3580亿美元，将"全球股王"位置还给了英伟达。（[Yahoo Finance](https://news.google.com/rss/articles/CBMi9gFBVV95cUxNUlBuUW9uS2NyYUZJTFhqWUJYLVA3UllKZThEbzFtRm1yTHdVMXR3aERlYjM4cElURlRhNFNxdlFGWF9VaDNPZ1ZlSXNqTVo3ZHpzcTB6SHVLbDdjOC0yUWd2WWl3NjR4NlhmR21xUnlYbGRGc3dDb09lNWFiZGlXUGluRWNkOTY0eTdIeEltSlYxYm5KMHBXRURTNkJNX1Nhbjl0bFd5ZHZvYkxYaGpJTGZZZXU0dWhjeW83ZHE0Q2hYeUZ1MWJUSTVOUU9ZbTgtellWTXdsa2lQb1RJMldlcjcyOHptMTZuNWRTVUkxYnMzZGlCaHc?oc=5)）
+5. **美国将43家中国企业列入涉疆清单**：美国以涉疆强迫劳动为由将43家中国企业列入实体清单，涉及制药、金属、棉花等领域，单次新增数量创纪录。（[联合早报](https://www.zaobao.com/news/china/story20260801-9453629)）
 
-4. **"AI股神"基金7月暴跌67%，已清仓大部分股票**：利奥波德·阿申布伦纳的"态势感知"基金因杠杆押注AI股爆亏，已将大部分股票投资组合出售给城堡投资。他在致投资人信中称"这个月，我们让你们失望了"。（[CNBC](https://news.google.com/rss/articles/CBMimwFBVV95cUxOd1l2WENPNlV4QjczWHZmUHByYU1mZUNYVDZTc3pOSE9tc2syakx1N0tCa2FnRUU0THJqaWNZQ2RXTTBlSlYwb3VDRERLY09EeHZHeERfVjhvSWhiRURjZXJWTWRqR0xhYkZGN0g3NS12X0s3S1BHekFHbTVOdC1jVHp4eGVlVUE1UHo0YTNnenZ2cFNCVXlqRUd6c9IBoAFBVV95cUxNeTRabDdSamM3VmltUUlmaWRiNmhGYlR3d29TTktHRFY0c2llelFkakRpZGdYeU1fLS1RcGNjN19XQmtsUVYwNWVSVkF4Mnh6U3N6ZGs4MUhZS0VTaDVhaDdMOE5BRjVRZDNnNWVYRE9RS2lqTnBpRzBDT0NLc0lXUFZXeWdYUmNUdEZmc0hWdkM2NjRyQmJGNmFldkhCR2F5?oc=5)）
+6. **南部战区位黄岩岛组织海空联合演训**：解放军南部战区在黄岩岛领海领空及周边海空域组织海空联合演训，针对当前南海局势。（[联合早报](https://www.zaobao.com/news/china/story20260801-9454175)）
 
-5. **OpenAI本周预览AI模型Astra**：OpenAI在美国华盛顿特区预览了名为"Astra"的AI模型，CEO Altman向国会山决策者及监管机构演示。（[财联社](https://www.cls.cn/detail/2443155)）
+7. **中国核准超1700亿元核电项目**：国务院常务会议核准辽宁庄河、浙江金七门、广东太平岭、山东莱阳四个核电项目共8台新机组。（[联合早报](https://www.zaobao.com/news/china/story20260801-9454193)）
 
-6. **美联储主席沃什考虑减少政策会议频率**：这一举措可能引发巨大震动，标志着近年来美联储运作方式最重大的变革。目前FOMC每年召开八次会议。（[The New York Times](https://news.google.com/rss/articles/CBMihgFBVV95cUxPTUxrbjBLc2d0NEF6REFjVXJvendUakU4cDdBX0pvTlpPUGhSZ20yTFEwM2xWd1NFTzAtQ0Y4bUpQVDRzUzhvelM0SUR3Z21vTTZvSkJVN3N4bVVrcDl2UHNUSlhTUlJWQmdMMVZvVWstdHgwcjZoYnV1YVJuOTZxeVJ4alhxZw?oc=5)）
+8. **国家电网原董事长辛保安被查**：退休逾两年的国家电网有限公司原董事长辛保安涉嫌严重违纪违法，正接受审查调查。（[联合早报](https://www.zaobao.com/news/china/story20260801-9454020)）
 
-7. **美日联合干预日元，美国财政部也加入**：美国财政部通知多家银行可能于周五干预日元汇率，美日联合行动或将进一步升级。周四日元对美元一度涨超3%。（[Reuters](https://news.google.com/rss/articles/CBMiuwFBVV95cUxPdXpOeGRTaEJ5bzQ0eldfM0hpWFlCTUlsVGE4WHJhTFAtNTdwT0Y4R0tDSjBJX1lseXYxVnhDZ1FWRDRmZG05X3lFUl9JdnRBVDZEbHJma1NfdmMxbnNscm1SMmVfT0F4NXhhRGhoZlY4RlJfZDRrdXluMEJfWm1RODA2ek82a2poakpMMnRsZ0Mwd0JOQmV4SFczako3VnRzb1JXN2xCejdUdHJ3Mk5Tc0JkWnpxUXQwQzZr?oc=5)）
+9. **美媒：OpenAI筹备发布新模型系列Astra**：OpenAI正准备发布新模型系列"Astra"，主打多智能体长周期任务协同，或成为继Sol、Terra、Luna之后的新一类模型。（[格隆汇](https://www.gelonghui.com/live/2587262)）
 
-8. **CFTC持仓：美元多头头寸创历史新高**：美元综合多头头寸激增至刚超过500亿美元，打破2014-2015年创下的纪录。投机客抛售了3.11万份欧元、1.13万份日元。（[财联社](https://www.cls.cn/detail/2443155)）
+10. **理想汽车7月交付30468辆**：理想汽车公布7月交付数据，持续保持较高交付量。（[格隆汇](https://www.gelonghui.com/live/2587265)）
 
-9. **BP出售北海油气业务**：英国石油公司将其北海油气业务挂牌出售，反映能源巨头在能源转型与地缘风险下的战略调整。（[Crude Oil Prices Today](https://news.google.com/rss/articles/CBMipAFBVV95cUxPNFhtMVpWcS1nTFB0OGk0TmJHYXhtb3d0eUFtU0lSZnFmbngzc0s4cnZidUxTNlNjYnR2M1BUb1ozVkFUbWxjRmxWMlNSR1JaVklUeWJkVGRQelpDY1NxcHhTQVhrVkhlcVJVU0VXZ3pNdjdnMHNISkFRUkVYV2dReS1RMERtRzVBdVFvZEFfWkRyT2NQRDFxNExYbWdKVVZyS1JOedIBqgFBVV95cUxPeVE3SkVQTldkb0pGUWtoVHNfZjZEQ2lFWG1BNXVTU3ZfNFE2c2MtaDlMLUctRkw3cjNwX0FUTFo0YWtRbnAydU55VmRaRG5HZGVCRlNpTEg3SE0xMEYwU1VhTGNGa3RzWnlRaHZFNUxUNXlSUk1yN1g4dVJjMmJYbEl3X0FnN0tmT3dPX0lmM2RUMUc1ZUhWT0F1d3Yxa3luQ2lCRFludExkZw?oc=5)）
+11. **小米汽车7月交付量超30000台**：小米汽车7月交付量持续超过30000台。（[格隆汇](https://www.gelonghui.com/live/2587242)）
 
-10. **纽约州起诉预测市场平台Kalshi**：纽约州政府指控其运营"非法、未经许可的赌博业务"，监管权之争进一步升级。（[ESPN](https://news.google.com/rss/articles/CBMizgFBVV95cUxOMGx3d3ptcEdwZENnM20tMWltck91WmMySGtZcll4d2JEV1lpM1VZdDhuSFJjSmQ4LWh6WHNIdmRQQV9IUDdFSjg0Mk5Ua2o0a09xSXJybXZMOEN0d255TVA3YmFieTE4MnVPb3o0emw0anc1UzR2T3RiVlgzaFJhR2FaLWNvT2p3MDdCRFR3b2lqTHo1bHpVVV9ZTVVRTE9rXzJhWFhCaHdISHRmWElrZy01MTZtbUphY1hieTc1RUp3RkZGTUg0VVhuYkVWZw?oc=5)）
+12. **美国汽车监管机构对120万辆特斯拉展开调查**：NHTSA因悬架故障投诉对近120万辆特斯拉车型启动初步调查。（[格隆汇](https://www.gelonghui.com/live/2587241)）
 
-**联合早报补充（10条）：**
+13. **泽璟制药首度半年盈利**：科创板首家披露半年报药企，上半年营收12.05亿元同比增220.88%，归母净利润6.40亿元成功扭亏。（[财联社](https://www.cls.cn/detail/2443195)）
 
-11. **乌克兰基辅传出连续爆炸声**：基辅市内当地时间8月1日传出连续爆炸声，此前基辅拉响防空警报。（[财联社](https://www.cls.cn/detail/2443155)）
+14. **华泰证券：汽车板块估值至历史低位**：2026年二季度汽车板块基金重仓持股占比降至1.65%为2021年以来最低，估值处近5年15%以下分位。（[格隆汇](https://www.gelonghui.com/live/2587253)）
 
-12. **伊朗警告打击美以能源基础设施**：伊朗高级安全官员称，若美国、以色列袭击伊朗能源设施，伊朗将视为"鲁莽行径"，回应方案涵盖打击以色列关键基础设施及美国在本地区的能源设施。（[CCTV国际时讯](https://www.cls.cn/detail/2443155)）
+15. **7月百城二手房价格环比下跌0.44%**：中指研究院数据显示，7月百城二手住宅均价环比下跌0.44%，跌幅较上月扩大。（[财联社](https://www.cls.cn/detail/2443193)）
 
-13. **胡塞武装继续封锁沙特船只**：已使8艘沙特油轮被迫改变航线折返，封锁行动仍在持续。（[财联社](https://www.cls.cn/detail/2443155)）
+16. **罕见7家投行罚单集中开出**：证监会一次性公示9份投行业务监管决定书，涉及广发证券、世纪证券等7家券商，质控内核普遍失守。（[财联社](https://www.cls.cn/detail/2443185)）
 
-14. **美中央司令部已改变30艘商船航行路线**：使2艘船只失去行动能力，并登船检查2艘，以确保其完全遵守封锁要求。（[财联社](https://www.cls.cn/detail/2443155)）
+17. **2026年中期分红方案密集落地**：45家公司拟派现逾370亿元，紫金矿业拟派现111.36亿元暂居首位。（[财联社](https://www.cls.cn/detail/2443193)）
 
-15. **拉脱维亚关闭与白俄罗斯的边境**：由于技术原因，建议尚未返回拉脱维亚的人员使用其他路线。（[财联社](https://www.cls.cn/detail/2443155)）
+18. **美国财政部罕见出手干预日元**：美日两国联合干预日元汇率，日元对美元一度涨超3%。（[财联社](https://www.cls.cn/detail/2443122)）
 
-16. **OpenAI宣布GPT-5.4系列将于8月31日下线**：GPT-5.4和GPT-5.4mini将从8月31日起不再向登录ChatGPT的用户提供，仍将在API中继续提供。（[财联社](https://www.cls.cn/detail/2443155)）
+19. **铁矿石贸易商Radiant World卷入假票据风波**：维多集团、嘉吉已停止与其交易，矿业巨头嘉能可也停止新业务。（[财联社](https://www.cls.cn/detail/2443135)）
 
-17. **标普道琼斯将Ferguson Enterprises纳入标普500指数**：取代Electronic Arts（艺电，EA）。（[财联社](https://www.cls.cn/detail/2443155)）
+20. **纽约州起诉预测市场平台Kalshi**：指控其运营非法赌博业务，监管权之争进一步升级。（[财联社](https://www.cls.cn/detail/2443184)）
 
-18. **《蜘蛛侠：崭新之日》点映票房破北美纪录**：提前点映票房达7200万美元，刷新好莱坞历史纪录，分析师预期首周末北美票房2.6-2.7亿美元。（[财联社](https://www.cls.cn/detail/2443120)）
-
-19. **生物科技公司Apnimed上市首日涨25%**：专注打鼾口服疗法，IPO发行价16美元，交易3分钟后升至22.19美元。（[财联社](https://www.cls.cn/detail/2443112)）
-
-20. **沪上阿姨上半年营收净利双增**：营收25.89亿元同比增42.4%，门店规模达13155家，深耕下沉市场策略见效。（[财联社](https://www.cls.cn/detail/2443101)）
+---
 
 ### 持仓动态与聚焦
 
 #### 个人持仓行情快照
 
-📊 数据来源：data_holdings.json（ts: 2026-08-01 06:48:26）
-
 | 标的 | 代码 | 市场 | 最新价 | 涨跌幅 |
 |------|------|------|--------|--------|
 | 招商银行A | 600036 | A股 | 39.62 元 | **↓2.29%** |
-| 招商银行H | 03968 | 港股 | 50.90 港元 | **↓0.59%** |
+| 招商银行H | 03968 | 港股 | 50.9 港元 | **↓0.59%** |
 | 长江电力 | 600900 | A股 | 29.09 元 | **↓1.36%** |
 | 红利低波ETF易方达 | 563020 | A股 | 1.195 元 | **↓0.25%** |
 | QQQM | QQQM | 美股 | 283.29 美元 | **↑0.69%** |
@@ -155,34 +153,29 @@ COMEX黄金本周累涨1.26%，7月累涨2.1%；COMEX白银本周累跌近1%，7
 
 #### 持仓聚焦（未来催化）
 
-📋 监督池标的新闻匹配（数据来源：data_cls_zaobao.json）
+- **寒武纪**：AI芯片龙头，DeepSeek新模型发布催化国产算力需求，关注Q3订单落地情况。
+- **中际旭创**：光模块龙头，AI算力建设持续拉动800G/1.6T产品需求。
+- **新易盛**：光模块厂商，受益于全球AI数据中心资本开支扩张。
+- **工业富联**：AI服务器代工龙头，绑定英伟达等头部客户，关注下半年订单能见度。
 
-**寒武纪**：AI模型Astra预览引发芯片需求预期升温，本周累涨6.1%，关注下周AI产业链催化。
-
-**三花智控**：周五涨5.84%，新能源热管理龙头，关注特斯拉供应链动态。
-
-**中际旭创**：涨4.4%，光模块龙头，受益于AI数据中心资本开支加速。
-
-**新易盛**：涨6.71%，光通信板块活跃，关注800G光模块订单进展。
+---
 
 ### QDII 溢价与申购额度监测
 
-📊 数据来源：data_extra.json（ts: 2026-08-01 06:49:31）
-
-**场内ETF溢价率**：
+#### 场内ETF溢价率
 
 | ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
 |-----|------|-------|------------|------|
-| 纳指ETF国泰 | 513100 | 14.72% | ↑2.57% | △溢价 |
-| 纳指ETF广发 | 159941 | 14.14% | ↑2.61% | △溢价 |
-| 纳斯达克100ETF招商 | 159659 | 12.42% | ↑2.51% | △溢价 |
-| 标普500ETF博时 | 513500 | 6.87% | ↑1.70% | △溢价 |
-| 标普500ETF国泰 | 159612 | 7.24% | ↑1.77% | △溢价 |
-| 标普500ETF南方 | 513650 | 6.03% | ↑1.83% | △溢价 |
+| 纳指ETF国泰 | 513100 | 14.72% | — | △溢价 |
+| 纳指ETF广发 | 159941 | 14.14% | — | △溢价 |
+| 纳斯达克100ETF招商 | 159659 | 12.42% | — | △溢价 |
+| 标普500ETF博时 | 513500 | 6.87% | — | △溢价 |
+| 标普500ETF国泰 | 159612 | 7.24% | — | △溢价 |
+| 标普500ETF南方 | 513650 | 6.03% | — | △溢价 |
 
-QDII溢价整体偏高，纳指ETF国泰溢价最高约14.72%，存在明显溢价风险，谨慎参与。
+QDII溢价整体偏高，纳指ETF国泰溢价最高约14.72%，存在较高折价风险，谨慎参与。
 
-**场外QDII申购额度**：
+#### 场外QDII申购额度
 
 | 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
 |------|------|---------|---------|-----------|------------|
@@ -193,4 +186,4 @@ QDII溢价整体偏高，纳指ETF国泰溢价最高约14.72%，存在明显溢�
 | 大成纳指100c | 008971 | 5.9749 | 限大额 | 10元 | — |
 | 华安纳指100c | 014978 | 7.6912 | 限大额 | 10元 | — |
 
----
+多数纳指QDII基金处于限大额状态，申购额度紧张。
