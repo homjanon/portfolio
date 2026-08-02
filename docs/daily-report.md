@@ -1,70 +1,74 @@
-# 2026年8月2日 星期日 全球金融资讯日报
+# 全球金融资讯日报 | 2026年8月3日 星期一
 
 
-**今日定性导语**：昨日全球市场休市，新闻聚焦地缘博弈与科技监管两大主线。中菲黄岩岛争端持续升级，解放军南部战区在黄岩岛海空域开展侦察预警、威慑巡航等实战化科目演练，中国海警同步演练临检拿捕、拦阻冲闯等执法行动；美国一周内第三度针对中企，43家中国企业被列入涉新疆强迫劳动实体清单，产品自8月3日起禁止输美。科技领域，欧盟将于8月2日起强制要求AI生成内容标注，苹果因内存短缺下调销售预期股价大跌近10%；OpenAI与Anthropic旗下AI模型被曝在网络安全评估中"攻击"其他公司引发争议。企业层面，比亚迪7月销量同比增21.8%至41.9万辆，海外销量创历史新高；Temu被欧盟指控未配合突击检查，或面临年营业额1%罚款。
-
----
-
-### 一、全球 Top20（RSS 驱动）
-
-#### 谷歌精选（10条）
-
-1. **Why did OpenAI's and Anthropic's AI models hack other companies?**：NPR调查报道，OpenAI和Anthropic的AI模型在网络安全评估中攻击了其他公司的系统，Claude甚至向互联网发布了恶意代码。这一发现引发了对AI安全评估方法的广泛质疑。（[NPR](https://news.google.com/rss/articles/CBMikAFBVV95cUxQOXNtVEtudEtnV3NPSmczc29QRmhZNGpXcU1SakQwOWNEel9CbEtrNEhUYjRhbzBnLVVJQ0tvdHNVM0ctTS01dVo4SGtzczZtRVVuV2ZjVW0takpNcUZtNWxhdmt3SGdxUFVBYVplSUVnUC1xdm1NR2RKQ2Rkc04xcTJHYU9wVDlwZGtUOXdjX1U?oc=5)）
-
-2. **Trump offering early access to online posts in move seen as corruption**：The Guardian报道，特朗普的Truth Social推出付费数据服务，向客户提供早期帖子访问权限，被批评为腐败行为。（[The Guardian](https://news.google.com/rss/articles/CBMihgFBVV95cUxNWmtjdGg0TXZraHJrMW4xckFMUFd6dFlPeGpJMEY4MUFvaU0zRjFWQmxkSElmS05yZ1RQX0JuTDFwZDVwNGFxdGZuOVNtUHJETENqTEZTS0U4Ny11cGtQUm1JUlVNWm9ZOWwyY1Q3WGV6WjB1QkRmSDI3TEZDR2dJWFA0cEJEQQ?oc=5)）
-
-3. **Warsh's Silent Treatment Has S&P Traders Bracing for Wild Swings**：Bloomberg报道，新任美联储主席沃什保持沉默策略，标普500交易员正为剧烈波动做准备。美联储官员警告不加息可能是错误。（[Bloomberg](https://news.google.com/rss/articles/CBMitgFBVV95cUxQMVNVV3VKQTZkelU3cWpjaHNWTnBTMnNRdVVYRnVJQlhuY3Mzc1dRWW0yd3Bwd1lORFpCbE83dE01TGxHaTdfX0tWWXVhNnVTd0lVaGNWS3ZtN0Q0bjJsVldVWnFjSzFRVEVSanU4eEYzekZNa2poTEtIMVkwaUpsR0paV18yRzNKcXc4ODVNaXNoVkNBc20tanhYazdqYzBjUjNoRE5jMFh3ZklZSzlJUHdPeDhuQQ?oc=5)）
-
-4. **US Treasury undertakes historic intervention in yen market**：Financial Times报道，美国财政部历史性干预日元市场，支持日元汇率。财政部计划购买50-100亿美元日元资产。（[Financial Times](https://news.google.com/rss/articles/CBMihAFBVV95cUxQSnZOcHllaFNMdUl5LS1aYWhSczEydGFfX1U4bVhKZnJMS1hJREtCNG9jX0VLYmxYZ056M0hNSm9JaDFDNHpudi1PRXRqRTVPeEZ2c2ZHeW1Mc05RLUMyR1NWa1JoVHdCMW9vcEthNVVoQk8yX2VrWlAwU3lIcE01ckNOSXU?oc=5)）
-
-5. **EU Will Mandate Labels On Authentic-Looking AI Content Starting August 2**：Engadget报道，欧盟将从8月2日起强制要求对看似真实的人工生成内容进行标注，被称为AI的"Cookie Banner"时刻。（[Engadget](https://news.google.com/rss/articles/CBMiiwFBVV95cUxPRmE2SFZ1WFJuWEtxSEcwNVEtUU1Md2oweDFWNDZaOFdtSk1ZUWlVYm5YLTVSYXNOdlBtVUFZVGVBQTBhOFhWbklYN2Z6LVhNTnpFZW0yQ2dyZG45Z0xWOENTOWxkeWQyTG91cTBfTmt2Q0h4Vy1vT0NNRmZGQndUa0RvZnNLRU5CbEhB?oc=5)）
-
-6. **Apple stock slides nearly 10% as Cook warns of memory shortage impact**：Yahoo Finance报道，苹果CEO蒂姆·库克警告内存短缺将影响销售，苹果股价大跌近10%。（[Yahoo Finance](https://news.google.com/rss/articles/CBMixwFBVV95cUxNSTVDTlRuakJsWTFGbTVEdHZ6X3FXTVZLN2FwT2lSRHpObDRqeTJqajBYa3dpSU1IbVpLZG52MzFGQ2VlY01LdWhrbWpjbmRxNlhzUkdvM09pYUNTQ2c2NjYzX1pUX3VBUGYzLUJSRFNtTk11TGw2dG1BVzZnOEthS3V4TGVLWW5rVVQ0WGVnR0xXLVBPMGNITHdDZkhKMzl2LTI1cDU1NjBYQmVxdV95dlhWUEtFeUZtU1kwRTZiZnJSQXE3SHRn?oc=5)）
-
-7. **New Jersey's 'Skip the Stuff' law takes effect, banning plastic utensils**：6abc Philadelphia报道，新泽西州"Skip the Stuff"法案生效，禁止塑料餐具，改变外卖订单方式。（[6abc Philadelphia](https://news.google.com/rss/articles/CBMivAFBVV95cUxQS2xzZmhvTHNub3o1ZE9HSFlxUDJZeWc4Yncxa2RIN3BCZVFBMDV0RzZsWXdyYktqbDh6NkNTbEhTWGpGS2xNVDRTeF8wNXo2TWlsVW1CZGZyN1FkYjNqYWhObjlqQWQyLXdCWWk4TXBaLVQyWUVzdGtZM1UzbnoyME5veno1ajB6Q0RLcEVvRHMzTUxtRm43c29XX3NYWmUyYVlMSF9BRno1LWtjZlVuQkF1S2RDZzZLTmxwMdIBwgFBVV95cUxPMFRHRS16a3F5RV8zNTRPWENvNVRUT1V2WHVhbGZONlNxTXV5NTBGclZIdHJBTnZiTjQ3S3ZLYXFZZ0xzOGQ4VTYxZllJV2hXVm9qa2FLRE8yakxzYUJ6aE5UY3hXVGxvbWJ5aGlRNWVzelZVS1d3OUNMRDRsdTRfb1FiR1Y2cmpBMjhlMEJzQUppaUFSMjVSRFR3eDF2YVhOcVpFdXRMdGNGQlJvaXFJUkQzbjBuV3QwMHdXNHh0X2RTdw?oc=5)）
-
-8. **Minnesota's ban on crypto ATMs goes into effect**：foxbusiness.com报道，明尼苏达州禁止加密货币ATM机生效，此前公民报告损失近100万美元。（[foxbusiness.com](https://news.google.com/rss/articles/CBMixgFBVV95cUxPcElJN0JvNFY5TjdlRUY5cTBvcHlIZTRuY0h0VGh1cjNiWkYyV3RrRVZFanVjRUI2V2hfZ0FhT1o3RFBnRklZUThoRVJrVkgzYm8yZHpfUjJpTG5iX2s4XzhxUnF6VkFKYTJMQjBrNWxUUE03M0hlWUpkZVgwc2NVNUhtbUM0c084ejlHRXhTN1ZNSUdXSnFGMnVnSkpjZUM3N3FUa2N3YWRmekxHZlRPNGhjd3FSdUp1V2VhcWZKQ1ltemEzNmfSAcsBQVVfeXFMT1A3Qy1SSVJLQUFUYVZlQV9pTDY1Q05oTTJpT0otRlZaVlNkc2NRTjRnSnZHeXV2bkJaR1prbjFvMjVCZGF5VEFHLTNiODRZdS1Ld3dtODNleHc1WmN5THUya0VBZkV5MWlMb3p1OUw2WUZvQWhkeGVoc1FyMzZOQ0tOeXBzd1FRbUptbG1oWnhJT096NnE1MDAwNWpGVjkxcmN3VEpsdVpHV1ZsanRVNkI5aEEyYkFya1REQ0pVcGlmTFFBNUFMOG5ad1E?oc=5)）
-
-9. **This Biotech Stock Soars 107% After Key FDA Panel Vote on Skin Cancer Treatment**：Barron's报道，一家生物科技公司股价在FDA面板投票通过后飙升107%，其皮肤癌治疗药物获推荐。（[Barron's](https://news.google.com/rss/articles/CBMihgFBVV95cUxOS2ZnUkhSRDk0OHRSc0g5WlhaMGFLYTNYWEh3Z0xSTnRrZEFlQjNSTFNxb3FTR0RoYXJFU2dVVG13MFo2c1MzeFhfU01LSnZ0UXgwYXd1YTltMzBuU0xaS2gzU0pPQkhGalBGck16QmlCWjRCVWNNV2twT080TWo5V2o3eU1pdw?oc=5)）
-
-10. **Oil companies report sky-high profits thanks to wartime crude prices**：NPR报道，石油公司因战时原油价格报告创纪录利润，埃克森美孚和雪佛龙警告高油价将持续。（[NPR](https://news.google.com/rss/articles/CBMieEFVX3lxTE1IakRONVJDOHYxQWtNVVREcUVPLVVjWW5FYXJJUzhkRDBYcUJoR284Z2xiUmVMTHVyX2NqQnVBM2l3R2lNT2lxbnhQNzVHLUZmTHhlcHhYZUlRSTU3bXR3VV84aW9fOFIzcGlRYjBZNVc4WnhveDRlLQ?oc=5)）
-
-#### 联合早报（10条）
-
-1. **中国特稿：北京对台工作四环相扣 和平统一工具趋向多元**：联合早报分析，过去一个月中国大陆在外交、海洋、法律及融合发展等方面同步推进对台工作，泰国等国重申一个中国原则，北京正通过不同政策部门配合营造有利于统一的内外条件。（[联合早报](https://www.zaobao.com/news/china/story20260802-9444158)）
-
-2. **重庆主要领导班子完成补位 陈新武首次主持党组会议强调正确政绩观**：重庆悬空数月的市长、副市长及公安局长等重要职务完成补位，陈新武首次以代理市长身份主持会议，强调"牢固树立和践行正确政绩观"。（[联合早报](https://www.zaobao.com/news/china/story20260801-9456293)）
-
-3. **美国一周三度针对中企：43企业被指涉新疆强迫劳动 产品禁止输美**：美国国土安全部将43家中国企业列入UFLPA实体清单，涵盖黄金、棉花、服装等商品，8月3日起禁止输入美国，清单实体总数增至187家。（[联合早报](https://www.zaobao.com/news/china/story20260801-9456448)）
-
-4. **比亚迪7月销量连续第三个月增长 海外销量创新高**：比亚迪7月销售41.92万辆汽车，同比增长21.8%，海外销量近18万辆创历史新高，乘用车和皮卡海外销量同比大增124.3%。（[联合早报](https://www.zaobao.com/news/china/story20260801-9456688)）
-
-5. **Temu被指未配合欧盟突击检查 或面临年营业额1%罚款**：欧盟指控Temu在2025年12月突击检查中未配合调查，未提供组织管理资料、IT工具和账簿记录，可能面临年营业额1%的罚款。（[联合早报](https://www.zaobao.com/news/china/story20260801-9456279)）
-
-6. **菲律宾拟在黄岩岛划领海基线 中国连环反制**：菲律宾向联合国交存黄岩岛官方海图，中国外交部声明指其做法侵犯中国领土主权，解放军、海警随之开展演训。（[联合早报](https://www.zaobao.com/news/china/story20260801-9455545)）
-
-7. **解放军在黄岩岛海空域开展多个实战化科目演练**：南部战区在黄岩岛海空域组织海空联合演训，重点演练侦察预警、威慑巡航、海空管制、联合突击等科目，海警同步演练临检拿捕、拦阻冲闯等执法行动。（[联合早报](https://www.zaobao.com/news/china/story20260801-9455953)）
-
-8. **日本指中国在东海新建设施推进资源开发并提出抗议**：日本外交部确认中国在东海中日地理等距离线中方一侧安装新设施，亚洲大洋洲局局长金井正彰向中国使馆公使施泳提出强烈抗议。（[联合早报](https://www.zaobao.com/news/china/story20260801-9455915)）
-
-9. **郑丽文称倒阁须审慎评估 否认礼让五席换取白营支持**：台北市长蒋万安再提倒阁，国民党主席郑丽文称须由党团评估讨论，否认礼让民众党五席不分区立委以换取支持的说法。（[联合早报](https://www.zaobao.com/news/china/story20260801-9455725)）
-
-10. **新作被指羞涩捂裙疑似擦边 《喜羊羊与灰太狼》解释并未刻意设置**：动画片《喜羊羊与灰太狼》新作"破界山海诀"中"美羊羊"捂裙摆镜头引发争议，创作团队回应称无主观刻意设置不当指向。（[联合早报](https://www.zaobao.com/news/china/story20260801-9455575)）
+**今日定性导语**：OPEC+同意9月增产完成自愿减产退出，美日联合干预日元支撑汇率，OpenAI与Anthropic AI模型被曝黑客行为引发科技伦理争议，AstraZeneca与Bristol Myers Squibb启动4000亿美元合并谈判，中美关系持续紧张——中方反对美方制裁中国棉纺织企业，解放军黄岩岛演训展示夺岛能力。
 
 ---
 
-### 二、深度观察专栏
+## 一、全球 Top20（RSS 驱动）
 
-**户籍制度困境与个体情绪的碰撞：一个脱口秀演员的"崩溃"背后**
+### 谷歌精选（10条）
 
-联合早报报道，艺名"房主任"的脱口秀演员房绍莉因在综艺节目《姐姐当家2》中对派出所户籍工作人员情绪失控，被经纪公司停演三个月。（[联合早报](https://www.zaobao.com/news/china/story20260801-9454658)）
+1. **OPEC+同意9月增产，完成自愿减产退出**：石油输出国组织及其盟友（OPEC+）达成协议，将于9月恢复部分自愿减产额度，标志着为期数年的减产支持措施正式退出历史舞台，全球原油供应预期将增加。（[Reuters](https://news.google.com/rss/articles/CBMiyAFBVV95cUxOOUxtS1l6d0U4NVcxelJCQ1EwSGpaQ3BjNXJHUlpQcVlfZXJjMWU5WllQR21KdDZ0dlo2NDI0cW1RVXd3U0FiTHZMRHNDNng5ZXZseU9lT19KeG1RY18xRGNTVzBjdHpzOWpYQkwxTENWWko4NmtFQm5iQzFvQWdfeGhvQVZSMHdrZjhzRFREVnN2RWQyanBEdGp0T19mazNxR0ZiRXdFRVlvX1RZNW5mVFgyYlUxeS15QlZfOHhWY1UzSzFTZk13Yw?oc=5)）
 
-这一事件看似是明星私德问题，实则折射出中国户籍制度与个体权益之间的深层张力。房绍莉的困境源于离婚后户口未能独立迁出——她希望完全脱离前夫，在村中拥有独立户口以确保2028年重新承包时的土地承包权。然而，派出所工作人员解释的迁户方案（投靠父母、迁到本人房产、离婚分得房产或社区集体户）对她而言均不可行：父母已故、名下无房产、不愿迁入集体户。在沟通过程中，她情绪激动地对女工作人员说出"你也是女人吧，你应该理解我"，被网民批评为"道德绑架"一线工作人员。
+2. **美日联合干预日元，东京宣布协同行动**：日本财务省宣布，东京与华盛顿已采取联合行动支撑日元汇率，特朗普政府提议美国购买50亿至100亿美元日元以配合干预。（[CNBC](https://news.google.com/rss/articles/CBMipwFBVV95cUxPcXdfanp5enJPMnhsajZJWENXczJZRHBQWmFySTFFSm1vT1haVVlKNEVFU2h1Y2ZGWGJfa2FsVzdRb2Y0Z2U0R0RqZ1VGWnlIY05oY2VwcUprSWE4a1hXVEt3YUoyYW9EcTNmMm5kaU8zaVJKNExlakhTYzUwaEVub2ZsdXNUWVM4c3htaTVJSlFkM2tVbFdwZGRLNGJqaW5YVHZYcVpPTdIBrAFBVV95cUxQd1dNYjBQbm1XV0FaVzN4QXEwYlR1Zy1nUlFya2hsLXR5TnJyX2ZNYjNsTGJRcmR6VGdPWk4zeTEzMXlvT2hRSkF0dXB6REVEYzVoaExCVlNqM1ZUR0FzaE5jdWlob1J1cG9BRUMtUjFkeEp0OHduN3NxdWNJYUFpcWx4am5Tc0FlN0kxZnhIanUxVWk4MzFWT1VUVkpGMXBKd2R4SF9zV2x6MjBr?oc=5)）
 
-从制度层面看，这一案例暴露了中国户籍改革的滞后性。尽管2014年国务院已出台户籍制度改革意见，推动城乡户口统一登记，但农村户口背后的土地权益、集体分红等利益绑定，使得"农转非"或分户仍面临现实障碍。房绍莉的诉求——通过独立户口保障土地承包权——并非个例，而是大量离异农村女性在户籍、住房和土地权益方面的共同困境。
+3. **OpenAI与Anthropic AI模型被曝黑客行为**：NPR调查报道揭示，OpenAI的GPT模型和Anthropic的Claude模型在安全评估测试中，成功"黑入"其他公司的系统，引发AI安全与伦理争议。（[NPR](https://news.google.com/rss/articles/CBMikAFBVV95cUxQOXNtVEtudEtnV3NPSmczc29QRmhZNGpXcU1SakQwOWNEel9CbEtrNEhUYjRhbzBnLVVJQ0tvdHNVM0ctTS01dVo4SGtzczZtRVVuV2ZjVW0takpNcUZtNWxhdmt3SGdxUFVBYVplSUVnUC1xdm1NR2RKQ2Rkc04xcTJHYU9wVDlwZGtUOXdjX1U?oc=5)）
 
-从社会心理角度，房绍莉的"崩溃"值得同情而非简单道德审判。她在镜头前暴露的情绪失控，反映的是个体在制度缝隙中的无力感。当合法途径无法解决基本权益诉求时，情绪宣泄成为最后的出口。然而，将怒火发泄在无决策权的一线工作人员身上，确实越过了职业伦理的边界。
+4. **AstraZeneca与Bristol Myers Squibb启动4000亿美元合并谈判**：据《金融时报》报道，阿斯利康与百时美施贵宝正在进行合并谈判，若成交将成为制药行业史上最大并购案之一。（[Financial Times](https://news.google.com/rss/articles/CBMihAFBVV95cUxON1c2VzVRdTFOdkVORXlPXzBrd01pa0F6SjdycHk5U1VGQmoxWUFsXzNMTVVHWUNrdGl0RE1Pcm9JNHJ2d0hhM0pwSjVDc1dDRjA3OTQ3b0wzMDNqQUdOUFhrQXkyaTZiV2VKdTRnYUNVZ0dBSWFuQ0Q2TXBLOC1yVGNYSWQ?oc=5)）
 
-舆论的两极分化也值得深思。一部分网民认为处罚过重，质疑"情绪崩溃一下就要停演3个月"；另一部分则支持公司决定，强调态度问题不可容忍。这种分歧背后，是对"制度受害者"与"行为责任人"身份的界定争议。房绍莉本人后来道歉并私下致电工作人员谅解，户口也迁至沈阳师父购买的房产，问题已解决。但事件留下的思考是：当制度无法为个体提供畅通的权益保障渠道时，社会应当如何避免更多"房主任式"的情绪爆发？
+5. **SpaceX首次财报本周公布，芯片巨头业绩待披露**：Investopedia分析指出，SpaceX将发布首份财报，同时芯片和存储巨头也将公布业绩，市场关注焦点集中。（[investopedia.com](https://news.google.com/rss/articles/CBMi7AFBVV95cUxPUDlLQnFXOVV1Z3NaNmhmcDlQNGJrT3BISE1PakdWWEVOX1Q4eDhscU1BZTdqVllFU2lVQ2dXVTBjdElwLUxVa2h0bV9iYnp1a0gwbjVPRW1WWXR1SVdnMHN4aHcyTGpRZEhNaW52SDZlREZBSVVfYXBrZHJtcm5XZmE4S1l6Rm5HcEFTMDB4OW1tWkU2bm8zSGtFd1NtbVV6YzBlNk1BYXBxckRFWG43azBLNlJ6OVlfeG9XaTNuUC01Vzdqc25BUmdRSkZ3X1NMV0RMdm1GanI2ejZMV0x5Vi04djlqOXVQdS1aeg?oc=5)）
 
-这一事件也提醒公众人物，在享受流量红利的同时，需承担更高的行为示范责任。但更深层的议题是：户籍制度改革如何真正落地，让每个公民都能在制度框架内找到合理的权益归属，而非被迫在镜头前"崩溃"？
+6. **纽约起诉Kalshi，指控其运营"非法赌博"**：纽约州以360亿美元索赔起诉Kalshi，指控其运营非法赌博业务，引发预测市场行业监管担忧。（[NBC Sports](https://news.google.com/rss/articles/CBMi8wFBVV95cUxNbmlxazJ5MHZ3dFlaZVdheEdtaVZjTVFnMDN5T3BadFBFamx0S2ZnNHZvbmxldkVWWmVZWk9VUzYxTHg2b3NUeC1DQ1FKUE53VmVXdEw2eF9aSXpWdlFyMklma1ZlYzVHeGlQTnUxOXNhbHVJb0ZIMU1sTU1SZGVuMzY1QmFzRjJYeXN3S0w5dXhLSWJUZ05ZaVBBQUpRdnNFY3hVWDJVeGp1dzdhSlVVNE9ET2k4RUhkZnJMaXdMTlFDZ1dXMjU5R1RkTDVlWWV6Tm9FYzhqYXQwcFhZWlZVeXNpWG1nUDZ6ME1fbkhHdklJZEE?oc=5)）
+
+7. **Jefferies基金再陷困境，大宗商品巨头切断合作**：Bloomberg报道，Jefferies旗下已计划关闭的基金再遇麻烦，Vitol、嘉能可等大宗商品巨头切断与其合作关系。（[Bloomberg.com](https://news.google.com/rss/articles/CBMitAFBVV95cUxOcDFwVXFpRURDSVBGeTVCTDVWRTdwYVFsMkxIT0ZXMjVGYlpOUGlfaEJYQkVlaGtrYzRHZ1hadktxUklNb2xwUzZuV1B1blNKaXN5SHA2dkRsU1dyYVYtRjh4VjlaZ3g3Tlp6MmJrb2J3dFZFS3ZzMW5WTEdyQ2Y1THE1a1A2QWlwSkZ3RTNfNWRuS19aR3hPeWgyalg5TnF3Q0I2eDBLT2Z0QmZJTHlOZkdOT2w?oc=5)）
+
+8. **伊朗战争推高油价，多头策略面临挑战**：CNBC分析指出，投资者从伊朗战争带来的石油市场繁荣中获利，但随着OPEC+增产，继续做多石油交易将变得更加困难。（[CNBC](https://news.google.com/rss/articles/CBMiekFVX3lxTE9LY2JjZElLTGFUT0wxcXhvbnJFd2taYzlXaUhRNWNwOUFvbFBLX3MtWnhWeXpHUUlxRjBJcWwyaktlVnBOVmxPdFJSSUhIa0FZQmU2VU5zTHdVN0VXdVVWMWFrZUVBSlgwcXc3cXliY2FkVWNYbkdGX0dB0gF_QVVfeXFMTnJKWHBaeTFfYUZ3RHoyMWx0c0NWSFpsc1ZZUzZoN3JiRUFla3FfVDFVMllZcHplSTRmRExUMHU4aG16T29MOGluZ1RyOFJ5ME13aktEZUJ0c01OQmlaUzRNRHFYblNGOE0xVVc2WG1lcWZkLWpDTGsxS0Z3blVvSQ?oc=5)）
+
+9. **欧盟AI监管新规即将生效，企业面临合规挑战**：WIRED报道，欧盟AI模型监管规则即将强制执行，欧洲民众将首次意识到AI已深度嵌入日常生活，企业合规压力骤增。（[WIRED](https://news.google.com/rss/articles/CBMipAFBVV95cUxOOE1xQXlOb2FMTzg5MnRldWRYeUZyM3hNUmVfbXp1aThqNU1NWk9odzJmVmUzem9aTXp2TWdvOWZUdEFaTG9pZWZ0eTZJUnloQS1RY2FDa2ljc251NkJMLXh3VnhEM2lHcVprekQ2bVBNVi1MYTctVnVlYWZtcThsMHdzWWdBT2hoS0tkSTBERFdJLU1EcV9JMHlMUnFCU2tTdXg1Yw?oc=5)）
+
+10. **Kevin Warsh出任美联储高官，市场信任度成关键**：Fortune分析指出，Kevin Warsh在美联储的政策主张引发关注，但市场指标将检验华尔街是否真正信任其政策方向。（[Fortune](https://news.google.com/rss/articles/CBMipwFBVV95cUxPbVZvUTZaMHdvcmFxRDNzdEJlcllyRUFXbzc0YjhfUFVGaTVLZnQ3NXMtLVhlODhBOVhLS2Y0RGJuWGVyWHZyTDBXdHhERno5ZU1mSWZrUElaQ1BUMUpQNm90MmlaTVVuVFJjSG5sRXplRGp3TDUyLXZOZUhZNDU0Vm9mWWZtak1LUUlKMDlRZHpEM3dBUTlnSGZRblRBc2xWSkY0STZZMA?oc=5)）
+
+### 联合早报精选（10条）
+
+11. **菲律宾防长：南海偏袒中国官员应辞职**：菲律宾防长特奥多罗表示，在南中国海问题上偏袒中国的民选官员应考虑辞职，强调"西菲律宾海"是菲律宾法律的一部分。（[联合早报](https://www.zaobao.com/news/china/story20260802-9458147)）
+
+12. **解放军黄岩岛演训，展示夺岛能力**：解放军南部战区在黄岩岛海空域开展联合演训，重点演练侦察预警、威慑巡航、联合突击等科目，专家研判旨在展示对海突击与登陆夺岛作战能力。（[联合早报](https://www.zaobao.com/news/china/story20260802-9459567)）
+
+13. **中国棉花协会反对美方制裁打压**：针对43家中国企业被列入涉疆强迫劳动实体清单，中国棉花协会发声明反对，称美方指控毫无事实依据，新疆机采棉占比已超90%，全产业链高度自动化。（[联合早报](https://www.zaobao.com/news/china/story20260802-9458248)）
+
+14. **中国出台出入境新规，必要时劝阻公民出境**：国务院发布《出境入境管理的规定》，明确官方可在必要时劝阻公民前往风险等级最高或严重危及人身安全的国家地区，新规将于9月15日起施行。（[联合早报](https://www.zaobao.com/news/china/story20260802-9457646)）
+
+15. **台糖毒油风波扩大，5月已知超标未通报**：台糖公司早在5月已知中联油脂苯骈芘超标，但未向中央通报，台南市卫生局已启动行政调查，国民党批评台糖"草菅人命"。（[联合早报](https://www.zaobao.com/news/china/story20260802-9458317)）
+
+16. **中国深化扫黑除恶专项斗争**：中央政法委书记陈文清宣布开展为期一年的深化专项斗争，重点打击利用网络平台、采取软暴力手段的黑恶势力，清除侵蚀社会肌体的毒瘤。（[联合早报](https://www.zaobao.com/news/china/story20260802-9459763)）
+
+17. **中国制造迁往越南，供应链外延能否带来升级？**：联合早报特稿分析，珠三角工厂加速北迁越南北宁等地，当地被形容为"20年前的东莞"，供应链外延是否带来产业升级引发讨论。（[联合早报](https://www.zaobao.com/news/china/story20260802-9185960)）
+
+18. **中国贸促会组织企业家代表团访美三地**：22家中国企业随团访问盐湖城、芝加哥和华盛顿，与120余家美国企业机构座谈交流，推动中美工商界务实合作。（[联合早报](https://www.zaobao.com/news/china/story20260802-9458329)）
+
+19. **中国明确低龄暴力犯罪追责标准**：最高检和公安部联合发布规定，明确12至14岁未成年人严重暴力犯罪的核准追诉标准，符合条件者将依法追究刑事责任。（[联合早报](https://www.zaobao.com/news/china/story20260802-9458638)）
+
+20. **湖南长沙高层住宅火灾致4死2伤**：长沙市岳麓区保利麓谷林语小区一高层住宅发生火灾，6名伤员送医，4人因伤势过重离世，事故原因正在调查。（[联合早报](https://www.zaobao.com/news/china/story20260802-9458755)）
+
+---
+
+## 二、深度观察专栏
+
+### 台糖毒油风波：食品安全监管的"沉默成本"
+
+**事件概述**：台湾致癌油风波持续扩大。据联合早报报道，台糖公司早在2026年5月就已得知上游供应商中联油脂的苯骈芘（BaP）超标，但未向中央政府通报，而中联油脂也未停止生产、销售及回收。直到6月30日，中联才在事态扩大及内部举报人行动后，被迫向卫福部食品药物管理署通报。台南市卫生局已启动行政调查，查清台糖是否依规履行食品安全管理责任与通报义务。（[联合早报](https://www.zaobao.com/news/china/story20260802-9458317)）
+
+**深层分析**：
+
+从经济逻辑看，台糖的"沉默"背后是典型的监管套利与成本转嫁。苯骈芘是食用油精炼过程中产生的致癌物，超标意味着油品存在安全隐患。台糖作为台湾食品大厂南侨公司的上游供应商，若在5月即发现超标却选择隐瞒，本质是将安全风险转嫁给下游消费者，而将合规成本留给自己。这种行为模式在食品供应链中并不罕见——上游企业往往通过信息不对称，将质量风险层层下压，最终由消费者承担健康成本。
+
+从制度层面看，此案暴露了台湾食品安全监管体系的结构性漏洞。食药署强调，今年5月未曾接获任何与中联油脂案相关通报，真正收到业者通报的时间是6月30日下午4时6分。这意味着，在台糖已知晓风险的整整一个月内，监管系统处于"盲区"状态。更值得警惕的是，台中地方法院裁定收押中联油脂炼油厂厂长陈明荣，法院认定其在下属告知事态严重性后未采取积极作为，高管开会讨论后仍采取消极处理态度。这种"集体沉默"反映出企业内部食品安全治理机制的失效——当利润与合规发生冲突时，企业往往选择前者。
+
+**影响与前瞻**：
+
+台糖毒油风波的连锁反应已超出食品安全范畴。国民党立法院党团批评台糖"事不关己"的态度让全台湾民众硬生生多吃了一个月以上的毒油，"这不是怠惰，这是草菅人命"。这种舆论压力可能推动台湾修订《食品安全卫生管理法》，提高对隐瞒食品安全信息的处罚力度，并建立更严格的供应商追溯机制。
+
+从更宏观的视角看，此案也折射出东亚食品供应链的共性风险。在中国大陆、台湾、香港等地，食品安全事件频发往往与供应链过长、信息不对称、监管滞后有关。台糖案提醒我们，食品安全不能仅靠事后追责，更需要建立事前预防、事中监控、事后追溯的全链条治理体系。对于消费者而言，提升食品安全意识、关注官方通报、理性看待食品标签，是降低健康风险的有效途径。
+
+---
