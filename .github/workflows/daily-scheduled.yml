@@ -76,7 +76,7 @@ jobs:
       - name: 生成 MP3 音频
         id: md_to_mp3
         continue-on-error: true
-        if: ${{ !inputs.skip_mp3 }}
+        if: ${{ !inputs.skip_mp3 && steps.md_to_script.outcome == 'success' }}
         run: |
           echo "生成 MP3 音频..."
           python3 scripts/md_to_mp3.py
@@ -89,14 +89,19 @@ jobs:
           echo "HTML 生成完成"
 
       - name: 部署到主分支 docs/ 目录
-        if: always()
+        if: ${{ always() && steps.call_llm.outcome == 'success' }}
         run: |
           mkdir -p docs
+          # 先清旧产物，避免部分失败时残留旧 mp3/html/md 上线
+          rm -f docs/daily-report.html docs/daily-report.md docs/daily-report.mp3 docs/index.html
           cp daily-report.html docs/ 2>/dev/null || true
           cp report.md docs/daily-report.md 2>/dev/null || true
-          cp daily-report.mp3 docs/ 2>/dev/null || true
-          cp web/sw.js docs/ 2>/dev/null || true
           cp daily-report.html docs/index.html 2>/dev/null || true
+          # MP3 仅在本次成功生成时才部署（杜绝旧音频上线）
+          if [ "${{ steps.md_to_mp3.outcome }}" = "success" ] && [ -f daily-report.mp3 ]; then
+            cp daily-report.mp3 docs/
+          fi
+          cp web/sw.js docs/ 2>/dev/null || true
           touch docs/.nojekyll
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

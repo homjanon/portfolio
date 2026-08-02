@@ -2,7 +2,7 @@
 """
 读取 report.md → 调用 LLM 转换为口语化广播稿 → 输出 script.txt
 主模型: Agnes agnes-2.0-flash (AGNES_API_KEY)
-次选: NVIDIA Llama 4 Maverick 17B (NVIDIA_API_KEY)
+次选: NVIDIA DeepSeek-V4-Pro (NVIDIA_API_KEY)
 兜底: NVIDIA Nemotron-3 Ultra 550B (NVIDIA_API_KEY)
 LLM 失败时直接复制 report.md 作为 script.txt
 
@@ -20,10 +20,10 @@ OUTPUT_PATH = sys.argv[2] if len(sys.argv) > 2 else "script.txt"
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from call_llm import LLM_CONFIGS, _call_llm
 
-# 广播稿专用顺序：Agnes 主用 → NVIDIA Llama 4 Maverick 17B 次 → NVIDIA Nemotron-3 Ultra 550B 兜（与日报一致）
+# 广播稿专用顺序：Agnes 主用 → NVIDIA DeepSeek-V4-Pro 次 → NVIDIA Nemotron-3 Ultra 550B 兜（与日报一致）
 _SCRIPT_ORDER = [
     "Agnes agnes-2.0-flash",
-    "NVIDIA Llama 4 Maverick 17B",
+    "NVIDIA DeepSeek-V4-Pro",
     "NVIDIA Nemotron-3 Ultra 550B",
 ]
 _MODEL_CHAIN = [c for name in _SCRIPT_ORDER
@@ -38,8 +38,9 @@ SYSTEM = """你是一个专业的财经广播稿写手。请将下面这份金�
 要求：
 - 语言口语化、自然，像财经主播在说话
 - 去掉 Markdown 表格、代码块格式，改为自然叙述
-- **整体以「二、行业洞察」的新闻资讯为主轴**（Top20 全球新闻、持仓聚焦、深度专栏），用口语串联、强调新闻叙事，而非罗列数据
-- **「一、市场全景」每个板块仅用一句话总结**，不展开表格数字：
+- **以日报中实际存在的新闻板块为主轴**（完整模式的「二、行业洞察」；精简模式则为「全球 Top20 + 深度观察专栏」），用口语串联、强调新闻叙事，而非罗列数据
+- **若日报为精简模式（纯新闻：仅有「全球 Top20」与「深度观察专栏」，无市场行情、估值、持仓、QDII 章节），则整篇只播报日报中实际存在的新闻与深度观察内容；严禁编造、补充或套用模板添加任何行情数据——美股/A股/港股涨跌、指数点位、估值、QDII 溢价等一律不得出现。**
+- **「一、市场全景」仅当日报含该章节时才播报**，每个板块仅用一句话总结，不展开表格数字：
   - **美股板块**的一句话须保留具体涨跌数据（如"纳指下跌1.2%、标普小涨0.3%"），因为听众尚不清楚凌晨美股表现；
   - A股/港股等板块用定性一句话即可（前一日涨跌听众已知，无需重复数字）
 - **「QDII 溢价与申购额度监测」**（位于「二、行业洞察」内）仅在结尾用**一句话简单带过**，不展开
