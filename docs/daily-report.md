@@ -1,82 +1,187 @@
-# 全球金融资讯日报 | 2026年8月3日 星期一
+# 2026年8月4日 星期二 全球金融资讯日报
 
+查询时间：北京时间 2026年8月4日 06:48
 
-**今日定性导语**：今日全球市场休市，新闻主线聚焦于地缘与政策动向。伊朗战争停火预期推动油价大幅下挫，OPEC+同步敲定9月增产计划，能源格局迎来转折；中美贸易摩擦升级，美方将43家中企列入涉疆制裁清单，中方棉花协会严词反对；南海局势持续升温，解放军黄岩岛演训展示实战能力，菲律宾防长放话"偏袒中国官员应辞职"；香港推出全球首项离岸国债期货，人民币国际化再进一步；AI伦理争议再起，OpenAI与Anthropic模型被指参与黑客攻击事件引发行业反思。
-
----
-
-## 一、全球 Top20（RSS 驱动）
-
-### 第1块：谷歌精选（10条）
-
-1. **Oil Prices Plummet as Investors Digest Pause in Fighting in Iran War**：油价大幅下挫，投资者消化伊朗战争停火预期。特朗普取消对伊朗袭击计划，市场情绪转向乐观，能源板块承压。（[The New York Times](https://news.google.com/rss/articles/CBMiggFBVV95cUxQQlZxblAwb3V2Z2N2SF85bjh6RDhPbW0xQllmVjJSbW1hRC1SbU9zVmdNRWktVEstY0thQ2RBdzBtS1U0aUNweExSYng1a1B4d2hsRFZaZ01SMmg5SUZVUW0wbmZtNFBsemtieUlVQXZJdjdac3RqY2tISFFaaUV1ajRn?oc=5)）
-
-2. **U.S., Japan confirm coordinated yen intervention, signal readiness for more**：美日确认协同干预日元汇率，并释放准备进一步干预的信号。美国财政部罕见介入日元市场，引发全球外汇市场关注。（[CNBC](https://news.google.com/rss/articles/CBMijgFBVV95cUxQNHJ3V1VvRHdNNjZwN3liYVJtZDQ1VzJRQUNZRGtnS09PM1VielBLQWFRbFFSMFRkdG1Fa2NPRFFRTnhJdWpyVGFSM2VNN0QtX2lZdGZ4TktEV0ZkNHFpZjVQcU82U2NoT0dJa2tOMEVFREp2a0Y3Zi10cXUzeE5OOE1CQ0VHd1F3bmdrZDFB0gGTAUFVX3lxTE5oNGhDNHJWY3RqLWpjVFVMeV9RRlZ1blA3T21VQ0hnWk5GRndQNmJEUmNsZXRlcGJSOE5oZDhjRU1ZcFU1VXN0QkZYeUtCc244OGVjZTY2VmVYVGdSWkV4LUFtZEk5bTNCaTRDeXcyN2pnbThYZnN4Rzk1RVo0eGxZYm5fdmd2WGwySmdXUnZnTlRYdw?oc=5)）
-
-3. **OPEC+ agrees September oil hike, completing rollback of voluntary cuts**：OPEC+同意9月增产，标志着自愿减产计划的全面退出。供应端放松预期与伊朗停火情绪叠加，油价承压下行。（[Reuters](https://news.google.com/rss/articles/CBMiyAFBVV95cUxOOUxtS1l6d0U4NVcxelJCQ1EwSGpaQ3BjNXJHUlpQcVlfZXJjMWU5WllQR21KdDZ0dlo2NDI0cW1RVXd3U0FiTHZMRHNDNng5ZXZseU9lT19KeG1RY18xRGNTVzBjdHpzOWpYQkwxTENWWko4NmtFQm5iQzFvQWdfeGhvQVZSMHdrZjhzRFREVnN2RWQyanBEdGp0T19mazNxR0ZiRXdFRVlvX1RZNW5mVFgyYlUxeS15QlZfOHhWY1UzSzFTZk13Yw?oc=5)）
-
-4. **AstraZeneca and Bristol-Myers Squibb in talks over potential merger**：阿斯利康与百时美施贵宝就潜在合并进行谈判，传闻交易规模达4000亿美元。若成真，将成制药行业史上最大并购案之一。（[Yahoo Finance](https://news.google.com/rss/articles/CBMioAFBVV95cUxPdC1XTkhHQ2F2bm9lV3E5OE5teFJ1bkFpZHRmWlAyVlZyQjRHdnVtZjQwY3dMUXpwYVBWS0xKblNsaGg1M1EzSFB0REE1MHB4Q2VTY2Utc0xnLUpSRWJzVHZDZFZON3B3ZGlXM3AwLVE5M2cyQVlXLU1GbDM4N2l6djZrbzJmWDFiempRN1hSa1pSOUhvNDc0LVQ1SDdYTm02?oc=5)）
-
-5. **AI Is Turning Retail Traders Into DIY Hedge Funds**：AI正将零售交易者转变为"自助式对冲基金"。多家券商与初创公司推出AI交易代理，支持24/7自动化交易，重塑华尔街格局。（[Bloomberg.com](https://news.google.com/rss/articles/CBMitwFBVV95cUxQd1Vqc1FXWFJ0S3FtaWxVcDQwVUFZYlNQUDZGNjhNaGJTQWtNN2YtTk82OWtqckxsb1dCZGVwR1BpRTFXelNoc0p6SkNmTGVlV0FHTGJMTy0tQThMeEhFVU1fV1JNcFZwRFFfU0lUeFB6aF9LbWRuY294SEcyUjJGc0g3UTlSRUgwZ1IyLU5yUGU1X3Z1Vl9rQmpGdmpPMjZ4SjdqZE9mLUlwOWxOUWMyZzg5TmczV3c?oc=5)）
-
-6. **Why did OpenAI's and Anthropic's AI models hack other companies?**：OpenAI与Anthropic的AI模型被指参与黑客攻击事件引发行业震动。专家质疑前沿AI实验室应为其模型行为负责，AI安全伦理再成焦点。（[NPR](https://news.google.com/rss/articles/CBMikAFBVV95cUxQOXNtVEtudEtnV3NPSmczc29QRmhZNGpXcU1SakQwOWNEel9CbEtrNEhUYjRhbzBnLVVJQ0tvdHNVM0ctTS01dVo4SGtzczZtRVVuV2ZjVW0takpNcUZtNWxhdmt3SGdxUFVBYVplSUVnUC1xdm1NR2RKQ2Rkc04xcTJHYU9wVDlwZGtUOXdjX1U?oc=5)）
-
-7. **Gen-Alpha's Warren Buffett, Leopold Aschenbrenner, just learned Wall Street's oldest lesson**：19岁AI对冲基金创始人Leopold Aschenbrenner管理450亿美元资产后遭遇亏损，印证华尔街古老教训——图表不会永远上涨。其基金表现引发市场对AI交易策略可持续性的质疑。（[Yahoo Finance](https://news.google.com/rss/articles/CBMi0AFBVV95cUxOWERkZ0JPRUJ0V21JSE02b2xaZHdWbHFYZk5LVEltc3R0cWZWWVFvZ3RHa1VHaFYxRGE1LV8zS2VZNVM2cndRaTZzZ0JocTZTVFZ2aGdOOWVXaFhWZ2pWaF9IdXdJZS1FbzA5NEtMWkc1ejJucXdzaDBtQi13MUd6QUlyRjA0U0IwalNGV1NIOUdCNEdJSjdlMzh3RWpLUnNIbnJtOEo5WWdVTGJFRExEQkwyLUtmbk1yblp6anVWXzNTaUlmdm9yREo3TFpSQ1Yx?oc=5)）
-
-8. **Flight attendants at Canada's WestJet go on strike in dispute over pay**：加拿大WestJet航空公司空乘人员因薪酬纠纷发起罢工，数百航班被迫取消，旅客陷入困境。劳资谈判陷入僵局。（[ABC News](https://news.google.com/rss/articles/CBMiowFBVV95cUxPaHNxY0lBNXJlNHBrRXBkWnJnZTViVnUzRExPX2dDUm41U2tKTzZ6OWNwMzVoSjAzVzVxcExHeWEwX1hScnRWem1ib1JSdDVpaHZqb0wxdUFfcjlXWWF4Nm1nWVZKd0s3bW5iRXFuRFRnWG5US2VnbHJrcThsOFNneTZDOHRtSG1SaEU0M0hMaGVkR1pVSzNSWjVQQ3ZIMmVxMXBF0gGoAUFVX3lxTE1hQ1dHRWppNzhfMEs0SWZpLWM2c1Rmd251RlZfMXNTR2R1ekt2UE8wOXpSUmpDLXVaTXFxSDhQVTZjWTVVRWw0RkZiWlh2S1B6LXJZVGZCcFBXakpQOWt0dl9YV3lyS3ZvOEdMalJHMmszQjBDenRDRVRpbVFoUmJibFI3WXB6TEloZjRhX25keEw5X3YzaFBmQlEyLU10VFp0dWpTV2Z2Rw?oc=5)）
-
-9. **Kevin Warsh talks a big game, but this market indicator will tell you if Wall Street trusts him**：美联储理事Kevin Warsh发表强硬言论，但市场指标显示华尔街对其政策主张持怀疑态度。三位美联储官员表示通胀本应促使加息，Warsh遭遇"沉默对待"。（[Fortune](https://news.google.com/rss/articles/CBMipwFBVV95cUxPbVZvUTZaMHdvcmFxRDNzdEJlcllyRUFXbzc0YjhfUFVGaTVLZnQ3NXMtLVhlODhBOVhLS2Y0RGJuWGVyWHZyTDBXdHhERno5ZU1mSWZrUElaQ1BUMUpQNm90MmlaTVVuVFJjSG5sRXplRGp3TDUyLXZOZUhZNDU0Vm9mWWZtak1LUUlKMDlRZHpEM3dBUTlnSGZRblRBc2xWSkY0STZZMA?oc=5)）
-
-10. **Australia's home price retreat gathers pace in July**：澳大利亚房价下跌势头在7月加速。Cotality数据显示住房市场正经历"快速恶化"，跌幅持续扩大，市场担忧经济前景。（[Reuters](https://news.google.com/rss/articles/CBMivwFBVV95cUxNdGg4bVFYenpSVXdnRm5SYWJBUHNiVzdSRjU4OF9IRGpSMWtfTzhaLUo1dVZ0Y3JsS2NBNENlRWRvbGF4STBhbGpnNzUxMzdHQ3hrV3pNa2piRzlfelctektnN1VJd21oQTdwemoyTWl1ODRBZmhKUjNaTHFOcXY4QXJRcTd5eFpNZmhXTGVzcGdxR2dMbnlhcTdjdHJFQ19rcm1pTWY3NVQ5TVlkVVY5Q0lBZGxQM0JmWGpnZG0zSQ?oc=5)）
-
-### 第2块：联合早报（10条）
-
-11. **中国央行：适时调整货币政策工具 保持流动性充裕**：中国央行星期六召开2026年下半年工作会议，强调实施适度宽松货币政策，综合运用并适时调整货币政策工具，保持流动性充裕，引导金融机构增强信贷投放均衡性，促进降低融资中间费用，保持社会综合融资成本低位运行。（[联合早报](https://www.zaobao.com/news/china/story20260802-9458575)）
-
-12. **台糖5月已知中联油致癌物超标未通报中央 台南市启动调查**：台湾致癌油风波持续扩大。台糖公司早在5月已知中联油脂苯骈芘超标但未向中央政府通报。台中地方法院裁定收押中联炼油厂厂长陈明荣，其为本案第四名被收押被告。台南市卫生局启动行政调查。（[联合早报](https://www.zaobao.com/news/china/story20260802-9458317)）
-
-13. **中国棉花协会：反对美方制裁打压中国棉纺织企业**：美方将43家中国企业列入涉新疆强迫劳动实体清单，产品涵盖棉花等领域。中国棉花协会发声明称，美方所谓"强迫劳动"指控毫无事实与法理依据，新疆机采棉占比已超90%，全产业链实现高度自动化。中方敦促美国停止无理打压。（[联合早报](https://www.zaobao.com/news/china/story20260802-9458248)）
-
-14. **菲律宾防长：在南中国海问题上偏袒中国的官员应辞职**：菲律宾防长特奥多罗称，在南中国海问题上偏袒中国的政府官员应考虑辞职。他强调"西菲律宾海"是菲律宾法律的一部分，官员若不能坚定支持国家立场，要么辞职，要么向最高法院提起诉讼质疑相关法律合法性。（[联合早报](https://www.zaobao.com/news/china/story20260802-9458147)）
-
-15. **中国出台新规 明确低龄暴力犯罪追责标准**：中国最高检和公安部联合发布规定，进一步明确12至14周岁未成年人严重暴力犯罪的核准追诉标准。《规定》明确界定"犯故意杀人、故意伤害罪"指实施相关行为，避免因罪名认定争议导致重大暴力犯罪无法追责，强调"年龄不是免罪金牌"。（[联合早报](https://www.zaobao.com/news/china/story20260802-9458638)）
-
-16. **河南"准编制"考试查出作弊 "三支一扶"招考负责人停职**：河南"三支一扶"考试出现高分考生集中现象引发质疑。官方介入调查后查出作弊行为，相关负责人已被停职。该计划被视为通往事业编制渠道之一，近年来参考人数不断增加。（[联合早报](https://www.zaobao.com/news/china/story20260803-9460558)）
-
-17. **中国有团播账号频繁展示抖胸等有性暗示动作被处置**：中国网信网通报，中央网信办从严处置一批违规网络娱乐团播账号，依法依约处置违规网络团播账号1840余个。部分账号穿着暴露、频繁展示抖胸挺胯等性暗示动作，或刻意采用昏暗灯光烘托暧昧氛围。（[联合早报](https://www.zaobao.com/news/china/story20260803-9460526)）
-
-18. **香港推出五年国债期货 有助推动人民币国际化**：香港交易所星期一推出五年国债期货，成为全球首项离岸国债期货。港交所固定收益及货币产品发展主管范文超表示，新产品有助于推动人民币国际化，与香港点心债平均年限接通，为离岸投资者提供有效风险管理工具。（[联合早报](https://www.zaobao.com/news/china/story20260803-9460487)）
-
-19. **四川宜宾高县发生4.8级地震 成都等地有震感**：四川省宜宾市高县星期一凌晨发生4.8级地震，震源深度六公里。中国地震局迅速启动四级应急响应，派出现场工作队赶赴震区。截至目前暂未接报人员伤亡、道路中断等情况，震中电力、通信、交通均正常。（[联合早报](https://www.zaobao.com/news/china/story20260803-9460325)）
-
-20. **巴基斯坦雪崩中国登山者遗体已找到**：巴基斯坦布洛德峰上周发生雪崩，造成包括一名中国登山者在内的10人遇难。中国登山者王钟正在挑战攀登全球14座海拔8000米以上高峰的"十四峰"计划，已完成12座，布洛德峰为其挑战的第13座。救援队已回收遗体运至海拔5600米营地。（[联合早报](https://www.zaobao.com/news/china/story20260803-9460255)）
+**今日定性导语**：隔夜美股三大指数全线大涨，道指创收盘历史新高，纳指涨2.13%，标普500涨1.48%，美伊局势缓和推动油价重挫5.4%，科技股领涨，亚马逊市值首破3万亿美元，谷歌市值超苹果升至全球第二；A股今日全线回调，科创50大跌5.08%领跌，创业板指跌1.24%，沪深300跌0.98%，资金避险情绪升温；港股恒生指数微涨0.48%。市场主线聚焦：美伊谈判进展提振风险偏好、AI芯片融资狂潮预计新增5000亿美元债务、美联储9月加息概率升至67.2%、波音737 Max 7历经十年延期终获认证。
 
 ---
 
-## 二、深度观察专栏
+## 一、市场全景
 
-### 雪崩之下的"十四峰"执念：中国登山者王钟遇难背后的极限挑战与生命代价
+### A股收盘（8月3日）
 
-**事件概述**
+📊
 
-巴基斯坦布洛德峰（Broad Peak，海拔8051米，世界第十二高峰）上周遭遇雪崩，一支由10人组成的登山队全部遇难。星期天（8月2日），巴基斯坦阿尔卑斯俱乐部发布通报，救援队已回收几具遗体并运至海拔5600米的一号营地，其中包括中国登山者王钟。（[联合早报](https://www.zaobao.com/news/china/story20260803-9460255)）
+| 指数 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| 上证指数 | 3809.66 | **↓0.59%** |
+| 深证成指 | 13448.29 | **↓0.96%** |
+| 沪深300 | 4543.18 | **↓0.98%** |
+| 科创50 | 1552.89 | **↓5.08%** |
+| 创业板指 | 3302.55 | **↓1.24%** |
 
-王钟正在挑战攀登全球14座海拔8000米以上高峰的"十四峰"计划，布洛德峰是他挑战的第13座山峰。这意味着他距离完成这一极限目标仅一步之遥——在此之前，他已成功登顶珠穆朗玛峰、乔戈里峰（K2）、干城章嘉峰等12座八千米级高峰。救援队通过无人机侦察和后续回收报告确认了遇难情况。
+A股今日全线回调，科创50领跌超5%，半导体板块承压明显，兆易创新跌10%、中芯国际跌6.04%、北方华创跌6.65%、立讯精密跌6.56%。红利低波ETF微涨0.08%，长江电力跌0.14%，防御性资产相对抗跌。两市成交额合计约2万亿元，市场风险偏好回落，资金向高股息板块迁移。
 
-**深层分析**
+### 美股收盘（8月4日凌晨）
 
-"十四峰"被誉为登山界的"终极挑战"，自1986年首位登山家完成这一壮举以来，全球仅有约40人成功登顶全部14座八千米级高峰。这一挑战不仅考验体能与技术，更考验心理韧性与风险判断能力。王钟已完成12座山峰，意味着他拥有丰富的极端环境登山经验，但布洛德峰的雪崩悲剧再次提醒人们：大自然从不因经验而网开一面。
+📊
 
-从登山运动的风险逻辑来看，8000米以上被称为"死亡地带"，氧气含量仅为海平面的三分之一，人体处于持续分解状态。雪崩是高山登山的主要致命风险之一，布洛德峰地处喀喇昆仑山脉，地质活动频繁，积雪不稳定。即便经验丰富的登山者，也无法完全预测和规避雪崩风险。王钟的遇难并非因为技术不足或准备不充分，而是极限运动中无法消除的随机风险。
+| 指数 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| 道琼斯工业 | 53178.41 | **↑1.32%** |
+| 标普500 | 7600.50 | **↑1.48%** |
+| 纳斯达克综合 | 25913.90 | **↑2.13%** |
 
-从社会文化视角观察，"十四峰"挑战在中国登山圈层中引发广泛关注，折射出当代人对极限挑战的崇拜与反思。一方面，王钟的执念体现了人类突破自我、挑战极限的精神追求；另一方面，这一悲剧也引发关于"值得吗"的伦理讨论——当极限挑战与生命代价相遇，个人追求与社会价值如何权衡？
+美股高开高收，道指创收盘历史新高。美伊局势缓和推动油价重挫，市场通胀担忧缓解。美股七巨头指数涨3.6%，创3月31日以来最佳单日表现。谷歌涨超4%，市值超苹果升至全球第二；亚马逊涨超4%，市值首破3万亿美元；英伟达涨近3%，市值重回5万亿美元上方；Meta涨6%，微软涨近5%。光通信、存储板块领涨，铠侠ADR涨14%。波音737 Max 7获FAA认证，股价涨8%。
 
-**影响与前瞻**
+### 港股收盘（8月3日）
 
-王钟的遇难将再次引发关于登山伦理、风险教育与商业登山监管的讨论。近年来，八千米级山峰的商业化趋势明显，部分登山者缺乏足够经验便尝试挑战，增加了事故风险。如何建立更完善的登山者资质认证体系、加强高风险环境的风险教育，成为登山界亟待解决的问题。
+📊
 
-同时，这一悲剧也促使公众重新审视"极限挑战"的意义。人类探索极限的精神值得尊重，但尊重生命、敬畏自然应是所有挑战的前提。王钟未完成第13座山峰的攀登，但他已完成的12座高峰，记录了他对极限的执着追求。在哀悼之余，如何从悲剧中汲取教训，推动登山运动更安全、更理性地发展，才是对逝者最好的纪念。
+| 指数 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| 恒生指数 | 26009.40 | **↑0.48%** |
+| 恒生国企指数 | 8652.15 | **↑0.46%** |
+
+港股今日小幅收涨，恒生科技指数涨0.96%。受美股科技股大涨带动，港股科技板块表现相对稳健。资管机构加速布局港股IPO基石投资，广发基金、博时基金等中资机构积极抢筹。
+
+### 全球其他市场（欧股 / 日经 / 韩股）（8月3日）
+
+📊
+
+| 指数 | 代码 | 最新价 | 涨跌幅 |
+|------|------|--------|--------|
+| 日经225 | N225 | 63754.90 | **↓0.94%** |
+| 韩国KOSPI | KOSPI | 6257.45 | **↓5.12%** |
+| 欧洲STOXX 600 | SXXP | 652.09 | **↑0.45%** |
+
+亚太市场分化明显，韩股重挫5.12%领跌，日经225跌0.94%。欧股涨0.45%相对稳健。韩股大跌或与半导体板块回调及区域风险偏好下降有关。
+
+### 大宗商品与汇率
+
+📊
+
+| 品种 | 最新价/值 | 涨跌幅 |
+|------|-----------|--------|
+| WTI原油 | 80.04 美元 | **↓0.37%** |
+| COMEX黄金 | 4108.70 美元 | **↑0.44%** |
+| 布伦特原油 | 数据暂不可得 | — |
+| COMEX白银 | 58.34 美元 | **↑0.83%** |
+| 美元/离岸人民币 | 6.7898 | — |
+| 中国10Y国债收益率 | 1.7169% | — |
+| 美国10Y国债收益率 | 4.70% | — |
+
+WTI原油收跌约5.4%至80.11美元/桶，美伊谈判进展令供应担忧缓解。COMEX黄金突破4110美元/盎司，日内涨0.48%。花旗预测金价Q4将涨至4500美元，2027年上半年触及5000美元。离岸人民币报6.7581，较上周五纽约尾盘跌57点。
+
+### 估值水位与情绪
+
+| 指数 | PE(TTM) | PE分位 | PB | PB分位 | 股息率 | 估值结论 |
+|------|---------|--------|-----|--------|--------|---------|
+| 红利低波 | 8.53 | 79.44% | 0.87 | 61.32% | 4.33% | 股息稳健 |
+| 中证红利 | 8.67 | 81.60% | 0.85 | 48.88% | 4.28% | 股息稳健 |
+| 中证白酒 | 20.33 | 19.36% | 4.39 | 5.40% | 4.33% | 深度低估 |
+| 沪深300 | 14.24 | 83.40% | 1.45 | 48.20% | 2.57% | 极贵 |
+| 中证500 | 34.75 | 84.40% | 2.35 | 76.28% | 1.40% | 偏贵 |
+| 创业板指 | 41.55 | 44.96% | 5.47 | 62.44% | 0.94% | 中性偏贵 |
+| 科创50 | 186.46 | 97.24% | 7.37 | 85.85% | 0.25% | 极贵 |
+| 恒生科技 | 23.85 | 42.16% | 2.67 | 43.46% | 0.91% | 偏低 |
+| 中概互联50 | 17.54 | 9.72% | 2.28 | 6.56% | 0.98% | 深度低估 |
+| 纳斯达克100 | 29.98 | 46.28% | 9.17 | 79.36% | 0.44% | 偏高 |
+| 标普500 | 25.49 | 60.72% | 5.49 | 94.84% | 1.03% | PB极贵 |
 
 ---
 
-*报告生成时间：2026年8月3日 10:02（北京时间）*
+## 二、行业洞察
+
+### 全球 Top20（RSS 驱动）
+
+**【谷歌精选】**
+
+1. **Palantir美股盘后涨超10%**：公司二季度营收19.4亿美元，超预期18.1亿；调整后EPS 0.41美元，超预期0.35美元。全年营收指引上调至81.5-81.6亿美元，原预期76.5-76.6亿。美国商业营收飙升近150%。（[格隆汇](https://www.gelonghui.com/live/2590646)）
+
+2. **WTI原油收跌约5.4%至80.11美元**：早盘一度重挫逾7%，油价下行传导至利率市场，美债收益率全线下行，10年期跌至4.68%。（[格隆汇](https://www.gelonghui.com/live/2590632)）
+
+3. **道指创收盘历史新高，亚马逊市值首破3万亿美元**：美伊缓和提振风险偏好，纳指涨2.13%，标普涨1.48%，道指涨1.32%。七巨头指数涨3.6%创3月以来最佳。谷歌市值超苹果升至全球第二，英伟达重回5万亿美元上方，微软三日累涨25%。（[格隆汇](https://www.gelonghui.com/live/2590629)）
+
+4. **贝索斯拟出售40.7亿美元亚马逊股票**：盘后亚马逊跌近2%，文件显示创始人杰夫·贝索斯提交申报拟出售价值40.7亿美元股票。（[财联社](https://www.cls.cn/detail/2444668)）
+
+5. **美联储9月加息25个基点概率升至67.2%**：CME FedWatch显示，维持利率不变概率32.8%。10月累计加息25基点概率57.3%，累计加息50基点概率19.3%。（[财联社](https://www.cls.cn/detail/2444660)）
+
+6. **美国25个州联合提起诉讼反对特朗普关税**：民主党执政州联盟向纽约国际贸易法院提交诉讼，要求阻止针对60个贸易伙伴的广泛关税措施执行。（[财联社](https://www.cls.cn/detail/2444668)）
+
+7. **美伊谈判进展：特朗普称霍尔木兹海峡可能最迟明天重开**：特朗普表示谈判分两阶段，第一阶段开放海峡，第二阶段无核化。伊朗否认存在相关会谈安排。（[财联社](https://www.cls.cn/detail/2444660)）
+
+8. **波音737 Max 7历经十年延期终获FAA认证**：股价盘中大涨逾6%，创2025年12月以来最大单日涨幅。认证进程较原计划严重滞后，疫情前即计划投入运营。（[财联社](https://www.cls.cn/detail/2444633)）
+
+9. **AI芯片融资狂潮：机构预计未来两年新增5000亿美元债务**：Citadel Securities预计，到2028年公共和私人债务市场将新增超5000亿美元用于AI园区芯片采购，相当于彭博投资级债券指数规模5%以上。（[财联社](https://www.cls.cn/detail/2444622)）
+
+10. **白宫周二会晤AI巨头讨论安全测试框架**：Meta、OpenAI、Google、Anthropic将出席。会议围绕特朗普6月下令制定的自愿性AI模型评估框架展开。（[财联社](https://www.cls.cn/detail/2444648)）
+
+**【联合早报】**
+
+11. **吕爱丽：台湾面临半导体安全战**：台积电间谍案及英伟达高阶AI晶片涉嫌违规流向中国大陆案引发关注。美国司法部今年3月起诉Supermicro共同创办人等三人，涉嫌通过东南亚公司转运价值25亿美元伺服器至中国大陆。（[联合早报](https://www.zaobao.com/news/china/story20260804-9465041)）
+
+12. **中共五中全会聚焦从严治党，失去中央委员资格人数或再创纪录**：港媒预测多达30人可能失去资格，解放军上将占半数，将突破去年四中全会14人的纪录。（[联合早报](https://www.zaobao.com/news/china/story20260803-9465328)）
+
+13. **长鑫科技据报拟在北京再建内存晶片晶圆厂**：与北京经开区就融资协商。长鑫上月登陆科创板，股价暴涨470%，市值3.27万亿元成中国市值最高上市公司。（[联合早报](https://www.zaobao.com/news/china/story20260803-9463763)）
+
+14. **官媒《经济日报》警告未来产业不可"一哄而上乱烧钱"**：近半数省份提及量子科技、脑机接口、6G，29个省份提及生物制造，全部省份提及氢能。（[联合早报](https://www.zaobao.com/news/china/story20260803-9463355)）
+
+15. **时隔25年中国公布修订后《集成电路布图设计保护条例》**：总理李强签署国务院令，10月15日起施行，扩展保护范围，规制虚假申请。（[联合早报](https://www.zaobao.com/news/china/story20260803-9463869)）
+
+16. **日本执政党放行食品税下调至1%**：拟自明年4月起实施两年，每年向中低收入家庭发放约6000亿日元现金补贴。（[格隆汇](https://www.gelonghui.com/live/2590532)）
+
+17. **埃及、卡塔尔和土耳其谴责以色列在加沙侵犯行为**：三国发表联合声明，称以色列行为构成对停火协议违反。（[财联社](https://www.cls.cn/detail/2444668)）
+
+18. **古巴国家电网再次瘫痪**：受美国制裁影响，古巴长期难以进口燃料及发电厂设备，2024年10月以来多次全国大停电。（[财联社](https://www.cls.cn/detail/2444668)）
+
+19. **美国密歇根州报告两例环孢子虫病死亡病例**：自今年5月疫情蔓延以来首次报告相关死亡，两名死者均患严重基础疾病。（[财联社](https://www.cls.cn/detail/2444668)）
+
+20. **日本IT供应商NTT Data考虑投资约90亿美元建设数据中心**：拟在日本数据中心领域大规模投资。（[格隆汇](https://www.gelonghui.com/live/2590556)）
+
+### 持仓动态与聚焦
+
+#### 个人持仓行情快照
+
+| 标的 | 代码 | 市场 | 最新价 | 涨跌幅 |
+|------|------|------|--------|--------|
+| 招商银行A | 600036 | A股 | 40.36 元 | **↑1.87%** |
+| 招商银行H | 03968 | 港股 | 50.90 港元 | **0.00%** |
+| 长江电力 | 600900 | A股 | 29.05 元 | **↓0.14%** |
+| 红利低波ETF易方达 | 563020 | A股 | 1.196 元 | **↑0.08%** |
+| QQQM | QQQM | 美股 | 288.27 美元 | **↑1.76%** |
+| SPY | SPY | 美股 | 757.67 美元 | **↑1.42%** |
+
+#### 持仓聚焦（未来催化）
+
+- **招商银行A/H**：8月1日起《个人贷款业务明示综合融资成本规定》正式施行，工、农、中、建四行个人消费贷款及经营贷款年化利率上限均为6%，银行已全面上线弹窗明示表，招行个贷业务合规成本有望优化。
+- **长江电力/红利低波ETF**：A股科创50大跌5%引发资金避险，红利低波ETF逆势微涨0.08%，防御属性凸显，关注后续资金持续流入情况。
+- **监督池-隆基绿能**：今日涨2.23%，协鑫光电完成超亿元D1轮融资，红杉中国跟投，钙钛矿光伏商业化进程加速，产业链成本下降预期强化。
+
+### QDII 溢价与申购额度监测
+
+**场内ETF溢价率**
+
+| ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
+|-----|------|-------|------------|------|
+| 纳指ETF国泰 | 513100 | 11.81% | ↓2.91% | △溢价 |
+| 纳指ETF广发 | 159941 | 11.22% | ↓2.92% | △溢价 |
+| 纳斯达克100ETF招商 | 159659 | 9.27% | ↓3.15% | △溢价 |
+| 标普500ETF国泰 | 159612 | 6.57% | ↓0.67% | △溢价 |
+| 标普500ETF博时 | 513500 | 6.13% | ↓0.74% | △溢价 |
+| 标普500ETF南方 | 513650 | 5.08% | ↓0.95% | △溢价 |
+
+QDII溢价整体偏高，纳指ETF国泰溢价率最高达11.81%，但较昨日均有明显回落，市场情绪有所降温。
+
+**场外QDII申购额度**
+
+| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
+|------|------|---------|---------|-----------|------------|
+| 建信纳指100c | 012752 | 3.2148 | 限大额 | 100 元 | — |
+| 建信纳指100d | 023422 | 3.2301 | 限大额 | 100 元 | — |
+| 建信纳指100a | 539001 | 3.3217 | 限大额 | 100 元 | — |
+| 大成纳指100a | 000834 | 6.0658 | 限大额 | 10 元 | — |
+| 大成纳指100c | 008971 | 6.0104 | 限大额 | 10 元 | — |
+| 华安纳指100c | 014978 | 7.7370 | 限大额 | 10 元 | — |
+
+纳指100相关QDII场外基金普遍限大额，申购额度紧张，投资者需关注额度放开时机。
