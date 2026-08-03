@@ -312,6 +312,7 @@ def fetch_market_hk():
     WANTED = [
         ("恒生指数", "100.HSI", "^HSI"),
         ("恒生中国企业指数", "100.HSCEI", "^HSCE"),
+        ("恒生科技指数", "124.HSTECH", "^HSTECH"),
     ]
     rows, yf_map = [], {}
     for name, secid, yf_tk in WANTED:
@@ -349,6 +350,9 @@ def fetch_market_global():
         ("日经225",      "100.N225",  "^N225"),
         ("KOSPI",        "100.KS11",   "^KS11"),
         ("STOXX 600",    "100.SXXP",   "^SXXP"),
+        ("德国DAX",      "100.GDAXI", "^GDAXI"),
+        ("英国富时100",  "100.FTSE",  "^FTSE"),
+        ("法国CAC40",    "100.FCHI",  "^FCHI"),
     ]
     result, yf_map = {}, {}
     for name, secid, yf_tk in WANTED:

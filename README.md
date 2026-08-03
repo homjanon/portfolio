@@ -58,15 +58,15 @@ schedule / workflow_dispatch
 
 > 任一日历网络获取失败时降级为"看昨天星期几 ≤4 即视为开市"。
 
-> **收盘日期标注（MarketDateResolver）**：报告「一、市场全景」各市场收盘均按真实交易日历标注业务日期与北京时间收盘时刻，由 `scripts/market_date_resolver.py` 的 `MarketDateResolver` 在 LLM 调用前注入。A股/港股/日经/韩国/欧洲取上一交易日（如 `A股收盘（7月13日）`），美股取美东前一交易日但于北京时间今天凌晨收盘（如 `美股收盘（7月14日凌晨）`）。海外用 `pandas_market_calendars`（DST 自动适配，禁止手写时区偏移），A股用 `tool_trade_date_hist_sina`（本地文件缓存，避免每次网络请求）。美股另做新鲜度校验：若 akshare 实际返回日期早于解析业务日期，置 `_stale` 提示数据可能滞后。**全球/港股指数新鲜度校验**：以东财 push2（push2delay）为主源取最新收盘（恒生国企 `100.HSCEI`、纳综 `100.NDX`、纳指100 `100.NDX100`，道指/标普/日经/KOSPI/STOXX 均直连），yfinance 兜底；仅当东财与 yfinance 均不可用才置 `_stale` 触发滞后告警（报告固定于约 07:00 跑，东财主源即上一交易日收盘）。
+> **收盘日期标注（MarketDateResolver）**：报告「一、市场全景」各市场收盘均按真实交易日历标注业务日期与北京时间收盘时刻，由 `scripts/market_date_resolver.py` 的 `MarketDateResolver` 在 LLM 调用前注入。A股/港股/日经/韩国/欧洲取上一交易日（如 `A股收盘（7月13日）`），美股取美东前一交易日但于北京时间今天凌晨收盘（如 `美股收盘（7月14日凌晨）`）。海外用 `pandas_market_calendars`（DST 自动适配，禁止手写时区偏移），A股用 `tool_trade_date_hist_sina`（本地文件缓存，避免每次网络请求）。美股另做新鲜度校验：若 akshare 实际返回日期早于解析业务日期，置 `_stale` 提示数据可能滞后。**全球/港股指数新鲜度校验**：以东财 push2（push2delay）为主源取最新收盘（恒生国企 `100.HSCEI`、恒生科技 `124.HSTECH`、纳综 `100.NDX`、纳指100 `100.NDX100`，道指/标普/日经/KOSPI/STOXX/DAX/富时100/CAC40 均直连），yfinance 兜底；仅当东财与 yfinance 均不可用才置 `_stale` 触发滞后告警（报告固定于约 07:00 跑，东财主源即上一交易日收盘）。
 
 ## 数据源路由
 
 | 数据类型 | 主数据源 | 门控条件 | 兜底 |
 |---------|---------|----------|------|
 | A 股指数 | 东财 push2（push2delay）`stock/get` | `a_open` | yfinance（`000001.SS` 等） |
-| 港股指数 | 东财 push2（`100.HSI` / `100.HSCEI`） | `hk_open` | yfinance（`^HSI` / `^HSCE`） |
-| 美股+全球指数 | 东财 push2（`100.DJIA`/`100.SPX`/`100.NDX`/`100.NDX100`/`100.N225`/`100.KS11`/`100.SXXP`） | `u_open` | yfinance（`^DJI`/`^GSPC`/`^IXIC`/`^NDX`/`^N225`/`^KS11`/`^SXXP`） |
+| 港股指数 | 东财 push2（`100.HSI` / `100.HSCEI` / `124.HSTECH`） | `hk_open` | yfinance（`^HSI` / `^HSCE` / `^HSTECH`） |
+| 美股+全球指数 | 东财 push2（`100.DJIA`/`100.SPX`/`100.NDX`/`100.NDX100`/`100.N225`/`100.KS11`/`100.SXXP`/`100.GDAXI`/`100.FTSE`/`100.FCHI`） | `u_open` | yfinance（`^DJI`/`^GSPC`/`^IXIC`/`^NDX`/`^N225`/`^KS11`/`^SXXP`/`^GDAXI`/`^FTSE`/`^FCHI`） |
 | 汇率/商品/债券 | akshare 期货 + 中美债收益率 | 完整模式 | — |
 | 估值/PE 分位（11 指数，固定顺序） | 雪球蛋卷 API `danjuanfunds.com/djapi/index_eva/dj`（1 次返回 63，白名单 11） | `a_open` | — |
 | 个人持仓行情 | 腾讯财经 `qt.gtimg.cn` | `a_open OR u_open` | yfinance |
