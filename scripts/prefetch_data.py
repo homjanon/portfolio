@@ -785,11 +785,12 @@ def _fetch_zaobao_raw():
 
 
 def _fetch_rss_other():
-    """Top20 双源：谷歌美国一地抓20条(去重,LLM精选≤10) + 联合早报最新10条。
-    谷歌：仅美国一地(hl=en-US)一次抓20条，Python去重后交给LLM按角度精选≤10(英译中)；
+    """Top20 双源：谷歌美国一地抓30条(去重,LLM精选≤10) + 联合早报最新10条。
+    谷歌：仅美国一地(hl=en-US)一次抓30条，失败/空结果指数退避重试3次（应对间歇限流），
+    去重后交给LLM精选≤10(英译中)；
     早报：联合早报中港台即时（hub.slarker.me 主 + rsshub.rssforever.com 备），取最新10条。"""
     TOPIC = "CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx6TVdZU0FtVnVHZ0pWVXlnQVAB"
-    MAX_PER = 20
+    MAX_PER = 30
 
     def _parse(url):
         r = requests.get(url, headers={"User-Agent": UA}, timeout=30)
@@ -818,14 +819,23 @@ def _fetch_rss_other():
                 break
         return out
 
-    # 谷歌：美国一地 30 条
+    # 谷歌：美国一地 30 条；失败或空结果时指数退避重试（2s/4s，共3次），应对间歇限流
     items_google = []
-    try:
-        url = (f"https://news.google.com/rss/topics/{TOPIC}"
-               f"?hl=en-US&gl=US&ceid=US:en")
-        items_google = _parse(url)
-    except Exception as _e:
-        print(f"    [谷歌新闻·美国] RSS 获取失败: {_e}")
+    url = (f"https://news.google.com/rss/topics/{TOPIC}"
+           f"?hl=en-US&gl=US&ceid=US:en")
+    for _attempt in range(3):
+        try:
+            items_google = _parse(url)
+            if items_google:
+                print(f"    [谷歌新闻·美国] 第{_attempt+1}次成功，获取 {len(items_google)} 条")
+                break
+            print(f"    [谷歌新闻·美国] 第{_attempt+1}次返回空，重试...")
+        except Exception as _e:
+            print(f"    [谷歌新闻·美国] 第{_attempt+1}次失败: {_e}")
+        if _attempt < 2:
+            time.sleep(2 * (_attempt + 1))
+    else:
+        print("    [谷歌新闻·美国] 3 次均失败/为空，由财联社/格隆汇补位")
 
     # 标题去重（归一化：去源后缀/标点，仅留字母数字与汉字后小写比对）
     def _norm(t):

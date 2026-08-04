@@ -637,10 +637,44 @@ def generate_mp3(input_file, output_file, voice=DEFAULT_VOICE, rate=DEFAULT_RATE
             'edge-tts', '--voice', voice, '--rate', rate,
             '--file', text_file, '--write-media', output_file,
         ]
+
+        def _duration_ok(path):
+            """ffprobe 读 mp3 时长；过短(截断)返回 False。ffprobe 不可用时保守放行。"""
+            try:
+                out = subprocess.run(
+                    ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                     "-of", "default=noprint_wrappers=1:nokey=1", path],
+                    capture_output=True, text=True, timeout=30)
+                secs = float(out.stdout.strip())
+                expected = len(plain_text) / 4.5   # 中文播音约 4.5 字/秒
+                threshold = max(60.0, expected * 0.6)
+                ok = secs >= threshold
+                print(f"🔍 mp3 完整性: 时长={secs:.0f}s, 预期≈{expected:.0f}s, "
+                      f"阈值={threshold:.0f}s -> {'✅' if ok else '❌ 疑似截断'}")
+                return ok
+            except Exception as e:
+                print(f"⚠️ ffprobe 校验不可用(放行): {e}")
+                return True
+
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=600)
         if result.returncode != 0:
             print(f"❌ edge-tts 错误: {result.stderr}", file=sys.stderr)
             return False
+
+        # edge-tts 可能返回码 0 但只输出部分音频（服务端流中断/限流），必须校验时长
+        if not _duration_ok(output_file):
+            print("❌ MP3 时长过短(疑似截断)，删除并重试 1 次...", file=sys.stderr)
+            if os.path.exists(output_file):
+                os.unlink(output_file)
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=600)
+            if result.returncode != 0:
+                print(f"❌ edge-tts 重试失败: {result.stderr}", file=sys.stderr)
+                return False
+            if not _duration_ok(output_file):
+                print("❌ 重试后 MP3 仍截断，放弃生成（不部署部分音频）", file=sys.stderr)
+                if os.path.exists(output_file):
+                    os.unlink(output_file)
+                return False
 
         size_mb = os.path.getsize(output_file) / (1024 * 1024)
         print(f"✅ MP3: {output_file} ({size_mb:.1f} MB)")
