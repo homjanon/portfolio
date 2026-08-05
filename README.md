@@ -71,7 +71,7 @@ schedule / workflow_dispatch
 | 估值/PE 分位（11 指数，固定顺序） | 雪球蛋卷 API `danjuanfunds.com/djapi/index_eva/dj`（1 次返回 63，白名单 11） | `a_open` | — |
 | 个人持仓行情 | 腾讯财经 `qt.gtimg.cn` | `a_open OR u_open` | yfinance |
 | QDII监测+USD/CNH汇率 | 腾讯API+东方财富(净值)+akshare(汇率) | `a_open` | — |
-| **全球 Top20 新闻** | **Google News 美国一地（30条→去重,LLM选≤10；失败/空结果指数退避重试3次）+ 联合早报 RSS（三实例兜底：hub.slarker.me 主 → rsshub.rssforever.com 备1 → rsshub.ktachibana.party 备2，最新10）+ 财联社/格隆汇（补位，<20 时即联合早报宕机时用谷歌剩余候选→财联社/格隆汇当天新闻补足；日常联合早报正常时 财联社/格隆汇 不进入 Top20）** | 始终抓 | `data_news.json` + `data_cls_zaobao.json` |
+| **全球 Top20 新闻** | **Google News 美国一地（30条→去重,LLM选≤10；解析带 HTTP 状态检查 + lxml recover 容错，429/非法XML不整份失败；失败/空结果指数退避重试3次，仍失败兜底 MarketWatch Top Stories）+ 联合早报 RSS（三实例兜底：hub.slarker.me 主 → rsshub.rssforever.com 备1 → rsshub.ktachibana.party 备2，最新10）+ 财联社/格隆汇（补位，<20 时即联合早报宕机时用谷歌剩余候选→财联社/格隆汇当天新闻补足；日常联合早报正常时 财联社/格隆汇 不进入 Top20）** | 始终抓 | `data_news.json` + `data_cls_zaobao.json` |
 | **深度观察专栏** | 联合早报 RSS 长文（>700字）按长度排序前6，由 LLM 选与 Top20 关联性最低一篇（联合早报三实例兜底；三源均不可用则当日「今日暂停」） | 仅精简模式 | `data_deep.json` |
 | **市场全景各板块一段简述（50–100字）+ 持仓聚焦（按持仓行业关键词预匹配 `industry_match`，仅命中行业的新闻入选，核心/监督池一视同仁）** | **财联社 + 格隆汇 RSS 合并抓取（财联社 telegraph/depth 双组 hub→rsshub 兜底；格隆汇 rss.injahow.cn 主 → rsshub.rssforever.com 备；合并后标题归一化去重、北京当天筛选，格隆汇缺 pubDate 视为当日保留；LLM 优先采用标题含板块关键词的条目直接复用收盘情况，否则综合最相关若干条写成 50–100 字一段、丰富该市场最新情况）** | 完整模式 | 无当天新闻则留空（不编造） |
 

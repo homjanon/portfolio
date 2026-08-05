@@ -18,6 +18,12 @@ v37: 市场全景A股/美股/港股改先表格后叙述(与全球/大宗/估值
 import json, os, sys, signal, traceback, time, re, requests, xml.etree.ElementTree as ET, html
 from datetime import datetime, timezone, timedelta
 
+# lxml 容错解析（Google RSS 偶发未转义字符/HTML错误页时 recover=True 不致整份失败）；不可用时回退严格 ET
+try:
+    from lxml import etree as LET
+except ImportError:
+    LET = None
+
 # ── 方案C: curl_cffi HTTP/2 补丁 ──
 # 东财 push2 端点需要 HTTP/2，标准 requests 仅支持 HTTP/1.1 会静默断连
 # 仅对 eastmoney push2 域名使用 curl_cffi 浏览器模拟，其余请求不受影响
@@ -786,7 +792,9 @@ def _fetch_zaobao_raw():
 
 def _fetch_rss_other():
     """Top20 双源：谷歌美国一地抓30条(去重,LLM精选≤10) + 联合早报最新10条。
-    谷歌：仅美国一地(hl=en-US)一次抓30条，失败/空结果指数退避重试3次（应对间歇限流），
+    谷歌：仅美国一地(hl=en-US)一次抓30条，失败/空结果指数退避重试3次（应对间歇限流/429/非法XML）；
+    解析带 HTTP 状态检查 + lxml recover 容错；主源仍失败则兜底 MarketWatch Top Stories（美国主流财经），
+    再失败由财联社/格隆汇补位；
     去重后交给LLM精选≤10(英译中)；
     早报：联合早报中港台即时（hub.slarker.me 主 + rsshub.rssforever.com 备），取最新10条。"""
     TOPIC = "CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx6TVdZU0FtVnVHZ0pWVXlnQVAB"
@@ -794,7 +802,14 @@ def _fetch_rss_other():
 
     def _parse(url):
         r = requests.get(url, headers={"User-Agent": UA}, timeout=30)
-        tree = ET.fromstring(r.content)
+        if r.status_code != 200:
+            # 429/403 等错误页不再被当 XML 解析（根因 a）
+            raise RuntimeError(f"HTTP {r.status_code}")
+        # lxml recover 容错：个别非法字符（未转义 & 等）不再导致整份 feed 解析失败（根因 b）
+        if LET is not None:
+            tree = LET.fromstring(r.content, parser=LET.XMLParser(recover=True))
+        else:
+            tree = ET.fromstring(r.content)
         out = []
         for item in tree.findall(".//item"):
             source_el = item.find("source")
@@ -805,8 +820,10 @@ def _fetch_rss_other():
             pub_el = item.find("pubDate")
             title = title_el.text if title_el is not None else ""
             title = re.sub(r"\s*[-–]\s*" + re.escape(source) + r"\s*$", "", title).strip()[:100]
+            title = html.unescape(title)
             desc = desc_el.text if desc_el is not None else ""
             desc = re.sub(r"<[^>]+>", " ", desc).strip()[:250]
+            desc = html.unescape(desc)
             out.append({
                 "title": title,
                 "desc": desc,
@@ -835,7 +852,24 @@ def _fetch_rss_other():
         if _attempt < 2:
             time.sleep(2 * (_attempt + 1))
     else:
-        print("    [谷歌新闻·美国] 3 次均失败/为空，由财联社/格隆汇补位")
+        print("    [谷歌新闻·美国] 3 次均失败/为空，尝试兜底源...")
+
+    # 谷歌主源失败 → 兜底源：MarketWatch Top Stories（美国主流财经，独立于谷歌，实测可达）
+    if not items_google:
+        print("    [兜底·MarketWatch] 尝试抓取...")
+        _MW_URL = "https://feeds.content.dowjones.io/public/rss/mw_topstories"
+        try:
+            _mw = _parse(_MW_URL)
+            if _mw:
+                for _it in _mw:
+                    _it["source"] = _it.get("source") or "MarketWatch"
+                    _it["region"] = "美国"
+                items_google = _mw[:MAX_PER]
+                print(f"    [兜底·MarketWatch] 成功，获取 {len(items_google)} 条")
+            else:
+                print("    [兜底·MarketWatch] 返回空")
+        except Exception as _e:
+            print(f"    [兜底·MarketWatch] 失败: {_e}")
 
     # 标题去重（归一化：去源后缀/标点，仅留字母数字与汉字后小写比对）
     def _norm(t):
