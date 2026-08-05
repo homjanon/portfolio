@@ -793,7 +793,7 @@ def _fetch_zaobao_raw():
 def _fetch_rss_other():
     """Top20 双源：谷歌美国一地抓30条(去重,LLM精选≤10) + 联合早报最新10条。
     谷歌：仅美国一地(hl=en-US)一次抓30条，失败/空结果指数退避重试3次（应对间歇限流/429/非法XML）；
-    解析带 HTTP 状态检查 + lxml recover 容错；主源仍失败则兜底 MarketWatch Top Stories（美国主流财经），
+    解析带 HTTP 状态检查 + lxml recover 容错；主源仍失败则兜底谷歌英国区（同 TOPIC 换 hl=en-GB&gl=GB&ceid=GB:en），
     再失败由财联社/格隆汇补位；
     去重后交给LLM精选≤10(英译中)；
     早报：联合早报中港台即时（hub.slarker.me 主 + rsshub.rssforever.com 备），取最新10条。"""
@@ -852,24 +852,28 @@ def _fetch_rss_other():
         if _attempt < 2:
             time.sleep(2 * (_attempt + 1))
     else:
-        print("    [谷歌新闻·美国] 3 次均失败/为空，尝试兜底源...")
+        print("    [谷歌新闻·美国] 3 次均失败/为空，尝试英国区兜底...")
 
-    # 谷歌主源失败 → 兜底源：MarketWatch Top Stories（美国主流财经，独立于谷歌，实测可达）
+    # 谷歌主源（美国区）失败 → 兜底：谷歌英国区（同一商业 TOPIC，换地域参数 hl=en-GB&gl=GB&ceid=GB:en）
     if not items_google:
-        print("    [兜底·MarketWatch] 尝试抓取...")
-        _MW_URL = "https://feeds.content.dowjones.io/public/rss/mw_topstories"
-        try:
-            _mw = _parse(_MW_URL)
-            if _mw:
-                for _it in _mw:
-                    _it["source"] = _it.get("source") or "MarketWatch"
-                    _it["region"] = "美国"
-                items_google = _mw[:MAX_PER]
-                print(f"    [兜底·MarketWatch] 成功，获取 {len(items_google)} 条")
-            else:
-                print("    [兜底·MarketWatch] 返回空")
-        except Exception as _e:
-            print(f"    [兜底·MarketWatch] 失败: {_e}")
+        _UK_URL = (f"https://news.google.com/rss/topics/{TOPIC}"
+                   f"?hl=en-GB&gl=GB&ceid=GB:en")
+        for _attempt in range(2):
+            try:
+                _uk = _parse(_UK_URL)
+                if _uk:
+                    for _it in _uk:
+                        _it["region"] = "英国"
+                    items_google = _uk[:MAX_PER]
+                    print(f"    [谷歌新闻·英国] 第{_attempt+1}次成功，获取 {len(items_google)} 条")
+                    break
+                print(f"    [谷歌新闻·英国] 第{_attempt+1}次返回空，重试...")
+            except Exception as _e:
+                print(f"    [谷歌新闻·英国] 第{_attempt+1}次失败: {_e}")
+            if _attempt < 1:
+                time.sleep(2)
+        if not items_google:
+            print("    [谷歌新闻·英国] 兜底也失败，由财联社/格隆汇补位")
 
     # 标题去重（归一化：去源后缀/标点，仅留字母数字与汉字后小写比对）
     def _norm(t):
