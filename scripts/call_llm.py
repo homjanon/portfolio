@@ -137,29 +137,6 @@ def main():
     system = system.replace("__GLOBAL_CLOSE__", _labels["GLOBAL_CLOSE"])
     print(f"🏷️ 收盘标注: A={_labels['A_CLOSE']} HK={_labels['HK_CLOSE']} US={_labels['US_CLOSE']} 全球={_labels['GLOBAL_CLOSE']} | 报告日期={_report_date_str}")
 
-    # 1d. 注入监督池标的名称清单（单一可信源：data_holdings.json → 监督池；与 prefetch_data.py 同步，避免 prompt 重复硬编码）
-    #     用于持仓聚焦：显式列出全部监督池标的，强制 LLM 与财联社新闻逐条匹配，而非仅输出 6 核心
-    _watchlist_names = ""
-    _holdings_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data_holdings.json")
-    try:
-        if os.path.exists(_holdings_path):
-            with open(_holdings_path, encoding="utf-8") as f:
-                _holdings = json.load(f)
-            # data_holdings.json 由 _ok() 包装为 {"ts","ok","data":{...}}，监督池在 data 下；兼容裸结构
-            _payload = _holdings.get("data", _holdings)
-            _wl = _payload.get("监督池", {})
-            _names = [v.get("名称", k) for k, v in _wl.items() if isinstance(v, dict)]
-            if _names:
-                _watchlist_names = "、".join(_names)
-                print(f"  🔍 监督池清单已注入 prompt（{len(_names)} 个标的）")
-            else:
-                print("  ⚠️ data_holdings.json 监督池为空，WATCHLIST 留空")
-        else:
-            print(f"  ⚠️ 未找到 {_holdings_path}，WATCHLIST 留空")
-    except Exception as e:
-        print(f"  ⚠️ 监督池清单解析失败({e})，WATCHLIST 留空")
-    system = system.replace("__WATCHLIST__", _watchlist_names)
-
     y = flags["yesterday"]
     print(f"📋 执行模式: {mode}（参考日 {y} 星期{'一二三四五六日'[y.weekday()]}，"
           f"A股:{'✅' if flags['a_open'] else '❌'} 美股:{'✅' if flags['u_open'] else '❌'} 港股:{'✅' if flags['hk_open'] else '❌'}）")
