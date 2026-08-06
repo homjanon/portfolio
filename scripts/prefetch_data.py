@@ -574,8 +574,23 @@ def _normalize_qdii_prev(prev):
     return _to_dict(_etf_raw), _to_dict(_qdii_raw)
 
 
+# ── 热门全球 QDII 关注（固定清单，默认 C 类份额；东财代码 + 内置简称）──
+HOT_GLOBAL_QDII = [
+    ("024239", "华夏全球科技"),       # 华夏全球科技先锋混合(QDII)C
+    ("002891", "华夏移动互联"),       # 华夏移动互联混合人民币
+    ("021277", "广发全球精选"),       # 广发全球精选股票(QDII)人民币C
+    ("014002", "浦银安盛全球"),       # 浦银安盛全球智能科技(QDII)C
+    ("021842", "国富全球科技互联"),   # 国富全球科技互联混合(QDII)人民币C
+    ("008254", "华宝致远"),           # 华宝致远混合(QDII)C
+    ("018147", "建信新兴市场"),       # 建信新兴市场混合(QDII)C
+    ("022184", "富国全球科技互联网"), # 富国全球科技互联网股票(QDII)C
+    ("015016", "华安德国DAX"),        # 华安德国(DAX)联接(QDII)C
+    ("021540", "华安法国CAC40"),      # 华安法国CAC40ETF发起式联接(QDII)C
+]
+
+
 def fetch_extra():
-    """QDII监测(腾讯API实时价+东方财富HTTP净值) + 场外申购额度(Nasdaq100/S&P500可申购大额度) + USD/CNH汇率；资金面/两融/涨跌停已移除"""
+    """QDII监测(腾讯API实时价+东方财富HTTP净值) + 场外申购额度(Nasdaq100/S&P500可申购大额度 + 热门全球QDII关注) + USD/CNH汇率；资金面/两融/涨跌停已移除"""
     import akshare as ak
     result = {}
     today_str = datetime.now(TZ_CN).strftime("%Y%m%d")
@@ -605,7 +620,7 @@ def fetch_extra():
     # 注：资金面(南下/北向/涨跌家数)、两融、涨停/跌停 已移除（prompt 不再消费，且为卡顿主因）
 
     # ── v24方案: QDII监测 — 腾讯API实时价 + 东方财富HTTP净值（不依赖 fund_etf_spot_em）──
-    qdii_data = {"场内ETF": [], "场外QDII": []}
+    qdii_data = {"场内ETF": [], "场外QDII": [], "场外QDII主动": []}
     # ── 跨运行昨日基准（qdii_prev.json；工作流已 git add 持久化）──
     _repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     _prev_path = os.path.join(_repo_root, "qdii_prev.json")
@@ -662,12 +677,43 @@ def fetch_extra():
             "溢价率来源": "腾讯价+东方财富净值",
         })
     # 场外QDII申购额度（纳指100/标普500，可申购且额度较大的6条）
+    # ── 场外QDII：共用行构建 + 排序（不限购[开放申购]置顶，其余按日累计限额降序）──
+    def _mk_qdii_row(_r, _code, _short=None):
+        import pandas as pd
+        _lim = _r['日累计限定金额']
+        _lim_val = round(float(_lim), 2) if pd.notna(_lim) and _lim else 0
+        _unlimited = (str(_r['申购状态']) == '开放申购')
+        _pv = _prev_qdii.get(_code, {})
+        _pv_lim = _pv.get("日累计限定金额")
+        _pv_unlimited = _pv.get("不限购", False)
+        if _unlimited or _pv_unlimited or _pv_lim is None:
+            _diff = None
+        else:
+            _diff = round(_lim_val - float(_pv_lim), 2)
+        return {
+            "代码": _code,
+            "简称": str(_r['基金简称']),
+            "名称_短": _short or _shorten_qdii_name(str(_r['基金简称'])),
+            "最新净值": str(_r['最新净值/万份收益']),
+            "净值日期": str(_r['最新净值/万份收益-报告时间']),
+            "申购状态": str(_r['申购状态']),
+            "日累计限定金额": _lim_val,
+            "不限购": _unlimited,
+            "限额对比昨日": _diff,
+        }
+
+    def _qdii_sort_key(x):
+        # 不限购置顶（组内按限额降序）；限大额/其余按限额降序
+        return (0 if x.get("不限购") else 1, -(x.get("日累计限定金额") or 0))
+
     try:
         import pandas as pd
         _df = ak.fund_purchase_em()
-        _qdii_kw = ["纳指","纳斯达克100","标普500"]
+        _by_code = {str(_r['基金代码']): _r for _, _r in _df.iterrows()}
+
+        # 1) 现有：纳指/标普 关键词筛选（可申购且额度较大的6条）
         _seen = set()
-        for _kw in _qdii_kw:
+        for _kw in ["纳指", "纳斯达克100", "标普500"]:
             _mask = (
                 _df['基金简称'].str.contains(_kw, na=False)
                 & _df['基金类型'].str.contains('海外', na=False)
@@ -679,32 +725,33 @@ def fetch_extra():
                 _c = str(_r['基金代码'])
                 if _c in _seen: continue
                 _seen.add(_c)
-                _lim = _r['日累计限定金额']
-                _lim_val = round(float(_lim), 2) if pd.notna(_lim) and _lim else 0
-                _prev_lim = _prev_qdii.get(_c, {}).get("日累计限定金额")
-                _lim_diff = round(_lim_val - float(_prev_lim), 2) if _prev_lim is not None else None
-                qdii_data["场外QDII"].append({
-                    "代码": _c,
-                    "简称": str(_r['基金简称']),
-                    "名称_短": _shorten_qdii_name(str(_r['基金简称'])),
-                    "最新净值": str(_r['最新净值/万份收益']),
-                    "净值日期": str(_r['最新净值/万份收益-报告时间']),
-                    "申购状态": str(_r['申购状态']),
-                    "日累计限定金额": _lim_val,
-                    "限额对比昨日": _lim_diff,
+                qdii_data["场外QDII"].append(_mk_qdii_row(_r, _c))
+        if qdii_data["场外QDII"]:
+            qdii_data["场外QDII"].sort(key=_qdii_sort_key)
+            qdii_data["场外QDII"] = qdii_data["场外QDII"][:6]
+
+        # 2) 新增：热门全球 QDII 关注（固定清单，默认 C 类，全部展示，不限购置顶）
+        for _code, _short in HOT_GLOBAL_QDII:
+            _r = _by_code.get(_code)
+            if _r is None:
+                qdii_data["场外QDII主动"].append({
+                    "代码": _code, "简称": "", "名称_短": _short,
+                    "最新净值": "", "净值日期": "", "申购状态": "无数据",
+                    "日累计限定金额": 0, "不限购": False, "限额对比昨日": None,
                 })
+                continue
+            qdii_data["场外QDII主动"].append(_mk_qdii_row(_r, _code, _short=_short))
+        if qdii_data["场外QDII主动"]:
+            qdii_data["场外QDII主动"].sort(key=_qdii_sort_key)
     except Exception as e:
         qdii_data["_场外_error"] = str(e)[:100]
-    # 按日累计限定金额降序排列（大额度优先），最多6条
-    if qdii_data["场外QDII"]:
-        qdii_data["场外QDII"].sort(key=lambda x: x["日累计限定金额"], reverse=True)
-        qdii_data["场外QDII"] = qdii_data["场外QDII"][:6]
     # ── 写回昨日基准快照（供下次运行对比；工作流已 commit 持久化）──
     try:
         _snap = {
             "日期": today_str,
             "场内ETF": {e["代码"]: {"溢价率": e.get("溢价率"), "日期": today_str} for e in qdii_data["场内ETF"]},
-            "场外QDII": {f["代码"]: {"日累计限定金额": f.get("日累计限定金额"), "日期": today_str} for f in qdii_data["场外QDII"]},
+            "场外QDII": {f["代码"]: {"日累计限定金额": f.get("日累计限定金额"), "不限购": f.get("不限购"), "日期": today_str} for f in qdii_data["场外QDII"]},
+            "场外QDII主动": {f["代码"]: {"日累计限定金额": f.get("日累计限定金额"), "不限购": f.get("不限购"), "日期": today_str} for f in qdii_data["场外QDII主动"]},
         }
         with open(_prev_path, "w", encoding="utf-8") as _f:
             json.dump(_snap, _f, ensure_ascii=False, indent=2)
