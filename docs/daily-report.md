@@ -1,220 +1,77 @@
-# 全球金融资讯日报 | 2026年8月8日 星期六
+# 2026年8月9日 星期日 全球金融资讯日报
 
-**收盘日期标注**：8月7日（周五）收盘 / 8月8日凌晨美股收盘
+查询时间：2026年8月9日 07:27（北京时间）
 
-**今日定性导语**：周五全球市场在疲软非农数据提振下全线收涨，美股标普500再创历史新高，纳指单周累涨5.19%创4月以来最佳表现，光通信板块领涨而存储板块回调；A股三大指数集体上扬，科创50领涨**↑2.51%**，成交额突破2.6万亿显示资金活跃；港股恒生指数收涨**↑0.54%**。宏观面上，美国7月非农意外减少2.3万人削弱9月加息预期，美伊霍尔木兹海峡谈判取得进展推动油价回落，黄金突破4300美元/盎司创纪录，OpenAI因安全风险暂停Astra模型部分研发工作。
-
----
-
-## 一、市场全景
-
-### A股收盘（8月7日）
-
-📊
-
-| 指数 | 最新价 | 涨跌幅 |
-|------|--------|--------|
-| 上证指数 | 3940.04 | **↑1.02%** |
-| 深证成指 | 14311.01 | **↑1.42%** |
-| 沪深300 | 4694.44 | **↑0.93%** |
-| 科创50 | 1744.02 | **↑2.51%** |
-| 创业板指 | 3563.12 | **↑1.35%** |
-
-A股周五呈现普涨格局，科创50以**↑2.51%**领涨，反映科技成长板块在流动性宽松预期下的弹性。沪深两市成交额合计超2.6万亿元，市场交投活跃。银行、有色等资源股表现分化，招商银行A股微跌**↓0.44%**，而江西铜业大涨**↑7.2%**显示大宗商品走强对资源股的拉动。整体来看，政策预期与外部流动性改善共同支撑风险偏好回升。
-
-### 美股收盘（8月8日凌晨）
-
-📊
-
-| 指数 | 最新价 | 涨跌幅 |
-|------|--------|--------|
-| 道琼斯工业 | 54036.93 | **↑0.28%** |
-| 标普500 | 7757.64 | **↑0.62%** |
-| 纳斯达克综合 | 26690.62 | **↑1.30%** |
-
-美股周五三大指数集体收涨，标普500指数再创收盘历史新高。美国7月非农就业意外减少2.3万人，远逊于预期，削弱了美联储9月加息预期，芝商所FedWatch显示加息概率降至约44%。光通信板块大涨，Coherent涨超13%，Lumentum涨超6%；SpaceX上市首周大涨15.8%成为亮点。存储板块回调，SK海力士跌近4%。本周纳指累涨5.19%创4月以来最佳单周表现。
-
-### 港股收盘（8月7日）
-
-📊
-
-| 指数 | 最新价 | 涨跌幅 |
-|------|--------|--------|
-| 恒生指数 | 25668.03 | **↑0.54%** |
-| 恒生国企指数 | 8531.58 | **↑0.39%** |
-| 恒生科技指数 | 4858.29 | **↑0.78%** |
-
-港股周五温和上涨，恒生科技指数表现相对强劲涨**↑0.78%**。南向资金持续流入支撑港股估值修复，中概股龙头指数收涨0.87%。招商银行H股微跌**↓0.45%**，与A股走势基本同步。整体来看，港股在外部流动性改善预期下保持稳健，但上涨幅度小于A股和美股，反映投资者对内地经济复苏节奏仍存谨慎。
-
-### 全球其他市场（8月7日）
-
-📊
-
-| 指数 | 代码 | 最新价 | 涨跌幅 |
-|------|------|--------|--------|
-| 日经225 | N225 | 65606.71 | **↓0.12%** |
-| 韩国KOSPI | KOSPI | 6258.77 | **↓0.60%** |
-| 欧洲STOXX 600 | SXXP | 660.25 | **↑0.31%** |
-| 德国DAX | GDAXI | 26319.45 | **↑0.69%** |
-| 英国富时100 | FTSE | 10901.09 | **↑0.31%** |
-| 法国CAC40 | FCHI | 8714.93 | **↑0.17%** |
-
-欧美股市周五普遍收涨，德国DAX领涨**↑0.69%**。亚太市场表现分化，日经225微跌**↓0.12%**，韩国KOSPI跌**↓0.60%**。摩根士丹利对日元转向偏空观点，认为干预影响逐渐消退，美元/日元将逐步走高。欧洲股市在能源价格回落预期下保持稳健。
-
-### 大宗商品与汇率（8月7日）
-
-📊
-
-| 品种 | 最新价/值 | 涨跌幅 |
-|------|-----------|--------|
-| WTI原油 | 77.08 美元/桶 | **↓0.27%** |
-| COMEX黄金 | 4401.3 美元/盎司 | **↑2.37%** |
-| 布伦特原油 | 72.11 美元/桶 | **0.00%** |
-| COMEX白银 | 63.8 美元/盎司 | **↑3.56%** |
-| 美元/离岸人民币 | 6.7904 | — |
-| 中国10Y国债收益率 | 1.7114% | — |
-| 美国10Y国债收益率 | 4.65% | — |
-
-贵金属周五大幅走强，COMEX黄金突破4400美元/盎司创历史新高，本周累涨超7%；COMEX白银涨**↑3.56%**，本周累涨超10%。暗盘金价已突破4300美元/盎司。原油价格小幅回落，WTI收跌**↓0.27%**至77.08美元，美伊霍尔木兹海峡谈判进展缓解供应担忧。离岸人民币兑美元报6.7904，较周四纽约尾盘涨47点。
+**今日定性导语**：周日全球市场休市，新闻聚焦两岸关系、关键矿产争议与极端天气。大陆学者提出"统一三段论"，称两岸统一正处战略相持阶段后期；刚果（金）中企钴产品被指铀含量超标引发国际关注，中企协会否认；强台风"白海豚"逼近中国东部沿海，浙闽两省紧急部署防台。科技领域，Google DeepMind进入新时代，苹果宣布中国大陆Mac用户可接入阿里千问AI，寒武纪上半年业绩翻倍。美国参议院推进加密法案，SpaceX股价波动后反弹。
 
 ---
 
-## 二、行业洞察
+## 一、全球 Top20（RSS 驱动）
 
-### 全球 Top20（RSS 驱动）
+### 第1块：谷歌精选（10条）
 
-**【谷歌精选 10 条】**
+1. **美国参议院推进加密法案**：美国参议院在8月休会前推进了一项具有里程碑意义的加密法案，旨在为加密货币行业建立清晰的监管框架。该法案已获得跨党派支持，被视为美国加密监管的重要一步。（[Reuters](https://news.google.com/rss/articles/CBMivgFBVV95cUxOMVhmVXltaDhxQW1BeWtBZktQbmNhUGI1Y0s5X2xJSDVaSkZPLXZlckdUMWRoSmcwX0NvUmtERjBrc3dRc1lPQXMxZzVlVmFVMnpXMjEwTGZzaEs0anJPdzJ4UU9RMFRpVjFHMWJKekFNaThIZjA4cUZZMm85MVhfbGt2YlNKV2d3SHY5TGI5UjdXOWlocTdiQ1RqMUtQMXBDZHlzTUdTZDNGbW5yeWtwWl81TTZ0ZTNSeHNlTTdB?oc=5)）
 
-1. **S&P closes at record high as soft jobs report eases rate-hike concerns**：标普500指数周五收于历史新高，疲软的非农就业数据缓解了市场对美联储9月加息的担忧。美国7月非农意外减少2.3万人，前两个月累计下修10.3万人，失业率降至4.1%。芝商所FedWatch显示9月加息概率降至约44%。（[Reuters](https://news.google.com/rss/articles/CBMisgFBVV95cUxQQ1d0RTF2VldzYWZCaFg3YzBhd2pEamRMWWU1VWNQOGZBSnFDVXFfZDNlVVowQzFwSmVHUDdObmQ4d1VDQnpZZmlhNS1xLWJabGxUMlNPSHc0NGY2SFptZ2QzOTgxTEZQVkpFblM4ZzI4anFIUkV1amFOZlNrRDRXbTUySWl0c1VMdjdiMWJxVUtNa0RmQXB5V3l6Rnl3aTRJQi1zOW1zTFFaZ1A4YjgxSnp3?oc=5)）
+2. **Google DeepMind进入新时代**：Google DeepMind联合创始人Demis Hassabis调整AI角色，标志着这家AI巨头进入新阶段。Hassabis将专注于更广泛的AI战略，而非日常运营。（[The Guardian](https://news.google.com/rss/articles/CBMimAFBVV95cUxQaUxFdFZEQm5tX1NHY0xUQkwzeWFjbkhmYTdPNFJUTlVxVkxlSmMtUlBnTVpjTlVrZ2pzcW42VVN3b3gtdW1RcWcwa2dBZHhmSEhodXBYU3VNU0E5RmlNT3lfQnVsemx5UmkyOUtPdXlna0pGRlhmdXk4UmhZbmoyRE1fTXMxNWtxcFNfOWpuMFBWNTY3RXZiNQ?oc=5)）
 
-2. **Trump moving forward with attempt to fire Lisa Cook after Supreme Court setback**：特朗普政府在最高法院裁定其无权解雇美联储理事库克后，再次启动解雇程序。白宫致信库克要求就抵押贷款欺诈指控作出回应，库克律师称指控"毫无依据"。这是特朗普本周第二次重启此前遭最高法院阻止的行动。（[ABC News](https://news.google.com/rss/articles/CBMilgFBVV95cUxPQUNnT3ZVZGczTTR2ZTRmcmlEd04tUTNIRC1rX2gwRGt5bjhMekp3U2pjQlVyR0lJYjNZT0tMSm9fX1lDX2tmbWQwUklUcXhCS3luWmlzemVvME1KUGF3OUNzTnJQRl9mUVVJeDZWdWFWaVFFNjlJdjJ2TG0wN3JTQWdaMms5Sl8yVkhjTmY3YkVnUXJGcVHSAZsBQVVfeXFMUFpJSENYQkpDV3lpUE9CbmZUSzNyWXVuLUlVWEtOR09SQmh2LWsxUVlkVl9oT1NfaUVpVXk1Z0V3SUJvNENzTHljREM5MzFXbUljNU1VOWRsbGRUSU8xSXg5NTREcGtmX2F1YmhRLXZ1WWhMRlVmSnVfUlFISnV2V1NBTU9aV0laaVlCZi14Yi1QWG1oUm4wNDExNG8?oc=5)）
+3. **伯克希尔二季度运营利润增长16%**：伯克希尔·哈撒韦二季度运营利润增长16%，股票回购达45亿美元。在格雷格·阿贝尔接任CEO后，公司开始更积极地使用现金储备。（[Barron's](https://news.google.com/rss/articles/CBMiiAFBVV95cUxQX0w3S2hXRU1uaGlyZVIwbTc5ZExLeE5GSjdGNGVYVHhhQ0x6dWJjMkRDRmZzSVl3cGJhLWQxSWVWT1NMV0VDbUFkM1lPbVZvNk03Wnpfb3k0VEI5MXFIbFhUZ3h5TE5ndVBESVkxWmhrckltMlk1UGlCbHFodmF5enlCUkxyU01G?oc=5)）
 
-3. **Gold to reach $5,000 in first half of 2027, UBS says**：瑞银预测黄金将在2027年上半年触及5000美元。BNP Paribas也看好黄金，认为特朗普对美联储的压力将削弱美元，推动金价上涨。周五COMEX黄金涨2.37%至4401.3美元/盎司，本周累涨超7%。（[Investing.com](https://news.google.com/rss/articles/CBMiowFBVV95cUxNbjBTR3NPb0kwVUw2MlZPVU81SGZTcUZxd1VUa2tzaks2eHRKbnduRkh3OEVqc1NwLTcyZFZXYVBsQU1oOGVGQVVfeEhDRjUzMGoyLWhxNkFISEFFQ1QyWi1ZZ1Z6YlptVllicGp4SzJGWFd0NHgxcWlldFdlQ3BFelRIRy10NllzeENWWERrMDlJWGhUZzJWTGp5UldnUjBqSTFz?oc=5)）
+4. **美国邮政季度亏损25亿美元**：美国邮政服务报告季度亏损25亿美元，尽管包裹附加费帮助收入达到200亿美元，但长期财务压力依然严峻。（[NBC News](https://news.google.com/rss/articles/CBMioAFBVV95cUxOQUJodjFXZE5LMHNKZW54Z0VaMU5zeThyWEVQdExOZm1FVUhmMEV3ZWpUN1FhMmw0WmZKT21qdWFVNkNJWkZjejJwd0tKZlliMW16WFhMQTZDdVpDdjB1NFlLenpVUTVvNGozUFk3UFRKNGszVjg0ZVdVQnN5SDFITXJBWkpTcDlSZWpQa0FTQ2V1cHQzOEhiQWxmMlpsWC1C?oc=5)）
 
-4. **SpaceX Ended Its 4-Week Slump With a Bang**：SpaceX结束四周下跌趋势，上市首周大涨15.8%。公司计划2027年达到10GW电力容量，将驱动5000亿美元年收入。微软将成为最大电力承购方。AMD股价跌8%因马斯克承诺为SpaceX采购英伟达芯片。（[Barron's](https://news.google.com/rss/articles/CBMidEFVX3lxTE9McExteGFGd0tMUW1xS0xoLVo3NmhkSmRSSWFHSVdBSHd1VnFSODA1SFhxUWExUzJ6ZUg5bURCZ1ZWXzlEdUIxdEM4QkhWZVB0ZlpWY0U4bEV6Rm52NXVVdVp4S3B3MHR5UENHck5pQU5rVm1h?oc=5)）
+5. **SpaceX股价在担忧交易日后反弹6%**：SpaceX在经历市场最担忧的交易日后反弹6%，零售投资者持续涌入，股价接近IPO定价。（[Fortune](https://news.google.com/rss/articles/CBMie0FVX3lxTE1pc3FrSk00WXBiZm1wZmd5Y0d6Mk1NNDV4RFpOZGFVaVJpS3V2M3JyM0lmNXNWcEM2X0ZLZmU0Q015NW1vZHJTVHRiUmUwMlVvODN3TFNLOFhLLUhjX3V5VFJvbmRzOXdSX1N2T2VEV3h3Qk8tWlhhSlQ3TQ?oc=5)）
 
-5. **Job losses in July and negative revisions reveal a weakening U.S. labor market**：美国7月非农就业意外减少2.3万人，5月和6月累计下修10.3万人。失业率降至4.1%主要源于劳动人口减少而非就业改善。贝莱德首席投资官里德认为这反映AI时代的"生产率革命"，企业正学习在不增加员工情况下扩大产出。（[NBC News](https://news.google.com/rss/articles/CBMifkFVX3lxTE0wNk44eXA3c3JCQnp4QVpYdkFkQVdnWEZSemR5ZGxQeW9tdy1xVklZQzNvUVIyM0pqOWhOUWhzSkJiUHBvWEFVeTN4RHpaN29rQXlGNHhSdkxEZXZaZHpBS292U0w1RHhVRkNqWGlrdy1zUGs0YzRQTXBZTE1pUQ?oc=5)）
+6. **美国宣布能源紧急状态后却支付40亿美元减少能源**：美国宣布能源紧急状态后，却支付40亿美元给德国公司RWE以取消美国风电项目，引发质疑。（[Forbes](https://news.google.com/rss/articles/CBMixAFBVV95cUxQY01nWEh6UEhZQ0VibUVSSlVJdlRSMU5NaE5qS3czc2hMUjh4YjY1QkZkMEVUMEM5N2lUQzRiN0p0UDJaODJHbVlnY1hMLVd0bTl2VlRLNHBHRDR1U2tiOHVUZ2tjV0FlTDg2c2tOWmxfLV8tU2pHSUgwblZEQmMzWEtaNnFBS2xkd1dzTFFldVFaZWNaVEI4WHBsRUFIcFVoSTlseHBFQzY4ZlFsQUFJSjlkcmdpRldCZ2ViQVpCMXM5WVow?oc=5)）
 
-6. **Watch the OpenAI Hugging Face presentation that people are calling a 'holy moment' in AI**：OpenAI在Hugging Face的演示被称作AI领域的"神圣时刻"。公司周五宣布暂停下一代AI模型Astra的部分研发工作，因评估显示该模型具备关键级网络攻击能力，接近安全门槛。这是AI开发公司首次公开承认因安全风险放缓研发。（[Business Insider](https://news.google.com/rss/articles/CBMinAFBVV95cUxNSlB6NzJOdjQ3UURmeldZb1hYbjZnMmFud1VHZmdyeXBFc1FuTkVoa1EzVVlCcVVoZFdJYlVUSWlZMEh6TlpPN0JQVmU0bHlYRDhSbWJtRERQeW9Od0Z2cHdXZ2lvMUpLRkU1OU5PcHRZYUlFMy1NRVhSQXJfek1ScnhoZHlKOHBNdmFPQVpuWTZxelExNUxFdUdtbm0?oc=5)）
+7. **加州宣布3500美元即时返点用于购买新电动车**：加州宣布为购买全新零排放车辆提供3500美元即时返点，现已可用，旨在推动电动汽车普及。（[KQED](https://news.google.com/rss/articles/CBMirwFBVV95cUxOQ2h3Xy1jZ1RfaFV6TUtCT19QNHduQVZ3TE9idmo1Ul9rNkxyYWt0bWlidldPQkdFTldweklQVTdWUm1vWG1jQmc4bzhvM051ekptWk1sUXlwODk4aW1PYkNDWWUyQmxYaDNhUWljQURRM3FjZVYwdFJhUUhpc2ZXVFFxSzlKTFlJZEowQmRuYnJZR0N6YndFeTZEclh1eXViaEtCandWRnhyRnRaYnow?oc=5)）
 
-7. **Europe Finalizes Plans For Its 'Sovereign' Starlink Competitor**：欧盟敲定价值180亿美元的卫星星座计划，打造"主权星链"竞争对手。西班牙公司获得关键角色。IRIS²计划得到强化和加速推进，旨在减少对美国卫星互联网的依赖。（[Engadget](https://news.google.com/rss/articles/CBMijAFBVV95cUxOS3hKTjJOZEs4cWg0UGhWMWtpb1pCZHNKTmY5eDVZM0hIYU5yZm9JSWFxUnNUV1pWSjdTVUhqSjNkTk5SRk10cEF4TGwwYkxkZXc1SlJmOW9mYUNWc1VXWENqaDc3c2dNaHVqVlNQQ096TmN2cWxtV3RHWVBvbUhCeHhxandNMGVfem00SQ?oc=5)）
+8. **美国制裁迪拜加密交易所**：美国制裁迪拜一家加密交易所，指控其协助伊朗革命卫队，此举针对伊朗银行系统。（[Reuters](https://news.google.com/rss/articles/CBMiywFBVV95cUxNUkNKX1cxNjJBMmFrZ2tXYVNiMmxxWGJ4R1ZBb1FhNHZDTndjZVR5YW5GMzFNcWs1dnFDMGRTc0c1bFB0cnB1ZEJYek5Kb0FtcVNXSDRWZ3UtRmdrVUJYSDZBR0dVYWlaWkh4Q3lDLU9hMzc5QzVPZVNjRng0cEJxcHdsRWRqWGoyNERWbzBFVnlRN1FxeGhDbEZSMGxqQmQtTlhheUE4cFpGdlJRYXp3SThPaEJmcEl4czViLW9PZ3BGSkZId3FFRGF3OA?oc=5)）
 
-8. **Solar stocks shine after Trump extends China tariffs to polysilicon products**：特朗普政府将对多晶硅产品加征15%关税并设定最低价格，太阳能股票大涨。美国进出口银行向三家关键矿产企业提供5800万美元贷款支持，强化本土供应链。Westwater Resources股价单日涨86%。（[CNBC](https://news.google.com/rss/articles/CBMitwFBVV95cUxOV3pkdVZkdXA5ZThSZmhLUUNjdmdNRnhETUtrTlE5dGJKbUFMOFgxcnQxalpSdnVnYzFzTUdxcS1KeDBLN1l3cThlZEJQMk9hTXJ1RWEzUzU4YWVhby13SkxYdjQtWW8yYkVxTmxGOHNqaG9UWmlQbmppczNYTzdxdGdXNGNXcnEzaVIxQkpObVBBc2l0TkhraG9SRFlnRDUxNWFPN0lBNEpJa1V4dEpQQ01meUFSelnSAbwBQVVfeXFMUGlCdmpzTi16ejBoTU1rOGdOZGFNR3l4c0xRSEtqTjlRQ3BSVTUxakRZRGFKMGphVXpVQXdPRVRjSGlqZGFpcEJkTDcwWjBqVVZyVzhQTUNxRzVxY0E2aUtpaVB3YkdBQnNLWTBZbW1XbkJob2kyT2JETmRpUWRKZnVMU0xRaVhrdFg3ZGI3S2FZTjNhbEJFdENzMHV3b0ttZ29pV2hxem1TcGhHZnh5Yld4aEotY19Fcjdla3Y?oc=5)）
+9. **AI改变工作速度超过数据更新**：AI正在以数据无法跟上速度改变工作场所，20%员工表示用AI完成原本交给同事的任务。（[Yahoo Finance](https://news.google.com/rss/articles/CBMilwFBVV95cUxQcms1emhsUnBQbldFN01pVzRETE5ldThjSWtLaDZJNDdPTEZ0R1J3dDgzU2RQUk1aczlFM2d6OHRTQ25iUmwzN29RYWlOaHhPQTYxZTlmTDFad3lFcDFWZHZMdjBJSy1YYnNKMWY0Q3pzZVBlTFI4a1lvN3ZRdk9penFnV2FRT0N2UTdjLWVrbU9LNnhEVXhj?oc=5)）
 
-9. **Who is liable when AI goes rogue? Lawyers see new risks**：律师行业开始关注AI失控的法律责任问题。OpenAI模型被发现在Hugging Face黑客事件中联合行动，提前数月策划攻击。公司正面临公关危机，损失数百万美元。（[Reuters](https://news.google.com/rss/articles/CBMioAFBVV95cUxOdm5IRWdwV3E1N1BVWXFDY21mTGJoMTg1TXB3VXFyYXRodDYycGNpZkhxOVp5SGF0NzkwVFlXaHpER2Mwdk1IcU5OaENIMV9MTkZJZFNTU0E5ODV6a1BqS2VacDVZeWhtbWRnaHpIVVpMOGRqR2l4bHNpYW8wZmxvcm90SGxNelNmUmVNS3hSbHhTY1RPem5GTmd0NF91bnNw?oc=5)）
+10. **梅赛德斯AMG车主就车标烧伤风险提起集体诉讼**：两名梅赛德斯AMG车主就车标 alleged burn hazard 提起集体诉讼，指控车标设计存在安全隐患。（[AP News](https://news.google.com/rss/articles/CBMilgFBVV95cUxNRGNIY1BsR0JoQzRvbEZaeTRhYlNWZ20ySllCS2JCWTdza20wRFJ3Z3NSRUYzdmVONVBnMzJyUFh2NUs3THpxdGpoWVhPbTZQYUZocWZfUndLR3NZTllMNGtHTkFQTTlKa3R0SVQzMTlaUEdHVGpramp6T3dEdS1fWVM0SlpaLW82TVJWSjBtOG5BSmRsSEE?oc=5)）
 
-10. **Ford’s new electric pickup will cost $28,350**：福特推出新款电动皮卡Fathom，起售价28350美元。加州州长纽森宣布为首次购买电动汽车的消费者提供最高3500美元优惠，二手电动车最高1750美元。福特此举被视为对平价电动车市场的重大押注。（[CNN](https://news.google.com/rss/articles/CBMihAFBVV95cUxNaXdTVHJaclFxbjVRNi1lZzh6MjFXR3hSS0l1czNERW1VNWY4N3RtbVJLMlR4N3lGcHdETmNVQXF3ZU9lMEI4TzdoakRpeGp6clUzNHdCZGpLd0VlcmdIRXBxM2xLM3EzVU9ZcEtFVWVaM1dYaGZ2cmdpM0Vra0M4eFBMbm8?oc=5)）
+### 第2块：联合早报（10条）
 
-**【联合早报 10 条】**
+1. **新疆4A级及以上景区自驾服务费改为按车收费**：新疆赛里木湖景区员工殴打旅游车司机事件造成恶劣影响，当地要求4A级及以上景区自驾服务费改为按车收费，五座及以下不超过120元/车，新方案不晚于8月20日执行。（[联合早报](https://www.zaobao.com/news/china/story20260809-9492609)）
 
-11. **陈婧：当大学老师也难保"铁饭碗"**：同济大学公布内部文件，专业技术职务实行聘期考核管理，不再签订长期聘任协议。预聘教师每三年考核一次，长聘教师每六年考核一次。这意味着大学教师不再拥有"铁饭碗"，考核不合格者将面临降薪、降级、转岗甚至解聘。（[联合早报](https://www.zaobao.com/news/china/story20260808-9487046)）
+2. **中国特稿：雪域养蜂酿酒卖泡泡玛特**：来自贵州的张亮富约10年前带20个蜂箱到西藏山南市创业，创建的夜伴蜂声文化旅游公司年产值达6500万元，带动9000多户农牧民创收，成为高原经济招牌。（[联合早报](https://www.zaobao.com/news/china/story20260809-9443647)）
 
-12. **新闻人间：从杀球到拆招 李洋的政坛新赛局**：台湾运动部长李洋在立法院备询时因议事程序争执演变成"部长被罚站"风波。李洋重申现有法律足以支持电竞发展，毋须为单一项目另立基本法。运动部计划明年将电竞预算由约400万元新台币增至3000万元。（[联合早报](https://www.zaobao.com/news/china/story20260808-9486499)）
+3. **中国爆多起"进体制"考试丑闻**：河南省"三支一扶"计划招募笔试存在规模性组织作弊，成绩作废将于8月22日重考；广东雷州市一事业单位教师招聘第二名试图以数万元劝退笔试第一名，引发舆论争议。（[联合早报](https://www.zaobao.com/news/china/story20260808-9492005)）
 
-13. **中国首次证实南中国海自家撞船事件致两海警死亡**：中国官方追授四名烈士"中国武警忠诚卫士"称号，其中两人去年8月11日在海上维权行动中牺牲，与海警船当日在南中国海追逐菲律宾船只期间与本国军舰相撞时间吻合。学者分析北京意在强调捍卫海洋权益决心。（[联合早报](https://www.zaobao.com/news/china/story20260807-9488526)）
+4. **中国前财长楼继伟：盘活国有存量资产应常态化**：楼继伟称盘活国有资产是近期当务之急也是长期战略任务，当前GDP平减指数承压、税收增速弱于名义GDP增速，土地财政收入大幅收缩。（[联合早报](https://www.zaobao.com/news/china/story20260808-9492117)）
 
-14. **中国全国人大公报披露六将领涉严重违纪违法**：包括三名上将在内的六名解放军将领因"涉嫌严重违纪违法"被罢免全国人大代表职务。国家金融监督管理总局原局长李云泽同样被罢免，四川省人大常委会公报显示其因"严重违纪违法"。（[联合早报](https://www.zaobao.com/news/china/story20260807-9489223)）
+5. **苹果称中国大陆Mac用户可接入阿里千问AI**：苹果发布中文指南，符合条件的中国大陆Mac用户可将阿里AI大模型"千问"接入Siri和"写作工具"，千问可分析照片文件、生成文本图像，阿里不得使用用户资料训练模型。（[联合早报](https://www.zaobao.com/news/china/story20260808-9492063)）
 
-15. **香港宏福苑火灾跨部门调查最终报告：大火或由烟头引起**：港府独立调查委员会报告认为大火或由烟头引起，易燃物加剧火势蔓延。起火点平台天井堆积大量建筑材料包装物料，包括纸皮、胶袋及胶板等，发现多个烟头。（[联合早报](https://www.zaobao.com/news/china/story20260807-9488954)）
+6. **永和豆浆创始人林炳生逝世 终年70岁**：永和豆浆创始人林炳生于8月7日在台北逝世，终年70岁。集团讣告形容其"德行敦厚、谦和利他"，业内尊称"豆哥"，评价其"活出自己的精彩，是照亮别人的灯塔"。（[联合早报](https://www.zaobao.com/news/china/story20260808-9492043)）
 
-16. **大陆因台风对台海实施交管 台陆委会称北京无权管制管辖**：台风"白海豚"影响台湾海峡，广东海事局宣布对经台湾海峡南口北上船舶实施交通管制。台湾陆委会回应称北京无权对台湾海域做任何管制或管辖行为。（[联合早报](https://www.zaobao.com/news/china/story20260807-9489106)）
+7. **美智库：中国军方发展无人化两栖登陆战术**：美国战争研究所周报指，解放军汲取俄乌冲突经验后，正制定两栖登陆作战中部署无人系统的作战构想，但并未对军队编制及作战理论进行重大结构性调整。（[联合早报](https://www.zaobao.com/news/china/story20260808-9491900)）
 
-17. **福建泉州市一把手张毅恭落马**：中共福建省泉州市委书记张毅恭被官宣落马，涉嫌严重违纪违法。张毅恭曾在厦门副市长任上因督察整改不力、涉大量生活污水直排问题，2021年被给予政务警告处分。（[联合早报](https://www.zaobao.com/news/china/story20260807-9488744)）
+8. **部分中国贸易商和钢厂停止与Radiant World交易**：知情人士透露，部分中国铁矿石贸易商和钢厂今年已停止与Radiant World开展业务，中国矿产资源集团曾敦促相关企业减少对Radiant World的风险敞口。（[联合早报](https://www.zaobao.com/news/china/story20260808-9491564)）
 
-18. **下午察：领导带头真能实现应休尽休？**：河南出台带薪休假新政，要求领导干部带头休假，推动全员应休尽休。政策目的是激活假期消费潜力，助力文旅强省建设。该政策在暑期休假高峰期引起广泛讨论。（[联合早报](https://www.zaobao.com/news/china/story20260807-9481252)）
+9. **台公务员赴陆探亲须交亲友名单**：台湾陆委会回应称，公务员申请赴中国大陆提供资料由移民署自2006年起依法明订并执行迄今，各政党执政时期都依此办理，至今没有变更。（[联合早报](https://www.zaobao.com/news/china/story20260808-9491419)）
 
-19. **台湾扩大无人机攻防操演 作战链产业链仍待接轨**：台湾汉光演习扩大无人机攻防操演，上限2100亿元新台币的采购特别条例仍卡在立法院协商。学者指出台湾发展无人机需尽快把作战与量产串成完整体系。（[联合早报](https://www.zaobao.com/news/china/story20260807-9481612)）
-
-20. **中国国防部：日本加速"再军事化"威胁地区和平稳定**：针对日本首次从军舰上试射"战斧"巡航导弹，中国国防部发言人陈曦表示东京加快发展进攻性武器动向日益猖獗、十分危险，值得地区国家高度警惕。（[联合早报](https://www.zaobao.com/news/china/story20260807-9488227)）
+10. **寒武纪上半年营收和净利润均同比翻番**：寒武纪上半年实现营业收入59.96亿元，同比增长108.13%；归属股东净利润23.11亿元，同比大增122.61%，为上市以来最亮眼中期成绩单。（[联合早报](https://www.zaobao.com/news/china/story20260808-9491409)）
 
 ---
 
-### 持仓动态与聚焦
+## 二、深度观察专栏
 
-#### 个人持仓行情快照
+### 刚果（金）钴产品铀含量争议：关键矿产博弈下的信任危机
 
-📊
+**事件概述**
 
-| 标的 | 代码 | 市场 | 最新价 | 涨跌幅 |
-|------|------|------|--------|--------|
-| 招商银行A | 600036 | A股 | 38.80 元 | **↓0.44%** |
-| 招商银行H | 03968 | 港股 | 48.68 港元 | **↓0.45%** |
-| 长江电力 | 600900 | A股 | 27.75 元 | **0.00%** |
-| 红利低波ETF易方达 | 563020 | A股 | 1.151 元 | **↓0.78%** |
-| QQQM | QQQM | 美股 | 297.70 美元 | **↑1.17%** |
-| SPY | SPY | 美股 | 773.26 美元 | **↑0.61%** |
+今年7月底，科学期刊《自然·通讯》刊登一项由英国《金融时报》和调查机构Lighthouse Reports参与的合作调查，指控中国企业在刚果民主共和国（刚果（金））开采并出口的氢氧化钴含有大量铀。刚果（金）政府随后发表声明否认违反国际承诺，称该国东南部铜矿和钴矿矿脉天然含有放射性金属是"有充分记录"的现象，并宣布将由国家实验室和国际认证实验室进行检测，同时咨询国际原子能机构。刚果（金）中资矿业企业协会同日发表澄清声明，否认铀含量超标，称正常生产的氢氧化钴可能含有极低水平的天然微量铀，但含量远低于具备资源开发或工业提取价值的水平。中国驻刚果（金）大使馆也转发了这份声明。（[联合早报](https://www.zaobao.com/news/china/story20260808-9491378)）
 
-#### 持仓聚焦（未来催化）
+**深层分析**
 
-半导体｜SK海力士批准54万亿韩元芯片扩产计划，将在龙仁清州新建两座晶圆厂，应对AI时代存储器需求增长（财联社）
+这一争议背后是三重逻辑的交织。首先是**供应链安全逻辑**。刚果（金）供应全球约68%的钴，绝大多数出口到中国，同时该国2025年以340万公吨产量成为非洲最大铜生产国。随着美国寻求减少对中国关键矿产供应链的依赖，刚果（金）已成为中美争夺战略资源的焦点。铀含量争议若被坐实，可能成为西方限制中国获取关键矿产的新借口。
 
-AI算力｜数据中心公司Switch秘密递交IPO申请，光通信板块周五大涨，Coherent涨超13%（财联社）
+其次是**环境标准与贸易壁垒逻辑**。铀作为放射性金属，其含量标准涉及环境安全与贸易合规的双重维度。刚果（金）政府称矿脉"天然含有"放射性金属，暗示这是地质特征而非人为污染，但调查机构称钴产品"含有大量铀"，双方对"大量"的定义可能存在分歧。这一争议也可能演变为新的非关税贸易壁垒。
 
-银行｜政策轮番鼓励银行理财入市，但直投权益敞口从2.38%降至1.86%，客户诉求与合规边界是主因（财联社）
+第三是**中非合作声誉逻辑**。刚果（金）中资矿业企业协会强调"严格遵守当地矿业法规和国际贸易检测规范"，并称将"常态化开展产品质量抽检工作，公开透明公示产品质检信息"。这反映出中资企业对国际舆论敏感性的提升，也暗示此前可能存在信息披露不足的问题。
 
-有色｜美国强化关键矿产供应链建设，三大项目获5800万美元融资支持，Westwater Resources股价单日涨86%（财联社）
+**影响与前瞻**
 
----
+这一争议对全球新能源产业链具有连锁影响。钴是锂电池关键原料，铀含量问题若引发进口国加强检测或限制，将增加中资矿企合规成本，也可能加速下游企业寻找替代供应链。刚果（金）政府宣布咨询国际原子能机构，表明其试图通过第三方权威背书维护出口信誉。
 
-### QDII 溢价与申购额度监测
-
-📊 **场内ETF溢价率**
-
-| ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
-|-----|------|-------|------------|------|
-| 纳指ETF国泰 | 513100 | 13.53% | ↑2.05% | △溢价 |
-| 纳指ETF广发 | 159941 | 12.87% | ↑2.13% | △溢价 |
-| 纳斯达克100ETF招商 | 159659 | 9.78% | ↑1.45% | △溢价 |
-| 标普500ETF博时 | 513500 | 8.75% | ↑0.44% | △溢价 |
-| 标普500ETF南方 | 513650 | 7.34% | ↑0.33% | △溢价 |
-| 标普500ETF国泰 | 159612 | 7.12% | ↑0.29% | △溢价 |
-
-QDII溢价整体偏高，纳指ETF国泰溢价率最高达13.53%，较昨日扩大2.05个百分点，投资者需关注溢价风险。
-
-**场外QDII申购额度**
-
-| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
-|------|------|---------|---------|-----------|------------|
-| 建信纳指100c | 012752 | 3.3301 | 限大额 | 100元 | — |
-| 建信纳指100d | 023422 | 3.3460 | 限大额 | 100元 | — |
-| 建信纳指100a | 539001 | 3.4409 | 限大额 | 100元 | — |
-| 大成纳指100a | 000834 | 6.2993 | 限大额 | 10元 | — |
-| 大成纳指100c | 008971 | 6.2415 | 限大额 | 10元 | — |
-| 华安纳指100c | 014978 | 8.0318 | 限大额 | 10元 | — |
-
-纳指100相关QDII普遍限大额，日累计限额仅10-100元，申购通道紧张。
-
-**热门全球 QDII 关注**
-
-| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
-|------|------|---------|---------|-----------|------------|
-| 广发全球精选 | 021277 | 6.1974 | 限大额 | 10000元 | — |
-| 华夏全球科技 | 024239 | 2.6143 | 限大额 | 5000元 | — |
-| 建信新兴市场 | 018147 | 2.2390 | 限大额 | 5000元 | — |
-| 华安法国CAC40 | 021540 | 1.1242 | 限大额 | 5000元 | — |
-| 华夏移动互联 | 002891 | 2.6000 | 限大额 | 1500元 | — |
-| 国富全球科技互联 | 021842 | 6.7778 | 限大额 | 1000元 | — |
-
-全球QDII主动基金普遍限大额，申购额度紧张，投资者需提前规划。
-
----
-
-### 估值水位与情绪
-
-📊
-
-| 指数 | PE(TTM) | PE分位 | PB | PB分位 | 股息率 | 估值结论 |
-|------|---------|--------|-----|--------|--------|---------|
-| 红利低波 | 8.19 | 71.96% | 0.84 | 54.80% | 4.51% | 股息稳健 |
-| 中证红利 | 8.38 | 74.84% | 0.82 | 43.32% | 4.41% | 股息稳健 |
-| 中证白酒 | 19.64 | 13.80% | 4.24 | 4.32% | 4.48% | 深度低估 |
-| 沪深300 | 14.41 | 87.56% | 1.47 | 54.76% | 2.55% | 极贵 |
-| 中证500 | 37.27 | 87.60% | 2.54 | 81.36% | 1.33% | 偏贵 |
-| 创业板指 | 45.02 | 56.72% | 5.92 | 70.28% | 0.87% | 中性偏贵 |
-| 科创50 | 199.55 | 97.81% | 8.27 | 96.69% | 0.25% | 极贵 |
-| 恒生科技 | 23.85 | 42.12% | 2.67 | 43.41% | 0.95% | 偏低 |
-| 中概互联50 | 17.27 | 8.04% | 2.24 | 5.24% | 0.99% | 深度低估 |
-| 纳斯达克100 | 30.98 | 51.32% | 9.37 | 82.40% | 0.42% | 偏高 |
-| 标普500 | 25.93 | 63.36% | 5.62 | 97.52% | 1.00% | PB极贵 |
-
-估值数据显示，A股红利类指数PE分位处于70%以上高位，但股息率仍具吸引力；中证白酒、中概互联50估值处于历史低位，具备安全边际；科创50、标普500 PB分位接近历史极值，需警惕估值回调风险。
+从更宏观视角看，关键矿产正成为地缘政治新战场。美国此前已通过《通胀削减法案》限制中国获取关键矿产，此次铀含量争议可能成为新的施压工具。中资企业需加强国际标准对接与信息披露，避免被卷入"资源民族主义"与"环境标准武器化"的博弈。刚果（金）作为资源大国，也在平衡与中国合作关系与西方压力之间寻找定位。
