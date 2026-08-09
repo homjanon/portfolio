@@ -2,7 +2,7 @@
 """
 读取 report.md → 调用 LLM 转换为口语化广播稿 → 输出 script.txt
 主模型: Agnes agnes-2.0-flash (AGNES_API_KEY)
-次选: NVIDIA DeepSeek-V4-Pro (NVIDIA_API_KEY)
+次选: NVIDIA MiniMax-M3 (NVIDIA_API_KEY)
 兜底: NVIDIA Nemotron-3 Ultra 550B (NVIDIA_API_KEY)
 LLM 失败时直接复制 report.md 作为 script.txt
 
@@ -20,10 +20,10 @@ OUTPUT_PATH = sys.argv[2] if len(sys.argv) > 2 else "script.txt"
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from call_llm import LLM_CONFIGS, _call_llm
 
-# 广播稿专用顺序：Agnes 主用 → NVIDIA DeepSeek-V4-Pro 次 → NVIDIA Nemotron-3 Ultra 550B 兜（与日报一致）
+# 广播稿专用顺序：Agnes 主用 → NVIDIA MiniMax-M3 次 → NVIDIA Nemotron-3 Ultra 550B 兜（与日报一致）
 _SCRIPT_ORDER = [
     "Agnes agnes-2.0-flash",
-    "NVIDIA DeepSeek-V4-Pro",
+    "NVIDIA MiniMax-M3",
     "NVIDIA Nemotron-3 Ultra 550B",
 ]
 _MODEL_CHAIN = [c for name in _SCRIPT_ORDER

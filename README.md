@@ -32,7 +32,7 @@ schedule / workflow_dispatch
 | 优先级 | 模型 | API 端点 | 环境变量 |
 |--------|------|----------|---------|
 | ① 主模型 | **Agnes agnes-2.0-flash** (`agnes-2.0-flash`) | `apihub.agnes-ai.com/v1` | `AGNES_API_KEY` |
-| ② 次选 | **NVIDIA DeepSeek-V4-Pro** (`deepseek-ai/deepseek-v4-pro`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
+| ② 次选 | **NVIDIA MiniMax-M3** (`minimaxai/minimax-m3`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
 | ③ 兜底 | **NVIDIA Nemotron-3 Ultra 550B** (`nvidia/nemotron-3-ultra-550b-a55b`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
 
 - 三个模型依次尝试，前一个失败（异常或输出 <500 字符判为近空）自动切换到下一个
@@ -135,7 +135,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 | Secret | 用途 |
 |--------|------|
 | `AGNES_API_KEY` | Agnes API Key（免费）；日报+广播稿主选 Agnes agnes-2.0-flash（`apihub.agnes-ai.com/v1`） |
-| `NVIDIA_API_KEY` | NVIDIA API Key；日报+广播稿次选 DeepSeek-V4-Pro（`deepseek-ai/deepseek-v4-pro`）+ 兜底 Nemotron-3 Ultra 550B（`nvidia/nemotron-3-ultra-550b-a55b`），均 `integrate.api.nvidia.com/v1` |
+| `NVIDIA_API_KEY` | NVIDIA API Key；日报+广播稿次选 MiniMax-M3（`minimaxai/minimax-m3`）+ 兜底 Nemotron-3 Ultra 550B（`nvidia/nemotron-3-ultra-550b-a55b`），均 `integrate.api.nvidia.com/v1` |
 
 ## 广播稿转换（md_to_script）模型链
 
@@ -147,13 +147,13 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 | 优先级 | 模型 | 密钥 | 说明 |
 |--------|------|------|------|
 | ① 主用 | Agnes agnes-2.0-flash | `AGNES_API_KEY` | 默认主模型 |
-| ② 次选 | NVIDIA DeepSeek-V4-Pro | `NVIDIA_API_KEY` | 主模型异常或近空（<500字符）即切换 |
+| ② 次选 | NVIDIA MiniMax-M3 | `NVIDIA_API_KEY` | 主模型异常或近空（<500字符）即切换 |
 | ③ 兜底 | NVIDIA Nemotron-3 Ultra 550B | `NVIDIA_API_KEY` | 前序模型连续报错 2 次（`_call_llm` 内部重试）仍未产出有效内容即切换 |
 | 末路 | 复制原文 | — | 三模型全失败，直接复制 `report.md` 为 `script.txt`，避免 workflow 中断 |
 
 **MP3 完整性防护**（`md_to_mp3.py`）：Edge TTS 合成后用 `ffprobe` 校验时长（预期 ≈ 广播稿字数 ÷ 4.5 秒；阈值 = max(60s, 预期×0.6)），**疑似截断（时长过短）则删除并自动重试 1 次，仍截断则不部署**，杜绝"部分音频上线"。广播稿 `script.txt` 随报告入库为 `docs/daily-script.txt`，便于核对每日实际播报文本。
 
-> 日报与广播稿模型链相互独立、结构一致：均为 **Agnes 主 → NVIDIA DeepSeek-V4-Pro 次 → NVIDIA Nemotron-3 Ultra 550B 兜**（见 `scripts/call_llm.py` 的 `LLM_CONFIGS` 与 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
+> 日报与广播稿模型链相互独立、结构一致：均为 **Agnes 主 → NVIDIA MiniMax-M3 次 → NVIDIA Nemotron-3 Ultra 550B 兜**（见 `scripts/call_llm.py` 的 `LLM_CONFIGS` 与 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
 
 ## 文件结构
 

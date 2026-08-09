@@ -2,7 +2,7 @@
 """
 调用 LLM 生成日报：
   主模型: Agnes agnes-2.0-flash (AGNES_API_KEY)
-  次选: NVIDIA DeepSeek-V4-Pro (NVIDIA_API_KEY)
+  次选: NVIDIA MiniMax-M3 (NVIDIA_API_KEY)
   兜底: NVIDIA Nemotron-3 Ultra 550B (NVIDIA_API_KEY)
 
 用法: python3 scripts/call_llm.py
@@ -24,10 +24,10 @@ LLM_CONFIGS = [
         "model": "agnes-2.0-flash",
     },
     {
-        "name": "NVIDIA DeepSeek-V4-Pro",
+        "name": "NVIDIA MiniMax-M3",
         "api_url": "https://integrate.api.nvidia.com/v1/chat/completions",
         "api_key_env": "NVIDIA_API_KEY",
-        "model": "deepseek-ai/deepseek-v4-pro",
+        "model": "minimaxai/minimax-m3",
     },
     {
         "name": "NVIDIA Nemotron-3 Ultra 550B",

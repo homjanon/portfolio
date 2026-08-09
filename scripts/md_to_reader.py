@@ -743,6 +743,12 @@ def md_to_html(md_file):
     html = html.replace('__CONTENT__', body_html)
     html = html.replace('__PLAYER_SCRIPT__', PLAYER_JS)
 
+    # mp3 版本参数：报告日期 YYYYMMDD，URL 每日唯一 → 绕过 Cloudflare/浏览器/ServiceWorker 对固定 URL 的缓存（播放必为当天最新）
+    _m = re.search(r'(\d{4})年(\d{1,2})月(\d{1,2})日', md_text)
+    if _m:
+        _ver = f'{_m.group(1)}{int(_m.group(2)):02d}{int(_m.group(3)):02d}'
+        html = html.replace("'daily-report.mp3'", f"'daily-report.mp3?v={_ver}'")
+
     return html
 
 
