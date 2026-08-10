@@ -9,7 +9,7 @@ v37: 市场全景A股/美股/港股改先表格后叙述(与全球/大宗/估值
   data_market_global.json   美股+全球主要指数         东财push2 + yfinance兜底
   data_forex_rate.json      汇率/商品/中美债券        akshare期货 + 中美债收益率
   data_valuation.json       中美核心指数估值+PE/PB分位 雪球蛋卷API
-  data_news.json   全球Top20新闻源    Google News RSS 美国一地(30条→去重,LLM选≤10) + 联合早报(按缺口补齐至20)
+  data_news.json   全球Top20新闻源    Google News RSS 美国一地(40条→去重,LLM选≤10且互不重复) + 联合早报(按缺口补齐至20)
   data_extra.json           资金面+QDII+涨停/跌停  akshare(汇率/资金流/QDII)  v29: 场外QDII纳指100/标普500可申购大额度
 
 每个文件：{"ts":"...", "ok":true/false, "data":..., "error":"..."}
@@ -838,14 +838,14 @@ def _fetch_zaobao_raw():
 
 
 def _fetch_rss_other():
-    """Top20 双源：谷歌美国一地抓30条(去重,LLM精选≤10) + 联合早报最新10条。
-    谷歌：仅美国一地(hl=en-US)一次抓30条，失败/空结果指数退避重试3次（应对间歇限流/429/非法XML）；
+    """Top20 双源：谷歌美国一地抓40条(去重,LLM精选≤10且互不重复) + 联合早报最新10条。
+    谷歌：仅美国一地(hl=en-US)一次抓40条，失败/空结果指数退避重试3次（应对间歇限流/429/非法XML）；
     解析带 HTTP 状态检查 + lxml recover 容错；主源仍失败则兜底谷歌英国区（同 TOPIC 换 hl=en-GB&gl=GB&ceid=GB:en），
     再失败由财联社/格隆汇补位；
-    去重后交给LLM精选≤10(英译中)；
+    去重后交给LLM精选≤10(英译中)，LLM 输出条目必须互不重复，候选不足则按实际条数输出由财联社/格隆汇补位；
     早报：联合早报中港台即时（hub.slarker.me 主 + rsshub.rssforever.com 备），取最新10条。"""
     TOPIC = "CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx6TVdZU0FtVnVHZ0pWVXlnQVAB"
-    MAX_PER = 30
+    MAX_PER = 40
 
     def _parse(url):
         r = requests.get(url, headers={"User-Agent": UA}, timeout=30)
@@ -927,13 +927,16 @@ def _fetch_rss_other():
         t = re.sub(r"<[^>]+>", " ", t)
         t = re.sub(r"[^\w\u4e00-\u9fff]+", "", t).lower()
         return t
+    _raw_cnt = len(items_google)
     seen, deduped = set(), []
     for it in items_google:
         key = _norm(it["title"])
         if key and key not in seen:
             seen.add(key)
             deduped.append(it)
+    _dup_cnt = _raw_cnt - len(deduped)
     items_google = deduped
+    print(f"    [谷歌新闻·美国] 去重后 {len(items_google)} 条（原始 {_raw_cnt} 条，丢弃重复 {_dup_cnt} 条）")
 
     # 联合早报：取最新 10 条（feed 已按时间倒序；长文留给深度专栏独立源）
     items_zaobao = _fetch_zaobao_raw()[:10]
