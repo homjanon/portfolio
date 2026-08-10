@@ -1,72 +1,190 @@
-# 2026年8月10日 星期一 全球金融资讯日报
+# 2026年8月11日 星期二 全球金融日报
 
-> 查询时间：2026年8月10日 星期一 北京时间 06:23
-> 预抓取数据时间戳：2026-08-10 06:23:33–06:23:34
+查询时间：2026-08-11 06:32（北京时间）
 
-**今日定性导语**：今日为周一开盘前的新闻日，三大市场（A股、美股、港股）均于上周五（8月8日）收盘后进入周末休市。当日新闻主线集中在五条：①**台风"白海豚"登陆浙江沿海**，上海/浙江/福建超100万人疏散，两大机场取消近1400架次航班；②**中美科技博弈外溢至学术领域**，美国国防部首次将复旦、上海交大列入国家安全限制名单，中国商务部首次将欧洲民用大学纳入出口管制清单；③**苹果测试长鑫科技存储芯片**，长鑫Q2营收同比暴涨716%、跃居全球DRAM第四；④**中国量化基金7月重挫**，DeepSeek创始人梁文锋旗下九只产品跌幅均超20%；⑤**美国宏观与就业信号走弱**，7月非农意外疲弱、CPI数据成本周焦点，叠加美债市场对财长贝森特操作的解读分歧。
-
----
-
-## 一、全球 Top20
-
-### 第1块：谷歌新闻精选（10条）
-
-1. **巴菲特接班人阿贝尔大举动用现金储备**：伯克希尔哈撒韦新任CEO阿贝尔启动大规模资金部署，公司购入约100亿美元Alphabet股票，同时回购45亿美元自家股票，标志着"现金堆"策略转向积极配置。（[CNBC](https://news.google.com/rss/articles/CBMijgFBVV95cUxPNUs1bUp5RGRRZ0N2dHpkQklja25FRGhoQVVyTVV6SU5IVHZFU1pacHFwODZRNWhrdy1UYXVwNllBaFI4R0t6S1U5c25BTnJWRmc0WHlsc2J0NnNYU0s5NGxXelJ1YWFZcHNiMS1ZbVB6V1NhSXJ3ZkY3SlBLNkVWejFjYkV2LTZYMm50bHRB0gGTAUFVX3lxTE9tcTN5M0Fza2FmWmRQM01HSWN0aXgyRXgyZ0Z6bGQzSXhCSXBVZVcwWS1odkpCbVdMeTVUdHN6VkZlcW1RS0Nsc2IxVDc0Vms0bnRFYnU3VFpGUk1ERGZNR3djM2JyYUgzMzI0SlY4cXJTX3VyYldNX1BuS1poakk4TUFJTGtScGM0NDBPUmVNRXBkSQ?oc=5)）
-
-2. **中国释放28万亿美元资本市场挑战美国AI霸权**：彭博报道，中国正借助庞大的资本市场体量推动AI产业融资潮，AI相关企业上市数量激增，被视为中美科技竞争进入资本维度对决的标志性事件。（[Bloomberg.com](https://news.google.com/rss/articles/CBMivgFBVV95cUxOdFdvZ2tPSDZZdVpMbUxQLXlSOGZTeHd3QlA1LXR5Y1M4d1ZlWnpIVkNRdjd2MTFmZmVGemFvYlJLUzVKeDBPUFdLUE9ENGY4RkhwaDBYY3U1V25DNHpTQUZFbVlUVXhUSnZ1TUJJbmlvNmhxZ3JOS1EyQlE5Yk9WSUhtUkd1U2ZqTzRBalVfOUlIa01ZRFZ3TVdJd09CVWRVckpaY2RxMlp5YjV6WTBMSXFZTjhLWFBLVWN5ekJ3?oc=5)）
-
-3. **美国7月非农意外疲弱，通胀治理难度上升**：CNN报道，7月就业报告显示雇主招聘意愿明显减弱，劳动力市场出现逆转迹象；华尔街普遍认为"几乎无可取之处"，通胀回落路径更加复杂。（[CNN](https://news.google.com/rss/articles/CBMie0FVX3lxTE0tN3Izb1NCd1lLUWFpa09DYldTZ1JYVm56QnBhcW5ublZiTlppYkNDcklDdzByMGxqOHV1UEFqM25BZVh4NHhLbVJLNEd1UjkzMmhSN1hmbWVvNzRZUzRLamhNNXd2VXFlajVXZWVLVU9MOUNXUnZvcHV5WQ?oc=5)）
-
-4. **本周两大关键考验：AI基建与通胀数据**：本周市场关注美国7月CPI数据及AI基础设施投资进展，被视为判断通胀粘性与AI泡沫成色的双重信号。（[Yahoo Finance](https://news.google.com/rss/articles/CBMixwFBVV95cUxQVElYTnFPQ09WVjFBRFZULVRza1RuN0RmdE5ZZnJ5emJlSnhsSnFCdGY3T3lPUklQVmZOZkRkclhqZXYyWThITDViOU03TTRqdEQxWGlla1VMUUpWUVFveWtKMUdmazRLTklyMjhEd0hreENMSDJfTXBleXFVYmFPX3FPVm1ZUWd3RnVyc3E4Rk40X2pTdURmc1BfVngzZzVsQlRqZFhVaVJzQ2NYbDRxaE1hcUdKWmE4SjVjZ1dyeHZtd2dDYWRV?oc=5)）
-
-5. **SpaceX锁仓期反弹3270亿美元，投资者质疑此前抛售**：福布斯报道，SpaceX在锁仓期出现强势反弹，市值回升约3270亿美元，逼近IPO价格，暗示此前市场抛售或为误判。（[Forbes](https://news.google.com/rss/articles/CBMirAFBVV95cUxORWFtanFFMXMzOXZXREgzWHJoNGpyRXVYR0o5SGZXMDExU2F6MkFLZFRqVk9jYno0d1Z1MHN5X015MEI3ZmY5bkc3bVFIVmRfNlVJbjMyZ3k2M3JucFNqLTVhSy1iM0lYMDhoZWZiWmQ3SVVKajE3WEJWVmx1VzRLR29MSDZVaUhOcXRENlRXRTFFQy1pOTVQdjdIcTdWLVFPM25tZmNYZUYzWG0w?oc=5)）
-
-6. **美联储主席沃什12字表态被指刺穿华尔街信心**：沃什以简短措辞暗示对利率路径的耐心可能正在耗尽，市场解读为偏鹰信号，引发华尔街对宽松预期回撤的担忧。（[Yahoo Finance](https://news.google.com/rss/articles/CBMilAFBVV95cUxPWDk0NXBtc3ZUOFVJZWktMFhlT2JvZVdkT1JPd1A5ZW9oanRDQWJ6N09hU3pwVjlDTU52VTRGQm5OY0gtVjEwWFhvQ1N1U1RMWFppemZiek9LcjVBUnE4c0FYZkJZd1BrQ25qazBXTUhNdUxjQl9JYlhrRHY5Tl90T1E0NTNTS0d2VjBLVnNreDRPWi1L?oc=5)）
-
-7. **美债市场对财长贝森特操作释放不安信号**：彭博报道，华尔街观察人士认为，贝森特近期一系列操作背后透露出债券市场对财政路径的深层焦虑，长端利率与汇率联动出现异动。（[Bloomberg.com](https://news.google.com/rss/articles/CBMitAFBVV95cUxPTGtZcUxST3BKd3FOQ2l3TDltSUlfQl82cGhRLU9XOHZNdHltaEFUM3RaMmNzdGRIQWJRSWR1c0VEUVJDYTVycVhRbVpTNjc4UFBFdUo2TnBHTWF0MjVIc0ZWb254Uzc4MXlkQnFORUd3d0RWT3VJdkpWMUJfTVNIOGtvUTNZVUVaUUVOYXRsQUtFeXZmbzRSOHNSWHRGT2FXaTFNNGNuZXFwVUs1T2JUUnpDWnM?oc=5)）
-
-8. **美国参议院推进里程碑式加密法案**：路透报道，在8月休会前，参议院推进加密货币监管框架立法，被视为数字资产合规化的重要一步；但部分议员对关键条款仍存异议。（[Reuters](https://news.google.com/rss/articles/CBMivgFBVV95cUxOMVhmVXltaDhxQW1BeWtBZktQbmNhUGI1Y0s5X2xJSDVaSkZPLXZlckdUMWRoSmcwX0NvUmtERjBrc3dRc1lPQXMxZzVlVmFVMnpXMjEwTGZzaEs0anJPdzJ4UU9RMFRpVjFHMWJKekFNaThIZjA4cUZZMm85MVhfbGt2YlNKV2d3SHY5TGI5UjdXOWlocTdiQ1RqMUtQMXBDZHlzTUdTZDNGbW5yeWtwWl81TTZ0ZTNSeHNlTTdB?oc=5)）
-
-9. **塞浦路斯天然气将于2028年上半年供应欧洲**：塞浦路斯能源部长宣布，随着欧盟寻求摆脱对俄能源依赖，地中海东部天然气将在2028年上半年进入欧洲市场，成为新的供应来源。（[AP News](https://news.google.com/rss/articles/CBMipwFBVV95cUxPM0xBMHlUTzZVelZLcmxkM0k2cTB6eUgxSG9wVW5veW1xN3BzX0NaNzc4SGEycjBrQTNHVWlFVDZtWmZZQWRlTnB1cGNNLU1uXzdVb1ZmdC1RYzhLdFh3dk5vNWFTRklQSHhTbnpQMncxVlNYVURhaHBNMDRXQVdmTVFiLXBWUXowZDhoX0NWNHplWUNRbC1iTUttNzNRYzRLcUdrZTJ0bw?oc=5)）
-
-10. **以色列小公司被指与OpenAI、Anthropic、Meta的AI失控事件相关**：CNBC调查显示，一家以色列初创企业在针对OpenAI、Anthropic和Meta的"流氓AI"渗透测试中扮演关键角色，揭示AI代理安全治理的全球性漏洞。（[CNBC](https://news.google.com/rss/articles/CBMipgFBVV95cUxQMU95TFhjeUdscnZoOElsdnRhRmV5eTNEZ0dpa3VRTmFCdEVmSTRNOGIyWjJOcTl1aFo3OENPNC1DTFJoWGk5YTJjSVhEQjd1ZzhFQVFteEI1R3dwb0ctbkNuREx2MkpMbHVMVnBfczV5eG1NQlZ2anZ6MXlDdnplS2ljSWVoVlBQaWhZS0JfdUQxNGZEY3VqLUZBTWY5MENKRUpKTnpn0gGrAUFVX3lxTE1uTHVPT3VwRk16aWFGZFFmdEI2akJOaXhmVmpjNkhzVDRkdUpoRDcyZS1HQ2NzZzAyRTJzcjJGTDIyNG5CYTMxY2NxNC1NS2hZQ2VRdUNZUVgweWNPZnBoQjJpd3BudHN5WFJFU2RrcU1EbU5OMEprNGlHQVJzRk1UbndLeUNOSjd0S0FiNjhUbjBkVXdaN2lkdlBTRWt1MjZ3WVh1SmtyNVdXcw?oc=5)）
-
-### 第2块：联合早报精选（10条）
-
-11. **台风"白海豚"登陆浙江，逾百万人疏散**：今年第13号台风"白海豚"星期天傍晚在浙江玉环登陆，中心附近最大风力14级；中央气象台发布今年第二个红色预警，浙江、福建、上海合计疏散超100万人，上海两大机场取消1384趟航班。（[联合早报](https://www.zaobao.com/news/china/story20260809-9495660)）
-
-12. **苹果测试长鑫科技存储芯片，用于iPhone与MacBook**：华尔街日报报道，苹果正多条产品线测试中国长鑫科技（CXMT）生产的DRAM芯片；长鑫Q2营收同比暴涨716%，以7%份额跃居全球DRAM市场第四。（[联合早报](https://www.zaobao.com/news/china/story20260809-9495062)）
-
-13. **中美科技竞争外溢，大学被推向国安前线**：美国国防部7月底首次将复旦、上海交大列入国家安全限制名单；次日中国商务部首次将欧洲民用大学——波兰弗罗茨瓦夫理工大学纳入出口管制清单。受访学者认为学术机构正被纳入国家安全框架，"寒蝉效应"或削弱跨境科研合作。（[联合早报](https://www.zaobao.com/news/china/story20260809-9468985)）
-
-14. **中国量化基金7月重挫，梁文锋旗下基金跌逾20%**：朝阳永续数据显示，中国纯多头量化基金7月平均亏损17%，追踪的1300余只产品中仅4%取得正收益；DeepSeek创始人梁文锋旗下被追踪的九只产品跌幅均超20%，其中八只今年以来转为亏损。（[联合早报](https://www.zaobao.com/news/china/story20260809-9492810)）
-
-15. **李家超：香港最迟9月发表首份五年规划文件**：香港特首李家超表示，自6月展开公众咨询以来已举办超90场咨询会，收到与五年规划相关意见约1.38万份、与施政报告相关约8500份；五年规划将设约束性指标与预期指标，目标9月以内发表。（[联合早报](https://www.zaobao.com/news/china/story20260809-9494252)）
-
-16. **戴庆成：罗奇的香港"玩完论"**：专栏作者戴庆成撰文回顾罗奇对香港经济的悲观判断，结合近期香港举办多场国际足球表演赛拉动消费的举措，探讨香港经济结构转型与博彩业依赖的反思。（[联合早报](https://www.zaobao.com/news/china/story20260810-9494911)）
-
-17. **中国驻古巴大使：将助力古巴在能源自主道路上稳步前行**：中国援古新一批家用太阳能设备首批物资上周五交付，古巴副总理出席；大使华昕表示这是"一带一路"框架下能源民生合作成果，恰逢卡斯特罗百年诞辰。（[联合早报](https://www.zaobao.com/news/china/story20260809-9494083)）
-
-18. **中印再磋商边境事务，同意保持外交军事渠道沟通**：中印边境事务磋商和协调工作机制第36次会议在新德里举行，双方同意共同筹备第25次边界问题特别代表会晤，并讨论划界、边境管控、机制建设、跨境合作等议题。（[联合早报](https://www.zaobao.com/news/china/story20260809-9492974)）
-
-19. **中国考察队抵北冰洋，开始半月冰站调查**：中国第16次北冰洋考察队"雪龙2"号星期天上午在北冰洋中央区开始首次冰站调查作业，标志着为期约半个月的冰站综合调查正式开启，作业浮冰厚约1.5米。（[联合早报](https://www.zaobao.com/news/china/story20260809-9494411)）
-
-20. **南水北调中线工程调水突破800亿立方米，惠及1.2亿人**：南水北调中线工程通水近12年来累计向北方调水突破800亿立方米，惠及河南、河北、天津、北京近1.18亿人；北京中心城区用水中"南水"占比近80%，天津主城区几乎全部用水来自南水北调。（[联合早报](https://www.zaobao.com/news/china/story20260809-9493413)）
+**今日定性导语**：A股震荡分化，沪指涨0.67%守住4000点关口，科创50与创业板指跌超0.3%；港股逆市走强，恒指涨1.05%、恒生科技涨1.26%领涨；美股三大指数集体收跌，道指跌0.11%、纳指跌0.32%，光通信与半导体板块重挫。市场主线聚焦：①英伟达拟联合阿波罗、黑石等六大金融巨头筹集5000亿美元投向AI基建，华尔街史上最大规模融资之一；②霍尔木兹海峡重启预期降温，国际油价大涨超5%，WTI突破82美元；③美联储鹰派发声，克利夫兰联储主席哈马克称"一次加息不够，或需多次加息"，9月加息概率升至51.2%；④中国AI产业链凸显增长韧性，国际资本借道ETF加力布局；⑤台风"白海豚"袭击华东，上海逾900航班取消，政府预拨3.8亿救灾。
 
 ---
 
-## 二、深度观察专栏
+## 一、市场全景
 
-### 苹果测试长鑫存储芯片：中美半导体供应链的"双向渗透"信号
+### A股收盘（8月10日）
 
-**事件概述**：据《华尔街日报》报道，苹果公司正多条产品线测试中国长鑫科技（CXMT）生产的DRAM存储芯片，涵盖iPhone与MacBook。Counterpoint Research数据显示，长鑫科技2026年第二季度营收同比暴涨**716%**，以**7%**的市场份额跃居全球DRAM市场第四位，仅次于三星、SK海力士与美光三家占据全球**90%**份额的巨头。（[联合早报](https://www.zaobao.com/news/china/story20260809-9495062)）
+| 指数 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| 上证指数 | 3966.59 | **↑0.67%** |
+| 深证成指 | 14316.96 | **↑0.04%** |
+| 沪深300 | 4702.02 | **↑0.16%** |
+| 科创50 | 1737.77 | **↓0.36%** |
+| 创业板指 | 3537.21 | **↓0.73%** |
 
-**深层分析**：
+A股今日呈现明显分化格局，沪指在权重股支撑下涨0.67%逼近4000点，深成指基本平收；创业板指与科创50受科技股回调拖累跌超0.3%。多重稳市信号持续释放——从中央政治局会议到监管部门密集座谈，长钱持续流入、优质供给增加，市场韧性底色渐显。中国AI产业链在震荡中凸显增长韧性，国际资本借道ETF加力布局算力基础设施、半导体等硬科技赛道，外资调研密度持续攀升。
 
-**一、苹果"双源采购"逻辑的回归与升级**。苹果此次测试长鑫芯片并非孤立事件，而是其多年"双源采购+成本对冲"策略的延续。在地缘政治不确定性上升的背景下，苹果一方面需要降低对SK海力士、三星等韩系DRAM的过度依赖（历史上苹果曾因供应商集中度过高遭遇产能瓶颈），另一方面也借此在价格谈判中获取筹码。对长鑫而言，进入苹果测试体系意味着其良率、稳定性与制程水平已具备服务全球顶级消费电子品牌的初步资格——这是中国存储芯片产业从"国产替代"迈向"全球供应"的关键一步。
+### 美股收盘（8月11日凌晨）
 
-**二、长鑫的"716%增速"背后的产能与资本逻辑**。长鑫Q2营收暴涨716%并非单纯的市场份额抢夺，而是其合肥工厂大规模扩产+中国本土AI算力需求爆发的双重叠加。一方面，国内大模型训练、智能终端与服务器对DRAM的消耗量激增；另一方面，长鑫在DDR5与HBM方向的研发投入开始进入收获期。但需注意，716%的同比增速建立在相对较小的基数之上，**7%的全球份额**与三星、SK海力士仍有数量级差距，短期内难以撼动三巨头格局。
+| 指数 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| 道琼斯工业 | 53975.98 | **↓0.11%** |
+| 标普500 | 7753.11 | **↓0.06%** |
+| 纳斯达克综合 | 26605.36 | **↓0.32%** |
 
-**三、对全球半导体供应链的连锁影响**。苹果测试长鑫的信号意义大于实际采购量。一旦苹果正式纳入长鑫，将形成"美企采购中国存储芯片"的示范效应，可能促使戴尔、惠普等PC厂商跟进评估；同时也将加剧美国国内对"关键技术流向中国"的担忧，或推动新一轮出口管制细则出台——尤其是涉及EUV光刻机、HBM相关设备的对华限制。
+美股三大指数集体收跌，光通信与半导体板块重挫——费城半导体指数跌2.94%，Coherent暴跌超14%，Lumentum跌超8%。英伟达收跌2.86%，盘中有消息称其将与六家金融巨头建立战略合作伙伴关系，筹集5000亿美元资金用于AI基础设施建设，与此同时信用违约互换价格创两周最大单日升幅。"科技七巨头"多数上涨，亚马逊涨1.30%，微软涨1.23%，特斯拉涨0.70%。标普500能源指数逆势上涨4.6%，创2025年4月以来最佳单日表现。
 
-**影响与前瞻**：短期看，长鑫进入苹果测试体系将提振中国半导体板块情绪，尤其是存储、设备国产化与封测链条；中长期则取决于两个变量：一是长鑫能否在2027–2028年实现HBM3/HBM4量产突破，二是中美科技博弈是否进一步升级至"全面脱钩"。若两者同步演进，全球DRAM市场可能加速形成"美韩主导高端、中国主导中低端"的双轨格局，而苹果等终端厂商将成为这一格局中最关键的"摇摆客户"。
+### 港股收盘（8月10日）
+
+| 指数 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| 恒生指数 | 25937.49 | **↑1.05%** |
+| 恒生中国企业指数 | 8621.84 | **↑1.06%** |
+| 恒生科技指数 | 4919.46 | **↑1.26%** |
+
+港股今日逆市走强，三大指数全线收涨，恒生科技指数领涨达1.26%。中概股集体走强，与美股科技股回调形成反差。市场情绪在多重稳市信号支撑下有所修复，资金对硬科技与AI产业链的配置意愿回升。
+
+### 全球其他市场（8月10日）
+
+| 指数 | 代码 | 最新价 | 涨跌幅 |
+|------|------|--------|--------|
+| 日经225 | N225 | 66970.22 | **↑2.08%** |
+| 韩国KOSPI | KOSPI | 6299.66 | **↑0.65%** |
+| 欧洲STOXX 600 | SXXP | 660.45 | **↑0.03%** |
+| 德国DAX | GDAXI | 26323.88 | **↑0.02%** |
+| 英国富时100 | FTSE | 10862.50 | **↓0.35%** |
+| 法国CAC40 | FCHI | 8726.03 | **↑0.13%** |
+
+亚太市场表现亮眼，日经225大涨2.08%领涨全球，韩国KOSPI涨0.65%。欧洲市场基本持平，英国富时100微跌0.35%。
+
+### 大宗商品与汇率
+
+| 品种 | 最新价/值 | 涨跌幅 |
+|------|-----------|--------|
+| WTI原油 | 82.11 美元/桶 | **↓0.02%** |
+| COMEX黄金 | 4452.0 美元/盎司 | **↑0.73%** |
+| COMEX白银 | 65.92 美元/盎司 | **↑0.99%** |
+| 美元/离岸人民币 | 6.7884 | — |
+| 中国10Y国债收益率 | 1.7074% | — |
+| 美国10Y国债收益率 | 4.72% | — |
+
+国际油价大幅走高，WTI收涨5.05%报82.13美元/桶，布伦特收涨4.99%报87.72美元/桶，因美伊就霍尔木兹海峡通行达成协议预期降温。国际金价升至接近每盎司4400美元，现货黄金涨1.1%报4389.29美元/盎司，现货白银涨3.57%报65.75美元/盎司。
+
+### 估值水位与情绪
+
+| 指数 | PE(TTM) | PE分位 | PB | PB分位 | 股息率 | 估值结论 |
+|------|---------|--------|-----|--------|--------|---------|
+| 红利低波 | 8.24 | 73.28% | 0.84 | 56.04% | 4.50% | 股息稳健 |
+| 中证红利 | 8.43 | 75.88% | 0.82 | 44.96% | 4.39% | 股息稳健 |
+| 中证白酒 | 20.19 | 18.36% | 4.36 | 5.16% | 4.09% | 深度低估 |
+| 沪深300 | 14.47 | 88.80% | 1.48 | 57.52% | 2.51% | 极贵 |
+| 中证500 | 37.45 | 88.04% | 2.55 | 81.80% | 1.31% | 偏贵 |
+| 创业板指 | 44.84 | 56.40% | 5.91 | 70.16% | 0.93% | 中性偏贵 |
+| 科创50 | 191.52 | 97.50% | 8.17 | 96.19% | 0.24% | 极贵 |
+| 恒生科技 | 24.13 | 43.32% | 2.70 | 46.25% | 0.94% | 偏低 |
+| 中概互联50 | 17.49 | 9.28% | 2.27 | 6.48% | 0.98% | 深度低估 |
+| 纳斯达克100 | 31.36 | 52.44% | 9.49 | 85.88% | 0.42% | 偏高 |
+| 标普500 | 26.03 | 64.48% | 5.64 | 97.84% | 1.00% | PB极贵 |
+
+---
+
+## 二、行业洞察
+
+### 全球 Top20
+
+**【谷歌精选 10 条】**
+
+1. **英伟达拟联合六大金融巨头筹集5000亿美元投向AI基建**：阿波罗全球管理、黑石集团、贝莱德、博枫资产管理、高盛、KKR等财团将与英伟达建立合作关系，共同投资人工智能基础设施建设，这将成为华尔街迄今规模最为庞大的贷款行动之一。英伟达正越来越积极地为自身及客户筹集资金，以继续建设支撑当前AI热潮的芯片、供电设施和数据中心。（[CNBC](https://news.google.com/rss/articles/CBMilAFBVV95cUxPRkc0VE5DYXlTRVNaYU1DRElZUVVwNDR3VG5aQ0pUTzlGS0c1UFNzUVA5Z3NIdFktV3hscktUVnVsS0UtR2RxZ0JQOWJZcElRZDNZRGNncXBWSTZFWFp3NWdwM054MFJ2OHVkWkpSdVJjVGFxbmNIQjdKanlZVFdmRkJvUFdzZkVlN0pCMEdqbzNCX1Yy0gGaAUFVX3lxTE90YzhwRlVTdmQ1aTNHZzl6elRlR2FJTDJTd2llX3d6Ym1yNnR1bUtRbjRjWXVkTGlZZVloanNKTDdMdmdZUFZma2hlMnYwNjNicDZUOTF6emxlaXRSbXhUejFId01ib1lyaVBnelVWRjhfTVg1ek45QjJPSlEwcWFSZm9faVB0WS1XLXlMOGR1UUNWcHVGWnBqN3c?oc=5)）
+
+2. **美联储鹰派释放强硬信号：一次升息不够，或需多次加息**：克利夫兰联储主席贝丝·哈马克表示，美联储可能需要多次加息才能推动通胀率降至2%目标水平，目前的利率水平并未对经济形成"实质性的限制"。这是自2016年以来美联储首次在同一次政策决议中出现三张方向一致的反对票。（[财联社](https://www.cls.cn/detail/2450633)）
+
+3. **英特尔计划150亿美元股票发行，转型反弹推高股价**：随着AI需求加速，英特尔股价今年已翻三倍，公司计划进行150亿美元的股票发行以支持转型战略。（[Yahoo Finance](https://news.google.com/rss/articles/CBMinAFBVV95cUxPQlZLZUs1TGx1UWhqNm1hMkRpUzZwR2lCQ3lNQTdjT3JWcmFCWWhESm9DakFoenhoZTdTOThDbE1qeWppNUlwS01UV2dBNFhsZFl2TjRxd3hfRmZJVzNHaC1mYVQ3VlRsaV9ONHBoU1JlUFNDV3hKNG9LWHRVNUo4VEpkRHF6cWh0Q2hVdllNYnEzRFVHUGZDeGFVVGU?oc=5)）
+
+4. **伯克希尔在新CEO格雷格·阿贝尔领导下开始动用现金储备**：伯克希尔·哈撒韦正在积极部署其巨额现金储备，阿贝尔已买入45亿美元其最喜爱的股票。（[Investopedia](https://news.google.com/rss/articles/CBMiwwFBVV95cUxPMjhIZ2pJUUFlUURXVlBOcDZtaUx5bWFoWlNmQkNwaTBENFJXM3BXV0tWaEZUcHFhWVMxSklMalNzaWR4LXhiNWNHVWlvUHp0eF9GYVBlaGltSlhvakp2d0RfNkhNNWcyY0twWFlHelltZzNEZURhS1BlNmkydHlmZGxYRE9YNHRRTXVFRXZRdXVKQXRqblN6d0xoNWNBSG1zOGozYmVHMWZ4cWNxWmlhcS12ZmhjWFoxNDFMYmRCU2JSNlU?oc=5)）
+
+5. **扎克伯格发表6500字长文阐述AI超级智能愿景**：Meta创始人马克·扎克伯格发布了一篇6500字的长文，详细阐述了他关于向所有人提供AI超级智能的愿景，引发广泛讨论。（[404 Media](https://news.google.com/rss/articles/CBMitgFBVV95cUxQWGVMeW1kYm9TZlloOGZrMldfLVNuczFYa1FYZXZvNkRvWlgtY2lkSzdjd2NXUGxyZXk5OHBQQXNoNkNkSDdIRHBoNWh1NEtGSThVTGNUbEZTNXZMaHZDTGladjFlb25IbnhwZ1ZzMTFvaHVkU1k0bXNJM2RVNlFlYTM2UGZYb2xYb1llS1NnUDZEaWY2amh6QUw3N2kyTEpvRDIyd1kxRkFMVUV5WU9wX0FyWlU1Zw?oc=5)）
+
+6. **Archer Aviation收购波音飞行出租车业务，股价飙升**：Archer Aviation宣布收购波音的飞行出租车企业，交易消息公布后股价大涨。波音将把其自主航空子公司出售给竞争对手Archer。（[Barron's](https://news.google.com/rss/articles/CBMiigFBVV95cUxQRGZ6SVA1Zk5UWXdLem1Ub0xlWm5QeDFrdTBoUFdYOW5URWVJTTZfVWJIWXlKQXA4X2xJR1lMOWRBWnVzbXF5U3M3QmhILVBnM2dpTC1zUnE0Ym9ROHhUWWVGdHROd0ZBc0cwc3NNQlFYVFNpZng0WTVFNElLX3gzSmp4NXE4dXZVR0E?oc=5)）
+
+7. **GameStop的瑞安·科恩正在考虑撤回560亿美元eBay收购要约**：据彭博社报道，GameStop正在权衡撤回对eBay的收购要约，eBay股价应声下跌。（[Bloomberg](https://news.google.com/rss/articles/CBMirgFBVV95cUxPYV85UTlWT1Q3OTNYT2Q2UEJ6c25rYlBneGZJODBhcmhzc0I3YU13Y0ZjckxfXzZNQlpWYzV2dU9mZms5OWdVR3VKamNxZFhlZEctZ1RsakI5bzZmTU1rR3d1TDA4WTVLSndtOTNzNkZ6bmVGM1VqT0FXQ2xwQXFTeUdwd1U5eGYzS0hlYXVwX0JuR0hPdmVzQTdCY1NRTFB2aHVFX1BtT3daZTdUMkE?oc=5)）
+
+8. **台积电否认积压10亿美元苹果芯片传闻**：分析师郭明錤否认台积电为苹果生产的A20 Pro处理器积压10亿美元的传闻，称苹果会提前三个月根据预期可用内存量来规划生产，不会出现戏剧性的在制品积压情景。（[格隆汇](https://www.gelonghui.com/live/2604433)）
+
+9. **英特尔计划150亿美元股票发行，转型反弹推高股价**：随着AI需求加速，英特尔股价今年已翻三倍，公司计划进行150亿美元的股票发行以支持转型战略。（[Yahoo Finance](https://news.google.com/rss/articles/CBMinAFBVV95cUxPQlZLZUs1TGx1UWhqNm1hMkRpUzZwR2lCQ3lNQTdjT3JWcmFCWWhESm9DakFoenhoZTdTOThDbE1qeWppNUlwS01UV2dBNFhsZFl2TjRxd3hfRmZJVzNHaC1mYVQ3VlRsaV9ONHBoU1JlUFNDV3hKNG9LWHRVNUo4VEpkRHF6cWh0Q2hVdllNYnEzRFVHUGZDeGFVVGU?oc=5)）
+
+10. **英特尔计划150亿美元股票发行，转型反弹推高股价**：随着AI需求加速，英特尔股价今年已翻三倍，公司计划进行150亿美元的股票发行以支持转型战略。（[Yahoo Finance](https://news.google.com/rss/articles/CBMinAFBVV95cUxPQlZLZUs1TGx1UWhqNm1hMkRpUzZwR2lCQ3lNQTdjT3JWcmFCWWhESm9DakFoenhoZTdTOThDbE1qeWppNUlwS01UV2dBNFhsZFl2TjRxd3hfRmZJVzNHaC1mYVQ3VlRsaV9ONHBoU1JlUFNDV3hKNG9LWHRVNUo4VEpkRHF6cWh0Q2hVdllNYnEzRFVHUGZDeGFVVGU?oc=5)）
+
+**【联合早报 10 条】**
+
+11. **中国发射卫星失利，运载火箭升空不到90秒爆炸**：8月10日晚，中国在海南文昌发射中星4B卫星，长征七号改运载火箭点火升空后约85秒发生爆炸，发射任务失利。具体原因正在进一步分析排查。（[联合早报](https://www.zaobao.com/news/china/story20260810-9499466)）
+
+12. **台风"白海豚"携暴雨袭击上海，逾900航班被取消**：台风"白海豚"星期天在浙江沿海登陆，上海普降暴雨到大暴雨，中心城区暴雨预警由黄色升级为橙色，多处出现内涝，两座机场共取消逾900趟航班。（[联合早报](https://www.zaobao.com/news/china/story20260811-9499213)）
+
+13. **中国政府预拨3.8亿救灾资金，支持浙江台风灾后恢复**：财政部、应急管理部紧急预拨1.8亿元中央自然灾害救灾资金，国家发改委同日安排2亿元支持浙江台风灾害灾后应急恢复。（[联合早报](https://www.zaobao.com/news/china/story20260810-9499049)）
+
+14. **A股"人形机器人第一股"宇树科技启动新股申购**：宇树科技在科创板正式开启新股申购，发行价150.80元，初始发行市值609亿元，中签率仅0.02%-0.05%，被形容"难度堪比中彩票"。（[联合早报](https://www.zaobao.com/news/china/story20260810-9498255)）
+
+15. **台湾人口总数连续30个月负增长**：截至7月底，台湾人口降至2323.5万人，较上月减少8563人。7月出生人数7906人，年减11.56%，平均每5.6分钟才诞生一个婴儿。（[联合早报](https://www.zaobao.com/news/china/story20260810-9497792)）
+
+16. **缪宗翰：比黄金更沉重的托付**：台湾检调追查冠病BNT疫苗采购诈骗案，扣押清单涉及158.8公斤黄金、9308万元新台币现金及名车不动产。检方指控这些财物涉及慈济基金会五年前支付的3000万美元委任报酬。（[联合早报](https://www.zaobao.com/news/china/story20260811-9498005)）
+
+17. **民进党大老贱卖土地导致亏损，台糖称8月若未提合理清偿计划将再声请管收**：吴乃仁任职台糖董事长期间贱售土地导致台糖损失1.7亿元新台币，台糖表示若无法提出合理清偿计划将再度声请管收。（[联合早报](https://www.zaobao.com/news/china/story20260810-9498592)）
+
+18. **香港市民建议港府设立"屋宇维修署"专责旧楼维修**：大埔宏福苑火灾引发社会对旧楼大维修的关注，香港特区政府有意设立独立专业代办机构监管全港逾万栋旧楼维修工程。（[联合早报](https://www.zaobao.com/news/china/story20260810-9498910)）
+
+19. **下午察：华为小米粉圈骂战成"丑陋现象"**：围绕华为"竹知了"风波，双方拥趸相互攻击升级，招来"华为小米极端粉丝相互攻击已成中国互联网最丑陋现象之一"的批评。（[联合早报](https://www.zaobao.com/news/china/story20260810-9498573)）
+
+20. **受贿近6800万人民币，中国一重集团原副总经理陆文俊一审获刑15年**：湖南省湘潭市中级法院一审公开宣判，陆文俊被判处有期徒刑15年，罚款500万元。（[联合早报](https://www.zaobao.com/news/china/story20260810-9498855)）
+
+### 持仓动态与聚焦
+
+#### 个人持仓行情快照
+
+| 标的 | 代码 | 市场 | 最新价 | 涨跌幅 |
+|------|------|------|--------|--------|
+| 招商银行A | 600036 | A股 | 38.91 元 | **↑0.28%** |
+| 招商银行H | 03968 | 港股 | 49.0 港元 | **↑0.66%** |
+| 长江电力 | 600900 | A股 | 28.05 元 | **↑1.08%** |
+| 红利低波ETF易方达 | 563020 | A股 | 1.157 元 | **↑0.52%** |
+| QQQM | QQQM | 美股 | 296.85 美元 | **↓0.29%** |
+| SPY | SPY | 美股 | 773.03 美元 | **↓0.03%** |
+
+#### 持仓聚焦（未来催化）
+
+- **半导体/AI芯片｜台积电否认积压10亿美元苹果芯片传闻，郭明錤称苹果会提前三个月规划生产（格隆汇）**
+- **AI算力/光模块｜Fermi盘后大涨34%，公司签订数据中心项目租赁协议（财联社）**
+- **券商/金融｜金融产品网络营销新规9月底起实施，保险业提前摸排整治账号端乱象（财联社）**
+- **消费电子/苹果链｜投行杰富瑞下调苹果股票评级，据称"全玻璃"iPhone因良率不佳取消（财联社）**
+
+### QDII 溢价与申购额度监测
+
+#### 场内ETF溢价率
+
+| ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
+|-----|------|-------|------------|------|
+| 纳指ETF国泰 | 513100 | 13.72% | ↑0.19% | △溢价 |
+| 纳指ETF广发 | 159941 | 13.10% | ↑0.23% | △溢价 |
+| 纳斯达克100ETF招商 | 159659 | 10.61% | ↑0.83% | △溢价 |
+| 标普500ETF博时 | 513500 | 8.98% | ↑0.23% | △溢价 |
+| 标普500ETF国泰 | 159612 | 7.92% | ↑0.80% | △溢价 |
+| 标普500ETF南方 | 513650 | 7.47% | ↑0.13% | △溢价 |
+
+QDII溢价整体偏高，纳指ETF国泰溢价率达13.72%，标普500ETF南方溢价7.47%，投资者需注意溢价风险。
+
+#### 场外QDII申购额度
+
+| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
+|------|------|---------|---------|-----------|------------|
+| 建信纳指100c | 012752 | 3.365 | 限大额 | 100元 | — |
+| 建信纳指100d | 023422 | 3.381 | 限大额 | 100元 | — |
+| 建信纳指100a | 539001 | 3.477 | 限大额 | 100元 | — |
+| 大成纳指100a | 000834 | 6.3738 | 限大额 | 10元 | — |
+| 大成纳指100c | 008971 | 6.3154 | 限大额 | 10元 | — |
+| 华安纳指100c | 014978 | 8.1262 | 限大额 | 10元 | — |
+
+#### 热门全球 QDII 关注
+
+| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
+|------|------|---------|---------|-----------|------------|
+| 华夏全球科技 | 024239 | 2.699 | 限大额 | 5000元 | — |
+| 建信新兴市场 | 018147 | 2.25 | 限大额 | 5000元 | — |
+| 华安法国CAC40 | 021540 | 1.1242 | 限大额 | 5000元 | — |
+| 广发全球精选 | 021277 | 6.2746 | 限大额 | 2000元 | — |
+| 华夏移动互联 | 002891 | 2.655 | 限大额 | 1500元 | — |
+| 国富全球科技互联 | 021842 | 6.8381 | 限大额 | 1000元 | — |
