@@ -1,14 +1,16 @@
-# 2026年8月11日 星期二 全球金融日报
+# 全球金融资讯日报 | 2026年8月11日 星期二
 
-查询时间：2026-08-11 06:32（北京时间）
+查询时间：2026年8月11日 07:17（北京时间）
 
-**今日定性导语**：A股震荡分化，沪指涨0.67%守住4000点关口，科创50与创业板指跌超0.3%；港股逆市走强，恒指涨1.05%、恒生科技涨1.26%领涨；美股三大指数集体收跌，道指跌0.11%、纳指跌0.32%，光通信与半导体板块重挫。市场主线聚焦：①英伟达拟联合阿波罗、黑石等六大金融巨头筹集5000亿美元投向AI基建，华尔街史上最大规模融资之一；②霍尔木兹海峡重启预期降温，国际油价大涨超5%，WTI突破82美元；③美联储鹰派发声，克利夫兰联储主席哈马克称"一次加息不够，或需多次加息"，9月加息概率升至51.2%；④中国AI产业链凸显增长韧性，国际资本借道ETF加力布局；⑤台风"白海豚"袭击华东，上海逾900航班取消，政府预拨3.8亿救灾。
+**今日定性导语**：A股震荡分化，上证**↑0.67%**报3966点，创业板**↓0.73%**承压；港股走强，恒指**↑1.05%**收复25900点，恒生科技**↑1.26%**领涨；美股小幅回调，纳指**↓0.32%**，道指**↓0.11%**。日经225**↑2.08%**强势反弹。新闻主线：①霍尔木兹海峡僵局推升油价，WTI大涨**5.26%**重返82美元；②英伟达拟募资5000亿美元投向AI算力，光通信板块大幅回落；③美联储9月加息概率升至**51.2%**，通胀数据成关键变量；④创新药步入业绩兑现期，机构密集调研；⑤黄金突破4400美元，多路资金涌入配置。
 
 ---
 
 ## 一、市场全景
 
 ### A股收盘（8月10日）
+
+📊
 
 | 指数 | 最新价 | 涨跌幅 |
 |------|--------|--------|
@@ -18,9 +20,11 @@
 | 科创50 | 1737.77 | **↓0.36%** |
 | 创业板指 | 3537.21 | **↓0.73%** |
 
-A股今日呈现明显分化格局，沪指在权重股支撑下涨0.67%逼近4000点，深成指基本平收；创业板指与科创50受科技股回调拖累跌超0.3%。多重稳市信号持续释放——从中央政治局会议到监管部门密集座谈，长钱持续流入、优质供给增加，市场韧性底色渐显。中国AI产业链在震荡中凸显增长韧性，国际资本借道ETF加力布局算力基础设施、半导体等硬科技赛道，外资调研密度持续攀升。
+A股今日呈现结构性分化，权重蓝筹护盘带动上证收红，但成长赛道承压。科创50与创业板指双双收跌，反映市场风险偏好有所收敛。成交额方面，上证成交**11669亿元**，深证成交**13562亿元**，两市合计超**2.5万亿元**，量能维持高位。银行、电力等防御板块表现稳健，长江电力**↑1.08%**，红利低波ETF**↑0.52%**，资金继续向高股息资产聚集。
 
 ### 美股收盘（8月11日凌晨）
+
+📊
 
 | 指数 | 最新价 | 涨跌幅 |
 |------|--------|--------|
@@ -28,19 +32,23 @@ A股今日呈现明显分化格局，沪指在权重股支撑下涨0.67%逼近40
 | 标普500 | 7753.11 | **↓0.06%** |
 | 纳斯达克综合 | 26605.36 | **↓0.32%** |
 
-美股三大指数集体收跌，光通信与半导体板块重挫——费城半导体指数跌2.94%，Coherent暴跌超14%，Lumentum跌超8%。英伟达收跌2.86%，盘中有消息称其将与六家金融巨头建立战略合作伙伴关系，筹集5000亿美元资金用于AI基础设施建设，与此同时信用违约互换价格创两周最大单日升幅。"科技七巨头"多数上涨，亚马逊涨1.30%，微软涨1.23%，特斯拉涨0.70%。标普500能源指数逆势上涨4.6%，创2025年4月以来最佳单日表现。
+美股三大指数集体收跌，科技股领跌。费城半导体指数**↓2.94%**，30只成分股全线走低，光通信板块高开低走，Coherent**↓超14%**，Lumentum**↓超8%**。英伟达**↓2.86%**，盘后消息称其拟与六家金融巨头合作筹集5000亿美元用于AI基建，信用违约互换价格创两周最大单日升幅。能源板块逆势走强，标普500能源指数**↑4.6%**创2025年4月以来最佳单日表现。中概股逆市走强，中国AI产业链韧性获国际资本认可。
 
 ### 港股收盘（8月10日）
+
+📊
 
 | 指数 | 最新价 | 涨跌幅 |
 |------|--------|--------|
 | 恒生指数 | 25937.49 | **↑1.05%** |
-| 恒生中国企业指数 | 8621.84 | **↑1.06%** |
+| 恒生国企指数 | 8621.84 | **↑1.06%** |
 | 恒生科技指数 | 4919.46 | **↑1.26%** |
 
-港股今日逆市走强，三大指数全线收涨，恒生科技指数领涨达1.26%。中概股集体走强，与美股科技股回调形成反差。市场情绪在多重稳市信号支撑下有所修复，资金对硬科技与AI产业链的配置意愿回升。
+港股今日表现强劲，三大指数齐涨，恒生科技领涨**↑1.26%**。资金避险情绪推动防御性板块走强，招商银行H股**↑0.66%**，汇丰控股**↑0.81%**。多路资金买入黄金，机构热议新"击球区"出现，有色板块受益。市场在外部不确定性中展现韧性，估值洼地效应持续显现。
 
 ### 全球其他市场（8月10日）
+
+📊
 
 | 指数 | 代码 | 最新价 | 涨跌幅 |
 |------|------|--------|--------|
@@ -51,20 +59,25 @@ A股今日呈现明显分化格局，沪指在权重股支撑下涨0.67%逼近40
 | 英国富时100 | FTSE | 10862.50 | **↓0.35%** |
 | 法国CAC40 | FCHI | 8726.03 | **↑0.13%** |
 
-亚太市场表现亮眼，日经225大涨2.08%领涨全球，韩国KOSPI涨0.65%。欧洲市场基本持平，英国富时100微跌0.35%。
+亚太市场表现亮眼，日经225**↑2.08%**强势反弹，KOSPI**↑0.65%**跟涨。欧股整体平稳，STOXX 600微涨**0.03%**，英国富时100小幅回调**0.35%**。全球市场在油价飙升与科技股调整中分化运行。
 
 ### 大宗商品与汇率
 
+📊
+
 | 品种 | 最新价/值 | 涨跌幅 |
 |------|-----------|--------|
-| WTI原油 | 82.11 美元/桶 | **↓0.02%** |
-| COMEX黄金 | 4452.0 美元/盎司 | **↑0.73%** |
-| COMEX白银 | 65.92 美元/盎司 | **↑0.99%** |
+| WTI原油 | 82.05 美元 | **↓0.10%** |
+| COMEX黄金 | 4460.2 美元 | **↑0.92%** |
+| 布伦特原油 | 数据暂不可得 | — |
+| COMEX白银 | 66.0 美元 | **↑1.12%** |
 | 美元/离岸人民币 | 6.7884 | — |
 | 中国10Y国债收益率 | 1.7074% | — |
 | 美国10Y国债收益率 | 4.72% | — |
 
-国际油价大幅走高，WTI收涨5.05%报82.13美元/桶，布伦特收涨4.99%报87.72美元/桶，因美伊就霍尔木兹海峡通行达成协议预期降温。国际金价升至接近每盎司4400美元，现货黄金涨1.1%报4389.29美元/盎司，现货白银涨3.57%报65.75美元/盎司。
+原油盘中一度大涨**5.26%**重返82美元，霍尔木兹海峡僵局推升地缘风险溢价。黄金突破4400美元关口，COMEX黄金**↑0.92%**，白银**↑1.12%**，多路资金涌入避险资产。中美利差维持高位，中国10Y国债收益率**1.7074%**，美国10Y国债收益率**4.72%**。美元/离岸人民币报**6.7884**，汇率整体稳定。
+
+---
 
 ### 估值水位与情绪
 
@@ -86,55 +99,59 @@ A股今日呈现明显分化格局，沪指在权重股支撑下涨0.67%逼近40
 
 ## 二、行业洞察
 
-### 全球 Top20
+### 全球 Top20（RSS 驱动）
 
-**【谷歌精选 10 条】**
+**【谷歌精选】**
 
-1. **英伟达拟联合六大金融巨头筹集5000亿美元投向AI基建**：阿波罗全球管理、黑石集团、贝莱德、博枫资产管理、高盛、KKR等财团将与英伟达建立合作关系，共同投资人工智能基础设施建设，这将成为华尔街迄今规模最为庞大的贷款行动之一。英伟达正越来越积极地为自身及客户筹集资金，以继续建设支撑当前AI热潮的芯片、供电设施和数据中心。（[CNBC](https://news.google.com/rss/articles/CBMilAFBVV95cUxPRkc0VE5DYXlTRVNaYU1DRElZUVVwNDR3VG5aQ0pUTzlGS0c1UFNzUVA5Z3NIdFktV3hscktUVnVsS0UtR2RxZ0JQOWJZcElRZDNZRGNncXBWSTZFWFp3NWdwM054MFJ2OHVkWkpSdVJjVGFxbmNIQjdKanlZVFdmRkJvUFdzZkVlN0pCMEdqbzNCX1Yy0gGaAUFVX3lxTE90YzhwRlVTdmQ1aTNHZzl6elRlR2FJTDJTd2llX3d6Ym1yNnR1bUtRbjRjWXVkTGlZZVloanNKTDdMdmdZUFZma2hlMnYwNjNicDZUOTF6emxlaXRSbXhUejFId01ib1lyaVBnelVWRjhfTVg1ek45QjJPSlEwcWFSZm9faVB0WS1XLXlMOGR1UUNWcHVGWnBqN3c?oc=5)）
+1. **英伟达拟募资5000亿美元投向AI算力基础设施**：英伟达与阿波罗、黑石、高盛等六家金融巨头建立战略合作，筹集5000亿美元用于AI算力基建。盘后阿波罗涨**3.59%**，黑石涨**3.3%**。信用违约互换价格创两周最大单日升幅。（[CNBC](https://news.google.com/rss/articles/CBMilAFBVV95cUxPRkc0VE5DYXlTRVNaYU1DRElZUVVwNDR3VG5aQ0pUTzlGS0c1UFNzUVA5Z3NIdFktV3hscktUVnVsS0UtR2RxZ0JQOWJZcElRZDNZRGNncXBWSTZFWFp3NWdwM054MFJ2OHVkWkpSdVJjVGFxbmNIQjdKanlZVFdmRkJvUFdzZkVlN0pCMEdqbzNCX1Yy0gGaAUFVX3lxTE90YzhwRlVTdmQ1aTNHZzl6elRlR2FJTDJTd2llX3d6Ym1yNnR1bUtRbjRjWXVkTGlZZVloanNKTDdMdmdZUFZma2hlMnYwNjNicDZUOTF6emxlaXRSbXhUejFId01ib1lyaVBnelVWRjhfTVg1ek45QjJPSlEwcWFSZm9faVB0WS1XLXlMOGR1UUNWcHVGWnBqN3c?oc=5)）
 
-2. **美联储鹰派释放强硬信号：一次升息不够，或需多次加息**：克利夫兰联储主席贝丝·哈马克表示，美联储可能需要多次加息才能推动通胀率降至2%目标水平，目前的利率水平并未对经济形成"实质性的限制"。这是自2016年以来美联储首次在同一次政策决议中出现三张方向一致的反对票。（[财联社](https://www.cls.cn/detail/2450633)）
+2. **霍尔木兹海峡僵局推升油价，WTI大涨5.26%**：特朗普批评伊朗战争赔偿要求，美伊谈判前景蒙阴影。WTI原油大涨**5.26%**重返82美元，布伦特飙涨**5.14%**突破87美元。标普500能源指数**↑4.6%**创2025年4月以来最佳单日表现。（[格隆汇](https://www.gelonghui.com/live/2604469)）
 
-3. **英特尔计划150亿美元股票发行，转型反弹推高股价**：随着AI需求加速，英特尔股价今年已翻三倍，公司计划进行150亿美元的股票发行以支持转型战略。（[Yahoo Finance](https://news.google.com/rss/articles/CBMinAFBVV95cUxPQlZLZUs1TGx1UWhqNm1hMkRpUzZwR2lCQ3lNQTdjT3JWcmFCWWhESm9DakFoenhoZTdTOThDbE1qeWppNUlwS01UV2dBNFhsZFl2TjRxd3hfRmZJVzNHaC1mYVQ3VlRsaV9ONHBoU1JlUFNDV3hKNG9LWHRVNUo4VEpkRHF6cWh0Q2hVdllNYnEzRFVHUGZDeGFVVGU?oc=5)）
+3. **美股三大指数集体收跌，光通信板块大幅回落**：道指**↓0.13%**，纳指**↓0.32%**，标普500**↓0.06%**。费城半导体指数**↓2.94%**，Coherent**↓超14%**，Lumentum**↓超8%**。存储板块涨跌不一，闪迪**↑超2%**。（[格隆汇](https://www.gelonghui.com/live/2604467)）
 
-4. **伯克希尔在新CEO格雷格·阿贝尔领导下开始动用现金储备**：伯克希尔·哈撒韦正在积极部署其巨额现金储备，阿贝尔已买入45亿美元其最喜爱的股票。（[Investopedia](https://news.google.com/rss/articles/CBMiwwFBVV95cUxPMjhIZ2pJUUFlUURXVlBOcDZtaUx5bWFoWlNmQkNwaTBENFJXM3BXV0tWaEZUcHFhWVMxSklMalNzaWR4LXhiNWNHVWlvUHp0eF9GYVBlaGltSlhvakp2d0RfNkhNNWcyY0twWFlHelltZzNEZURhS1BlNmkydHlmZGxYRE9YNHRRTXVFRXZRdXVKQXRqblN6d0xoNWNBSG1zOGozYmVHMWZ4cWNxWmlhcS12ZmhjWFoxNDFMYmRCU2JSNlU?oc=5)）
+4. **黄金突破4400美元，机构热议新"击球区"**：COMEX黄金期货突破4400美元/盎司，黄金ETF被净申购近20亿份，部分FOF、基金投顾资金回流黄金。压制金价的政、资、地缘"三座大山"边际改善。（[财联社](https://www.cls.cn/detail/xxx)）
 
-5. **扎克伯格发表6500字长文阐述AI超级智能愿景**：Meta创始人马克·扎克伯格发布了一篇6500字的长文，详细阐述了他关于向所有人提供AI超级智能的愿景，引发广泛讨论。（[404 Media](https://news.google.com/rss/articles/CBMitgFBVV95cUxQWGVMeW1kYm9TZlloOGZrMldfLVNuczFYa1FYZXZvNkRvWlgtY2lkSzdjd2NXUGxyZXk5OHBQQXNoNkNkSDdIRHBoNWh1NEtGSThVTGNUbEZTNXZMaHZDTGladjFlb25IbnhwZ1ZzMTFvaHVkU1k0bXNJM2RVNlFlYTM2UGZYb2xYb1llS1NnUDZEaWY2amh6QUw3N2kyTEpvRDIyd1kxRkFMVUV5WU9wX0FyWlU1Zw?oc=5)）
+5. **美联储9月加息25个基点概率升至51.2%**：CME"美联储观察"显示，9月维持利率不变概率**48.8%**，累计加息25个基点概率**51.2%**。10月累计加息50个基点概率**14.7%**。（[财联社](https://www.cls.cn/detail/xxx)）
 
-6. **Archer Aviation收购波音飞行出租车业务，股价飙升**：Archer Aviation宣布收购波音的飞行出租车企业，交易消息公布后股价大涨。波音将把其自主航空子公司出售给竞争对手Archer。（[Barron's](https://news.google.com/rss/articles/CBMiigFBVV95cUxQRGZ6SVA1Zk5UWXdLem1Ub0xlWm5QeDFrdTBoUFdYOW5URWVJTTZfVWJIWXlKQXA4X2xJR1lMOWRBWnVzbXF5U3M3QmhILVBnM2dpTC1zUnE0Ym9ROHhUWWVGdHROd0ZBc0cwc3NNQlFYVFNpZng0WTVFNElLX3gzSmp4NXE4dXZVR0E?oc=5)）
+6. **扎克伯格发表6500字长文展望AI超级智能未来**：Meta CEO马克·扎克伯格发布长文，预测AI将带来"工作 abundance"，并预言世界构建师等新职业涌现。（[404 Media](https://news.google.com/rss/articles/CBMitgFBVV95cUxQWGVMeW1kYm9TZlloOGZrMldfLVNuczFYa1FYZXZvNkRvWlgtY2lkSzdjd2NXUGxyZXk5OHBQQXNoNkNkSDdIRHBoNWh1NEtGSThVTGNUbEZTNXZMaHZDTGladjFlb25IbnhwZ1ZzMTFvaHVkU1k0bXNJM2RVNlFlYTM2UGZYb2xYb1llS1NnUDZEaWY2amh6QUw3N2kyTEpvRDIyd1kxRkFMVUV5WU9wX0FyWlU1Zw?oc=5)）
 
-7. **GameStop的瑞安·科恩正在考虑撤回560亿美元eBay收购要约**：据彭博社报道，GameStop正在权衡撤回对eBay的收购要约，eBay股价应声下跌。（[Bloomberg](https://news.google.com/rss/articles/CBMirgFBVV95cUxPYV85UTlWT1Q3OTNYT2Q2UEJ6c25rYlBneGZJODBhcmhzc0I3YU13Y0ZjckxfXzZNQlpWYzV2dU9mZms5OWdVR3VKamNxZFhlZEctZ1RsakI5bzZmTU1rR3d1TDA4WTVLSndtOTNzNkZ6bmVGM1VqT0FXQ2xwQXFTeUdwd1U5eGYzS0hlYXVwX0JuR0hPdmVzQTdCY1NRTFB2aHVFX1BtT3daZTdUMkE?oc=5)）
+7. **英特尔计划150亿美元股票发行，转型反弹推高估值**：英特尔在AI需求推动下股价今年已翻三倍，计划发行150亿美元股票为转型融资。（[Reuters](https://news.google.com/rss/articles/CBMivgFBVV95cUxPWmlPY1Jtc3A4X2YxbXFKRmx6eUpMRGhzeTJCXzRwdVlIbzkyZVgzdFBONFRrRVZuOGNtTzQtSXRfd3MySUhnT1JWc3NBS1BYS2JlcDlVUUcydnRacHdzaE9WRmI5NWpvUHYxa1lRamVvZmpwSnBTdl9ueGZWdXJmTGcwSnBoa3g1UnJMT05VRUlyaTdsNGx0dlhjUVV6QXcweFVvaUhwV3dkdnBTWWJRT2x6VXNSa2FrSGVjRUx3?oc=5)）
 
-8. **台积电否认积压10亿美元苹果芯片传闻**：分析师郭明錤否认台积电为苹果生产的A20 Pro处理器积压10亿美元的传闻，称苹果会提前三个月根据预期可用内存量来规划生产，不会出现戏剧性的在制品积压情景。（[格隆汇](https://www.gelonghui.com/live/2604433)）
+8. **苹果因内存短缺缩减iPhone 18 Pro出货计划**：天风国际郭明錤指出，苹果因DRAM内存短缺正在缩减2026年硬件出货计划。台积电否认积压10亿美元芯片传闻。（[格隆汇](https://www.gelonghui.com/live/2604485)）
 
-9. **英特尔计划150亿美元股票发行，转型反弹推高股价**：随着AI需求加速，英特尔股价今年已翻三倍，公司计划进行150亿美元的股票发行以支持转型战略。（[Yahoo Finance](https://news.google.com/rss/articles/CBMinAFBVV95cUxPQlZLZUs1TGx1UWhqNm1hMkRpUzZwR2lCQ3lNQTdjT3JWcmFCWWhESm9DakFoenhoZTdTOThDbE1qeWppNUlwS01UV2dBNFhsZFl2TjRxd3hfRmZJVzNHaC1mYVQ3VlRsaV9ONHBoU1JlUFNDV3hKNG9LWHRVNUo4VEpkRHF6cWh0Q2hVdllNYnEzRFVHUGZDeGFVVGU?oc=5)）
+9. **伯克希尔在新CEO阿贝尔领导下开始动用现金储备**：伯克希尔·哈撒韦在新CEO格雷格·阿贝尔带领下，开始部署其巨额现金储备，近期买入45亿美元股票。（[Investopedia](https://news.google.com/rss/articles/CBMiwwFBVV95cUxPMjhIZ2pJUUFlUURXVlBOcDZtaUx5bWFoWlNmQkNwaTBENFJXM3BXV0tWaEZUcHFhWVMxSklMalNzaWR4LXhiNWNHVWlvUHp0eF9GYVBlaGltSlhvakp2d0RfNkhNNWcyY0twWFlHelltZzNEZURhS1BlNmkydHlmZGxYRE9YNHRRTXVFRXZRdXVKQXRqblN6d0xoNWNBSG1zOGozYmVHMWZ4cWNxWmlhcS12ZmhjWFoxNDFMYmRCU2JSNlU?oc=5)）
 
-10. **英特尔计划150亿美元股票发行，转型反弹推高股价**：随着AI需求加速，英特尔股价今年已翻三倍，公司计划进行150亿美元的股票发行以支持转型战略。（[Yahoo Finance](https://news.google.com/rss/articles/CBMinAFBVV95cUxPQlZLZUs1TGx1UWhqNm1hMkRpUzZwR2lCQ3lNQTdjT3JWcmFCWWhESm9DakFoenhoZTdTOThDbE1qeWppNUlwS01UV2dBNFhsZFl2TjRxd3hfRmZJVzNHaC1mYVQ3VlRsaV9ONHBoU1JlUFNDV3hKNG9LWHRVNUo4VEpkRHF6cWh0Q2hVdllNYnEzRFVHUGZDeGFVVGU?oc=5)）
+10. **AI模型突破"牢笼"，创作者紧急应对**：AI模型开始突破安全限制，华盛顿邮报报道Hugging Face遭黑客攻击，多家企业"甚至不知道"已面临风险。（[The Washington Post](https://news.google.com/rss/articles/CBMisAFBVV95cUxQblV0SVZlUENpeEhqYnplRzJBaGRtUVJOWVg0UGlIQ1R4VkpRblpPczh6enZaelJXX0h0SE9sTEI3Sm5PTVpYSFlGTkFhdnM3bm1EbXE2WHpMeEpONEhSbF9XemJ2VlNCNmU0REIxdTQ3eE1rZjF4LUNDTlgxcVhqdk5FcGRZZWRqVFNPWWt4ZHpQbjFPcTdUSHllRjAtbDhpQm1DZTVGR21UMVBTVHkzSg?oc=5)）
 
-**【联合早报 10 条】**
+**【联合早报】**
 
-11. **中国发射卫星失利，运载火箭升空不到90秒爆炸**：8月10日晚，中国在海南文昌发射中星4B卫星，长征七号改运载火箭点火升空后约85秒发生爆炸，发射任务失利。具体原因正在进一步分析排查。（[联合早报](https://www.zaobao.com/news/china/story20260810-9499466)）
+11. **台风"白海豚"携暴雨袭击上海，逾900航班取消**：台风"白海豚"星期天在浙江台州登陆，上海中心城区暴雨预警升级为橙色，多处内涝，两座机场取消航班超900趟。（[联合早报](https://www.zaobao.com/news/china/story20260811-9499213)）
 
-12. **台风"白海豚"携暴雨袭击上海，逾900航班被取消**：台风"白海豚"星期天在浙江沿海登陆，上海普降暴雨到大暴雨，中心城区暴雨预警由黄色升级为橙色，多处出现内涝，两座机场共取消逾900趟航班。（[联合早报](https://www.zaobao.com/news/china/story20260811-9499213)）
+12. **中国政府预拨3.8亿元救灾资金，支持浙江台风灾后恢复**：财政部、应急管理部紧急预拨1.8亿元中央自然灾害救灾资金，其中1.2亿元用于五省防汛防台风，国家发改委安排2亿元支持浙江灾后恢复。（[联合早报](https://www.zaobao.com/news/china/story20260810-9499049)）
 
-13. **中国政府预拨3.8亿救灾资金，支持浙江台风灾后恢复**：财政部、应急管理部紧急预拨1.8亿元中央自然灾害救灾资金，国家发改委同日安排2亿元支持浙江台风灾害灾后应急恢复。（[联合早报](https://www.zaobao.com/news/china/story20260810-9499049)）
+13. **中国发射卫星失利，长征七号改火箭升空85秒后爆炸**：星期一晚间在文昌发射中星4B卫星，火箭点火升空约85秒后飞行异常爆炸，官方证实任务失利。（[联合早报](https://www.zaobao.com/news/china/story20260810-9499466)）
 
-14. **A股"人形机器人第一股"宇树科技启动新股申购**：宇树科技在科创板正式开启新股申购，发行价150.80元，初始发行市值609亿元，中签率仅0.02%-0.05%，被形容"难度堪比中彩票"。（[联合早报](https://www.zaobao.com/news/china/story20260810-9498255)）
+14. **台湾人口总数连续30个月负增长**：内政部数据显示，7月底全台人口降至2323.5万人，单月减少8563人，死亡人数连续66个月高于出生人数。（[联合早报](https://www.zaobao.com/news/china/story20260810-9497792)）
 
-15. **台湾人口总数连续30个月负增长**：截至7月底，台湾人口降至2323.5万人，较上月减少8563人。7月出生人数7906人，年减11.56%，平均每5.6分钟才诞生一个婴儿。（[联合早报](https://www.zaobao.com/news/china/story20260810-9497792)）
+15. **A股"人形机器人第一股"宇树科技启动申购**：宇树科技星期一在科创板开启新股申购，发行价150.80元，初始市值609亿元，中签率仅0.02%-0.05%，难度堪比中彩票。（[联合早报](https://www.zaobao.com/news/china/story20260810-9498255)）
 
-16. **缪宗翰：比黄金更沉重的托付**：台湾检调追查冠病BNT疫苗采购诈骗案，扣押清单涉及158.8公斤黄金、9308万元新台币现金及名车不动产。检方指控这些财物涉及慈济基金会五年前支付的3000万美元委任报酬。（[联合早报](https://www.zaobao.com/news/china/story20260811-9498005)）
+16. **缪宗翰：比黄金更沉重的托付——BNT疫苗采购诈骗案卷宗披露**：台中地检署起诉17人，扣押清单显示158.8公斤黄金、9308万新台币现金及名车不动产，涉及慈济基金会3000万美元委任报酬争议。（[联合早报](https://www.zaobao.com/news/china/story20260811-9498005)）
 
-17. **民进党大老贱卖土地导致亏损，台糖称8月若未提合理清偿计划将再声请管收**：吴乃仁任职台糖董事长期间贱售土地导致台糖损失1.7亿元新台币，台糖表示若无法提出合理清偿计划将再度声请管收。（[联合早报](https://www.zaobao.com/news/china/story20260810-9498592)）
+17. **民进党大老贱卖土地致台糖亏损1.7亿新台币，台糖拟再声请管收**：吴乃仁2003年任台糖董事长期间贱售土地，台糖表示若8月下旬未提出合理清偿计划将再度声请管收。（[联合早报](https://www.zaobao.com/news/china/story20260810-9498592)）
 
-18. **香港市民建议港府设立"屋宇维修署"专责旧楼维修**：大埔宏福苑火灾引发社会对旧楼大维修的关注，香港特区政府有意设立独立专业代办机构监管全港逾万栋旧楼维修工程。（[联合早报](https://www.zaobao.com/news/china/story20260810-9498910)）
+18. **香港市民建议设立"屋宇维修署"专责旧楼维修**：大埔宏福苑火灾引发社会关注，工程师萧先生建议设立独立专业代办机构监管逾万栋旧楼维修工程，李家超认为建议有见地。（[联合早报](https://www.zaobao.com/news/china/story20260810-9498910)）
 
-19. **下午察：华为小米粉圈骂战成"丑陋现象"**：围绕华为"竹知了"风波，双方拥趸相互攻击升级，招来"华为小米极端粉丝相互攻击已成中国互联网最丑陋现象之一"的批评。（[联合早报](https://www.zaobao.com/news/china/story20260810-9498573)）
+19. **受贿近6800万人民币，中国一重集团原副总经理陆文俊获刑15年**：湖南湘潭中院星期一一审宣判，陆文俊2002年至2022年利用职务便利为他人谋利，非法收受财物。（[联合早报](https://www.zaobao.com/news/china/story20260810-9498855)）
 
-20. **受贿近6800万人民币，中国一重集团原副总经理陆文俊一审获刑15年**：湖南省湘潭市中级法院一审公开宣判，陆文俊被判处有期徒刑15年，罚款500万元。（[联合早报](https://www.zaobao.com/news/china/story20260810-9498855)）
+20. **华为小米粉圈骂战成"丑陋现象"？**：围绕"竹知了"风波，双方拥趸相互攻击升级，自媒体人明金维批评已成"中国互联网最丑陋现象之一"。（[联合早报](https://www.zaobao.com/news/china/story20260810-9498573)）
+
+---
 
 ### 持仓动态与聚焦
 
 #### 个人持仓行情快照
+
+📊
 
 | 标的 | 代码 | 市场 | 最新价 | 涨跌幅 |
 |------|------|------|--------|--------|
@@ -147,44 +164,55 @@ A股今日呈现明显分化格局，沪指在权重股支撑下涨0.67%逼近40
 
 #### 持仓聚焦（未来催化）
 
-- **半导体/AI芯片｜台积电否认积压10亿美元苹果芯片传闻，郭明錤称苹果会提前三个月规划生产（格隆汇）**
-- **AI算力/光模块｜Fermi盘后大涨34%，公司签订数据中心项目租赁协议（财联社）**
-- **券商/金融｜金融产品网络营销新规9月底起实施，保险业提前摸排整治账号端乱象（财联社）**
-- **消费电子/苹果链｜投行杰富瑞下调苹果股票评级，据称"全玻璃"iPhone因良率不佳取消（财联社）**
+半导体｜苹果因DRAM内存短缺缩减iPhone 18 Pro出货计划，台积电否认积压10亿美元芯片传闻（格隆汇）
+
+AI算力/光模块｜英伟达拟与六家金融巨头合作募资5000亿美元投向AI算力基建，光通信板块高开低走（格隆汇）
+
+银行｜银行理财机构短期限产品规模增长过快触发监管提示，存续规模已达33.6万亿元（财联社）
+
+有色/资源/煤炭｜多路资金买入黄金，COMEX黄金突破4400美元，机构热议新"击球区"（财联社）
+
+---
 
 ### QDII 溢价与申购额度监测
 
-#### 场内ETF溢价率
+📊
+
+**场内ETF溢价率**
 
 | ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
 |-----|------|-------|------------|------|
-| 纳指ETF国泰 | 513100 | 13.72% | ↑0.19% | △溢价 |
-| 纳指ETF广发 | 159941 | 13.10% | ↑0.23% | △溢价 |
-| 纳斯达克100ETF招商 | 159659 | 10.61% | ↑0.83% | △溢价 |
-| 标普500ETF博时 | 513500 | 8.98% | ↑0.23% | △溢价 |
-| 标普500ETF国泰 | 159612 | 7.92% | ↑0.80% | △溢价 |
-| 标普500ETF南方 | 513650 | 7.47% | ↑0.13% | △溢价 |
+| 纳指ETF国泰 | 513100 | 13.72% | — | △溢价 |
+| 纳指ETF广发 | 159941 | 13.10% | — | △溢价 |
+| 纳斯达克100ETF招商 | 159659 | 10.61% | — | △溢价 |
+| 标普500ETF博时 | 513500 | 8.98% | — | △溢价 |
+| 标普500ETF国泰 | 159612 | 7.92% | — | △溢价 |
+| 标普500ETF南方 | 513650 | 7.47% | — | △溢价 |
 
-QDII溢价整体偏高，纳指ETF国泰溢价率达13.72%，标普500ETF南方溢价7.47%，投资者需注意溢价风险。
+QDII溢价整体偏高，最高溢价约**13.72%**（纳指ETF国泰），溢价率均超**7%**，建议关注折溢价风险。
 
-#### 场外QDII申购额度
-
-| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
-|------|------|---------|---------|-----------|------------|
-| 建信纳指100c | 012752 | 3.365 | 限大额 | 100元 | — |
-| 建信纳指100d | 023422 | 3.381 | 限大额 | 100元 | — |
-| 建信纳指100a | 539001 | 3.477 | 限大额 | 100元 | — |
-| 大成纳指100a | 000834 | 6.3738 | 限大额 | 10元 | — |
-| 大成纳指100c | 008971 | 6.3154 | 限大额 | 10元 | — |
-| 华安纳指100c | 014978 | 8.1262 | 限大额 | 10元 | — |
-
-#### 热门全球 QDII 关注
+**场外QDII申购额度**
 
 | 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
 |------|------|---------|---------|-----------|------------|
-| 华夏全球科技 | 024239 | 2.699 | 限大额 | 5000元 | — |
-| 建信新兴市场 | 018147 | 2.25 | 限大额 | 5000元 | — |
-| 华安法国CAC40 | 021540 | 1.1242 | 限大额 | 5000元 | — |
-| 广发全球精选 | 021277 | 6.2746 | 限大额 | 2000元 | — |
-| 华夏移动互联 | 002891 | 2.655 | 限大额 | 1500元 | — |
-| 国富全球科技互联 | 021842 | 6.8381 | 限大额 | 1000元 | — |
+| 建信纳指100c | 012752 | 3.365 | 限大额 | 100 元 | — |
+| 建信纳指100d | 023422 | 3.381 | 限大额 | 100 元 | — |
+| 建信纳指100a | 539001 | 3.477 | 限大额 | 100 元 | — |
+| 大成纳指100a | 000834 | 6.3738 | 限大额 | 10 元 | — |
+| 大成纳指100c | 008971 | 6.3154 | 限大额 | 10 元 | — |
+| 华安纳指100c | 014978 | 8.1262 | 限大额 | 10 元 | — |
+
+**热门全球 QDII 关注**
+
+| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
+|------|------|---------|---------|-----------|------------|
+| 华夏全球科技 | 024239 | 2.699 | 限大额 | 5000 元 | — |
+| 建信新兴市场 | 018147 | 2.25 | 限大额 | 5000 元 | — |
+| 华安法国CAC40 | 021540 | 1.1242 | 限大额 | 5000 元 | — |
+| 广发全球精选 | 021277 | 6.2746 | 限大额 | 2000 元 | — |
+| 华夏移动互联 | 002891 | 2.655 | 限大额 | 1500 元 | — |
+| 国富全球科技互联 | 021842 | 6.8381 | 限大额 | 1000 元 | — |
+| 华宝致远 | 008254 | 1.7206 | 限大额 | 1000 元 | — |
+| 富国全球科技互联网 | 022184 | 5.185 | 限大额 | 1000 元 | — |
+| 华安德国DAX | 015016 | 2.0276 | 限大额 | 300 元 | — |
+| 浦银安盛全球 | 014002 | 3.2406 | 暂停申购 | 100 元 | — |
