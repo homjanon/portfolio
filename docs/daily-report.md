@@ -1,201 +1,70 @@
-# 2026年8月15日 星期六 全球金融资讯日报
+# 全球金融资讯日报 | 2026年8月16日 星期日
 
 
-**今日定性导语**：周五（8月14日）A股窄幅震荡，创业板指领涨**↑1.12%**，科创50与上证综指基本收平；港股全线下挫，恒生科技指数跌**↓1.77%**领跌；美股三大指数小幅收低，道指跌**↓0.2%**，罗素2000续创收盘纪录。中东局势持续紧张，特朗普扬言"很快将宣布霍尔木兹海峡为美国领土"，ADNOC船只遭袭，国际油价走高；AI赛道竞争白热化，Anthropic二季度营收超115亿美元、同比增14倍，SpaceX完成对Cursor的600亿美元收购。量化巨头简街7月亏损约150亿美元，营收较峰值下降25%，市场风险偏好有所降温。
-
----
-
-## 一、市场全景
-
-### A股收盘（8月14日）
-
-📊
-
-| 指数 | 最新价 | 涨跌幅 |
-|------|--------|--------|
-| 上证指数 | 3927.18 | **↑0.01%** |
-| 深证成指 | 14354.31 | **↑0.45%** |
-| 沪深300 | 4665.88 | **↑0.04%** |
-| 科创50 | 1717.68 | **↑0.00%** |
-| 创业板指 | 3626.30 | **↑1.12%** |
-
-A股周五窄幅震荡，创业板指表现亮眼领涨，深成指同步走强；上证综指与科创50基本收平，市场整体交投清淡，成交额约2.14万亿元。资金在科技成长与防御板块间轮动，红利低波ETF易方达（563020）盘中表现稳健。
-
-### 美股收盘（8月15日凌晨）
-
-📊
-
-| 指数 | 最新价 | 涨跌幅 |
-|------|--------|--------|
-| 道琼斯工业 | 53732.41 | **↓0.20%** |
-| 标普500 | 7785.76 | **↓0.17%** |
-| 纳斯达克综合 | 26729.16 | **↓0.28%** |
-
-> 数据时效提示：美股数据来自东财push2，时效正常。
-
-美股周五窄幅波动，三大指数小幅收低。存储概念逆市走强，闪迪周涨逾35%；罗素2000指数涨0.51%刷新收盘纪录，连续四日收涨创6月以来最长连涨。CPI与PPI低于预期压低加息预期，美联储9月维持利率不变概率约67.5%。
-
-### 港股收盘（8月14日）
-
-📊
-
-| 指数 | 最新价 | 涨跌幅 |
-|------|--------|--------|
-| 恒生指数 | 25116.85 | **↓1.10%** |
-| 恒生中国企业指数 | 8340.83 | **↓1.02%** |
-| 恒生科技指数 | 4707.62 | **↓1.77%** |
-
-港股周五全线下挫，恒生科技指数跌近2%领跌，受美股科技股回调及中东地缘风险升温拖累。富时中国A50期货夜盘收涨0.13%，恒指主连夜盘涨0.61%，显示周末前资金谨慎观望。
-
-### 全球其他市场（8月14日）
-
-📊
-
-| 指数 | 代码 | 最新价 | 涨跌幅 |
-|------|------|--------|--------|
-| 日经225 | N225 | 68713.80 | **↑0.59%** |
-| 韩国KOSPI | KOSPI | 6977.94 | **↑2.42%** |
-| 欧洲STOXX 600 | SXXP | 657.86 | **↓0.21%** |
-| 德国DAX | GDAXI | 26440.31 | **↑0.53%** |
-| 英国富时100 | FTSE | 10750.11 | **↓0.21%** |
-| 法国CAC40 | FCHI | 8636.80 | **↓0.16%** |
-
-> 数据时效提示：全球数据来自东财push2，时效正常。
-
-亚太市场表现分化，韩国KOSPI大涨**↑2.42%**，日经225与德国DAX同步走强；欧股普遍小幅收跌，英国富时100与法国CAC40微挫。
-
-### 大宗商品与汇率
-
-📊
-
-| 品种 | 最新价/值 | 涨跌幅 |
-|------|-----------|--------|
-| WTI原油 | 数据暂不可得 | — |
-| COMEX黄金 | 数据暂不可得 | — |
-| 布伦特原油 | 数据暂不可得 | — |
-| COMEX白银 | 数据暂不可得 | — |
-| 美元/离岸人民币 | 6.7878 | — |
-| 中国10Y国债收益率 | 1.6964% | — |
-| 美国10Y国债收益率 | 4.68% | — |
-
-> 原油/黄金数据暂不可得（akshare期货接口暂不可用）。
-
-国际油价走高，WTI结算价报82.40美元/桶（**↑1.4%**），布伦特报88.52美元/桶（**↑1.7%**），巴克莱维持2026年布伦特预测96美元/桶。美元/离岸人民币报6.7878，中美利差维持高位。
+**今日定性导语**：今日为周日休市日，全球市场无交易数据。新闻主线聚焦三大方向：一是中美科技博弈持续升温，中国AI企业快速追赶引发硅谷降价应战，苹果罕见与中国阿里合作训练本土AI模型；二是美国国内经济信号转弱，零售销售九个月来首次下滑、消费者信心回落，叠加食品召回与公共卫生事件频发；三是江泽民诞辰100周年纪念活动即将举行，相关纪录片播出引发关注。
 
 ---
 
-### 估值水位与情绪
+## 一、全球 Top20（RSS 驱动）
 
-| 指数 | PE(TTM) | PE分位 | PB | PB分位 | 股息率 | 估值结论 |
-|------|---------|--------|-----|--------|--------|---------|
-| 红利低波 | 8.25 | 73.32% | 0.84 | 55.60% | 4.51% | 股息稳健 |
-| 中证红利 | 8.39 | 75.00% | 0.82 | 44.08% | 4.42% | 股息稳健 |
-| 中证白酒 | 20.04 | 16.88% | 4.33 | 4.60% | 4.11% | 深度低估 |
-| 沪深300 | 14.31 | 84.92% | 1.46 | 51.40% | 2.56% | 极贵 |
-| 中证500 | 36.80 | 86.92% | 2.53 | 81.16% | 1.32% | 偏贵 |
-| 创业板指 | 44.39 | 55.64% | 6.01 | 72.00% | 0.91% | 中性偏贵 |
-| 科创50 | 186.37 | 96.70% | 8.09 | 95.64% | 0.24% | 极贵 |
-| 恒生科技 | 22.83 | 32.38% | 2.53 | 32.11% | 1.02% | 偏低 |
-| 中概互联50 | 16.15 | 1.84% | 2.10 | 1.44% | 1.10% | 深度低估 |
-| 纳斯达克100 | 31.57 | 53.04% | 9.49 | 86.04% | 0.42% | 偏高 |
-| 标普500 | 26.06 | 64.52% | 5.65 | 97.92% | 0.99% | PB极贵 |
+### 谷歌精选（10条）
 
----
+1. **Anthropic营收二季度突破115亿美元**：AI巨头Anthropic第二季度营收 reportedly 超过115亿美元，IPO估值或达1900-2000亿美元，凸显AI商业化加速。（[CNBC](https://news.google.com/rss/articles/CBMinwFBVV95cUxNOGFTR2NEWkd0UXZ2Y3pITjZ4MXRQZEREU3A0LU9GXy1aY0Z1bzNUY083NE4xN21wc2V3czEtWC1idGliQzZxM2h4WTRuSzRSVGFUN2tMS2VFN0k2QTlHSEhaWHd3ekpSSS16YTVSdTFwMUtkX1lZYVZGdjA1NEx2aFdQUVJnSXZWRE11RGxJSGpsWG9qZWxYY2s4bGNFSWfSAaQBQVVfeXFMTXllMzRNcmVRZTZib3pmRjVWZHg0ZEoxSkx0VTM2dnR1dWFOOGlxQWZqRVh1dXB5b1BuUjVaaUlCRURqclhkbDZpd3l1V3VnR3RSazBJYUdSYW5zaS1LbnpGNllGakRId1FFYkRWNlZfeGNYUkxUbTl3bzN0eDdZUWdqSVA2eDh4RVQ0NHhmcTlfemp4Tzc2blFNWVNsa2lGSDBJSnU?oc=5)）
 
-## 二、行业洞察
+2. **迪士尼乐园业务成季度"意外惊喜"**：迪士尼CEO Josh D'Amaro透露，上季度乐园部门表现超出预期，公司表示已恢复"清晰与稳定"。（[WDW News Today](https://news.google.com/rss/articles/CBMipwFBVV95cUxNV2dSZVUyM2ZiN3Y5RUVvcl9GdG5OeE1YZXV5UFVZZ2ZqWnJfc3RaTVZYQlZSdHEzYkxTT0lEcWd4N1JIdEkzc0N3TUptdWdKdFpyUVZRYkNVT1FIa3JJS1dWRm0tU3VmWkZMallsUkhzaHdoeGZ0aXJROUxZOEI2WVE3YTZNVVY4WG1TbUlYMVIxRTBPNDREWjFkWDUxdF82TGVvb24zYw?oc=5)）
 
-### 全球 Top20（RSS 驱动）
+3. **美国南部大规模鸡蛋召回**：因沙门氏菌爆发，美国南部和西南部发起大规模鸡蛋召回，FDA将召回级别升至最高风险等级。（[The Guardian](https://news.google.com/rss/articles/CBMipAFBVV95cUxPMGdEMXVZNFFYajJxemE4Z1IxZWZ1OFJrQlBFY3d6cEVRZkg0ZFIyeTh0eW8wUEVlTGRqVkZQVVViajBkTVNCU3J6WEJFN2J0c1cxaHN4cS1lc3Z3dDhrX3NOWUlXZVRtRzl3ek5ZX0dvTE5Dbk5mSkFyblpiNENkY3hDWHg1N01namNCaDJueGZkNHJHb3JvdHJ3S21GeGxpTXNybg?oc=5)）
 
-**【谷歌精选】**
+4. **拉里·埃里森财富缩水1000亿美元**：甲骨文创始人拉里·埃里森因Oracle股价下跌，从全球第二富豪位置滑落，财富蒸发约1000亿美元。（[Forbes](https://news.google.com/rss/articles/CBMixAFBVV95cUxPdHZLb0NqVXYtWUhLVDIzQks5UHB3cXhVeGctVGJQZXhXM09ubV9raFFveTU0SFVfZTkzOEV4Q01UQmtyS0gyaHFiWVF5VWo0WDh0UlRMMWc4MWdqeF85U1RRWEtsV3FJV0RFWXRIRFlZc2VqUHZIbFhUSVU1OW9IRjdackRmVjRPekpHYko1M1d6Z1hlZzlYWVJBMGZxUW1tVXEtd0hoRTBJOVo4WkdPbDFDRTVhX0RqbzVHaExkMTFEN0xl?oc=5)）
 
-1. **Anthropic二季度营收超115亿美元，同比增14倍**：Anthropic向潜在投资者披露，第二季度营收超115亿美元，较上年同期7.87亿美元增长至少14倍，调整后营业利润转正。公司年化营收已突破470亿美元，AI赛道IPO融资今年迄今达2564亿美元创2021年来新高。（[格隆汇](https://www.gelonghui.com/live/2613756)）
+5. **特朗普家族World Liberty Financial获银行牌照**：特朗普家族加密货币项目World Liberty Financial获得初步银行牌照批准，系前所未有的政治关联案例。（[WSJ](https://news.google.com/rss/articles/CBMiuAFBVV95cUxOWlQwM214bWI1eFkwOTl0NzBjaXFVaVh3MXdKVXhrV1V5S2lJclVkTlZNNVVhNkJQS0tGMlZmV0YtSGxYWG1LOGtvRUpmaUNBbWdRYk55S3RicDZfc0ZOTnNlbnBzSFJtck43dG5jUTcwOFFfeGhld0Q1RndTalF2UENtVzFZTVAyMFpndWduckVMM2ZEV2RTOWFVZUdJdVNTRTBBVnFGOW9ZR3haV053MlR6Mnc5RURn?oc=5)）
 
-2. **SpaceX完成600亿美元收购AI编程公司Cursor**：SpaceX于8月14日正式完成对Cursor的收购，估值600亿美元，是科技行业规模较大的收购案之一。马斯克称公司"必须在软件领域取得成功"，此举旨在追赶Anthropic、OpenAI等竞争对手。（[财联社](https://www.cls.cn/detail/2455019)）
+6. **Reddit加入标普500指数**：Reddit股票因纳入标普500指数大涨，技术分析显示对称三角形形态仍有效。（[Seeking Alpha](https://news.google.com/rss/articles/CBMipwFBVV95cUxNdVh6Y1B6WTVjREIxZWtCSnZTWHlzbldlNUNYaTJUX3RPZE9uR29lMllfcGNGN3JVT2hWd0xoY29CWUlOTl9lb1MtbWVQM09WOE1fcFVfd25qOHpZdHRWUGNnV1dZTkxPZ1dVVUo3V2hOZXM1Vm1BM04yel8zaXlkVENrc09iUE9EMDRKWnN4bDU1T2V5UVJERXZMT25OMUtTRXN5bGsyWQ?oc=5)）
 
-3. **英伟达披露持有210亿美元SpaceX股份**：英伟达申报文件显示，其持有SpaceX价值约209.7亿美元股份，同时持有约300亿美元英特尔股份，AI算力巨头跨界投资版图持续扩张。（[财联社](https://www.cls.cn/detail/2455018)）
+7. **美国消费者信心下滑**：8月美国消费者信心指数下降，共和党人信心降幅尤为明显， affordability 压力持续。（[Axios](https://news.google.com/rss/articles/CBMicEFVX3lxTFBNaDlHbnZGeFJoTDRwQTRaY0hCM2Y2WFFDU1c0Q1lLenN2OWhlVnZYM0xraFRqS0d4NkdIZDJkMldyUjBjU0I3eXA0N3IxcWhSbE42SkdxdEE3eFlMZUgyWGpJcnI5c1o3VnhXR2NZTFk?oc=5)）
 
-4. **简街7月亏损约150亿美元，营收较峰值下降25%**：量化巨头简街（Jane Street）7月交易收入自2016年以来首次出现月度亏损，营收较6月底峰值下降约25%，公司已关闭大部分风险头寸，风险偏好显著降温。（[格隆汇](https://www.gelonghui.com/live/2613758)）
+8. **谢尔盖·布林为谷歌设定新AI目标**：谷歌联合创始人Sergey Brin宣布公司新的AI战略愿景，旨在追赶OpenAI和Anthropic。（[thestreet.com](https://news.google.com/rss/articles/CBMijgFBVV95cUxOdEtYdE94a3hNbHJGQnJyaUJoZUVRRzgxbDlKTTlxanhhNlJTQjlkbmtqVEtuY2o1X2EtdGxqVmlKaENESzFEZkNMT3YxTXc5bzQ4YWZ5bEFlQzFELVlZcmJCMUpmN1d2VnJWVVFKVGVNdGI0X0hKYi1tLXJVd2JLSi1SLUNCRlIwd1BEN2JB?oc=5)）
 
-5. **美国7月零售销售九个月来首次下滑**：美国消费者支出放缓，7月零售销售数据低于预期，叠加CPI与PPI走低，市场对美联储9月加息预期降温，维持利率不变概率升至67.5%。（[Reuters](https://news.google.com/rss/articles/CBMiiwFBVV95cUxQSUpsdlVVb2FPYVpWSk4wT3hkMFo0eHhoZDBfemp1cVJ5b0pVeUREcVRMRE8yQjlYVE9NdDQ2VmlVbEt0RHZXYUgwYlZGNnVuMUgxUW9FdDRORnU1TGI5b0xWZGdTNzNQQXlzb1pfdDNkejhDX1RqZmpoamstRXZoYjExRnZ0WWdVMVRR)）
+9. **马斯克宣布SpaceX重大进展**：SpaceX宣布2027年实现10GW产能目标，预计将推动3000亿美元年收入，微软将成为最大客户。（[Yahoo Finance](https://news.google.com/rss/articles/CBMimAFBVV95cUxNckRsU3l1RWdHOG9rTGNrYVZQT0FFN1pXUENnYUIzYWlHME9obmdLMzNEd0ZCVi1vOU9LYl9VZjU0V3I3TGx1ejh5NnNHcmNHYW0wN1VtY0htZDEwTEc4cEQ5SzJUZ1l5Y0oxM2RxaGRuNFFJLVRwMWJNRXhqMVM4RXFEMjBJM0lOdlgzdHBmZGhuV0k4LXF5YQ?oc=5)）
 
-6. **特朗普扬言"很快将宣布霍尔木兹海峡为美国领土"**：特朗普8月14日在纽约表示，伊朗正遭受"惨败"，并称"很快将宣布霍尔木兹海峡为美国领土"。阿联酋ADNOC称一艘船只当日在海峡遭袭，无人受伤。伊朗副外长回应称海峡开放或关闭只能由伊朗决定。（[财联社](https://www.cls.cn/detail/2455050)）
+10. **比尔·阿克曼调整投资组合**：知名投资者Bill Ackman披露五只股票调仓，包括Netflix、Visa、Mastercard等。（[Barron's](https://news.google.com/rss/articles/CBMihgFBVV95cUxNeGVXeDRrQ1BYWkZ6SEUtYWFOcVVZVkx4bXduUFNzajJmbFpSeXRXSVV6RmwyM2p3X1R1V0NpQ0RUeGM3WUY0MUEtY3dHanYtcy14ZnUwM2NYUnQ1U1ZjY2g2bnUyX3NXeUFld2I5cHJFYzVXOXZWSWV4akxlVFY3ZEpSZ3dMQQ?oc=5)）
 
-7. **伯克希尔二季度增持谷歌至前三大持仓**：伯克希尔·哈撒韦二季度增持谷歌A与谷歌C，谷歌跃升为第三大重仓股；同时增持达美航空、莱纳房屋、梅西百货，减持克罗格、第一资本等。（[财联社](https://www.cls.cn/detail/2455017)）
+### 联合早报（10条）
 
-8. **索罗斯二季度新建电力等头寸，清仓赛富时**：索罗斯基金二季度新建美国电力（AEP）、Nebius集团等头寸，清仓赛富时（CRM）、格芯（GFS）等，转向公用事业与住宅板块。（[财联社](https://www.cls.cn/detail/2455014)）
+11. **中国AI追赶美国引恐慌，硅谷罕见降价应战**：中国AI企业智谱GLM-5.2已能与Claude在编程任务上"不相上下"，美国创业者开始部署国产模型替代昂贵服务。（[联合早报](https://www.zaobao.com/news/china/story20260816-9514193)）
 
-9. **美股存储板块逆市走强，闪迪周涨超35%**：受AI算力需求推动，存储芯片板块表现亮眼，闪迪涨超7%、周累涨35.38%，希捷科技涨超5%，西部数据涨超4%，美光科技涨超2%。（[财联社](https://www.cls.cn/detail/2455043)）
+12. **《江泽民》纪录片播出老布什受访画面**：央视纪录片第十集"五洲际会"播放老布什2008年受访片段，称江泽民"为中国结交了很多好朋友"。（[联合早报](https://www.zaobao.com/news/china/story20260816-9525482)）
 
-10. **OpenAI人才流失引发IPO前"巨大红旗"担忧**：OpenAI多名高管相继离职，包括首席营收官Dali Rajic等，人才外流引发市场对公司IPO前稳定性的担忧。（[CNBC](https://news.google.com/rss/articles/CBMiaEFVX3lxTE44OUJZSWt3dkU4Vmh6T1lEbkFhMi1SNnc0aEF2d1RNNzZ2Q0ViLWM2UGFYS0VSLVUzYW1PNjRPYm04ajJlV2JSdXlGS1BnYU1wcDhyT2pxMzNvNHRWQkoyZGY5bmdaZ2ZI0gFuQVVfeXFMT0hVcEpCdG9PRElhcFVtc211cnNmX0twcF9DeVU2aXNRYXdZaExmNFlDdGluaWtmQ0pjXzY0bVNKWVNRMHY1a0FkSlRTelZaLXBkaW9FNm01TFU0MGY0dVVIQXY2M2ZfekYxd3FiNnc)）
+13. **于东来回应招聘刑满释放人员**：胖东来创始人于东来称，首批刑释人员入职后"无一人离开"，均稳定开心工作生活。（[联合早报](https://www.zaobao.com/news/china/story20260815-9525285)）
 
-**【联合早报】**
+14. **党晓龙调任河北师范大学党委书记**：原保定市委书记党晓龙出任河北师范大学党委书记，其曾参与雄安新区早期筹建。（[联合早报](https://www.zaobao.com/news/china/story20260815-9525094)）
 
-11. **陈光炎：美中AI双雄争霸，"数字铁幕"正在落下**：新加坡学者陈光炎指出，美中形成两个竞争科技生态系统，美国推动"硅和平"倡议拉拢盟友，中国成立世界人工智能合作组织应对，新加坡与东盟面临核心挑战变化。（[联合早报](https://www.zaobao.com/news/china/story20260814-9516430)）
+15. **周一举行江泽民诞辰100周年纪念大会**：习近平将出席8月17日上午在人民大会堂举行的纪念大会并发表重要讲话。（[联合早报](https://www.zaobao.com/news/china/story20260815-9524927)）
 
-12. **第二届世界人形机器人运动会参赛机器人数量翻两番**：8月22日至26日北京"冰丝带"将举办第二届赛事，16国666支队伍、2056台机器人参赛，中国157家企业、200所院校641支队伍齐聚。（[联合早报](https://www.zaobao.com/news/china/story20260814-9522269)）
+16. **港媒：习近平访美前美方筹备混乱令北京不安**：距9月访美不足六周，美国政府尚无官员牵头统筹，礼宾安排进展甚微。（[联合早报](https://www.zaobao.com/news/china/story20260815-9524346)）
 
-13. **陈光炎：中国以"合肥模式"提升国家整体战略能力**：陈光炎剖析合肥地方政府投资模式，指出其以摆脱"卡脖子"困境为目标，与硅谷风投追求资本回报不同，孕育出长鑫科技等企业。（[联合早报](https://www.zaobao.com/news/china/story20260814-9516193)）
+17. **苹果在阿里支持下为中国训练AI模型**：知情人士称苹果正与中国阿里合作，专门为中国市场训练大语言模型，策略转向。（[联合早报](https://www.zaobao.com/news/china/story20260815-9524422)）
 
-14. **高市就朱镕基逝世致哀，分析：借葬礼外交管控日中关系跌势**：日本首相高市早苗向习近平、李强发唁电，同日传出将不参拜靖国神社消息，学者认为日方试图通过葬礼外交稳住双边关系。（[联合早报](https://www.zaobao.com/news/china/story20260814-9521837)）
+18. **中国动画电影《牛来》反向大热**：被评"粗糙到离谱"的国产动画《牛来》上映十余天后排片从不足5场猛增至168场，票房逆势增长。（[联合早报](https://www.zaobao.com/news/china/story20260815-9524498)）
 
-15. **公众咨询结束，港首份五年规划预计9月发表**：香港政府收到1.38万份意见，AI分析显示市民支持香港对接国家战略、培育新兴产业、建设国际创科中心及巩固金融中心地位。（[联合早报](https://www.zaobao.com/news/china/story20260814-9521680)）
+19. **中国7月信贷增长超预期但人民币贷款转负**：社会融资规模增量1.4万亿元高于预期，但人民币新增贷款减少3400亿元，为20年来罕见负增长。（[联合早报](https://www.zaobao.com/news/china/story20260815-9524469)）
 
-16. **江泽民诞辰100周年纪念币下周一起发行**：中国人民银行8月17日起发行四枚纪念币，含普通纪念币1枚（面额1元）、金质纪念币2枚、银质纪念币1枚，普通纪念币发行量1000万枚。（[联合早报](https://www.zaobao.com/news/china/story20260814-9521545)）
-
-17. **刘柳：复旦留学生"王水牛"撕开的裂口**：自称复旦大学研究生的美国网红"王水牛"被爆私生活混乱，多名中国女性控诉其假借辅导中文接近异性致孕后拉黑，相关词条冲上微博热搜。（[联合早报](https://www.zaobao.com/news/china/story20260815-9521182)）
-
-18. **郭德纲改编红歌未报备被查，西安演出取消**：郭德纲7月在武汉商演中改编《弹起我心爱的土琵琶》被举报，武汉市文旅局已立案调查，麒麟剧社取消8月15日西安10周年巡演。（[联合早报](https://www.zaobao.com/news/china/story20260814-9521818)）
-
-19. **新闻人间：赖清德成"北戴河听床师"？**：赖清德称"中共北戴河会议对台工作下了一道非常严重的指令"，被批评者取新外号"北戴河听床师"，台湾"九合一"选举倒计时三个月，高雄市长选情升温。（[联合早报](https://www.zaobao.com/news/china/story20260815-9521644)）
-
-20. **下午察：长崎为何对台湾另眼相待**：长崎市原子弹爆炸纪念仪式座位安排引发争议，台湾代表被安排在外交使节席之外，台湾驻日代表李逸洋批评"屈从中国意志"，改由福冈分处处长代为出席。（[联合早报](https://www.zaobao.com/news/china/story20260814-9518720)）
+20. **"鹅腿阿姨"涉刑事违法被举报**：法律从业者举报北大附近摆摊"鹅腿阿姨"涉嫌刑事违法，市监部门回应正在调查。（[联合早报](https://www.zaobao.com/news/china/story20260815-9524442)）
 
 ---
 
-### 持仓动态与聚焦
+## 二、深度观察专栏
 
-#### 个人持仓行情快照
+### 从"事前预防"看中国灾害治理转型
 
-📊
+**联合早报**报道，中共总书记习近平在《求是》杂志刊发的署名文章《提高防灾减灾救灾能力》中，系统提出推动灾害治理向"事前预防"转型的战略方向。文章基于今年4月28日在二十届中央政治局第二十五次集体学习时的讲话整理，涵盖隐患排查、工程治理、预警体系、应急指挥、科技支撑、基层基础等六大维度。
 
-| 标的 | 代码 | 市场 | 最新价 | 涨跌幅 |
-|------|------|------|--------|--------|
-| 招商银行A | 600036 | A股 | 数据暂不可得 | — |
-| 招商银行H | 03968 | 港股 | 数据暂不可得 | — |
-| 长江电力 | 600900 | A股 | 数据暂不可得 | — |
-| 红利低波ETF易方达 | 563020 | A股 | 数据暂不可得 | — |
-| QQQM | QQQM | 美股 | 301.01 美元 | **↓0.13%** |
-| SPY | SPY | 美股 | 776.34 美元 | **↓0.20%** |
+**事件概述**：文章开篇即指出中国"国土广袤、地理复杂、气候多样，自然灾害易发多发"的基本国情。十八大以来，中国在防灾减灾领域作出大量部署，但当前仍面临"不少新情况新问题"。核心主张是"坚持源头管控，有效规避自然灾害风险"，具体包括加强隐患排查、提高基础设施设防标准、补齐北方防洪排涝短板、加强对高风险地段的重点防控等。
 
-> 注：A股及港股持仓标的腾讯API暂不可得，美股持仓通过yfinance兜底获取。
+**深层分析**：这一政策转向背后有深刻的经济逻辑。首先，"事前预防"比"事后救灾"成本更低——文章明确提到要"有效压降存量风险、遏制新增风险"，这反映了从被动应对向主动管理的治理理念升级。其次，文章强调"树牢底线思维、极限思维"，要求"深入研判大灾巨灾风险"，这与中国近年频发的极端天气事件（如2021年河南暴雨、2023年京津冀洪涝）直接相关。第三，文章提出"防止自然灾害风险向经济安全、能源资源安全、粮食安全、社会安全等领域传导和扩散"，显示出灾害治理已被纳入总体国家安全观框架。
 
-#### 持仓聚焦（未来催化）
-
-**电力/公用事业｜索罗斯二季度新建美国电力（AEP）头寸，清仓赛富时等科技股（财联社）**
+**影响与前瞻**：从政策信号看，未来中国将在应急领域加大科技投入（"推动应急领域科技创新和产业创新"）、完善法治体系（"健全应急领域法治体系"）、强化基层能力（"推动资源和力量下沉"）。对投资者而言，防灾减灾产业链（监测预警设备、应急物资、基建加固等）可能迎来政策红利；对公众而言，预警系统的"及时性、精准性、通达性"提升将直接改善风险应对能力。文章最后强调"坚决纠正重发展轻安全、重救灾轻预防等倾向"，标志着中国灾害治理进入新阶段。
 
 ---
 
-### QDII 溢价与申购额度监测
-
-📊
-
-**场内ETF溢价率**：
-
-| ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
-|-----|------|-------|------------|------|
-| 纳指ETF国泰 | 513100 | 数据暂不可得 | — | — |
-| 纳指ETF广发 | 159941 | 数据暂不可得 | — | — |
-| 纳斯达克100ETF招商 | 159659 | 数据暂不可得 | — | — |
-| 标普500ETF博时 | 513500 | 数据暂不可得 | — | — |
-| 标普500ETF国泰 | 159612 | 数据暂不可得 | — | — |
-| 标普500ETF南方 | 513650 | 数据暂不可得 | — | — |
-
-> 场内ETF实时价格数据暂不可得（腾讯API无响应），溢价率无法计算。
-
-**场外QDII申购额度**：数据暂不可得（模块执行超时）
-
-**热门全球QDII关注**：数据暂不可得（模块执行超时）
-
----
-
-*报告生成时间：2026年8月15日 06:25 北京时间*
+*报告生成时间：2026年8月16日 06:15（北京时间）*
