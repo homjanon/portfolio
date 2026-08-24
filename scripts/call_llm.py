@@ -38,6 +38,38 @@ LLM_CONFIGS = [
 ]
 
 
+def _dedup_top20_links(text):
+    """Top20 块内同链接去重：同一原文链接（news.google.com 重定向）重复出现时仅保留第一条，
+    并重新连续编号（删除后不产生断号）。防御 LLM 幻觉复制（把同一条候选输出两遍）。
+    """
+    # 仅处理含「全球 Top20」的板块
+    if 'Top20' not in text:
+        return text
+    # 逐条新闻行形如：N. **标题**：内容。（[媒体](链接)） 或 N. **标题**：内容（[媒体](链接)）
+    line_re = re.compile(
+        r'^(\d+)\.\s+\*\*([^*]+)\*\*[：:](.*?)（\[[^\]]+\]\(([^)]+)\)）\s*$',
+        re.MULTILINE
+    )
+    seen_links = set()
+    seq = [0]
+    removed = [0]
+    def _repl(m):
+        link = m.group(4)
+        if link in seen_links:
+            removed[0] += 1
+            return ''  # 删除整行
+        seen_links.add(link)
+        seq[0] += 1
+        # 仅替换行首序号（保留 **标题**/正文/媒体名/链接原样）
+        return re.sub(r'^\d+\.\s+', f'{seq[0]}. ', m.group(0), count=1)
+    out = line_re.sub(_repl, text)
+    # 清理删除后留下的空行
+    out = re.sub(r'\n{3,}', '\n\n', out)
+    if removed[0]:
+        print(f"  🧹 Top20 同链接去重：移除 {removed[0]} 条重复新闻（已重新编号）")
+    return out
+
+
 def _call_llm(api_url, api_key, model, system, user, timeout=90, extra_headers=None):
     """通用 OpenAI 兼容 LLM 调用器，含快速退避重试。
 
@@ -232,6 +264,8 @@ def main():
             content = None
             continue
         content = c
+        # Top20 同链接去重（防 LLM 幻觉复制同一条新闻；对 HTML/广播稿链路无副作用）
+        content = _dedup_top20_links(content)
         print(f"✅ {llm['name']} 成功（{len(content)} 字符）")
         break
 
