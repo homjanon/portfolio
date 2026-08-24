@@ -534,33 +534,93 @@ def _is_table_line(line):
     return line.strip().startswith('|')
 
 
+def _is_bold_heading(line):
+    """识别纯加粗小标题行（`**xxx**` 或 `**xxx**：`），返回标题文本或 None"""
+    stripped = line.strip()
+    m = re.fullmatch(r'\*\*([^*]+)\*\*[：:]?', stripped)
+    return m.group(1) if m else None
+
+
+def _render_text_group(text_group, title_clean):
+    """渲染一组文本行（有序列表 / 无序列表 / 持仓卡片 / 普通段落；纯加粗行→小标题 h4）"""
+    parts = []
+    # 检测有序列表块
+    is_ordered_list = any(
+        re.match(r'^\d+\.\s', l.strip()) for l in text_group if l.strip()
+    )
+    is_unordered_list = any(
+        l.strip().startswith(('- ', '* ')) for l in text_group if l.strip()
+    )
+
+    if is_ordered_list:
+        parts.append('<ol class="news-list">')
+        for line in text_group:
+            rendered = _render_text_line(line)
+            if rendered:
+                parts.append(rendered)
+        parts.append('</ol>')
+    elif is_unordered_list:
+            # 持仓板块特殊处理：转为卡片样式（标题随实际小节名动态显示，原「持仓快照」已删除改为持仓聚焦）
+        if any('持仓' in kw for kw in [title_clean]):
+            parts.append('<div class="card">')
+            for line in text_group:
+                stripped = line.strip()
+                if stripped.startswith('- '):
+                    content = stripped[2:]
+                    content = _smart_inline(content)
+                    content = _markdown_to_html_inline(content)
+                    parts.append(f'<div class="holding-item">{content}</div>')
+                else:
+                    rendered = _render_text_line(line)
+                    if rendered:
+                        parts.append(rendered)
+            parts.append('</div>')
+        else:
+            parts.append('<ul>')
+            for line in text_group:
+                rendered = _render_text_line(line)
+                if rendered:
+                    parts.append(rendered)
+            parts.append('</ul>')
+    else:
+        for line in text_group:
+            # 纯加粗行（**xxx** / **xxx**：）识别为小标题，渲染 h4 而非普通段落
+            heading = _is_bold_heading(line)
+            if heading:
+                parts.append(f'<h4>{_markdown_to_html_inline(heading)}</h4>')
+                continue
+            rendered = _render_text_line(line)
+            if rendered:
+                parts.append(rendered)
+    return '\n'.join(parts)
+
+
 def block_to_html(lines, title='', level='section'):
-    """板块 → HTML 片段"""
+    """板块 → HTML 片段（表格与文本按 MD 原始顺序交错渲染，修复 QDII 等表格错位）"""
     if not lines:
         return ''
 
-    # 收集表格和文本行
-    table_groups = []  # [(table_lines, preceding_title)]
-    text_groups = []   # [list of text lines]
+    # 按 MD 原始顺序收集渲染项：表格行成组、文本行成组，保持先后顺序
+    items = []          # [('table', [...]) | ('text', [...])]
     current_text = []
     current_table = []
 
     for line in lines:
         if _is_table_line(line):
             if current_text:
-                text_groups.append(current_text)
+                items.append(('text', current_text))
                 current_text = []
             current_table.append(line)
         else:
             if current_table:
-                table_groups.append((current_table, title))
+                items.append(('table', current_table))
                 current_table = []
             current_text.append(line)
 
     if current_table:
-        table_groups.append((current_table, title))
+        items.append(('table', current_table))
     if current_text:
-        text_groups.append(current_text)
+        items.append(('text', current_text))
 
     html_parts = []
 
@@ -580,61 +640,20 @@ def block_to_html(lines, title='', level='section'):
             return ''  # 整块跳过
         html_parts.append(f'<{tag}>{title_clean}</{tag}>')
 
-    # 交错渲染：表格和文本按它们在 MD 中的顺序出现
-    # 简化：先渲染表格组，再渲染文本组
-    for tbl_lines, tbl_title in table_groups:
-        rows = _parse_table_rows(tbl_lines)
-        if not rows:
-            continue
-        if _should_render_table(tbl_title):
-            html_parts.append(_table_to_html(rows))
-        else:
-            html_parts.append(_table_to_div(rows))
-
-    for text_group in text_groups:
-        # 检测有序列表块
-        is_ordered_list = any(
-            re.match(r'^\d+\.\s', l.strip()) for l in text_group if l.strip()
-        )
-        is_unordered_list = any(
-            l.strip().startswith(('- ', '* ')) for l in text_group if l.strip()
-        )
-
-        if is_ordered_list:
-            html_parts.append('<ol class="news-list">')
-            for line in text_group:
-                rendered = _render_text_line(line)
-                if rendered:
-                    html_parts.append(rendered)
-            html_parts.append('</ol>')
-        elif is_unordered_list:
-                # 持仓板块特殊处理：转为卡片样式（标题随实际小节名动态显示，原「持仓快照」已删除改为持仓聚焦）
-            if any('持仓' in kw for kw in [title_clean]):
-                html_parts.append('<div class="card">')
-                for line in text_group:
-                    stripped = line.strip()
-                    if stripped.startswith('- '):
-                        content = stripped[2:]
-                        content = _smart_inline(content)
-                        content = _markdown_to_html_inline(content)
-                        html_parts.append(f'<div class="holding-item">{content}</div>')
-                    else:
-                        rendered = _render_text_line(line)
-                        if rendered:
-                            html_parts.append(rendered)
-                html_parts.append('</div>')
+    # 按 MD 原始顺序交错渲染：表格与文本交替出现（不再先表格后文本）
+    for kind, group in items:
+        if kind == 'table':
+            rows = _parse_table_rows(group)
+            if not rows:
+                continue
+            if _should_render_table(title):
+                html_parts.append(_table_to_html(rows))
             else:
-                html_parts.append('<ul>')
-                for line in text_group:
-                    rendered = _render_text_line(line)
-                    if rendered:
-                        html_parts.append(rendered)
-                html_parts.append('</ul>')
+                html_parts.append(_table_to_div(rows))
         else:
-            for line in text_group:
-                rendered = _render_text_line(line)
-                if rendered:
-                    html_parts.append(rendered)
+            _rg = _render_text_group(group, title_clean)
+            if _rg:
+                html_parts.append(_rg)
 
     return '\n'.join(html_parts)
 
