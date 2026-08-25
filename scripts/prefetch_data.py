@@ -595,27 +595,61 @@ def fetch_extra():
     result = {}
     today_str = datetime.now(TZ_CN).strftime("%Y%m%d")
 
-    # ── 1. USD/CNH 汇率（akshare 外汇局中间价 → yfinance 兜底）──
+    # ── 1. USD/CNH 汇率（新浪离岸即期 → yfinance → 外汇局中间价末位兜底）──
+    # 口径统一：同表 WTI/黄金等均为市场价，汇率也用离岸即期市场价（CNH 24h 交易，
+    # 07:00 出报告时可取隔夜最新价；中间价 9:15 才公布且有 ±2% 偏离，不作主价格）
     usdcnh_ok = False
-    try:
-        _df_fx = ak.currency_boc_safe()
-        if _df_fx is not None and len(_df_fx) > 0:
-            _latest = _df_fx.iloc[-1]
-            _usd_str = str(_latest.get("美元", ""))
-            if _usd_str:
-                # 央行中间价以 "元/100外币" 计，如 679.89 → 6.7989
-                result["USD_CNH"] = round(float(_usd_str) / 100.0, 4)
-                result["USD_CNH_日期"] = str(_latest.get("日期", ""))
-                result["USD_CNH_来源"] = "akshare 外汇局中间价"
-                usdcnh_ok = True
-    except Exception as e:
-        print(f"    currency_boc_safe 失败: {e}")
 
+    # 主源：新浪财经 fx_susdcnh（离岸人民币即期，买卖报价中值）
+    try:
+        _r = requests.get(
+            "https://hq.sinajs.cn/list=fx_susdcnh",
+            headers={"Referer": "https://finance.sina.com.cn", "User-Agent": UA},
+            timeout=15,
+        )
+        if _r.status_code == 200:
+            _m = re.search(r'fx_susdcnh="([^"]*)"', _r.text)
+            if _m:
+                _parts = _m.group(1).split(",")
+                # 0:时间 1:买价 2:卖价 3:昨收 4:成交量 5:最新价 ... 9:名称 ... 末位:日期
+                if len(_parts) > 5 and _m.group(1).strip():
+                    try:
+                        _bid, _ask = float(_parts[1]), float(_parts[2])
+                        if _bid > 0 and _ask > 0:
+                            result["USD_CNH"] = round((_bid + _ask) / 2, 4)
+                            result["USD_CNH_日期"] = _parts[-1] if _parts[-1] else ""
+                            result["USD_CNH_时间"] = _parts[0]
+                            result["USD_CNH_来源"] = "新浪财经·离岸即期(CNH)"
+                            usdcnh_ok = True
+                    except (ValueError, IndexError):
+                        pass
+    except Exception as e:
+        print(f"    新浪 USDCNH 失败: {e}")
+
+    # 兜底1：yfinance USDCNH=X（同为离岸即期市场价）
     if not usdcnh_ok:
         yf_fx = _yf_fallback({"USD_CNH": "USDCNH=X"})
         if yf_fx.get("USD_CNH"):
             result["USD_CNH"] = yf_fx["USD_CNH"]["最新价"]
-            result["USD_CNH_来源"] = "yfinance兜底"
+            result["USD_CNH_日期"] = ""
+            result["USD_CNH_来源"] = "yfinance·离岸即期(CNH)"
+            usdcnh_ok = True
+
+    # 末位兜底：外汇局中间价（官方锚定价、非市场成交价，来源字段明确标注防误导）
+    if not usdcnh_ok:
+        try:
+            _df_fx = ak.currency_boc_safe()
+            if _df_fx is not None and len(_df_fx) > 0:
+                _latest = _df_fx.iloc[-1]
+                _usd_str = str(_latest.get("美元", ""))
+                if _usd_str:
+                    # 央行中间价以 "元/100外币" 计，如 679.89 → 6.7989
+                    result["USD_CNH"] = round(float(_usd_str) / 100.0, 4)
+                    result["USD_CNH_日期"] = str(_latest.get("日期", ""))
+                    result["USD_CNH_来源"] = "外汇局官方中间价(非市场价)"
+                    usdcnh_ok = True
+        except Exception as e:
+            print(f"    currency_boc_safe 失败: {e}")
 
     # 注：资金面(南下/北向/涨跌家数)、两融、涨停/跌停 已移除（prompt 不再消费，且为卡顿主因）
 
