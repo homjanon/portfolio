@@ -1,195 +1,61 @@
-# 2026年8月29日 星期六 全球金融资讯日报
+# 全球金融资讯日报 | 2026年8月30日 星期日
 
-**今日定性导语**：周五全球市场分化明显，A股三大指数小幅收跌，科创50领跌**↓1.85%**，港股恒指微涨**↑0.07%**，美股三大指数集体收跌，纳指**↓0.52%**，芯片股遭抛售拖累；欧洲股市普遍走强，法股**↑0.98%**领涨。美联储主席沃什鹰派表态推升加息预期，美债收益率曲线显著趋平，美元走强致黄金暴跌**↓3.43%**，白银**↓4.48%**。伊朗霍尔木兹海峡局势紧张，国际油价微跌，WTI收**↓0.11%**。特朗普签署行政令创建美国太空学院，太空战略再升级。
+查询时间：北京时间 2026年8月30日 06:39（星期日）
 
----
-
-## 一、市场全景
-
-### A股收盘（8月28日）
-
-| 指数 | 最新价 | 涨跌幅 |
-|------|--------|--------|
-| 上证指数 | 3952.18 | **↓0.11%** |
-| 深证成指 | 13953.07 | **↓0.68%** |
-| 沪深300 | 4609.18 | **↓0.46%** |
-| 科创50 | 1662.15 | **↓1.85%** |
-| 创业板指 | 3424.40 | **↓1.41%** |
-
-A股周五整体偏弱，沪指窄幅震荡收跌，创业板与科创板领跌，科创50跌近**2%**。银行、电力等防御板块相对抗跌，红利低波ETF逆势收涨**↑0.17%**。港股恒指微涨**↑0.07%**，恒生科技指数**↓0.33%**，夜盘延续跌势。富时A50期货夜盘**↓0.31%**，预示周一开盘承压。
-
-### 美股收盘（8月29日凌晨）
-
-| 指数 | 最新价 | 涨跌幅 |
-|------|--------|--------|
-| 道琼斯工业 | 53559.99 | **↓0.02%** |
-| 标普500 | 7711.76 | **↓0.25%** |
-| 纳斯达克综合 | 26402.42 | **↓0.52%** |
-
-美股周五收跌，芯片股遭抛售拖累。英伟达跌超**4%**，费城半导体指数跌**3.47%**，ARM跌超**6%**。美联储主席沃什鹰派表态推升加息预期，市场加大对9月加息押注。本周三大指数仍录得小幅上涨，道指累涨**0.53%**，纳指累涨**0.85%**，标普累涨**0.49%**。
-
-### 港股收盘（8月28日）
-
-| 指数 | 最新价 | 涨跌幅 |
-|------|--------|--------|
-| 恒生指数 | 25584.79 | **↑0.07%** |
-| 恒生国企指数 | 8490.39 | **0.00%** |
-| 恒生科技指数 | 4605.15 | **↓0.33%** |
-
-港股周五窄幅震荡，恒指微涨，恒生科技指数小幅回落。夜盘恒指**↓0.2%**，恒生科技**↓0.16%**，市场情绪偏谨慎。
-
-### 全球其他市场（8月28日）
-
-| 指数 | 代码 | 最新价 | 涨跌幅 |
-|------|------|--------|--------|
-| 日经225 | N225 | 66405.56 | **↑0.41%** |
-| 韩国KOSPI | KOSPI | 6788.88 | **↓1.79%** |
-| 欧洲STOXX 600 | SXXP | 655.16 | **↑0.51%** |
-| 德国DAX | GDAXI | 26569.99 | **↑0.77%** |
-| 英国富时100 | FTSE | 10824.26 | **↑0.29%** |
-| 法国CAC40 | FCHI | 8401.18 | **↑0.98%** |
-
-欧洲股市周五普遍走强，法股**↑0.98%**领涨，德股**↑0.77%**。日经225微涨**0.41%**，韩股KOSPI跌**1.79%**领跌亚太。
-
-### 大宗商品与汇率
-
-| 品种 | 最新价/值 | 涨跌幅 |
-|------|-----------|--------|
-| WTI原油 | 83.44 美元 | **↓0.11%** |
-| COMEX黄金 | 4504.10 美元 | **↓3.43%** |
-| 布伦特原油 | 75.44 美元 | **↑0.13%** |
-| COMEX白银 | 67.09 美元 | **↓4.48%** |
-| 美元/离岸人民币 | 6.7312 | — |
-| 中国10Y国债收益率 | 1.6949% | — |
-| 美国10Y国债收益率 | 4.73% | — |
-
-美联储鹰派表态致美元走强，黄金暴跌**↓3.43%**跌破4500美元/盎司，白银**↓4.48%**。国际油价微跌，WTI收**↓0.11%**报83.40美元。美债收益率曲线显著趋平，两年期收益率一度涨10个基点至4.33%，30年期跌2个基点至5.17%。
-
-### 估值水位与情绪
-
-| 指数 | PE(TTM) | PE分位 | PB | PB分位 | 股息率 | 估值结论 |
-|------|---------|--------|-----|--------|--------|---------|
-| 红利低波 | 8.45 | 78.04% | 0.87 | 61.56% | 4.42% | 股息稳健 |
-| 中证红利 | 8.64 | 80.64% | 0.85 | 50.52% | 4.30% | 股息稳健 |
-| 中证白酒 | 19.97 | 16.88% | 4.07 | 2.84% | 4.54% | 深度低估 |
-| 沪深300 | 13.79 | 72.16% | 1.45 | 47.72% | 2.59% | 极贵 |
-| 中证500 | 34.14 | 82.00% | 2.46 | 78.76% | 1.30% | 偏贵 |
-| 创业板指 | 39.32 | 35.76% | 5.54 | 63.60% | 0.92% | 中性偏贵 |
-| 科创50 | 148.64 | 84.96% | 7.75 | 91.77% | 0.24% | 极贵 |
-| 恒生科技 | 24.54 | 45.68% | 2.48 | 27.16% | 1.00% | 偏低 |
-| 中概互联50 | 17.43 | 9.48% | 2.08 | 1.36% | 1.06% | 深度低估 |
-| 纳斯达克100 | 30.44 | 48.36% | 9.29 | 80.12% | 0.43% | 偏高 |
-| 标普500 | 25.48 | 60.00% | 5.57 | 96.12% | 1.01% | PB极贵 |
+**今日定性导语**：全球市场本周聚焦美联储政策走向与AI产业格局重塑，杰克逊霍尔年会释放加息预期升温信号，OpenAI与SpaceX旗下Cursor的模型断供事件加剧科技圈博弈；同时苹果迎来15年CEO更替、腾讯发布新一代AI模型挑战中美科技竞争格局。地缘层面，中尼边境泥石流灾害引发跨境救援合作，日本海上保安厅申请创纪录预算应对区域海上活动变化。
 
 ---
 
-## 二、行业洞察
+## 一、全球 Top20
 
-### 全球 Top20
+### 🌐 谷歌精选（美国视角）
 
-**【谷歌精选】**
+1. **Warsh就通胀表态强硬后，面临利率"无赢局"**：美联储理事Warsh在杰克逊霍尔年会前后就利率政策发表强硬通胀立场，但市场分析师指出其面临两难困境——若坚持鹰派可能压制经济，若转向鸽派则损害央行信誉。市场预计本次年会将释放更明确的加息信号。（[The New York Times](https://news.google.com/rss/articles/CBMihwFBVV95cUxNUkZFdlh5emdvLTJTbEVINkVEY1dRa2ZmMUkxNHZBZExGdFRLdkZWQ2hOQWJFNTZ6cXJUcTFEMERrbGg1ZmkyalBQNVdaVk9pODVLZVFZN24zX0pKdmxRalNNVjBxYmNMalRveVE0Z056VjNtV0JibF8yc3czUHE4U0xSU0NuOTA?oc=5)）
 
-1. **美联储主席沃什暗示可能需要加息**：美联储主席凯文·沃什在杰克逊霍尔年会上表示，通胀尚未出现实质性放缓，美联储"还有工作要做"，暗示可能需要进一步加息。市场对9月加息的押注升至接近60%。（[AP News](https://news.google.com/rss/articles/CBMiqgFBVV95cUxNTUFJSHBlaThPY3QxNm1TZEpORnhMam5QQUZTc203emxiY0pKSWJLYWtvaFZNMUd0UGluNzJHVHNhcTZERkpOdmpQR2ZsWC10Q1IxMTFIaDVVRkQ3WjhFWFZsX254RVVJUG9QemZ6ZEtIbndJZk1iYUtuNDEzUGFmejVPZTZlQXl5SEx5WGZPSzh1WHlXalY1dldNR2l3a0RkT0t2M1RZTEdLZw?oc=5)）
+2. **Meta 170亿美元和解案揭示社交媒体危害**：Meta达成创纪录的170亿美元社交媒体和解协议，凸显平台内容审核漏洞与用户心理健康损害。新规或将重塑Facebook和Instagram的内容管理框架，科技监管进入新阶段。（[Los Angeles Times](https://news.google.com/rss/articles/CBMingFBVV95cUxNMGh3TGRLNTV0WTZJX3lLSHJFMkZrNXo3cHRZMDluZDhueVl5eGNpenBNZE13TmYxVVpQbHhDTC1meFVUUnU1YnhGTWZmUl9Db2NPUzRsaE91bVYxdkYyZVAzenZEWGRtLXZaZ3dUZkVsTlpkTVQ1T3ZhMllGLUZrcnhPcTJJRUpsT1d1ODVLRjdKYVRvTHo2a040SEt2QQ?oc=5)）
 
-2. **沃什鹰派表态推升加息押注 现货黄金日内暴跌超120美元**：美联储主席鹰派言论引发贵金属市场剧烈抛售，现货黄金日内跌超2.6%，报4480美元/盎司，白银跌3.63%至66.77美元。（[格隆汇](https://www.gelonghui.com/live/2639837)）
+3. **特朗普反弹为政府持股股票增添新风险**：政治动荡加剧市场对政府持股股票的风险担忧，政策不确定性可能影响相关板块估值。（[Bloomberg.com](https://news.google.com/rss/articles/CBMitAFBVV95cUxNTml6UDBEN2NpSTJaNzVjQnJiZGNIZF9hcmFhWGRQVmlFcHd0Uk54UkQyMjVTTVVHR0NqSWx0OVdDNnZyZ1A0czdGcVJqbFBuNExiRFhMbjhsNmlrQks5d2VqclE5TGIydFFYR3ZsM1lrUERncG5pd3cxRF9tblg4dmNRa3dzSzJteWV5ODg2Wm1OMXIxdVF6SkwxV3MyWWktczVnZXppUktTaW1iRU13S3h2NGw?oc=5)）
 
-3. **美股收盘：沃什鹰派言论推升加息预期 三大指数小幅收跌**：道指跌0.02%，纳指跌0.52%，标普500跌0.25%。芯片股走弱，费城半导体指数跌3.47%，英伟达跌4.57%。（[财联社](https://www.cls.cn/detail/2468421)）
+4. **库克时代落幕：苹果迎来15年来首次CEO更替**：蒂姆·库克即将卸任苹果CEO，硬件主管John Ternus接棒。分析指出，新任CEO面临华尔街最具挑战性的月份，需应对AI转型与供应链重构双重压力。（[PCMag](https://news.google.com/rss/articles/CBMijwFBVV95cUxQa3FiWC1JUFItZV9sd093MjVvX09GN2xfSzhmSkRnRGtBMkw4elAtMnI0VXZwSGM4aVlrTTVtTkJQRk5sZ0hxcENkQ1pfZVdEWTJnNEV6Mm1vUWFqRUJQNDhydHk1aHNWbjFRTWRNUHpMMVZUZW50OXpweTIwMTJfNHRWVkFqQ0Y2amRjT0VOQQ?oc=5)）
 
-4. **伊朗总统：若霍尔木兹海峡重开 美国必须履行其义务**：伊朗总统佩泽希齐扬表示，若海峡重新开放，美国必须解除封锁和制裁、解冻伊朗资金、停止以色列在黎巴嫩的敌对行动。（[格隆汇](https://www.gelonghui.com/live/2640006)）
+5. **OpenAI切断Cursor模型访问，马斯克与AI圈矛盾深化**：SpaceX收购Cursor后，OpenAI宣布终止对其AI模型访问权限，标志着马斯克阵营与OpenAI的对抗进一步升级。（[CNBC](https://news.google.com/rss/articles/CBMiekFVX3lxTE90bmQ0enBvenh2RFZzWDJtV2FWRnFMVzNRMEJrbG1RSmtWbnZ6MU1XcHV0TUJ1dll3YkJJM1RSMUgyRWVsV3NTeHpUV1JOeEZVb01TRkctT0c0NjZIc0haWFVTdzVkSmFLM1htanRGeVJZMmxNb2NaWnBn0gF_QVVfeXFMTnNMYVB6Q3hkc1l0NnRTSVhOeU5uT21nbUxOZDZjU2ota0tocTk2a3JjOWdxeUp0M2ttVUpHNk1ZTlB5MWp6QkR5c21aUlduUERGbzRZenhNZ1ZIQVVWTWt6RmJJdW8xcVAtRW05NnIxVGI5UE1uaVA4Q0V6NWd4cw?oc=5)）
 
-5. **特朗普签署行政令创建美国太空学院**：特朗普在休斯敦约翰逊航天中心签署行政命令，宣布成立美国太空学院，仿照西点军校模式，培养太空领域专业人才。（[财联社](https://www.cls.cn/detail/2468411)）
+6. **美国40万亿美元国债增加股市"失落十年"风险**：市场研究员警告，美国国债规模膨胀可能重演日本式长期低迷，AI泡沫与债务危机双重风险叠加。（[Business Insider](https://news.google.com/rss/articles/CBMipgFBVV95cUxOSGtuVjE5M3dNeHVzbk9GUmg0U1Y4U29MMmxDWkd6MmJnWGZlekMyT24xTmpMeEp0VmdtdzJhYXFYa2NGWUZ6em56eW1kY0RvSVlIZExIZlNyUU9Hb3FhbFpxWGd0c3Vhc1BKLUtCU3RqNFhtT0dvcmxrS1FFR1U1MW5nOVJSYjlCTVNPUUVuMDdJcFN3bnNoYnUzRldNNHhaVEpBZW5R?oc=5)）
 
-6. **粮食危机警告不绝于耳 玉米与小麦价格齐创逾三年新高**：芝加哥小麦期货收涨3.1%报784美分/蒲式耳，创2023年2月以来最高；玉米期货收涨0.6%报536.5美分/蒲式耳，为2023年7月以来最高。（[财联社](https://www.cls.cn/detail/2468428)）
+7. **DRAM价格暴涨401%，1公斤内存价值等同620克24K黄金**：AI数据中心需求激增导致存储芯片供应短缺，内存价格创历史新高，2027年短缺或进一步加剧。（[Wccftech](https://news.google.com/rss/articles/CBMivgFBVV95cUxQMmdTdDhHLTA2clJIZkJrRURkSTZPaUVpNlF5bVRWcU4wVnM2U2JZN3BaMktveHo1a2lWVnE3QTdYRy1QRklQTDc1Q2hCQTZMaG1rbFVkSUtkQ1VaVHd5TDRiZWdveG5oYVdKMVI5UXh0REk4QW13TEJkVUpQTElxZl9LdnpSZnlVSkh4RVBabjQyb21GZzV2M1FUQTU5ejZXeUt6OHhWUzVtR1M4SFM3T3p3U09oMm1Hd2tYV0VB0gHDAUFVX3lxTFAySTc0MldLd3JSYmtxMFhGSXJoWHl5N2hVcEpNNE5rclNiekRsTFBUVnJQNFhYbW0xX3JCanJRNlpYalAzMVFvemJsNjhRRXJWMzhiUDdzcDJfOEdwWlFYR1VMUUpORnQzSE9kUjU2TXNwMk4wS0VScGd3d2E2QzJmZzdKc29IaDY4bldLbENGMFVvY2Exa2pMdWN2M0FPZEY2ZkNEM2g3UkV2SkVjMjZMOFVzd1kzT0lFRGRrYlZnQW9Jdw?oc=5)）
 
-7. **美债收益率曲线显著趋平**：两年期美债收益率涨10个基点至4.33%，30年期跌2个基点至5.17%，收益率曲线趋平反映加息预期升温。（[格隆汇](https://www.gelonghui.com/live/2639808)）
+8. **BIS行长：稳定币难以成为大规模可信支付工具**：国际清算银行行长警告稳定币在规模化支付场景中缺乏可信度，"数字美元化"风险需警惕。（[Reuters](https://news.google.com/rss/articles/CBMisgFBVV95cUxPRnRMdWlYZ3VXdTdSS0NWWi04QjVRbkpmSG5STFd1dUgtNl9tUWVkcVVGd0xOMU9oRHdlVnNDa2ZFWHdJSXIzQUpkSmNiZnpDTW5wbktodk52Ukprd3cyMDlfMmRvdlVJVDFNdFFWS2UyTGFjdUVKMWVoVmVlVEZHVHplZjYybHM4Q1NaVXlmcHh3VjBqSVVoZDhpZGdiN2xiRnd4QUFMWnNGZGtzaXhOU1N3?oc=5)）
 
-8. **贝森特为干预日元行动辩护**：美国财政部长贝森特表示，日元"失序"可能推高美国利率，日本过去一个月投入创纪录964亿美元支持日元。（[格隆汇](https://www.gelonghui.com/live/2640008)）
+9. **AI巨头警告：网络"末日"将在数个月内降临**：116家科技公司与机构联合发布警告，称AI驱动的网络攻击威胁迫在眉睫，准备时间窗口有限。（[WIRED](https://news.google.com/rss/articles/CBMitwFBVV95cUxNY2ptOHUxdHZlWEFZWkY1YUFITGZfSjFRTmZHMFQyaXBQd3VOajlKaGEyOVdOaWtGOEt4ODJrU1RRVnRpNHU4NkVSREdFc2gyTXFtLVZhTFdLOU5fNlhFNTd5d0RueGk0ZzR2b0dDUnhwSi1McEMtZXZIY1Y4ZWJHZTlqZVBORWxZaVFMcVJiaDdDWUEtVldCN2NialVzOUZIX3M3ZVZCLUxkWnpCNm9XbzFZX2h2b0k?oc=5)）
 
-9. **伊朗革命卫队：持续控制霍尔木兹海峡 船只未经协调不得通过**：伊朗革命卫队海军声明称，美国官员关于海峡开放的声明为谎言，所有未经伊朗协调的船只均不得通行。（[财联社](https://www.cls.cn/detail/2468394)）
+10. **英伟达坚持"印钞"模式为AI繁荣融资**：英伟达季度财报显示其通过资产负债表服务支撑AI基础设施投资，2000亿美元级资金流转引发市场关注。（[WSJ](https://news.google.com/rss/articles/CBMinwFBVV95cUxObVVkZ3E3ZmJtVFR1SGFmMm1CNUpSTVRFM3psNWRGZndCZXFTaUdvR1cwUXBXN0N3bGJqb3hTUi1BdkxrbmZtUVVXQ1JjVVpqTm5vSmM3eXV2VkRadFFNcTdzeFdEMlJRQk5JZFNHcGdtRk80ZlRJaFpsLU9fUXBPejZZbHYtY2tiNExJcmVGVXZETUhVMHF5R0Jsd1RVcTQ?oc=5)）
 
-10. **拉美四国签署联合声明推动关键矿产合作**：智利、阿根廷、玻利维亚和秘鲁四国签署联合声明，加强铜和锂等战略矿产合作，提升全球供应链地位。（[财联社](https://www.cls.cn/detail/2468397)）
+### 🌏 联合早报精选（中港台视角）
 
-**【联合早报】**
+11. **台湾生育率滑至全球最低，养儿太重本年轻人拒买单**：罗玉婷与丈夫在父母协助下凑齐500万新台币头期款购房，却因缺工延至年底才能入住。38岁高先生表示连狗都快养不起，不愿让孩子来受罪。（[联合早报](https://www.zaobao.com/news/china/story20260830-9569181)）
 
-11. **中共政治局部署西藏泥石流救援 习近平李强作救灾指示**：习近平主持召开政治局会议，强调科学制定搜救方案，全力搜救国内外失联人员。会议向西藏泥石流灾害遇难人员默哀。（[联合早报](https://www.zaobao.com/news/china/story20260828-9591721)）
+12. **腾讯发布新AI模型，称表现优于智谱和月之暗面**：腾讯混元Hy4 Preview模型拥有7700亿参数、支持100万Token上下文窗口，内部盲测得分2.99/4.00，略优于智谱GLM 5.3（2.92）与月之暗面产品。（[联合早报](https://www.zaobao.com/news/china/story20260829-9596169)）
 
-12. **中国全国人大常委会免除张又侠刘振立国家军委职务**：全国人大常委会决定免去张又侠的中央军委副主席职务及刘振立的国家中央军委委员职务，未公布接替人选。（[联合早报](https://www.zaobao.com/news/china/story20260828-9592503)）
+13. **中尼边境泥石流，王毅：一揽子援助正在落实**：尼泊尔喜马拉雅山区发生严重山洪泥石流，王毅与尼泊尔外长通话表示中国已分享灾区影像、卫星和水文数据，习近平致慰问电，李强赶赴灾区指导救援。（[联合早报](https://www.zaobao.com/news/china/story20260829-9596423)）
 
-13. **台湾人口50年后恐腰斩 2075年减至1215万**：台湾国发会公布人口推估，受少子化和高龄化影响，总人口预计2075年减至1215万，较2026年锐减约48%。（[联合早报](https://www.zaobao.com/news/china/story20260828-9592854)）
+14. **中尼边境泥石流：气候变暖加剧风险，预警存盲区**：专家指此次灾难源头位于监测盲区，全球高山冰层融化使山体更不稳定，阿拉斯加、瑞士等地亦面临类似风险。（[联合早报](https://www.zaobao.com/news/china/story20260829-9596012)）
 
-14. **吉隆口岸：承担中尼六成以上贸易量 上半年出入境突破10万人次**：西藏吉隆口岸是中尼边境重要枢纽，承担60%以上两国贸易量，上半年出入境人员突破10万人次。（[联合早报](https://www.zaobao.com/news/china/story20260828-9592900)）
+15. **朱忠明任中共上海市政府党组书记**：54岁的朱忠明履新上海市委副书记、市政府党组书记，按惯例下一步预计出任上海市长。其曾任浙江省财政厅副厅长近20年。（[联合早报](https://www.zaobao.com/news/china/story20260829-9595968)）
 
-15. **中国混动汽车在欧洲销量飙升 媒体称或很快被征关税**：中国品牌插电式混合动力汽车在欧洲市场份额飙升，7月占欧洲插混车约三分之一，可能很快面临关税。（[联合早报](https://www.zaobao.com/news/china/story20260828-9591631)）
+16. **港媒：中国企业高管或将随习近平访美**：中美正商讨中企高管是否随行访美以体现互惠原则，北京希望包括中美贸易委员会中企在内的管理层同行，有助两国从对抗转向可控经济竞争。（[联合早报](https://www.zaobao.com/news/china/story20260829-9595328)）
 
-16. **三公投案仅一案成案 在野党谴责中选会剥夺人民公投权**：台湾在野党推动的三项公投案，仅"废除非核家园"一案成案，将于年底与九合一地方选举同日举行。（[联合早报](https://www.zaobao.com/news/china/story20260828-9592661)）
+17. **湖北鄂城政协微信公众号时隔五年再更新**：账号因管理员工作调动导致无法登录而停更，办公室致歉称"长久未能持续分享内容"。（[联合早报](https://www.zaobao.com/news/china/story20260829-9595515)）
 
-17. **深圳市原市长覃伟中履新广东省人大常委会领导**：官方披露，本周初宣布辞去深圳市市长的覃伟中，已履新广东省人大常委会领导。（[联合早报](https://www.zaobao.com/news/china/story20260828-9592603)）
+18. **日本海保申请3448亿日元预算应对中国海上活动**：创纪录预算用于强化海上保安能力，包括建造三艘小型巡逻船艇，应对中国海警船在钓鱼岛周边活动增加。（[联合早报](https://www.zaobao.com/news/china/story20260829-9595425)）
 
-18. **新闻人间：向网民求助的刘翔**：中国田径奥运冠军刘翔在社媒平台发出"求助帖"，询问体育局要求买断或当教练上班该如何选择，迅速冲上热搜。（[联合早报](https://www.zaobao.com/news/china/story20260829-9589437)）
+19. **刘国梁出席国际乒联执委会会议**：刘国梁与运动员委员会主席刘诗雯、金克霍尔参会，听取2027年阿斯塔纳世乒赛筹备进展。（[联合早报](https://www.zaobao.com/news/china/story20260829-9595509)）
 
-19. **吕爱丽：围堵"万安效应"**：台北市长蒋万安力推"无烟城市"，因吸烟区被网民揶揄像"狗笼"引发舆论发酵，全市六座同类型吸烟区同步撤除。（[联合早报](https://www.zaobao.com/news/china/story20260829-9586817)）
+20. **中国媒体批"掌握灾情没向尼泊尔发预警"说法是造谣**：《解放军报》旗下"钧正平"发文指台湾人士将自然灾害当成政治抹黑工具，质问"泯灭人性到何种程度"。（[联合早报](https://www.zaobao.com/news/china/story20260829-9595450)）
 
-20. **下午察：对抗"羞辱式裁员"诉诸欧盟？**：中国车灯龙头企业星宇股份被曝向多名刚入职的高校毕业生抛出"主动离职或转去流水线打螺丝"的二选一难题，引发"羞辱式裁员"争议。（[联合早报](https://www.zaobao.com/news/china/story20260828-9592307)）
+---
 
-### 持仓动态与聚焦
+## 二、深度观察专栏
 
-#### 个人持仓行情快照
+**深度观察：今日暂停**
 
-| 标的 | 代码 | 市场 | 最新价 | 涨跌幅 |
-|------|------|------|--------|--------|
-| 招商银行A | 600036 | A股 | 39.35 元 | **↓0.58%** |
-| 招商银行H | 03968 | 港股 | 49.02 港元 | **↓1.01%** |
-| 长江电力 | 600900 | A股 | 28.05 元 | **↓0.18%** |
-| 红利低波ETF易方达 | 563020 | A股 | 1.178 元 | **↑0.17%** |
-| QQQM | QQQM | 美股 | 295.00 美元 | **↓0.65%** |
-| SPY | SPY | 美股 | 769.35 美元 | **↓0.23%** |
-
-#### 持仓聚焦（未来催化）
-
-- **银行｜甘肃银行上半年营收降2.3%，个人经营贷不良率19.61%（财联社）**
-- **银行｜农业银行上半年净利增4.93%，力争县域贷款占比站稳40%（财联社）**
-- **银行｜建设银行上半年营收增10.72%，净息差保持同业领先（财联社）**
-- **半导体/AI芯片｜英伟达跌超4%，费城半导体指数跌3.47%（财联社）**
-- **有色/资源/煤炭｜现货黄金日内暴跌超120美元，跌破4500美元/盎司（格隆汇）**
-- **电力/公用事业｜巴西电力监管机构将9月份电费定为"黄色"警戒级别（财联社）**
-
-### QDII 溢价与申购额度监测
-
-#### 场内ETF溢价率
-
-| ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
-|-----|------|-------|------------|------|
-| 纳指ETF国泰 | 513100 | 13.11% | — | △溢价 |
-| 纳指ETF广发 | 159941 | 12.26% | — | △溢价 |
-| 纳斯达克100ETF招商 | 159659 | 10.63% | — | △溢价 |
-| 标普500ETF博时 | 513500 | 10.57% | — | △溢价 |
-| 标普500ETF南方 | 513650 | 9.03% | — | △溢价 |
-| 标普500ETF国泰 | 159612 | 8.14% | — | △溢价 |
-
-QDII溢价整体偏高，最高溢价约13.11%（纳指ETF国泰），场内溢价风险需关注。
-
-#### 场外QDII申购额度
-
-| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
-|------|------|---------|---------|-----------|------------|
-| 国泰纳指100 | 160213 | 4.502 | 限大额 | 50.00 元 | — |
-| 大成纳指100a | 000834 | 6.3424 | 限大额 | 10.00 元 | — |
-| 大成纳指100c | 008971 | 6.2834 | 限大额 | 10.00 元 | — |
-| 建信纳指100c | 012752 | 3.3531 | 限大额 | 10.00 元 | — |
-| 华安纳指100c | 014978 | 8.0753 | 限大额 | 10.00 元 | — |
-| 南方发起纳指100a | 016452 | 2.3015 | 限大额 | 10.00 元 | — |
-
-#### 热门全球 QDII 关注
-
-| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
-|------|------|---------|---------|-----------|------------|
-| 华安法国CAC40 | 021540 | 1.084 | 限大额 | 5000.00 元 | — |
-| 浦银安盛全球 | 014002 | 3.4245 | 暂停申购 | 3000.00 元 | — |
-| 广发全球精选 | 021277 | 6.2424 | 限大额 | 2000.00 元 | — |
-| 华宝致远 | 008254 | 1.6735 | 限大额 | 1000.00 元 | — |
-| 银华海外数字经济 | 016702 | 2.0769 | 限大额 | 1000.00 元 | — |
-| 华安德国DAX | 015016 | 2.0466 | 限大额 | 300.00 元 | — |
-| 汇添富全球移动互联 | 015202 | 5.1744 | 暂停申购 | 300.00 元 | — |
-| 华夏移动互联 | 002891 | 2.672 | 限大额 | 200.00 元 | — |
-| 建信新兴市场 | 018147 | 2.354 | 限大额 | 100.00 元 | — |
-| 国富全球科技互联 | 021842 | 6.718 | 限大额 | 100.00 元 | — |
+（联合早报三源均无可用长文数据，今日暂停深度观察专栏）
