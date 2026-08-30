@@ -994,24 +994,25 @@ def _fetch_rss_other():
 
 # ─── 数据源I: 联合早报原文 → 深度观察专栏独立源（仅精简模式） ──────
 def _fetch_rss_deep():
-    """深度观察专栏（仅精简模式消费）：联合早报一源双职责（Top10 + 深度观察原文）。
-    从缓存条目的第 11 条起（避开 Top20 前 10，防同条重复+前10已被截断到300字）取 desc
-    最长的 1 条作为 item_deep（单对象，非数组），由 prompt 直接输出原文（LLM 不改写）。
-    取消 >700 字硬阈值——永远取最长，彻底避免"有数据但被阈值卡死→今日暂停"（2026-08-30 故障根因）；
-    三源均不可用（缓存为空）才留空，由 prompt 输出「深度观察：今日暂停」。"""
+    """深度观察专栏（仅精简模式消费）：联合早报一源双职责（Top10 + 深度观察候选）。
+    从缓存条目的第 11 条起（避开 Top20 前 10，防同条重复+前10已截断到300字）取 ≤10 条
+    候选形成 items_deep 数组（保持 feed 时间倒序、不做长度排序；desc 未截断），
+    由 LLM 自主选 1 篇原文直出（优先与当日 Top20 互补/不同角度，其次最值得当下阅读）。
+    取消 >700 字硬阈值与"取最长"确定性规则（2026-08-30 曾因阈值卡死、又因取最长导致
+    连续两天同篇）；三源均不可用（缓存为空）才留空，由 prompt 输出「深度观察：今日暂停」。"""
     zaobao = _fetch_zaobao_raw()
     tail = zaobao[10:]  # 前 10 条留给 Top20 联合早报块
     if not tail:
-        # 条目不足 11 条时回退：从全部条目里选与 Top10 首条标题不同的最长一条
+        # 条目不足 11 条时回退：从全部条目取（feed 时间倒序，最新优先）
         tail = zaobao
-    item_deep = max(tail, key=lambda x: len(x.get("desc", "")), default=None)
-    if item_deep:
-        print(f"    [联合早报] 深度观察选定: 《{item_deep.get('title', '')[:40]}》"
-              f"({len(item_deep.get('desc', ''))}字)")
+    items_deep = tail[:10]
+    if items_deep:
+        print(f"    [联合早报] 深度观察候选 {len(items_deep)} 条"
+              f"（首条《{items_deep[0].get('title', '')[:40]}》…）")
     else:
         print("    [联合早报] 深度观察无候选（三源均不可用），今日暂停")
-    # 联合早报三源均不可用则当日深度专栏留空（item_deep=null），由 prompt 输出「深度观察：今日暂停」
-    return _ok({"item_deep": item_deep})
+    # 联合早报三源均不可用则当日深度专栏留空（items_deep=[]），由 prompt 输出「深度观察：今日暂停」
+    return _ok({"total": len(items_deep), "items_deep": items_deep})
 
 # ─── 数据源J: 财联社 RSS（多实例兜底：hub.slarker.me 主 + 多个 RSSHub 公共实例备用）────
 def _fetch_cls_rss_once(url, source_name="财联社"):
