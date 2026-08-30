@@ -796,14 +796,14 @@ def fetch_extra():
     return _ok(result)
 
 
-# ─── 数据源H/I: Top20 双源(谷歌美国主流+联合早报) + 深度观察(联合早报长文) ──────
+# ─── 数据源H/I: Top20 双源(谷歌美国主流+联合早报) + 深度观察(联合早报原文) ──────
 # 联合早报 RSS 仅抓取一次并缓存，Top20 后10 与 深度专栏(数据源I) 复用
 _ZAOBAI_CACHE = None
 
 def _fetch_zaobao_raw():
     """抓取联合早报·中港台即时 RSS（三实例兜底：hub.slarker.me 主 → rsshub.rssforever.com 备1 → rsshub.ktachibana.party 备2；
-    Top20 与 深度观察专栏复用）。顺序尝试，第一个返回**当天内容**的源即采用并停止。
-    若某源返回的条目均非北京时间当天（疑似旧缓存/镜像），判该源失败并切下一备用源。"""
+    Top20 与 深度观察专栏复用）。顺序尝试，第一个返回**昨天或今天内容**的源即采用并停止（早6点运行，凌晨新闻少，
+    前一天内容属正常，仅拦三天前旧缓存/镜像）。每个源无论成败均打印财联社风格状态日志，便于 Actions 排查。"""
     global _ZAOBAI_CACHE
     if _ZAOBAI_CACHE is not None:
         return _ZAOBAI_CACHE
@@ -825,13 +825,16 @@ def _fetch_zaobao_raw():
         "https://rsshub.ktachibana.party/zaobao/realtime/china",
     ]
     today_cn = datetime.now(TZ_CN).date()
-    notes = []
+    yesterday_cn = today_cn - timedelta(days=1)
+    notes = []      # 每源状态记录（无论成败）
+    _log_prefix = "    [联合早报RSS] 源状态:"
     for url in SOURCES:
+        _host = re.sub(r"^https?://", "", url).split("/")[0]
         try:
             # 连接 8s / 读取 25s，避免云环境对不可达主机长时间挂起
             r = requests.get(url, headers={"User-Agent": UA}, timeout=(8, 25))
             if r.status_code != 200:
-                notes.append(f"❌ {url} → HTTP {r.status_code}")
+                notes.append(f"❌ {_host} → HTTP {r.status_code}")
                 continue
             tree = ET.fromstring(r.content)
             out = []
@@ -854,19 +857,21 @@ def _fetch_zaobao_raw():
                     "pubDate": pub_el.text if pub_el is not None else "",
                 })
             if not out:
-                notes.append(f"❌ {url} → 200但无<item>(疑似HTML错误页)")
+                notes.append(f"❌ {_host} → 200但无<item>(疑似HTML错误页)")
                 continue
-            # 日期校验：至少一个条目为北京时间当天，否则视为该源失效（旧缓存/镜像）→ 切备用源
-            if not any(_bj_date(it.get("pubDate", "")) == today_cn for it in out):
-                notes.append(f"❌ {url} → 无当天内容(疑似旧缓存/镜像)")
+            # 日期校验：至少一个条目为北京时间昨天或今天即可（早6点运行凌晨新闻少，
+            # 前一天内容属正常；仅拦三天前旧缓存/镜像）→ 不满足则切备用源
+            if not any(_bj_date(it.get("pubDate", "")) in (today_cn, yesterday_cn) for it in out):
+                notes.append(f"❌ {_host} → 无昨天/今天内容(疑似旧缓存/镜像)")
                 continue
-            _ZAOBAI_CACHE = out
+            notes.append(f"✅ {_host} → OK({len(out)}条) 采纳")
+            print(_log_prefix, " | ".join(notes))
+            _ZAOBAO_CACHE = out
             return out
         except Exception as _e:
-            notes.append(f"❌ {url} → {type(_e).__name__}: {_e}")
-    print("    [联合早报] 全部候选源失败：")
-    for n in notes:
-        print("      " + n)
+            notes.append(f"❌ {_host} → {type(_e).__name__}: {str(_e)[:60]}")
+    print(_log_prefix, " | ".join(notes) if notes else "无候选源尝试")
+    print("    [联合早报RSS] 全部候选源失败")
     _ZAOBAI_CACHE = []
     return []
 
@@ -987,16 +992,26 @@ def _fetch_rss_other():
     })
 
 
-# ─── 数据源I: 联合早报长文 → 深度观察专栏独立源 ──────
+# ─── 数据源I: 联合早报原文 → 深度观察专栏独立源（仅精简模式） ──────
 def _fetch_rss_deep():
-    """深度观察专栏独立源：取联合早报长文(>700字)按长度排序前6作为候选，
-    由 LLM 选取与当日 Top20 关联性最低的一篇写成专栏。联合早报 3 源均不可用则留空（prompt 输出「今日暂停」）。"""
+    """深度观察专栏（仅精简模式消费）：联合早报一源双职责（Top10 + 深度观察原文）。
+    从缓存条目的第 11 条起（避开 Top20 前 10，防同条重复+前10已被截断到300字）取 desc
+    最长的 1 条作为 item_deep（单对象，非数组），由 prompt 直接输出原文（LLM 不改写）。
+    取消 >700 字硬阈值——永远取最长，彻底避免"有数据但被阈值卡死→今日暂停"（2026-08-30 故障根因）；
+    三源均不可用（缓存为空）才留空，由 prompt 输出「深度观察：今日暂停」。"""
     zaobao = _fetch_zaobao_raw()
-    long_items = [it for it in zaobao if len(it.get("desc", "")) > 700]
-    long_items.sort(key=lambda x: len(x.get("desc", "")), reverse=True)
-    items_deep = long_items[:6]
-    # 联合早报（现 3 源主备）长文不足则当日深度专栏留空，由 prompt 输出「深度观察：今日暂停」（不回退财新/谷歌）
-    return _ok({"total": len(items_deep), "items_deep": items_deep})
+    tail = zaobao[10:]  # 前 10 条留给 Top20 联合早报块
+    if not tail:
+        # 条目不足 11 条时回退：从全部条目里选与 Top10 首条标题不同的最长一条
+        tail = zaobao
+    item_deep = max(tail, key=lambda x: len(x.get("desc", "")), default=None)
+    if item_deep:
+        print(f"    [联合早报] 深度观察选定: 《{item_deep.get('title', '')[:40]}》"
+              f"({len(item_deep.get('desc', ''))}字)")
+    else:
+        print("    [联合早报] 深度观察无候选（三源均不可用），今日暂停")
+    # 联合早报三源均不可用则当日深度专栏留空（item_deep=null），由 prompt 输出「深度观察：今日暂停」
+    return _ok({"item_deep": item_deep})
 
 # ─── 数据源J: 财联社 RSS（多实例兜底：hub.slarker.me 主 + 多个 RSSHub 公共实例备用）────
 def _fetch_cls_rss_once(url, source_name="财联社"):
@@ -1428,7 +1443,7 @@ def main():
         # 精简模式：三市场均休市，仅执行 RSS 新闻模块
         modules = [
             ("data_news.json", _fetch_rss_other, "全球Top20 RSS(美国主流+联合早报)"),
-            ("data_deep.json", _fetch_rss_deep, "深度观察源(联合早报长文)"),
+            ("data_deep.json", _fetch_rss_deep, "深度观察源(联合早报原文)"),
         ]
         print(f"📋 精简模式（三市场均休市）: 仅执行 {len(modules)} 个模块（纯新闻）")
     else:
