@@ -866,7 +866,7 @@ def _fetch_zaobao_raw():
                 continue
             notes.append(f"✅ {_host} → OK({len(out)}条) 采纳")
             print(_log_prefix, " | ".join(notes))
-            _ZAOBAO_CACHE = out
+            _ZAOBAI_CACHE = out
             return out
         except Exception as _e:
             notes.append(f"❌ {_host} → {type(_e).__name__}: {str(_e)[:60]}")
