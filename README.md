@@ -1,416 +1,416 @@
-# 每日金融日报
-
-
-
-基于 GitHub Actions 自动运行的全球金融市场日报生成系统。每日（北京时间约 07:00 自动生成，Actions 计划 05:59 触发）抓取行情数据后调用 LLM 生成结构化日报，同步输出 Markdown 报告、HTML 朗读版和 MP3 音频，自动部署至 `docs/` 目录并发布到 GitHub Pages。
-
-
-
-## 工作流程
-
-
-
-```
-
-schedule / workflow_dispatch
-
-        ↓
-
-  prefetch_data.py   ← 按三市场交易日历门控，抓取 data_*.json（数量动态）
-
-        ↓
-
-  call_llm.py        ← 调用 LLM 生成 report.md（不联网，仅基于预抓取 JSON）
-
-        ↓
-
-  md_to_reader.py    ← report.md → daily-report.html（朗读版）
-
-  md_to_script.py    ← report.md → script.txt（广播稿）
-
-  md_to_mp3.py       ← script.txt → daily-report.mp3（音频，Edge TTS）
-
-        ↓
-
-  部署到 docs/ 目录   ← 推送到 main 分支 → GitHub Pages 发布
-
-```
-
-
-
-## 触发方式
-
-
-
-| 方式 | 说明 |
-
-|------|------|
-
-| **schedule（定时）** | 每日 `59 21 * * *`（UTC 21:59 = 北京时间次日 05:59）— 叠加约 52 分钟调度延迟，实际约 06:51（≈07:00）出报告 |
-
-| **workflow_dispatch（手动）** | 支持手动触发，可选 `skip_mp3=true` 跳过音频生成 |
-
-
-
-> ⚠️ GitHub Actions schedule 事件存在注册延迟（首次启用或改 cron 后可能延迟数十分钟至 1 小时），若定时未触发可手动运行一次。
-
-
-
-## 日报 LLM 模型优先级
-
-
-
-| 优先级 | 模型 | API 端点 | 环境变量 |
-
-|--------|------|----------|---------|
-
-| ① 主模型 | **Agnes agnes-2.0-flash** (`agnes-2.0-flash`) | `apihub.agnes-ai.com/v1` | `AGNES_API_KEY` |
-
-| ② 次选 | **NVIDIA MiniMax-M3** (`minimaxai/minimax-m3`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
-
-| ③ 兜底 | **NVIDIA Nemotron-3 Ultra 550B** (`nvidia/nemotron-3-ultra-550b-a55b`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
-
-
-
-- 三个模型依次尝试，前一个失败（异常或输出 <500 字符判为近空）自动切换到下一个
-
-- 失败时自动重试（指数退避）
-
-- **LLM 仅基于预抓取的 `data_*.json` 加工，不联网搜索、不调用工具**
-
-
-
-## 模式自动判定（三市场交易日历）
-
-
-
-报告在北京时间约 07:00 生成（Actions 计划 05:59 触发，含约 52 分钟调度延迟），覆盖"昨日（D-1）收盘 + 今晨美股凌晨收盘"。由 `scripts/trading_calendar.py` 用真·交易日历判定昨日各市场是否开市（不靠周几二分，可正确处理节假日/调休）：
-
-
-
-| 市场 | 日历来源 | 开市判定 |
-
-|------|----------|----------|
-
-| A 股 | akshare `tool_trade_date_hist_sina` | 昨日为 A 股交易日 |
-
-| 美股 | `pandas_market_calendars` XNYS | 昨日为美股交易日 |
-
-| 港股 | `pandas_market_calendars` XHKG | 昨日为港股交易日 |
-
-
-
-**模式规则**：
-
-
-
-| 条件 | 执行模式 | 抓取模块 |
-
-|------|----------|----------|
-
-| `A股开市 OR 美股开市 OR 港股开市` | **完整模式** | 按开市市场逐模块抓取（休市市场 JSON 不生成）+ 始终抓 RSS 新闻 |
-
-| 三市场均休市（通常周日/周一） | **精简模式** | 仅抓 `data_news.json`（Top20：谷歌美国40条→去重,LLM精选≤10仅谷歌来源不补位 + 联合早报最新10,三实例兜底；两块独立互不补位、不强制凑满20）+ `data_deep.json`（深度观察专栏·联合早报长文，三源均不可用则今日暂停） |
-
-
-
-> 任一日历网络获取失败时降级为"看昨天星期几 ≤4 即视为开市"。
-
-
-
-> **收盘日期标注（MarketDateResolver）**：报告「一、市场全景」各市场收盘均按真实交易日历标注业务日期与北京时间收盘时刻，由 `scripts/market_date_resolver.py` 的 `MarketDateResolver` 在 LLM 调用前注入。A股/港股/日经/韩国/欧洲取上一交易日（如 `A股收盘（7月13日）`），美股取美东前一交易日但于北京时间今天凌晨收盘（如 `美股收盘（7月14日凌晨）`）。海外用 `pandas_market_calendars`（DST 自动适配，禁止手写时区偏移），A股用 `tool_trade_date_hist_sina`（本地文件缓存，避免每次网络请求）。美股另做新鲜度校验：若 akshare 实际返回日期早于解析业务日期，置 `_stale` 提示数据可能滞后。**全球/港股指数新鲜度校验**：以东财 push2（push2delay）为主源取最新收盘（恒生国企 `100.HSCEI`、恒生科技 `124.HSTECH`、纳综 `100.NDX`、纳指100 `100.NDX100`，道指/标普/日经/KOSPI/STOXX/DAX/富时100/CAC40 均直连），yfinance 兜底；仅当东财与 yfinance 均不可用才置 `_stale` 触发滞后告警（报告固定于约 07:00 跑，东财主源即上一交易日收盘）。
-
-
-
-## 数据源路由
-
-
-
-| 数据类型 | 主数据源 | 门控条件 | 兜底 |
-
-|---------|---------|----------|------|
-
-| A 股指数 | 东财 push2（push2delay）`stock/get` | `a_open` | yfinance（`000001.SS` 等） |
-
-| 港股指数 | 东财 push2（`100.HSI` / `100.HSCEI` / `124.HSTECH`） | `hk_open` | yfinance（`^HSI` / `^HSCE` / `^HSTECH`） |
-
-| 美股+全球指数 | 东财 push2（`100.DJIA`/`100.SPX`/`100.NDX`/`100.NDX100`/`100.N225`/`100.KS11`/`100.SXXP`/`100.GDAXI`/`100.FTSE`/`100.FCHI`） | `u_open` | yfinance（`^DJI`/`^GSPC`/`^IXIC`/`^NDX`/`^N225`/`^KS11`/`^SXXP`/`^GDAXI`/`^FTSE`/`^FCHI`） |
-
-| 汇率/商品/债券 | akshare 期货 + 中美债收益率 | 完整模式 | — |
-
-| 估值/PE 分位（11 指数，固定顺序） | 雪球蛋卷 API `danjuanfunds.com/djapi/index_eva/dj`（1 次返回 63，白名单 11） | `a_open` | — |
-
-| 个人持仓行情 | 腾讯财经 `qt.gtimg.cn` | `a_open OR u_open` | yfinance |
-
-| QDII监测+USD/CNH汇率 | 腾讯API+东方财富(净值)+新浪外汇(fx_susdcnh离岸即期市场价，买卖中值；→yfinance USDCNH=X兜底→外汇局中间价末位兜底并标注非市场价，场外QDII：纳指/标普自动筛6只 + 热门全球QDII固定清单10只，均不限购置顶) | `a_open` | — |
-
-| **全球 Top20 新闻** | **Google News 美国一地（40条→去重,LLM精选≤10且互不重复，仅谷歌来源、不补位；解析带 HTTP 状态检查 + lxml recover 容错，429/非法XML不整份失败；失败/空结果指数退避重试3次，仍失败兜底谷歌英国区 hl=en-GB&gl=GB&ceid=GB:en，同 TOPIC 换地域参数）+ 联合早报 RSS（三实例兜底：hub.slarker.me 主 → rsshub.rssforever.com 备1 → rsshub.ktachibana.party 备2，最新10）；两块独立互不补位、不强制凑满20，选不出则少输出** | 始终抓 | `data_news.json` + `data_cls_zaobao.json` |
-
-| **深度观察专栏** | 联合早报 RSS 长文（>700字）按长度排序前6，由 LLM 选与 Top20 关联性最低一篇（联合早报三实例兜底；三源均不可用则当日「今日暂停」） | 仅精简模式 | `data_deep.json` |
-
-| **市场全景各板块一段简述（50–100字）+ 持仓聚焦（按持仓行业关键词预匹配 `industry_match`，仅命中行业的新闻入选，核心/监督池一视同仁）** | **财联社 + 格隆汇 RSS 合并抓取（财联社 telegraph/depth 双组 hub→rsshub 兜底；格隆汇 rss.injahow.cn 主 → rsshub.rssforever.com 备；合并后标题归一化去重、北京当天筛选，格隆汇缺 pubDate 视为当日保留；LLM 优先采用标题含板块关键词的条目直接复用收盘情况，否则综合最相关若干条写成 50–100 字一段、丰富该市场最新情况）** | 完整模式 | 无当天新闻则留空（不编造） |
-
-
-
-> **方案 C（curl_cffi HTTP/2 补丁）**：东方财富 `push2.eastmoney.com` / `push2delay.eastmoney.com` / `push2his.eastmoney.com` 需 HTTP/2，标准 `requests` 仅 HTTP/1.1 会静默断连。脚本在顶部注入 `curl_cffi` 浏览器模拟，仅对这些域名生效，保障指数主源稳定；其余请求不受影响。运行依赖已包含 `curl_cffi` 与 `pandas_market_calendars`。
-
-
-
-## QDII 与 ETF 监测板块格式规范
-
-
-
-日报「QDII 溢价与申购额度监测」子板块呈现三张表（场内 ETF 溢价 + 场外 QDII 申购额度 + 热门全球 QDII 关注），格式约定如下：
-
-
-
-### 场内 ETF 溢价率表（5 列）
-
-
-
-| ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
-
-|-----|------|-------|------------|------|
-
-
-
-- 始终列 6 只核心 ETF（纳指/标普 500 各 3 只），代码写死于 `prefetch_data.py`。
-
-- **「跟踪指数」列已删除**（ETF 名称自带跟踪标的，无需重复）。
-
-- `对比昨日溢价`：今日溢价率 − 昨日溢价率，由代码计算（`qdii_prev.json` 跨运行快照留存昨日基准），首日留空。
-
-- `评估` 列用短标签：**✓**（±1% 内）/ **△溢价**（>3%）/ **▽折价**（>2%），严禁长句。
-
-
-
-### 场外 QDII 申购额度表（简称列）
-
-
-
-| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
-
-|------|------|---------|---------|-----------|------------|
-
-
-
-- 「简称」列由 `prefetch_data.py::_shorten_qdii_name()` 自动生成（字段 `名称_短`），**基金公司名完整保留**。
-
-- **统一短名格式**：`公司名 + 纳指100/标普500 + 小写份额字母`，例：`建信纳指100c`、`大成纳指100a`、`易方达标普500a`。
-
-- 纯规则驱动（清理 `(QDII)`/币种/`ETF联接` 等），零硬编码映射；份额字母锚定**末尾或"X类"**提取（避开 QDII/ETF 内部字母误判），**小写置末尾**，支持 A–E（覆盖 A/C/D/E 等）。
-
-- `对比昨日限额`：今日限额 − 昨日限额（单位元），由 `qdii_prev.json` 跨运行计算，首日/新进前 6 留空。
-
-- **排序：不限购（申购状态=开放申购）置顶，其余按日累计限额从大到小**；「日累计限额」列不限购显示「不限购」，其余显示数字。
-
-
-
-### 热门全球 QDII 关注表（固定清单，默认 C 类）
-
-
-
-| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
-
-|------|------|---------|---------|-----------|------------|
-
-
-
-- 固定 10 只清单写死于 `prefetch_data.py::HOT_GLOBAL_QDII`（含内置简称：华夏移动互联、华宝致远、浦银安盛全球、华安德国DAX、汇添富全球移动互联、银华海外数字经济、建信新兴市场、广发全球精选、华安法国CAC40、国富全球科技互联）；
-
-- 数据来自 `data_extra.json` → "QDII_监测" → "场外QDII主动"，**不限购置顶、其余按日累计限额降序**；申购状态如实展示（含暂停申购），无数据标「无数据」，严禁编造。
-
-
-
-## 全球 Top20 组合规则（谷歌 + 联合早报，独立不补位）
-
-
-
-日报「全球 Top20」由两个独立数据源构成，**两块互不补位、不强制凑满 20 条**：
-
-
-
-### 第 1 块：谷歌精选（≤10 条）
-
-
-
-- 数据源：`data_news.json` 的 `items_google`（Google News 美国一地一次抓 40 条，已去重）。
-
-- LLM 从中**精选 ≤10 条不同角度的重要新闻**（英译中），每条标题/链接必须互不重复（同一事件的多篇报道只选一篇）。
-
-- **只能从 `items_google` 中选择，严禁使用任何其他来源**（财联社/格隆汇/联合早报/其他 JSON）填充或替换。
-
-- **精选出几条就输出几条**：重要新闻不足 10 条时按实际条数输出即可，**禁止硬凑、禁止从其他来源补位**。
-
-
-
-### 第 2 块：联合早报（≤10 条）
-
-
-
-- 数据源：`data_news.json` 的 `items_zaobao`（联合早报·中港台即时 RSS 最新 10 条，三实例兜底：hub.slarker.me 主 → rsshub.rssforever.com 备1 → rsshub.ktachibana.party 备2）。
-
-- 中文直用，无需翻译；固定为 Top20 次块（中港台视角）。
-
-
-
-### 边界规则
-
-
-
-- 某块为空或条数不足时，**直接少输出或跳过该块标题**，不输出占位说明。
-
-- **财联社/格隆汇不进入 Top20**，仅用于「市场全景简述」与「持仓聚焦」（见 `data_cls_zaobao.json`）。
-
-- 完整模式与精简模式规则一致（prompt 两处同步约束）。
-
-
-
-## 新闻原文链接
-
-
-
-每条新闻末尾的来源媒体名已嵌入原文链接，支持点击跳转：
-
-
-
-- **Markdown 报告**（`daily-report.md`）：`（[Reuters](原文链接)）` — 在 GitHub 或 Markdown 查看器中点击媒体名跳转
-
-- **HTML 朗读版**（`daily-report.html`）：`<a href="原文链接">Reuters</a>` — 在浏览器中点击媒体名跳转（新标签页）
-
-- 链接为 Google News 重定向链接，自动跳转至原始文章
-
-- 精简模式与完整模式均支持此功能
-
-
-
-## 今日定性导语（HTML 朗读版）
-
-
-
-Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H1 标题块内）会在 `md_to_reader.py` 中被单独抽取，渲染为文章顶部带左侧强调色边框的高亮卡片 `<p class="lede">`，并保留粗体标签。该段落在主流程中随 `title` 块被跳过，故由 `_extract_lede()` 置顶注入，避免 HTML 朗读版丢失导语（与 Markdown 报告保持一致）。
-
-
-
-**今日定性导语为报告固定开头板块（完整模式 / 精简模式均必出）**：完整模式先用一句话梳理当日市场涨跌全景，再列 3–5 条新闻主线；精简模式（纯新闻日）以当日新闻要点为主线列 3–5 条新闻主线，融合市场与新闻做通篇归纳。
-
-
-
-## 汇率转换
-
-
-
-- 自动抓取 USD/CNH 汇率（**离岸即期市场价 CNH**：新浪 fx_susdcnh 买卖报价中值，24h 实时；与报告「大宗商品与汇率」表同口径。外汇局中间价仅作末位兜底且明确标注），首次刷新后缓存当日汇率
-
-- A 股/港股/美股/基金四类资产的盈亏统一以人民币计价
-
-
-
-## GitHub Secrets
-
-
-
-| Secret | 用途 |
-
-|--------|------|
-
-| `AGNES_API_KEY` | Agnes API Key（免费）；日报+广播稿主选 Agnes agnes-2.0-flash（`apihub.agnes-ai.com/v1`） |
-
-| `NVIDIA_API_KEY` | NVIDIA API Key；日报+广播稿次选 MiniMax-M3（`minimaxai/minimax-m3`）+ 兜底 Nemotron-3 Ultra 550B（`nvidia/nemotron-3-ultra-550b-a55b`），均 `integrate.api.nvidia.com/v1` |
-
-
-
-## 广播稿转换（md_to_script）模型链
-
-
-
-`scripts/md_to_script.py` 将 `report.md` 转为口语化广播稿 `script.txt`，复用 `call_llm.py` 的 `LLM_CONFIGS` 与 `_call_llm`（单一数据源）。`SYSTEM` 提示词按 **【通用要求】/【完整模式适用】/【精简模式适用】** 三块分域，**完整模式的行情指令（市场全景、美股涨跌数据、QDII）只作用于完整模式，从源头隔离泄漏**（根治精简模式曾"补出美股涨跌"的问题）：
-
-
-
-- **完整模式**（含「一、市场全景 / 二、行业洞察」章节）：走 LLM 链路（约 6 分钟，1200–1600 字），以「二、行业洞察」为主轴；「一、市场全景」每个板块一句话（美股保留具体涨跌、A股/港股定性），QDII 监测（含场内 ETF 溢价、场外 QDII 额度、热门全球 QDII 关注等表）仅结尾一句带过。
-
-- **精简模式**（纯新闻日，仅「全球 Top20 + 深度观察专栏」）：仍走 LLM 链路（约 4–5 分钟，800–1100 字），**仅以 Top20 + 深度观察为素材改写为口语播音稿**；与完整模式行情指令隔离（不套用、不联想市场全景/行情）；**禁止播报来源媒体名 / URL / 话题标签 / 序号**，**严禁编造任何行情数据**；可基于原文但须为适合收听的播音稿。
-
-
-
-| 优先级 | 模型 | 密钥 | 说明 |
-
-|--------|------|------|------|
-
-| ① 主用 | Agnes agnes-2.0-flash | `AGNES_API_KEY` | 默认主模型 |
-
-| ② 次选 | NVIDIA MiniMax-M3 | `NVIDIA_API_KEY` | 主模型异常或近空（<500字符）即切换 |
-
-| ③ 兜底 | NVIDIA Nemotron-3 Ultra 550B | `NVIDIA_API_KEY` | 前序模型连续报错 2 次（`_call_llm` 内部重试）仍未产出有效内容即切换 |
-
-| 末路 | 复制原文 | — | 三模型全失败，直接复制 `report.md` 为 `script.txt`，避免 workflow 中断 |
-
-
-
-**MP3 完整性防护**（`md_to_mp3.py`）：Edge TTS 合成后用 `ffprobe` 校验时长（预期 ≈ 广播稿字数 ÷ 4.5 秒；阈值 = max(60s, 预期×0.6)），**疑似截断（时长过短）则删除并自动重试 1 次，仍截断则不部署**，杜绝"部分音频上线"。广播稿 `script.txt` 随报告入库为 `docs/daily-script.txt`，便于核对每日实际播报文本。
-
-
-
-> 日报与广播稿模型链相互独立、结构一致：均为 **Agnes 主 → NVIDIA MiniMax-M3 次 → NVIDIA Nemotron-3 Ultra 550B 兜**（见 `scripts/call_llm.py` 的 `LLM_CONFIGS` 与 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
-
-
-
-## 文件结构
-
-
-
-```
-
-.
-
-├── .github/workflows/daily-scheduled.yml   # GitHub Actions 工作流（cron 59 21 * * *）
-
-├── prompt/
-
-│   └── daily_report_prompt.txt             # LLM 系统提示词（含完整/精简模式指令 + 市场门控硬规则）
-
-├── scripts/
-
-│   ├── prefetch_data.py                     # 数据抓取（市场全景+估值+QDII/ETF+新闻；新闻：Google News 美国单地40条(失败指数退避重试3次)→去重,LLM精选≤10且互不重复仅谷歌来源不补位 + 联合早报最新10(三实例兜底:hub.slarker.me 主 → rsshub.rssforever.com 备1 → rsshub.ktachibana.party 备2；非当天内容判源失败切备源) 双源 Top20，两块独立互不补位；data_deep.json 取联合早报>700字长文供深度观察专栏(三源均不可用则今日暂停)；data_cls_zaobao.json 取财联社+格隆汇 RSS 合并(财联社 telegraph/depth 双组 hub→rsshub 兜底；格隆汇 rss.injahow.cn 主→rsshub.rssforever.com 备；合并标题归一化去重+北京当天筛选,格隆汇缺pubDate保留)当天新闻供市场全景各板块一段简述（50–100字）+持仓聚焦(按持仓行业关键词预匹配industry_match)；data_holdings.json 取腾讯API持仓核心标的行情(价格+涨跌幅)+监督池供「持仓动态与聚焦」板块；已停抓 data_fund/data_industry（LLM 输入 JSON 由 11→9）
-
-│   ├── market_date_resolver.py             # 按市场解析业务日期 + 北京时间收盘标注（MarketDateResolver）
-
-│   ├── trading_calendar.py                  # 三市场交易日历判定（A股/美股/港股）
-
-│   ├── call_llm.py                          # LLM 调用（含模式判定 + 模型切换 + 市场标志注入 + 输入体积护栏 + Top20 同链接去重：防 LLM 幻觉复制重复新闻，删除后重新连续编号）
-
-│   ├── md_to_reader.py                      # Markdown → HTML（朗读版；表格与文本按 MD 原始顺序交错渲染，修复 QDII 等表格错位；纯加粗行 **xxx** 识别为 h4 小标题）
-
-│   ├── md_to_script.py                      # Markdown → 广播稿（注入 __TODAY_DATE__ 防日期错）
-
-│   └── md_to_mp3.py                         # 广播稿 → MP3（Edge TTS，含 ffprobe 时长校验 + 截断自动重试）
-
-├── web/
-
-│   └── sw.js                                # Service Worker（离线缓存）
-
-├── docs/                                    # 部署目录（自动生成）
-
-│   ├── daily-report.html                    # HTML 朗读版
-
-│   ├── daily-report.md                      # Markdown 完整报告
-
-│   ├── daily-report.mp3                     # 音频文件
-
-│   ├── daily-script.txt                     # 广播稿文本（script.txt 入库）
-
-│   └── sw.js                                # 前端 Service Worker
-
-└── README.md
-
-```
-
-
-
-## 发布地址
-
-
-
-- GitHub Pages：`https://homjanon.github.io/portfolio/`
-
+# 每日金融日报
+
+
+
+基于 GitHub Actions 自动运行的全球金融市场日报生成系统。每日（北京时间约 07:00 自动生成，Actions 计划 05:59 触发）抓取行情数据后调用 LLM 生成结构化日报，同步输出 Markdown 报告、HTML 朗读版和 MP3 音频，自动部署至 `docs/` 目录并发布到 GitHub Pages。
+
+
+
+## 工作流程
+
+
+
+```
+
+schedule / workflow_dispatch
+
+        ↓
+
+  prefetch_data.py   ← 按三市场交易日历门控，抓取 data_*.json（数量动态）
+
+        ↓
+
+  call_llm.py        ← 调用 LLM 生成 report.md（不联网，仅基于预抓取 JSON）
+
+        ↓
+
+  md_to_reader.py    ← report.md → daily-report.html（朗读版）
+
+  md_to_script.py    ← report.md → script.txt（广播稿）
+
+  md_to_mp3.py       ← script.txt → daily-report.mp3（音频，Edge TTS）
+
+        ↓
+
+  部署到 docs/ 目录   ← 推送到 main 分支 → GitHub Pages 发布
+
+```
+
+
+
+## 触发方式
+
+
+
+| 方式 | 说明 |
+
+|------|------|
+
+| **schedule（定时）** | 每日 `59 21 * * *`（UTC 21:59 = 北京时间次日 05:59）— 叠加约 52 分钟调度延迟，实际约 06:51（≈07:00）出报告 |
+
+| **workflow_dispatch（手动）** | 支持手动触发，可选 `skip_mp3=true` 跳过音频生成 |
+
+
+
+> ⚠️ GitHub Actions schedule 事件存在注册延迟（首次启用或改 cron 后可能延迟数十分钟至 1 小时），若定时未触发可手动运行一次。
+
+
+
+## 日报 LLM 模型优先级
+
+
+
+| 优先级 | 模型 | API 端点 | 环境变量 |
+
+|--------|------|----------|---------|
+
+| ① 主模型 | **Agnes agnes-2.0-flash** (`agnes-2.0-flash`) | `apihub.agnes-ai.com/v1` | `AGNES_API_KEY` |
+
+| ② 次选 | **NVIDIA MiniMax-M3** (`minimaxai/minimax-m3`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
+
+| ③ 兜底 | **NVIDIA Nemotron-3 Ultra 550B** (`nvidia/nemotron-3-ultra-550b-a55b`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
+
+
+
+- 三个模型依次尝试，前一个失败（异常或输出 <500 字符判为近空）自动切换到下一个
+
+- 失败时自动重试（指数退避）
+
+- **LLM 仅基于预抓取的 `data_*.json` 加工，不联网搜索、不调用工具**
+
+
+
+## 模式自动判定（三市场交易日历）
+
+
+
+报告在北京时间约 07:00 生成（Actions 计划 05:59 触发，含约 52 分钟调度延迟），覆盖"昨日（D-1）收盘 + 今晨美股凌晨收盘"。由 `scripts/trading_calendar.py` 用真·交易日历判定昨日各市场是否开市（不靠周几二分，可正确处理节假日/调休）：
+
+
+
+| 市场 | 日历来源 | 开市判定 |
+
+|------|----------|----------|
+
+| A 股 | akshare `tool_trade_date_hist_sina` | 昨日为 A 股交易日 |
+
+| 美股 | `pandas_market_calendars` XNYS | 昨日为美股交易日 |
+
+| 港股 | `pandas_market_calendars` XHKG | 昨日为港股交易日 |
+
+
+
+**模式规则**：
+
+
+
+| 条件 | 执行模式 | 抓取模块 |
+
+|------|----------|----------|
+
+| `A股开市 OR 美股开市 OR 港股开市` | **完整模式** | 按开市市场逐模块抓取（休市市场 JSON 不生成）+ 始终抓 RSS 新闻 |
+
+| 三市场均休市（通常周日/周一） | **精简模式** | 仅抓 `data_news.json`（Top20：谷歌美国40条→去重,LLM精选≤10仅谷歌来源不补位 + 联合早报最新10,三实例兜底；两块独立互不补位、不强制凑满20）+ `data_deep.json`（深度观察专栏·联合早报一源双职责：Top10 之外取最长一篇**原文直出**，三源均不可用则今日暂停） |
+
+
+
+> 任一日历网络获取失败时降级为"看昨天星期几 ≤4 即视为开市"。
+
+
+
+> **收盘日期标注（MarketDateResolver）**：报告「一、市场全景」各市场收盘均按真实交易日历标注业务日期与北京时间收盘时刻，由 `scripts/market_date_resolver.py` 的 `MarketDateResolver` 在 LLM 调用前注入。A股/港股/日经/韩国/欧洲取上一交易日（如 `A股收盘（7月13日）`），美股取美东前一交易日但于北京时间今天凌晨收盘（如 `美股收盘（7月14日凌晨）`）。海外用 `pandas_market_calendars`（DST 自动适配，禁止手写时区偏移），A股用 `tool_trade_date_hist_sina`（本地文件缓存，避免每次网络请求）。美股另做新鲜度校验：若 akshare 实际返回日期早于解析业务日期，置 `_stale` 提示数据可能滞后。**全球/港股指数新鲜度校验**：以东财 push2（push2delay）为主源取最新收盘（恒生国企 `100.HSCEI`、恒生科技 `124.HSTECH`、纳综 `100.NDX`、纳指100 `100.NDX100`，道指/标普/日经/KOSPI/STOXX/DAX/富时100/CAC40 均直连），yfinance 兜底；仅当东财与 yfinance 均不可用才置 `_stale` 触发滞后告警（报告固定于约 07:00 跑，东财主源即上一交易日收盘）。
+
+
+
+## 数据源路由
+
+
+
+| 数据类型 | 主数据源 | 门控条件 | 兜底 |
+
+|---------|---------|----------|------|
+
+| A 股指数 | 东财 push2（push2delay）`stock/get` | `a_open` | yfinance（`000001.SS` 等） |
+
+| 港股指数 | 东财 push2（`100.HSI` / `100.HSCEI` / `124.HSTECH`） | `hk_open` | yfinance（`^HSI` / `^HSCE` / `^HSTECH`） |
+
+| 美股+全球指数 | 东财 push2（`100.DJIA`/`100.SPX`/`100.NDX`/`100.NDX100`/`100.N225`/`100.KS11`/`100.SXXP`/`100.GDAXI`/`100.FTSE`/`100.FCHI`） | `u_open` | yfinance（`^DJI`/`^GSPC`/`^IXIC`/`^NDX`/`^N225`/`^KS11`/`^SXXP`/`^GDAXI`/`^FTSE`/`^FCHI`） |
+
+| 汇率/商品/债券 | akshare 期货 + 中美债收益率 | 完整模式 | — |
+
+| 估值/PE 分位（11 指数，固定顺序） | 雪球蛋卷 API `danjuanfunds.com/djapi/index_eva/dj`（1 次返回 63，白名单 11） | `a_open` | — |
+
+| 个人持仓行情 | 腾讯财经 `qt.gtimg.cn` | `a_open OR u_open` | yfinance |
+
+| QDII监测+USD/CNH汇率 | 腾讯API+东方财富(净值)+新浪外汇(fx_susdcnh离岸即期市场价，买卖中值；→yfinance USDCNH=X兜底→外汇局中间价末位兜底并标注非市场价，场外QDII：纳指/标普自动筛6只 + 热门全球QDII固定清单10只，均不限购置顶) | `a_open` | — |
+
+| **全球 Top20 新闻** | **Google News 美国一地（40条→去重,LLM精选≤10且互不重复，仅谷歌来源、不补位；解析带 HTTP 状态检查 + lxml recover 容错，429/非法XML不整份失败；失败/空结果指数退避重试3次，仍失败兜底谷歌英国区 hl=en-GB&gl=GB&ceid=GB:en，同 TOPIC 换地域参数）+ 联合早报 RSS（三实例兜底：hub.slarker.me 主 → rsshub.rssforever.com 备1 → rsshub.ktachibana.party 备2，最新10）；两块独立互不补位、不强制凑满20，选不出则少输出** | 始终抓 | `data_news.json` + `data_cls_zaobao.json` |
+
+| **深度观察专栏（仅精简模式）** | 联合早报 RSS 一源双职责（Top10 + 深度观察）：从第 11 条起取 desc 最长 1 篇，**原文直出（LLM 零改写）**；取消 >700 字阈值，永远取最长；三实例兜底 + 财联社风格逐源状态日志（✅采纳/❌失败原因），源校验放宽为「昨天或今天内容」；三源均不可用则当日「今日暂停」 | 仅精简模式 | `data_deep.json`（`item_deep` 单对象） |
+
+| **市场全景各板块一段简述（50–100字）+ 持仓聚焦（按持仓行业关键词预匹配 `industry_match`，仅命中行业的新闻入选，核心/监督池一视同仁）** | **财联社 + 格隆汇 RSS 合并抓取（财联社 telegraph/depth 双组 hub→rsshub 兜底；格隆汇 rss.injahow.cn 主 → rsshub.rssforever.com 备；合并后标题归一化去重、北京当天筛选，格隆汇缺 pubDate 视为当日保留；LLM 优先采用标题含板块关键词的条目直接复用收盘情况，否则综合最相关若干条写成 50–100 字一段、丰富该市场最新情况）** | 完整模式 | 无当天新闻则留空（不编造） |
+
+
+
+> **方案 C（curl_cffi HTTP/2 补丁）**：东方财富 `push2.eastmoney.com` / `push2delay.eastmoney.com` / `push2his.eastmoney.com` 需 HTTP/2，标准 `requests` 仅 HTTP/1.1 会静默断连。脚本在顶部注入 `curl_cffi` 浏览器模拟，仅对这些域名生效，保障指数主源稳定；其余请求不受影响。运行依赖已包含 `curl_cffi` 与 `pandas_market_calendars`。
+
+
+
+## QDII 与 ETF 监测板块格式规范
+
+
+
+日报「QDII 溢价与申购额度监测」子板块呈现三张表（场内 ETF 溢价 + 场外 QDII 申购额度 + 热门全球 QDII 关注），格式约定如下：
+
+
+
+### 场内 ETF 溢价率表（5 列）
+
+
+
+| ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
+
+|-----|------|-------|------------|------|
+
+
+
+- 始终列 6 只核心 ETF（纳指/标普 500 各 3 只），代码写死于 `prefetch_data.py`。
+
+- **「跟踪指数」列已删除**（ETF 名称自带跟踪标的，无需重复）。
+
+- `对比昨日溢价`：今日溢价率 − 昨日溢价率，由代码计算（`qdii_prev.json` 跨运行快照留存昨日基准），首日留空。
+
+- `评估` 列用短标签：**✓**（±1% 内）/ **△溢价**（>3%）/ **▽折价**（>2%），严禁长句。
+
+
+
+### 场外 QDII 申购额度表（简称列）
+
+
+
+| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
+
+|------|------|---------|---------|-----------|------------|
+
+
+
+- 「简称」列由 `prefetch_data.py::_shorten_qdii_name()` 自动生成（字段 `名称_短`），**基金公司名完整保留**。
+
+- **统一短名格式**：`公司名 + 纳指100/标普500 + 小写份额字母`，例：`建信纳指100c`、`大成纳指100a`、`易方达标普500a`。
+
+- 纯规则驱动（清理 `(QDII)`/币种/`ETF联接` 等），零硬编码映射；份额字母锚定**末尾或"X类"**提取（避开 QDII/ETF 内部字母误判），**小写置末尾**，支持 A–E（覆盖 A/C/D/E 等）。
+
+- `对比昨日限额`：今日限额 − 昨日限额（单位元），由 `qdii_prev.json` 跨运行计算，首日/新进前 6 留空。
+
+- **排序：不限购（申购状态=开放申购）置顶，其余按日累计限额从大到小**；「日累计限额」列不限购显示「不限购」，其余显示数字。
+
+
+
+### 热门全球 QDII 关注表（固定清单，默认 C 类）
+
+
+
+| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
+
+|------|------|---------|---------|-----------|------------|
+
+
+
+- 固定 10 只清单写死于 `prefetch_data.py::HOT_GLOBAL_QDII`（含内置简称：华夏移动互联、华宝致远、浦银安盛全球、华安德国DAX、汇添富全球移动互联、银华海外数字经济、建信新兴市场、广发全球精选、华安法国CAC40、国富全球科技互联）；
+
+- 数据来自 `data_extra.json` → "QDII_监测" → "场外QDII主动"，**不限购置顶、其余按日累计限额降序**；申购状态如实展示（含暂停申购），无数据标「无数据」，严禁编造。
+
+
+
+## 全球 Top20 组合规则（谷歌 + 联合早报，独立不补位）
+
+
+
+日报「全球 Top20」由两个独立数据源构成，**两块互不补位、不强制凑满 20 条**：
+
+
+
+### 第 1 块：谷歌精选（≤10 条）
+
+
+
+- 数据源：`data_news.json` 的 `items_google`（Google News 美国一地一次抓 40 条，已去重）。
+
+- LLM 从中**精选 ≤10 条不同角度的重要新闻**（英译中），每条标题/链接必须互不重复（同一事件的多篇报道只选一篇）。
+
+- **只能从 `items_google` 中选择，严禁使用任何其他来源**（财联社/格隆汇/联合早报/其他 JSON）填充或替换。
+
+- **精选出几条就输出几条**：重要新闻不足 10 条时按实际条数输出即可，**禁止硬凑、禁止从其他来源补位**。
+
+
+
+### 第 2 块：联合早报（≤10 条）
+
+
+
+- 数据源：`data_news.json` 的 `items_zaobao`（联合早报·中港台即时 RSS 最新 10 条，三实例兜底：hub.slarker.me 主 → rsshub.rssforever.com 备1 → rsshub.ktachibana.party 备2）。
+
+- 中文直用，无需翻译；固定为 Top20 次块（中港台视角）。
+
+
+
+### 边界规则
+
+
+
+- 某块为空或条数不足时，**直接少输出或跳过该块标题**，不输出占位说明。
+
+- **财联社/格隆汇不进入 Top20**，仅用于「市场全景简述」与「持仓聚焦」（见 `data_cls_zaobao.json`）。
+
+- 完整模式与精简模式规则一致（prompt 两处同步约束）。
+
+
+
+## 新闻原文链接
+
+
+
+每条新闻末尾的来源媒体名已嵌入原文链接，支持点击跳转：
+
+
+
+- **Markdown 报告**（`daily-report.md`）：`（[Reuters](原文链接)）` — 在 GitHub 或 Markdown 查看器中点击媒体名跳转
+
+- **HTML 朗读版**（`daily-report.html`）：`<a href="原文链接">Reuters</a>` — 在浏览器中点击媒体名跳转（新标签页）
+
+- 链接为 Google News 重定向链接，自动跳转至原始文章
+
+- 精简模式与完整模式均支持此功能
+
+
+
+## 今日定性导语（HTML 朗读版）
+
+
+
+Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H1 标题块内）会在 `md_to_reader.py` 中被单独抽取，渲染为文章顶部带左侧强调色边框的高亮卡片 `<p class="lede">`，并保留粗体标签。该段落在主流程中随 `title` 块被跳过，故由 `_extract_lede()` 置顶注入，避免 HTML 朗读版丢失导语（与 Markdown 报告保持一致）。
+
+
+
+**今日定性导语为报告固定开头板块（完整模式 / 精简模式均必出）**：完整模式先用一句话梳理当日市场涨跌全景，再列 3–5 条新闻主线；精简模式（纯新闻日）以当日新闻要点为主线列 3–5 条新闻主线，融合市场与新闻做通篇归纳。
+
+
+
+## 汇率转换
+
+
+
+- 自动抓取 USD/CNH 汇率（**离岸即期市场价 CNH**：新浪 fx_susdcnh 买卖报价中值，24h 实时；与报告「大宗商品与汇率」表同口径。外汇局中间价仅作末位兜底且明确标注），首次刷新后缓存当日汇率
+
+- A 股/港股/美股/基金四类资产的盈亏统一以人民币计价
+
+
+
+## GitHub Secrets
+
+
+
+| Secret | 用途 |
+
+|--------|------|
+
+| `AGNES_API_KEY` | Agnes API Key（免费）；日报+广播稿主选 Agnes agnes-2.0-flash（`apihub.agnes-ai.com/v1`） |
+
+| `NVIDIA_API_KEY` | NVIDIA API Key；日报+广播稿次选 MiniMax-M3（`minimaxai/minimax-m3`）+ 兜底 Nemotron-3 Ultra 550B（`nvidia/nemotron-3-ultra-550b-a55b`），均 `integrate.api.nvidia.com/v1` |
+
+
+
+## 广播稿转换（md_to_script）模型链
+
+
+
+`scripts/md_to_script.py` 将 `report.md` 转为口语化广播稿 `script.txt`，复用 `call_llm.py` 的 `LLM_CONFIGS` 与 `_call_llm`（单一数据源）。`SYSTEM` 提示词按 **【通用要求】/【完整模式适用】/【精简模式适用】** 三块分域，**完整模式的行情指令（市场全景、美股涨跌数据、QDII）只作用于完整模式，从源头隔离泄漏**（根治精简模式曾"补出美股涨跌"的问题）：
+
+
+
+- **完整模式**（含「一、市场全景 / 二、行业洞察」章节）：走 LLM 链路（约 6 分钟，1200–1600 字），以「二、行业洞察」为主轴；「一、市场全景」每个板块一句话（美股保留具体涨跌、A股/港股定性），QDII 监测（含场内 ETF 溢价、场外 QDII 额度、热门全球 QDII 关注等表）仅结尾一句带过。
+
+- **精简模式**（纯新闻日，仅「全球 Top20 + 深度观察专栏」）：仍走 LLM 链路（约 4–5 分钟，800–1100 字），**仅以 Top20 + 深度观察为素材改写为口语播音稿**；与完整模式行情指令隔离（不套用、不联想市场全景/行情）；**禁止播报来源媒体名 / URL / 话题标签 / 序号**，**严禁编造任何行情数据**；可基于原文但须为适合收听的播音稿。
+
+
+
+| 优先级 | 模型 | 密钥 | 说明 |
+
+|--------|------|------|------|
+
+| ① 主用 | Agnes agnes-2.0-flash | `AGNES_API_KEY` | 默认主模型 |
+
+| ② 次选 | NVIDIA MiniMax-M3 | `NVIDIA_API_KEY` | 主模型异常或近空（<500字符）即切换 |
+
+| ③ 兜底 | NVIDIA Nemotron-3 Ultra 550B | `NVIDIA_API_KEY` | 前序模型连续报错 2 次（`_call_llm` 内部重试）仍未产出有效内容即切换 |
+
+| 末路 | 复制原文 | — | 三模型全失败，直接复制 `report.md` 为 `script.txt`，避免 workflow 中断 |
+
+
+
+**MP3 完整性防护**（`md_to_mp3.py`）：Edge TTS 合成后用 `ffprobe` 校验时长（预期 ≈ 广播稿字数 ÷ 4.5 秒；阈值 = max(60s, 预期×0.6)），**疑似截断（时长过短）则删除并自动重试 1 次，仍截断则不部署**，杜绝"部分音频上线"。广播稿 `script.txt` 随报告入库为 `docs/daily-script.txt`，便于核对每日实际播报文本。
+
+
+
+> 日报与广播稿模型链相互独立、结构一致：均为 **Agnes 主 → NVIDIA MiniMax-M3 次 → NVIDIA Nemotron-3 Ultra 550B 兜**（见 `scripts/call_llm.py` 的 `LLM_CONFIGS` 与 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
+
+
+
+## 文件结构
+
+
+
+```
+
+.
+
+├── .github/workflows/daily-scheduled.yml   # GitHub Actions 工作流（cron 59 21 * * *）
+
+├── prompt/
+
+│   └── daily_report_prompt.txt             # LLM 系统提示词（含完整/精简模式指令 + 市场门控硬规则）
+
+├── scripts/
+
+│   ├── prefetch_data.py                     # 数据抓取（市场全景+估值+QDII/ETF+新闻；新闻：Google News 美国单地40条(失败指数退避重试3次)→去重,LLM精选≤10且互不重复仅谷歌来源不补位 + 联合早报最新10(三实例兜底:hub.slarker.me 主 → rsshub.rssforever.com 备1 → rsshub.ktachibana.party 备2；源校验放宽为昨天或今天内容,财联社风格逐源状态日志) 双源 Top20，两块独立互不补位；data_deep.json 联合早报一源双职责:第11条起取desc最长1篇原文直出供精简模式深度观察专栏(仅精简模式抓取,取消>700字阈值,三源均不可用则今日暂停)；data_cls_zaobao.json 取财联社+格隆汇 RSS 合并(财联社 telegraph/depth 双组 hub→rsshub 兜底；格隆汇 rss.injahow.cn 主→rsshub.rssforever.com 备；合并标题归一化去重+北京当天筛选,格隆汇缺pubDate保留)当天新闻供市场全景各板块一段简述（50–100字）+持仓聚焦(按持仓行业关键词预匹配industry_match)；data_holdings.json 取腾讯API持仓核心标的行情(价格+涨跌幅)+监督池供「持仓动态与聚焦」板块；已停抓 data_fund/data_industry（LLM 输入 JSON 由 11→9）
+
+│   ├── market_date_resolver.py             # 按市场解析业务日期 + 北京时间收盘标注（MarketDateResolver）
+
+│   ├── trading_calendar.py                  # 三市场交易日历判定（A股/美股/港股）
+
+│   ├── call_llm.py                          # LLM 调用（含模式判定 + 模型切换 + 市场标志注入 + 输入体积护栏 + Top20 同链接去重：防 LLM 幻觉复制重复新闻，删除后重新连续编号）
+
+│   ├── md_to_reader.py                      # Markdown → HTML（朗读版；表格与文本按 MD 原始顺序交错渲染，修复 QDII 等表格错位；纯加粗行 **xxx** 识别为 h4 小标题）
+
+│   ├── md_to_script.py                      # Markdown → 广播稿（注入 __TODAY_DATE__ 防日期错）
+
+│   └── md_to_mp3.py                         # 广播稿 → MP3（Edge TTS，含 ffprobe 时长校验 + 截断自动重试）
+
+├── web/
+
+│   └── sw.js                                # Service Worker（离线缓存）
+
+├── docs/                                    # 部署目录（自动生成）
+
+│   ├── daily-report.html                    # HTML 朗读版
+
+│   ├── daily-report.md                      # Markdown 完整报告
+
+│   ├── daily-report.mp3                     # 音频文件
+
+│   ├── daily-script.txt                     # 广播稿文本（script.txt 入库）
+
+│   └── sw.js                                # 前端 Service Worker
+
+└── README.md
+
+```
+
+
+
+## 发布地址
+
+
+
+- GitHub Pages：`https://homjanon.github.io/portfolio/`
+
