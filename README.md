@@ -2,7 +2,7 @@
 
 
 
-基于 GitHub Actions 自动运行的全球金融市场日报生成系统。每日（北京时间约 07:00 自动生成，Actions 计划 05:59 触发）抓取行情数据后调用 LLM 生成结构化日报，同步输出 Markdown 报告、HTML 朗读版和 MP3 音频，自动部署至 `docs/` 目录并发布到 GitHub Pages。
+基于 Cloudflare Worker（qdii-dispatch）自动调度的全球金融市场日报生成系统。每日北京时间 06:30 由 Cloudflare 触发 `workflow_dispatch`（GitHub 侧不再配置 schedule），抓取行情数据后调用 LLM 生成结构化日报，同步输出 Markdown 报告、HTML 朗读版和 MP3 音频，自动部署至 `docs/` 目录并发布到 GitHub Pages。
 
 
 
@@ -52,7 +52,7 @@ schedule / workflow_dispatch
 
 
 
-> ⚠️ GitHub Actions schedule 事件存在注册延迟（首次启用或改 cron 后可能延迟数十分钟至 1 小时），若定时未触发可手动运行一次。
+> 触发链路：Cloudflare 心跳（每 5 分钟）→ 北京 06:30 到点 → `workflow_dispatch` → Actions 运行。GitHub 侧已移除 schedule（2026-09-01 起单通道），漏跑可手动 `/trigger?repo=portfolio&key=...` 补一次。
 
 
 
