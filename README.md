@@ -46,7 +46,7 @@ schedule / workflow_dispatch
 
 |------|------|
 
-| **schedule（定时）** | 每日 `59 21 * * *`（UTC 21:59 = 北京时间次日 05:59）— 叠加约 52 分钟调度延迟，实际约 06:51（≈07:00）出报告 |
+| **workflow_dispatch（定时·单通道）** | 每日北京时间 06:30 由 Cloudflare Worker `qdii-dispatch`（心跳每5分钟）调 GitHub API 触发，绕开 Actions 共享 cron 队列的调度延迟/偶发漏触发 |
 
 | **workflow_dispatch（手动）** | 支持手动触发，可选 `skip_mp3=true` 跳过音频生成 |
 
@@ -84,7 +84,7 @@ schedule / workflow_dispatch
 
 
 
-报告在北京时间约 07:00 生成（Actions 计划 05:59 触发，含约 52 分钟调度延迟），覆盖"昨日（D-1）收盘 + 今晨美股凌晨收盘"。由 `scripts/trading_calendar.py` 用真·交易日历判定昨日各市场是否开市（不靠周几二分，可正确处理节假日/调休）：
+报告在北京时间约 06:30 由 Cloudflare 触发生成（GitHub 侧不再有 schedule），覆盖"昨日（D-1）收盘 + 今晨美股凌晨收盘"。由 `scripts/trading_calendar.py` 用真·交易日历判定昨日各市场是否开市（不靠周几二分，可正确处理节假日/调休）：
 
 
 
@@ -364,7 +364,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 .
 
-├── .github/workflows/daily-scheduled.yml   # GitHub Actions 工作流（cron 59 21 * * *）
+├── .github/workflows/daily-scheduled.yml   # 由 Cloudflare qdii-dispatch 触发（北京 06:30 · 无 schedule）
 
 ├── prompt/
 
