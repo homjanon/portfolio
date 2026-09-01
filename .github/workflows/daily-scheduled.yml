@@ -1,9 +1,11 @@
 name: 每日金融日报（定时）
 
+# 单通道（2026-09-01 起）：由 Cloudflare Worker qdii-dispatch 在每天北京 06:30
+# 触发 workflow_dispatch（原 GitHub schedule 已移除，绕开 Actions 调度延迟/偶发漏触发）
+
 on:
-  schedule:
-    # 北京 06:00 = UTC 22:00(前日) | 叠加~52min调度延迟 → 实际约北京 06:52(≈07:00)
-    - cron: "00 22 * * *"
+  # 触发方式（单通道 2026-09-01 起）：由 Cloudflare Worker qdii-dispatch
+  # 心跳调度表 06:30（北京时间）调 workflow_dispatch 触发，GitHub 侧不再配置 schedule。
   workflow_dispatch:
     inputs:
       skip_mp3:
