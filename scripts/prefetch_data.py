@@ -543,7 +543,7 @@ def _shorten_qdii_name(name):
         _core = ""
     # 4) 公司名（剔除核心/冗余词，截前4字）
     _company = re.sub(
-        r"纳斯达克100|纳指100|纳斯达克|标普500|标普|QDII|\(.*?\)|（.*?）|ETF|联接|基金|指数|证券|投资|\s+",
+        r"纳斯达克100|纳指100|纳斯达克|标普500|标普|QDII|\(.*?\)|（.*?）|ETF|联接|基金|指数|发起|证券|投资|\s+",
         "", s, flags=re.I,
     ).strip()[:4]
     if not _core:
@@ -746,12 +746,15 @@ def fetch_extra():
         _df = ak.fund_purchase_em()
         _by_code = {str(_r['基金代码']): _r for _, _r in _df.iterrows()}
 
-        # 1) 现有：纳指/标普 关键词筛选（可申购且额度较大的6条）
+        # 1) 纳指系/标普系 两组各取前5（类型含 QDII-FOF：天弘标普500发起即为该类型，
+        #    v39 前只放行"海外"导致 007721/007722 被过滤、场外表长期无标普500代表）
         _seen = set()
-        for _kw in ["纳指", "纳斯达克100", "标普500"]:
+        _picked = []
+        for _kw, _grp_cap in [("纳指|纳斯达克100", 5), ("标普500", 5)]:
+            _grp = []
             _mask = (
                 _df['基金简称'].str.contains(_kw, na=False)
-                & _df['基金类型'].str.contains('海外', na=False)
+                & _df['基金类型'].str.contains('海外|QDII', na=False)
                 & ~_df['基金简称'].str.contains('美元', na=False)
                 & (_df['申购状态'] != '场内交易')
                 & (_df['申购状态'] != '暂停申购')
@@ -760,10 +763,13 @@ def fetch_extra():
                 _c = str(_r['基金代码'])
                 if _c in _seen: continue
                 _seen.add(_c)
-                qdii_data["场外QDII"].append(_mk_qdii_row(_r, _c))
-        if qdii_data["场外QDII"]:
-            qdii_data["场外QDII"].sort(key=_qdii_sort_key)
-            qdii_data["场外QDII"] = qdii_data["场外QDII"][:6]
+                _row = _mk_qdii_row(_r, _c)
+                _grp.append(_row)
+            _grp.sort(key=_qdii_sort_key)
+            _picked.extend(_grp[:_grp_cap])
+        # 合并后统一排序（不限购置顶→限额降序），各5只共10只
+        _picked.sort(key=_qdii_sort_key)
+        qdii_data["场外QDII"] = _picked
 
         # 2) 新增：热门全球 QDII 关注（固定清单，默认 C 类，全部展示，不限购置顶）
         for _code, _short in HOT_GLOBAL_QDII:
