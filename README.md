@@ -142,7 +142,7 @@ schedule / workflow_dispatch
 
 | 个人持仓行情 | 腾讯财经 `qt.gtimg.cn` | `a_open OR u_open` | yfinance |
 
-| QDII监测+USD/CNH汇率 | 腾讯API+东方财富(净值)+新浪外汇(fx_susdcnh离岸即期市场价，买卖中值；→yfinance USDCNH=X兜底→外汇局中间价末位兜底并标注非市场价，场外QDII：纳指/标普自动筛6只 + 热门全球QDII固定清单10只，均不限购置顶) | `a_open` | — |
+| QDII监测+USD/CNH汇率 | 腾讯API+东方财富(净值)+新浪外汇(fx_susdcnh离岸即期市场价，买卖中值；→yfinance USDCNH=X兜底→外汇局中间价末位兜底并标注非市场价，场外QDII：纳指/标普自动筛6只 + 热门全球QDII固定清单11只，均不限购置顶) | `a_open` | — |
 
 | **全球 Top20 新闻** | **Google News 美国一地（40条→去重,LLM精选≤10且互不重复，仅谷歌来源、不补位；解析带 HTTP 状态检查 + lxml recover 容错，429/非法XML不整份失败；失败/空结果指数退避重试3次，仍失败兜底谷歌英国区 hl=en-GB&gl=GB&ceid=GB:en，同 TOPIC 换地域参数）+ 联合早报 RSS（三实例兜底：hub.slarker.me 主 → rsshub.rssforever.com 备1 → rsshub.ktachibana.party 备2，最新10）；两块独立互不补位、不强制凑满20，选不出则少输出** | 始终抓 | `data_news.json` + `data_cls_zaobao.json` |
 
@@ -218,7 +218,7 @@ schedule / workflow_dispatch
 
 
 
-- 固定 10 只清单写死于 `prefetch_data.py::HOT_GLOBAL_QDII`（含内置简称：华夏移动互联、华宝致远、浦银安盛全球、华安德国DAX、汇添富全球移动互联、银华海外数字经济、建信新兴市场、广发全球精选、华安法国CAC40、国富全球科技互联）；
+- 固定 11 只清单写死于 `prefetch_data.py::HOT_GLOBAL_QDII`（含内置简称：华夏移动互联、华宝致远、浦银安盛全球、华安德国DAX、汇添富全球移动互联、银华海外数字经济、建信新兴市场、建信富时100、广发全球精选、华安法国CAC40、国富全球科技互联）；
 
 - 数据来自 `data_extra.json` → "QDII_监测" → "场外QDII主动"，**不限购置顶、其余按日累计限额降序**；申购状态如实展示（含暂停申购），无数据标「无数据」，严禁编造。
 
