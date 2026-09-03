@@ -142,7 +142,7 @@ schedule / workflow_dispatch
 
 | 个人持仓行情 | 腾讯财经 `qt.gtimg.cn` | `a_open OR u_open` | yfinance |
 
-| QDII监测+USD/CNH汇率 | 腾讯API+东方财富(净值)+新浪外汇(fx_susdcnh离岸即期市场价，买卖中值；→yfinance USDCNH=X兜底→外汇局中间价末位兜底并标注非市场价，场外QDII：纳指/标普自动筛6只 + 热门全球QDII固定清单11只，均不限购置顶) | `a_open` | — |
+| QDII监测+USD/CNH汇率 | 腾讯API+东方财富(净值)+新浪外汇(fx_susdcnh离岸即期市场价，买卖中值；→yfinance USDCNH=X兜底→外汇局中间价末位兜底并标注非市场价，场外QDII：纳指/标普各取5只(含QDII-FOF) + 热门全球QDII固定清单11只，均不限购置顶) | `a_open` | — |
 
 | **全球 Top20 新闻** | **Google News 美国一地（40条→去重,LLM精选≤10且互不重复，仅谷歌来源、不补位；解析带 HTTP 状态检查 + lxml recover 容错，429/非法XML不整份失败；失败/空结果指数退避重试3次，仍失败兜底谷歌英国区 hl=en-GB&gl=GB&ceid=GB:en，同 TOPIC 换地域参数）+ 联合早报 RSS（三实例兜底：hub.slarker.me 主 → rsshub.rssforever.com 备1 → rsshub.ktachibana.party 备2，最新10）；两块独立互不补位、不强制凑满20，选不出则少输出** | 始终抓 | `data_news.json` + `data_cls_zaobao.json` |
 
@@ -194,13 +194,15 @@ schedule / workflow_dispatch
 
 
 
+- **选基规则**：纳指100系与标普500系（关键词「纳指/纳斯达克100」合并一组、「标普500」一组；基金类型放行 `海外|QDII`，覆盖 QDII-FOF 如天弘标普500发起）**两组各取限额较大的 5 只，共 10 只**。
+
 - 「简称」列由 `prefetch_data.py::_shorten_qdii_name()` 自动生成（字段 `名称_短`），**基金公司名完整保留**。
 
 - **统一短名格式**：`公司名 + 纳指100/标普500 + 小写份额字母`，例：`建信纳指100c`、`大成纳指100a`、`易方达标普500a`。
 
-- 纯规则驱动（清理 `(QDII)`/币种/`ETF联接` 等），零硬编码映射；份额字母锚定**末尾或"X类"**提取（避开 QDII/ETF 内部字母误判），**小写置末尾**，支持 A–E（覆盖 A/C/D/E 等）。
+- 纯规则驱动（清理 `(QDII)`/币种/`ETF联接`/`发起` 等），零硬编码映射；份额字母锚定**末尾或"X类"**提取（避开 QDII/ETF 内部字母误判），**小写置末尾**，支持 A–E（覆盖 A/C/D/E 等）。
 
-- `对比昨日限额`：今日限额 − 昨日限额（单位元），由 `qdii_prev.json` 跨运行计算，首日/新进前 6 留空。
+- `对比昨日限额`：今日限额 − 昨日限额（单位元），由 `qdii_prev.json` 跨运行计算，首日/新进前 10 留空。
 
 - **排序：不限购（申购状态=开放申购）置顶，其余按日累计限额从大到小**；「日累计限额」列不限购显示「不限购」，其余显示数字。
 
