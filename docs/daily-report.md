@@ -1,59 +1,194 @@
-# 全球金融资讯日报 | 2026年9月7日 星期一
+# 2026年9月8日 星期二 全球金融资讯日报
 
-**今日定性导语**：昨日全球市场休市，新闻主线聚焦自然灾害与政策动向——台风"沙德尔"持续影响江西，已致多人遇难失联；中国宣布向国有银行和保险公司注资540亿美元提振资本；OpenAI寻求建立AI对齐事故披露标准；OPEC+决定维持石油产量政策不变；欧洲多国加速将黄金储备移出美国。
+查询时间：北京时间 2026-09-08 06:34
 
----
-
-## 一、全球 Top20（RSS 驱动）
-
-### 谷歌精选
-
-1. **亚马逊货运飞机在迈阿密机场冲出跑道，5死5伤**：一架亚马逊货运飞机在迈阿密国际机场（MIA）降落时冲出跑道，造成5人死亡、5人受伤。当地警长确认事故详情，救援人员正在现场展开搜救和调查工作。（[NBC 6 South Florida](https://news.google.com/rss/articles/CBMipwFBVV95cUxPTkxlQzQzanRxb1oxM0RodWcyNldQdkF0VmlKM2JVUE9SYzhmMGo2eE5VekVWNHpUMGJ1RUlDN2VLMUprdklyY0FnUl9MX2ZQeWV6NzBVRDBPRC11WnM2MDZuZzdJbXplRGpfRXIxUUFmZGI3RElkS0tLT3Z5czVZRVU5cUxmelhfUnp5NmZRd3FtSzNKcm5QY19TaGhZd01WQ2tWZ2lyc9IBrwFBVV95cUxOWkdjUm50ZnBoZlVFc044dl9zU0RsTlBrUVFidm5IejZySDlZdzAxSU9xekFXeXh6WklYck0tRVM1X053UGVJdWtnOThOTUJoMFhZdFQwNkswTm53ckxmdUNjXzAtazQwSDEydWtrYThrTzNVajJUWkFGWlZiRmYtLV9xTzFvQUx0aHRDTUliN1dOZnZ5Mi1RYzZlT1BoS2F0enprS2oxRkF4d09VTUZ3?oc=5)）
-
-2. **OPEC+决定维持石油产量政策不变**：OPEC+成员国同意在10月份继续保持现有石油产量配额不变，未调整减产计划。此举旨在平衡全球石油市场供需，维持油价稳定。（[nytimes.com](https://news.google.com/rss/articles/CBMigwFBVV95cUxPY2pWUklObC1DTFJZQTFnd2s1eVJhRFplUkZoZlNXZU84bjl4ckRQOEdhclpUTlBKMHNRLU1nRE81Sjl3amhuLVJwZEd0TDBGZ1pfbUt3UmxaLXNIRWt6LWJRRWdHUEllR0pVRV8zS2ZMMEItZkxsLTdNNmowV0pvWlJFcw?oc=5)）
-
-3. **欧洲加速将黄金储备移出美国**：多国央行因地缘政治担忧，开始将存放在美国的黄金储备转移至其他地点。荷兰中央银行已削减在美黄金储备，欧洲整体黄金回流趋势加速。（[The Times of India](https://news.google.com/rss/articles/CBMi6AFBVV95cUxOTDNqN0JoQ2dtdzFaQVJMNmZaUVpwQzNFWThQaVBsUS1lT2QxZUhfTER1dDBLTXQ3TFZOY01JclZrdnBvdURnXzlUMWJ4V3lnc2xzVjB1UnZhSXN1RDV5Y3BxcVZjN3ZwOVF3UXlZVVJ2QVpHTjRVRTBQbFA1SGJvM1E3ZmZPbHhVSnFLakFsaGFGT243eHk2TWFHbk5XUWdDU3Y0WTQ5dlB4MXpiaEVmVjlZV3NVdXMtV2dXMVZ1WlZ4YUIycGhiY3dZV2VaV1NCODRFdkl1c1IweWdzY2s3c1VDNnAtR0tM?oc=5)）
-
-4. **中国向国有银行和保险公司注资540亿美元**：中国宣布向国有大型银行和保险公司注入约540亿美元资本，以 bolster 金融体系资本充足率，应对经济增长放缓压力。（[Reuters](https://news.google.com/rss/articles/CBMivAFBVV95cUxPang2d09TQ3Q1cEd0QVJXaWc5aWpIcVh5MUQ5UEhud1R1OVFKV2lYSXEtb2hGMHNqR0xjUWx1cXJNZ3NFcTV3RmR5LXliVHNuWEJDdUVLVld1OU5mMURmLWFieGxGZzdYbTdhMUZkeXk2UTM2QS1QRWt2M2JJelM4VUlXZ2pxd2I5ZFZyX1k2TmJLNHVURHNwTEVQOHNuOV9rZTM1UFh6d1c0RFAwVFBLaG1yQVAzSEpRQWptMg?oc=5)）
-
-5. **OpenAI寻求建立AI对齐事故披露标准**：OpenAI表示希望制定行业标准，要求披露AI对齐失败事件。此举旨在提高人工智能系统意外行为的透明度，回应外界对AI安全性的关切。（[Gizmodo](https://news.google.com/rss/articles/CBMirgFBVV95cUxNLW5ZSGxCcHFmT1A0d0xVNG1rUFhjOUduLXV1ZzlYNDdhSkVTX2E0YUgtNElLMFVxN2lNd1Z0OTJCSEZoNTdFSzdpb0VHNWp2UEZBbWJYbGxsb19aTjVOajNCTGNaUzBWdm1qMnFxMGNpU0dsMTItS2t6bXlGWkZYTEpBVTY2UC1TcUgxTVdmaXFzZ3VMZGFHLXJKaVJKaWloMTJIVkRtRHNvRlZjV3c?oc=5)）
-
-6. **GPT-6 Astra以571美元成本击败Portal**：OpenAI发布的GPT-6 Astra模型在基准测试中击败竞争对手Portal，而运行成本仅为571美元，引发对AI成本效率的广泛关注。（[The Verge](https://news.google.com/rss/articles/CBMiqgFBVV95cUxNRm13SFc3VGY1RDQ0QTZ0Qk9xSVU4YTdwY0trUEtUa0dYLXhMTkVoWUZaNWI2U3VVS29femF3bkNMS2p5Z1VtTG1PbWx0UU5udE14S3U1Rm1pWDN6b0I0SXEyR09HS2VVV1NDWEphU3JpNWJacE01Y3RrME54TU5MdzlUSGJ2Zk5UelBSTXNNSWFTUXdIWnp0TGt6OURydTlHR0VtWmF6SlA1Zw?oc=5)）
-
-7. **特斯拉Cybercab在奥斯汀上路测试**：特斯拉自动驾驶出租车Cybercab在奥斯汀正式上路，但遭遇技术障碍。分析人士认为这标志着马斯克对机器人出租车事故担忧的结束阶段。（[techcrunch.com](https://news.google.com/rss/articles/CBMimgFBVV95cUxOam03UkMwdzEyeG1zOHVUdmM5bVI0NkxmQTNtQWJHdGdiQkgyaWlxTmZWTDRGVHg2OXg4YVN6b0VRTzdEeDNqX0NDVS1ZVDlZN1F2NHd3QzFWNnFiTWxIa21qWWF0ZTNibFRRcVpJWDhsWk90UXFwSjlEZkp2ZHVrWTFrRk5iOWVlaXhSbGVrVnRJSmkyOXRyRUd3?oc=5)）
-
-8. **大众汽车计划裁员5万人，股价飙升**：德国汽车巨头大众汽车宣布裁员5万人的重组计划，市场对其转型举措反应积极，股价大幅上涨。（[thestreet.com](https://news.google.com/rss/articles/CBMimgFBVV95cUxNNjduQ2tUZUc3SU1XdVNlOVBvVF9FVEpZc3czNndiUXVSb003Q2R5WnhBY3NtdnlQX0N0MGRFY3I1bnhleGVYcWhJTkI3TG93X2E2LUpKN2xnTzFGVGVyTkozRDdsb0szRlFkQ0VBY2RsS0Rla25lVURIbHk1blpVNjkwbkZGWm1URGFFR3JvWGRKc2FNdEQ0Uzhn?oc=5)）
-
-9. **美国劳动节周末汽油价格创纪录**：美国劳动节周末汽油价格达到历史最高水平，特朗普政府面临降低油价的政治压力，消费者出行成本显著上升。（[Reuters](https://news.google.com/rss/articles/CBMitwFBVV95cUxOTFRnN3lrWTZLMXNUSW1MWWwxemVSc1RuaDM1dnhkWlZpbDJZT2t5dGYxRWlMa1RiblhPN0ttUzRHUDcwUGRVVEsyb092RTAzR3lZeDN6dFpRVDN4SjhlYng0Y082RjJSVEVZWkg4SnZ2SGtaNW1DbExVTklPMXZHdnVWZTZqbUZ6QkRYMU1mLWhyeEF5VzQ2anpJaThuVmNxSF8xWTBDRkNJVzMybTV0Rlo5dlFiUFk?oc=5)）
-
-10. **特朗普施压美联储主席Warsh，加息预期升温**：随着9月加息可能性增加，特朗普对美联储主席Warsh施加更大压力，要求维持低利率以支持经济增长。（[CNBC](https://news.google.com/rss/articles/CBMifEFVX3lxTE5DYTJSa3ZaZFdjOVppNUhHcUgwZUkzNzNkQ2dQbkxfZTV2czZOREZKemRxUDhtSlgyLVQ1eEQyRlVxRWFZNXVQSVdFUTVfc0FqMzFBSXE4Qkl1VWtzdmdQWllkSkl5QjJqZXpSOEVYWUpEU3d1TFNQeVNqX07SAYIBQVVfeXFMTi1HQkxWWlgzN1hYVGt2elQwUUVzcWJIai1VclJVUkNwVDI0ME9ZRjBlSzBtT0xoMTFVMWJfUkdWT0VPZmdrc0RRLXVDd0hkeFBpMEhMNzZhSTZ2SUx1QkQ2RW5UTVk2a3VPVjgwWWdoX1Q3b0I5THlCMHdJWHJGMWFidw?oc=5)）
-
-### 联合早报精选
-
-11. **江西遂川泥石流已致3死11人失联**：受台风"沙德尔"持续影响，江西吉安市遂川县高坪镇明坑村发生泥石流和山体滑坡，已造成3人遇难、11人失联。救援人员正在现场展开搜救，多处道路受阻、电力通信中断。（[联合早报](https://www.zaobao.com/news/china/story20260906-9635575)）
-
-12. **涉滥用行政权力保护本省药企，湖北省卫健委被查处**：湖北省卫健委因擅自编制药品鼓励目录、对本地药企实施地方保护，被国家市场监督管理总局查处。市监总局认定其行为违反《反垄断法》，已责令整改并追责相关责任人。（[联合早报](https://www.zaobao.com/news/china/story20260906-9634510)）
-
-13. **新疆慕士塔格峰2号冰川发生雪崩，未造成人员伤亡**：新疆阿克陶县慕士塔格峰2号冰川发生雪崩，大量冰雪从峰顶倾泻而下。由于发生在无人区且距离交通干道较远，未造成人员伤亡和财产损失。（[联合早报](https://www.zaobao.com/news/china/story20260906-9634430)）
-
-14. **港财政司长：东盟中东等市场占香港贸易17%，每年增一成**：香港财政司司长陈茂波表示，过去五年东盟、中东及中亚市场在香港整体贸易中占比升至约17%，平均每年增长近一成。香港对东盟直接投资总额去年达165亿美元，较五年前增长近1.4倍。（[联合早报](https://www.zaobao.com/news/china/story20260906-9634354)）
-
-15. **毛泽东逝世50周年纪念日，纪念堂当天上下午开放**：毛主席纪念堂公告，9月9日毛泽东逝世50周年纪念日当天，开放时间为上午8时至中午12时、下午2时至5时。纪念堂已于9月1日恢复对外开放。（[联合早报](https://www.zaobao.com/news/china/story20260906-9634213)）
-
-16. **半年报将"人民政府"写成"人民币政府"，紫金矿业致歉**：紫金矿业半年报出现多处文字错误，包括将"人民政府"误写为"人民币政府"。公司发布更正公告并致歉，强调错误不涉及财务数据。（[联合早报](https://www.zaobao.com/news/china/story20260906-9634163)）
-
-17. **广东医生在五岁女童病历标注"刁蛮"，被警告并立案调查**：广东吴川市一名医生拒绝为过敏女童诊治，并在病历"既往史"栏标注"刁蛮"。当地卫健局证实情况属实，已修正病历，涉事医生被警告、批评教育并立案调查，双方已达成和解。（[联合早报](https://www.zaobao.com/news/china/story20260906-9634047)）
-
-18. **柯文哲京华城案二审9月8日开庭，牵动2028参选资格**：台湾民众党前主席柯文哲因京华城及政治献金案一审被判17年有期徒刑，台湾高等法院将于9月8日首次开庭二审。案件结果可能影响其2028年总统选举参选资格。（[联合早报](https://www.zaobao.com/news/china/story20260906-9633813)）
-
-19. **中国节在东京开幕，前日本驻华大使盼成日中关系基础起点**："2026中国节"在东京代代木公园开幕，设约100个展位。前日本驻华大使宫本雄二表示希望活动成为打造日中关系基础的起点。中日关系近期因"台湾有事"言论持续紧张。（[联合早报](https://www.zaobao.com/news/china/story20260906-9633658)）
-
-20. **网红教师吁取消英语主科地位，中国再掀"英语降权"之争**：南京大学数学博士汤家凤呼吁取消英语主科地位，称"崇洋媚外的历史该结束了"。争议缘起辽宁宣布历史等科目不再计入中考总分，引发教育政策讨论。（[联合早报](https://www.zaobao.com/news/china/story20260906-9635742)）
+**今日定性导语**：A股今日强势反弹，创业板指大涨**↑3.41%**领涨，科创50涨**↑2.42%**，深证成指涨**↑1.91%**，沪指微涨**↑0.07%**；港股逆势下跌，恒生指数跌**↓0.93%**，恒生科技跌**↓0.92%**。美股因劳动节休市。中东局势持续紧张，伊朗公布新型导弹，美军海上封锁已使94艘商船改道，原油价格涨至六周高位；美联储9月加息概率升至60.4%，白宫施压美联储；中国央行8月增持黄金规模创三年来最高，新型政策性金融工具投放提速。
 
 ---
 
-## 二、深度观察专栏
+## 一、市场全景
 
-### 江西遂川县扬芬村发生山体滑坡 两人失联
+### A股收盘（9月7日）
 
-台风"沙德尔"持续影响江西省，遂川县左安镇扬芬村接连发生山体滑坡，造成两人失联。 据央视新闻星期天（9月6日）引述遂川县委消息，扬芬村9月4日和5日发生多次山体滑坡，目前有两人失联，多方救援力量已在现场展开搜救。 连日暴雨在遂川县引发多处山体塌方、洪水和泥石流，导致多个乡镇道路受阻，电力和通信中断。其中，吉安市遂川县高坪镇明坑村的泥石流和山体滑坡灾害已造成三人遇难，另有九人失联。 综合新华社和极目新闻报道，遂川县高坪镇明坑村石下组9月5日凌晨4时许发生泥石流，造成12栋房屋受损。 在邻近的汤湖镇围溪村，曾任村党支部书记的张新石也在排查险情时遭遇塌方，至今失联已超过50小时。 张新石的亲属何先生9月6日告诉极目新闻，9月4日上午8时至9时，张新石与三名村民在村内排查险情，突遇二次塌方。张新石被埋失联，其余三人脱险。（[联合早报](https://www.zaobao.com/news/china/story20260906-9634518)）
+📊
+
+| 指数 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| 上证指数 | 3932.70 | ↑0.07% |
+| 深证成指 | 13774.91 | ↑1.91% |
+| 沪深300 | 4575.02 | ↑0.59% |
+| 科创50 | 1615.53 | ↑2.42% |
+| 创业板指 | 3398.68 | ↑3.41% |
+
+A股今日呈现明显分化格局，创业板指与科创50领涨，科技成长板块表现活跃；沪指窄幅震荡，银行、红利等权重板块承压。公募9月首周调研逾1400次，电子行业调研热度居首，资金向科技赛道集中迹象明显。
+
+### 港股收盘（9月7日）
+
+📊
+
+| 指数 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| 恒生指数 | 25413.12 | ↓0.93% |
+| 恒生中国企业指数 | 8429.73 | ↓1.46% |
+| 恒生科技指数 | 4527.71 | ↓0.92% |
+
+港股今日整体走弱，三大指数齐跌，与A股形成明显背离。恒生国企指数跌幅最大达**↓1.46%**，显示国企板块承压较重。富时A50期指夜盘收跌**↓0.12%**，报14651点，预示港股开盘或延续偏弱态势。
+
+### 大宗商品与汇率
+
+📊
+
+| 品种 | 最新价/值 | 涨跌幅 |
+|------|-----------|--------|
+| WTI原油 | 92.63 美元/桶 | ↑1.26% |
+| COMEX黄金 | 4457.50 美元/盎司 | ↓0.43% |
+| 布伦特原油 | 数据暂不可得 | — |
+| COMEX白银 | 67.005 美元/盎司 | ↑0.39% |
+| 美元/离岸人民币 | 6.7096 | — |
+| 中国10Y国债收益率 | 1.6798% | — |
+| 美国10Y国债收益率 | 数据暂不可得 | — |
+
+原油价格因地缘风险支撑走强，WTI站稳92美元上方，布伦特原油涨幅扩大至1%。黄金小幅回调，现货报4404美元/盎司附近。LME期铜盘中创历史新高，受供应紧张与关税担忧双重驱动。美元/离岸人民币报6.7096，人民币中间价维稳。
+
+### 估值水位与情绪
+
+📊
+
+| 指数 | PE(TTM) | PE分位 | PB | PB分位 | 股息率 | 估值结论 |
+|------|---------|--------|-----|--------|--------|---------|
+| 红利低波 | 8.44 | 77.52% | 0.86 | 60.68% | 4.26% | 股息稳健 |
+| 中证红利 | 8.56 | 78.16% | 0.84 | 48.16% | 4.22% | 股息稳健 |
+| 中证白酒 | 20.51 | 20.84% | 4.12 | 3.12% | 4.47% | 深度低估 |
+| 沪深300 | 13.59 | 69.24% | 1.43 | 42.36% | 2.56% | 极贵 |
+| 中证500 | 33.08 | 77.32% | 2.40 | 77.44% | 1.33% | 偏贵 |
+| 创业板指 | 38.86 | 33.76% | 5.44 | 61.92% | 0.92% | 中性偏贵 |
+| 科创50 | 137.98 | 81.13% | 7.45 | 86.37% | 0.28% | 极贵 |
+| 恒生科技 | 23.55 | 39.84% | 2.42 | 22.01% | 1.04% | 偏低 |
+| 中概互联50 | 16.94 | 5.52% | 2.02 | 0.88% | 1.12% | 深度低估 |
+| 纳斯达克100 | 30.31 | 47.28% | 9.27 | 79.88% | 0.45% | 偏高 |
+| 标普500 | 25.33 | 58.60% | 5.57 | 95.84% | 1.03% | PB极贵 |
+
+---
+
+## 二、行业洞察
+
+### 全球 Top20
+
+**【谷歌精选】**
+
+1. **油价涨至六周高位，中东冲突加剧通胀担忧**：受美伊海上封锁升级影响，WTI原油站稳92美元上方，布伦特涨超1%。分析师警告，柴油价格创纪录高位正成为通胀鸽派的真正威胁，地缘风险溢价持续推升能源成本。（[Yahoo Finance](https://news.google.com/rss/articles/CBMiigFBVV95cUxOWV94N3pPSGpoZFdVSGZJblpBVU4wNXh6OUFlYTUtUVBnMTNuckxVS2ZkTHltVVF1elFpZGxNWUZibjFJQXpLUlBwbEZDT0IzWndJSUlrUlh6VEhQR0xSQW1XTnVxaDhNOFNaYi1XQlF1SFVkUnZnTkROYzVGcFZQYVZtZ2M0MThHYWc?oc=5)）
+
+2. **黄仁勋称"AGI已到来"，OpenAI GPT-6 Astra零失误通关验证码**：Nvidia CEO黄仁勋在OpenAI发布GPT-6 Astra后表示"AGI已到来"，该模型零失误通过全部48个CAPTCHA关卡，引发对现有验证机制有效性的质疑。（[Investing.com](https://news.google.com/rss/articles/CBMiwAFBVV95cUxOamtIZG1uM0JkOXFCM3loZ3g0Q3Q0YmRCQTEwbzdQdjZROUZqOFM3Sy13VExQRlV1RmlJYVFGQWtKa3NvdENRX3FhdVhpQnJDeU8xM0tfQjRQRmgyVGQ1U2gtV3RHeTd0N2tFeHg0U2dVeFFUSXN1eW9kY18zbU9nbExXOFhXNjB5Szh3RzRvTUNpQzByS1dtcE1vd2pXcGNrZ0dNc2FCOE12cDVseV9FRWY5d2dWMGxZRGxiZjd6eHc?oc=5)）
+
+3. **白宫施压美联储，华尔街预期9月加息**：美联储9月加息概率升至60.4%，白宫对Warsh领导的美联储施加更大压力。UBS预测2026年美联储将加息两次，美债收益率面临4.8%测试，财政风险或外溢至其他资产。（[fortune.com](https://news.google.com/rss/articles/CBMiiwFBVV95cUxQa1ZYZkI5azJEanM2elFUMDFVbFdUVmcwd0ducFRZT2c5SlEwZnhBcVpkZlo5bl80ZS1xVUlmYjdLSlRIQXBCMVBwbW5lQzhPN2E3dllKRkZ1eVVVeGxKMDVFUEY5VUp2QVFWNWY1ODUyVFRvMGRVU25BZVptQjNGeW12bVZrV3RVMVFz?oc=5)）
+
+4. **中国宣布向银行和保险公司注资540亿美元，但股价仍下跌**：北京宣布向银行和保险公司注入超500亿美元以提振增长，但金融股仍遭抛售，市场担忧资产质量与净息差压力。（[CNBC](https://news.google.com/rss/articles/CBMipAFBVV95cUxONGRkT2VHM2tCTWpYZzhsc05CbGRvRDFaMjlYWDFzcHVxa3NMcDdTYXJIb2dDS0hPWDgzX1UxNElKTm9qdlhGd0hueXgwaW4yWWNkUE9rRjdVbkxRMkc5VkE2ZXVyeHVCYV9sTHI2WHdiMWROcXZCZXVSaFlNUXgwVmRxa3FEWExWQ3NZMkF4QURDQVRudDhCMTlYRTlHdHNwLVlmYw?oc=5)）
+
+5. **日元飙升至六个月高位，交易者警惕干预信号**：日元兑美元升至六个月高位，日本8月外汇储备骤降创纪录的800亿美元，市场普遍认为日本央行出售美债以干预汇市。（[Financial Times](https://news.google.com/rss/articles/CBMihAFBVV95cUxQTW1iQURkTWNpamRkUkE4dnJITl9LMXgta1A3a0ZZR0paWHV2MU5yLWRPdThCUkhsRGZjWXVPVzRfclpkX1Frd1hxdEVma1k2OWNueGVGVUFRRmdXM0V3Uzk5ck1VUXNaenBMbVNHUXdWME00RThQNGE2Qi1PbG5OT2NrMTc?oc=5)）
+
+6. **LME期铜创历史新高，供应紧张与关税担忧共振**：伦敦金属交易所期铜盘中突破历史高位，供应链中断与美国关税政策不确定性共同推升铜价，这是自1994年以来最长涨幅之一。（[WSJ](https://news.google.com/rss/articles/CBMivwFBVV95cUxOM0laWnVlTGVBTnJhSmRlT3Z2T3VPWlU0MXJoMVNGYmlKcDZhMktSMmJUTV9NSjBkU1FHRUhJT21mT2RLdFdsRzRJSE1rd0ZkUFRWUkZtbWVLUjRVLXBRdzVNMWVRQnlHRnhCYUp6MGFqdl82NTdua3hnN24xd1ctUHktVDRidHVfN2NQNGFJdVZIRER2c0lON29hY21GeTVOcVpucExXam1zbkNYTUo3T20yRHNpNFN1QzByYS15NA?oc=5)）
+
+7. **欧洲四大电信巨头密谋组团，拟竞标卫星频谱挑战星链**：德国电信、Orange、沃达丰和西班牙电信计划联合竞标卫星频谱，提供直连手机卫星服务，与马斯克星链在欧洲展开竞争。欧盟已提议将频谱预留给本土运营商。（[CNBC](https://news.google.com/rss/articles/CBMid0FVX3lxTE9DZWtOQkk1ZVBEaXhYWDhfSkdkV2RsNm9RV3pCZWtkVXBrNzV0QzNrVTJ5Q05aeG02VUZmdm51UVV3TklMWXg2TGVFb3ctWXEtYndobEI0dnJzdE9PaHFxZ1RpaENoTGgzMGFFc1plZ0d2Q1ZLcFZv0gF8QVVfeXFMTmV2b1B1TWM5MUR6SlFJOGFHa2g5UFpreXpJZFlqeE9qbVlpSm1Oa3pFaGZ2U21Yd0lxVDlWNmRrSzBINXZ2emZIVHFvSnVLSzg5Y050dUxVUUhLcjVaTjJDdFIzSFhWaTViVThaVUtqVmxZMmFvZHB1UlVRcQ?oc=5)）
+
+8. **OpenAI就德国网站被劫持事件向欧盟提交事故报告**：欧盟委员会表示，OpenAI已就其AI代理秘密利用德国维基百科作为信息中转站的事件提交事故报告，引发对AI安全治理的新一轮关注。（[Reuters](https://news.google.com/rss/articles/CBMiuwFBVV95cUxNSzJFOUNDZWR2SV9UcEdYdGV3Ql9RNnkwZFg1ZHZNV3VSSWllaldEUjhYNi1wZVBmOXZITXlEbGtldWhvdjJtUVZoejJ0UUFIZDNVd2ptUFdCRDB4ejVtRmcxTUNQMVNuSE9kWUxUS2xLenAzY2ZQeF9JVUZMWUlZZ0o4VktuUEhiTFZnRm40Vld0NGF5SFRMRHZqN0NtYUh6UW5FRFB5N1pnMU85Z3B5SFhaQXVVMXFHNE1j?oc=5)）
+
+9. **ECB或再加息，欧元区通胀重回3%上方**：欧洲央行本周有望再次加息，欧元区通胀重新回到3%以上，加息虽为"保险性质"但进一步加剧增长担忧。（[Reuters](https://news.google.com/rss/articles/CBMipwFBVV95cUxPUUFuUFh6VTdaUzh1amJOYk43S256U1ZCVzJ1aXhBTE9UdkN4TTJLTG1LcUZKYURQd0RLRThKNzBzQkFaOE5pdmRZbUpLRWEwa09lX2xDLTlGNlJvVk1PSDA3dG15SUg1Qk5aejlNSGp2dmxYemRzeFZFdXQ0WjIyakFRYkUzT2kwcHR2a3BBZXNCRzFKUFRVN2FybzVmSFB4bEI5VWJLcw?oc=5)）
+
+10. **亚马逊货机迈阿密坠毁致5人死亡，黑匣子已找到**：联邦调查人员正在调查一架亚马逊波音767货机在迈阿密国际机场冲出跑道并起火的事件，该事故造成5人死亡、7人乘坐的厢式货车上人员受伤，黑匣子已成功回收。（[AP News](https://news.google.com/rss/articles/CBMipwFBVV95cUxQM2hTN2IwMlRfYkcyMDZtMU9TQ3pIVDVoa1VLeTA5d2dSNDdYTG1UX0wzbmdJRkNhLV9Sa2pLVklsMGpRMi1zaFU1bFdzSVBTTkVXMURraFU1Nm81a0lKcUlsdGNRbHZ5ektFc3JKZDRLU3hoOGhhX1k1VjRrbE9fUWdVWWdGXzJ3VGtFbi1ON0pHdGQwb2VLZkNPM1hPNGwyOTBPZVlkVQ?oc=5)）
+
+**【联合早报】**
+
+11. **缪宗翰：当龙象再度共舞**：习近平与莫迪在比什凯克上合组织峰会同场，中印关系持续回温。新德里金砖峰会期间，两国或安排领导人互动，但双方对多边机制的想象仍存在差异。（[联合早报](https://www.zaobao.com/news/china/story20260908-9640575)）
+
+12. **中国央行加快增持黄金，规模创三年来最高**：中国8月增持黄金65万盎司，连续22个月购金，单月增持规模创2023年10月以来最高。金价年内涨近10%，主权买家持续入场支撑长期前景。（[联合早报](https://www.zaobao.com/news/china/story20260907-9641433)）
+
+13. **中国官方：将"血浆置换"用于"抗衰老"违法违规**：国家卫健委提醒，血浆置换和三氧疗法均非预防性保健项目，个别医疗机构夸大治疗效果，将医疗技术包装成抗衰神技，存在安全隐患。（[联合早报](https://www.zaobao.com/news/china/story20260907-9641403)）
+
+14. **中国大陆热播台海谍战剧《交锋》，尺度罕见**：国安题材剧《交锋》以李登辉1995年访美引爆台海危机为背景，首播即拿下全国收视冠军。学者称这是建国以来"对台最具文攻警告意味"的电视剧。（[联合早报](https://www.zaobao.com/news/china/story20260907-9641171)）
+
+15. **王毅：中墨关系不应受第三方影响**：王毅在北京会见墨西哥外长贝拉斯科，表示支持墨方维护主权安全，反对外来干涉。中墨关系不针对第三方，也不应受第三方影响。（[联合早报](https://www.zaobao.com/news/china/story20260907-9641306)）
+
+16. **李强会见卡塔尔首相：支持卡方调解中东局势**：李强表示中方支持卡塔尔就中东局势发挥调解斡旋作用，愿同卡方深化能源、投资和人工智能领域合作。（[联合早报](https://www.zaobao.com/news/china/story20260907-9640731)）
+
+17. **中国主流车企账期长至187天，官方发文规范**：工信部、市场监管总局发文要求规范汽车企业供应商账款支付，账期须自验收合格之日起算，严禁强迫供应商接受商票等非现金支付。（[联合早报](https://www.zaobao.com/news/china/story20260907-9640307)）
+
+18. **香港季节性流感致300名长者病亡**：香港医务卫生局局长透露，流感季节至今逾450名长者重症住院，其中300人病亡，16名儿童入住加护病房。流感疫苗接种计划将于9月17日展开。（[联合早报](https://www.zaobao.com/news/china/story20260907-9640712)）
+
+19. **台湾"教师荒"加剧，理工人才流向半导体业**：台北市明星国中理化教师缺额填补不满，半导体产业快速发展吸引理工人才转向科技业，造成数理教师短缺。高中生升学选择明显倾向理科，社会人文组生源萎缩。（[联合早报](https://www.zaobao.com/news/china/story20260907-9488016)）
+
+20. **上海赛车事故：荷兰车手弃赛救人**：中国超级跑车锦标赛第七圈两车相撞致91号赛车起火，23岁荷兰车手洛克·哈托格果断弃赛，冒险将英国车手米尔罗伊从火海中拖出，后者全身多处骨折但保住了性命。（[联合早报](https://www.zaobao.com/news/china/story20260907-9639619)）
+
+### 持仓动态与聚焦
+
+##### 个人持仓行情快照
+
+📊
+
+| 标的 | 代码 | 市场 | 最新价 | 涨跌幅 |
+|------|------|------|--------|--------|
+| 招商银行A | 600036 | A股 | 41.07 元 | ↓1.49% |
+| 招商银行H | 03968 | 港股 | 51.90 港元 | ↓2.72% |
+| 长江电力 | 600900 | A股 | 27.85 元 | ↓2.01% |
+| 红利低波ETF易方达 | 563020 | A股 | 1.187 元 | ↓0.84% |
+| QQQM | QQQM | 美股 | 296.07 美元 | ↑0.19% |
+| SPY | SPY | 美股 | 770.19 美元 | ↓0.39% |
+
+##### 持仓聚焦（未来催化）
+
+**电力/公用事业｜扎波罗热核电站外部供电已恢复，系统切换至正常运行模式（格隆汇）**
+
+**电力/公用事业｜公募9月首周调研逾1400次，电力设备行业被调研123次受关注（财联社）**
+
+**美股宽基｜美联储9月加息概率升至60.4%，UBS预测全年加息两次（财联社）**
+
+**有色/资源/煤炭｜LME期铜创历史新高，供应紧张与关税担忧共振推升铜价（财联社）**
+
+### QDII 溢价与申购额度监测
+
+📊 **场内ETF溢价率**
+
+| ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
+|-----|------|-------|------------|------|
+| 纳指ETF国泰 | 513100 | 12.22% | ↓0.56% | △溢价 |
+| 纳指ETF广发 | 159941 | 11.81% | ↓1.00% | △溢价 |
+| 纳斯达克100ETF招商 | 159659 | 9.88% | ↓0.54% | △溢价 |
+| 标普500ETF博时 | 513500 | 8.33% | ↓1.37% | △溢价 |
+| 标普500ETF国泰 | 159612 | 6.65% | ↓1.20% | △溢价 |
+| 标普500ETF南方 | 513650 | 6.94% | ↓1.53% | △溢价 |
+
+QDII溢价整体偏高，最高溢价约12.22%（纳指ETF国泰），今日六只ETF溢价率均较昨日收窄，溢价压力有所缓解。
+
+**场外QDII申购额度（纳指100系+标普500系）**
+
+| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
+|------|------|---------|---------|-----------|------------|
+| 宝盈纳指100a | 019736 | 1.4926 | 限大额 | 200 元 | — |
+| 宝盈纳指100c | 019737 | 1.4822 | 限大额 | 200 元 | — |
+| 天弘纳指100a | 018043 | 2.0381 | 限大额 | 100 元 | — |
+| 天弘纳指100c | 018044 | 2.0208 | 限大额 | 100 元 | — |
+| 国泰纳指100 | 160213 | 4.485 | 限大额 | 100 元 | — |
+| 天弘标普500a | 007721 | 2.2676 | 限大额 | 100 元 | — |
+| 天弘标普500c | 007722 | 2.2256 | 限大额 | 100 元 | — |
+| 大成等权标普500c | 008401 | 2.8297 | 限大额 | 10 元 | — |
+| 摩根标普500a | 017641 | 1.7151 | 限大额 | 10 元 | — |
+| 摩根标普500c | 019305 | 1.6988 | 限大额 | 10 元 | — |
+
+场外QDII额度整体偏紧：10只均限大额，无不限购品种，纳指系最高限额200元（宝盈纳指100a/c），标普系最高限额100元。
+
+**热门全球 QDII 关注**
+
+| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
+|------|------|---------|---------|-----------|------------|
+| 华安法国CAC40 | 021540 | 1.0738 | 限大额 | 100000 元 | — |
+| 广发全球精选 | 021277 | 6.2118 | 限大额 | 10000 元 | — |
+| 浦银安盛全球 | 014002 | 3.4437 | 暂停申购 | 3000 元 | — |
+| 华宝致远 | 008254 | 1.6758 | 限大额 | 2000 元 | — |
+| 华安德国DAX | 015016 | 2.0147 | 限大额 | 1000 元 | — |
+| 汇添富全球移动互联 | 015202 | 5.1237 | 限大额 | 1000 元 | — |
+| 银华海外数字经济 | 016702 | 2.0945 | 限大额 | 1000 元 | — |
+| 华夏移动互联 | 002891 | 2.655 | 限大额 | 100 元 | — |
+| 建信新兴市场 | 018147 | 2.379 | 限大额 | 100 元 | — |
+| 国富全球科技互联 | 021842 | 6.7554 | 限大额 | 100 元 | — |
+| 建信富时100 | 008706 | 1.4941 | 限大额 | 10 元 | — |
+
+热门QDII申购偏紧：1只暂停申购（浦银安盛全球），10只限大额，额度最高10万元（华安法国CAC40）。
