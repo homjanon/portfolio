@@ -2,7 +2,7 @@
 """
 调用 LLM 生成日报：
   主模型: Agnes agnes-2.0-flash (AGNES_API_KEY)
-  次选: NVIDIA MiniMax-M3 (NVIDIA_API_KEY)
+  次选: 商汤 SenseNova DeepSeek-V4-Flash (SENSENOVA_API_KEY)
   兜底: NVIDIA Nemotron-3 Ultra 550B (NVIDIA_API_KEY)
 
 用法: python3 scripts/call_llm.py
@@ -24,10 +24,13 @@ LLM_CONFIGS = [
         "model": "agnes-2.0-flash",
     },
     {
-        "name": "NVIDIA MiniMax-M3",
-        "api_url": "https://integrate.api.nvidia.com/v1/chat/completions",
-        "api_key_env": "NVIDIA_API_KEY",
-        "model": "minimaxai/minimax-m3",
+        # 商汤日日新 DeepSeek-V4-Flash（OpenAI 兼容）
+        # 2026-09-11 替换已 EOL 的 NVIDIA MiniMax-M3（410 Gone, 2026-09-09 09:00 UTC 下线）
+        # reasoning_effort=low 轻思考：参考 douban-tracker 实测 12s→2.6s 且 content 稳定非空
+        "name": "SenseNova DeepSeek-V4-Flash",
+        "api_url": "https://token.sensenova.cn/v1/chat/completions",
+        "api_key_env": "SENSENOVA_API_KEY",
+        "model": "deepseek-v4-flash",
     },
     {
         "name": "NVIDIA Nemotron-3 Ultra 550B",
@@ -36,6 +39,10 @@ LLM_CONFIGS = [
         "model": "nvidia/nemotron-3-ultra-550b-a55b",
     },
 ]
+
+# 已知支持 reasoning_effort 的后端（轻思考：大幅降延迟，且避免长思考导致 content 为空）
+# 用白名单而非写死在函数里：将来增删模型只改此处，函数体不动
+_REASONING_EFFORT_BACKENDS = {"SenseNova DeepSeek-V4-Flash"}
 
 
 def _dedup_top20_links(text):
@@ -70,11 +77,15 @@ def _dedup_top20_links(text):
     return out
 
 
-def _call_llm(api_url, api_key, model, system, user, timeout=90, extra_headers=None):
+def _call_llm(api_url, api_key, model, system, user, timeout=90, extra_headers=None, name=None):
     """通用 OpenAI 兼容 LLM 调用器，含快速退避重试。
 
     单模型最多尝试 MAX_ATTEMPTS=2 次（失败2次即切下一个模型）；
     重试间隔短（2s/4s），请求超时 90s，避免单次挂起拖慢整体生成。
+
+    永久性错误（403 无权限 / 404 模型不存在 / 410 模型已下线）不重试，
+    立即抛出让上层切换下一模型——这类错误重试不会自愈，只会白白拖延，
+    且日志里容易被当成普通异常忽略（2026-09-11 MiniMax-M3 EOL 事故复盘）。
     """
     headers = {"Authorization": f"Bearer {api_key}"}
     if extra_headers:
@@ -88,9 +99,17 @@ def _call_llm(api_url, api_key, model, system, user, timeout=90, extra_headers=N
             {"role": "user", "content": user},
         ],
     }
+    # reasoning_effort=low：轻思考。商汤 DeepSeek-V4-Flash 实测 12s→2.6s 且内容稳定非空
+    if name in _REASONING_EFFORT_BACKENDS:
+        payload["reasoning_effort"] = "low"
+
+    # 永久性错误状态码：模型不存在/已下线/无权限，重试无意义
+    PERMANENT_CODES = {403, 404, 410}
+
     last_exc = None
     MAX_ATTEMPTS = 2  # 失败2次即切下一模型
     for attempt in range(MAX_ATTEMPTS):
+        resp = None
         try:
             resp = requests.post(
                 api_url,
@@ -98,23 +117,34 @@ def _call_llm(api_url, api_key, model, system, user, timeout=90, extra_headers=N
                 json=payload,
                 timeout=timeout,
             )
-            if resp.status_code == 200:
-                return resp.json()["choices"][0]["message"]["content"]
-            elif resp.status_code == 429:
-                wait = int(resp.headers.get("Retry-After", 2 * (attempt + 1)))
-                print(f"    429 限流，等待 {wait}s...")
-                time.sleep(wait)
-            else:
-                # 非 200：打印状态码与响应体前 600 字符，便于定位（如 401 密钥无效 / 404 模型不可用 / 模型已下线）
-                _body = resp.text[:600] if isinstance(resp.text, str) else ""
-                print(f"    ⚠️ HTTP {resp.status_code} 响应: {_body}")
-                resp.raise_for_status()
         except requests.exceptions.Timeout:
             last_exc = "Timeout"
             print(f"    ⏱ 超时 (attempt {attempt+1}/{MAX_ATTEMPTS}, 请求超时 {timeout}s)")
         except Exception as e:
+            # 网络层异常（连接失败/DNS/TLS 等）：可重试
             last_exc = str(e)
             print(f"    ⚠️ 失败: {e} (attempt {attempt+1}/{MAX_ATTEMPTS})")
+        else:
+            # ---- 请求已返回，以下分支互斥且不使用任何「可能被异常捕获顺序影响」的控制流 ----
+            if resp.status_code == 200:
+                return resp.json()["choices"][0]["message"]["content"]
+            if resp.status_code in PERMANENT_CODES:
+                # 永久性错误：不重试、不等待，立即抛出让上层切换下一模型
+                _body = resp.text[:300] if isinstance(resp.text, str) else ""
+                print(f"    🚫 模型不可用（HTTP {resp.status_code}，不重试，直接切换下一模型）: {_body}")
+                raise RuntimeError(
+                    f"模型已下线/不存在/无权限（HTTP {resp.status_code}），切换下一模型"
+                )
+            if resp.status_code == 429:
+                wait = int(resp.headers.get("Retry-After", 2 * (attempt + 1)))
+                print(f"    429 限流，等待 {wait}s...")
+                time.sleep(wait)
+                last_exc = "HTTP 429 限流"
+            else:
+                # 非 200：打印状态码与响应体前 600 字符，便于定位（如 401 密钥无效）
+                _body = resp.text[:600] if isinstance(resp.text, str) else ""
+                print(f"    ⚠️ HTTP {resp.status_code} 响应: {_body}")
+                last_exc = f"HTTP {resp.status_code}"
         # 仅非末次尝试后退避，避免最终失败后多余等待
         if attempt < MAX_ATTEMPTS - 1:
             _backoff = 2 * (attempt + 1)  # 2s, 4s
@@ -230,6 +260,7 @@ def main():
             raw = _call_llm(
                 llm["api_url"], api_key, llm["model"], system, user,
                 extra_headers=llm.get("extra_headers"),
+                name=llm["name"],
             )
         except Exception as e:
             print(f"❌ {llm['name']} 调用异常: {e}")

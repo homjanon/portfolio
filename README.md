@@ -66,7 +66,7 @@ schedule / workflow_dispatch
 
 | ① 主模型 | **Agnes agnes-2.0-flash** (`agnes-2.0-flash`) | `apihub.agnes-ai.com/v1` | `AGNES_API_KEY` |
 
-| ② 次选 | **NVIDIA MiniMax-M3** (`minimaxai/minimax-m3`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
+| ② 次选 | **商汤 SenseNova DeepSeek-V4-Flash** (`deepseek-v4-flash`) | `token.sensenova.cn/v1` | `SENSENOVA_API_KEY` |
 
 | ③ 兜底 | **NVIDIA Nemotron-3 Ultra 550B** (`nvidia/nemotron-3-ultra-550b-a55b`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
 
@@ -74,7 +74,15 @@ schedule / workflow_dispatch
 
 - 三个模型依次尝试，前一个失败（异常或输出 <500 字符判为近空）自动切换到下一个
 
-- 失败时自动重试（指数退避）
+- 失败时自动重试（指数退避）；**但 403/404/410 属永久性错误，不重试、立即切换下一模型**
+
+- 商汤后端带 `reasoning_effort=low` 轻思考（实测 12s→2.6s 且 content 稳定非空）
+
+> **模型变更记录（2026-09-11）**：次选由 NVIDIA MiniMax-M3 换为商汤 SenseNova DeepSeek-V4-Flash。原因：`minimaxai/minimax-m3` 已于 **2026-09-09 09:00 UTC** 被 NVIDIA 标记 EOL，接口返回 `410 Gone`，导致 2026-09-11 早间日报调用失败。商汤 DeepSeek-V4-Flash 已在 douban-tracker / xueqiu-tracker 等多仓实测可用。
+>
+> **⚠️ 架构提示**：原 ②③ 均走 `integrate.api.nvidia.com`，同一上游单一故障点会一次性损失两级兜底。本次替换后 ② 已跨到商汤平台，该隐患消除；③ 仍为 NVIDIA，如需进一步分散可后续再调。
+>
+> **⚠️ 改模型必读**：`scripts/md_to_script.py` 的 `_MODEL_CHAIN` 按 `name` 从 `LLM_CONFIGS` 精确匹配取值，**两处名字必须同步改**，对不上会被静默跳过（不报错，直接少一层兜底）。
 
 - **LLM 仅基于预抓取的 `data_*.json` 加工，不联网搜索、不调用工具**
 
@@ -322,7 +330,9 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 | `AGNES_API_KEY` | Agnes API Key（免费）；日报+广播稿主选 Agnes agnes-2.0-flash（`apihub.agnes-ai.com/v1`） |
 
-| `NVIDIA_API_KEY` | NVIDIA API Key；日报+广播稿次选 MiniMax-M3（`minimaxai/minimax-m3`）+ 兜底 Nemotron-3 Ultra 550B（`nvidia/nemotron-3-ultra-550b-a55b`），均 `integrate.api.nvidia.com/v1` |
+| `SENSENOVA_API_KEY` | 商汤日日新 API Key；日报+广播稿次选 DeepSeek-V4-Flash（`token.sensenova.cn/v1`），已在 douban-tracker / xueqiu-tracker 实测 |
+
+| `NVIDIA_API_KEY` | NVIDIA API Key；日报+广播稿兜底 Nemotron-3 Ultra 550B（`nvidia/nemotron-3-ultra-550b-a55b`），`integrate.api.nvidia.com/v1` |
 
 
 
@@ -346,7 +356,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 | ① 主用 | Agnes agnes-2.0-flash | `AGNES_API_KEY` | 默认主模型 |
 
-| ② 次选 | NVIDIA MiniMax-M3 | `NVIDIA_API_KEY` | 主模型异常或近空（<500字符）即切换 |
+| ② 次选 | 商汤 SenseNova DeepSeek-V4-Flash | `SENSENOVA_API_KEY` | 主模型异常或近空（<500字符）即切换 |
 
 | ③ 兜底 | NVIDIA Nemotron-3 Ultra 550B | `NVIDIA_API_KEY` | 前序模型连续报错 2 次（`_call_llm` 内部重试）仍未产出有效内容即切换 |
 
@@ -358,7 +368,9 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 
 
-> 日报与广播稿模型链相互独立、结构一致：均为 **Agnes 主 → NVIDIA MiniMax-M3 次 → NVIDIA Nemotron-3 Ultra 550B 兜**（见 `scripts/call_llm.py` 的 `LLM_CONFIGS` 与 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
+> 日报与广播稿模型链相互独立、结构一致：均为 **Agnes 主 → 商汤 SenseNova DeepSeek-V4-Flash 次 → NVIDIA Nemotron-3 Ultra 550B 兜**（见 `scripts/call_llm.py` 的 `LLM_CONFIGS` 与 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
+>
+> ⚠️ **改模型时两条链必须同步改**：`md_to_script.py` 的 `_MODEL_CHAIN` 是按 `name` 从 `LLM_CONFIGS` 中取值的，两处名字对不上会导致该模型被静默跳过（不报错、直接少一层兜底）。
 
 
 
@@ -384,7 +396,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 │   ├── trading_calendar.py                  # 三市场交易日历判定（A股/美股/港股）
 
-│   ├── call_llm.py                          # LLM 调用（含模式判定 + 模型切换 + 市场标志注入 + 输入体积护栏 + Top20 同链接去重：防 LLM 幻觉复制重复新闻，删除后重新连续编号）
+│   ├── call_llm.py                          # LLM 调用（含模式判定 + 模型切换 + 永久性错误快切 + 市场标志注入 + 输入体积护栏 + Top20 同链接去重：防 LLM 幻觉复制重复新闻，删除后重新连续编号）
 
 │   ├── md_to_reader.py                      # Markdown → HTML（朗读版；表格与文本按 MD 原始顺序交错渲染，修复 QDII 等表格错位；纯加粗行 **xxx** 识别为 h4 小标题）
 

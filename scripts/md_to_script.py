@@ -2,7 +2,7 @@
 """
 读取 report.md → 调用 LLM 转换为口语化广播稿 → 输出 script.txt
 主模型: Agnes agnes-2.0-flash (AGNES_API_KEY)
-次选: NVIDIA MiniMax-M3 (NVIDIA_API_KEY)
+次选: 商汤 SenseNova DeepSeek-V4-Flash (SENSENOVA_API_KEY)
 兜底: NVIDIA Nemotron-3 Ultra 550B (NVIDIA_API_KEY)
 LLM 失败时直接复制 report.md 作为 script.txt
 
@@ -20,10 +20,12 @@ OUTPUT_PATH = sys.argv[2] if len(sys.argv) > 2 else "script.txt"
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from call_llm import LLM_CONFIGS, _call_llm
 
-# 广播稿专用顺序：Agnes 主用 → NVIDIA MiniMax-M3 次 → NVIDIA Nemotron-3 Ultra 550B 兜（与日报一致）
+# 广播稿专用顺序：Agnes 主用 → 商汤 SenseNova DeepSeek-V4-Flash 次 → NVIDIA Nemotron-3 Ultra 550B 兜（与日报一致）
+# ⚠️ 名字必须与 call_llm.py 的 LLM_CONFIGS[].name 完全一致：
+#    _MODEL_CHAIN 按 name 精确匹配，对不上会被静默跳过（不报错，直接少一层兜底）
 _SCRIPT_ORDER = [
     "Agnes agnes-2.0-flash",
-    "NVIDIA MiniMax-M3",
+    "SenseNova DeepSeek-V4-Flash",
     "NVIDIA Nemotron-3 Ultra 550B",
 ]
 _MODEL_CHAIN = [c for name in _SCRIPT_ORDER
@@ -84,7 +86,7 @@ def _convert(system, report):
         try:
             print(f"  🔄 尝试 {cfg['name']}...")
             text = _call_llm(cfg["api_url"], api_key, cfg["model"],
-                             system, user, timeout=300)
+                             system, user, timeout=300, name=cfg["name"])
             # 去除可能的代码围栏
             if text.startswith("```"):
                 text = text.split("\n", 1)[-1] if "\n" in text else text[3:]
