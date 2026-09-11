@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
-调用 LLM 生成日报：
-  主模型: Agnes agnes-2.0-flash (AGNES_API_KEY)
-  次选: 商汤 SenseNova DeepSeek-V4-Flash (SENSENOVA_API_KEY)
-  兜底: NVIDIA Nemotron-3 Ultra 550B (NVIDIA_API_KEY)
+调用 LLM 生成日报（四层跨平台冗余链，2026-09-12 起）：
+  ① 主模型: Agnes agnes-2.0-flash (AGNES_API_KEY)
+  ② 次选: Google Gemini 3.1 Flash-Lite (GEMINI_API_KEY)
+  ③ 备选: 商汤 SenseNova DeepSeek-V4-Flash (SENSENOVA_API_KEY)
+  ④ 兜底: NVIDIA Nemotron-3 Ultra 550B (NVIDIA_API_KEY)
 
 用法: python3 scripts/call_llm.py
   读取 prompt/daily_report_prompt.txt (system) + data_*.json (user)
@@ -22,6 +23,15 @@ LLM_CONFIGS = [
         "api_url": "https://apihub.agnes-ai.com/v1/chat/completions",
         "api_key_env": "AGNES_API_KEY",
         "model": "agnes-2.0-flash",
+    },
+    {
+        # Google Gemini 3.1 Flash-Lite（走官方 OpenAI 兼容端点，无需额外 SDK）
+        # 2026-09-12 加入为第 ②层：免费层 1M 上下文 / 250K TPM，可一次吃下日报 40-60K tokens 输入
+        # （Groq 等免费层 TPM 仅 6-30K，无法胜任本项目的长输入）
+        "name": "Gemini 3.1 Flash-Lite",
+        "api_url": "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+        "api_key_env": "GEMINI_API_KEY",
+        "model": "gemini-3.1-flash-lite",
     },
     {
         # 商汤日日新 DeepSeek-V4-Flash（OpenAI 兼容）
@@ -127,7 +137,12 @@ def _call_llm(api_url, api_key, model, system, user, timeout=90, extra_headers=N
         else:
             # ---- 请求已返回，以下分支互斥且不使用任何「可能被异常捕获顺序影响」的控制流 ----
             if resp.status_code == 200:
-                return resp.json()["choices"][0]["message"]["content"]
+                # 字段兼容（2026-09-12）：部分平台（如商汤 deepseek-v4-flash）把答案放在
+                # reasoning_content / reasoning，content 可能为空字符串 → 依次回退，
+                # 避免「HTTP 200 但内容为空」被上层误判为「输出过短」而白丢一层兜底
+                _msg = resp.json()["choices"][0].get("message") or {}
+                return (_msg.get("content") or _msg.get("reasoning_content")
+                        or _msg.get("reasoning") or "")
             if resp.status_code in PERMANENT_CODES:
                 # 永久性错误：不重试、不等待，立即抛出让上层切换下一模型
                 _body = resp.text[:300] if isinstance(resp.text, str) else ""

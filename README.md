@@ -66,13 +66,15 @@ schedule / workflow_dispatch
 
 | ① 主模型 | **Agnes agnes-2.0-flash** (`agnes-2.0-flash`) | `apihub.agnes-ai.com/v1` | `AGNES_API_KEY` |
 
-| ② 次选 | **商汤 SenseNova DeepSeek-V4-Flash** (`deepseek-v4-flash`) | `token.sensenova.cn/v1` | `SENSENOVA_API_KEY` |
+| ② 次选 | **Google Gemini 3.1 Flash-Lite** (`gemini-3.1-flash-lite`) | `generativelanguage.googleapis.com/v1beta/openai` | `GEMINI_API_KEY` |
 
-| ③ 兜底 | **NVIDIA Nemotron-3 Ultra 550B** (`nvidia/nemotron-3-ultra-550b-a55b`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
+| ③ 备选 | **商汤 SenseNova DeepSeek-V4-Flash** (`deepseek-v4-flash`) | `token.sensenova.cn/v1` | `SENSENOVA_API_KEY` |
+
+| ④ 兜底 | **NVIDIA Nemotron-3 Ultra 550B** (`nvidia/nemotron-3-ultra-550b-a55b`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
 
 
 
-- 三个模型依次尝试，前一个失败（异常或输出 <500 字符判为近空）自动切换到下一个
+- 四个模型依次尝试，前一个失败（异常或输出 <500 字符判为近空）自动切换到下一个
 
 - 失败时自动重试（指数退避）；**但 403/404/410 属永久性错误，不重试、立即切换下一模型**
 
@@ -80,7 +82,9 @@ schedule / workflow_dispatch
 
 > **模型变更记录（2026-09-11）**：次选由 NVIDIA MiniMax-M3 换为商汤 SenseNova DeepSeek-V4-Flash。原因：`minimaxai/minimax-m3` 已于 **2026-09-09 09:00 UTC** 被 NVIDIA 标记 EOL，接口返回 `410 Gone`，导致 2026-09-11 早间日报调用失败。商汤 DeepSeek-V4-Flash 已在 douban-tracker / xueqiu-tracker 等多仓实测可用。
 >
-> **⚠️ 架构提示**：原 ②③ 均走 `integrate.api.nvidia.com`，同一上游单一故障点会一次性损失两级兜底。本次替换后 ② 已跨到商汤平台，该隐患消除；③ 仍为 NVIDIA，如需进一步分散可后续再调。
+> **模型变更记录（2026-09-12）**：新增 **Google Gemini 3.1 Flash-Lite** 为第 ②层（商汤顺延 ③、Nemotron 顺延 ④），形成四层跨平台链。动因：Agnes 免费层频繁 429、NVIDIA 频繁 503 过载；Gemini 免费层 1M 上下文 + 250K TPM，可一次吃下日报 40–60K tokens 输入（Groq 等免费层 TPM 仅 6–30K 无法胜任）。**同批修复**：`_call_llm` 响应字段兼容 `content or reasoning_content or reasoning`（商汤 deepseek-v4-flash 的 content 常为空、答案在 reasoning_content，此前该层实为"哑弹"）。
+
+> **⚠️ 架构提示**：四层现已跨 4 个平台（Agnes/新加坡 → Google/美国 → 商汤/国内 → NVIDIA/美国），单一平台故障或限流不再导致当日无日报。如需进一步分散，③④ 可考虑改用 OpenRouter 的 `nvidia/nemotron-3-ultra-550b:free` 等网关化路径。
 >
 > **⚠️ 改模型必读**：`scripts/md_to_script.py` 的 `_MODEL_CHAIN` 按 `name` 从 `LLM_CONFIGS` 精确匹配取值，**两处名字必须同步改**，对不上会被静默跳过（不报错，直接少一层兜底）。
 
@@ -330,6 +334,8 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 | `AGNES_API_KEY` | Agnes API Key（免费）；日报+广播稿主选 Agnes agnes-2.0-flash（`apihub.agnes-ai.com/v1`） |
 
+| `GEMINI_API_KEY` | Google AI Studio API Key（免费层）；日报+广播稿第②层 Gemini 3.1 Flash-Lite（`generativelanguage.googleapis.com/v1beta/openai`），在 AI Studio → API Keys 生成 |
+
 | `SENSENOVA_API_KEY` | 商汤日日新 API Key；日报+广播稿次选 DeepSeek-V4-Flash（`token.sensenova.cn/v1`），已在 douban-tracker / xueqiu-tracker 实测 |
 
 | `NVIDIA_API_KEY` | NVIDIA API Key；日报+广播稿兜底 Nemotron-3 Ultra 550B（`nvidia/nemotron-3-ultra-550b-a55b`），`integrate.api.nvidia.com/v1` |
@@ -341,6 +347,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 > ```yaml
 > env:
 >   AGNES_API_KEY:     ${{ secrets.AGNES_API_KEY }}
+>   GEMINI_API_KEY:    ${{ secrets.GEMINI_API_KEY }}
 >   SENSENOVA_API_KEY: ${{ secrets.SENSENOVA_API_KEY }}
 >   NVIDIA_API_KEY:    ${{ secrets.NVIDIA_API_KEY }}
 > ```
@@ -369,9 +376,11 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 | ① 主用 | Agnes agnes-2.0-flash | `AGNES_API_KEY` | 默认主模型 |
 
-| ② 次选 | 商汤 SenseNova DeepSeek-V4-Flash | `SENSENOVA_API_KEY` | 主模型异常或近空（<500字符）即切换 |
+| ② 次选 | Google Gemini 3.1 Flash-Lite | `GEMINI_API_KEY` | 主模型异常或近空（<500字符）即切换 |
 
-| ③ 兜底 | NVIDIA Nemotron-3 Ultra 550B | `NVIDIA_API_KEY` | 前序模型连续报错 2 次（`_call_llm` 内部重试）仍未产出有效内容即切换 |
+| ③ 备选 | 商汤 SenseNova DeepSeek-V4-Flash | `SENSENOVA_API_KEY` | 本层异常或近空（<500字符）即切换 |
+
+| ④ 兜底 | NVIDIA Nemotron-3 Ultra 550B | `NVIDIA_API_KEY` | 前序模型连续报错 2 次（`_call_llm` 内部重试）仍未产出有效内容即切换 |
 
 | 末路 | 复制原文 | — | 三模型全失败，直接复制 `report.md` 为 `script.txt`，避免 workflow 中断 |
 
@@ -381,7 +390,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 
 
-> 日报与广播稿模型链相互独立、结构一致：均为 **Agnes 主 → 商汤 SenseNova DeepSeek-V4-Flash 次 → NVIDIA Nemotron-3 Ultra 550B 兜**（见 `scripts/call_llm.py` 的 `LLM_CONFIGS` 与 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
+> 日报与广播稿模型链相互独立、结构一致：均为 **Agnes 主 → Gemini 3.1 Flash-Lite 次 → 商汤 SenseNova DeepSeek-V4-Flash 备 → NVIDIA Nemotron-3 Ultra 550B 兜**（见 `scripts/call_llm.py` 的 `LLM_CONFIGS` 与 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
 >
 > ⚠️ **改模型时两条链必须同步改**：`md_to_script.py` 的 `_MODEL_CHAIN` 是按 `name` 从 `LLM_CONFIGS` 中取值的，两处名字对不上会导致该模型被静默跳过（不报错、直接少一层兜底）。
 

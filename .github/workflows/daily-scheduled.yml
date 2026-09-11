@@ -64,6 +64,7 @@ jobs:
           NVIDIA_API_KEY:    ${{ secrets.NVIDIA_API_KEY }}
           AGNES_API_KEY:     ${{ secrets.AGNES_API_KEY }}
           SENSENOVA_API_KEY: ${{ secrets.SENSENOVA_API_KEY }}
+          GEMINI_API_KEY:    ${{ secrets.GEMINI_API_KEY }}
 
       - name: 转换日报为广播稿
         id: md_to_script
@@ -76,6 +77,7 @@ jobs:
           NVIDIA_API_KEY:    ${{ secrets.NVIDIA_API_KEY }}
           AGNES_API_KEY:     ${{ secrets.AGNES_API_KEY }}
           SENSENOVA_API_KEY: ${{ secrets.SENSENOVA_API_KEY }}
+          GEMINI_API_KEY:    ${{ secrets.GEMINI_API_KEY }}
 
       - name: 生成 MP3 音频
         id: md_to_mp3
