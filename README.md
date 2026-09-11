@@ -336,6 +336,19 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 
 
+> **⚠️ 新增 Secret 后必须回 workflow 注入（否则静默失效）**：仅在 Settings → Secrets and variables → Actions 添加 Secret 是**不够的**——Secret 必须在 `.github/workflows/daily-scheduled.yml` 中需要该 Key 的 step（「调用 LLM 生成日报」「转换日报为广播稿」）的 `env:` 段显式注入才会成为容器内环境变量：
+>
+> ```yaml
+> env:
+>   AGNES_API_KEY:     ${{ secrets.AGNES_API_KEY }}
+>   SENSENOVA_API_KEY: ${{ secrets.SENSENOVA_API_KEY }}
+>   NVIDIA_API_KEY:    ${{ secrets.NVIDIA_API_KEY }}
+> ```
+>
+> 漏注入时脚本 `os.environ.get()` 读不到该变量，只会打印「⏭️ 跳过 <模型>: 环境变量 XXX 未设置」并**静默落到下一层兜底**（不报错、不中断）。2026-09-12 商汤接入即踩此坑：Secret 已设置但 workflow 未注入，三层链路实际只剩 Agnes + Nemotron 两层，两者同时失败时整个日报生成失败（当日无日报产出）。**排查口诀：日志里出现「跳过 … 未设置」= workflow env 漏注入，而不是 Secret 没配。**
+
+
+
 ## 广播稿转换（md_to_script）模型链
 
 
