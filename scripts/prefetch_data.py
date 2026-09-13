@@ -9,7 +9,7 @@ v37: 市场全景A股/美股/港股改先表格后叙述(与全球/大宗/估值
   data_market_global.json   美股+全球主要指数         东财push2 + yfinance兜底
   data_forex_rate.json      汇率/商品/中美债券        akshare期货 + 中美债收益率
   data_valuation.json       中美核心指数估值+PE/PB分位 雪球蛋卷API
-  data_news.json   全球Top20新闻源    Google News RSS 美国一地(40条→去重,LLM选≤10且互不重复) + 联合早报(按缺口补齐至20)
+  data_news.json   全球Top20新闻源    Google News RSS 美国一地(20条→LLM选≤10且互不重复) + 联合早报(按缺口补齐至20)
   data_extra.json           资金面+QDII+涨停/跌停  akshare(汇率/资金流/QDII)  v29: 场外QDII纳指100/标普500可申购大额度
 
 每个文件：{"ts":"...", "ok":true/false, "data":..., "error":"..."}
@@ -803,8 +803,8 @@ def fetch_extra():
     return _ok(result)
 
 
-# ─── 数据源H/I: Top20 双源(谷歌美国主流+联合早报) + 深度观察(海外中文媒体深度池) ──────
-# 联合早报 RSS 仅抓取一次并缓存，供 Top20 联合早报块复用（深度专栏已改为独立海外四源，见数据源I）
+# ─── 数据源H/I: Top20 双源(谷歌美国主流+联合早报) + 深度观察(联合早报双源) ──────
+# 联合早报 RSS 仅抓取一次并缓存，供 Top20 联合早报块与深度观察中港台源复用（见数据源I）
 # 统一 RSSHub 实例池（全项目共用：早报/财联社/格隆汇/深度观察；按序尝试、命中即止 + 逐源状态日志）
 _RSSHUB_HOSTS = [
     "hub.slarker.me",
@@ -817,7 +817,7 @@ _RSSHUB_HOSTS = [
 _ZAOBAI_CACHE = None
 
 def _fetch_zaobao_raw():
-    """抓取联合早报·中港台即时 RSS（三实例兜底：hub.slarker.me 主 → rsshub.rssforever.com 备1 → rsshub.ktachibana.party 备2；
+    """抓取联合早报·中港台即时 RSS（统一六实例兜底；
     Top20 与 深度观察专栏复用）。顺序尝试，第一个返回**昨天或今天内容**的源即采用并停止（早6点运行，凌晨新闻少，
     前一天内容属正常，仅拦三天前旧缓存/镜像）。每个源无论成败均打印财联社风格状态日志，便于 Actions 排查。"""
     global _ZAOBAI_CACHE
@@ -834,7 +834,7 @@ def _fetch_zaobao_raw():
         except Exception:
             return None
         return None
-    # 三实例顺序兜底（同路径换主机）
+    # 统一六实例顺序兜底（同路径换主机，命中即止）
     SOURCES = [f"https://{h}/zaobao/realtime/china" for h in _RSSHUB_HOSTS]
     today_cn = datetime.now(TZ_CN).date()
     yesterday_cn = today_cn - timedelta(days=1)
@@ -843,8 +843,8 @@ def _fetch_zaobao_raw():
     for url in SOURCES:
         _host = re.sub(r"^https?://", "", url).split("/")[0]
         try:
-            # 连接 8s / 读取 25s，避免云环境对不可达主机长时间挂起
-            r = requests.get(url, headers={"User-Agent": UA}, timeout=(8, 25))
+            # 连接 8s / 读取 15s，避免云环境对不可达主机长时间挂起
+            r = requests.get(url, headers={"User-Agent": UA}, timeout=(8, 15))
             if r.status_code != 200:
                 notes.append(f"❌ {_host} → HTTP {r.status_code}")
                 continue
@@ -889,14 +889,14 @@ def _fetch_zaobao_raw():
 
 
 def _fetch_rss_other():
-    """Top20 双源：谷歌美国一地抓40条(去重,LLM精选≤10且互不重复) + 联合早报最新10条。
-    谷歌：仅美国一地(hl=en-US)一次抓40条，失败/空结果指数退避重试3次（应对间歇限流/429/非法XML）；
+    """Top20 双源：谷歌美国一地抓20条(LLM精选≤10且互不重复) + 联合早报最新10条。
+    谷歌：仅美国一地(hl=en-US)一次抓20条，失败/空结果指数退避重试3次（应对间歇限流/429/非法XML）；
     解析带 HTTP 状态检查 + lxml recover 容错；主源仍失败则兜底谷歌英国区（同 TOPIC 换 hl=en-GB&gl=GB&ceid=GB:en），
     再失败由财联社/格隆汇补位；
     去重后交给LLM精选≤10(英译中)，LLM 输出条目必须互不重复，候选不足则按实际条数输出由财联社/格隆汇补位；
     早报：联合早报中港台即时（hub.slarker.me 主 + rsshub.rssforever.com 备），取最新10条。"""
     TOPIC = "CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx6TVdZU0FtVnVHZ0pWVXlnQVAB"
-    MAX_PER = 40
+    MAX_PER = 20
 
     def _parse(url):
         r = requests.get(url, headers={"User-Agent": UA}, timeout=30)
@@ -1004,14 +1004,14 @@ def _fetch_rss_other():
     })
 
 
-# ─── 数据源I: 深度观察候选池（海外中文媒体深度池；仅精简模式） ──────
+# ─── 数据源I: 深度观察候选池（联合早报双源；仅精简模式） ──────
 def _fetch_deep_feed(path, label):
-    """抓取单个海外中文媒体深度源（统一六实例兜底、命中即止；desc 未截断）。
+    """抓取单个联合早报深度源（统一六实例兜底、命中即止；desc 未截断）。
     返回条目列表（含 source/desc_len）；全部实例失败返回 []。逐源状态日志（✅采纳/❌原因）。"""
     notes = []
     for host in _RSSHUB_HOSTS:
         try:
-            r = requests.get(f"https://{host}{path}", headers={"User-Agent": UA}, timeout=(8, 25))
+            r = requests.get(f"https://{host}{path}", headers={"User-Agent": UA}, timeout=(8, 15))
             if r.status_code != 200:
                 notes.append(f"❌ {host} → HTTP {r.status_code}")
                 continue
@@ -1052,32 +1052,32 @@ def _fetch_deep_feed(path, label):
 
 
 def _fetch_rss_deep():
-    """深度观察专栏（仅精简模式消费）：**海外中文媒体深度池**（4 源，均为完整全文）。
-    ① 法广 RFI 中文  /rfi/cn              取最新 10 条（实测 desc 均 1479 字、最长 5358 字）
-    ② 德国之声中文   /dw/news/zh          取最新  6 条（实测均 1511 字、最长 3768 字）
-    ③ 日经中文网     /nikkei/cn/index     取最新  6 条（实测均 1166 字、最长 2875 字）
-    ④ 联合早报·国际  /zaobao/realtime/world 取最新 8 条（实测均 872 字、最长 4723 字）
-    每条附 `source`/`desc_len`，desc **未截断**；由 LLM 从四源候选中选 1 篇
-    **写得最有深度、最值得当下阅读**且与 Top20 互补的，原文直出（零改写）。
-    四源均不可用才留空 → prompt 输出「今日暂停」。
-    ⚠️ 变更史：2026-09-13 上午由「联合早报中港台即时（快讯）」改为「财联社深度+早报」，
-    同日晚按用户要求移除财联社（国内媒体）、改为海外中文媒体深度池。"""
-    SOURCES = [
-        ("/rfi/cn", "法广RFI", 10),
-        ("/dw/news/zh", "德国之声", 6),
-        ("/nikkei/cn/index", "日经中文", 6),
-        ("/zaobao/realtime/world", "联合早报", 8),
-    ]
+    """深度观察专栏（仅精简模式消费）：**联合早报双源深度池**（均为完整全文）。
+    ① 联合早报·中港台即时 /zaobao/realtime/china  复用 Top20 抓取结果（_fetch_zaobao_raw 全局缓存，零重复请求），取最新 10 条
+    ② 联合早报·国际      /zaobao/realtime/world   独立抓取（统一六实例兜底、命中即止），取最新 8 条（实测均 872 字、最长 4723 字）
+    每条附 `source`/`desc_len`，desc **未截断**；由 LLM 从早报双源候选中选 1 篇
+    **写得最有深度、最值得当下阅读**且与 Top20 互补的原文直出（零改写）。
+    双源均不可用才留空 → prompt 输出「今日暂停」。"""
     items_deep = []
-    for path, label, limit in SOURCES:
-        _items = _fetch_deep_feed(path, label)
-        if _items:
-            _pick = _items[:limit]
-            items_deep.extend(_pick)
-            print(f"    [{label}] 深度候选 {len(_pick)} 条"
-                  f"（首条《{_pick[0].get('title', '')[:32]}》…）")
+    # ① 中港台：复用 Top20 抓取结果（_fetch_zaobao_raw 全局缓存，零重复请求）
+    _cn = _fetch_zaobao_raw()
+    if _cn:
+        _pick = []
+        for _it in _cn[:10]:
+            _it["desc_len"] = len(_it.get("desc", ""))  # 补充字段，供 LLM 判断篇幅
+            _pick.append(_it)
+        items_deep.extend(_pick)
+        print(f"    [联合早报·中港台] 深度候选 {len(_pick)} 条"
+              f"（复用Top20抓取，首条《{_pick[0].get('title', '')[:32]}》…）")
+    # ② 国际：独立抓取（统一六实例兜底、命中即止）
+    _world = _fetch_deep_feed("/zaobao/realtime/world", "联合早报·国际")
+    if _world:
+        _pick = _world[:8]
+        items_deep.extend(_pick)
+        print(f"    [联合早报·国际] 深度候选 {len(_pick)} 条"
+              f"（首条《{_pick[0].get('title', '')[:32]}》…）")
     if not items_deep:
-        print("    [深度观察] 四源均不可用，今日暂停")
+        print("    [深度观察] 早报双源均不可用，今日暂停")
     return _ok({"total": len(items_deep), "items_deep": items_deep})
 
 
@@ -1097,7 +1097,7 @@ def _fetch_cls_rss_once(url, source_name="财联社"):
 
     try:
         # 连接 8s / 读取 25s，避免云环境对不可达主机长时间挂起
-        r = requests.get(url, headers={"User-Agent": UA}, timeout=(8, 25))
+        r = requests.get(url, headers={"User-Agent": UA}, timeout=(8, 15))
         if r.status_code != 200:
             # 非 200（如 503 宕机页、403 屏蔽）记为失败，便于日志定位
             return [], False, f"HTTP {r.status_code}"
@@ -1155,7 +1155,7 @@ HOLDINGS_INDUSTRY_GROUPS = [
 
 def fetch_cls_zaobao():
     """财联社 + 格隆汇 RSS 抓取，合并去重后供市场全景简述 + 持仓聚焦。
-    三组（telegraph/depth/gelonghui）均走统一六实例池兜底（命中即止）；格隆汇另以 rss.injahow.cn
+    两组（telegraph/gelonghui）均走统一六实例池兜底（命中即止）；格隆汇另以 rss.injahow.cn
     （.cn 专属实例，实测仅支持格隆汇路由）为首选；某组全部实例失败则该组留空（不整体中断）。
     合并后按 title+link 去重，再严格按「北京时间当天」筛选，供 LLM 提炼 A股/港股/美股/全球/大宗 各板块一句话简述 + 持仓聚焦新闻驱动；
     每条新闻按 HOLDINGS_INDUSTRY_GROUPS 预匹配行业标签 industry_match（供持仓聚焦仅选命中行业的条目）。
@@ -1175,10 +1175,9 @@ def fetch_cls_zaobao():
     def _norm_title(t):
         """标题归一化：去标点/空白，仅留字母数字与汉字后小写，用于跨源去重。"""
         return re.sub(r"[^\w\u4e00-\u9fff]+", "", t or "").lower()
-    # 财联社双组 + 格隆汇单组（主备）；组名→来源标记（用于合并区分与当天过滤容错）
+    # 财联社单组 + 格隆汇单组（主备）；组名→来源标记（用于合并区分与当天过滤容错）
     GROUPS = {
         "telegraph": ("财联社", [f"https://{h}/cls/telegraph" for h in _RSSHUB_HOSTS]),
-        "depth": ("财联社", [f"https://{h}/cls/depth/1000" for h in _RSSHUB_HOSTS]),
         # 格隆汇：rss.injahow.cn（.cn 专属实例，实测仅支持格隆汇路由）为首选，失败后走统一池
         "gelonghui": ("格隆汇", ["https://rss.injahow.cn/gelonghui/live"]
                       + [f"https://{h}/gelonghui/live" for h in _RSSHUB_HOSTS]),
@@ -1504,7 +1503,7 @@ def main():
         # 精简模式：三市场均休市，仅执行 RSS 新闻模块
         modules = [
             ("data_news.json", _fetch_rss_other, "全球Top20 RSS(美国主流+联合早报)"),
-            ("data_deep.json", _fetch_rss_deep, "深度观察源(海外中文媒体深度池)"),
+            ("data_deep.json", _fetch_rss_deep, "深度观察源(联合早报双源深度池)"),
         ]
         print(f"📋 精简模式（三市场均休市）: 仅执行 {len(modules)} 个模块（纯新闻）")
     else:
