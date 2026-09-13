@@ -804,7 +804,7 @@ def fetch_extra():
 
 
 # ─── 数据源H/I: Top20 双源(谷歌美国主流+联合早报) + 深度观察(联合早报原文) ──────
-# 联合早报 RSS 仅抓取一次并缓存，Top20 后10 与 深度专栏(数据源I) 复用
+# 联合早报 RSS 仅抓取一次并缓存，供 Top20 联合早报块复用（深度专栏已改为独立海外四源，见数据源I）
 _ZAOBAI_CACHE = None
 
 def _fetch_zaobao_raw():
@@ -999,22 +999,27 @@ def _fetch_rss_other():
     })
 
 
-# ─── 数据源I: 深度观察候选池（财联社「深度」主源 + 联合早报辅源；仅精简模式） ──────
-def _fetch_cls_depth_raw():
-    """抓取财联社「深度」栏目 RSS（真·分析/特稿长文，desc 未截断）。两实例兜底：
-    hub.slarker.me 主 → rsshub.rssforever.com 备；每源成败打印财联社风格状态日志。
-    返回条目列表（含 source/desc_len），全部失败返回空列表。"""
-    SOURCES = [
-        "https://hub.slarker.me/cls/depth/1000",
-        "https://rsshub.rssforever.com/cls/depth/1000",
-    ]
+# ─── 数据源I: 深度观察候选池（海外中文媒体深度池；仅精简模式） ──────
+# 实例池（按序尝试、命中即止；逐源状态日志便于 Actions 排查）
+_DEEP_HOSTS = [
+    "hub.slarker.me",
+    "rsshub.rssforever.com",
+    "rsshub.umzzz.com",
+    "rsshub.isrss.com",
+    "rsshub.ktachibana.party",
+    "rsshub-balancer.virworks.moe",
+]
+
+
+def _fetch_deep_feed(path, label):
+    """抓取单个海外中文媒体深度源（六实例兜底、命中即止；desc 未截断）。
+    返回条目列表（含 source/desc_len）；全部实例失败返回 []。逐源状态日志（✅采纳/❌原因）。"""
     notes = []
-    for url in SOURCES:
-        _host = re.sub(r"^https?://", "", url).split("/")[0]
+    for host in _DEEP_HOSTS:
         try:
-            r = requests.get(url, headers={"User-Agent": UA}, timeout=(8, 25))
+            r = requests.get(f"https://{host}{path}", headers={"User-Agent": UA}, timeout=(8, 25))
             if r.status_code != 200:
-                notes.append(f"❌ {_host} → HTTP {r.status_code}")
+                notes.append(f"❌ {host} → HTTP {r.status_code}")
                 continue
             r.encoding = "utf-8"
             root = ET.fromstring(r.content)
@@ -1036,60 +1041,51 @@ def _fetch_cls_depth_raw():
                     "title": _title,
                     "desc": _desc,                 # 未截断：深度观察需原文直出全文
                     "desc_len": len(_desc),
-                    "source": "财联社",
+                    "source": label,
                     "link": _f.get("link", ""),
                     "pubDate": _f.get("pubDate", ""),
                 })
             if not out:
-                notes.append(f"❌ {_host} → 200但无<item>(疑似HTML错误页)")
+                notes.append(f"❌ {host} → 200但无<item>(疑似HTML错误页)")
                 continue
-            notes.append(f"✅ {_host} → OK({len(out)}条) 采纳")
-            print("    [财联社深度RSS] 源状态:", " | ".join(notes))
+            notes.append(f"✅ {host} → OK({len(out)}条) 采纳")
+            print(f"    [{label}] 源状态:", " | ".join(notes))
             return out
         except Exception as e:
-            notes.append(f"❌ {_host} → {str(e)[:40]}")
-    print("    [财联社深度RSS] 源状态:", " | ".join(notes))
+            notes.append(f"❌ {host} → {str(e)[:40]}")
+    print(f"    [{label}] 源状态:", " | ".join(notes))
     return []
 
 
 def _fetch_rss_deep():
-    """深度观察专栏（仅精简模式消费）：**双源候选池**，以「深度文章」为选篇第一标准。
-
-    ① 主源·财联社「深度」栏目（真·分析/特稿长文，desc 平均 ~1900 字、最长 7000+ 字）：
-       feed 时间倒序取最新 20 条，再按 desc 长度降序取前 10（兼顾新鲜与深度），desc 未截断。
-    ② 辅源·联合早报·中港台即时 RSS 第 11 条起取 5 条（中港台视角补充；该源多为即时新闻，
-       平均仅 ~527 字，仅作角度补充与主源失效时的兜底）。
-    每条候选附 `source` 与 `desc_len` 供 LLM 判断深度性；LLM 选 1 篇原文直出
-    （深度性优先 → 排除纯事件通报/快讯 → 与 Top20 互补 → 最值得读）。
-    ⚠️ 2026-09-13 改：原先只用联合早报即时源，选出「民警殉职」类讣告快讯、毫无深度；
-    改为财联社深度栏目作主源。两源均不可用才留空 → prompt 输出「今日暂停」。"""
+    """深度观察专栏（仅精简模式消费）：**海外中文媒体深度池**（4 源，均为完整全文）。
+    ① 法广 RFI 中文  /rfi/cn              取最新 10 条（实测 desc 均 1479 字、最长 5358 字）
+    ② 德国之声中文   /dw/news/zh          取最新  6 条（实测均 1511 字、最长 3768 字）
+    ③ 日经中文网     /nikkei/cn/index     取最新  6 条（实测均 1166 字、最长 2875 字）
+    ④ 联合早报·国际  /zaobao/realtime/world 取最新 8 条（实测均 872 字、最长 4723 字）
+    每条附 `source`/`desc_len`，desc **未截断**；由 LLM 从四源候选中选 1 篇
+    **写得最有深度、最值得当下阅读**且与 Top20 互补的，原文直出（零改写）。
+    四源均不可用才留空 → prompt 输出「今日暂停」。
+    ⚠️ 变更史：2026-09-13 上午由「联合早报中港台即时（快讯）」改为「财联社深度+早报」，
+    同日晚按用户要求移除财联社（国内媒体）、改为海外中文媒体深度池。"""
+    SOURCES = [
+        ("/rfi/cn", "法广RFI", 10),
+        ("/dw/news/zh", "德国之声", 6),
+        ("/nikkei/cn/index", "日经中文", 6),
+        ("/zaobao/realtime/world", "联合早报", 8),
+    ]
     items_deep = []
-
-    # ① 主源：财联社「深度」栏目
-    _cls = _fetch_cls_depth_raw()
-    if _cls:
-        _recent = _cls[:20]                                    # feed 时间倒序 → 最新 20 条
-        _recent.sort(key=lambda x: x.get("desc_len", 0), reverse=True)
-        _pick_cls = _recent[:10]                               # 其中篇幅最长的 10 条
-        items_deep.extend(_pick_cls)
-        print(f"    [财联社深度] 候选 {len(_cls)} 条 → 最新20中取长度前 {len(_pick_cls)} 条"
-              f"（最长 {_pick_cls[0].get('desc_len', 0)} 字《{_pick_cls[0].get('title', '')[:30]}》）")
-
-    # ② 辅源：联合早报（浅拷贝并补 desc_len，避免污染 Top20 复用的缓存条目）
-    _zb_all = _fetch_zaobao_raw()
-    _pick_zb = []
-    for _it in (_zb_all[10:] or _zb_all)[:5]:
-        _c = dict(_it)
-        _c["desc_len"] = len(_c.get("desc", ""))
-        _pick_zb.append(_c)
-    if _pick_zb:
-        items_deep.extend(_pick_zb)
-        print(f"    [联合早报] 深度观察辅源候选 {len(_pick_zb)} 条"
-              f"（首条《{_pick_zb[0].get('title', '')[:30]}》）")
-
+    for path, label, limit in SOURCES:
+        _items = _fetch_deep_feed(path, label)
+        if _items:
+            _pick = _items[:limit]
+            items_deep.extend(_pick)
+            print(f"    [{label}] 深度候选 {len(_pick)} 条"
+                  f"（首条《{_pick[0].get('title', '')[:32]}》…）")
     if not items_deep:
-        print("    [深度观察] 两源均不可用，今日暂停")
+        print("    [深度观察] 四源均不可用，今日暂停")
     return _ok({"total": len(items_deep), "items_deep": items_deep})
+
 
 # ─── 数据源J: 财联社 RSS（多实例兜底：hub.slarker.me 主 + 多个 RSSHub 公共实例备用）────
 def _fetch_cls_rss_once(url, source_name="财联社"):
@@ -1521,7 +1517,7 @@ def main():
         # 精简模式：三市场均休市，仅执行 RSS 新闻模块
         modules = [
             ("data_news.json", _fetch_rss_other, "全球Top20 RSS(美国主流+联合早报)"),
-            ("data_deep.json", _fetch_rss_deep, "深度观察源(联合早报原文)"),
+            ("data_deep.json", _fetch_rss_deep, "深度观察源(海外中文媒体深度池)"),
         ]
         print(f"📋 精简模式（三市场均休市）: 仅执行 {len(modules)} 个模块（纯新闻）")
     else:
