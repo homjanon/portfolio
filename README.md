@@ -122,7 +122,7 @@ schedule / workflow_dispatch
 
 | `A股开市 OR 美股开市 OR 港股开市` | **完整模式** | 按开市市场逐模块抓取（休市市场 JSON 不生成）+ 始终抓 RSS 新闻 |
 
-| 三市场均休市（通常周日/周一） | **精简模式** | 仅抓 `data_news.json`（Top20：谷歌美国40条→去重,LLM精选≤10仅谷歌来源不补位 + 联合早报最新10,统一六实例兜底；两块独立互不补位、不强制凑满20）+ `data_deep.json`（深度观察专栏·**海外中文媒体深度池**：法广RFI中文 + 德国之声中文 + 日经中文网 + 联合早报·国际，各取最新若干条（desc 均为完整全文），**LLM 选 1 篇写得最有深度、最值得阅读且与 Top20 互补的原文直出**，四源均不可用则今日暂停） |
+| 三市场均休市（通常周日/周一） | **精简模式** | 仅抓 `data_news.json`（Top20：谷歌美国20条→LLM精选≤10仅谷歌来源不补位 + 联合早报最新10,统一六实例兜底；两块独立互不补位、不强制凑满20）+ `data_deep.json`（深度观察专栏·**联合早报双源**：中港台即时+国际，各取最新若干条（desc 均为完整全文），**LLM 选 1 篇写得最有深度、最值得阅读且与 Top20 互补的原文直出**，双源均不可用则今日暂停） |
 
 
 
@@ -156,15 +156,15 @@ schedule / workflow_dispatch
 
 | QDII监测+USD/CNH汇率 | 腾讯API+东方财富(净值)+新浪外汇(fx_susdcnh离岸即期市场价，买卖中值；→yfinance USDCNH=X兜底→外汇局中间价末位兜底并标注非市场价，场外QDII：纳指/标普各取5只(含QDII-FOF) + 热门全球QDII固定清单11只，均不限购置顶) | `a_open` | — |
 
-| **全球 Top20 新闻** | **Google News 美国一地（40条→去重,LLM精选≤10且互不重复，仅谷歌来源、不补位；解析带 HTTP 状态检查 + lxml recover 容错，429/非法XML不整份失败；失败/空结果指数退避重试3次，仍失败兜底谷歌英国区 hl=en-GB&gl=GB&ceid=GB:en，同 TOPIC 换地域参数）+ 联合早报 RSS（统一六实例兜底，最新10）；两块独立互不补位、不强制凑满20，选不出则少输出** | 始终抓 | `data_news.json` + `data_cls_zaobao.json` |
+| **全球 Top20 新闻** | **Google News 美国一地（20条→LLM精选≤10且互不重复，仅谷歌来源、不补位；解析带 HTTP 状态检查 + lxml recover 容错，429/非法XML不整份失败；失败/空结果指数退避重试3次，仍失败兜底谷歌英国区 hl=en-GB&gl=GB&ceid=GB:en，同 TOPIC 换地域参数）+ 联合早报 RSS（统一六实例兜底，最新10）；两块独立互不补位、不强制凑满20，选不出则少输出** | 始终抓 | `data_news.json` + `data_cls_zaobao.json` |
 
-| **深度观察专栏（仅精简模式）** | **海外中文媒体深度池（2026-09-13 定稿）**：4 源 —— **法广 RFI 中文** `/rfi/cn`（10 条，实测均 1479/最长 5358 字）、**德国之声中文** `/dw/news/zh`（6 条，均 1511/最长 3768 字）、**日经中文网** `/nikkei/cn/index`（6 条，均 1166/最长 2875 字）、**联合早报·国际** `/zaobao/realtime/world`（8 条，均 872/最长 4723 字）；desc 均为**完整全文**。实例池 6 个按序兜底（命中即止 + 逐源状态日志）：`hub.slarker.me → rsshub.rssforever.com → rsshub.umzzz.com → rsshub.isrss.com → rsshub.ktachibana.party → rsshub-balancer.virworks.moe`。每条附 `source`/`desc_len`、desc **未截断**；**LLM 从四源候选中选 1 篇写得最有深度、最值得阅读且与 Top20 互补的原文直出**（零改写；排除纯事件通报/快讯/汇总；无达标深度文则降级选话题性最强的一篇；长文不设篇幅上限）。变更史：原「联合早报中港台即时」（平均 527 字快讯）→ 2026-09-13 曾短暂接入财联社深度 → 同日按用户要求**移除财联社（国内媒体）**、改为海外中文媒体深度池。实测不可用：WSJ/NYT/BBC 中文（源站反爬 503）、FT 中文（无路由）、半岛 `/aljazeera/cn`（实为阿语） | 仅精简模式 | `data_deep.json`（`items_deep` 数组） |
+| **深度观察专栏（仅精简模式）** | **联合早报双源深度池**：**联合早报·中港台即时** `/zaobao/realtime/china`（复用 Top20 抓取，最新 10 条）+ **联合早报·国际** `/zaobao/realtime/world`（独立抓取，统一六实例兜底，最新 8 条）；desc 均为**完整全文**（未截断）。每条附 `source`/`desc_len`；**LLM 从早报双源候选中选 1 篇写得最有深度、最值得阅读且与 Top20 互补的原文直出**（零改写；排除纯事件通报/快讯/汇总；无达标深度文则降级选话题性最强的一篇；长文不设篇幅上限）；双源均不可用则今日暂停 | 仅精简模式 | `data_deep.json`（`items_deep` 数组） |
 
-| **市场全景各板块一段简述（50–100字）+ 持仓聚焦（按持仓行业关键词预匹配 `industry_match`，仅命中行业的新闻入选，核心/监督池一视同仁）** | **财联社 + 格隆汇 RSS 合并抓取（财联社 telegraph/depth 双组与格隆汇均走统一六实例兜底（命中即止），格隆汇另以 rss.injahow.cn（.cn 专属实例，实测仅支持格隆汇）为首选；合并后标题归一化去重、北京当天筛选，格隆汇缺 pubDate 视为当日保留；LLM 优先采用标题含板块关键词的条目直接复用收盘情况，否则综合最相关若干条写成 50–100 字一段、丰富该市场最新情况）** | 完整模式 | 无当天新闻则留空（不编造） |
+| **市场全景各板块一段简述（50–100字）+ 持仓聚焦（按持仓行业关键词预匹配 `industry_match`，仅命中行业的新闻入选，核心/监督池一视同仁）** | **财联社 + 格隆汇 RSS 合并抓取（财联社 telegraph + 格隆汇两组均走统一六实例兜底（命中即止），格隆汇另以 rss.injahow.cn（.cn 专属实例，实测仅支持格隆汇）为首选；合并后标题归一化去重、北京当天筛选，格隆汇缺 pubDate 视为当日保留；LLM 优先采用标题含板块关键词的条目直接复用收盘情况，否则综合最相关若干条写成 50–100 字一段、丰富该市场最新情况）** | 完整模式 | 无当天新闻则留空（不编造） |
 
 
 
-> **统一 RSSHub 实例池（2026-09-13 起，全项目共用）**：所有 RSS 源（Top20 双源、深度观察、财联社、格隆汇、联合早报）均按以下 6 实例顺序兜底、**命中即止**，并打印逐源状态日志（✅采纳/❌失败原因）：
+> **统一 RSSHub 实例池（全项目共用）**：所有 RSS 源（Top20 双源、深度观察、财联社、格隆汇、联合早报）均按以下 6 实例顺序兜底、**命中即止**，并打印逐源状态日志（✅采纳/❌失败原因）：
 > `hub.slarker.me → rsshub.rssforever.com → rsshub.umzzz.com → rsshub.isrss.com → rsshub.ktachibana.party → rsshub-balancer.virworks.moe`
 > 例外：**格隆汇**以 `rss.injahow.cn`（.cn 专属实例，实测仅支持格隆汇路由）为**首选**，失败后再走上述统一池；财联社路由在 rss.injahow.cn 与 rsshub.umzzz.com 上不可用（503/超时，实测），由池内其余实例覆盖。单实例超时已收紧为 (8s连接, 15s读取)。
 
@@ -256,7 +256,7 @@ schedule / workflow_dispatch
 
 
 
-- 数据源：`data_news.json` 的 `items_google`（Google News 美国一地一次抓 40 条，已去重）。
+- 数据源：`data_news.json` 的 `items_google`（Google News 美国一地一次抓 20 条）。
 
 - LLM 从中**精选 ≤10 条不同角度的重要新闻**（英译中），每条标题/链接必须互不重复（同一事件的多篇报道只选一篇）。
 
@@ -270,7 +270,7 @@ schedule / workflow_dispatch
 
 
 
-- 数据源：`data_news.json` 的 `items_zaobao`（联合早报·中港台即时 RSS 最新 10 条，统一六实例兜底）。
+- 数据源：`data_news.json` 的 `items_zaobao`（联合早报·中港台即时 RSS 最新 10 条，统一六实例兜底；**同时供深度观察专栏复用同一份抓取**）。
 
 - 中文直用，无需翻译；固定为 Top20 次块（中港台视角）。
 
@@ -416,7 +416,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 ├── scripts/
 
-│   ├── prefetch_data.py                     # 数据抓取（市场全景+估值+QDII/ETF+新闻；新闻：Google News 美国单地40条(失败指数退避重试3次)→去重,LLM精选≤10且互不重复仅谷歌来源不补位 + 联合早报最新10(统一六实例兜底,命中即止+逐源状态日志；源校验放宽为昨天或今天内容) 双源 Top20，两块独立互不补位；data_deep.json 深度观察·海外中文媒体深度池(仅精简模式抓取):法广RFI中文/rfi/cn(10条)+德国之声中文/dw/news/zh(6条)+日经中文网/nikkei/cn/index(6条)+联合早报国际/zaobao/realtime/world(8条),六实例兜底(hub.slarker.me→rsshub.rssforever.com→rsshub.umzzz.com→rsshub.isrss.com→rsshub.ktachibana.party→rsshub-balancer.virworks.moe,命中即止+逐源状态日志),desc均为完整全文(未截断)并附source/desc_len;LLM从四源选1篇最有深度/最值得读且与Top20互补的原文直出(零改写,长文不设上限,无达标深度文则降级选话题性最强一篇),四源均不可用则今日暂停；data_cls_zaobao.json 取财联社+格隆汇 RSS 合并(财联社 telegraph/depth 双组与格隆汇均走统一六实例兜底(格隆汇以 rss.injahow.cn 为 cn 专属首选)；合并标题归一化去重+北京当天筛选,格隆汇缺pubDate保留)当天新闻供市场全景各板块一段简述（50–100字）+持仓聚焦(按持仓行业关键词预匹配industry_match)；data_holdings.json 取腾讯API持仓核心标的行情(价格+涨跌幅)+监督池供「持仓动态与聚焦」板块；已停抓 data_fund/data_industry（LLM 输入 JSON 由 11→9）
+│   ├── prefetch_data.py                     # 数据抓取（市场全景+估值+QDII/ETF+新闻；新闻：Google News 美国单地20条(失败指数退避重试3次)→LLM精选≤10且互不重复仅谷歌来源不补位 + 联合早报最新10(统一六实例兜底,命中即止+逐源状态日志；源校验放宽为昨天或今天内容) 双源 Top20，两块独立互不补位；data_deep.json 深度观察·联合早报双源(仅精简模式抓取):中港台即时/zaobao/realtime/china(复用Top20抓取,最新10条)+国际/zaobao/realtime/world(独立抓取,统一六实例兜底,最新8条),desc均为完整全文(未截断)并附source/desc_len;LLM从早报双源选1篇最有深度/最值得读且与Top20互补的原文直出(零改写,长文不设上限,无达标深度文则降级选话题性最强一篇),双源均不可用则今日暂停；data_cls_zaobao.json 取财联社+格隆汇 RSS 合并(财联社 telegraph 与格隆汇均走统一六实例兜底(格隆汇以 rss.injahow.cn 为 cn 专属首选)；合并标题归一化去重+北京当天筛选,格隆汇缺pubDate保留)当天新闻供市场全景各板块一段简述（50–100字）+持仓聚焦(按持仓行业关键词预匹配industry_match)；data_holdings.json 取腾讯API持仓核心标的行情(价格+涨跌幅)+监督池供「持仓动态与聚焦」板块；已停抓 data_fund/data_industry（LLM 输入 JSON 由 11→9）
 
 │   ├── market_date_resolver.py             # 按市场解析业务日期 + 北京时间收盘标注（MarketDateResolver）
 
@@ -457,4 +457,3 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 
 - GitHub Pages：`https://homjanon.github.io/portfolio/`
-
