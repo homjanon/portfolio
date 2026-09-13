@@ -803,8 +803,17 @@ def fetch_extra():
     return _ok(result)
 
 
-# ─── 数据源H/I: Top20 双源(谷歌美国主流+联合早报) + 深度观察(联合早报原文) ──────
+# ─── 数据源H/I: Top20 双源(谷歌美国主流+联合早报) + 深度观察(海外中文媒体深度池) ──────
 # 联合早报 RSS 仅抓取一次并缓存，供 Top20 联合早报块复用（深度专栏已改为独立海外四源，见数据源I）
+# 统一 RSSHub 实例池（全项目共用：早报/财联社/格隆汇/深度观察；按序尝试、命中即止 + 逐源状态日志）
+_RSSHUB_HOSTS = [
+    "hub.slarker.me",
+    "rsshub.rssforever.com",
+    "rsshub.umzzz.com",
+    "rsshub.isrss.com",
+    "rsshub.ktachibana.party",
+    "rsshub-balancer.virworks.moe",
+]
 _ZAOBAI_CACHE = None
 
 def _fetch_zaobao_raw():
@@ -826,11 +835,7 @@ def _fetch_zaobao_raw():
             return None
         return None
     # 三实例顺序兜底（同路径换主机）
-    SOURCES = [
-        "https://hub.slarker.me/zaobao/realtime/china",
-        "https://rsshub.rssforever.com/zaobao/realtime/china",
-        "https://rsshub.ktachibana.party/zaobao/realtime/china",
-    ]
+    SOURCES = [f"https://{h}/zaobao/realtime/china" for h in _RSSHUB_HOSTS]
     today_cn = datetime.now(TZ_CN).date()
     yesterday_cn = today_cn - timedelta(days=1)
     notes = []      # 每源状态记录（无论成败）
@@ -1000,22 +1005,11 @@ def _fetch_rss_other():
 
 
 # ─── 数据源I: 深度观察候选池（海外中文媒体深度池；仅精简模式） ──────
-# 实例池（按序尝试、命中即止；逐源状态日志便于 Actions 排查）
-_DEEP_HOSTS = [
-    "hub.slarker.me",
-    "rsshub.rssforever.com",
-    "rsshub.umzzz.com",
-    "rsshub.isrss.com",
-    "rsshub.ktachibana.party",
-    "rsshub-balancer.virworks.moe",
-]
-
-
 def _fetch_deep_feed(path, label):
-    """抓取单个海外中文媒体深度源（六实例兜底、命中即止；desc 未截断）。
+    """抓取单个海外中文媒体深度源（统一六实例兜底、命中即止；desc 未截断）。
     返回条目列表（含 source/desc_len）；全部实例失败返回 []。逐源状态日志（✅采纳/❌原因）。"""
     notes = []
-    for host in _DEEP_HOSTS:
+    for host in _RSSHUB_HOSTS:
         try:
             r = requests.get(f"https://{host}{path}", headers={"User-Agent": UA}, timeout=(8, 25))
             if r.status_code != 200:
@@ -1161,8 +1155,8 @@ HOLDINGS_INDUSTRY_GROUPS = [
 
 def fetch_cls_zaobao():
     """财联社 + 格隆汇 RSS 抓取，合并去重后供市场全景简述 + 持仓聚焦。
-    两组独立抓取后合并：telegraph 组优先 hub.slarker.me/cls/telegraph，失败切 rsshub.rssforever.com/cls/telegraph，
-    depth/1000 组同理；组内命中即止（hub 主 → rsshub 备），某组两级均失败则该组留空（不整体中断）。
+    三组（telegraph/depth/gelonghui）均走统一六实例池兜底（命中即止）；格隆汇另以 rss.injahow.cn
+    （.cn 专属实例，实测仅支持格隆汇路由）为首选；某组全部实例失败则该组留空（不整体中断）。
     合并后按 title+link 去重，再严格按「北京时间当天」筛选，供 LLM 提炼 A股/港股/美股/全球/大宗 各板块一句话简述 + 持仓聚焦新闻驱动；
     每条新闻按 HOLDINGS_INDUSTRY_GROUPS 预匹配行业标签 industry_match（供持仓聚焦仅选命中行业的条目）。
     两组均不可达才返回 _fail（日报对应板块简述自动留空，不崩）。每个源成败与原因打印到日志便于定位。"""
@@ -1183,18 +1177,11 @@ def fetch_cls_zaobao():
         return re.sub(r"[^\w\u4e00-\u9fff]+", "", t or "").lower()
     # 财联社双组 + 格隆汇单组（主备）；组名→来源标记（用于合并区分与当天过滤容错）
     GROUPS = {
-        "telegraph": ("财联社", [
-            "https://hub.slarker.me/cls/telegraph",
-            "https://rsshub.rssforever.com/cls/telegraph",
-        ]),
-        "depth": ("财联社", [
-            "https://hub.slarker.me/cls/depth/1000",
-            "https://rsshub.rssforever.com/cls/depth/1000",
-        ]),
-        "gelonghui": ("格隆汇", [
-            "https://rss.injahow.cn/gelonghui/live",
-            "https://rsshub.rssforever.com/gelonghui/live",
-        ]),
+        "telegraph": ("财联社", [f"https://{h}/cls/telegraph" for h in _RSSHUB_HOSTS]),
+        "depth": ("财联社", [f"https://{h}/cls/depth/1000" for h in _RSSHUB_HOSTS]),
+        # 格隆汇：rss.injahow.cn（.cn 专属实例，实测仅支持格隆汇路由）为首选，失败后走统一池
+        "gelonghui": ("格隆汇", ["https://rss.injahow.cn/gelonghui/live"]
+                      + [f"https://{h}/gelonghui/live" for h in _RSSHUB_HOSTS]),
     }
     MAX_ITEMS = 80  # 保护：当天条目过多时仅取最新 80 条
     today_cn = datetime.now(TZ_CN).date()
