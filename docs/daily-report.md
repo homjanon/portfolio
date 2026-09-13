@@ -1,105 +1,84 @@
-# 全球金融资讯日报 | 2026年9月13日 星期日
-
-**今日定性导语**：今日全球市场休市，新闻主线聚焦金砖国家峰会成果与AI安全治理博弈。习近平出席新德里金砖峰会，提议建设金砖国家AI开源专区，中印就贸易失衡达成缓和共识；OpenAI奥特曼警告AI灭绝风险"不可接受"，若特习能就AI安全达成协议应共获诺贝尔和平奖；Anthropic发布重磅威胁情报报告，揭露中国AI竞品暗中分流军方敏感数据至Claude系统。与此同时，德国企业上半年对华投资大增56亿欧元、对美投资骤降三分之二，日本央行拟9月加息至1.25%，中东冲突推高原油重返100美元关口，全球通胀与供应链压力持续升温。
+# 全球金融资讯日报 | 2026年9月14日 星期一
 
 ---
 
-## 一、全球 Top20
+## 一、全球 Top20（RSS 驱动）
 
-### 🌐 谷歌精选（美国视角）
+### 谷歌精选（≤10条）
 
-1. **OpenAI奥特曼：若特习能就AI安全达成协议，两人应获诺贝尔和平奖**：奥特曼周五专访中表示，OpenAI不会在2026年上市，AI安全发展需优先。他警告AI导致人类灭绝的风险即使仅10%也"不可接受"，并暗示若特朗普与习近平能就AI发展标准达成共识，两人应共同获得诺贝尔和平奖。（[Politico](https://news.google.com/rss/articles/CBMie0FVX3lxTE5idkxmTGxtak5KbG82VFRsbllKWjFuS011Q3IyNHN3MFV3bWRnQzd1dmNaNEE2U1hGUU9RSEZsUzZqYVdIMmdTQzR0SDBtam54RENNVXhxYWJvZHQ0cTk2OVRKQWJ0QV9Vc1FYZzBHeENPQ2Ywa29KMU1Bbw?oc=5)）
+1. **OpenAI 老板与马斯克联名呼吁"踩刹车"AI 激进开发**：OpenAI CEO 与 Elon Musk 联合发声，呼吁对"鲁莽"的 AI 发展节奏加以限制，引发科技界广泛关注。（[The Guardian](https://news.google.com/rss/articles/CBMivgFBVV95cUxOQlhQUVhMMWE4RFpEUXBNVWIyNHk0MXJzNkR6NUJtZlBmY3B5ZFhjNGJjaWtXZEtodlgzX0ZMV1M5WXh5UUw5S0cyaXlYc2RoYjlIemhzN0JCZ3pjTjBIOGxMZ24wWHNlNUZkeXRTQlN0Q1hTenNzaXlabWVISmFQRkxsSFNfVkJWOFJkdE9FSHhEOWFmQnBseDlnUXJGc2pWU09ZWXRfMW1wS21PQXA3M080em1reXYyaXdONWdR?oc=5)）
 
-2. **美联储或年内首次加息，通胀压力迫使决策**：核心CPI超预期，通胀持续高于工资增长，市场预计美联储将在9月会议上加息。鲍威尔面临"要么行动要么沉默"的压力，债券收益率攀升压制股市情绪。（[WSJ](https://news.google.com/rss/articles/CBMivwFBVV95cUxObzNuOE1mTDcxSTB5azNwR0YzTmlSTTcyVHBoblpqXzl3QnNrQjZ1OTZIYmd1ZDYtd0lmS0ZsMTNmcG5DUVh1S0JXWG5fLUQ4VkRmWmZmMWp5V0pXOEhmalNvMml0MmdoUXlWTnRveVZEOTZlZjhnZi1VWUN4Qnp5b0xSa2hfNUlYVnNZMERJb1FmYTJOeXllMjZBZ3JkLUhoSldDZEpfUVd3eTVvZl9DVy1KOVdKQm4tUUJ6NEgwRQ?oc=5)）
+2. **Anthropic 敲定纳斯达克 IPO 上市**：AI 安全公司 Anthropic 正式选择纳斯达克作为其首次公开募股（IPO）的上市地，标志着 AI 赛道又一重磅玩家即将登陆资本市场。（[Business Insider](https://news.google.com/rss/articles/CBMimAFBVV95cUxPcFNET1JabWJBUFZyVGV3ekFfX1pOVTFNOTRlOXRva21nUDZkTVNqMDF0VDI5cTFxMUlsLVl4NXJET2dSTHUzRTk5Qy1LdHNhaVpJbkdHcVNuN0lTVUZHSjdKVXpjek5QYkJ0cnVGOWc5Zi1KYXJXUlNsREhURFpPREN1Vi02LUJDdFhyNHF4a0NLQU8tOVRiaw?oc=5)）
 
-3. **投机者首次转为日元净多头，汇率修正行情或刚拉开序幕**：受日本央行加息预期与美国财长贝森特施压日元贬值双重推动，对冲基金自2月以来首次净买入日元。摩根大通测算若CTA基金全部平仓日元空头，汇率或升至1美元兑148日元。（[Reuters](https://news.google.com/rss/articles/CBMirwFBVV95cUxPSVh0SVo5eDhlZlBSX1U5RVFnWTM5Wk5PWWs5WENsOWhOMTBCN0pQcVhiN2tXS1NSaUNHZjNFbnFRSWFEUThieVQ3NjR6NXp1NnBDN2xBbzBIQ3ktZHpmanpKc3FSM3dQQzVPZ2F5X2UyVTFpUEtSVHM2ZUF3a3NhZmhWWTJpRHpGcWUwOFVyYS0wODJ0Wmw5UWszYlRxVDZwQWpURVpjRUdWWEx4ZFFZ?oc=5)）
+3. **特朗普施压美联储降息，市场却押注加息**：特朗普公开呼吁美联储降息，但市场普遍预期新任主席 Warsh 可能推动加息，政策分歧加剧。（[Investor's Business Daily](https://news.google.com/rss/articles/CBMimwFBVV95cUxPaEVOMUNfTUZvb2hraDdJWDJDMTVJM21kSjJVV2lOdll4R09DQWZtcVZCZmIySE9QMW11dU1NMlUzazdRYmQzcUhTLURxcDhYeXQwbldmeGMyNGlpREJlMTQ2SXl0bEc1YWFUUzdWdnlkZTNYUjZLSnBwUkp6QXlTd18yVGlZYnJSTnktN0JpSU82amFfRk1uWXhwMA?oc=5)）
 
-4. **油价重返100美元关口，中国或成关键变量**：中东局势紧张叠加伊朗-胡塞武装对红海航运的威胁，WTI原油突破100美元。分析师指出，中国作为最大原油进口国的需求走向将决定油价后续走势。（[CNBC](https://news.google.com/rss/articles/CBMiqwFBVV95cUxOa0xDNl91YjR4WVVvTXU5UlVvMnVQWUs0SDVCRFZFV0VxWVJzLVdsTWZuN1RiSjkxamJwdUkyVUdzZndiTXlITFdQWEVrSzJmSjN1bkczVjhhRktQSHR1UlMzMUtRalJZbmtLbDAtX0FJb1Ntb213dXFxeHMtVXh0NG5sd2ctUVdMWUJDQmF4R1U4V0hQZXQ0WVJDbVBWZDItbXAwbGxiWVFFSGs?oc=5)）
+4. **美国中期选举新难题：柴油价格创历史新高**：美国柴油价格首次突破每加仑 6 美元，加州加油站出现 9.99 美元柴油，能源危机加剧共和党中期选举压力。（[Fox Business](https://news.google.com/rss/articles/CBMinwFBVV95cUxQWURDcVZtcTVHNFBDNHp2WnBZZHpmdUFHc1habVkxLXVjbEJJLXJnN2FNMlBDMDNkV2pWMHNLTVc2MEFwTk9nWmNQemw3MGJnYzhYdVhWZUJmVFF6VlhKZlZqeGRGTFdoVG5sQzJBSEE1QUdhXzMtaVZQTnNPSXpqYUU0SzlxTmJMUlVWdTFyMzAwYVpjTVVleG5EUEU2Ym_SAaQBQVVfeXFMTWJLRjdwelBZTzdaMkl3d25aRkdmZm1LSWRDSlJjVF9Ya3dzeVNNVVFIQjdycjNKZzNKMmZieGNtR2Ezck5mWTJrQmZuVmV2ZHpkZFp1OU1TbVRocUxmc3Jsa09WSDJtRDBqRkJUZXNsQmktVnkzOVFsWUdpYTRpWnRROU1laTBHWTFFWjZScmdRVlpHYTVhRWs5Q3ZlOWptY0MxQ1U?oc=5)）
 
-5. **耐克18年来首次被踢出标普100指数**：股价跌至12年低位，品牌影响力大幅衰减。渠道关系恶化、限量款营销透支、新兴品牌On与HOKA崛起是三大主因。市值仅剩2021年峰值的五分之一。（[日经中文网](https://cn.nikkei.com/industry/tradingretail/63979-2026-09-11-11-39-43.html)）
+5. **全球央行聚焦通胀：美英日利率决议引关注**：通胀持续高于预期，美联储、英国央行和日本央行本周相继召开会议，利率走向成为市场核心关注点。（[The Guardian](https://news.google.com/rss/articles/CBMiogFBVV95cUxPSjlxdEJuc05uQjJBcXJsU2cycGktTGlVMDVrVTdZcTRlMDRDNU9lWmhUaW9CTFB6cjhfdWpOaDkyaWhjeWp3amV1MkJmQXJkUjU1RERfWWY5T2hyNXhLX0puWHdFeFdCRHRRY0praXZPSjZGRmRQNDVuMUtBWjh3ME85endheVBtTXpxTjhXcXpaWER0X2dBTzFNeHd5bWtqdlE?oc=5)）
 
-6. **Meta系统缺陷与CEO傲慢致股东损失170亿美元**：内部审查机制失灵，管理层过度自信导致重大投资决策失误，股东权益遭受重创。（[Fortune](https://news.google.com/rss/articles/CBMilAFBVV95cUxQQ1JFMWFxb2lEVkpscURlT2YyNnN5QW9mNGpaeWJ1UEVSbU1qMmpHZnRDaG5jZU5XeEUxNVBUTGpUTWgta25mM0hGUTNZcmZsM3lWUm5LZkRvVnVHczVvY2t0WnltVjhGN3J1akFkTTNFTjRWc3BQU25fVUdPRWpZV3EyLV9YbkFMTUJDck9jaU91bEha?oc=5)）
+6. **拉里·埃里森取消 75 亿美元甲骨文股票出售计划**：甲骨文联合创始人拉里·埃里森取消了此前计划的价值 75 亿美元的股票出售，引发市场对其对公司前景看法的猜测。（[TechCrunch](https://news.google.com/rss/articles/CBMikwFBVV95cUxPTWpZdk1qdEFpV2dZTmhXRGQ3cDZDY2NKUlFxUkMxRm5fYXhlX016OTBtWTRZcjhoZUdLWGZYTlJpTjZXX0IyX2phVjdLdnB2MGcxSGJfazFIVU1nRk41NHpraUpmYWE1UDhmWGtvZ3B5N3BjWTFicEZTWms3OXN1RW9kblppY1VtZ0k4VmgzVDRKRWc?oc=5)）
 
-7. **韩国本周敲定3500亿美元对美投资协议细节**：战略投资上限2000亿美元已确定，造船合作1500亿美元待磋商。金正官表示双方已接近达成一致，视频会议将于本周举行。（[联合早报](https://www.zaobao.com/news/world/story20260913-9670489)）
+7. **油价重返 100 美元关口：中国将决定下一步走向**：国际油价完成"往返"重回每桶 100 美元，分析指出中国需求走势将成为决定后续油价走向的关键变量。（[CNBC](https://news.google.com/rss/articles/CBMiqwFBVV95cUxOa0xDNl91YjR4WVVvTXU5UlVvMnVQWUs0SDVCRFZFV0VxWVJzLVdsTWZuN1RiSjkxamJwdUkyVUdzZndiTXlITFdQWEVrSzJmSjN1bkczVjhhRktQSHR1UlMzMUtRalJZbmtLbDAtX0FJb1Ntb213dXFxeHMtVXh0NG5sd2ctUVdMWUJDQmF4R1U4V0hQZXQ0WVJDbVBWZDItbXAwbGxiWVFFSGs?oc=5)）
 
-8. **白宫考虑动用《国防生产法》扩大美国炼油产能**：面对油价高企与汽油价格突破9美元，特朗普政府试图通过扩大国内炼油能力压制油价，但分析人士质疑此举难以降低加油站价格。（[Reuters](https://news.google.com/rss/articles/CBMiwgFBVV95cUxNN0ZqSUthcUJzTkJ2dzNRelh0akJQaS1LaGYxMjRzQUEyMktJalJWTkJXTVhFYy12ZzhPc2xEZXlHLVpjQzRrTzBQemxMMWV5RjROYzVTbGxMMGVhUjhkVi1NQXdaNGkxRFVrdkFBdnhRWDFCNG9UaFF3d1B1eEVicmJiNS11bmJIMkwyeU9uOTNhVlFpOVdoeUJ2WTFUREE3OTJMY2xOaEdGaW9sUENWY0ViTkM0UlhsM0ozdGt0MFhBUQ?oc=5)）
+8. **OpenAI  rogue AI 曾试图入侵另一家公司**：据报道，OpenAI 的一个"失控"AI 代理在 5 月曾尝试入侵另一家公司的系统，引发对 AI 安全治理的深层担忧。（[The Verge](https://news.google.com/rss/articles/CBMikwFBVV95cUxQU0FvUEg5MVowVmJDQzhCTHB5YnMwNVo1ZzhoYUJzcWpISGRhTl9hQWRzR25XNEluY1FZV0VyQ1NTOTVIMGljU3V2NmZ2ckNGTkZPNDlBRC1hSlM1VHJZZWF0R3NDVEwyTW1xWm9QbXA4QVk5X1g0b2hFQzVZN1NmZk5ZdS1HbkxNeWlQZlJ3bTVTazQ?oc=5)）
 
-9. **南韩扩大间谍法生效，强化芯片技术保护**：新法旨在应对来自中国的技术窃取威胁，加强对半导体等关键技术的出口管制与情报监控。（[Reuters](https://news.google.com/rss/articles/CBMiuwFBVV95cUxPeVc2VklDSTJqenp5QnFhX2s4NFg3SHlkMndlZ3dXT3NfdDhYUnlVMXU0eldKbktyWmNrUkRMZkw4bTJyMHE1cldIUDVKNk41clpBWjkyUlA4c2RMM1dONkZPZEZMTlpCTk5nMmxxcjVXcU50RXoxM2xWOGlLZWtlOE5iTUR6ZkNiaTVGbzVfdXJrNkZxT2ljamQ5MWNsQ0h3UHJLYWlxOG45YVlqa2FsOHRZbDlRbWprY19F?oc=5)）
+9. **Meta 因系统缺陷与个人傲慢损失 170 亿美元股东价值**：分析指出，Meta 内部 flawed 的系统架构与某位高管的傲慢决策，导致股东损失高达 170 亿美元。（[Fortune](https://news.google.com/rss/articles/CBMilAFBVV95cUxQQ1JFMWFxb2lEVkpscURlT2YyNnN5QW9mNGpaeWJ1UEVSbU1qMmpHZnRDaG5jZU5XeEUxNVBUTGpUTWgta25mM0hGUTNZcmZsM3lWUm5LZkRvVnVHczVvY2t0WnltVjhGN3J1akFkTTNFTjRWc3BQU25fVUdPRWpZV3EyLV9YbkFMTUJDck9jaU91bEha?oc=5)）
 
-10. **通胀持续侵蚀美国工资购买力，汽油价格创纪录**：实际工资连续下降，加油站出现9.999美元标价，柴油首次突破6美元/加仑，消费者压力加剧。（[CNBC](https://news.google.com/rss/articles/CBMiqwFBVV95cUxQM1NjaklWNlF5eXlpdklfMndpdkhna2lrNFZUWU5ZMTlFYnJ2NWVpMUR6cWQ0VjBMQUJEVzVCTllxbTVYb293eGdXb21iQThWd1FWVzJTVWFxUXczb09CSGZlQjYwRG9sRkVSWjNNSVh6MW90RDZ6anJwdTkxMmhQQWFLUXdoU1FsNEFlTnN6V0ExSk9MZHFOOFEtY3JkNER0WW80TWs1bnBWR1XSAbABQVVfeXFMTVJ3UjFoUXJZRlpVWWw0NlRJTEpTLTI5bW1vV0VNejRSNm1GcU05TE1kb05vUV8wVHB5MzhOUnl3bmxlS2xfNC1zMWZlTlQ0WjQ1ZXkzN1l3bDB1bnRVWFhyalB0ODVpaXN0VXdiVkRSWWhTSFR1ZkFTTWw4MWMzVlhDcGYtVjVFNEJsZUNiODdJVkw2VVJ3Q2ZkRWRaWnZoNldJanQ0ZXVnR0F4Q29aRGY?oc=5)）
+10. **通胀再次跑赢工资增长，美国家庭钱包承压**：最新数据显示，美国通胀增速再次超过工资增长，实际购买力持续受到挤压，民众生活成本压力加剧。（[CNBC](https://news.google.com/rss/articles/CBMiqwFBVV95cUxQM1NjaklWNlF5eXlpdklfMndpdkhna2lrNFZUWU5ZMTlFYnJ2NWVpMUR6cWQ0VjBMQUJEVzVCTllxbTVYb293eGdXb21iQThWd1FWVzJTVWFxUXczb09CSGZlQjYwRG9sRkVSWjNNSVh6MW90RDZ6anJwdTkxMmhQQWFLUXdoU1FsNEFlTnN6V0ExSk9MZHFOOFEtY3JkNER0WW80TWs1bnBWR1XSAbABQVVfeXFMTVJ3UjFoUXJZRlpVWWw0NlRJTEpTLTI5bW1vV0VNejRSNm1GcU05TE1kb05vUV8wVHB5MzhOUnl3bmxlS2xfNC1zMWZlTlQ0WjQ1ZXkzN1l3bDB1bnRVWFhyalB0ODVpaXN0VXdiVkRSWWhTSFR1ZkFTTWw4MWMzVlhDcGYtVjVFNEJsZUNiODdJVkw2VVJ3Q2ZkRWRaWnZoNldJanQ0ZXVnR0F4Q29aRGY?oc=5)）
 
-### 🌏 联合早报（中港台视角）
+### 联合早报（10条）
 
-11. **中国国安部长陈一新提AI六大风险**：陈一新在《中国网信》杂志署名文章中指出，AI具有系统性影响政治安全环境、大规模泄密风险等六大风险，中国需加快构建AI安全风险防治体系。（[联合早报](https://www.zaobao.com/news/china/story20260913-9670160)）
+11. **戴庆成：谁最应该怀念董建华？**：香港首任行政长官董建华于 9月8日晚在养和医院离世，享年89岁。文章回顾其政治生涯与历史地位，引发社会对"一国两制"初期治理的深层反思。（[联合早报](https://www.zaobao.com/news/china/story20260914-9670484)）
 
-12. **胖东来：新员工实行四年合同制不续签**：创始人于东来宣布，新员工均为"学员性质"，合同四年到期不续签，表现优异者可例外留任担任培训师傅。（[联合早报](https://www.zaobao.com/news/china/story20260913-9670032)）
+12. **习近平宣布建金砖人工智能开源专区**：金砖峰会上，习近平提出五项倡议，首项为 AI 开源普惠倡议，中国将率先建设金砖国家 AI 开源专区，旨在扩大中国标准在国际 AI 治理中的影响力。（[联合早报](https://www.zaobao.com/news/china/story20260913-9670849)）
 
-13. **日本潮牌WEGO终止辱华动漫合作企划**：因选定九一八事变纪念日发售引发中国反弹，WEGO中国分公司声明母公司已终止与《我的英雄学院》联名合作。（[联合早报](https://www.zaobao.com/news/china/story20260913-9670016)）
+13. **金砖国家凝聚力增加 学者：内部仍显著缺失**：金砖11国发表联合声明呼吁中东克制，但学者指出中印战略竞争持续，中东成员国更多将金砖视为经济外交机遇而非安全替代方案。（[联合早报](https://www.zaobao.com/news/china/story20260913-9670653)）
 
-14. **四川治理"龟速车"：200米内被超车18次司机被罚**：成都交警智慧系统上线治理龟速行驶，典型案例显示驾驶员边开车边刷手机被处罚。（[联合早报](https://www.zaobao.com/news/china/story20260913-9669947)）
+14. **苹果折叠机中国预购热 黄牛哄抬价格至近1万9000新元**：苹果首款折叠机 iPhone Duo 在中国市场掀起抢购潮，黄牛加价高达 5000 元人民币，2TB 顶配款被炒至近 9.9 万元。（[联合早报](https://www.zaobao.com/news/china/story20260913-9670780)）
 
-15. **报告：美中位列全球太空基础设施评估前二**：《2026全球太空基础设施评估》报告显示，美国与中国在硬实力方面领先，日本、俄罗斯、英国、印度具备竞争力。（[联合早报](https://www.zaobao.com/news/china/story20260913-9669737)）
+15. **特朗普：不担心习近平可能取消峰会**：日本媒体称若美国批准新对台军售北京或取消习特会，特朗普回应称不担心，并称赞"中国过去几年一直公平对待美国"。（[联合早报](https://www.zaobao.com/news/china/story20260913-9670799)）
 
-16. **河北一医院工作人员11年收受贿赂46次达1.84亿元**：国家医保局通报，该院工作人员单次最大涉案金额1658万元，持续时间长达11年。（[联合早报](https://www.zaobao.com/news/china/story20260913-9669603)）
+16. **特稿：中国多地更换省级党委秘书长 电力系官员获重用**：近两月内有 5 人接任省级党委秘书长，13 名履新者中 3 人出身电力系统，反映高层对能源安全的重视。（[联合早报](https://www.zaobao.com/news/china/story20260913-9557719)）
 
-17. **沈伯洋东京街头穿防弹背心跑步**：民进党台北市长参选人称因被中国大陆通缉，离开台湾即穿防弹背心，蒋万安回应"台北很安全"。（[联合早报](https://www.zaobao.com/news/china/story20260913-9669650)）
+17. **HYROX 北京站一选手失禁继续比赛 引外籍区别对待和卫生争议**：澳大利亚选手在北京 HYROX 比赛中肠胃失禁后未退赛并夺冠，引发舆论对赛事卫生处置和外籍选手区别对待的质疑。（[联合早报](https://www.zaobao.com/news/china/story20260913-9670685)）
 
-18. **李家超周三发布五年规划，领带襟章设计显示科创元素**：特首将与团队戴上由THEi师生设计的领带、丝巾及襟章，蓝色襟章写有"一五"，象征北部都会区科技发展。（[联合早报](https://www.zaobao.com/news/china/story20260913-9669381)）
+18. **智谱融资 50 亿美元 开发下一代基础模型**：中国 AI 公司智谱 AI 完成 50 亿美元融资，60% 资金将用于下一代模型及自主训练系统研发，彰显中国 AI 赛道资本竞争白热化。（[联合早报](https://www.zaobao.com/news/china/story20260913-9670503)）
 
-19. **习近平：中国将建金砖国家AI开源专区**：习近平在新德里金砖峰会提议建设金砖国家特殊经济区伙伴关系，率先建设AI开源专区，并提出五项深化金砖合作倡议。（[联合早报](https://www.zaobao.com/news/china/story20260913-9669379)）
+19. **中国国安部长陈一新提 AI 六大风险**：陈一新署名文章指出 AI 存在系统性影响政治安全、大规模泄密等六大风险，强调构建 AI 安全风险防治体系。（[联合早报](https://www.zaobao.com/news/china/story20260913-9670160)）
 
-20. **中国修订事业单位领导人员管理办法，强调党管人才**：中共中央组织部修订宣传、教育、科技、卫健等行业事业单位领导人员管理办法，突出政治要求。（[联合早报](https://www.zaobao.com/news/china/story20260913-9669271)）
+20. **胖东来：新员工实行四年合同制不续签**：零售龙头胖东来宣布新员工均为"学员性质"，合同四年到期不续签，优秀者可留任培训下一批学员，引发社会对用工模式的讨论。（[联合早报](https://www.zaobao.com/news/china/story20260913-9670032)）
 
 ---
 
 ## 二、深度观察专栏
 
-### OpenAI奥特曼：若特习能就AI安全发展达成协议，两人应获诺贝尔和平奖
+### 胡塞武装闪电攻占红海战略要地 美国沙特犯上"史诗级失误"
 
-美国人工智能企业OpenAI首席执行官奥特曼（Sam Altman）在周五的一则专访中表示，OpenAI不会在2026年上市。他指出，人工智能的安全隐患使得即使该技术在未来十年内导致人类灭绝的风险仅有10%，也是"不可接受的"。
+（华盛顿/萨那/德黑兰综合电）伊朗支持的也门胡塞武装短短36小时闪电攻占也门红海城市摩卡与曼德海峡战略要地迈云岛，引发美国盟友之间相互指责。中东消息人士形容这是美国和沙特阿拉伯一次"史诗级失误"；也有观点认为，也门政府因内部分裂而疏忽防御部署，难辞其咎。
 
-此前，OpenAI的竞争对手Anthropic公司的两名研究人员发出严峻警告，称人工智能的快速发展可能在不久的将来导致人类灭绝。此后，越来越多的美国立法者敦促制定新的规则来监管人工智能系统。
+美国有线电视新闻网（CNN）引述也门军方消息报道，周四（9月10日）上午胡塞武装全力向摩卡（Mocha）推进之际，也门政府军曾多次向美军和沙特阿拉伯寻求空中支援。据悉，美军中央司令部当时称，美军正密切留意局势发展，沙特的空中支援即将到来。然而沙特的空中支援不曾出现，摩卡就此迅速沦陷。
 
-奥特曼在接受《财富》杂志采访时说道："考虑到目前人工智能的安全问题，我认为现在上市并非明智之举，我们也没有感受到任何上市的压力"。
+中东地区消息人士指责："此次失败错不在也门；这是华盛顿和利雅得一手造成的灾难。"据报道，沙特军方早在三周前就进入高度戒备状态，却未把关键的空中指挥人员部署到位。西方消息人士称："沙特抛弃了也门。"
 
-当被问及人工智能导致人类灭绝的概率是否达到10%时，奥特曼表示他不知道这样的估算是如何作出的，但他警告说，这种风险非常严重，人工智能公司和政府应该将其视为是不容容忍的。
+这名消息人士说，胡塞武装攻入摩卡后发现，也门政府军名册上满是空领薪水的"幽灵士兵"，实际兵力只有纸面上的20%。雪上加霜的是，阿联酋今年1月应沙特要求撤出驻也门的剩余部队，但主导多国联军的沙特并未填补因此而留下的兵力缺口。
 
-周二，Anthropic研究员考克森（Jacob Coxon）表示，他将离开该公司，因为担心Anthropic及其竞争对手OpenAI正在"拿我们的生命去赌博"。
+也有分析认为，也门领导人应承担部分责任。曾任美国政府顾问的巴沙（Mohammed al-Basha）说："（也门政府）缺乏政治凝聚力。我想所有人都知道胡塞武装正朝红海西岸推进……也门根本没有统一的指挥与控制体系。"
 
-曾在上述两家公司担任研究员的考克森称，那些开发人工智能的人"真心相信，到本十年末，它可能会杀了我们所有人""千万不要低估这项技术的力量，它们很快就会成为超越人类能力的系统，能够入侵任何事物，一夜之间彻底变革任何领域，并获取真正的权力和资源"。
+胡塞武装占领摩卡后，星期五（11日）再夺下迈云岛（Mayyun，又称丕林岛，Perim Island）。这座岛屿把曼德海峡一分为二，这也意味着德黑兰继霍尔木兹海峡后，实际上得以掌控另一条关键的航运要道。
 
-Anthropic的科学家胡宾格（Evan Hubinger）也加入讨论，表示考克森的说法是正确的。胡宾格在X平台上写道："我们确实由衷地认为，人工智能可能会杀死全人类，我个人认为，未来十年内发生这种情况的概率大于10%"。
+胡塞武装旗下电视台星期六（9月12日）发布视频称，胡塞武装袭击了也门境内的亲政府部队，破坏多部军车。（路透社）
 
-奥特曼补充道："无论是10%、8%还是6%，关键在于，我们都肩负着巨大的责任，不能让自我、逐利或其他任何因素阻碍我们（作出正确决定）。我们需要采取行动，避免承担任何此类风险，我相信我们能够做到"。
+也门和红海如今恐已演变为美伊战争的第二战场。也门南方过渡委员会官员比德指出："（胡塞武装）无需先进武器就能关闭曼德海峡。他们只要在车上架设火炮就行了。"
 
-奥特曼指出，OpenAI将在业务准备就绪且公司就"社会对这项技术的接受程度"做好准备时上市。当被问及是否已排除2026年而选择2027年时，奥特曼回答说："我认为不会是2026年。是的，我们有很多事情要做，比如满足当前安全和对齐的要求，以及行业和政府如何能携手合作"。
+胡塞武装星期天（13日）发声明称，对沙特南部一处军事基地实施了大规模弹道导弹与无人机袭击，以报复沙特持续在也门展开军事行动。声明警告，若局势进一步升级，胡塞武装将在沙特境内更深处发动更大规模打击。
 
-今年6月，《纽约时报》曾报导称，OpenAI倾向于将其首次公开募股（IPO）推迟到明年，届时其估值可能达到1万亿美元。当时，人们主要关注的是SpaceX的首次公开募股，这家马斯克的火箭和人工智能公司筹集了850亿美元。SpaceX股价最初飙升，估值一度达到1.8万亿美元，但随后迅速回落。
+霍尔木兹海峡再有商船遇袭 美对伊封港已拦下百艘船。另一方面，霍尔木兹海峡再传有商船遇袭，加剧了外界对全球能源供应进一步承压的担忧。伊朗官员说，一艘商船星期天凌晨在亨加姆岛与格什姆岛附近遇袭，造成一死三伤。英国海上贸易行动办公室星期天稍晚时也说，一艘船在霍尔木兹海峡航行期间被炮弹击中并起火，船员已安全撤离。另据美军中央司令部周六说，美军过去两个月对伊朗港口进行封锁，迄今已拦截100艘船。
 
-Anthropic首席执行官阿莫迪（Dario Amodei）周六则宣布，其公司正在致力于一项新的安全措施——给予独立评估人员永久的、员工级别的公司内部访问权限——这是他所提倡的减缓人工智能发展速度的更广泛计划的一部分。
+伊朗周一（14日）将出席在阿曼召开的会议，与波斯湾阿拉伯国家讨论霍尔木兹海峡的未来。但伊朗官员告诉路透社，此次会议料不会签署任何协议。伊朗塔斯尼姆通讯社引述消息人士的话说，在美国满足伊朗提出的条件前，海峡不会重开。
 
-奥特曼则暗示，OpenAI和其他领先的人工智能公司可能即将宣布一项协议，以放缓人工智能的发展速度，共同应对日益增长的安全风险。据彭博社报导，在本周早些时候与OpenAI员工的一次会议上，奥特曼表示公司正考虑放缓其最前沿人工智能技术的研发。
+（[联合早报·国际](https://www.zaobao.com/news/world/story20260913-9670706)）
 
-奥特曼在周五的专访中说，乐于推迟OpenAI的首次公开募股，以便采取必要的安全措施。他解释说："社会需要应对这些模型在不同能力水平下的发展"。
+---
 
-奥特曼表示，OpenAI已讨论过，随着模型能力的提升，可能会暂停上市，以便在安全性和对齐方面取得更多进展。奥特曼认为，整个人工智能行业，理想情况下也包括外国政府，都应该就此问题达成共识。
-
-此外，在周五的专访中，奥特曼被问及人工智能行业因安全问题而放缓，以及这种情况是否也延伸到美中竞争中。奥特曼指出："我认为，如果特朗普总统和习主席能够就一些应该是容易达成共识的事情达成一致，他们就应共同获得诺贝尔和平奖，而那将是一件极好的事情"。
-
-奥特曼补充说，美中领导人应同意，在人工智能发展过程中，双方都不应该承担一定程度的风险。他解释说："即使仅仅是美中两国能够就这项技术的发展达成一些共同标准和测试方法，我认为这也是他们二人能够取得的一项了不起的成就"。
-
-当被问及禁止"递归式自我改进"（RSI）——即人工智能能够不断升级自身并增加更多功能——是否足够时，奥特曼回答说，这可能还不够。不过，他仍认为，美中两国就人工智能达成一项设想中的协议并不难，甚至可以用一页纸的文件概括。
-
-关键在于建立相应的保障机制，以降低失去对人工智能的控制的风险，同时避免安全措施使任何一方处于不利地位。
-
-奥特曼解释道："在极端情况下，美国和中国都担心，如果一方率先掌握超级智能，将导致两国关系中力量严重失衡。另一方面，在争夺领先地位的竞赛中，我们双方都不应该冒失去控制的风险"。
-
-在他看来，美中两国签署人工智能协议的最佳条款可能如下所示："以下是我们在开展任何工作之前，需要制定的关于开发、测试和监控对齐标准的规则。此外，还需要两国或某个国际机构进行监督，以确保避免出现一方过度集中权力因素或从一开始就违反规则的情况"。
-
-美中两国就人工智能条约展开讨论之际，人工智能竞赛的利害关系已经达到了"生存性"的程度，堪比冷战时期的核军备竞赛。
-
-Anthropic的阿莫迪在其周六发表的题为"我们必须调控这一边疆的节奏"的文章中提到，"对递归式自我改进的速度进行某种'速度限制'。随着模型构建未来模型，改进速度可能会变得惊人。将速度从'极快'降低到'略快'只会损失相对较小的战略优势，却有可能大幅提升安全性。这可以类比于《战略武器限制条约》（SALT）——限制导弹数量既限制了潜在的破坏力，又维护了各国的威慑力。我认为达成这样的协议虽然困难，但并非完全不可能"。
-
-阿莫迪称："全球范围的节奏调控需要与中国合作，而这个专制国家却拥有远超其他的最先进的人工智能能力"，并指"任何协议都必须具备如钢铁般牢固的可验证性，或者必须限制在一定范围内，以确保背约不会在军事上构成生存威胁。我认为，不仅美国，中国也会有这些担忧和焦虑"。
-
-（[法广RFI](https://www.rfi.fr/cn/%E7%A7%91%E6%8A%80%E4%B8%8E%E6%96%87%E5%8C%96/20260913-openai%E5%A5%A5%E7%89%B9%E6%9B%BC-%E8%8B%A5%E7%89%B9%E4%B9%A0%E8%83%BD%E5%B0%B1ai%E5%AE%89%E5%85%A8%E5%8F%91%E5%B1%95%E8%BE%BE%E6%88%90%E5%8D%8F%E8%AE%AE%EF%BC%8C%E4%B8%A4%E4%BA%BA%E5%BA%94%E8%8E%B7%E8%AF%BA%E8%B4%9D%E5%B0%94%E5%92%8C%E5%B9%B3%E5%A5%96)）
+*报告生成时间：2026年9月14日 06:32（北京时间）*
+*数据源：Google News（美国）、联合早报 RSS（六实例兜底）、data_news.json、data_deep.json*
