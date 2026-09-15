@@ -12,7 +12,7 @@
 
 ```
 
-schedule / workflow_dispatch
+Cloudflare qdii-dispatch → workflow_dispatch
 
         ↓
 
