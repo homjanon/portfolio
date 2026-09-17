@@ -64,7 +64,7 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 |--------|------|----------|---------|
 
-| ① 主模型 | **Agnes agnes-2.0-flash** (`agnes-2.0-flash`) | `apihub.agnes-ai.com/v1` | `AGNES_API_KEY` |
+| ① 主模型 | **Agnes agnes-2.5-flash** (`agnes-2.5-flash`) | `apihub.agnes-ai.com/v1` | `AGNES_API_KEY` |
 
 | ② 次选 | **Google Gemini 3.1 Flash-Lite** (`gemini-3.1-flash-lite`) | `generativelanguage.googleapis.com/v1beta/openai` | `GEMINI_API_KEY` |
 
@@ -86,6 +86,9 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 > **⚠️ 架构提示**：四层现已跨 4 个平台（Agnes/新加坡 → Google/美国 → 商汤/国内 → NVIDIA/美国），单一平台故障或限流不再导致当日无日报。如需进一步分散，③④ 可考虑改用 OpenRouter 的 `nvidia/nemotron-3-ultra-550b:free` 等网关化路径。
 >
+> **模型变更记录（2026-09-17）**：① 主模型由 **`agnes-2.0-flash` 升级为 `agnes-2.5-flash`**。动因：Agnes 官方已将 `agnes-2.0-flash` 标记为「**已废弃**」（官方原文：「已废弃，不再建议用于新的 API 接入」，并提示「请勿继续将已废弃的 agnes-2.0-flash 作为兼容回退」），建议迁移至 `agnes-2.5-flash`。
+> 2.5 与 2.0 **接入参数完全兼容**（Base URL / endpoint / 请求头 / messages 格式 / 流式响应 / 工具调用 / 图像 URL 输入全部不变），**迁移只需替换模型名称**。能力规格：上下文 512K、最大输出 65.5K，现价输入/输出均 `$0 / 1M tokens`（刊例价 $0.05 / $0.15）。
+> **未选 `agnes-3.0-flash` 的原因**：① 官方价格栏为「价格另行公布」，无公开刊例价可跟踪（2.5 有），多个平台标为 Preview；② 3.0 是**推理模型**，会先消耗输出 tokens 生成内部思考，若 max_tokens 不足可能导致可见输出为空；③ 官方定位偏「Agent 编程与工具调用」，与本项目「长文本日报写作」场景不对口。后续如需升级可再评估。
 > **⚠️ 改模型必读**：`scripts/md_to_script.py` 的 `_MODEL_CHAIN` 按 `name` 从 `LLM_CONFIGS` 精确匹配取值，**两处名字必须同步改**，对不上会被静默跳过（不报错，直接少一层兜底）。
 
 - **LLM 仅基于预抓取的 `data_*.json` 加工，不联网搜索、不调用工具**
@@ -336,7 +339,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 |--------|------|
 
-| `AGNES_API_KEY` | Agnes API Key（免费）；日报+广播稿主选 Agnes agnes-2.0-flash（`apihub.agnes-ai.com/v1`） |
+| `AGNES_API_KEY` | Agnes API Key（免费）；日报+广播稿主选 Agnes agnes-2.5-flash（`apihub.agnes-ai.com/v1`） |
 
 | `GEMINI_API_KEY` | Google AI Studio API Key（免费层）；日报+广播稿第②层 Gemini 3.1 Flash-Lite（`generativelanguage.googleapis.com/v1beta/openai`），在 AI Studio → API Keys 生成 |
 
@@ -378,7 +381,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 |--------|------|------|------|
 
-| ① 主用 | Agnes agnes-2.0-flash | `AGNES_API_KEY` | 默认主模型 |
+| ① 主用 | Agnes agnes-2.5-flash | `AGNES_API_KEY` | 默认主模型 |
 
 | ② 次选 | Google Gemini 3.1 Flash-Lite | `GEMINI_API_KEY` | 主模型异常或近空（<500字符）即切换 |
 

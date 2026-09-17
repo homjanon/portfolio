@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 调用 LLM 生成日报（四层跨平台冗余链，2026-09-12 起）：
-  ① 主模型: Agnes agnes-2.0-flash (AGNES_API_KEY)
+  ① 主模型: Agnes agnes-2.5-flash (AGNES_API_KEY)
   ② 次选: Google Gemini 3.1 Flash-Lite (GEMINI_API_KEY)
   ③ 备选: 商汤 SenseNova DeepSeek-V4-Flash (SENSENOVA_API_KEY)
   ④ 兜底: NVIDIA Nemotron-3 Ultra 550B (NVIDIA_API_KEY)
@@ -19,10 +19,15 @@ BEIJING = timezone(timedelta(hours=8))
 _WEEKDAYS = ["一", "二", "三", "四", "五", "六", "日"]
 LLM_CONFIGS = [
     {
-        "name": "Agnes agnes-2.0-flash",
+        # Agnes 2.5 Flash（2026-09-17 由 agnes-2.0-flash 升级）
+        # 动因：官方已将 agnes-2.0-flash 标记为「已废弃」，建议迁移至 agnes-2.5-flash。
+        # 接入参数完全兼容（Base URL / endpoint / messages 格式 / 流式 / 工具调用均不变），
+        # 仅模型名变更。上下文 512K、最大输出 65.5K，现价 $0/1M tokens。
+        # ⚠️ name 与 scripts/md_to_script.py 的 _SCRIPT_ORDER 按字符串精确匹配，两处必须同步改。
+        "name": "Agnes agnes-2.5-flash",
         "api_url": "https://apihub.agnes-ai.com/v1/chat/completions",
         "api_key_env": "AGNES_API_KEY",
-        "model": "agnes-2.0-flash",
+        "model": "agnes-2.5-flash",
     },
     {
         # Google Gemini 3.1 Flash-Lite（走官方 OpenAI 兼容端点，无需额外 SDK）

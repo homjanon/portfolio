@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 读取 report.md → 调用 LLM 转换为口语化广播稿 → 输出 script.txt
-主模型: Agnes agnes-2.0-flash (AGNES_API_KEY)
+主模型: Agnes agnes-2.5-flash (AGNES_API_KEY)
 次选: Google Gemini 3.1 Flash-Lite (GEMINI_API_KEY)
 备选: 商汤 SenseNova DeepSeek-V4-Flash (SENSENOVA_API_KEY)
 兜底: NVIDIA Nemotron-3 Ultra 550B (NVIDIA_API_KEY)
@@ -25,7 +25,7 @@ from call_llm import LLM_CONFIGS, _call_llm
 # ⚠️ 名字必须与 call_llm.py 的 LLM_CONFIGS[].name 完全一致：
 #    _MODEL_CHAIN 按 name 精确匹配，对不上会被静默跳过（不报错，直接少一层兜底）
 _SCRIPT_ORDER = [
-    "Agnes agnes-2.0-flash",
+    "Agnes agnes-2.5-flash",
     "Gemini 3.1 Flash-Lite",
     "SenseNova DeepSeek-V4-Flash",
     "NVIDIA Nemotron-3 Ultra 550B",
