@@ -393,7 +393,15 @@ def fetch_forex_rate():
         import akshare as ak
         df = ak.futures_global_spot_em()
         if df is not None and len(df) > 0:
-            # 找最近到期的主力合约
+            # 取主力合约。优先「当月连续」（代码含 00Y）；无连续合约的品种
+            # （如布伦特原油）退回「成交量最大」的合约——两者在本数据源中等价
+            # （实测 WTI：CL00Y == CL26X，成交量 300567 为全品种第一）。
+            #
+            # 2026-09-19 修复：布伦特原用 code.startswith("B") 无约束匹配，命中的是
+            # 数据表中第一个 B 开头合约 B28G（布伦特原油2802，最远月），价格 78.09；
+            # 而 WTI 走 00Y 分支取到近月（95.47），两者口径错位，导致报告里两个油价
+            # 相差 17 美元（真实价差仅约 2 美元）。改用成交量最大后取到 B26Z（2612，
+            # 近月/主力，98.85），与 WTI 口径对齐。
             targets = {"NYMEX原油": ["CL"], "COMEX黄金": ["GC"],
                        "布伦特原油": ["B"], "COMEX白银": ["SI"]}
             found = {}
@@ -404,14 +412,33 @@ def fetch_forex_rate():
                     price = _num(r.get("最新价")); chg = _num(r.get("涨跌幅"))
                     for label, prefixes in targets.items():
                         if label in found: continue
-                        if label == "布伦特原油" and code.startswith("B"):
-                            found[label] = {"名称": name, "代码": code, "最新价": price, "涨跌幅": chg}
-                        elif code.startswith(tuple(prefixes)) and "00Y" in code:  # 主连
+                        if code.startswith(tuple(prefixes)) and "00Y" in code:  # 当月连续
                             found[label] = {"名称": name, "代码": code, "最新价": price, "涨跌幅": chg}
                 except: pass
 
+            # 无「当月连续」合约的品种，退回成交量最大的合约（= 主力）
+            for label in ("布伦特原油",):
+                if label in found: continue
+                try:
+                    cand = df[df["名称"].astype(str).str.startswith(label)]
+                    if len(cand):
+                        cand = cand.copy()
+                        cand["_v"] = cand["成交量"].map(lambda x: _num(x) or 0)
+                        r = cand.loc[cand["_v"].idxmax()]
+                        found[label] = {"名称": str(r.get("名称","")), "代码": str(r.get("代码","")),
+                                        "最新价": _num(r.get("最新价")), "涨跌幅": _num(r.get("涨跌幅"))}
+                        print(f"    {label} 无当月连续，取成交量最大合约: "
+                              f"{found[label]['代码']} {found[label]['名称']} "
+                              f"(量={int(r['_v'])}, 价={found[label]['最新价']})")
+                    else:
+                        print(f"    ⚠️ {label} 未匹配到任何合约，本次将缺失")
+                except Exception as e:
+                    print(f"    ⚠️ {label} 主力合约筛选失败: {e}")
+
             if found.get("NYMEX原油"):
                 result["WTI原油"] = {**found["NYMEX原油"], "source": "akshare期货"}
+            else:
+                print("    ⚠️ WTI原油 未匹配到当月连续合约（00Y），本次将缺失")
             if found.get("COMEX黄金"):
                 result["COMEX黄金"] = {**found["COMEX黄金"], "source": "akshare期货"}
             if found.get("布伦特原油"):
@@ -441,7 +468,9 @@ def fetch_forex_rate():
     # ── USD/CNH: 由 fetch_extra 获取 ──
 
     # 标记缺失
-    for k in ["WTI原油","COMEX黄金","CN10Y","US10Y"]:
+    # 布伦特原油一并纳入缺失检查（2026-09-19）：原列表漏了它，
+    # 导致取数失败时该字段静默消失、报告里直接少一行，不易察觉。
+    for k in ["WTI原油","布伦特原油","COMEX黄金","CN10Y","US10Y"]:
         if k not in result or "最新价" not in result.get(k, {}):
             if k not in result:
                 result[k] = {}
