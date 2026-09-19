@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 调用 LLM 生成日报（四层跨平台冗余链，2026-09-12 起）：
-  ① 主模型: Agnes agnes-2.5-flash (AGNES_API_KEY)
+  ① 主模型: Agnes agnes-3.0-flash (AGNES_API_KEY)
   ② 次选: Google Gemini 3.1 Flash-Lite (GEMINI_API_KEY)
   ③ 备选: 商汤 SenseNova DeepSeek-V4-Flash (SENSENOVA_API_KEY)
   ④ 兜底: NVIDIA Nemotron-3 Ultra 550B (NVIDIA_API_KEY)
@@ -19,15 +19,16 @@ BEIJING = timezone(timedelta(hours=8))
 _WEEKDAYS = ["一", "二", "三", "四", "五", "六", "日"]
 LLM_CONFIGS = [
     {
-        # Agnes 2.5 Flash（2026-09-17 由 agnes-2.0-flash 升级）
-        # 动因：官方已将 agnes-2.0-flash 标记为「已废弃」，建议迁移至 agnes-2.5-flash。
-        # 接入参数完全兼容（Base URL / endpoint / messages 格式 / 流式 / 工具调用均不变），
-        # 仅模型名变更。上下文 512K、最大输出 65.5K，现价 $0/1M tokens。
+        # Agnes 3.0 Flash（2026-09-19 由 agnes-2.5-flash 升级）
+        # 动因：官方 agnes-3.0-flash 已免费开放，本机实测同端点同 key 可用（200 正常返回）。
+        # 3.0 是推理模型：内部先消耗 output tokens 生成思考 → 必须关闭 thinking（enable_thinking=false）
+        #   且 max_tokens 给足，否则可见输出可能为空（README 曾记录此坑）。
+        # 响应字段可能放 reasoning/reasoning_content → _call_llm 已做 content or reasoning 兼容。
         # ⚠️ name 与 scripts/md_to_script.py 的 _SCRIPT_ORDER 按字符串精确匹配，两处必须同步改。
-        "name": "Agnes agnes-2.5-flash",
+        "name": "Agnes agnes-3.0-flash",
         "api_url": "https://apihub.agnes-ai.com/v1/chat/completions",
         "api_key_env": "AGNES_API_KEY",
-        "model": "agnes-2.5-flash",
+        "model": "agnes-3.0-flash",
     },
     {
         # Google Gemini 3.1 Flash-Lite（走官方 OpenAI 兼容端点，无需额外 SDK）
@@ -58,6 +59,9 @@ LLM_CONFIGS = [
 # 已知支持 reasoning_effort 的后端（轻思考：大幅降延迟，且避免长思考导致 content 为空）
 # 用白名单而非写死在函数里：将来增删模型只改此处，函数体不动
 _REASONING_EFFORT_BACKENDS = {"SenseNova DeepSeek-V4-Flash"}
+# 推理模型白名单：这些模型需关闭内部思考（enable_thinking=false），否则先消费 output tokens 挤空可见输出
+# agnes-3.0-flash 是推理模型（README 曾记录 max_tokens 不足导致内容为空的坑），加入此名单
+_THINKING_OFF_BACKENDS = {"Agnes agnes-3.0-flash"}
 
 
 def _dedup_top20_links(text):
@@ -108,7 +112,7 @@ def _call_llm(api_url, api_key, model, system, user, timeout=90, extra_headers=N
     payload = {
         "model": model,
         "temperature": 0.3,
-            "max_tokens": 12000,
+            "max_tokens": 16000,
         "messages": [
             {"role": "system", "content": system},
             {"role": "user", "content": user},
@@ -117,6 +121,9 @@ def _call_llm(api_url, api_key, model, system, user, timeout=90, extra_headers=N
     # reasoning_effort=low：轻思考。商汤 DeepSeek-V4-Flash 实测 12s→2.6s 且内容稳定非空
     if name in _REASONING_EFFORT_BACKENDS:
         payload["reasoning_effort"] = "low"
+    # enable_thinking=false：关闭推理模型的内部思考（agnes-3.0 等），避免思考挤空可见输出
+    if name in _THINKING_OFF_BACKENDS:
+        payload["chat_template_kwargs"] = {"enable_thinking": False}
 
     # 永久性错误状态码：模型不存在/已下线/无权限，重试无意义
     PERMANENT_CODES = {403, 404, 410}
