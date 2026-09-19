@@ -64,7 +64,7 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 |--------|------|----------|---------|
 
-| ① 主模型 | **Agnes agnes-2.5-flash** (`agnes-2.5-flash`) | `apihub.agnes-ai.com/v1` | `AGNES_API_KEY` |
+| ① 主模型 | **Agnes agnes-3.0-flash** (`agnes-3.0-flash`) | `apihub.agnes-ai.com/v1` | `AGNES_API_KEY` |
 
 | ② 次选 | **Google Gemini 3.1 Flash-Lite** (`gemini-3.1-flash-lite`) | `generativelanguage.googleapis.com/v1beta/openai` | `GEMINI_API_KEY` |
 
@@ -86,9 +86,9 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 > **⚠️ 架构提示**：四层现已跨 4 个平台（Agnes/新加坡 → Google/美国 → 商汤/国内 → NVIDIA/美国），单一平台故障或限流不再导致当日无日报。如需进一步分散，③④ 可考虑改用 OpenRouter 的 `nvidia/nemotron-3-ultra-550b:free` 等网关化路径。
 >
-> **模型变更记录（2026-09-17）**：① 主模型由 **`agnes-2.0-flash` 升级为 `agnes-2.5-flash`**。动因：Agnes 官方已将 `agnes-2.0-flash` 标记为「**已废弃**」（官方原文：「已废弃，不再建议用于新的 API 接入」，并提示「请勿继续将已废弃的 agnes-2.0-flash 作为兼容回退」），建议迁移至 `agnes-2.5-flash`。
+> **模型变更记录（2026-09-19）**：① 主模型由 **`agnes-2.5-flash` 升级为 `agnes-3.0-flash`**。动因：官方 3.0 已免费开放，实测同端点同 key 可用（200 正常返回）。3.0 为推理模型，已通过 `chat_template_kwargs.enable_thinking=false` 关闭内部思考、`max_tokens=16000` 防思考挤空输出（避开 README 曾记录的 3.0 空输出坑）。
 > 2.5 与 2.0 **接入参数完全兼容**（Base URL / endpoint / 请求头 / messages 格式 / 流式响应 / 工具调用 / 图像 URL 输入全部不变），**迁移只需替换模型名称**。能力规格：上下文 512K、最大输出 65.5K，现价输入/输出均 `$0 / 1M tokens`（刊例价 $0.05 / $0.15）。
-> **未选 `agnes-3.0-flash` 的原因**：① 官方价格栏为「价格另行公布」，无公开刊例价可跟踪（2.5 有），多个平台标为 Preview；② 3.0 是**推理模型**，会先消耗输出 tokens 生成内部思考，若 max_tokens 不足可能导致可见输出为空；③ 官方定位偏「Agent 编程与工具调用」，与本项目「长文本日报写作」场景不对口。后续如需升级可再评估。
+> **agnes-3.0 升级避坑说明**：① 3.0 是**推理模型**，会先消耗输出 tokens 生成内部思考，已通过 `enable_thinking=false` 关闭 + `max_tokens=16000` 避免可见输出为空；② 响应字段可能放 `reasoning`/`reasoning_content`，`_call_llm` 已做 `content or reasoning_content or reasoning` 兼容。
 > **⚠️ 改模型必读**：`scripts/md_to_script.py` 的 `_MODEL_CHAIN` 按 `name` 从 `LLM_CONFIGS` 精确匹配取值，**两处名字必须同步改**，对不上会被静默跳过（不报错，直接少一层兜底）。
 
 - **LLM 仅基于预抓取的 `data_*.json` 加工，不联网搜索、不调用工具**
@@ -125,7 +125,7 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 | `A股开市 OR 美股开市 OR 港股开市` | **完整模式** | 按开市市场逐模块抓取（休市市场 JSON 不生成）+ 始终抓 RSS 新闻 |
 
-| 三市场均休市（通常周日/周一） | **精简模式** | 仅抓 `data_news.json`（Top20：谷歌美国20条→LLM精选≤10仅谷歌来源不补位 + 联合早报最新10,统一六实例兜底；两块独立互不补位、不强制凑满20）+ `data_deep.json`（深度观察专栏·**联合早报双源**：中港台即时+国际，各取最新若干条（desc 均为完整全文），**LLM 选 1 篇写得最有深度、最值得阅读且与 Top20 互补的原文直出**，双源均不可用则今日暂停） |
+| 三市场均休市（通常周日/周一） | **精简模式** | 仅抓 `data_news.json`（Top20：谷歌美国20条→LLM精选≤10仅谷歌来源不补位 + 联合早报最新10,统一六实例兜底；两块独立互不补位、不强制凑满20）+ `data_deep.json`（深度观察专栏·**《联合早报》时事与新闻评论** `/zaobao/other/forum/views` 单源（取最新 12 条，desc 均为完整全文），**LLM 选 1 篇写得最有深度、最值得阅读且与 Top20 互补的原文直出**，源不可用则今日暂停） |
 
 
 
@@ -161,7 +161,7 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 | **全球 Top20 新闻** | **Google News 美国一地（20条→LLM精选≤10且互不重复，仅谷歌来源、不补位；解析带 HTTP 状态检查 + lxml recover 容错，429/非法XML不整份失败；失败/空结果指数退避重试3次，仍失败兜底谷歌英国区 hl=en-GB&gl=GB&ceid=GB:en，同 TOPIC 换地域参数）+ 联合早报 RSS（统一六实例兜底，最新10）；两块独立互不补位、不强制凑满20，选不出则少输出** | 始终抓 | `data_news.json` + `data_cls_zaobao.json` |
 
-| **深度观察专栏（仅精简模式）** | **联合早报双源深度池**：**联合早报·中港台即时** `/zaobao/realtime/china`（复用 Top20 抓取，最新 10 条）+ **联合早报·国际** `/zaobao/realtime/world`（独立抓取，统一六实例兜底，最新 8 条）；desc 均为**完整全文**（未截断）。每条附 `source`/`desc_len`；**LLM 从早报双源候选中选 1 篇写得最有深度、最值得阅读且与 Top20 互补的原文直出**（零改写；排除纯事件通报/快讯/汇总；无达标深度文则降级选话题性最强的一篇；长文不设篇幅上限）；双源均不可用则今日暂停 | 仅精简模式 | `data_deep.json`（`items_deep` 数组） |
+| **深度观察专栏（仅精简模式）** | **《联合早报》时事与新闻评论** `/zaobao/other/forum/views`（单源，统一六实例兜底，最新 12 条）；desc 均为**完整全文**（未截断）。每条附 `source`/`desc_len`；**LLM 从候选中选 1 篇写得最有深度、最值得阅读且与 Top20 互补的原文直出**（零改写；排除纯事件通报/讣告；无达标深度文则降级选话题性最强的一篇；长文不设篇幅上限）；源不可用则今日暂停 | 仅精简模式 | `data_deep.json`（`items_deep` 数组） |
 
 | **市场全景各板块一段简述（50–100字）+ 持仓聚焦（按持仓行业关键词预匹配 `industry_match`，仅命中行业的新闻入选，核心/监督池一视同仁）** | **财联社 + 格隆汇 RSS 合并抓取（财联社 telegraph + 格隆汇两组均走统一六实例兜底（命中即止），格隆汇另以 rss.injahow.cn（.cn 专属实例，实测仅支持格隆汇）为首选；合并后标题归一化去重、北京当天筛选，格隆汇缺 pubDate 视为当日保留；LLM 优先采用标题含板块关键词的条目直接复用收盘情况，否则综合最相关若干条写成 50–100 字一段、丰富该市场最新情况）** | 完整模式 | 无当天新闻则留空（不编造） |
 
@@ -281,7 +281,7 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 
 
-- 数据源：`data_news.json` 的 `items_zaobao`（联合早报·中港台即时 RSS 最新 10 条，统一六实例兜底；**同时供深度观察专栏复用同一份抓取**）。
+- 数据源：`data_news.json` 的 `items_zaobao`（联合早报·中港台即时 RSS 最新 10 条，统一六实例兜底）。
 
 - 中文直用，无需翻译；固定为 Top20 次块（中港台视角）。
 
@@ -347,7 +347,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 |--------|------|
 
-| `AGNES_API_KEY` | Agnes API Key（免费）；日报+广播稿主选 Agnes agnes-2.5-flash（`apihub.agnes-ai.com/v1`） |
+| `AGNES_API_KEY` | Agnes API Key（免费）；日报+广播稿主选 Agnes agnes-3.0-flash（`apihub.agnes-ai.com/v1`） |
 
 | `GEMINI_API_KEY` | Google AI Studio API Key（免费层）；日报+广播稿第②层 Gemini 3.1 Flash-Lite（`generativelanguage.googleapis.com/v1beta/openai`），在 AI Studio → API Keys 生成 |
 
@@ -389,7 +389,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 |--------|------|------|------|
 
-| ① 主用 | Agnes agnes-2.5-flash | `AGNES_API_KEY` | 默认主模型 |
+| ① 主用 | Agnes agnes-3.0-flash | `AGNES_API_KEY` | 默认主模型 |
 
 | ② 次选 | Google Gemini 3.1 Flash-Lite | `GEMINI_API_KEY` | 主模型异常或近空（<500字符）即切换 |
 
@@ -405,7 +405,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 
 
-> 日报与广播稿模型链相互独立、结构一致：均为 **Agnes 主 → Gemini 3.1 Flash-Lite 次 → 商汤 SenseNova DeepSeek-V4-Flash 备 → NVIDIA Nemotron-3 Ultra 550B 兜**（见 `scripts/call_llm.py` 的 `LLM_CONFIGS` 与 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
+> 日报与广播稿模型链相互独立、结构一致：均为 **Agnes 3.0 主 → Gemini 3.1 Flash-Lite 次 → 商汤 SenseNova DeepSeek-V4-Flash 备 → NVIDIA Nemotron-3 Ultra 550B 兜**（见 `scripts/call_llm.py` 的 `LLM_CONFIGS` 与 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
 >
 > ⚠️ **改模型时两条链必须同步改**：`md_to_script.py` 的 `_MODEL_CHAIN` 是按 `name` 从 `LLM_CONFIGS` 中取值的，两处名字对不上会导致该模型被静默跳过（不报错、直接少一层兜底）。
 
@@ -427,7 +427,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 ├── scripts/
 
-│   ├── prefetch_data.py                     # 数据抓取（市场全景+估值+QDII/ETF+新闻；新闻：Google News 美国单地20条(失败指数退避重试3次)→LLM精选≤10且互不重复仅谷歌来源不补位 + 联合早报最新10(统一六实例兜底,命中即止+逐源状态日志；源校验放宽为昨天或今天内容) 双源 Top20，两块独立互不补位；data_deep.json 深度观察·联合早报双源(仅精简模式抓取):中港台即时/zaobao/realtime/china(复用Top20抓取,最新10条)+国际/zaobao/realtime/world(独立抓取,统一六实例兜底,最新8条),desc均为完整全文(未截断)并附source/desc_len;LLM从早报双源选1篇最有深度/最值得读且与Top20互补的原文直出(零改写,长文不设上限,无达标深度文则降级选话题性最强一篇),双源均不可用则今日暂停；data_cls_zaobao.json 取财联社+格隆汇 RSS 合并(财联社 telegraph 与格隆汇均走统一六实例兜底(格隆汇以 rss.injahow.cn 为 cn 专属首选)；合并标题归一化去重+北京当天筛选,格隆汇缺pubDate保留)当天新闻供市场全景各板块一段简述（50–100字）+持仓聚焦(按持仓行业关键词预匹配industry_match)；data_holdings.json 取腾讯API持仓核心标的行情(价格+涨跌幅)+监督池供「持仓动态与聚焦」板块；已停抓 data_fund/data_industry（LLM 输入 JSON 由 11→9）
+│   ├── prefetch_data.py                     # 数据抓取（市场全景+估值+QDII/ETF+新闻；新闻：Google News 美国单地20条(失败指数退避重试3次)→LLM精选≤10且互不重复仅谷歌来源不补位 + 联合早报最新10(统一六实例兜底,命中即止+逐源状态日志；源校验放宽为昨天或今天内容) 双源 Top20，两块独立互不补位；data_deep.json 深度观察·《联合早报》时事与新闻评论(仅精简模式抓取):/zaobao/other/forum/views 单源(统一六实例兜底,命中即止+逐源状态日志,最新12条),desc均为完整全文(未截断)并附source/desc_len;LLM从候选中选1篇最有深度/最值得读且与Top20互补的原文直出(零改写,长文不设上限,无达标深度文则降级选话题性最强一篇),源不可用则今日暂停；data_cls_zaobao.json 取财联社+格隆汇 RSS 合并(财联社 telegraph 与格隆汇均走统一六实例兜底(格隆汇以 rss.injahow.cn 为 cn 专属首选)；合并标题归一化去重+北京当天筛选,格隆汇缺pubDate保留)当天新闻供市场全景各板块一段简述（50–100字）+持仓聚焦(按持仓行业关键词预匹配industry_match)；data_holdings.json 取腾讯API持仓核心标的行情(价格+涨跌幅)+监督池供「持仓动态与聚焦」板块；已停抓 data_fund/data_industry（LLM 输入 JSON 由 11→9）
 
 │   ├── market_date_resolver.py             # 按市场解析业务日期 + 北京时间收盘标注（MarketDateResolver）
 
