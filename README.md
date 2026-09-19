@@ -64,7 +64,7 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 |--------|------|----------|---------|
 
-| ① 主模型 | **Agnes agnes-3.0-flash** (`agnes-3.0-flash`) | `apihub.agnes-ai.com/v1` | `AGNES_API_KEY` |
+| ① 主模型 | **Agnes agnes-2.5-flash** (`agnes-2.5-flash`) | `apihub.agnes-ai.com/v1` | `AGNES_API_KEY` |
 
 | ② 次选 | **Google Gemini 3.1 Flash-Lite** (`gemini-3.1-flash-lite`) | `generativelanguage.googleapis.com/v1beta/openai` | `GEMINI_API_KEY` |
 
@@ -86,9 +86,9 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 > **⚠️ 架构提示**：四层现已跨 4 个平台（Agnes/新加坡 → Google/美国 → 商汤/国内 → NVIDIA/美国），单一平台故障或限流不再导致当日无日报。如需进一步分散，③④ 可考虑改用 OpenRouter 的 `nvidia/nemotron-3-ultra-550b:free` 等网关化路径。
 >
-> **模型变更记录（2026-09-19）**：① 主模型由 **`agnes-2.5-flash` 升级为 `agnes-3.0-flash`**。动因：官方 3.0 已免费开放，实测同端点同 key 可用（200 正常返回）。3.0 为推理模型，已通过 `chat_template_kwargs.enable_thinking=false` 关闭内部思考、`max_tokens=16000` 防思考挤空输出（避开 README 曾记录的 3.0 空输出坑）。
+> **模型变更记录（2026-09-19）**：① 主模型已实测 `agnes-3.0-flash` 并**回退为 `agnes-2.5-flash`**。动因：3.0 为推理模型，在 GitHub Actions 90s 超时上限内无法完成长日报生成（实测 2 次均 90s 超时），回退 2.5 保稳定。
 > 2.5 与 2.0 **接入参数完全兼容**（Base URL / endpoint / 请求头 / messages 格式 / 流式响应 / 工具调用 / 图像 URL 输入全部不变），**迁移只需替换模型名称**。能力规格：上下文 512K、最大输出 65.5K，现价输入/输出均 `$0 / 1M tokens`（刊例价 $0.05 / $0.15）。
-> **agnes-3.0 升级避坑说明**：① 3.0 是**推理模型**，会先消耗输出 tokens 生成内部思考，已通过 `enable_thinking=false` 关闭 + `max_tokens=16000` 避免可见输出为空；② 响应字段可能放 `reasoning`/`reasoning_content`，`_call_llm` 已做 `content or reasoning_content or reasoning` 兼容。
+> **agnes-3.0 实测回退说明（避坑记录）**：3.0 是推理模型且单次生成耗时远超 90s（长日报 58K tokens 输入），GitHub Actions 请求超时上限 90s 内不可用；已回退 2.5。`_call_llm` 仍保留 `enable_thinking` 关闭机制与 `max_tokens=16000`，供后续接入耗时更短的推理模型时复用。
 > **⚠️ 改模型必读**：`scripts/md_to_script.py` 的 `_MODEL_CHAIN` 按 `name` 从 `LLM_CONFIGS` 精确匹配取值，**两处名字必须同步改**，对不上会被静默跳过（不报错，直接少一层兜底）。
 
 - **LLM 仅基于预抓取的 `data_*.json` 加工，不联网搜索、不调用工具**
@@ -347,7 +347,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 |--------|------|
 
-| `AGNES_API_KEY` | Agnes API Key（免费）；日报+广播稿主选 Agnes agnes-3.0-flash（`apihub.agnes-ai.com/v1`） |
+| `AGNES_API_KEY` | Agnes API Key（免费）；日报+广播稿主选 Agnes agnes-2.5-flash（`apihub.agnes-ai.com/v1`） |
 
 | `GEMINI_API_KEY` | Google AI Studio API Key（免费层）；日报+广播稿第②层 Gemini 3.1 Flash-Lite（`generativelanguage.googleapis.com/v1beta/openai`），在 AI Studio → API Keys 生成 |
 
@@ -389,7 +389,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 |--------|------|------|------|
 
-| ① 主用 | Agnes agnes-3.0-flash | `AGNES_API_KEY` | 默认主模型 |
+| ① 主用 | Agnes agnes-2.5-flash | `AGNES_API_KEY` | 默认主模型 |
 
 | ② 次选 | Google Gemini 3.1 Flash-Lite | `GEMINI_API_KEY` | 主模型异常或近空（<500字符）即切换 |
 
@@ -405,7 +405,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 
 
-> 日报与广播稿模型链相互独立、结构一致：均为 **Agnes 3.0 主 → Gemini 3.1 Flash-Lite 次 → 商汤 SenseNova DeepSeek-V4-Flash 备 → NVIDIA Nemotron-3 Ultra 550B 兜**（见 `scripts/call_llm.py` 的 `LLM_CONFIGS` 与 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
+> 日报与广播稿模型链相互独立、结构一致：均为 **Agnes 2.5 主 → Gemini 3.1 Flash-Lite 次 → 商汤 SenseNova DeepSeek-V4-Flash 备 → NVIDIA Nemotron-3 Ultra 550B 兜**（见 `scripts/call_llm.py` 的 `LLM_CONFIGS` 与 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
 >
 > ⚠️ **改模型时两条链必须同步改**：`md_to_script.py` 的 `_MODEL_CHAIN` 是按 `name` 从 `LLM_CONFIGS` 中取值的，两处名字对不上会导致该模型被静默跳过（不报错、直接少一层兜底）。
 
