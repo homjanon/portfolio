@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-调用 LLM 生成日报（四层跨平台冗余链，2026-09-12 起）：
+调用 LLM 生成日报（四层冗余链，2026-09-19 起）：
   ① 主模型: Agnes agnes-2.5-flash (AGNES_API_KEY)
-  ② 次选: Google Gemini 3.1 Flash-Lite (GEMINI_API_KEY)
+  ② 次选: Google Gemini 3.8 Flash (GEMINI_API_KEY)
   ③ 备选: 商汤 SenseNova DeepSeek-V4-Flash (SENSENOVA_API_KEY)
-  ④ 兜底: NVIDIA Nemotron-3 Ultra 550B (NVIDIA_API_KEY)
+  ④ 兜底: Google Gemini 3.5 Flash-Lite (GEMINI_API_KEY)
 
 用法: python3 scripts/call_llm.py
   读取 prompt/daily_report_prompt.txt (system) + data_*.json (user)
@@ -31,13 +31,16 @@ LLM_CONFIGS = [
         "model": "agnes-2.5-flash",
     },
     {
-        # Google Gemini 3.1 Flash-Lite（走官方 OpenAI 兼容端点，无需额外 SDK）
-        # 2026-09-12 加入为第 ②层：免费层 1M 上下文 / 250K TPM，可一次吃下日报 40-60K tokens 输入
-        # （Groq 等免费层 TPM 仅 6-30K，无法胜任本项目的长输入）
-        "name": "Gemini 3.1 Flash-Lite",
+        # Google Gemini 3.8 Flash（走官方 OpenAI 兼容端点，无需额外 SDK）
+        # 2026-09-19 由 3.1 Flash-Lite 升级：同 1M 上下文，本机实测 74K 字符长输入 25.0s（本链最快）
+        # ⚠️ 免费档 503「high demand」拥堵实测：长输入 5/12、小输入 4/24 → 靠 _call_llm 2 次重试 + 下层兜底
+        # ⚠️ Gemini 3 系**无法关闭思考**（官方明确：Reasoning cannot be turned off for 3 models），
+        #    现有 _THINKING_OFF_BACKENDS 对其无效；如需压延迟只能用 reasoning_effort=low/minimal 降档
+        # ⚠️ 与第 ④层 Gemini 3.5 Flash-Lite 共用 GEMINI_API_KEY（同一配额池：Gemini 故障会连废两层）
+        "name": "Gemini 3.8 Flash",
         "api_url": "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
         "api_key_env": "GEMINI_API_KEY",
-        "model": "gemini-3.1-flash-lite",
+        "model": "gemini-3.8-flash",
     },
     {
         # 商汤日日新 DeepSeek-V4-Flash（OpenAI 兼容）
@@ -49,10 +52,15 @@ LLM_CONFIGS = [
         "model": "deepseek-v4-flash",
     },
     {
-        "name": "NVIDIA Nemotron-3 Ultra 550B",
-        "api_url": "https://integrate.api.nvidia.com/v1/chat/completions",
-        "api_key_env": "NVIDIA_API_KEY",
-        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        # Google Gemini 3.5 Flash-Lite（2026-09-19 替换 NVIDIA Nemotron-3 Ultra 550B 为第 ④层）
+        # 动因：3.5 Flash-Lite 是 3.1 Flash-Lite 的同档继任者（2026-07-21 发布，稳定版，EOL ≥2027-07-21），
+        #       1,048,576 输入 / 65,536 输出，官方称输出 350 tok/s；3.1-flash-lite 官方退役窗口 2027-05-07 起
+        #       Nemotron-3 Ultra 550B 移除后 NVIDIA_API_KEY 不再被本项目使用
+        # ⚠️ 与第 ②层同 key 同配额池（第 ③层商汤夹在中间作隔离）
+        "name": "Gemini 3.5 Flash-Lite",
+        "api_url": "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+        "api_key_env": "GEMINI_API_KEY",
+        "model": "gemini-3.5-flash-lite",
     },
 ]
 

@@ -2,9 +2,9 @@
 """
 读取 report.md → 调用 LLM 转换为口语化广播稿 → 输出 script.txt
 主模型: Agnes agnes-2.5-flash (AGNES_API_KEY)
-次选: Google Gemini 3.1 Flash-Lite (GEMINI_API_KEY)
+次选: Google Gemini 3.8 Flash (GEMINI_API_KEY)
 备选: 商汤 SenseNova DeepSeek-V4-Flash (SENSENOVA_API_KEY)
-兜底: NVIDIA Nemotron-3 Ultra 550B (NVIDIA_API_KEY)
+兜底: Google Gemini 3.5 Flash-Lite (GEMINI_API_KEY)
 LLM 失败时直接复制 report.md 作为 script.txt
 
 ⚠️ 日期注入：SYSTEM prompt 末尾注入 __TODAY_DATE__ 占位符，
@@ -21,14 +21,14 @@ OUTPUT_PATH = sys.argv[2] if len(sys.argv) > 2 else "script.txt"
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from call_llm import LLM_CONFIGS, _call_llm
 
-# 广播稿专用顺序：Agnes 2.5 主用 → Gemini 3.1 Flash-Lite 次 → 商汤 SenseNova DeepSeek-V4-Flash 备 → NVIDIA Nemotron-3 Ultra 550B 兜（与日报一致）
+# 广播稿专用顺序：Agnes 2.5 主用 → Gemini 3.8 Flash 次 → 商汤 SenseNova DeepSeek-V4-Flash 备 → Gemini 3.5 Flash-Lite 兜（与日报一致）
 # ⚠️ 名字必须与 call_llm.py 的 LLM_CONFIGS[].name 完全一致：
 #    _MODEL_CHAIN 按 name 精确匹配，对不上会被静默跳过（不报错，直接少一层兜底）
 _SCRIPT_ORDER = [
     "Agnes agnes-2.5-flash",
-    "Gemini 3.1 Flash-Lite",
+    "Gemini 3.8 Flash",
     "SenseNova DeepSeek-V4-Flash",
-    "NVIDIA Nemotron-3 Ultra 550B",
+    "Gemini 3.5 Flash-Lite",
 ]
 _MODEL_CHAIN = [c for name in _SCRIPT_ORDER
                for c in LLM_CONFIGS if c["name"] == name]

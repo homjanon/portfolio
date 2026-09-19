@@ -66,11 +66,11 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 | ① 主模型 | **Agnes agnes-2.5-flash** (`agnes-2.5-flash`) | `apihub.agnes-ai.com/v1` | `AGNES_API_KEY` |
 
-| ② 次选 | **Google Gemini 3.1 Flash-Lite** (`gemini-3.1-flash-lite`) | `generativelanguage.googleapis.com/v1beta/openai` | `GEMINI_API_KEY` |
+| ② 次选 | **Google Gemini 3.8 Flash** (`gemini-3.8-flash`) | `generativelanguage.googleapis.com/v1beta/openai` | `GEMINI_API_KEY` |
 
 | ③ 备选 | **商汤 SenseNova DeepSeek-V4-Flash** (`deepseek-v4-flash`) | `token.sensenova.cn/v1` | `SENSENOVA_API_KEY` |
 
-| ④ 兜底 | **NVIDIA Nemotron-3 Ultra 550B** (`nvidia/nemotron-3-ultra-550b-a55b`) | `integrate.api.nvidia.com/v1` | `NVIDIA_API_KEY` |
+| ④ 兜底 | **Google Gemini 3.5 Flash-Lite** (`gemini-3.5-flash-lite`) | `generativelanguage.googleapis.com/v1beta/openai` | `GEMINI_API_KEY` |
 
 
 
@@ -84,11 +84,12 @@ Cloudflare qdii-dispatch → workflow_dispatch
 >
 > **模型变更记录（2026-09-12）**：新增 **Google Gemini 3.1 Flash-Lite** 为第 ②层（商汤顺延 ③、Nemotron 顺延 ④），形成四层跨平台链。动因：Agnes 免费层频繁 429、NVIDIA 频繁 503 过载；Gemini 免费层 1M 上下文 + 250K TPM，可一次吃下日报 40–60K tokens 输入（Groq 等免费层 TPM 仅 6–30K 无法胜任）。**同批修复**：`_call_llm` 响应字段兼容 `content or reasoning_content or reasoning`（商汤 deepseek-v4-flash 的 content 常为空、答案在 reasoning_content，此前该层实为"哑弹"）。
 
-> **⚠️ 架构提示**：四层现已跨 4 个平台（Agnes/新加坡 → Google/美国 → 商汤/国内 → NVIDIA/美国），单一平台故障或限流不再导致当日无日报。如需进一步分散，③④ 可考虑改用 OpenRouter 的 `nvidia/nemotron-3-ultra-550b:free` 等网关化路径。
+> **⚠️ 架构提示**：四层现跨 3 个平台（Agnes/新加坡 → Google/美国 → 商汤/国内 → Google/美国）。**②④ 两层共用 `GEMINI_API_KEY`（同一配额池），Gemini 侧限流或故障会连废两层**——第 ③层商汤夹在中间作隔离。如需进一步分散，可把 ④ 换回非 Google 平台（如 OpenRouter 网关化路径）。
 >
 > **模型变更记录（2026-09-19）**：① 主模型已实测 `agnes-3.0-flash` 并**回退为 `agnes-2.5-flash`**。动因：3.0 为推理模型，在 GitHub Actions 90s 超时上限内无法完成长日报生成（实测 2 次均 90s 超时），回退 2.5 保稳定。
 > 2.5 与 2.0 **接入参数完全兼容**（Base URL / endpoint / 请求头 / messages 格式 / 流式响应 / 工具调用 / 图像 URL 输入全部不变），**迁移只需替换模型名称**。能力规格：上下文 512K、最大输出 65.5K，现价输入/输出均 `$0 / 1M tokens`（刊例价 $0.05 / $0.15）。
 > **agnes-3.0 实测回退说明（避坑记录）**：3.0 是推理模型且单次生成耗时远超 90s（长日报 58K tokens 输入），GitHub Actions 请求超时上限 90s 内不可用；已回退 2.5。`_call_llm` 仍保留 `enable_thinking` 关闭机制与 `max_tokens=16000`，供后续接入耗时更短的推理模型时复用。
+> **模型变更记录（2026-09-19 晚，模型链改版）**：② 层由 `gemini-3.1-flash-lite` 升级为 **`gemini-3.8-flash`**；④ 层由 **NVIDIA Nemotron-3 Ultra 550B 换为 `gemini-3.5-flash-lite`**（NVIDIA 模型整体移除，本项目不再使用 `NVIDIA_API_KEY`）。动因：本机实测 Google 免费档 6 个候选（system 15,426 字符 + user 58,667 字符 ≈ 74K 字符真实规模）——`gemini-3.8-flash` 长输入 **25.0s** 最快；`gemini-3.5-flash`/`3.6-flash` 需 50–65s 逼近 90s 上限故未选；`gemini-3-flash-preview` 两轮全 503 已排除。**实测要点**：Google 免费档 503「high demand」拥堵率长输入约 42%，由 `_call_llm` 的 2 次重试 + 下层兜底覆盖；**Gemini 3 系无法关闭思考**（官方明确），`_THINKING_OFF_BACKENDS` 对其无效，唯一降延迟杠杆为 `reasoning_effort`。
 > **⚠️ 改模型必读**：`scripts/md_to_script.py` 的 `_MODEL_CHAIN` 按 `name` 从 `LLM_CONFIGS` 精确匹配取值，**两处名字必须同步改**，对不上会被静默跳过（不报错，直接少一层兜底）。
 
 - **LLM 仅基于预抓取的 `data_*.json` 加工，不联网搜索、不调用工具**
@@ -349,11 +350,11 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 | `AGNES_API_KEY` | Agnes API Key（免费）；日报+广播稿主选 Agnes agnes-2.5-flash（`apihub.agnes-ai.com/v1`） |
 
-| `GEMINI_API_KEY` | Google AI Studio API Key（免费层）；日报+广播稿第②层 Gemini 3.1 Flash-Lite（`generativelanguage.googleapis.com/v1beta/openai`），在 AI Studio → API Keys 生成 |
+| `GEMINI_API_KEY` | Google AI Studio API Key（免费层）；**日报+广播稿第 ②层 Gemini 3.8 Flash 与第 ④层 Gemini 3.5 Flash-Lite 共用本 key**（`generativelanguage.googleapis.com/v1beta/openai`），在 AI Studio → API Keys 生成。⚠️ 两层同 key = 同一配额池 |
 
 | `SENSENOVA_API_KEY` | 商汤日日新 API Key；日报+广播稿次选 DeepSeek-V4-Flash（`token.sensenova.cn/v1`），已在 douban-tracker / xueqiu-tracker 实测 |
 
-| `NVIDIA_API_KEY` | NVIDIA API Key；日报+广播稿兜底 Nemotron-3 Ultra 550B（`nvidia/nemotron-3-ultra-550b-a55b`），`integrate.api.nvidia.com/v1` |
+| ~~`NVIDIA_API_KEY`~~ | **已弃用（2026-09-19）**：NVIDIA Nemotron-3 Ultra 550B 已从模型链移除，本项目不再使用该 Secret（可自行删除） |
 
 
 
@@ -364,7 +365,6 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 >   AGNES_API_KEY:     ${{ secrets.AGNES_API_KEY }}
 >   GEMINI_API_KEY:    ${{ secrets.GEMINI_API_KEY }}
 >   SENSENOVA_API_KEY: ${{ secrets.SENSENOVA_API_KEY }}
->   NVIDIA_API_KEY:    ${{ secrets.NVIDIA_API_KEY }}
 > ```
 >
 > 漏注入时脚本 `os.environ.get()` 读不到该变量，只会打印「⏭️ 跳过 <模型>: 环境变量 XXX 未设置」并**静默落到下一层兜底**（不报错、不中断）。2026-09-12 商汤接入即踩此坑：Secret 已设置但 workflow 未注入，三层链路实际只剩 Agnes + Nemotron 两层，两者同时失败时整个日报生成失败（当日无日报产出）。**排查口诀：日志里出现「跳过 … 未设置」= workflow env 漏注入，而不是 Secret 没配。**
@@ -391,11 +391,11 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 | ① 主用 | Agnes agnes-2.5-flash | `AGNES_API_KEY` | 默认主模型 |
 
-| ② 次选 | Google Gemini 3.1 Flash-Lite | `GEMINI_API_KEY` | 主模型异常或近空（<500字符）即切换 |
+| ② 次选 | Google Gemini 3.8 Flash | `GEMINI_API_KEY` | 主模型异常或近空（<500字符）即切换 |
 
 | ③ 备选 | 商汤 SenseNova DeepSeek-V4-Flash | `SENSENOVA_API_KEY` | 本层异常或近空（<500字符）即切换 |
 
-| ④ 兜底 | NVIDIA Nemotron-3 Ultra 550B | `NVIDIA_API_KEY` | 前序模型连续报错 2 次（`_call_llm` 内部重试）仍未产出有效内容即切换 |
+| ④ 兜底 | Google Gemini 3.5 Flash-Lite | `GEMINI_API_KEY` | 前序模型连续报错 2 次（`_call_llm` 内部重试）仍未产出有效内容即切换 |
 
 | 末路 | 复制原文 | — | 三模型全失败，直接复制 `report.md` 为 `script.txt`，避免 workflow 中断 |
 
@@ -405,7 +405,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 
 
-> 日报与广播稿模型链相互独立、结构一致：均为 **Agnes 2.5 主 → Gemini 3.1 Flash-Lite 次 → 商汤 SenseNova DeepSeek-V4-Flash 备 → NVIDIA Nemotron-3 Ultra 550B 兜**（见 `scripts/call_llm.py` 的 `LLM_CONFIGS` 与 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
+> 日报与广播稿模型链相互独立、结构一致：均为 **Agnes 2.5 主 → Gemini 3.8 Flash 次 → 商汤 SenseNova DeepSeek-V4-Flash 备 → Gemini 3.5 Flash-Lite 兜**（见 `scripts/call_llm.py` 的 `LLM_CONFIGS` 与 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
 >
 > ⚠️ **改模型时两条链必须同步改**：`md_to_script.py` 的 `_MODEL_CHAIN` 是按 `name` 从 `LLM_CONFIGS` 中取值的，两处名字对不上会导致该模型被静默跳过（不报错、直接少一层兜底）。
 
