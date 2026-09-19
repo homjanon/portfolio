@@ -832,8 +832,8 @@ def fetch_extra():
     return _ok(result)
 
 
-# ─── 数据源H/I: Top20 双源(谷歌美国主流+联合早报) + 深度观察(联合早报双源) ──────
-# 联合早报 RSS 仅抓取一次并缓存，供 Top20 联合早报块与深度观察中港台源复用（见数据源I）
+# ─── 数据源H/I: Top20 双源(谷歌美国主流+联合早报) + 深度观察(联合早报·时事与新闻评论专栏) ──────
+# 联合早报 RSS 仅抓取一次并缓存，供 Top20 联合早报块复用（深度观察已改为 forum/views 单源，见数据源I）
 # 统一 RSSHub 实例池（全项目共用：早报/财联社/格隆汇/深度观察；按序尝试、命中即止 + 逐源状态日志）
 _RSSHUB_HOSTS = [
     "hub.slarker.me",
@@ -1033,9 +1033,9 @@ def _fetch_rss_other():
     })
 
 
-# ─── 数据源I: 深度观察候选池（联合早报双源；仅精简模式） ──────
+# ─── 数据源I: 深度观察候选池（联合早报·时事与新闻评论专栏；仅精简模式） ──────
 def _fetch_deep_feed(path, label):
-    """抓取单个联合早报深度源（统一六实例兜底、命中即止；desc 未截断）。
+    """抓取单个深度源（统一六实例兜底、命中即止；desc 未截断）。
     返回条目列表（含 source/desc_len）；全部实例失败返回 []。逐源状态日志（✅采纳/❌原因）。"""
     notes = []
     for host in _RSSHUB_HOSTS:
@@ -1081,32 +1081,19 @@ def _fetch_deep_feed(path, label):
 
 
 def _fetch_rss_deep():
-    """深度观察专栏（仅精简模式消费）：**联合早报双源深度池**（均为完整全文）。
-    ① 联合早报·中港台即时 /zaobao/realtime/china  复用 Top20 抓取结果（_fetch_zaobao_raw 全局缓存，零重复请求），取最新 10 条
-    ② 联合早报·国际      /zaobao/realtime/world   独立抓取（统一六实例兜底、命中即止），取最新 8 条（实测均 872 字、最长 4723 字）
-    每条附 `source`/`desc_len`，desc **未截断**；由 LLM 从早报双源候选中选 1 篇
+    """深度观察专栏（仅精简模式消费）：**《联合早报》时事与新闻评论专栏**（forum/views，均为完整全文）。
+    ⚠️ desc 含专栏标题前缀「作者：」与全文，**未截断**；由 LLM 从候选中选 1 篇
     **写得最有深度、最值得当下阅读**且与 Top20 互补的原文直出（零改写）。
-    双源均不可用才留空 → prompt 输出「今日暂停」。"""
-    items_deep = []
-    # ① 中港台：复用 Top20 抓取结果（_fetch_zaobao_raw 全局缓存，零重复请求）
-    _cn = _fetch_zaobao_raw()
-    if _cn:
-        _pick = []
-        for _it in _cn[:10]:
-            _it["desc_len"] = len(_it.get("desc", ""))  # 补充字段，供 LLM 判断篇幅
-            _pick.append(_it)
-        items_deep.extend(_pick)
-        print(f"    [联合早报·中港台] 深度候选 {len(_pick)} 条"
-              f"（复用Top20抓取，首条《{_pick[0].get('title', '')[:32]}》…）")
-    # ② 国际：独立抓取（统一六实例兜底、命中即止）
-    _world = _fetch_deep_feed("/zaobao/realtime/world", "联合早报·国际")
-    if _world:
-        _pick = _world[:8]
-        items_deep.extend(_pick)
-        print(f"    [联合早报·国际] 深度候选 {len(_pick)} 条"
-              f"（首条《{_pick[0].get('title', '')[:32]}》…）")
+    源不可用才留空 → prompt 输出「今日暂停」。"""
+    # 单源：《联合早报》时事与新闻评论专栏（/zaobao/other/forum/views）
+    # 实测两种公共实例均可用、内容一致（24 条评论/专栏文章，desc 203-518 字）
+    _items = _fetch_deep_feed("/zaobao/other/forum/views", "联合早报·时事与新闻评论")
+    items_deep = _items[:12] if _items else []
     if not items_deep:
-        print("    [深度观察] 早报双源均不可用，今日暂停")
+        print("    [深度观察] forum/views 源不可用，今日暂停")
+    else:
+        print(f"    [联合早报·时事与新闻评论] 深度候选 {len(items_deep)} 条"
+              f"（首条《{items_deep[0].get('title', '')[:32]}》…）")
     return _ok({"total": len(items_deep), "items_deep": items_deep})
 
 
@@ -1532,7 +1519,7 @@ def main():
         # 精简模式：三市场均休市，仅执行 RSS 新闻模块
         modules = [
             ("data_news.json", _fetch_rss_other, "全球Top20 RSS(美国主流+联合早报)"),
-            ("data_deep.json", _fetch_rss_deep, "深度观察源(联合早报双源深度池)"),
+            ("data_deep.json", _fetch_rss_deep, "深度观察源(联合早报·时事与新闻评论专栏)"),
         ]
         print(f"📋 精简模式（三市场均休市）: 仅执行 {len(modules)} 个模块（纯新闻）")
     else:
