@@ -1,91 +1,230 @@
-# 全球金融资讯日报 — 2026年9月21日 星期一
+# 全球金融资讯日报 — 2026年9月22日 星期二
 
-> 查询时间：2026年9月21日 22:32（北京时间）| 查询日期：星期一
+查询时间：2026-09-22 06:33 北京时间（周二）
 
-**今日定性导语**：全球市场在油价回落与美债收益率缓和的支撑下延续涨势，美股三大指数集体走强，比特币重返85000美元八个月高位。地缘方面，朝鲜向日本海再发两枚弹道导弹引发区域紧张，国际社会再度呼吁制止；中美在特朗普-习近平会晤前夕各做铺垫——中国增持美国大豆、稀土出口放缓，美方则在AI安全框架上寻求共识。科技与产业领域，软银紧急筹发110亿美元垃圾债券押注OpenAI，大众汽车下调全年利润率预期至1%，德国金属工业工会号召全国汽车工人下周一发起大规模抗议。欧洲内部，法国数千民众上街抗议警方开枪免责法案；中东局势持续动荡，伊朗关闭德黑兰法国语言中心，日首相拟在联大讨论海湾能源供应方案。
-
----
-
-## 一、全球 Top20（RSS 驱动）
-
-### 🌍 谷歌精选（美国视角）
-
-1. **Stocks rise as oil and yields ease to start week**：美股三大指数集体走高，油价四连跌后回落至100美元/桶下方，美债收益率同步缓和，投资者对通胀粘性放缓感到乐观。（[CNBC](https://news.google.com/rss/articles/CBMid0FVX3lxTE9PV3BMZGlwWktIQVdmYWdJMWl3eVJHMUFfR2pPNUQ3dVk5OVROd2ZYQ3BzNEdSbElpSW5UREJmLVJxbVdJUzdITzNTM2QyM3FlV1hlZUp6anc5MFd6cEtPeW84WWNzZHZGaXVjd0Q3STRJRUFERmFN0gF8QVVfeXFMT1JBRmVDRWpaTXhKZDhZSTVWbllXZ3dZNzVhQVlPdjExaXNsY3daUVF1ZmFIOFNsQlJzeXpTc0plejhnNGhvRjdaZWlyYlp5QlFmMVFncmZvNEJNQjNUZTdLUldiMWJfS2JMYm5YaUJaNWRHekNLX1FqeXl6dw)）
-
-2. **Bitcoin Jumps Above $85,000 to 8-Month High**：比特币突破85000美元，创2026年1月以来新高，市场热议"加密之春"是否到来，机构资金持续流入推动行情。（[WSJ](https://news.google.com/rss/articles/CBMilAFBVV95cUxPbm1ocHJySVRjNEFTTk9TQnk2bGJReXFfc3VvcEk4Q3ZwaElWZFptS2FvSUFVNWJsU2p6Q2RUU3BoNWdWNUpyMHVYbzNEZ3dVajlKY2YzSnNBdC1sWDlJV3lIOXBOa0ZqeWYtU01Yemw3WFFIeDVVRTE1b0lUUDFwZWtVM2xQSy1iUzNvMktrWkFKaFhm)）
-
-3. **SoftBank Seeks Over $11 Billion in Junk Bonds for OpenAI Bet**：软银启动超110亿美元垃圾债券发行，为对OpenAI的战略投资筹措资金，被视为近年来科技行业最大规模高收益债融资之一。（[Bloomberg](https://news.google.com/rss/articles/CBMitAFBVV95cUxPU0o1UjZOa1FQMEhiUEdRVFh0Um1SYnh6TWl3Z2FJSUFUZ3ltX2d1UzE4TzBXb2VYU3NfelRXWjUtbmxxRVlLRkRLUkpQZm5XR0FQMEJIaVNHaXMxMVZ0Y0F5NDgtODFCbGFIRnlSU2FRcTNDTHFpS0xsRnFQT3I1UkdCcWFTaUhreHZJejk4cnRGcERTOThEOGt4MkkxOFpKdTlaYjJkbXJfYXFFeWZlVHR4WEs)）
-
-4. **China and the US are competing for AI dominance but have shared concerns over safety**：中美在AI竞争白热化的同时，双方均在联合国框架下推动AI安全治理合作，被视为难得的战略共识领域。（[AP News](https://news.google.comrss/articles/CBMikgFBVV95cUxOcWNPS1J5MWVTNGkyTjdFaVZReGZES1E1VFk3MHI0dEhZQkFPSnh0NWlnQkU4Y1I4QXZ5X0hGOW04czgwbFNtdGZqcHhCc29IcS0yQWdYQWxnczNUVXpETVJ4S1BPUXVxZWxPaTdFalNUWWZvTmFMcW5wRGVydUtBSmxkY1lSSHVwLWc2bjJxVm5Tdw)）
-
-5. **Slide in oil prices drives rebound in battered government bonds**：WTI原油连续第四日下跌，美债收益率走低，机构投资者开始重新评估债券资产估值。（[Financial Times](https://news.google.com/rss/articles/CBMihAFBVV95cUxNRVVOOWNyQWNOZWc4NU9rMFFDZXhNZG91cDhxWFZTM0NXWnBCd2ktRkhnbXJzRGU3cUstOTZ2Y210a0ZpQ3lncF94endwRS15ell2TW1MSXo1WHpRQzFzNVgzLUd1Ymc0RGN6WVlwSkdweEVlV0RTZG45TnQ0RVpkS2x1dlA)）
-
-6. **Yuan hits fresh multi-year peak as PBOC eases curb ahead of Trump-Xi summit**：人民币兑美元触及多年高点，中国人民银行放松中间价逆周期因子约束，市场预期北京在中美元首会晤前有意释放积极信号。（[Reuters](https://news.google.com/rss/articles/CBMiwgFBVV95cUxQcFFpVEZVVTl5VlVUN2VCcnZIWExvUG5ZZ201LTgtdmVUQ1kzVi1BN2dROUtKZHc2RDl4U216NWdCUUlDbVVkZUt3MkhpMlg0bGw3WGY0bjQtNDZoeW82elFGMVF1LUJyVml4bDVfekVWMzBlS1NnQ2FVbTJFaG9ka19hTDd2QzF2WXJhVVk2TUFtNXBfQ3FxN3ZGckE0RWZmU2FKY1lsejZqV3pNdFZfcWQ0QzVrMHRaS0ZFT1hWUTBvQQ)）
-
-7. **Volkswagen Group Warns 'We Have No Time To Lose' As Problems Worsen**：大众汽车将2026年利润率预期大幅下调至1%，归咎于中国市场疲软与电池转型成本，股价重挫后被剔除德国DAX指数。（[Motor1.com](https://news.google.com/rss/articles/CBMiaEFVX3lxTE5MRjVtT0FicnNXMEo1M0RPRXhWcU1mLXhCRHl5eWRIcDU0Ti1PczI2UmhYcTNXajRqSEdpMUN6R0JaeWlUQVpFREhYVUk1Q0hIWEhXSnpsUGJhQzRvNDEwekoxT2tWOXRF)）
-
-8. **Chinese rare earth shipments to US drop ahead of Trump-Xi summit**：中国在特朗普-习特会前夕放缓稀土出口至美国，分析认为北京正以战略资源为筹码调节贸易谈判节奏。（[Financial Times](https://news.google.com/rss/articles/CBMihAFBVV95cUxQUmZQc285cE1xSXV5OTFxRXc3NG1HZWlvdHZFMkd4VmlGalJWUnVwaHI5dDdHRTZldGVVellZN2F2REJhRWdRTDVpMUxhQWN1OG1PekdmR3JpTWlHdzhvbHNuYmZuYi1neHl0VnVhU1pZOXMtMElmVmNuS28ySS1CRnA3SWQ)）
-
-9. **Let's Talk Climate**：联合国气候周在纽约召开，各国聚焦极端天气灾害应对与AI技术在环境监测中的应用，多国承诺加速可再生能源转型。（[The New York Times](https://news.google.com/rss/articles/CBMigwFBVV95cUxPcE9JRng4Ml9Ud3pGcmtZTWZyZ1pjSXA1bDQ4dmd4aG1IbnExellwX1hIR0x4TTBzQ3BQX05QcElhOEI2M2R4WnFNd2pHWWxpaFYwSFRhMmV1N3JPZjdnc21KNnZHR1kzRkkxSGp5Ui1BanV3WDdFTkF2Y2lMLXNERnBEWQ)）
-
-10. **AI's Wobbly House of Cards Puts Markets and US Economy at Risk**：彭博社刊文警告，AI产业链估值泡沫化风险加剧，一旦资本支出增速放缓，可能对美股及整体经济造成连锁冲击。（[Bloomberg](https://news.google.com/rss/articles/CBMiswFBVV95cUxNOUIzTWFrSUtlVXdxeVFicV9kTjY4bnlHa295MjlFVlYyYzQ4VGp4NXBPbWlLM2RDUkdocWZ3VHU0R0lKTTFtWElhbHMtQXdhREZLc203d3dpMzI4UTFSUGN2em5QM2ZQMC1aZkZrMUx5YUNTZXJmbE90dmxSNVVrTVpUYXFoOTFUT1VZRWx3ZWNjOENjSzNYdWJFeGtLZlBGTnZWS0Q4aFd0MWxORTA5dWIxdw)）
+**今日定性导语**：A股小幅高开后震荡上行，三大指数涨超0.6%，科技成长与红利风格共振；美股延续上日涨势，半导体板块领涨，纳指再涨2.26%，AMD首破万亿市值；港股微涨0.6%，恒科指数据暂缺。市场关注点集中于：美联储10月加息概率升至56.5%；习近平本周访美，"习特二会"将讨论经贸与AI合作，中美或延长关税休战；AI算力产业链Q3业绩持续兑现，近40家上市公司预告三季高增长；A股中期分红创历史新高，875家公司拟派现超7200亿元，高股息策略吸引力仍存。
 
 ---
 
-### 🇭🇰 联合早报（中港台视角）
+## 一、市场全景
 
-11. **习特会前 中国据悉再购26万吨美国大豆**：中国国企上周订购约26万吨美国大豆，本销售季采购总量接近1300万吨，超出华盛顿所要求年采购2500万吨目标的一半。（[联合早报](https://www.zaobao.com/news/china/story20260921-9712147)）
+#### A股收盘（9月21日）
 
-12. **海南文昌打造世界级航天旅游目的地**：海南省航天旅游平台组建提速，文昌定位为"航天旅游之都"，正在推进商业化项目落地与文旅业态创新。（[联合早报](https://www.zaobao.com/news/china/story20260921-9712577)）
+📊
 
-13. **首对澳门出生熊猫拟11月初赴成都**：大熊猫"健健""康康"预计11月初启程赴成都大熊猫繁育研究基地，养护团队正安排适应性训练。（[联合早报](https://www.zaobao.com/news/china/story20260921-9711138)）
+| 指数 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| 上证指数 | 3949.91 | **↑0.97%** |
+| 深证成指 | 13730.02 | **↑0.65%** |
+| 沪深300 | 4539.57 | 数据暂不可得 |
+| 科创50 | 1657.48 | 数据暂不可得 |
+| 创业板指 | 3399.59 | 数据暂不可得 |
 
-14. **张又侠、刘振立严重违纪违法被开除党籍军籍**：中共中央军委副主席张又侠、原联合参谋部参谋长刘振立被通报严重违纪违法，被开除党籍和军籍。（[联合早报](https://www.zaobao.com/news/china/story20260921-9711541)）
+A股整体延续反弹节奏，上证指数收复3950点关口，成交额维持近万亿水平；深成指小幅收红，科创与创业板指数数据源暂缺。市场风格呈现双轮驱动：一方面AI算力与半导体产业链景气度持续兑现，公募加大产品布局；另一方面政策与并购催化券商板块活跃，近30家上市券商已召开业绩说明会，行业集中度提升趋势明确。
 
-15. **下午察："奔赴战场战斗" 长沙对电动车重拳出击**：长沙上百名交警铁骑夜间集结，对电动自行车逆行、超速乱象开展专项整治行动。（[联合早报](https://www.zaobao.com/news/china/story20260921-9711675)）
+#### 美股收盘（9月22日凌晨）
 
-16. **蔡天凤碎尸案今在香港高等法院开审**：香港名媛蔡天凤碎尸案进入审前聆讯阶段，三名被告认罪态度成焦点，案件将遴选陪审团后正式开庭。（[联合早报](https://www.zaobao.com/news/china/story20260921-9710859)）
+📊
 
-17. **评估施政与连任 北京据报正收集香港特首评价意见**：香港《经济日报》报道，北京已着手收集各方对李家超施政成效的评价，为其连任评估做准备。（[联合早报](https://www.zaobao.com/news/china/story20260921-9711055)）
+| 指数 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| 道琼斯工业 | 52048.83 | **↑0.71%** |
+| 标普500 | 7764.70 | **↑1.49%** |
+| 纳斯达克综合 | 27122.09 | **↑2.26%** |
 
-18. **广东省人大常委会党组成员覃伟中被查**：中纪委监委通报，覃伟中涉嫌严重违纪违法接受审查调查，其此前刚从深圳市市长岗位履新。（[联合早报](https://www.zaobao.com/news/china/story20260921-9711004)）
+美股延续强势，三大指数集体走高，费城半导体指数单日涨4.29%为8月以来最佳表现，ARM、英特尔等多只半导体股暴涨超10%，AMD市值首破1万亿美元大关；市场同时出现技术面警示——据CNBC援引数据，标普500日内换手率出现1999年以来罕见变化，部分资金对当前高位谨慎情绪升温。
 
-19. **设空壳公司骗取千万政府退税补贴 湖南法院判男子监禁14年**：湖南宁乡市法院通报一起虚报出口骗取退税案，涉案男子被判14年监禁并处罚金1800万元。（[联合早报](https://www.zaobao.com/news/china/story20260921-9710886)）
+#### 港股收盘（9月21日）
 
-20. **重庆两男子使用滑翔伞起飞被罚**：重庆两名男子未经审批擅自从居民楼顶放飞滑翔伞，被警方依法给予行政处罚。（[联合早报](https://www.zaobao.com/news/china/story20260921-9710746)）
+📊
+
+| 指数 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| 恒生指数 | 24750.78 | **↑0.60%** |
+| 恒生中国企业指数 | 8225.40 | **↑0.61%** |
+| 恒生科技指数 | 数据暂不可得（东财+yfinance均失败） | — |
+
+港股整体窄幅上行，恒指稳守24700点上方，但恒生科技指数因数据源异常暂缺；富时A50期指夜盘收涨0.29%至14653点，反映隔夜美股行情对早盘偏暖支撑。
+
+#### 全球其他市场（欧股 / 日经 / 韩股 / 德股 / 英股 / 法股）（9月22日凌晨）
+
+> ⚠️ 欧洲STOXX 600 数据暂不可得（东财与 yfinance/Yahoo 财经均暂不可得），以最新可得为准。
+
+📊
+
+| 指数 | 代码 | 最新价 | 涨跌幅 |
+|------|------|--------|--------|
+| 日经225 | N225 | 65018.95 | **↑1.38%** |
+| 韩国KOSPI | KOSPI | 6894.23 | **↑2.66%** |
+| 欧洲STOXX 600 | SXXP | 数据暂不可得 | — |
+| 德国DAX | GDAXI | 25304.06 | **↓1.60%** |
+| 英国富时100 | FTSE | 10739.01 | **↑0.75%** |
+| 法国CAC40 | FCHI | 8065.02 | **↓1.49%** |
+
+全球市场分化明显：亚太延续涨势，韩国KOSPI大涨2.66%领跑，日本日经225同步走强；欧洲市场则明显走弱，德国DAX与法国CAC40双双下跌超1.4%，反映欧元区制造业PMI疲软预期。
+
+#### 大宗商品与汇率
+
+📊
+
+| 品种 | 最新价/值 | 涨跌幅 |
+|------|-----------|--------|
+| WTI原油 | 91.92 美元/桶 | **↓0.49%** |
+| COMEX黄金 | 4389.10 美元/盎司 | **↑0.12%** |
+| 布伦特原油 | 78.99 美元/桶 | **↓0.38%** |
+| COMEX白银 | 66.64 美元/盎司 | **↑0.34%** |
+| 美元/离岸人民币 | 6.6929 | — |
+| 中国10Y国债收益率 | 1.6829% | — |
+| 美国10Y国债收益率 | 4.96% | — |
+
+大宗商品价格整体承压，WTI与布伦特原油连续第四个交易日下挫，受美国-伊朗局势缓和预期及美国至9月5日当周ADP就业数据利好需求减弱影响；国际贵金属期货普遍收跌，COMEX黄金期货跌0.99%至4381美元/盎司，但亚洲时段现货黄金小幅回升至4350美元附近。离岸人民币较上周五纽约尾盘上涨26点至6.6929，最近三个交易日累计升值约0.3%。
 
 ---
 
-## 二、深度观察专栏（法广中文 | 原文直出）
+#### 估值水位与情绪
 
-### 汽车行业危机：德国金属工业工会呼吁周一全国汽车工人举行抗议
+📊
 
-周一，德国汽车业工人举行全国性抗议活动。日前，欧洲最大汽车制造商大众汽车发布了一份令人震惊的盈利预警，凸显了该行业正面临高昂成本及来自亚洲竞争对手的激烈挑战所带来的前所未有的困境。
+| 指数 | PE(TTM) | PE分位 | PB | PB分位 | 股息率 | 估值结论 |
+|------|---------|--------|-----|--------|--------|---------|
+| 红利低波 | 8.44 | 77.36% | 0.87 | 61.40% | 4.41% | 股息稳健 |
+| 中证红利 | 8.59 | 78.68% | 0.85 | 49.52% | 4.27% | 股息稳健 |
+| 中证白酒 | 19.51 | 12.76% | 3.92 | 1.48% | 4.70% | 深度低估 |
+| 沪深300 | 13.49 | 67.20% | 1.42 | 41.12% | 2.64% | 极贵 |
+| 中证500 | 33.59 | 79.84% | 2.43 | 78.52% | 1.33% | 偏贵 |
+| 创业板指 | 38.66 | 33.32% | 5.42 | 61.84% | 0.96% | 中性偏贵 |
+| 科创50 | 136.19 | 80.27% | 7.90 | 93.75% | 0.23% | 极贵 |
+| 恒生科技 | 23.42 | 39.10% | 2.38 | 19.99% | 1.04% | 偏低 |
+| 中概互联50 | 16.78 | 4.92% | 1.98 | 0.96% | 1.12% | 深度低估 |
+| 纳斯达克100 | 30.48 | 48.76% | 9.42 | 83.72% | 0.44% | 偏高 |
+| 标普500 | 25.16 | 57.16% | 5.52 | 94.52% | 1.03% | PB极贵 |
 
-无论是在沃尔夫斯堡、茨维考还是斯图加特，德国金属工业工会周一都呼吁汽车行业的工人举行抗议活动。该工会抗议公司不断削减员工工资。据德国《每日新闻》报导，超过200个地点计划举行抗议活动。
+---
 
-据悉，此次抗议活动以"着眼未来而非大幅裁员——团结是我们最强大的品牌"为口号，其重点将放在维护德国汽车工业上。德国金属工业工会已号召全国各州的汽车制造商和供应商的员工采取行动。工会计划举办200多场活动，包括内部工作会议、午休抗议、游行和公众集会。预计将有超过10万人参与。
+## 二、行业洞察
 
-针对在大众汽车、宝马及零部件供应商博世的抗议活动，正值德国的这一支柱产业面临痛苦的裁员、潜在的生产转移甚至工厂关闭之际；这种危机感也反映在了周日举行的两场州选举结果中。
+#### 全球 Top20（RSS 驱动：谷歌 精选 ≤10 + 联合早报 ≤10，独立不补位）
 
-仅大众汽车一家就计划再裁减5万个工作岗位，这是其本月早些时候与利益相关方达成的一项史上最大规模重组计划的一部分；此举避免了与势力强大的工会爆发全面冲突，尽管工会方面仍不断呼吁公司管理层解决当前存在的问题。
+**① 谷歌精选（10条）**
 
-大众汽车劳工委员会主席卡瓦洛（Daniela Cavallo）与德国金属工业工会主席本纳（Christiane Benner）呼吁：加强针对来自中国的不公平竞争的保护措施，实施更有效的欧盟补贴政策，并延续分阶段退休计划。
+1. **AMD市值首破1万亿美元**：半导体板块延续强势，AMD股价涨约10%至历史新高，市值首次突破1万亿美元大关，成为全球第16大上市公司；费城半导体指数涨4.29%，创8月以来最佳单日表现。ARM、英特尔等个股同步大涨超10%。（[qz.com](https://news.google.com/rss/articles/CBMib0FVX3lxTE1RcXpsQ1ZUMU05dWZIbFEtVmJrbl9mdy1MT3lHVGVSS2ZyMlMxWE9aOFBaQUlTaGRwSWhmeHA4Vm5zNEVTaXBGZ05Qak5jbUxaaEpWVC1oSGtiMnM4NlBPWm5ncG5ZdVE1blg2c3h5TQ?oc=5)）
 
-抗议者们抱怨说，员工们正承受着行业危机的重压。本纳在行动日当天表示，"我们目前正经历着对汽车行业工人前所未有的攻击"，并指"这种情况必须停止"。德国的汽车制造商和零部件供应商不仅已经削减了数千个工作岗位，该工会还担心未来会进一步裁员，并明确要求："不得动摇每周35小时工作制！"
+2. **黄仁勋回应AI末日论：2030不会是世界末日**：英伟达CEO在Climate Week讲话中表示，AI将在未来十年推动全球经济增长，驳斥了技术悲观主义者的末日叙事，强调AI是应对气候挑战的关键工具。[Fox Business](https://news.google.com/rss/articles/CBMirwFBVV95cUxQSTJuMm1GdmJFb1ZnQ1VwdDNneE1iQjFzNXk1YXhrMnk5ZmtFUkl5aUN3eDFNekJyXzBtVUtLNDdsdmphTWc4TG82TldlNnphRVprUkx2cVNZZ0tkQVFrUVBEUGxFdkdiN0l5QnRXRXo3YTFmZTlfS0F4VVpDRVE0THo5N2VPUFlnR3kyc1h1RzRIQm5CaW13QnJIc1hheDlsRTJlZ3dUcTZRaXFyaE1v0gG0AUFVX3lxTE1TQnVMcVh1TFVrSXdVM043Ulc4amZrcnNZNGh5M3JnZVFXendKUjBYb2lVVTdoWloxMVZKQUg2elN3NXFLQzhLV3V5NG1lSngwalRDclNUaUhTQkcwNm9pMmJ2ZDJyd1l1MThNdVhJdmZDOXFoQ3g1WWoxSm02Uk1GWEhGc2RtZXdVZlJGcENJTjhmZFRsYWF0TGdPMUZaU1pCWEtZZE5aVGdrMm5NNW5aZGRseQ?oc=5)
 
-此外，各方呼吁企业再次加大对德国本土基地的投资力度，特别是在电池制造、自动驾驶和现代化生产设施等领域。同时，还需要推出更多高产量的车型，以确保工厂保持较高的产能利用率。"投资生产基地，而非向股东发放意外红利！"——是该工会提出的口号。
+3. **比特币突破8.5万美元**：比特币因空头挤压反弹，当日触发约6.48亿美元空头仓位清算，价格触及自今年1月以来最高水平86000美元；市场对"加密寒冬"是否结束展开争论。[CoinDesk](https://news.google.com/rss/articles/CBMiwwFBVV95cUxOd0RPR0JvUEtmZWxFdkZqN1o0R1kwbDlOTTY1MmQxYXYwY1FOOWJDUzQyUEJMbUl1eGdHTTQ1SmlhbUphRnlrenpZVzV0dXI4Mk1RTktwRlB0aktteGVOVVhMcDFxV21nODJ2N2NQWXNqaVc1VUJiVHJDWW5ZS1pNTDhBdVNFQ0UzaHExSkhkaDFMLTgxYXdURWx5bUJoRURFZEJYWjFoUC1DM3E5NzBBTUFCN3E4Z2hYWkhjc0xZQUlzRTA?oc=5)
 
-本纳在大众汽车位于沃尔夫斯堡的总部对员工们表示："我们期望企业领导层和管理团队能够承担起责任——既要对作为汽车大国的德国负责，也要对员工及就业岗位负责"。
+4. **巴菲特告别信发布：给出最"致命"的4字投资建议**：巴菲特发布告别信，其中一句4字投资建议引发市场广泛关注，被称为"我见过最深刻的投资建议"；信中包含其对伯克希尔未来治理安排的详细安排。[The Motley Fool](https://news.google.com/rss/articles/CBMilwFBVV95cUxNNldFdTJrTUFJV01tenF1R3d6d0ljWlRZQnB4WFo1aGNuOC1kVzBnNXhndy1YaGp4QWpEOWZvUi1RN1gxbUdRejVsdml3YXUyY1pyc3I4cFpuZ3Y1Wk4xNnlXcVJ1VkFMbzlIeDZHOEdDRmZvcWNsY1A1VFZMZjV4T29lLS1VTVpnQ2ZjYzhhN0xDSzFQUDVr?oc=5)
 
-卡瓦洛也呼吁德国政界人士承担责任，并表示"现在最迫切需要解决的四个问题是政界人士必须终于要解决的：第一，对中国混合动力汽车征收反补贴税。第二，工业用电价格必须作出改变。而且这一次，必须是下调！第三，我们终于需要一项名副其实的欧盟范围内的补贴政策。中国、加拿大、美国——他们都走在前列。而德国得到的却少得可怜。第四，柏林的政界人士需要坦诚面对分阶段退休的问题。他们是否打算像'养老金委员会'提议的那样，废除区块模式？"
+5. **华尔街表面光鲜下的隐忧：标普500出现1999年以来罕见信号**：尽管标普500创历史新高，但技术分析显示市场内部出现类似1999年互联网泡沫时期的预警信号——多数股票相对强弱恶化，领涨股广度转弱，暗示上涨动能正在衰减。[CNBC](https://news.google.com/rss/articles/CBMixAFBVV95cUxNWHI2dUs1VHRMaTBYUTdCODVvYUllNkdEVlJXMUs3eTFGZlVQM2hDbGFJMjRQU0hkd3JyQllXUnNOZjU1Y081S0Z4emk3RXdITlU5VjN4UU96YjhsTmpIVkF0cUkwWThGZHZvZmM1a0c2TnVabl9MZ0ljMC1sTmNlOUpLYlJ1OTlncElCQ2hRMGZRc0I5Uk9SMG9TLS1GdTBfdFZjdWdBZ3gwZGJGUmpieUtoVTJjaFRnUXZ1Vm9pZy0tSU1L0gHKAUFVX3lxTE9BZTVLUmhnOExPQlc2LWRvZ2dBVHFNaXVOaWRWRTZRT2V6UDhNamVzYmUzb28zMW16VmY2ejdfMXBVYVZ1c3o2VnU0OXNaQ25RQk9wbV81aGZJRDFmbUpKc2oyVy0zcnhMdFBkdmtseUk5dkJ3eW9UeVhJcnZveWlTSG41dWI1WklGWWIxTmZXdkd3T0ZyM1N2aVg0b2lDOTNfdW1QNnVJaTdyWmxLUmtYeGk0dWlxWGxGUlhzbzBRTWlCbTVObWdpY0E?oc=5)
 
-欧洲汽车制造商正面临来自亚洲竞争对手在本土及海外市场的日益激烈的竞争，这对大众汽车构成了严峻挑战；该公司目前已深陷欧洲产能过剩、美国关税以及中国市场利润大幅下滑等多重困境之中。
+6. **惠誉给予特斯拉BBB发行人违约评级，展望稳定**：惠誉首次给予特斯拉BBB级发行人违约评级，肯定其作为全球BEV领导者的市场地位，同时指出公司向实体AI转型的战略重点，但也警告大规模资本支出可能推动中期自由现金流转负。[格隆汇](https://www.gelonghui.com/live/2681542)
 
-大众汽车上周五下调了2026年的利润率预期，最高仅为1%。公司将此归咎于中国市场表现疲软、退休相关拨备增加，以及对其旗下保时捷跑车品牌前景预期的转趋审慎。
+7. **欧盟就延长对俄制裁达成一致，同意延长三年**：欧盟成员国正式就延长对俄制裁措施达成共识，相关制裁措施将再延长三年。欧盟外交与安全政策高级代表卡拉斯表示，随着俄罗斯冒险升级，欧盟需施加更大成本压力。[格隆汇](https://www.gelonghui.com/live/2681535)
 
-导致这一局面的部分原因是，市场对利润率较低的电动汽车需求增长较快，这凸显出该行业仍持续依赖几十年来支撑德国这一欧洲最大经济体的内燃机技术。
+8. **FAA推出AI辅助空中交通管理工具**：美国联邦航空管理局（FAA）正式发布一款AI驱动的空中交通管理工具，旨在应对持续的设备故障和航班延误问题；此前费城等东北部机场因光纤中断一度实施地面停飞管制。[Politico](https://news.google.com/rss/articles/CBMiggFBVV95cUxNQ3QyOUNjTFJ0Qm9uWXNFWmZEV0RzS3ZYN2hzVmdHYWItdFFTVC04eFB3Z21GMWt1U25jd1RvNnl6bXFydGlaUmdYWGxTQy1JZnl2ZWNjTjJpczRNWkZISHVPd0hLRnNUSXdjOXBTUzM5b0l5MDhvd2F0cHhEY2hHdnhB?oc=5)
 
-德国金属工业工会巴伐利亚分会主席奥特（Horst Ott）表示："由于倦怠和灾难性的误判，大多数管理人员未能跟上电动出行、数字化和电池技术的发展步伐，从而导致德国汽车及零部件产业陷入落后境地"。
+9. **特朗普施压要求禁止美国柴油出口，共和党议员发声**：美国多位共和党领袖敦促特朗普政府在中期选举前禁止柴油出口，称记录在案的高柴油价格正冲击农民与卡车司机群体，农业与能源行业就此展开激烈交锋。[ft.com](https://news.google.com/rss/articles/CBMihAFBVV95cUxPMGhjWlc5OTFjM0pISHJDTDVvdlBzWEJxNml2d05ObzdDYkhaYTM0V0Y4TDdXMG1aM2hxRW16c2hFV3Y5cm1MYlJISDdiMmNKYnNISWtvdkFQQ292UDl6ejc5bkRicFRON2tSSXpNb3kyNWQzaWpveWREb0kzRE5CWjd1V2Y?oc=5)
 
-（[法广中文](https://www.rfi.fr/cn/%E7%BB%8F%E8%B4%B8/20260921-%E6%B1%BD%E8%BD%A6%E8%A1%8C%E4%B8%9A%E5%8D%B1%E6%9C%BA-%E5%BE%B7%E5%9B%BD%E9%87%91%E5%B1%9E%E5%B7%A5%E4%B8%9A%E5%B7%A5%E4%BC%9A%E5%91%BC%E5%90%81%E5%91%A8%E4%B8%80%E5%85%A8%E5%9B%BD%E6%B1%BD%E8%BD%A6%E5%B7%A5%E4%BA%BA%E4%B8%BE%E8%A1%8C%E6%8A%97%E8%AE%AE)）
+10. **Climate Week：清洁能源希望与AI不确定性并存**：本周气候周讨论聚焦于清洁能源转型的机遇，同时AI带来的能源需求激增引发担忧——谷歌与佐治亚州达成电力供应协议，凸显数据中心对电力的巨大消耗。[AP News](https://news.google.com/rss/articles/CBMinAFBVV95cUxNaEE1bjlaME9fOXRpcmJBNGpnUFpWZmM5R1U3SDdTQTJRSzVvaTRZLXEyU21GekYzYjdqYTRjUFJHM3gyRU5vcFpVZWFhbXZHMEZOaEc0WWd6eGJOek9MYk53TmdmaXM3cHl3bmJwQTB2bEFLUmZIbkJjcHZFZFl1NjY3bFFYb09LbkhXb3ZFZzNwVExfMmI3Vm96Z2w?oc=5)
+
+**② 联合早报精选（10条）**
+
+2. **习近平本周三至五访美，学者：华盛顿会晤或延长中美贸易休战**：外交部证实习近平应特朗普邀请将于23日至25日访美，期间"习特二会"将重点讨论贸易与AI合作，预计将延长去年10月釜山峰会达成的一年期贸易休战，并敲定11月深圳"习特三会"及12月迈阿密"习特四会"日程。（[联合早报](https://www.zaobao.com/news/china/story20260922-9712778)）
+
+3. **习特会前中国据悉再购26万吨美国大豆**：北京在首脑会晤前进一步兑现农产品采购承诺，国企上周订购四批约26万吨美国大豆，拟于12月至明年1月装船，本季累计采购量接近1300万吨，约占华盛顿承诺目标的一半。（[联合早报](https://www.zaobao.com/news/china/story20260921-9712147)）
+
+4. **中德外长通话：王毅称中欧是全面战略伙伴不应打贸易战**：王毅与德国外长瓦德富尔通话，呼吁德国在欧盟内发挥建设性作用，推动摒弃保护主义，坚持开放合作，为中德关系及中欧关系释放积极信号。（[联合早报](https://www.zaobao.com/news/china/story20260922-9713128)）
+
+5. **赖清德政府首位部长赴大陆**：台湾劳动部长洪申翰赴南京出席APEC人力资源发展部长会议，成为赖清德2024年上任以来首位赴陆部长，岛内舆论对此解读不一，或将APEC惯例视为破冰指标，也有观点认为两岸角力焦点在11月深圳APEC经济领袖会议。（[联合早报](https://www.zaobao.com/news/china/story20260921-9712710)）
+
+6. **海南文昌打造世界级航天旅游目的地**：海南省航天旅游平台组建工作提速，经营主体已签订合作协议，聚焦商业化项目落地、文旅业态创新等方向，文昌定位为"航天旅游之都"。（[联合早报](https://www.zaobao.com/news/china/story20260921-9712577)）
+
+7. **湖南邵阳"远洋捕捞"上海老板被质疑"跨省敲诈"**：湖南邵阳县警方被曝对上海企业负责人实施"远洋捕捞"式执法，办案人员提及"县财政困难"并将涉案款项与解决当地财政相联系，涉事官员去年已被免职，相关词条冲上微博热搜。（[联合早报](https://www.zaobao.com/news/china/story20260921-9712547)）
+
+8. **中化集团原副总经理冯志斌涉受贿滥用职权被判监19年**：大庆中院一审宣判，冯志斌犯受贿罪判处有期徒刑14年并处罚金600万元，利用影响力受贿罪判8年并处罚金100万元，国有公司人员滥用职权罪判5年，数罪并罚执行有期徒刑19年，犯罪所得财物依法追缴。（[联合早报](https://www.zaobao.com/news/china/story20260921-9713065)）
+
+9. **谌贻琴：中国政府愿与各方共同促进高质量充分就业**：第八届APEC人力资源开发部长会在南京举行，谌贻琴出席开幕式并表示，中国政府愿践行亚太合作初心，投资于人、强化政策协调，推动国际高水平人才交流合作。（[联合早报](https://www.zaobao.com/news/china/story20260921-9712869)）
+
+10. **"习特二会"前的台湾不安**：学者分析认为，台湾议题将被讨论但未必是焦点，因为经贸、稀土等议题已足够两强忙碌；台北方面的不安源自无法预判缓和安排会为台湾留下多少空间。（[联合早报](https://www.zaobao.com/news/china/story20260922-9709855)）
+
+---
+
+#### 持仓动态与聚焦
+
+##### 个人持仓行情快照
+
+📊
+
+| 标的 | 代码 | 市场 | 最新价 | 涨跌幅 |
+|------|------|------|--------|--------|
+| 招商银行A | 600036 | A股 | 41.04 元 | **↑1.11%** |
+| 招商银行H | 03968 | 港股 | 52.10 港元 | **↑1.76%** |
+| 长江电力 | 600900 | A股 | 28.10 元 | **↓0.60%** |
+| 红利低波ETF易方达 | 563020 | A股 | 1.165 元 | **↑0.17%** |
+| QQQM | QQQM | 美股 | 305.27 美元 | **↑2.92%** |
+| SPY | SPY | 美股 | 773.50 美元 | **↑1.55%** |
+
+##### 持仓聚焦（未来催化）
+
+- **红利/高股息｜中期分红创新高，875家A股公司拟派现超7200亿**（财联社）
+- **券商/金融｜券商并购重组加速落地，近30家上市券商已召开业绩说明会，行业集中度持续提升**（财联社）
+- **汽车/新能源车｜特斯拉人形机器人量产在即，机器人团队赴拓普集团、三花智控、均胜电子审厂**（财联社）
+- **AI算力/光模块｜近40家公司预告三季度业绩，AI产业链高景气度持续兑现，公募加大算力主题布局**（上证报）
+
+---
+
+#### QDII 溢价与申购额度监测
+
+**场内ETF溢价率**
+
+> ⚠️ 净值日期为2026-09-17，较今日有所滞后，以实际披露为准。
+
+| ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
+|-----|------|-------|------------|------|
+| 纳指ETF国泰 | 513100 | **15.09%** | ↓1.19% | △溢价 |
+| 纳指ETF广发 | 159941 | **13.60%** | ↓1.27% | △溢价 |
+| 纳斯达克100ETF招商 | 159659 | **11.21%** | ↓1.13% | △溢价 |
+| 标普500ETF博时 | 513500 | **10.05%** | ↓1.06% | △溢价 |
+| 标普500ETF南方 | 513650 | **9.89%** | ↓0.41% | △溢价 |
+| 标普500ETF国泰 | 159612 | **9.38%** | ↓0.49% | △溢价 |
+
+QDII溢价整体偏高，**纳指ETF国泰溢价最高约15.09%**，六只ETF均呈溢价状态，对比昨日全部收窄，提醒注意溢价回落风险。
+
+**场外QDII申购额度**
+
+| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
+|------|------|---------|---------|-----------|------------|
+| 宝盈纳指100a | 019736 | 1.4925 | 限大额 | 200 元 | — |
+| 宝盈纳指100c | 019737 | 1.4820 | 限大额 | 200 元 | — |
+| 万家式纳指100a | 019441 | 1.6919 | 限大额 | 100 元 | — |
+| 万家式纳指100c | 019442 | 1.6807 | 限大额 | 100 元 | — |
+| 国泰纳指100 | 160213 | 4.4830 | 限大额 | 100 元 | — |
+| 大成等权标普500c | 008401 | 2.7385 | 限大额 | 100 元 | — |
+| 大成等权标普500a | 096001 | 2.7544 | 限大额 | 100 元 | — |
+| 摩根标普500a | 017641 | 1.6952 | 限大额 | 10 元 | — |
+| 摩根标普500c | 017642 | 1.6790 | 限大额 | 10 元 | — |
+| 摩根美钞标普500 | 017642 | 0.2511 | 限大额 | 0 元 | — |
+
+场外QDII额度整体偏紧：**10只均限大额，无不限购品种**，最高限额200元（宝盈纳指100），申购门槛极低。
+
+**热门全球 QDII 关注**
+
+| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
+|------|------|---------|---------|-----------|------------|
+| 华安法国CAC40 | 021540 | 1.0308 | 限大额 | 100000 元 | — |
+| 广发全球精选 | 021277 | 6.2590 | 限大额 | 10000 元 | — |
+| 华宝致远 | 008254 | 1.6946 | 限大额 | 2000 元 | — |
+| 浦银安盛全球 | 014002 | 3.5224 | 限大额 | 1000 元 | — |
+| 华安德国DAX | 015016 | 1.9330 | 限大额 | 1000 元 | — |
+| 汇添富全球移动互联 | 015202 | 5.1685 | 暂停申购 | 1000 元 | — |
+| 银华海外数字经济 | 016702 | 2.1324 | 限大额 | 1000 元 | — |
+| 华夏移动互联 | 002891 | 2.7400 | 限大额 | 100 元 | — |
+| 建信新兴市场 | 018147 | 2.3880 | 限大额 | 100 元 | — |
+| 国富全球科技互联 | 021842 | 6.8047 | 限大额 | 100 元 | — |
+| 建信富时100 | 008706 | 1.4553 | 限大额 | 10 元 | — |
+
+热门QDII申购偏紧：**1只暂停申购（汇添富全球移动互联），其余10只均限大额**，额度最高10万元（华安法国CAC40）。
+
+---
+
+**📰 数据来源**：预抓取结构化数据（data_market_cn.json / data_market_hk.json / data_market_global.json / data_forex_rate.json / data_valuation.json / data_news.json / data_extra.json / data_holdings.json / data_cls_zaobao.json），ts = 2026-09-22 06:31–06:34 北京时间
