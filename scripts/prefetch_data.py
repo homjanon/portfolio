@@ -131,7 +131,9 @@ def _ak_eastmoney(func_name, **kwargs):
         return None
 
 
-# ─── 数据源B2: 东方财富 push2 直连（market-live 同款，指数主源） ──
+_EM_LAST_TS = 0.0   # 东财上次请求时间（限速用）
+
+# ─── 数据源B2: 东方财富 push2 直连（market-live 同款；2026-09-22 起降为指数备选源） ──
 def _em_quote(secid, fields="f43,f44,f45,f46,f47,f48,f57,f58,f60,f169,f170"):
     """东方财富 push2（push2delay）按 secid 直连取指数最新行情。
     借鉴 market-live：A/港/美/全球统一走 push2delay，数据始终最新（收盘后=最新收盘）。
@@ -140,9 +142,20 @@ def _em_quote(secid, fields="f43,f44,f45,f46,f47,f48,f57,f58,f60,f169,f170"):
     try:
         url = ("https://push2delay.eastmoney.com/api/qt/stock/get"
                f"?secid={secid}&fields={fields}&invt=2&fltt=2")
+        # 2026-09-22：东财连续请求易触发风控（实测 CI 上"前 2 个成功、之后全挂"）→ 加限速
+        global _EM_LAST_TS
+        _gap = time.time() - _EM_LAST_TS
+        if _gap < 0.6:
+            time.sleep(0.6 - _gap)
         r = requests.get(url, headers={
             "User-Agent": UA,
             "Referer": "https://quote.eastmoney.com/"}, timeout=15)
+        _EM_LAST_TS = time.time()
+        if r.status_code != 200 or not (r.text or "").strip():
+            # 关键诊断信息：HTTP 状态 + 响应片段（旧版只有 JSON 解析异常，无法判断是 403 还是空响应）
+            print(f"    ⚠️ 东财 push2 {secid} HTTP {r.status_code} "
+                  f"body={repr((r.text or '')[:80])}")
+            return None
         j = r.json()
         d = j.get("data") or {}
         price = _num(d.get("f43"))
@@ -151,6 +164,7 @@ def _em_quote(secid, fields="f43,f44,f45,f46,f47,f48,f57,f58,f60,f169,f170"):
         return {
             "名称": d.get("f58") or secid,
             "代码": d.get("f57") or secid,
+            "数据日期": "",        # 东财未返回时间字段 → 视为"未知"（不参与新鲜度比较）
             "最新价": price,
             "涨跌幅": _num(d.get("f170")),
             "昨收": _num(d.get("f60")),
@@ -163,6 +177,182 @@ def _em_quote(secid, fields="f43,f44,f45,f46,f47,f48,f57,f58,f60,f169,f170"):
     except Exception as e:
         print(f"    ⚠️ 东财 push2 {secid} 失败: {e}")
         return None
+
+# ─── 数据源B3: 多源指数解析器（2026-09-22 新增）────────────────────────
+# 背景：2026-09-22 早报东财 push2 在 CI 全挂（25 次），全靠 yfinance 兜底，暴露两个问题：
+#   ① 指数链只有"东财主 + yfinance 兜"两层，中间没有实时源；
+#   ② yfinance 的港股数据滞后一整天（恒指返回 9/18 收盘 24750.78，真实 9/21 收盘 25042.71），
+#      且被静默写入报告 —— 比"数据缺失"更危险。
+# 现按 polo 批准改为：A股/港股/美股指数 腾讯首选；全球指数 yfinance 首选、东财备选。
+# 并把「数据日期」写进结果 + 两遍新鲜度校正，滞后值显式标 _stale。
+_TX_ORDER = ("腾讯", "东财", "新浪", "yfinance")
+_GLOBAL_ORDER = ("yfinance", "东财")     # 全球指数：腾讯/新浪无覆盖（新浪 int_/znb_ 实测陈旧）
+_TX_TS_FORMATS = ("%Y%m%d%H%M%S", "%Y/%m/%d %H:%M:%S", "%Y-%m-%d %H:%M:%S")
+
+
+def _tx_ts_to_date(s):
+    """腾讯时间戳 → YYYY-MM-DD（三种市场格式不同：20260921161412 / 2026/09/21 18:31:34 / 2026-09-21 16:50:57）。"""
+    from datetime import datetime
+    s = (s or "").strip()
+    for _f in _TX_TS_FORMATS:
+        try:
+            return datetime.strptime(s, _f).strftime("%Y-%m-%d")
+        except Exception:
+            pass
+    return ""
+
+
+def _tx_index_batch(pairs):
+    """腾讯批量取指数行情。pairs=[(name, tx_code)] → {name: 数据dict}
+
+    ⚠️ 腾讯响应为 v_<请求码>="..."，**无效代码不会出现在响应里** → 必须按请求码匹配，不能按位置对齐。
+    实测字段（A股/港股/美股三市场一致）：
+      [1]名称 [3]现价 [4]昨收 [5]今开 [6]成交量 [30]时间戳 [32]涨跌幅 [33]最高 [34]最低 [37]成交额
+    """
+    out = {}
+    if not pairs:
+        return out
+    try:
+        q = ",".join(c for _, c in pairs)
+        r = requests.get(f"https://qt.gtimg.cn/q={q}", headers={"User-Agent": UA}, timeout=15)
+        r.encoding = "gbk"
+        got = {}
+        for m in re.finditer(r'v_([A-Za-z0-9_.]+)="([^"]*)"', r.text or ""):
+            f = m.group(2).split("~")
+            if len(f) >= 35 and _num(f[3]) is not None:
+                got[m.group(1)] = f
+        for name, code in pairs:
+            f = got.get(code)
+            if not f:
+                continue
+            out[name] = {
+                "名称": f[1], "代码": f[2],
+                "最新价": _num(f[3]), "涨跌幅": _num(f[32]),
+                "今开": _num(f[5]), "最高": _num(f[33]), "最低": _num(f[34]),
+                "成交量": _num(f[6]), "成交额": _num(f[37]),
+                "数据日期": _tx_ts_to_date(f[30] if len(f) > 30 else ""),
+                "source": "腾讯",
+            }
+        miss = [n for n, c in pairs if c not in got]
+        if miss:
+            print(f"    ⚠️ 腾讯无数据: {', '.join(miss)}")
+    except Exception as e:
+        print(f"    ⚠️ 腾讯批量失败: {type(e).__name__}: {str(e)[:60]}")
+    return out
+
+
+def _sina_index_quote(name, code):
+    """新浪行情（第三层）。需 Referer。三种前缀字段布局不同（实测）：
+      s_    A股指数: [1]现价 [3]涨跌幅               （无日期）
+      rt_hk 港股指数: [6]现价 [8]涨跌幅               （无日期）
+      gb_$  美股指数: [1]现价 [2]涨跌幅 [3]时间(带日期)
+    """
+    if not code:
+        return None
+    try:
+        r = requests.get(f"https://hq.sinajs.cn/list={code}",
+                         headers={"Referer": "https://finance.sina.com.cn", "User-Agent": UA},
+                         timeout=12)
+        r.encoding = "gbk"
+        body = (r.text or "").strip()
+        if '=""' in body or '"' not in body:
+            return None
+        f = body.split('"')[1].split(",")
+        if code.startswith("s_") and len(f) >= 4:
+            return {"名称": f[0], "最新价": _num(f[1]), "涨跌幅": _num(f[3]),
+                    "数据日期": "", "source": "新浪"}
+        if code.startswith("gb_") and len(f) >= 3:
+            return {"名称": f[0], "最新价": _num(f[1]), "涨跌幅": _num(f[2]),
+                    "数据日期": (f[3] or "")[:10] if len(f) > 3 else "", "source": "新浪"}
+        if code.startswith("rt_hk") and len(f) >= 9:
+            return {"名称": f[1], "最新价": _num(f[6]), "涨跌幅": _num(f[8]),
+                    "数据日期": "", "source": "新浪"}
+    except Exception as e:
+        print(f"    ⚠️ 新浪 {code} 失败: {type(e).__name__}: {str(e)[:50]}")
+    return None
+
+
+def _resolve_index(name, em_secid=None, tx_code=None, sina_code=None, yf_tk=None,
+                   order=_TX_ORDER, tx_data=None, min_date=None):
+    """按 order 逐层取单个指数，返回 (数据dict, 命中源) 或 (None, None)。
+
+    min_date（新鲜度闸门）：优先返回「数据日期 >= min_date」的源；
+    若所有源都更旧，返回日期最新的那一个并置 _stale=True（供报告显式提示，而非静默写入）。
+    """
+    best = None
+    for src in order:
+        d = None
+        try:
+            if src == "腾讯" and tx_code:
+                d = (tx_data or {}).get(name) if tx_data is not None else \
+                    _tx_index_batch([(name, tx_code)]).get(name)
+            elif src == "东财" and em_secid:
+                q = _em_quote(em_secid)
+                if q and q.get("最新价") is not None:
+                    d = dict(q)
+                    d["source"] = "东财push2"
+            elif src == "新浪" and sina_code:
+                d = _sina_index_quote(name, sina_code)
+            elif src == "yfinance" and yf_tk:
+                r = _yf_fallback({name: yf_tk})
+                if name in r:
+                    d = dict(r[name])
+                    d["代码"] = yf_tk
+                    d["source"] = "yfinance"
+        except Exception as e:
+            print(f"    ⚠️ {name}／{src} 异常: {type(e).__name__}: {str(e)[:50]}")
+        if not d or d.get("最新价") is None:
+            continue
+        dt = d.get("数据日期") or ""
+        if not min_date or not dt or dt >= min_date:
+            return d, src
+        if best is None or dt > (best[0].get("数据日期") or ""):
+            best = (d, src)
+    if best:
+        best[0]["_stale"] = True
+        return best
+    return None, None
+
+
+def _collect_indices(wanted, label=""):
+    """wanted: [(name, order, em_secid, tx_code, sina_code, yf_tk)] → {name: 数据dict}
+
+    两遍式：先逐层解析；再以「本批次最新数据日期」为基准，把偏旧的行用 min_date 重挑一次源，
+    仍挑不到更新源则标 _stale。这样既省请求（正常只打腾讯一次），又能兜住 yfinance 滞后。
+    """
+    tx_pairs = [(n, t) for n, o, e, t, s, y in wanted if t]
+    tx_data = _tx_index_batch(tx_pairs) if tx_pairs else {}
+    out = {}
+    for name, order, em, tx, sina, yf in wanted:
+        d, _s = _resolve_index(name, em, tx, sina, yf, order, tx_data=tx_data)
+        if d:
+            out[name] = d
+
+    dates = [v.get("数据日期") for v in out.values() if v.get("数据日期")]
+    if dates:
+        ref = max(dates)
+        for name, order, em, tx, sina, yf in wanted:
+            d = out.get(name)
+            if not d or not d.get("数据日期") or d["数据日期"] >= ref:
+                continue
+            print(f"    ⚠️ {name} 数据日期 {d['数据日期']} 早于本批最新 {ref} → 重新挑源")
+            d2, _s2 = _resolve_index(name, em, tx, sina, yf, order,
+                                     tx_data=tx_data, min_date=ref)
+            if d2:
+                out[name] = d2
+
+    cnt, stale, miss = {}, [], []
+    for v in out.values():
+        cnt[v.get("source", "?")] = cnt.get(v.get("source", "?"), 0) + 1
+    for n, v in out.items():
+        if v.get("_stale"):
+            stale.append(n)
+    miss = [n for n, *_ in wanted if n not in out]
+    print(f"    [{label}] 取到 {len(out)}/{len(wanted)} | 来源分布 {cnt}"
+          + (f" | ⚠️ 无数据 {miss}" if miss else "")
+          + (f" | ⚠️ 滞后 _stale {stale}" if stale else ""))
+    return out
+
 
 # ─── 数据源D: 雪球蛋卷 API（PE/PB/分位/股息率全覆盖） ────────
 def _fetch_danjuan_valuation():
@@ -246,7 +436,8 @@ def _yf_fallback(ticker_map):
             if idx > 0:
                 time.sleep(1.5)  # 避免 yfinance 频率限制
             tk = yf.Ticker(ticker)
-            hist = tk.history(period="5d", auto_adjust=True)
+            # 2026-09-22：5d 对 A股指数常只回 1 根 K 线 → 涨跌幅算不出（实测沪深300/科创50/创业板指）
+            hist = tk.history(period="10d", auto_adjust=True)
             if hist is None or hist.empty:
                 continue
             close = hist['Close'].dropna()
@@ -275,111 +466,104 @@ def _yf_fallback(ticker_map):
 # 业务模块
 # ═══════════════════════════════════════════════════════════════
 
-# ─── 1. A股指数行情（不变）───────────────────────────────────
+# ─── 1. A股指数行情（2026-09-22 改造：腾讯首选 → 东财 → 新浪 → yfinance）───
+def _index_row(d, name, fallback_code=""):
+    """统一输出行：指数/代码/最新价/涨跌幅 + 可选 今开/最高/最低/成交量/成交额 + source/数据日期/_stale。"""
+    row = {"指数": name, "代码": d.get("代码") or fallback_code,
+           "最新价": d.get("最新价"), "涨跌幅": d.get("涨跌幅"),
+           "source": d.get("source")}
+    for k in ("今开", "最高", "最低", "成交量", "成交额"):
+        if d.get(k) is not None:
+            row[k] = d[k]
+    if d.get("数据日期"):
+        row["数据日期"] = d["数据日期"]
+    if d.get("_stale"):
+        row["_stale"] = True
+    return row
+
+
 def fetch_market_cn():
-    """上证/深证/沪深300/科创50/创业板指 — 东财push2主源 + yfinance兜底"""
+    """上证/深证/沪深300/科创50/创业板指 — 腾讯首选 → 东财 → 新浪 → yfinance"""
     WANTED = [
-        ("上证指数",   "1.000001", "000001.SS"),
-        ("深证成指",   "0.399001", "399001.SZ"),
-        ("沪深300",    "1.000300", "000300.SS"),
-        ("科创50",     "1.000688", "000688.SS"),
-        ("创业板指",   "0.399006", "399006.SZ"),
+        ("上证指数",  _TX_ORDER, "1.000001", "sh000001", "s_sh000001", "000001.SS"),
+        ("深证成指",  _TX_ORDER, "0.399001", "sz399001", "s_sz399001", "399001.SZ"),
+        ("沪深300",   _TX_ORDER, "1.000300", "sh000300", "s_sh000300", "000300.SS"),
+        ("科创50",    _TX_ORDER, "1.000688", "sh000688", "s_sh000688", "000688.SS"),
+        ("创业板指",  _TX_ORDER, "0.399006", "sz399006", "s_sz399006", "399006.SZ"),
     ]
-    rows, yf_map = [], {}
-    for name, secid, yf_tk in WANTED:
-        q = _em_quote(secid)
-        if q and q.get("最新价") is not None:
-            rows.append({
-                "指数": name, "代码": secid.split(".")[-1],
-                "最新价": q["最新价"], "涨跌幅": q["涨跌幅"],
-                "今开": q.get("今开"), "最高": q.get("最高"),
-                "最低": q.get("最低"), "成交量": q.get("成交量"),
-                "成交额": q.get("成交额"), "source": "东财push2",
-            })
+    idx = _collect_indices(WANTED, "A股指数")
+    rows = []
+    for name, _o, _e, _t, _s, yf_tk in WANTED:
+        d = idx.get(name)
+        if not d:
+            rows.append({"指数": name, "代码": yf_tk,
+                         "error": "腾讯+东财+新浪+yfinance 均失败", "_stale": True})
         else:
-            yf_map[name] = yf_tk
-    if yf_map:
-        yf_data = _yf_fallback(yf_map)
-        for name, secid, yf_tk in WANTED:
-            if name in yf_map and name in yf_data:
-                d = yf_data[name]
-                rows.append({"指数": name, "代码": yf_tk,
-                             "最新价": d["最新价"], "涨跌幅": d["涨跌幅"],
-                             "source": "yfinance兜底"})
-            elif name in yf_map:
-                rows.append({"指数": name, "代码": yf_tk,
-                             "error": "东财+yfinance均失败"})
+            rows.append(_index_row(d, name, yf_tk))
     return _ok(rows)
 
 
-# ─── 2. 港股指数行情（不变）──────────────────────────────────
+# ─── 2. 港股指数行情（2026-09-22 改造：腾讯首选；yfinance ticker 修正）────────
 def fetch_market_hk():
-    """恒生指数 + 恒生中国企业指数 — 东财push2主源 + yfinance兜底"""
+    """恒生指数 + 恒生中国企业指数 + 恒生科技指数 — 腾讯首选 → 东财 → 新浪 → yfinance
+
+    ⚠️ 2026-09-22：原 yfinance ticker `^HSTECH` 在 Yahoo 无效 → 恒生科技长期拿不到兜底值，
+    已改为 `HSTECH.HK`（Yahoo 官方页实测 9/21 收 4423.29，与腾讯一致）。
+    """
     WANTED = [
-        ("恒生指数", "100.HSI", "^HSI"),
-        ("恒生中国企业指数", "100.HSCEI", "^HSCE"),
-        ("恒生科技指数", "124.HSTECH", "^HSTECH"),
+        ("恒生指数",         _TX_ORDER, "100.HSI",     "hkHSI",    "rt_hkHSI",    "^HSI"),
+        ("恒生中国企业指数", _TX_ORDER, "100.HSCEI",   "hkHSCEI",  "rt_hkHSCEI",  "^HSCE"),
+        ("恒生科技指数",     _TX_ORDER, "124.HSTECH",  "hkHSTECH", "rt_hkHSTECH", "HSTECH.HK"),
     ]
-    rows, yf_map = [], {}
-    for name, secid, yf_tk in WANTED:
-        q = _em_quote(secid)
-        if q and q.get("最新价") is not None:
-            rows.append({
-                "指数": name, "代码": secid,
-                "最新价": q["最新价"], "涨跌幅": q["涨跌幅"],
-                "今开": q.get("今开"), "最高": q.get("最高"),
-                "最低": q.get("最低"), "source": "东财push2",
-            })
+    idx = _collect_indices(WANTED, "港股指数")
+    rows = []
+    for name, _o, _e, _t, _s, yf_tk in WANTED:
+        d = idx.get(name)
+        if not d:
+            rows.append({"指数": name, "代码": yf_tk,
+                         "error": "腾讯+东财+新浪+yfinance 均失败", "_stale": True})
         else:
-            yf_map[name] = yf_tk
-    if yf_map:
-        yf_data = _yf_fallback(yf_map)
-        for name, secid, yf_tk in WANTED:
-            if name in yf_map and name in yf_data:
-                d = yf_data[name]
-                rows.append({"指数": name, "代码": yf_tk,
-                             "最新价": d["最新价"], "涨跌幅": d["涨跌幅"],
-                             "source": "yfinance兜底"})
-            elif name in yf_map:
-                rows.append({"指数": name, "代码": yf_tk,
-                             "error": "东财+yfinance均失败"})
+            rows.append(_index_row(d, name, yf_tk))
     return _ok(rows)
 
 
-# ─── 3. 全球主要指数（东财push2主源 + yfinance兜底）──
+# ─── 3. 全球主要指数（2026-09-22：美股走腾讯链；全球指数 yfinance 首选、东财备选）──
 def fetch_market_global():
-    """美股(DJI/SPX/IXIC) + 全球(日经/KOSPI/STOXX) — 东财push2主源 + yfinance兜底"""
+    """美股(DJI/SPX/IXIC) + 全球(日经/KOSPI/STOXX/DAX/富时/CAC)
+
+    分层依据（实测）：腾讯覆盖 A股/港股/美股，但**无全球指数**；
+    新浪 int_/znb_ 系列实测陈旧（int_nikkei 44946 而真实 ≈65019）→ 全球指数不用新浪。
+    故全球指数＝ yfinance 首选（实测有效）→ 东财备选（CI 当前不可靠）。
+
+    ⚠️ 2026-09-22：原 `^SXXP` 在 Yahoo 无效 → STOXX 600 长期缺失，已改为 `^STOXX`。
+    """
     WANTED = [
-        ("道琼斯工业",   "100.DJIA", "^DJI"),
-        ("标普500",      "100.SPX",   "^GSPC"),
-        ("纳斯达克综合", "100.NDX",  "^IXIC"),
-        ("日经225",      "100.N225",  "^N225"),
-        ("KOSPI",        "100.KS11",   "^KS11"),
-        ("STOXX 600",    "100.SXXP",   "^SXXP"),
-        ("德国DAX",      "100.GDAXI", "^GDAXI"),
-        ("英国富时100",  "100.FTSE",  "^FTSE"),
-        ("法国CAC40",    "100.FCHI",  "^FCHI"),
+        ("道琼斯工业",   _TX_ORDER,     "100.DJIA",  "usDJI",  "gb_$dji",  "^DJI"),
+        ("标普500",      _TX_ORDER,     "100.SPX",   "usINX",  "gb_$inx",  "^GSPC"),
+        ("纳斯达克综合", _TX_ORDER,     "100.NDX",   "usIXIC", "gb_$ixic", "^IXIC"),
+        ("日经225",      _GLOBAL_ORDER, "100.N225",  None, None, "^N225"),
+        ("KOSPI",        _GLOBAL_ORDER, "100.KS11",  None, None, "^KS11"),
+        ("STOXX 600",    _GLOBAL_ORDER, "100.SXXP",  None, None, "^STOXX"),
+        ("德国DAX",      _GLOBAL_ORDER, "100.GDAXI", None, None, "^GDAXI"),
+        ("英国富时100",  _GLOBAL_ORDER, "100.FTSE",  None, None, "^FTSE"),
+        ("法国CAC40",    _GLOBAL_ORDER, "100.FCHI",  None, None, "^FCHI"),
     ]
-    result, yf_map = {}, {}
-    for name, secid, yf_tk in WANTED:
-        q = _em_quote(secid)
-        if q and q.get("最新价") is not None:
-            result[name] = {"名称": name, "代码": secid,
-                            "最新价": q["最新价"], "涨跌幅": q["涨跌幅"],
-                            "source": "东财push2"}
-        else:
-            yf_map[name] = yf_tk
-    if yf_map:
-        yf_data = _yf_fallback(yf_map)
-        for name, secid, yf_tk in WANTED:
-            if name in yf_map and name in yf_data:
-                d = yf_data[name]
-                result[name] = {"名称": name, "代码": yf_tk,
-                                "最新价": d["最新价"], "涨跌幅": d["涨跌幅"],
-                                "source": "yfinance兜底"}
-            elif name in yf_map and name not in result:
-                result[name] = {"名称": name, "代码": yf_tk,
-                                "error": "东财+yfinance均失败", "_stale": True}
+    idx = _collect_indices(WANTED, "全球指数")
+    result = {}
+    for name, _o, _e, _t, _s, yf_tk in WANTED:
+        d = idx.get(name)
+        if not d:
+            result[name] = {"名称": name, "代码": yf_tk,
+                            "error": "yfinance+东财 均失败", "_stale": True}
+            continue
+        r = {"名称": name, "代码": d.get("代码") or yf_tk,
+             "最新价": d.get("最新价"), "涨跌幅": d.get("涨跌幅"),
+             "source": d.get("source")}
+        if d.get("数据日期"):
+            r["数据日期"] = d["数据日期"]
+        if d.get("_stale"):
+            r["_stale"] = True
+        result[name] = r
     return _ok(result)
 
 
@@ -482,49 +666,73 @@ def fetch_forex_rate():
 
 # ─── 5. 估值数据（东财push2 + yfinance，删新浪）────
 def fetch_valuation():
-    """A股7大指数价格 + 美股估值 + 恒生科技 + 且慢PE/PB分位"""
+    """A股7大指数价格 + 美股估值 + 恒生科技 + 且慢PE/PB分位
+
+    2026-09-22 改造：A股7指数、恒生科技原先**只有东财单一来源、无任何兜底**（东财在 CI 挂掉即全空），
+    现全部改为「腾讯 → 东财 → 新浪 → yfinance」多源链。"""
     result = {}
 
-    # ── A股指数价格（东财push2，单一来源）──
-    a_indices = [
-        ("上证指数", "1.000001"), ("深证成指", "0.399001"), ("沪深300", "1.000300"),
-        ("科创50", "1.000688"), ("创业板指", "0.399006"),
-        ("中证A500", "1.000510"), ("中证红利", "1.000922"),
+    # ── A股指数价格（2026-09-22：腾讯首选 → 东财 → 新浪 → yfinance）──
+    # 腾讯实测覆盖全部 7 个（含中证A500/中证红利）；新浪仅 6/7（中证红利返回 0）→ 中证红利不走新浪
+    a_wanted = [
+        ("上证指数", _TX_ORDER, "1.000001", "sh000001", "s_sh000001", "000001.SS"),
+        ("深证成指", _TX_ORDER, "0.399001", "sz399001", "s_sz399001", "399001.SZ"),
+        ("沪深300",  _TX_ORDER, "1.000300", "sh000300", "s_sh000300", "000300.SS"),
+        ("科创50",   _TX_ORDER, "1.000688", "sh000688", "s_sh000688", "000688.SS"),
+        ("创业板指", _TX_ORDER, "0.399006", "sz399006", "s_sz399006", "399006.SZ"),
+        ("中证A500", _TX_ORDER, "1.000510", "sh000510", "s_sh000510", "000510.SS"),
+        ("中证红利", _TX_ORDER, "1.000922", "sh000922", None, "000922.SS"),
     ]
+    _aidx = _collect_indices(a_wanted, "估值-A股指数")
     a_list = []
-    for name, secid in a_indices:
-        q = _em_quote(secid)
-        if q and q.get("最新价") is not None:
-            a_list.append({"指数": name, "代码": secid.split(".")[-1],
-                           "最新价": q["最新价"], "涨跌幅": q["涨跌幅"]})
-    result["a_share"] = a_list if a_list else {"error": "东财push2无数据"}
+    for name, _o, _e, _t, _s, yf_tk in a_wanted:
+        d = _aidx.get(name)
+        if d:
+            a_list.append({"指数": name, "代码": d.get("代码") or yf_tk,
+                           "最新价": d.get("最新价"), "涨跌幅": d.get("涨跌幅"),
+                           "source": d.get("source")})
+    result["a_share"] = a_list if a_list else {"error": "多源均无数据"}
 
-    # ── 美股估值（东财push2主源 → yfinance兜底）──
-    us_val_secids = {"纳斯达克100": "100.NDX100", "标普500": "100.SPX"}
-    us_val_yf = {"纳斯达克100": "^NDX", "标普500": "^GSPC"}
-    _us_val_yf = _yf_fallback(us_val_yf)
+    # ── 美股估值（2026-09-22：腾讯首选 → 东财 → 新浪 → yfinance）──
+    us_val_wanted = [
+        ("纳斯达克100", _TX_ORDER, "100.NDX100", "usNDX", "gb_$ndx", "^NDX"),
+        ("标普500",     _TX_ORDER, "100.SPX",    "usINX", "gb_$inx", "^GSPC"),
+    ]
+    _usidx = _collect_indices(us_val_wanted, "估值-美股指数")
     us_list = []
-    for name, sym in [("纳斯达克100", ".NDX"), ("标普500", ".INX")]:
+    for name, _o, _e, _t, _s, yf_tk in us_val_wanted:
+        sym = {"纳斯达克100": ".NDX", "标普500": ".INX"}[name]
         entry = {"指数": name, "ticker": sym}
-        q = _em_quote(us_val_secids[name])
-        if q and q.get("最新价") is not None:
-            entry["最新价"] = q["最新价"]; entry["涨跌幅"] = q["涨跌幅"]; entry["source"] = "东财push2"
-        elif name in _us_val_yf:
-            d = _us_val_yf[name]
-            entry["最新价"] = d["最新价"]; entry["涨跌幅"] = d["涨跌幅"]; entry["source"] = "yfinance"
+        d = _usidx.get(name)
+        if d:
+            entry["最新价"] = d.get("最新价")
+            entry["涨跌幅"] = d.get("涨跌幅")
+            entry["source"] = d.get("source")
+            if d.get("数据日期"):
+                entry["数据日期"] = d["数据日期"]
+            if d.get("_stale"):
+                entry["_stale"] = True
         else:
             entry["note"] = "数据暂不可得"
         us_list.append(entry)
     result["us"] = us_list
 
-    # ── 恒生科技（东财push2）──
-    q_hk = _em_quote("124.HSTECH")
-    if q_hk and q_hk.get("最新价") is not None:
-        result["hk_tech"] = {"指数":"恒生科技","最新价":q_hk["最新价"],
-                             "涨跌幅":q_hk["涨跌幅"],
+    # ── 恒生科技（2026-09-22：腾讯首选 → 东财 → 新浪 → yfinance）──
+    # 原先只有东财单一来源，东财挂掉即整行丢失（2026-09-22 早报实测）
+    _hkidx = _collect_indices(
+        [("恒生科技", _TX_ORDER, "124.HSTECH", "hkHSTECH", "rt_hkHSTECH", "HSTECH.HK")],
+        "估值-恒生科技")
+    _hk = _hkidx.get("恒生科技")
+    if _hk:
+        result["hk_tech"] = {"指数": "恒生科技", "最新价": _hk["最新价"],
+                             "涨跌幅": _hk["涨跌幅"], "source": _hk.get("source"),
                              "note": "PE/PB分位需WebSearch（且慢无此指数）"}
+        if _hk.get("数据日期"):
+            result["hk_tech"]["数据日期"] = _hk["数据日期"]
+        if _hk.get("_stale"):
+            result["hk_tech"]["_stale"] = True
     else:
-        result["hk_tech"] = {"指数":"恒生科技","note":"需WebSearch"}
+        result["hk_tech"] = {"指数": "恒生科技", "note": "需WebSearch"}
 
     # ── PE/PB分位+股息率: 雪球蛋卷 API ──
     danjuan = _fetch_danjuan_valuation()

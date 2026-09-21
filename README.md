@@ -146,11 +146,13 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 |---------|---------|----------|------|
 
-| A 股指数 | 东财 push2（push2delay）`stock/get` | `a_open` | yfinance（`000001.SS` 等） |
+| A 股指数 | **腾讯财经 `qt.gtimg.cn`**（批量，`sh000001` 等） | `a_open` | 东财 push2（push2delay，0.6s 限速） → 新浪 `s_sh000001` → yfinance（`000001.SS` 等） |
 
-| 港股指数 | 东财 push2（`100.HSI` / `100.HSCEI` / `124.HSTECH`） | `hk_open` | yfinance（`^HSI` / `^HSCE` / `^HSTECH`） |
+| 港股指数 | **腾讯财经**（`hkHSI` / `hkHSCEI` / `hkHSTECH`） | `hk_open` | 东财 push2（`100.HSI`/`100.HSCEI`/`124.HSTECH`） → 新浪 `rt_hk*` → yfinance（`^HSI` / `^HSCE` / **`HSTECH.HK`**） |
 
-| 美股+全球指数 | 东财 push2（`100.DJIA`/`100.SPX`/`100.NDX`/`100.NDX100`/`100.N225`/`100.KS11`/`100.SXXP`/`100.GDAXI`/`100.FTSE`/`100.FCHI`） | `u_open` | yfinance（`^DJI`/`^GSPC`/`^IXIC`/`^NDX`/`^N225`/`^KS11`/`^SXXP`/`^GDAXI`/`^FTSE`/`^FCHI`） |
+| 美股指数 | **腾讯财经**（`usDJI`/`usINX`/`usIXIC`/`usNDX`） | `u_open` | 东财 push2 → 新浪 `gb_$dji` 等 → yfinance |
+
+| 全球指数（日经/KOSPI/STOXX600/DAX/富时/CAC） | **yfinance**（`^N225`/`^KS11`/`^STOXX`/`^GDAXI`/`^FTSE`/`^FCHI`） | `u_open` | 东财 push2（`100.N225`/`100.KS11`/`100.SXXP`/`100.GDAXI`/`100.FTSE`/`100.FCHI`） |
 
 | 汇率/商品/债券 | akshare 期货（`futures_global_spot_em`，详见下方「原油主力合约筛选」）+ 中美债收益率 | 完整模式 | — |
 
