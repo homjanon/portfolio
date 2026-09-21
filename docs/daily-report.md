@@ -1,61 +1,69 @@
-# 2026年9月21日 星期一 全球金融日报
+# 全球金融资讯日报 2026年9月21日 星期一
 
-查询时间：北京时间 2026-09-21 06:32
+查询时间：北京时间 2026年9月21日 22:13 | 星期
 
-**今日定性导语**：A股、港股、美股昨日均休市，全球市场暂无交易数据。今日焦点集中在 geopolitics 与科技领域：中美经贸团队在纽约举行磋商，为周五中美元首峰会铺路；AI赛道持续火热——黄仁勋公开反驳"AI末日论"，月之暗面推出Kimi金融行业解决方案获数十家机构采用；宏观方面，美债收益率创下2007年以来新高，通胀粘性令美联储陷入两难；地缘层面，董建华国葬公祭在香港举行，多国政要致哀。此外，加拿大乳制品农民承压特朗普关税冲击，加密货币市场迎来反弹——比特币重返8万美元关口。
-
----
-
-## 一、全球 Top20
-
-### 【谷歌精选】
-
-1. **中美经贸磋商在纽约举行**：中国国务院副总理何立峰与美国财政部长贝森特星期天在纽约摩根大通总部举行磋商，就经贸投资、关键矿产及人工智能等议题深入交流，为周五中美元首峰会铺路。双方预计将围绕贸易平衡、市场准入及承诺落实等议题推进讨论。（[路透社](https://news.google.com/rss/articles/CBMiuwFBVV95cUxOVDU1MlBxV3pIckRnemgzc1dvTlVHRUJOWkh4M2JQTElsR19PUW9FYVV4ME5ScDlyREdSOTI5QlRDSkNiMlRDTHBTaVJBOFRjblBzRnZfSHVYMFljYTRVQzJSMXFFWTEtU2xUNDVIV1NHclBwd0tWWjd0Vlk1RFdRZDVUVUFNS2pSRW55LTY2b0R0b1pBTkpEVm0yMllGYUlKVkQ0bmJZcVJYcUg0RGotdVJWTlB0NWJYTTdj)）
-
-2. **美联储加息折射通胀粘性**：美债收益率攀升至2007年以来最高水平，费城联储主席 Kashkari 表示通胀在"所有方面"仍过高。加息决策反映美国经济增长强劲但价格压力顽固的新现实，房产市场或面临重压。（[AP News](https://news.google.com/rss/articles/CBMiogFBVV95cUxPeUxpb0hhaEY4MGl0T21yM2ZObndRRlBrc0owTWxDM1FKMlFrWmF5Q21aNGFXdFh2QW5RRTJMMkVZSnJkdnpJMEdTWEFzTjFLQ2RCUWNqWXdlVVJoalBTLUxTMFJHN3pQVlAyLTdGLXBDdnlWbFlzMEJRTLowcklrY2NOaXEyOUE0cG4zQS1oRkxFR1JORWFBNHdJUXRnSGpILWc)）
-
-3. **黄仁勋驳斥AI末日论**：英伟达CEO黄仁勋公开否认AI存在灭绝风险，称"世界在2030年前终结的可能性为零%"，反驳市场恐慌情绪。他强调AI技术正稳步发展，而非失控奔向深渊。（[CBS News](https://news.google.com/rss/articles/CBMihwFBVV95cUxNYW5zMHVGQTA0bXB5dlhtcXVlY0JMRmstbzNobVItUWZxS1FlSnhDSkZVa0JpVFYtQld5VHZtSnhGUGVJb0RtUEFxcWd3YUxKU09PRXJkNXNuN0pobHIyN1VBdjNtcEM4Qm5RYWplWE9uMDd1TElZSjJmazhuS29zVWlCdEg2RnM)）
-
-4. **比特币重返8万美元**：加密市场全面反弹，比特币突破8万美元大关，Coinbase、Robinhood等币安概念股受益。分析师认为市场已消化"清晰度法案"流产的不利影响，资金流向转向主流资产。（[Yahoo Finance](https://news.google.com/rss/articles/CBMizAFBVV95cUxOREJCWC1GV25HM0x1bTVJZ0pFNU85UmVXMHNRVWdNb0tyeTFKTnRUWFZMMVE0dEtRaHNLdHBpSDFlZ3ZzYm53d3dOb3RFYmwzdVd2a0E0WGRqUkppeXN1bDRhRWYxYUpxZ2Y3U0VPYkk4X3htZWtVQ0ZyenVXVWNsdmI2TjAtWGdnZGF2b25kR3pRaU9YdmFmS3h1a2tTZlZ4dTFoVldmLVotSWRTVUUwV25ENFlGczJLdl9FS2xKak5TQ0NQdXRheXhxU1g)）
-
-5. **特朗普关税重创加拿大奶农**：美国关税政策导致加拿大乳制品对美出口停滞，农民生计承压。加拿大发起贸易反击但效果有限，两国贸易摩擦持续升级。（[Al Jazeera](https://news.google.com/rss/articles/CBMipAFBVV95cUxPMmFnR2dibXl6SE5yd0FKVG5NQzJCRi1zMkNkMERVODF1eVZBQUpQOTAzSVJaUnQ1ekJCMzEzS0tGb2tJZTNYQXJ0TXd2aVZxMWVaMVVTQklUWDJkeDVPWV95TnlNR3drTjNoMkp5RUgyMF8zdV9qNDdhWjNBVUE2dHJyanN5ZUJOMlNLVVZmaVduNkNCN0FsLTE3ZjEwNmx6ZjVMTdIBqgFBVV95cUxNREtmNmlsaGkxX1hVRml2dm91UzVmaG9GSWhvRWlDY3UxLXpabklRWmc3ME5ENWl5eEtyUS1kV0pXMEc1Z1VGTDJuaXhjTTRkQXMtQ0ExaFZKVk1TcGx0a01jWTJoZjZIa1doUHozbV8tMmo5SlNrbkFnUU5XbHNubTVhSWFGQzBKSVJneTFhNEMydFJicTM1ODBjYTFNRnF0Y2M1UlR5dnpwZw)）
-
-6. **柴油价格飙升冲击美国消费者**：创纪录的柴油价格正通过物流、运输链条传导至终端消费品，专家警告美国经济成本将进一步攀升。（[Christian Science Monitor](https://news.google.com/rss/articles/CBMifEFVX3lxTE5GWUZ3Z0hTSTlkSnJqc05uOHl5OEJSdml1YzFiMXE0eUg3LTNVcUVIN29zbE0xVTRzcnJ3d09LbFRuQVVCTWlnaTlMVHRYTzhIVTNmNnBUQVBIM2hwMGxXVS1GRTREZFp0U1lWWXU1dU1teXBJQjFTVUF6QzM)）
-
-7. **AI泡沫隐患引发市场担忧**：彭博社警告AI"摇摇欲坠的纸牌屋"正威胁美股与美国经济，科技股估值过度依赖叙事支撑，基本面脆弱性凸显。（[Bloomberg](https://news.google.com/rss/articles/CBMiswFBVV95cUxNOUIzTWFrSUtlVXdxeVFicV9kTjY4bnlHa295MjlFVlYyYzQ4VGp4NXBPbWlLM2RDUkdocWZ3VHU0R0lKTTFtWElhbHMtQXdhREZLc203d3dpMzI4UTFSUGN2em5QM2ZQMC1aZkZrMUx5YUNTZXJmbE90dmxSNVVrTVpUYXFoOTFUT1VZRWx3ZWNjOENjSzNYdWJFeGtLZlBGTnZWS0Q4aFd0MWxORTA5dWIxdw)）
-
-8. **美国住房成本再创新高**：抵押利率逼近7%，中期选举前夕住房可负担性恶化。购房者信心指数降至历史低位，西雅图等热点城市预期将面临短期阵痛。（[Yahoo Finance](https://news.google.com/rss/articles/CBMilgFBVV95cUxQa1lYWnpSb1pwbW9DQWFGZkVFcm8zZkljX2ZoUHFReHliWGktTHROWF9yMG9lN1phOGN0Y0ZSNlNaanpIY3BYX04wWjhqeFJDbHI2QUtoNmt3S3M3d1BnQnhuLW42SWFPLTdXb0QyWWMtSGZmTEZVZlphdWZHRHA3X3Y1Y0VQT1dRbUNKTU9ob0hTcGRHcGc)）
-
-9. **财政部收益率击穿CBO预测**：债务担忧专家警告，10年期美债收益率创下2007年以来新高，国会预算办公室预测已被市场现实甩开，财政可持续性争议升温。（[Fortune](https://news.google.com/rss/articles/CBMimAFBVV95cUxNZ2lldDl5X2JLbUFvNElfNWs5eG9ZMHl3Um5pYWYyelJCaEtPLUc0b0VNdThfeEFhNWdSclM5b2N3NVhKR0ptaE84Zk05c3VyaldDLWZsT1RZT05BOEVuU21yVVB6UnBkNUE0VTF3dEFmdFZ1b1pZQW5sbEZIUGNDeElaMDFmYmtMd0h3TzFobm9pQ3d5MVZEMg)）
-
-10. **伯克希尔继任者如何守护巴菲特遗产**：霍华德·巴菲特接任伯克希尔董事长，致力保持公司文化传统与投资哲学稳定传承，市场关注治理连续性。（[WSJ](https://news.google.com/rss/articles/CBMilAFBVV95cUxNcVViOXQ3bTZXSUZIWlpOd3dHRTNpNU1Kb3Blb0VwRy1qTWw5d0lIbmI1a0dKYzdjU2piQmppU3IyZi1tdWtWSlpMSXNUcGtIcWQySDlmelZLUFQxT1BNT2VoRFFyRWJMS2hhR2JwWnplNkdXbWFZZjdOUGFuOHRlam40cFFiYUN6Rll5SXBQekVvTlBP)）
+**今日定性导语**：中美元首会晤前贸易博弈升温，人民币创多年新高、中国再购美国大豆释放缓和信号；加密货币市场迎来突破，比特币攀升至85,000美元八个月高位；与此同时朝鲜朝核问题再度引发紧张，日本海连续试射弹道导弹遭国际社会谴责。AI产业进入关键十字路口——Anthropic CEO公开呼吁放慢开发步伐，而软银则以110亿美元垃圾债券融资押注OpenAI，资本狂热与安全隐忧形成鲜明对比。
 
 ---
 
-### 【联合早报】
+### 一、全球 Top20（RSS 驱动）
 
-11. **董建华国葬公祭仪式隆重举行**：香港首任特区行政长官董建华公祭仪式以国葬规格在香港举行，习近平等中共七常委、胡锦涛、温家宝等卸任领导人送花圈致哀。三名全国政协副主席、港澳办主任夏宝龙及现任特首李家超出席。（[联合早报](https://www.zaobao.com/news/china/story20260920-9706700)）
+**谷歌精选（美国视角）**
 
-12. **四川盐边县泥石流致2死3失联**：9月19日凌晨，四川攀枝花市盐边县发生泥石流灾害，冲毁多处道路与村民房屋，高速公路工地5名施工人员失联，其中2人已被找到无生命体征，搜救仍在进行。（[联合早报](https://www.zaobao.com/news/china/story20260920-9706718)）
+1. **比特币突破85,000美元创八个月新高**：加密货币市场 debate 是否"crypto winter"已结束。比特币价格突破关键阻力位，重返2026年1月以来最高水平。（[WSJ](https://news.google.com/rss/articles/CBMilAFBVV95cUxPbm1ocHJySVRjNEFTTk9TQnk2bGJReXFfc3VvcEk4Q3ZwaElWZFptS2FvSUFVNWJsU2p6Q2RUU3BoNWdWNUpyMHVYbzNEZ3dVajlKY2YzSnNBdC1sWDlJV3lIOXBOa0ZqeWYtU01Yemw3WFFIeDVVRTE1b0lUUDFwZWtVM2xQSy1iUzNvMktrWkFKaFhm?oc=5)）
 
-13. **AIT处长：美国希望成为台湾能源安全首选伙伴**：美国在台协会处长谷立言在论坛表示，台湾电力供应充足与否对台美经济关系至关重要，美方希望成为台湾能源安全与韧性的"首选伙伴"，并强调全球供应链对台湾商品的依赖远超LNG储备天数。（[联合早报](https://www zaobao.com/news/china/story20260920-9705684)）
+2. **软银寻求110亿美元垃圾债券融资押注OpenAI**：日本科技巨头为支持对OpenAI的投资，推出史上最大规模垃圾债券交易之一，反映AI领域资本竞赛白热化。（[Bloomberg](https://news.google.com/rss/articles/CBMitAFBVV95cUxPU0o1UjZOa1FQMEhiUEdRVFh0Um1SYnh6TWl3Z2FJSUFUZ3ltX2d1UzE4TzBXb2VYU3NfelRXWjUtbmxxRVlLRkRLUkpQZm5XR0FQMEJIaVNHaXMxMVZ0Y0F5NDgtODFCbGFIRnlSU2FRcTNDTHFpS0xsRnFQT3I1UkdCcWFTaUhreHZJejk4cnRGcERTOThEOGt4MkkxOFpKdTlaYjJkbXJfYXFFeWZlVHR4WEs?oc=5)）
 
-14. **台劳动部长洪申翰启程赴大陆出席APEC会议**：洪申翰是赖清德上任以来首位访大陆的台湾部会首长，将于周一在南京参加APEC人力资源开发部长级会议，讨论AI对就业影响及技能发展议题。（[联合早报](https://www.zaobao.com/news/china/story20260920-9706633)）
+3. **人民币在中美元首会晤前创多年新高**：中国人民银行放宽汇率限制，推动人民币升值，市场解读为北京在贸易谈判前释放善意信号。（[Reuters](https://news.google.com/rss/articles/CBMiwgFBVV95cUxQcFFpVEZVVTl5VlVUN2VCcnZIWExvUG5ZZ201LTgtdmVUQ1kzVi1BN2dROUtKZHc2RDl4U216NWdCUUlDbVVkZUt3MkhpMlg0bGw3WGY0bjQtNDZoeW82elFGMVF1LUJyVml4bDVfekVWMzBlS1NnQ2FVbTJFaG9ka19hTDd2QzF2WXJhVVk2TUFtNXBfQ3FxN3ZGckE0RWZmU2FKY1lsejZqV3pNdFZfcWQ0QzVrMHRaS0ZFT1hWUTBvQQ?oc=5)）
 
-15. **月之暗面推出Kimi金融解决方案**：中国AI公司月之暗面9月17日宣布推出Kimi金融行业方案，整合Wind、标普全球等十余个权威数据源，目前已获数十家中国金融机构采用，可将报告初稿制作时间从数天缩短至数小时。（[联合早报](https://www.zaobao.com/news/china/story20260920-9705497)）
+4. **油价四连跌提振债券市场反弹**：原油供应担忧缓解，WTI和布伦特原油价格持续走低，带动政府债券收益率下行。（[Financial Times](https://news.google.com/rss/articles/CBMihAFBVV95cUxNRVVOOWNyQWNOZWc4NU9rMFFDZXhNZG91cDhxWFZTM0NXWnBCd2ktRkhnbXJzRGU3cUstOTZ2Y210a0ZpQ3lncF94endwRS15ell2TW1MSXo1WHpRQzFzNVgzLUd1Ymc0RGN6WVlwSkdweEVlV0RTZG45TnQ0RVpkS2x1dlA?oc=5)）
 
-16. **台行政院长吁抵御小红书、抖音"文化入侵"**：卓荣泰在文化会议上呼吁文化界团结对内抵制预算删减的"文化杀手"，对外抵御中国大陆社交平台带来的"文化入侵"，同时将角色定位从"补助"转向"支持"。（[联合早报](https://www zaobao.com/news/china/story20260920-9705322)）
+5. **美国企业面临关税、燃料成本与高利率三重挤压**：商界抱怨压力远超新冠疫情时期，能源成本飙升与企业利润空间持续收窄形成恶性循环。（[CNBC](https://news.google.com/rss/articles/CBMinAFBVV95cUxQMjRLd0w5c3ROVHloWC1wajJzaHkwUDNrQW4zdnFuNXVLeFp6U2gzdmVWUEtoZjJFWDdBWUZYX213WXBqSHFWUFdsQmlNUjRNc3VrT2tBcTh1V0F3MFlNTmNfd1lqNkdpT3k0XzI2ajhMZzdrRFYyS29LeVo0UzdSRUxic3FPNzZ1dFppMXRIc3Y0YXFMS1FXOFhpTjfSAaIBQVVfeXFMTVpoaklmUmVQTjg3QXhERl8yZlI3YlBEVS1CYUkxYnl4ZDVuaXRlQmRKZDRzRG9ZRUd5VF9qRU93QXE3LWVCS0xHeldwNzgtNW9TYzAzdmhUckRUZmJwc0hoX254SGFreTRta2ZhMmRIRHFBZWhnN1V2M2E3MVFUaUt4QmxiZ25pVXhzcnVkN3ZGZktSNmpZZ3N4bTF2QW92QjVR?oc=5)）
 
-17. **李成钢任中国国际贸易谈判代表**：国务院宣布任命李成钢为中华人民共和国国际贸易谈判代表（正部长级），凌激兼任副代表。李成钢是中美经贸谈判中方核心成员，长期在商务系统任职。（[联合早报](https://www.zaobao.com/news/china/story20260920-9705962)）
+6. **Anthropic CEO警告AI发展过快**：首席执行官阿莫迪称AI已开始参与开发下一代AI，能力可能超越人类理解与控制速度，呼吁主动放慢前沿AI能力提升。（[TechCrunch](https://news.google.com/rss/articles/CBMihgFBVV95cUxPV3JETDlNeFloZXZBOUhEcFRqM2J4ZHBUc0hlV2JLel9uOHlEZEs3OVlwLXFOT0tHc29MVE5meWxrVHktQ1R2RHhhZW1uZmRGTHVtNnNjQl95Y1B5SUM1b2RQcmNXOWxDa0c1bjRfTWtXWlluWkFCZzlYMlhheWpSN3VNcVJWUQ?oc=5)）
 
-18. **戴庆成：香港要学习"合肥模式"？**：文章回顾合肥从默默无闻到培育出长鑫存储等科技龙头的转型经验，建议香港借鉴"合肥模式"——政府战略性引导产业投资，推动本地科技产业升级。（[联合早报](https://www.zaobao.com/news/china/story20260921-9706728)）
+7. **胡塞-沙特紧张升级，美中海岛安全计划影响市场**：中东地缘政治风险持续发酵，红海航运危机与AI安全议题交织影响市场情绪。（[Investing.com](https://news.google.com/rss/articles/CBMivwFBVV95cUxOdGVGQmh2c0drcGNOaUNEUWQydEswS3JFelhLLU9RMkVCal8zeFZSNEMtOWF3QnVZVThvdXV3YUROTmY5OS0wY2RZVUl4V3lTREZPaHpZUkRoNU85cEVzRVJPTHRsUGZMTUNMc0NKVW16LV9KOHdWb0RHbjNZNFFoRWozdHZYSDdFZGVNMXVYMk1ueENpUWdkMTVJSS1kaFBTYThvRTBJV0JRQm1hZHItdUYybktTU3FsdmVvLVVPOA?oc=5)）
+
+8. **诺和诺德被要求规划Wegovy之外的战略**：减肥药龙头面临 pipeline 担忧，股价承压，投资者呼吁公司制定多元化增长策略。（[Reuters](https://news.google.com/rss/articles/CBMiwgFBVV95cUxNekJHT3lsN3JVUXUzTUg3R24xS0pySkxoRjQzclAwNWo0SFJfR1lwQUhEZWFUbG9kQmFyY1pMeGxvRmo2TWhBX0luTkkxRTZLOTk1a3JLb1p4ZTJsV1RFNWpDOFhYSHMwNWFxaXpPZUFfaW5DN1JldDhuN0ZiTUIzMUFIQi1YdkFNUFpWV0pVbm5tYzZ5NVRETGhDZ3Y5TW1LRFdlMlNfMXNLMTk5NWszS0pwQVVSVk53NmtpZHFjbFNXUQ?oc=5)）
+
+9. **美联储加息反映粘性通胀与更快增长的新世界**：货币政策调整体现全球经济结构的深刻变化，央行面临两难抉择。（[AP News](https://news.google.com/rss/articles/CBMiogFBVV95cUxPeUxpb0hhaEY4MGl0T21yM2ZObndRRlBrc0owTWxDM1FKMlFrWmF5Q21aNGFXdFh2QW5RRTJMMkVZSnJkdnpJMEdTWEFzTjFLQ2RCUWNqWXdlVVJoalBTLUxTMFJHN3pQVlAyLTdGLXBDdnlWbFlzMEJRTlowcklrY2NOaXEyOUE0cG4zQS1oRkxFR1JORWFBNHdJUXRnSGpILWc?oc=5)）
+
+10. **年轻顾问跳槽AI初创公司**：咨询行业人才流向AI领域，反映科技产业对传统专业服务领域的虹吸效应。（[New York Times](https://news.google.com/rss/articles/CBMikAFBVV95cUxNY0JSYm1HS042TVdNcFYxRi1IVzVKQ1diTUpSdmRBODBGcDJHT0NEOU5MSG1TNHRUS1lNNUx6aDcyT01tUjQxVDVJRExLeG01XzI0WU1iTERWLUM1clVnRFd5SS13OHJvbi0wNnRpOVlLeTFtSEpFQkdEeHpiblR1UHk5N1E2bDJCckdGNE8xX2E?oc=5)）
+
+**联合早报（中港台视角）**
+
+11. **海南文昌打造世界级航天旅游目的地**：海南省航天旅游平台组建提速，文昌定位"航天旅游之都"，商业化项目落地与文旅业态创新成为重点方向。（[联合早报](https://www.zaobao.com/news/china/story20260921-9712577)）
+
+12. **长沙重拳整治电动自行车安全**：上百名交警铁骑集结，开展"奔赴战场战斗"专项整治行动，逆行超速、人行道行驶等乱象成为打击重点。（[联合早报](https://www.zaobao.com/news/china/story20260921-9711675)）
+
+13. **习特会前中国再购26万吨美国大豆**：中方展现兑现农产品承诺诚意，本销售季采购总量接近1300万吨，已达华盛顿所称目标一半。（[联合早报](https://www.zaobao.com/news/china/story20260921-9712147)）
+
+14. **首对澳门出生熊猫拟11月初赴成都学习成长**：大熊猫"健健""康康"现年10岁，经中央政府与特区政府同意将启程前往成都大熊猫繁育研究基地。（[联合早报](https://www.zaobao.com/news/china/story20260921-9711138)）
+
+15. **张又侠、刘振立严重违纪违法被开除党籍军籍**：中共中央军委副主席张又侠、军委联合参谋部原参谋长刘振立被立案审查调查，政治局会议审议通过审查结果报告。（[联合早报](https://www.zaobao.com/news/china/story20260921-9711541)）
+
+16. **湖南法院判男子监禁14年骗取千万退税**：李姓男子利用空壳公司虚报出口业务，骗取国家出口退税补贴，涉案金额达1800余万元。（[联合早报](https://www.zaobao.com/news/china/story20260921-9710886)）
+
+17. **北京据报收集香港特首评价意见评估施政**：李家超首个五年任期剩余不足一年，针对其管治团队工作表现，北京已着手收集各方反馈。（[联合早报](https://www.zaobao.com/news/china/story20260921-9711055)）
+
+18. **广东省人大常委会党组成员覃伟中被查**：覃伟中8月下旬辞去深圳市市长职位并履新广东省人大常委会，现涉嫌严重违纪违法被查。（[联合早报](https://www.zaobao.com/news/china/story20260921-9711004)）
+
+19. **蔡天凤碎尸案今在香港高等法院开审**：28岁名媛2023年疑遭前夫邝港智一家碎尸，前夫、前家翁和前大伯被控谋杀及阻止合法埋葬尸体罪。（[联合早报](https://www.zaobao.com/news/china/story20260921-9710859)）
+
+20. **重庆两男子使用滑翔伞起飞被罚**：未经审批擅自从居民小区楼顶起飞，警方提醒低空飞行须严格申报。（[联合早报](https://www.zaobao.com/news/china/story20260921-9710746)）
 
 ---
 
-## 二、深度观察专栏
+### 二、深度观察专栏（联合早报·时事与新闻评论）
 
-### 陈振声：以德服人共筑全球持久安全
+**陈聪发：百万元的问题：一位部长到底值多少钱？**
 
-尊敬的先生和女士们，大家早上好。非常荣幸受中国国防部长董军海军上将的邀请再次参加北京香山论坛。我期待与大家坦诚交流，在动荡的国际局势中共同寻求和平稳定之道。接下来，我会用英语发言。 距离我上次在这里发言，过去12个月里发生了许多变化。在全球，实力的分配——无论是在现实层面还是认知层面——都在持续演变。 科技竞赛正在升温。无论是在人工智能、太空还是机器人领域，竞争的差距似乎都在缩小。如今，军事技术的迭代以天计，而不再以年计，这为软硬实力的平衡带来新的不确定性和新的认知。
+9月8日，政府公布一份由独立委员会提交的政治薪金检讨报告及政府回应；两天后，国会就两者展开辩论。委员会建议，将初级部长（MR4）的薪金参照基准，从110万元提高到180万元。基准的计算方法是：以收入最高的1000名新加坡公民年薪中位数为基础，再下调40%，以体现公共服务精神。政府同意这一方向，但拒绝一步到位：从10月15日起，部长将获得一次性上调，最高不超过9%；国会议员津贴也将迎来自2011年以来的首次上调。随后出现的并非一场对决，而是一场由来已久，但争议点正逐渐收窄的辩论。
 
-（[联合早报·时事与新闻评论](https://www.zaobao.com/forum/views/story20260920-9706311)）
+政府怎么说
+
+黄循财总理把论证重心放在未来而非当下。他说，这些数额确实远高于多数新加坡人的收入，部长也并不乐于谈论，但制度是公开透明的，因此薪金会对外公布。真正的问题不在于今天的内阁部长到手多少，而在于二三十年后，那些有能力，也关心国家的人是否仍愿意参选。这也不是人民行动党独有的难题：无论由谁执政，都需要优秀人才。
+
+公共服务统筹部长兼国防部长陈振声的表述更为直接：新加坡不能寄望于"恰好"有国家所需的人才，又"恰好"不介意在薪酬上屈就，从而组成强有力的团队。具体机制也有所调整：两个部长级别被合并，且每个级别的薪金范围，将设在薪金参照基准的75%至125%。同时，裸薪（无养老金、无隐性福利）保持不变；部长薪金中约三分之一仍取决于个人表现花红和国家表现花红，并探讨如何纳入生活素质衡量指标。
+
+（[联合早报·时事与新闻评论](https://www.zaobao.com/forum/views/story20260921-9710345)）
