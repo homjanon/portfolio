@@ -1033,16 +1033,78 @@ def _fetch_rss_other():
     })
 
 
-# ─── 数据源I: 深度观察候选池（联合早报·时事与新闻评论专栏；仅精简模式） ──────
+# ─── 数据源I: 深度观察候选池（联合早报·时事与新闻评论 + 法广中文；仅精简模式） ──────
+# ⚠️ 2026-09-21 修正：「六实例命中即止」导致常年只用"导语版"实例，专栏只输出文章开头。
+#   【实测证据】24 篇同日文章跨实例比对，同一篇 desc 长度差 4–8 倍：
+#     hub.slarker.me    中位  534 字（结尾停在设问句 → 仅导语，≈全文 23%）
+#     rsshub.umzzz.com  中位 2192 字（结尾带「作者是…」署名 → 全文）
+#   isrss / ktachibana / virworks 与 slarker 同为导语版；rssforever 当日 503。
+#   【后果】线上 9/21 专栏仅 334 字、9/20 仅 511 字（等于源侧 desc 长度 → 非 LLM 截断）。
+#   【修法】① umzzz 提第 1 顺位；② 加 desc 中位门槛，不达标继续试下一实例；
+#          ③ 全实例不达标则取最长者并打印告警（不静默降级）。
+_DEEP_HOST_ORDER = [
+    "rsshub.umzzz.com",              # 实测唯一返回全文的实例
+    "hub.slarker.me",
+    "rsshub.rssforever.com",
+    "rsshub.isrss.com",
+    "rsshub.ktachibana.party",
+    "rsshub-balancer.virworks.moe",
+]
+_DEEP_DESC_MEDIAN_MIN = 700    # 实例采纳门槛：desc 中位数须 ≥700 字
+#   实测（正确口径：ET 解析→剥标签→unescape）：早报导语版中位 298 字、全文版 1844 字；
+#   法广中位 1025 字。门槛设 700：既排除导语版（298，差 2.3 倍），又给法广留 ~46% 余量。
+_DEEP_DESC_MAX = 6000          # 单篇上限：超长不入池（防 max_tokens=16000 输出预算被全文挤爆）
+_DEEP_PER_SOURCE = 5           # 每源入池上限（desc 已是全文，条数须下调以控输入体积）
+_DEEP_POOL_MAX = 10            # 候选池总上限
+
+# 「非中美」硬排除词（L1：标题命中即弃；语义级由 LLM 复核，见 prompt「选题禁区」条款）
+_DEEP_EXCLUDE = [
+    # 国家/地区
+    "中国", "中共", "北京", "大陆", "内地", "美国", "美方", "华盛顿", "中美", "美中",
+    "台海", "台湾", "台北", "香港", "澳门", "新疆", "西藏", "南海", "两岸",
+    # 机构
+    "白宫", "五角大楼", "中南海", "国务院", "商务部", "外交部", "中共中央", "全国人大", "政协",
+    # 人物
+    "习近平", "特朗普", "拜登", "万斯", "鲁比奥", "耶伦", "张又侠", "刘振立",
+    # 概念（隐性涉中美，如「对美百年冲击」「AI两强相争」）
+    "关税战", "贸易战", "芯片禁令", "脱钩", "对华", "涉华", "反华", "对美", "亲美",
+    "美国优先", "中国制造", "统一大业",
+]
+# 非文章条目（法广 feed 混有播音节目表/收听指南）
+_DEEP_NON_ARTICLE = re.compile(r"第[一二三四五六七八九十0-9]+次播音|北京时间\s*\d{1,2}\s*点|^节目表|^收听指南|^播出时间")
+
+
+def _deep_reject_reason(title):
+    """非空返回 = 应排除的原因（供逐源日志统计）。"""
+    for _w in _DEEP_EXCLUDE:
+        if _w in title:
+            return f"涉中美「{_w}」"
+    if _DEEP_NON_ARTICLE.search(title):
+        return "非文章条目"
+    return ""
+
+
+def _deep_ts(item):
+    """pubDate → 时间戳；解析失败返回 0.0（稳定排序下保持原序）。"""
+    try:
+        from email.utils import parsedate_to_datetime
+        return parsedate_to_datetime(item.get("pubDate") or "").timestamp()
+    except Exception:
+        return 0.0
+
+
 def _fetch_deep_feed(path, label):
-    """抓取单个深度源（统一六实例兜底、命中即止；desc 未截断）。
-    返回条目列表（含 source/desc_len）；全部实例失败返回 []。逐源状态日志（✅采纳/❌原因）。"""
-    notes = []
-    for host in _RSSHUB_HOSTS:
+    """抓取单个深度源：多实例兜底 + **desc 长度门槛**（根治"锁死导语版实例"）。
+
+    返回 (items, host, median_len)；全部实例失败返回 ([], None, 0)。
+    门槛判定用该实例**全量条目的 desc 中位数**（单条长度噪声大，中位数代表实例版本特性）。
+    """
+    notes, best = [], None          # best = 未达门槛时的保底（中位数最长者）
+    for host in _DEEP_HOST_ORDER:
         try:
-            r = requests.get(f"https://{host}{path}", headers={"User-Agent": UA}, timeout=(8, 15))
+            r = requests.get(f"https://{host}{path}", headers={"User-Agent": UA}, timeout=(8, 20))
             if r.status_code != 200:
-                notes.append(f"❌ {host} → HTTP {r.status_code}")
+                notes.append(f"❌ {host} HTTP{r.status_code}")
                 continue
             r.encoding = "utf-8"
             root = ET.fromstring(r.content)
@@ -1069,30 +1131,76 @@ def _fetch_deep_feed(path, label):
                     "pubDate": _f.get("pubDate", ""),
                 })
             if not out:
-                notes.append(f"❌ {host} → 200但无<item>(疑似HTML错误页)")
+                notes.append(f"❌ {host} 200但无<item>")
                 continue
-            notes.append(f"✅ {host} → OK({len(out)}条) 采纳")
+            _lens = sorted(x["desc_len"] for x in out)
+            med = _lens[len(_lens) // 2]
+            if med < _DEEP_DESC_MEDIAN_MIN:
+                notes.append(f"⚠️ {host} 中位{med}字<{_DEEP_DESC_MEDIAN_MIN} 跳过")
+                if best is None or med > best[2]:
+                    best = (out, host, med)
+                continue
+            notes.append(f"✅ {host} 中位{med}字 采纳({len(out)}条)")
             print(f"    [{label}] 源状态:", " | ".join(notes))
-            return out
+            return out, host, med
         except Exception as e:
-            notes.append(f"❌ {host} → {str(e)[:40]}")
+            notes.append(f"❌ {host} {str(e)[:36]}")
+    if best:
+        notes.append(f"⚠️ 全部实例未达门槛 → 降级用最长实例 {best[1]}(中位{best[2]}字)")
+        print(f"    [{label}] 源状态:", " | ".join(notes))
+        return best
     print(f"    [{label}] 源状态:", " | ".join(notes))
-    return []
+    return [], None, 0
+
+
+# 深度观察双源（早报·时事与新闻评论 + 法广中文）
+_DEEP_SOURCES = [
+    ("/zaobao/other/forum/views", "联合早报·时事与新闻评论"),
+    ("/rfi/cn", "法广中文"),
+]
 
 
 def _fetch_rss_deep():
-    """深度观察专栏（仅精简模式消费）：**《联合早报》时事与新闻评论专栏**（forum/views，均为完整全文）。
-    ⚠️ desc 含专栏标题前缀「作者：」与全文，**未截断**；由 LLM 从候选中选 1 篇
-    **写得最有深度、最值得当下阅读**且与 Top20 互补的原文直出（零改写）。
-    源不可用才留空 → prompt 输出「今日暂停」。"""
-    # 单源：《联合早报》时事与新闻评论专栏（/zaobao/other/forum/views）
-    # 实测两种公共实例均可用、内容一致（24 条评论/专栏文章，desc 203-518 字）
-    _items = _fetch_deep_feed("/zaobao/other/forum/views", "联合早报·时事与新闻评论")
-    items_deep = _items[:12] if _items else []
+    """深度观察专栏（仅精简模式消费）：早报·时事与新闻评论 + 法广中文 **双源**。
+
+    流程：抓全量 → L1 硬筛（非中美 + 非文章条目）→ 剔除超长(>6000字) → 按 pubDate 取最新 N 条 → 合并候选池。
+    由 LLM 从候选池选 1 篇「非中美 + 最有深度 + 与 Top20 互补」的原文直出（零改写）。
+    两源独立记账：一源可用即可出专栏；双源皆空 → 留空 → prompt 输出「今日暂停」。
+    """
+    items_deep = []
+    _seen_titles = set()
+    for _path, _label in _DEEP_SOURCES:
+        raw, host, med = _fetch_deep_feed(_path, _label)
+        if not raw:
+            continue
+        kept, bad, over = [], [], 0
+        for it in raw:
+            reason = _deep_reject_reason(it["title"])
+            if reason:
+                bad.append(reason)
+                continue
+            if it["desc_len"] > _DEEP_DESC_MAX:
+                over += 1
+                continue
+            _key = re.sub(r"[\s\u3000｜|·・:：?？!！,，。.、\"'“”‘’()（）\[\]【】]", "", it["title"])[:20]
+            if _key in _seen_titles:          # 去重：feed 内偶有同文重复（实测法广有 2 组）
+                continue
+            _seen_titles.add(_key)
+            kept.append(it)
+        kept.sort(key=_deep_ts, reverse=True)      # 无 pubDate 时稳定排序=保持原序
+        sel = kept[:_DEEP_PER_SOURCE]
+        items_deep.extend(sel)
+        _sl = sorted(x["desc_len"] for x in sel) or [0]
+        print(f"    [{_label}] {len(raw)}条 → 硬筛后{len(kept)}条"
+              f"（涉中美{len(bad)}条 超长{over}条）→ 入池{len(sel)}条"
+              f" | 实例 {host} | desc 中位 {_sl[len(_sl)//2]}字")
+
+    items_deep = items_deep[:_DEEP_POOL_MAX]
     if not items_deep:
-        print("    [深度观察] forum/views 源不可用，今日暂停")
+        print("    [深度观察] 双源均无合格候选（非中美+长度合格），今日暂停")
     else:
-        print(f"    [联合早报·时事与新闻评论] 深度候选 {len(items_deep)} 条"
+        _sources = sorted({x["source"] for x in items_deep})
+        print(f"    [深度观察] 候选池 {len(items_deep)} 条 | 来源 {_sources}"
               f"（首条《{items_deep[0].get('title', '')[:32]}》…）")
     return _ok({"total": len(items_deep), "items_deep": items_deep})
 
