@@ -832,7 +832,7 @@ def fetch_extra():
     return _ok(result)
 
 
-# ─── 数据源H/I: Top20 双源(谷歌美国主流+联合早报) + 深度观察(联合早报·时事与新闻评论专栏) ──────
+# ─── 数据源H/I: Top20 双源(谷歌美国主流+联合早报) + 深度观察(法广中文) ──────
 # 联合早报 RSS 仅抓取一次并缓存，供 Top20 联合早报块复用（深度观察已改为 forum/views 单源，见数据源I）
 # 统一 RSSHub 实例池（全项目共用：早报/财联社/格隆汇/深度观察；按序尝试、命中即止 + 逐源状态日志）
 _RSSHUB_HOSTS = [
@@ -1033,7 +1033,7 @@ def _fetch_rss_other():
     })
 
 
-# ─── 数据源I: 深度观察候选池（联合早报·时事与新闻评论 + 法广中文；仅精简模式） ──────
+# ─── 数据源I: 深度观察候选池（法广中文；仅精简模式） ──────
 # ⚠️ 2026-09-21 修正：「六实例命中即止」导致常年只用"导语版"实例，专栏只输出文章开头。
 #   【实测证据】24 篇同日文章跨实例比对，同一篇 desc 长度差 4–8 倍：
 #     hub.slarker.me    中位  534 字（结尾停在设问句 → 仅导语，≈全文 23%）
@@ -1043,7 +1043,7 @@ def _fetch_rss_other():
 #   【修法】① umzzz 提第 1 顺位；② 加 desc 中位门槛，不达标继续试下一实例；
 #          ③ 全实例不达标则取最长者并打印告警（不静默降级）。
 _DEEP_HOST_ORDER = [
-    "rsshub.umzzz.com",              # 实测唯一返回全文的实例
+    "rsshub.umzzz.com",              # 实测最稳（深度源独立顺序；法广在各实例均为全文）
     "hub.slarker.me",
     "rsshub.rssforever.com",
     "rsshub.isrss.com",
@@ -1054,7 +1054,7 @@ _DEEP_DESC_MEDIAN_MIN = 700    # 实例采纳门槛：desc 中位数须 ≥700 �
 #   实测（正确口径：ET 解析→剥标签→unescape）：早报导语版中位 298 字、全文版 1844 字；
 #   法广中位 1025 字。门槛设 700：既排除导语版（298，差 2.3 倍），又给法广留 ~46% 余量。
 _DEEP_DESC_MAX = 6000          # 单篇上限：超长不入池（防 max_tokens=16000 输出预算被全文挤爆）
-_DEEP_PER_SOURCE = 5           # 每源入池上限（desc 已是全文，条数须下调以控输入体积）
+_DEEP_PER_SOURCE = 10          # 入池上限（单源，取最新 10 条；desc 为全文，条数需控输入体积）
 _DEEP_POOL_MAX = 10            # 候选池总上限
 
 # 「非中美」硬排除词（L1：标题命中即弃；语义级由 LLM 复核，见 prompt「选题禁区」条款）
@@ -1153,9 +1153,12 @@ def _fetch_deep_feed(path, label):
     return [], None, 0
 
 
-# 深度观察双源（早报·时事与新闻评论 + 法广中文）
+# 深度观察源（2026-09-21 v2：移除《联合早报》时事与新闻评论，**只保留法广中文**）
+#   移除动因：早报的全文只有 rsshub.umzzz.com 一个实例提供，其余实例（slarker/isrss/
+#   ktachibana/virworks）只给导语（中位 298 字 ≈ 全文 23%）→ **umzzz 一挂早报就拿不到全文**，
+#   等于把专栏质量押在单个公共实例上。法广 /rfi/cn 各可用实例本身就是全文
+#   （中位 1025–1289 字），天然抗单点，故只留法广。
 _DEEP_SOURCES = [
-    ("/zaobao/other/forum/views", "联合早报·时事与新闻评论"),
     ("/rfi/cn", "法广中文"),
 ]
 
@@ -1627,7 +1630,7 @@ def main():
         # 精简模式：三市场均休市，仅执行 RSS 新闻模块
         modules = [
             ("data_news.json", _fetch_rss_other, "全球Top20 RSS(美国主流+联合早报)"),
-            ("data_deep.json", _fetch_rss_deep, "深度观察源(联合早报·时事与新闻评论专栏)"),
+            ("data_deep.json", _fetch_rss_deep, "深度观察源(法广中文)"),
         ]
         print(f"📋 精简模式（三市场均休市）: 仅执行 {len(modules)} 个模块（纯新闻）")
     else:
