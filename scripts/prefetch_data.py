@@ -183,10 +183,32 @@ def _em_quote(secid, fields="f43,f44,f45,f46,f47,f48,f57,f58,f60,f169,f170"):
 #   ① 指数链只有"东财主 + yfinance 兜"两层，中间没有实时源；
 #   ② yfinance 的港股数据滞后一整天（恒指返回 9/18 收盘 24750.78，真实 9/21 收盘 25042.71），
 #      且被静默写入报告 —— 比"数据缺失"更危险。
-# 现按 polo 批准改为：A股/港股/美股指数 腾讯首选；全球指数 yfinance 首选、东财备选。
+# 现按 polo 批准改为：A股/港股/美股指数 腾讯首选；全球指数东财 push2delay 首选（4 层链见下方 _GLOBAL_ORDER）。
 # 并把「数据日期」写进结果 + 两遍新鲜度校正，滞后值显式标 _stale。
 _TX_ORDER = ("腾讯", "东财", "新浪", "yfinance")
-_GLOBAL_ORDER = ("yfinance", "东财")     # 全球指数：腾讯/新浪无覆盖（新浪 int_/znb_ 实测陈旧）
+
+# 2026-09-22（polo 批准）全球指数链路改为 4 层：
+#   ① 东财 push2delay（与 market-live 同款端点，实测可用）
+#   ② 新浪 znb_（实测新鲜：值一致 + 日期在 [6] 字段；早先"陈旧"判断系字段读错所致）
+#   ③ akshare index_global_spot_em（东财 clist 接口，与 ① 的 stock/get 是不同端点）
+#   ④ yfinance（末位兜底；实测其国际指数日线在 CI 运行时点可能滞后一个交易日）
+# ⚠️ STOXX600 在新浪（znb_SXXP=554.52，日期停在 2025-09）与 akshare 清单中均无有效代码
+#    → 该指数实际为双源：东财 push2delay（100.SXXP，实测 641.93）+ yfinance（^STOXX）。
+_GLOBAL_ORDER = ("东财", "新浪", "akshare", "yfinance")
+
+# 新鲜度闸门容差：某源日期落后「本批最新日期」超过该天数才判为陈旧并重挑源。
+# 设 3 天的原因：周末 + 单日休市（如 2026-09-21 日本敬老日，日经最新值只能到 9/18）属正常，
+# 不能因休市误报「数据滞后」；而真正的错源（如新浪 SXXP 停在 2025-09）会被稳稳拦下。
+_STALE_TOLERANCE_DAYS = 3
+
+
+def _shift_date(dstr, delta_days):
+    """'YYYY-MM-DD' ± N 天 → 'YYYY-MM-DD'；解析失败原样返回。"""
+    try:
+        from datetime import datetime as _dt, timedelta as _td
+        return (_dt.strptime(str(dstr)[:10], "%Y-%m-%d") + _td(days=delta_days)).strftime("%Y-%m-%d")
+    except Exception:
+        return dstr
 _TX_TS_FORMATS = ("%Y%m%d%H%M%S", "%Y/%m/%d %H:%M:%S", "%Y-%m-%d %H:%M:%S")
 
 
@@ -242,10 +264,14 @@ def _tx_index_batch(pairs):
 
 
 def _sina_index_quote(name, code):
-    """新浪行情（第三层）。需 Referer。三种前缀字段布局不同（实测）：
-      s_    A股指数: [1]现价 [3]涨跌幅               （无日期）
-      rt_hk 港股指数: [6]现价 [8]涨跌幅               （无日期）
+    """新浪行情。需 Referer。四种前缀字段布局不同（实测）：
+      s_    A股指数: [1]现价 [3]涨跌幅                    （无日期）
+      rt_hk 港股指数: [6]现价 [8]涨跌幅                    （无日期）
       gb_$  美股指数: [1]现价 [2]涨跌幅 [3]时间(带日期)
+      znb_  全球指数: [1]现价 [2]涨跌额 [3]涨跌幅 [6]日期 'YYYY-MM-DD'   ← 2026-09-22 新增
+        ⚠️ 日期在 [6] 而非 [4]：[4] 是杂乱值（有时是去年的日期如 '9/26/2025'），
+           早先据此误判"新浪 znb_ 陈旧"，实为字段读错。实测 znb_DAX/CAC/FTSE/NKY/KOSPI
+           全部新鲜且与东财逐个一致（25575.01 / 8138.94 / 10739.01 / 65018.73 / 7009.72）。
     """
     if not code:
         return None
@@ -267,17 +293,78 @@ def _sina_index_quote(name, code):
         if code.startswith("rt_hk") and len(f) >= 9:
             return {"名称": f[1], "最新价": _num(f[6]), "涨跌幅": _num(f[8]),
                     "数据日期": "", "source": "新浪"}
+        if code.startswith("znb_") and len(f) >= 7:
+            return {"名称": f[0], "最新价": _num(f[1]), "涨跌幅": _num(f[3]),
+                    "数据日期": (f[6] or "").strip()[:10], "source": "新浪"}
     except Exception as e:
         print(f"    ⚠️ 新浪 {code} 失败: {type(e).__name__}: {str(e)[:50]}")
     return None
 
 
+_AK_GLOBAL_CACHE = None
+
+
+def _ak_global_snapshot():
+    """akshare 全球指数快照（全球指数第③层兜底）。
+
+    走 akshare 的 index_global_spot_em（东财 clist 接口），与第①层 push2delay 的
+    stock/get 是**不同端点** → 风控可能独立，故作为独立一层。一次请求取回全部指数后缓存。
+    失败返回 {}，永不抛异常。
+
+    ⚠️ 刻意不返回「数据日期」：东财系时间戳是"北京时间收盘时刻"（欧洲指数落在凌晨 00:00），
+    直接当日期会比真实交易日多一天（9/22 00:00 实为 9/21 的交易），参与闸门比较会污染基准。
+    故本层日期留空（闸门对无日期源放行），时间仅存 `时间戳` 字段供日志查看。
+    """
+    global _AK_GLOBAL_CACHE
+    if _AK_GLOBAL_CACHE is not None:
+        return _AK_GLOBAL_CACHE
+    _AK_GLOBAL_CACHE = {}
+    try:
+        import akshare as ak
+        df = ak.index_global_spot_em()
+    except Exception as e:
+        print(f"    ⚠️ akshare 全球指数快照失败: {type(e).__name__}: {str(e)[:60]}")
+        return _AK_GLOBAL_CACHE
+    # 我们的指数名 → akshare 名称关键词（模糊匹配，容忍 akshare 侧改名）
+    KEYS = [
+        ("日经225",     ["日经225", "日经"]),
+        ("KOSPI",       ["KOSPI", "韩国", "首尔"]),
+        ("德国DAX",     ["DAX"]),
+        ("英国富时100", ["富时100", "FTSE"]),
+        ("法国CAC40",   ["CAC40", "CAC"]),
+        ("STOXX 600",   ["斯托克600", "SXXP"]),   # akshare 清单实际无此指数 → 匹配不到属预期
+    ]
+    try:
+        for our, keys in KEYS:
+            for _, row in df.iterrows():
+                nm = str(row.get("名称", "") or "")
+                up = nm.upper()
+                if any(k.upper() in up for k in keys):
+                    _AK_GLOBAL_CACHE[our] = {
+                        "名称": nm,
+                        "代码": str(row.get("代码", "") or ""),
+                        "最新价": _num(row.get("最新价")),
+                        "涨跌幅": _num(row.get("涨跌幅")),
+                        "数据日期": "",          # 见 docstring：刻意留空
+                        "时间戳": str(row.get("最新行情时间", "") or "")[:19],
+                        "source": "东财akshare",
+                    }
+                    break
+    except Exception as e:
+        print(f"    ⚠️ akshare 全球指数解析失败: {type(e).__name__}: {str(e)[:60]}")
+    if _AK_GLOBAL_CACHE:
+        print(f"    akshare 全球指数快照: 命中 {list(_AK_GLOBAL_CACHE.keys())}")
+    return _AK_GLOBAL_CACHE
+
+
 def _resolve_index(name, em_secid=None, tx_code=None, sina_code=None, yf_tk=None,
-                   order=_TX_ORDER, tx_data=None, min_date=None):
+                   order=_TX_ORDER, tx_data=None, min_date=None, ak_data=None):
     """按 order 逐层取单个指数，返回 (数据dict, 命中源) 或 (None, None)。
 
-    min_date（新鲜度闸门）：优先返回「数据日期 >= min_date」的源；
+    min_date（新鲜度闸门）：优先返回「数据日期 >= min_date」的源；min_date 由调用方按
+    「本批最新日期 − _STALE_TOLERANCE_DAYS」计算（见 _collect_indices），以豁免休市。
     若所有源都更旧，返回日期最新的那一个并置 _stale=True（供报告显式提示，而非静默写入）。
+    ak_data：akshare 全球指数快照（第③层），由 _collect_indices 按需传入。
     """
     best = None
     for src in order:
@@ -293,6 +380,10 @@ def _resolve_index(name, em_secid=None, tx_code=None, sina_code=None, yf_tk=None
                     d["source"] = "东财push2"
             elif src == "新浪" and sina_code:
                 d = _sina_index_quote(name, sina_code)
+            elif src == "akshare" and ak_data:
+                d = ak_data.get(name)
+                if d:
+                    d = dict(d)
             elif src == "yfinance" and yf_tk:
                 r = _yf_fallback({name: yf_tk})
                 if name in r:
@@ -322,22 +413,32 @@ def _collect_indices(wanted, label=""):
     """
     tx_pairs = [(n, t) for n, o, e, t, s, y in wanted if t]
     tx_data = _tx_index_batch(tx_pairs) if tx_pairs else {}
+    # akshare 快照仅在链路含 "akshare" 时才拉取（避免给 A股/港股/美股链路白付一次请求）
+    ak_data = _ak_global_snapshot() if any("akshare" in o for _, o, *_ in wanted) else {}
     out = {}
     for name, order, em, tx, sina, yf in wanted:
-        d, _s = _resolve_index(name, em, tx, sina, yf, order, tx_data=tx_data)
+        d, _s = _resolve_index(name, em, tx, sina, yf, order, tx_data=tx_data, ak_data=ak_data)
         if d:
             out[name] = d
 
     dates = [v.get("数据日期") for v in out.values() if v.get("数据日期")]
     if dates:
         ref = max(dates)
+        # 2026-09-22：原判定为「d["数据日期"] >= ref」（须严格等于最新），会把**休市**误判为滞后
+        #   （如 9/21 日本敬老日，日经最新只能到 9/18 → 被判偏旧 → 标 _stale → 报告无端提示"数据滞后"）
+        # 现改为「落后超过 _STALE_TOLERANCE_DAYS 天」才算陈旧，休市/周末自动豁免。
+        cutoff = _shift_date(ref, -_STALE_TOLERANCE_DAYS)
         for name, order, em, tx, sina, yf in wanted:
             d = out.get(name)
-            if not d or not d.get("数据日期") or d["数据日期"] >= ref:
+            if not d or not d.get("数据日期") or d["数据日期"] >= cutoff:
+                if d and d.get("数据日期") and d["数据日期"] < ref:
+                    print(f"    · {name} 数据日期 {d['数据日期']} 早于本批最新 {ref}，"
+                          f"在 {_STALE_TOLERANCE_DAYS} 天容忍内（休市/周末）→ 保留")
                 continue
-            print(f"    ⚠️ {name} 数据日期 {d['数据日期']} 早于本批最新 {ref} → 重新挑源")
+            print(f"    ⚠️ {name} 数据日期 {d['数据日期']} 落后本批最新 {ref} 超 "
+                  f"{_STALE_TOLERANCE_DAYS} 天 → 重新挑源")
             d2, _s2 = _resolve_index(name, em, tx, sina, yf, order,
-                                     tx_data=tx_data, min_date=ref)
+                                     tx_data=tx_data, min_date=cutoff, ak_data=ak_data)
             if d2:
                 out[name] = d2
 
@@ -446,13 +547,26 @@ def _yf_fallback(ticker_map):
                 prev = round(float(close.iloc[-2]), 2)
                 chg_pct = round((price - prev) / prev * 100, 2)
                 _d = hist.index[-1]
+                # 2026-09-22 修复：字段名由「日期」统一为「数据日期」
+                #   —— 原名字与其它源不一致，导致新鲜度闸门读不到 → 对最该防的源（yfinance 滞后）完全失效
                 result[key] = {"最新价": price, "涨跌幅": chg_pct,
-                               "日期": _d.strftime("%Y-%m-%d")}
+                               "数据日期": _d.strftime("%Y-%m-%d")}
             elif len(close) == 1:
                 price = round(float(close.iloc[-1]), 2)
                 _d = hist.index[-1]
                 result[key] = {"最新价": price, "涨跌幅": None,
-                               "日期": _d.strftime("%Y-%m-%d")}
+                               "数据日期": _d.strftime("%Y-%m-%d")}
+            # 诊断日志（2026-09-22 新增）：打印最后 3 根 K 线，用于判定 Yahoo 在 CI 运行时点
+            # 是否只到前一交易日（曾出现 CI 拿到 9/18、本机同代码拿到 9/21 的差异）
+            if key in result and len(close) >= 1:
+                try:
+                    _k = min(3, len(close))
+                    _tail = ", ".join(
+                        f"{close.index[len(close) - _k + i].strftime('%m-%d')}="
+                        f"{float(close.iloc[len(close) - _k + i]):.2f}" for i in range(_k))
+                    print(f"      yfinance 诊断[{key}] 最后{_k}根收盘: {_tail}")
+                except Exception:
+                    pass
         except:
             pass
     
@@ -527,26 +641,29 @@ def fetch_market_hk():
     return _ok(rows)
 
 
-# ─── 3. 全球主要指数（2026-09-22：美股走腾讯链；全球指数 yfinance 首选、东财备选）──
+# ─── 3. 全球主要指数（2026-09-22：美股走腾讯链；全球指数改为 4 层链）──
 def fetch_market_global():
-    """美股(DJI/SPX/IXIC) + 全球(日经/KOSPI/STOXX/DAX/富时/CAC)
+    """美股(DJI/SPX/IXIC) + 全球(日经/KOSPI/STOXX600/DAX/富时/CAC)
 
-    分层依据（实测）：腾讯覆盖 A股/港股/美股，但**无全球指数**；
-    新浪 int_/znb_ 系列实测陈旧（int_nikkei 44946 而真实 ≈65019）→ 全球指数不用新浪。
-    故全球指数＝ yfinance 首选（实测有效）→ 东财备选（CI 当前不可靠）。
+    美股：腾讯 → 东财 → 新浪 → yfinance（腾讯实测覆盖美股，CI 已验证 3/3）
+    全球：东财 push2delay → 新浪 znb_ → akshare → yfinance（见 _GLOBAL_ORDER 注释）
+      · 腾讯**无全球指数**（实测 usDAX 返回"DAX德国指数ETF"、usCAC 返回"卡姆登国家银行"撞名）
+      · 新浪 int_ 系列确实陈旧；但 znb_ 系列新鲜且带日期（[6]）→ 2026-09-22 启用
+      · STOXX600 新浪/akshare 无有效代码 → 实际双源（东财 100.SXXP + yfinance ^STOXX）
 
-    ⚠️ 2026-09-22：原 `^SXXP` 在 Yahoo 无效 → STOXX 600 长期缺失，已改为 `^STOXX`。
+    ⚠️ 2026-09-22：原 `^SXXP` 在 Yahoo 无效 → 曾长期缺失，已改为 `^STOXX`（实测 641.93 = 东财值）。
+    单条容错：任一指数全链失败只标它自己「数据暂不可得」，不影响其余指数照常输出。
     """
     WANTED = [
         ("道琼斯工业",   _TX_ORDER,     "100.DJIA",  "usDJI",  "gb_$dji",  "^DJI"),
         ("标普500",      _TX_ORDER,     "100.SPX",   "usINX",  "gb_$inx",  "^GSPC"),
         ("纳斯达克综合", _TX_ORDER,     "100.NDX",   "usIXIC", "gb_$ixic", "^IXIC"),
-        ("日经225",      _GLOBAL_ORDER, "100.N225",  None, None, "^N225"),
-        ("KOSPI",        _GLOBAL_ORDER, "100.KS11",  None, None, "^KS11"),
-        ("STOXX 600",    _GLOBAL_ORDER, "100.SXXP",  None, None, "^STOXX"),
-        ("德国DAX",      _GLOBAL_ORDER, "100.GDAXI", None, None, "^GDAXI"),
-        ("英国富时100",  _GLOBAL_ORDER, "100.FTSE",  None, None, "^FTSE"),
-        ("法国CAC40",    _GLOBAL_ORDER, "100.FCHI",  None, None, "^FCHI"),
+        ("日经225",      _GLOBAL_ORDER, "100.N225",  None, "znb_NKY",   "^N225"),
+        ("KOSPI",        _GLOBAL_ORDER, "100.KS11",  None, "znb_KOSPI", "^KS11"),
+        ("STOXX 600",    _GLOBAL_ORDER, "100.SXXP",  None, None,        "^STOXX"),
+        ("德国DAX",      _GLOBAL_ORDER, "100.GDAXI", None, "znb_DAX",   "^GDAXI"),
+        ("英国富时100",  _GLOBAL_ORDER, "100.FTSE",  None, "znb_FTSE",  "^FTSE"),
+        ("法国CAC40",    _GLOBAL_ORDER, "100.FCHI",  None, "znb_CAC",   "^FCHI"),
     ]
     idx = _collect_indices(WANTED, "全球指数")
     result = {}
@@ -554,7 +671,7 @@ def fetch_market_global():
         d = idx.get(name)
         if not d:
             result[name] = {"名称": name, "代码": yf_tk,
-                            "error": "yfinance+东财 均失败", "_stale": True}
+                            "error": "东财+新浪+akshare+yfinance 均失败", "_stale": True}
             continue
         r = {"名称": name, "代码": d.get("代码") or yf_tk,
              "最新价": d.get("最新价"), "涨跌幅": d.get("涨跌幅"),
@@ -664,86 +781,26 @@ def fetch_forex_rate():
     return _ok(result)
 
 
-# ─── 5. 估值数据（东财push2 + yfinance，删新浪）────
+# ─── 5. 估值数据（雪球蛋卷 = 唯一被消费的字段）────
 def fetch_valuation():
-    """A股7大指数价格 + 美股估值 + 恒生科技 + 且慢PE/PB分位
+    """估值数据：**仅保留雪球蛋卷的 PE/PB/分位/股息率**（danjuan_valuation）。
 
-    2026-09-22 改造：A股7指数、恒生科技原先**只有东财单一来源、无任何兜底**（东财在 CI 挂掉即全空），
-    现全部改为「腾讯 → 东财 → 新浪 → yfinance」多源链。"""
+    2026-09-22 精简（polo 批准）：删除 a_share / us / hk_tech 三块**价格**字段。
+    依据：它们从未被下游消费——已在 prompt/daily_report_prompt.txt、call_llm.py、
+    md_to_script.py、md_to_reader.py 四个文件全量 grep，a_share / us / hk_tech 命中数均为 0；
+    报告「估值水位与情绪」表只读 danjuan_valuation。
+    收益：省去约 10 次网络请求，并消除"估值模块为何出现腾讯行情"的困惑。
+    （若日后需要这些价格：见 git 历史 commit 09f7261。）
+    """
     result = {}
 
-    # ── A股指数价格（2026-09-22：腾讯首选 → 东财 → 新浪 → yfinance）──
-    # 腾讯实测覆盖全部 7 个（含中证A500/中证红利）；新浪仅 6/7（中证红利返回 0）→ 中证红利不走新浪
-    a_wanted = [
-        ("上证指数", _TX_ORDER, "1.000001", "sh000001", "s_sh000001", "000001.SS"),
-        ("深证成指", _TX_ORDER, "0.399001", "sz399001", "s_sz399001", "399001.SZ"),
-        ("沪深300",  _TX_ORDER, "1.000300", "sh000300", "s_sh000300", "000300.SS"),
-        ("科创50",   _TX_ORDER, "1.000688", "sh000688", "s_sh000688", "000688.SS"),
-        ("创业板指", _TX_ORDER, "0.399006", "sz399006", "s_sz399006", "399006.SZ"),
-        ("中证A500", _TX_ORDER, "1.000510", "sh000510", "s_sh000510", "000510.SS"),
-        ("中证红利", _TX_ORDER, "1.000922", "sh000922", None, "000922.SS"),
-    ]
-    _aidx = _collect_indices(a_wanted, "估值-A股指数")
-    a_list = []
-    for name, _o, _e, _t, _s, yf_tk in a_wanted:
-        d = _aidx.get(name)
-        if d:
-            a_list.append({"指数": name, "代码": d.get("代码") or yf_tk,
-                           "最新价": d.get("最新价"), "涨跌幅": d.get("涨跌幅"),
-                           "source": d.get("source")})
-    result["a_share"] = a_list if a_list else {"error": "多源均无数据"}
-
-    # ── 美股估值（2026-09-22：腾讯首选 → 东财 → 新浪 → yfinance）──
-    us_val_wanted = [
-        ("纳斯达克100", _TX_ORDER, "100.NDX100", "usNDX", "gb_$ndx", "^NDX"),
-        ("标普500",     _TX_ORDER, "100.SPX",    "usINX", "gb_$inx", "^GSPC"),
-    ]
-    _usidx = _collect_indices(us_val_wanted, "估值-美股指数")
-    us_list = []
-    for name, _o, _e, _t, _s, yf_tk in us_val_wanted:
-        sym = {"纳斯达克100": ".NDX", "标普500": ".INX"}[name]
-        entry = {"指数": name, "ticker": sym}
-        d = _usidx.get(name)
-        if d:
-            entry["最新价"] = d.get("最新价")
-            entry["涨跌幅"] = d.get("涨跌幅")
-            entry["source"] = d.get("source")
-            if d.get("数据日期"):
-                entry["数据日期"] = d["数据日期"]
-            if d.get("_stale"):
-                entry["_stale"] = True
-        else:
-            entry["note"] = "数据暂不可得"
-        us_list.append(entry)
-    result["us"] = us_list
-
-    # ── 恒生科技（2026-09-22：腾讯首选 → 东财 → 新浪 → yfinance）──
-    # 原先只有东财单一来源，东财挂掉即整行丢失（2026-09-22 早报实测）
-    _hkidx = _collect_indices(
-        [("恒生科技", _TX_ORDER, "124.HSTECH", "hkHSTECH", "rt_hkHSTECH", "HSTECH.HK")],
-        "估值-恒生科技")
-    _hk = _hkidx.get("恒生科技")
-    if _hk:
-        result["hk_tech"] = {"指数": "恒生科技", "最新价": _hk["最新价"],
-                             "涨跌幅": _hk["涨跌幅"], "source": _hk.get("source"),
-                             "note": "PE/PB分位需WebSearch（且慢无此指数）"}
-        if _hk.get("数据日期"):
-            result["hk_tech"]["数据日期"] = _hk["数据日期"]
-        if _hk.get("_stale"):
-            result["hk_tech"]["_stale"] = True
-    else:
-        result["hk_tech"] = {"指数": "恒生科技", "note": "需WebSearch"}
-
-    # ── PE/PB分位+股息率: 雪球蛋卷 API ──
+    # ── PE/PB分位+股息率: 雪球蛋卷 API（唯一消费字段）──
     danjuan = _fetch_danjuan_valuation()
     result["danjuan_valuation"] = danjuan if danjuan else {"note": "雪球蛋卷API失败，需WebSearch"}
 
     return _ok(result)
 
 
-
-
-# ═══════════════════════════════════════════════════════════════
 # 🆕 v22 数据源: 新浪汇率 + akshare资金面 + Google News RSS(英+中) + 宏观扩展(核心PCE/BDI/SOX等)
 # ═══════════════════════════════════════════════════════════════
 
@@ -1041,7 +1098,7 @@ def fetch_extra():
 
 
 # ─── 数据源H/I: Top20 双源(谷歌美国主流+联合早报) + 深度观察(法广中文) ──────
-# 联合早报 RSS 仅抓取一次并缓存，供 Top20 联合早报块复用（深度观察已改为 forum/views 单源，见数据源I）
+# 联合早报 RSS 抓取一次并缓存，供 Top20 联合早报块使用（深度观察专栏已独立使用法广中文源，见数据源I）
 # 统一 RSSHub 实例池（全项目共用：早报/财联社/格隆汇/深度观察；按序尝试、命中即止 + 逐源状态日志）
 _RSSHUB_HOSTS = [
     "hub.slarker.me",
@@ -1466,7 +1523,7 @@ def _fetch_cls_rss_once(url, source_name="财联社"):
         return [], False, f"{type(e).__name__}: {e}"
 
 
-# ── 持仓聚焦：行业（概念）关键词池（由核心持仓 + 监督池标的归并）──
+# ── 持仓聚焦：行业（概念）关键词池（由核心持仓 + 关注标的归并）──
 # 新闻 title+summary 命中任一关键词即打上对应行业标签 industry_match，
 # 数据侧限定 LLM 候选（仅 industry_match 非空条目可用于持仓聚焦），杜绝编造/选无关新闻。
 HOLDINGS_INDUSTRY_GROUPS = [
@@ -1579,8 +1636,9 @@ def fetch_cls_zaobao():
                 "groups": {k: v[1] for k, v in GROUPS.items()}, "items": items})
 
 def fetch_holdings():
-    """个人持仓(招行A/H/长电/563020/QQQM/SPY) + 监督池批量行情
-    美股通过腾讯API获取，自动截取交易所后缀(.OQ/.AM等)匹配stock_map"""
+    """个人持仓行情（招行A/H/长电/563020/QQQM/SPY）
+    美股通过腾讯API获取，自动截取交易所后缀(.OQ/.AM等)匹配stock_map
+    （2026-09-22：原「监督池」54 只个股批量行情已移除——下游从未消费，见函数内说明）"""
     raw = _tencent_quote("sh600036,hk03968,sh600900,sh563020,usQQQM,usSPY")
     result = {}
 
@@ -1629,103 +1687,12 @@ def fetch_holdings():
                                 "涨跌幅": data["涨跌幅"],
                                 "source": "yfinance兜底"}
 
-    # ── 🆕 v23: 监督池批量行情（腾讯API）──
-    _watchlist = {
-        "600900": {"名称":"长江电力","市场":"A股"},          # 个人持仓已在上面，但监督池也保留
-        "002050": {"名称":"三花智控","市场":"A股"},
-        "688256": {"名称":"寒武纪","市场":"A股"},
-        "601975": {"名称":"招商南油","市场":"A股"},
-        "300308": {"名称":"中际旭创","市场":"A股"},
-        "hk06809": {"名称":"澜起科技","市场":"港股"},
-        "300502": {"名称":"新易盛","市场":"A股"},
-        "600116": {"名称":"三峡水利","市场":"A股"},
-        "hk00005": {"名称":"汇丰控股","市场":"港股"},
-        "688795": {"名称":"摩尔线程-U","市场":"A股"},
-        "603259": {"名称":"药明康德","市场":"A股"},
-        "601088": {"名称":"中国神华","市场":"A股"},
-        "300750": {"名称":"宁德时代","市场":"A股"},
-        "601919": {"名称":"中远海控","市场":"A股"},
-        "002594": {"名称":"比亚迪","市场":"A股"},
-        "000651": {"名称":"格力电器","市场":"A股"},
-        "600362": {"名称":"江西铜业","市场":"A股"},
-        "601288": {"名称":"农业银行","市场":"A股"},
-        "600030": {"名称":"中信证券","市场":"A股"},
-        "002142": {"名称":"宁波银行","市场":"A股"},
-        "000568": {"名称":"泸州老窖","市场":"A股"},
-        "300059": {"名称":"东方财富","市场":"A股"},
-        "601899": {"名称":"紫金矿业","市场":"A股"},
-        "688981": {"名称":"中芯国际","市场":"A股"},
-        "000625": {"名称":"长安汽车","市场":"A股"},
-        "002600": {"名称":"领益智造","市场":"A股"},
-        "601138": {"名称":"工业富联","市场":"A股"},
-        "603369": {"名称":"今世缘","市场":"A股"},
-        "000858": {"名称":"五粮液","市场":"A股"},
-        "600519": {"名称":"贵州茅台","市场":"A股"},
-        "603986": {"名称":"兆易创新","市场":"A股"},
-        "603501": {"名称":"豪威集团","市场":"A股"},
-        "300274": {"名称":"阳光电源","市场":"A股"},
-        "300124": {"名称":"汇川技术","市场":"A股"},
-        "600732": {"名称":"爱旭股份","市场":"A股"},
-        "601012": {"名称":"隆基绿能","市场":"A股"},
-        "600486": {"名称":"扬农化工","市场":"A股"},
-        "002371": {"名称":"北方华创","市场":"A股"},
-        "002475": {"名称":"立讯精密","市场":"A股"},
-        "600438": {"名称":"通威股份","市场":"A股"},
-        "600745": {"名称":"*ST闻泰","市场":"A股"},
-        "002241": {"名称":"歌尔股份","市场":"A股"},
-        "600312": {"名称":"平高电气","市场":"A股"},
-        "601615": {"名称":"明阳智能","市场":"A股"},
-        "000400": {"名称":"许继电气","市场":"A股"},
-        "600585": {"名称":"海螺水泥","市场":"A股"},
-        "000860": {"名称":"顺鑫农业","市场":"A股"},
-        "000630": {"名称":"铜陵有色","市场":"A股"},
-        "600703": {"名称":"三安光电","市场":"A股"},
-        "000063": {"名称":"中兴通讯","市场":"A股"},
-        "002223": {"名称":"鱼跃医疗","市场":"A股"},
-        "601398": {"名称":"工商银行","市场":"A股"},
-        "002352": {"名称":"顺丰控股","市场":"A股"},
-        "600309": {"名称":"万华化学","市场":"A股"},
-        "002415": {"名称":"海康威视","市场":"A股"},
-    }
-    # 构建腾讯API查询串
-    _prefix_map = {}   # query_code → bare_code (API内部code)
-    _bare_to_wl = {}   # bare_code → watchlist_key
-    for _wc in _watchlist:
-        _m = _watchlist[_wc]["市场"]
-        if _m == "港股":
-            _code_str = _wc        # hk06809
-            _bare = _wc[2:]        # 06809 — 腾讯API返回的裸code
-        elif _m == "美股":
-            _code_str = f"us{_wc}"
-            _bare = _wc
-        elif _wc.startswith("6") or _wc.startswith("688"):
-            _code_str = f"sh{_wc}"
-            _bare = _wc
-        else:
-            _code_str = f"sz{_wc}"
-            _bare = _wc
-        _prefix_map[_code_str] = _bare
-        _bare_to_wl[_bare] = _wc
-    _wl_raw = _tencent_quote(",".join(_prefix_map.keys()))
-    _wl_result = {}
-    for _bare, _sc in _bare_to_wl.items():
-        if _bare in _wl_raw:
-            _v = _wl_raw[_bare]
-            _wl_result[_sc] = {
-                **_watchlist[_sc],
-                "最新价": _v["price"],
-                "涨跌幅": _v["change_pct"],
-            }
-        else:
-            _wl_result[_sc] = {**_watchlist[_sc], "error": "腾讯API无数据"}
-    # 澜起科技兜底: 如果HK6809没数据，试688008（科创板）
-    if "hk06809" in _wl_result and _wl_result["hk06809"].get("error"):
-        _fallback = _tencent_quote("sh688008")
-        if "688008" in _fallback:
-            _v = _fallback["688008"]
-            _wl_result["688008"] = {"名称":"澜起科技","市场":"A股","最新价":_v["price"],"涨跌幅":_v["change_pct"]}
-            del _wl_result["hk06809"]
-    result['监督池'] = _wl_result
+    # ── 2026-09-22（polo 批准）：已移除「监督池」个股批量行情 ──
+    # 原 v23 用腾讯批量取 54 只个股行情并写入 result['监督池']，但**下游从不消费**：
+    #   prompt 只读本文件的 6 只个人持仓（招行A/H/长电/563020/QQQM/SPY），
+    #   从未引用「监督池」字段 → 零产出动作，白付一次批量请求、徒增文件体积。
+    # 保留：HOLDINGS_INDUSTRY_GROUPS（15 个行业/概念组关键词）+ industry_match 打标，
+    #   持仓聚焦的新闻匹配走关键词组，与本块无关，不受影响。
 
     return _ok(result)
 
@@ -1855,7 +1822,7 @@ def main():
         if a_open:
             modules.append(("data_valuation.json", fetch_valuation,  "估值数据"))
         if a_open or u_open:
-            modules.append(("data_holdings.json", fetch_holdings, "持仓行情+监督池"))
+            modules.append(("data_holdings.json", fetch_holdings, "个人持仓行情"))
         # 注：data_fund / data_industry 已停抓（prompt 不再消费）；data_holdings 已恢复（LLM 输入 JSON 11→9）
         # RSS 新闻：始终抓取（深度观察专栏仅精简模式，完整模式不抓 data_deep）
         modules.append(("data_news.json", _fetch_rss_other, "全球Top20 RSS(美国主流+联合早报)"))

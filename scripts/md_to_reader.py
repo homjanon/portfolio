@@ -771,6 +771,80 @@ def md_to_html(md_file):
     return html
 
 
+# ── 报告骨架校验（2026-09-22 新增）─────────────────────────────
+# 背景：报告格式已由 prompt 的「报告骨架（固定模板·逐字复制）」硬约束固定，
+#   但 LLM 仍可能漂移。历史上真实出现过：
+#     · H1 写成「全球金融日报」（完整模式是「全球金融资讯日报」）
+#     · 章节块标签写成「### 【谷歌精选】」而非「**📌 谷歌精选**」
+#     · 查询时间行写成「查询时间：北京时间 2026-09-21 06:32」
+#   本函数做**只告警、不阻断**的核对 —— 漂移当天即可从 Actions 日志发现，
+#   不必等到人工翻报告。任何缺失都不会中断日报生成。
+_SK_REQUIRED_FULL = [
+    '## 一、市场全景', '## 二、行业洞察', '### 全球 Top20',
+]
+# 块标签：该块**有条目时**必须原样输出；整块完全无条目时可整体省略（prompt 已明确该规则）
+#   → 故列为「条件项」而非必需项，避免误报
+_SK_BLOCK_LABELS = ['**📌 谷歌精选**', '**📌 联合早报**']
+_SK_OPTIONAL_FULL = [
+    '### A股收盘（', '### 美股收盘（', '### 港股收盘（', '### 全球其他市场（',
+    '### 大宗商品与汇率', '### 持仓动态与聚焦', '#### 个人持仓行情快照',
+    '#### 持仓聚焦（未来催化）', '### 估值水位与情绪', '### QDII 溢价与申购额度监测',
+]
+_SK_REQUIRED_SIMPLE = [
+    '## 一、全球 Top20', '## 二、深度观察专栏',
+]
+_SK_ALLOWED_H2_FULL = {'## 一、市场全景', '## 二、行业洞察'}
+_SK_ALLOWED_H2_SIMPLE = {'## 一、全球 Top20', '## 二、深度观察专栏'}
+_SK_DRIFT_PATTERNS = [
+    '### 【谷歌精选】', '### 【联合早报】',
+    '谷歌10条', '联合早报10条', '联合早报（中港台视角）',
+    '查询时间：北京时间',
+]
+
+
+def _verify_skeleton(md_file):
+    """核对报告是否落在骨架内；只打印告警，永不抛出、永不阻断。"""
+    try:
+        text = open(md_file, encoding='utf-8').read()
+    except Exception as e:
+        print(f"  ⚠️ 骨架校验跳过（读取失败: {type(e).__name__}）")
+        return
+    lines = text.split('\n')
+    heads = [l for l in lines if l.startswith('#')]
+    h2 = [l.strip() for l in heads if l.startswith('## ')]
+    is_full = '## 一、市场全景' in h2
+    mode = '完整' if is_full else '精简'
+    req = _SK_REQUIRED_FULL if is_full else _SK_REQUIRED_SIMPLE
+    opt = _SK_OPTIONAL_FULL if is_full else []
+    allowed_h2 = _SK_ALLOWED_H2_FULL if is_full else _SK_ALLOWED_H2_SIMPLE
+
+    miss = [k for k in req if k not in text]
+    miss_opt = [k for k in opt if k not in text]
+    miss_label = [k for k in _SK_BLOCK_LABELS if k not in text]
+    drift = [k for k in _SK_DRIFT_PATTERNS if k in text]
+    extra_h2 = [h for h in h2 if h not in allowed_h2]
+    h1 = next((l for l in heads if l.startswith('# ')), '')
+    if h1 and '全球金融资讯日报' not in h1:
+        drift.append(f'H1 应为「…全球金融资讯日报」，实际「{h1[:42]}」')
+
+    if not miss and not drift and not extra_h2 and not miss_label:
+        extra = f"，{len(miss_opt)} 个条件章节未出现（门控跳过，正常）" if miss_opt else ""
+        print(f"  ✅ 骨架校验通过（{mode}模式，必需 {len(req)} 项齐全{extra}）")
+        return
+    print(f"  ⚠️ 骨架校验发现问题（{mode}模式）—— 仅供提醒，不影响生成：")
+    if miss:
+        print(f"     缺少必需标题 {len(miss)} 项: {miss}")
+    if extra_h2:
+        print(f"     出现骨架外的二级标题（疑似自创章节）: {extra_h2}")
+    if drift:
+        print(f"     命中漂移写法 {len(drift)} 项: {drift}")
+    if miss_label:
+        print(f"     块标签未出现 {len(miss_label)} 项: {miss_label}"
+              f"（若该块完全无条目属正常；否则说明标签被改写）")
+    if miss_opt:
+        print(f"     条件章节未出现 {len(miss_opt)} 项（若对应数据缺失属正常）: {miss_opt}")
+
+
 def main():
     if len(sys.argv) < 2:
         print("用法: python3 md_to_reader.py <report.md> [daily-report.html]")
@@ -784,6 +858,7 @@ def main():
         sys.exit(1)
 
     print(f"📖 读取: {md_file}")
+    _verify_skeleton(md_file)
     html = md_to_html(md_file)
     with open(html_file, 'w', encoding='utf-8') as f:
         f.write(html)

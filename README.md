@@ -52,7 +52,7 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 
 
-> 触发链路：Cloudflare 心跳（每 5 分钟）→ 北京 06:30 到点 → `workflow_dispatch` → Actions 运行。GitHub 侧已移除 schedule（2026-09-01 起单通道），漏跑可手动 `/trigger?repo=portfolio&key=...` 补一次。
+> 触发链路：Cloudflare 心跳（每 5 分钟）→ 北京 06:30 到点 → `workflow_dispatch` → Actions 运行。GitHub 侧不使用 schedule（单通道触发），漏跑可手动 `/trigger?repo=portfolio&key=...` 补一次。
 
 
 
@@ -80,16 +80,16 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 - 商汤后端带 `reasoning_effort=low` 轻思考（实测 12s→2.6s 且 content 稳定非空）
 
-> **模型变更记录（2026-09-11）**：次选由 NVIDIA MiniMax-M3 换为商汤 SenseNova DeepSeek-V4-Flash。原因：`minimaxai/minimax-m3` 已于 **2026-09-09 09:00 UTC** 被 NVIDIA 标记 EOL，接口返回 `410 Gone`，导致 2026-09-11 早间日报调用失败。商汤 DeepSeek-V4-Flash 已在 douban-tracker / xueqiu-tracker 等多仓实测可用。
+> **⚠️ 架构提示**：四层跨 3 个平台（Agnes/新加坡 → Google/美国 → 商汤/国内 → Google/美国）。**②④ 两层共用 `GEMINI_API_KEY`（同一配额池），Gemini 侧限流或故障会连废两层**——第 ③层商汤夹在中间作隔离。
 >
-> **模型变更记录（2026-09-12）**：新增 **Google Gemini 3.1 Flash-Lite** 为第 ②层（商汤顺延 ③、Nemotron 顺延 ④），形成四层跨平台链。动因：Agnes 免费层频繁 429、NVIDIA 频繁 503 过载；Gemini 免费层 1M 上下文 + 250K TPM，可一次吃下日报 40–60K tokens 输入（Groq 等免费层 TPM 仅 6–30K 无法胜任）。**同批修复**：`_call_llm` 响应字段兼容 `content or reasoning_content or reasoning`（商汤 deepseek-v4-flash 的 content 常为空、答案在 reasoning_content，此前该层实为"哑弹"）。
-
-> **⚠️ 架构提示**：四层现跨 3 个平台（Agnes/新加坡 → Google/美国 → 商汤/国内 → Google/美国）。**②④ 两层共用 `GEMINI_API_KEY`（同一配额池），Gemini 侧限流或故障会连废两层**——第 ③层商汤夹在中间作隔离。如需进一步分散，可把 ④ 换回非 Google 平台（如 OpenRouter 网关化路径）。
+> **接入参数要点**：Agnes 2.5 与 2.0 完全兼容（Base URL / endpoint / 请求头 / messages 格式 / 流式响应 / 工具调用 / 图像 URL 输入均不变），迁移只需替换模型名。能力规格：上下文 512K、最大输出 65.5K，现价输入/输出均 `$0 / 1M tokens`（刊例价 $0.05 / $0.15）。`_call_llm` 响应字段兼容 `content or reasoning_content or reasoning`（商汤 deepseek-v4-flash 的 content 常为空、答案在 `reasoning_content`，缺兼容时该层会静默失效）。
 >
-> **模型变更记录（2026-09-19）**：① 主模型已实测 `agnes-3.0-flash` 并**回退为 `agnes-2.5-flash`**。动因：3.0 为推理模型，在 GitHub Actions 90s 超时上限内无法完成长日报生成（实测 2 次均 90s 超时），回退 2.5 保稳定。
-> 2.5 与 2.0 **接入参数完全兼容**（Base URL / endpoint / 请求头 / messages 格式 / 流式响应 / 工具调用 / 图像 URL 输入全部不变），**迁移只需替换模型名称**。能力规格：上下文 512K、最大输出 65.5K，现价输入/输出均 `$0 / 1M tokens`（刊例价 $0.05 / $0.15）。
-> **agnes-3.0 实测回退说明（避坑记录）**：3.0 是推理模型且单次生成耗时远超 90s（长日报 58K tokens 输入），GitHub Actions 请求超时上限 90s 内不可用；已回退 2.5。`_call_llm` 仍保留 `enable_thinking` 关闭机制与 `max_tokens=16000`，供后续接入耗时更短的推理模型时复用。
-> **模型变更记录（2026-09-19 晚，模型链改版）**：② 层由 `gemini-3.1-flash-lite` 升级为 **`gemini-3.8-flash`**；④ 层由 **NVIDIA Nemotron-3 Ultra 550B 换为 `gemini-3.5-flash-lite`**（NVIDIA 模型整体移除，本项目不再使用 `NVIDIA_API_KEY`）。动因：本机实测 Google 免费档 6 个候选（system 15,426 字符 + user 58,667 字符 ≈ 74K 字符真实规模）——`gemini-3.8-flash` 长输入 **25.0s** 最快；`gemini-3.5-flash`/`3.6-flash` 需 50–65s 逼近 90s 上限故未选；`gemini-3-flash-preview` 两轮全 503 已排除。**实测要点**：Google 免费档 503「high demand」拥堵率长输入约 42%，由 `_call_llm` 的 2 次重试 + 下层兜底覆盖；**Gemini 3 系无法关闭思考**（官方明确），`_THINKING_OFF_BACKENDS` 对其无效，唯一降延迟杠杆为 `reasoning_effort`。
+> **⚠️ 推理模型避坑**：推理档模型（如 `agnes-3.0-flash`）在长日报（58K tokens 输入）下单次生成耗时远超 Actions 的 90s 上限 → **主模型须用非推理档（现为 `agnes-2.5-flash`）**。`_call_llm` 保留 `enable_thinking` 关闭机制与 `max_tokens=16000`，供后续接入更快推理模型时复用。
+>
+> **⚠️ Gemini 3 系无法关闭思考**（官方明确）→ `_THINKING_OFF_BACKENDS`（发 `enable_thinking=false`）对其**无效**，唯一降延迟杠杆是 `reasoning_effort`。
+>
+> **免费档实测要点**（Google，规模 system 15,426 + user 58,667 ≈ 74K 字符，即线上真实量级）：`gemini-3.8-flash` 长输入 **25.0s** 最快 → ② 层；`gemini-3.5-flash-lite` **6/6 通过、14.5–24.1s** → ④ 层；`gemini-3.5-flash` / `3.6-flash` 需 50–65s 逼近 90s 上限，未采用；`gemini-3-flash-preview` 两轮全 503，已排除。免费档 503「high demand」拥堵率长输入约 **42%**，由 `_call_llm` 的 2 次重试 + 下层兜底覆盖。
+>
 > **⚠️ 改模型必读**：`scripts/md_to_script.py` 的 `_MODEL_CHAIN` 按 `name` 从 `LLM_CONFIGS` 精确匹配取值，**两处名字必须同步改**，对不上会被静默跳过（不报错，直接少一层兜底）。
 
 - **LLM 仅基于预抓取的 `data_*.json` 加工，不联网搜索、不调用工具**
@@ -152,7 +152,7 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 | 美股指数 | **腾讯财经**（`usDJI`/`usINX`/`usIXIC`/`usNDX`） | `u_open` | 东财 push2 → 新浪 `gb_$dji` 等 → yfinance |
 
-| 全球指数（日经/KOSPI/STOXX600/DAX/富时/CAC） | **yfinance**（`^N225`/`^KS11`/`^STOXX`/`^GDAXI`/`^FTSE`/`^FCHI`） | `u_open` | 东财 push2（`100.N225`/`100.KS11`/`100.SXXP`/`100.GDAXI`/`100.FTSE`/`100.FCHI`） |
+| 全球指数（日经/KOSPI/STOXX600/DAX/富时/CAC） | **东财 push2delay**（`100.N225`/`100.KS11`/`100.SXXP`/`100.GDAXI`/`100.FTSE`/`100.FCHI`） | `u_open` | 新浪 `znb_*`（日期取 `[6]`） → akshare `index_global_spot_em`（东财 clist，与 push2delay 属不同端点） → yfinance（`^N225`/`^KS11`/`^STOXX`/`^GDAXI`/`^FTSE`/`^FCHI`）。⚠️ STOXX600 在新浪（`znb_SXXP` 陈旧）与 akshare 清单中均无有效代码 → 实际双源（东财 + yfinance）；单条失败只标该指数暂不可得，不影响其余 |
 
 | 汇率/商品/债券 | akshare 期货（`futures_global_spot_em`，详见下方「原油主力合约筛选」）+ 中美债收益率 | 完整模式 | — |
 
@@ -166,7 +166,8 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 | **深度观察专栏（仅精简模式）** | **单源：法广中文** `/rfi/cn`（统一实例池兜底，但为深度源启用 **desc 中位长度门槛 ≥700 字**：不达标继续试下一实例、全不达标取最长者并告警——根治“锁死导语版实例”；取最新 10 条）。**选源依据**：法广各可用实例返回的均为全文（中位 1025–1289 字）。**代码侧先硬筛**：标题含涉中美词（中国/美国/中美/台海/港澳/新疆/西藏/南海/白宫/中南海/习近平/特朗普…含「对美」「两强相争」等隐性词）或非文章条目（播音节目表）一律剔除，超长文（>6000 字）不入池；**再由 LLM 做语义精筛并选 1 篇「中国与美国之外」的第三方深度文章原文直出**（零改写；LLM 须排除标题干净但主题涉华涉美的条目，如《纽伦堡文革60周年研讨会对文革的反思》；合规候选均不够深度时降级选其中话题性最强的一篇；全部涉中美则今日暂停） | 仅精简模式 | `data_deep.json`（`items_deep` 数组） |
 
-| **市场全景各板块一段简述（50–100字）+ 持仓聚焦（按持仓行业关键词预匹配 `industry_match`，仅命中行业的新闻入选，核心/监督池一视同仁）** | **财联社 + 格隆汇 RSS 合并抓取（财联社 telegraph + 格隆汇两组均走统一六实例兜底（命中即止），格隆汇另以 rss.injahow.cn（.cn 专属实例，实测仅支持格隆汇）为首选；合并后标题归一化去重、北京当天筛选，格隆汇缺 pubDate 视为当日保留；LLM 优先采用标题含板块关键词的条目直接复用收盘情况，否则综合最相关若干条写成 50–100 字一段、丰富该市场最新情况）** | 完整模式 | 无当天新闻则留空（不编造） |
+| **市场全景各板块一段简述（50–100字）+ 持仓聚焦（按持仓行业关键词预匹配 `industry_match`，仅命中行业的新闻入选，所有标的行业命中即入选）** | **财联社 + 格隆汇 RSS 合并抓取（财联社 telegraph + 格隆汇两组均走统一六实例兜底（命中即止），格隆汇另以 rss.injahow.cn（.cn 专属实例，实测仅支持格隆汇）为首选；合并后标题归一化去重、北京当天筛选，格隆汇缺 pubDate 视为当日保留；LLM 优先采用标题含板块关键词的条目直接复用收盘情况，否则综合最相关若干条写成 50–100 字一段、丰富该市场最新情况）** | 完整模式 | 无当天新闻则留空（不编造） |
+> **📐 报告骨架（固定模板）**：报告的 H1 标题、查询时间行、导语标签、**全部章节标题、块标签（`**📌 谷歌精选**` / `**📌 联合早报**`）、表格表头**均已固定，作为硬约束写入 `prompt/daily_report_prompt.txt` 文末「## ▸ 报告骨架（固定模板 · 逐字复制）」一节（完整/精简两套骨架）——LLM 只负责**填数据与写文字**，格式一律不变。`scripts/md_to_reader.py` 内置**骨架校验**（`_verify_skeleton`，只告警不阻断）：核对必需标题是否齐全、是否出现骨架外的二级标题、是否命中历史漂移写法（如 `### 【谷歌精选】`、H1 写成「全球金融日报」、查询时间行写成「查询时间：北京时间 …」），**格式漂移当天即可从 Actions 日志发现**。
 
 
 
@@ -177,13 +178,11 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 > **方案 C（curl_cffi HTTP/2 补丁）**：东方财富 `push2.eastmoney.com` / `push2delay.eastmoney.com` / `push2his.eastmoney.com` 需 HTTP/2，标准 `requests` 仅 HTTP/1.1 会静默断连。脚本在顶部注入 `curl_cffi` 浏览器模拟，仅对这些域名生效，保障指数主源稳定；其余请求不受影响。运行依赖已包含 `curl_cffi` 与 `pandas_market_calendars`。
 
-> **原油主力合约筛选（2026-09-19 修复）**：WTI 与布伦特同源自 akshare `futures_global_spot_em()`（东财全球期货快照），走**两条匹配分支**，此前口径不一致导致报告里两油价差异常。
+> **原油主力合约筛选口径**：WTI 与布伦特同源自 akshare `futures_global_spot_em()`（东财全球期货快照），走**两条匹配分支**：优先取「**当月连续**」（代码含 `00Y`，= 成交量/持仓量最大的主力合约）；**无连续合约的品种退回「成交量最大」筛选**。本数据源 36 个提供连续合约的品种中，**布伦特原油是唯一缺席者**（东财未为其生成 `B00Y`），故走后者取到近月 `B26Z`。
 >
-> **原 bug**：布伦特用 `code.startswith("B")` **无约束**匹配，命中数据表中的 *第一个* B 开头合约 —— `B28G`（布伦特原油 **2802**，即 **2028 年 2 月最远月**）价 **78.09**；而 WTI 走 `00Y` 分支取到近月 **95.47**。两者一近一远错位，报告里价差被放大到 **17 美元**，真实价差仅约 **2–3 美元**。
+> ⚠️ **不可用 `code.startswith("B")` 无约束匹配**：会命中数据表中第一个 B 开头合约（最远月），与 WTI 的近月口径错位 —— 曾导致报告里两油价差被放大到 17 美元（真实仅约 2–3 美元）。
 >
-> **修复**：优先取「**当月连续**」（代码含 `00Y`，= 成交量/持仓量最大的主力合约）；**无连续合约的品种退回「成交量最大」筛选**。经实测，本数据源 36 个提供连续合约的品种中，**布伦特原油是唯一缺席者**（东财未为其生成 `B00Y`）。改后布伦特取到 `B26Z`（布伦特原油 **2612**，近月/主力，量 393910、持仓 498601，断层第一），价格 **98.85**，与 WTI 口径对齐，价差回归 **3.38**（新浪 `hf_CL`/`hf_OIL` 交叉验证约 1.8–3.4）。
->
-> **防御**：新增 3 处匹配失败日志（布伦特无当月连续 / 未匹配到任何合约 / 主力筛选异常），并在**缺失字段检查列表补上「布伦特原油」**——此前该字段取数失败会**静默消失**，报告里直接少一行不易察觉。两条分支命中即写入并打印日志，异常均有明确提示。
+> **防静默失败**：3 处匹配失败均打印日志（布伦特无当月连续 / 未匹配到任何合约 / 主力筛选异常）；「布伦特原油」已列入**缺失字段检查列表** —— 该字段取数失败会导致报告少一行，不做检查不易察觉。
 
 
 
@@ -357,7 +356,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 | `SENSENOVA_API_KEY` | 商汤日日新 API Key；日报+广播稿次选 DeepSeek-V4-Flash（`token.sensenova.cn/v1`），已在 douban-tracker / xueqiu-tracker 实测 |
 
-| ~~`NVIDIA_API_KEY`~~ | **已弃用（2026-09-19）**：NVIDIA Nemotron-3 Ultra 550B 已从模型链移除，本项目不再使用该 Secret（可自行删除） |
+| ~~`NVIDIA_API_KEY`~~ | **已弃用**：本模型链不含 NVIDIA 模型，不再使用该 Secret（可自行删除） |
 
 
 
@@ -370,7 +369,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 >   SENSENOVA_API_KEY: ${{ secrets.SENSENOVA_API_KEY }}
 > ```
 >
-> 漏注入时脚本 `os.environ.get()` 读不到该变量，只会打印「⏭️ 跳过 <模型>: 环境变量 XXX 未设置」并**静默落到下一层兜底**（不报错、不中断）。2026-09-12 商汤接入即踩此坑：Secret 已设置但 workflow 未注入，三层链路实际只剩 Agnes + Nemotron 两层，两者同时失败时整个日报生成失败（当日无日报产出）。**排查口诀：日志里出现「跳过 … 未设置」= workflow env 漏注入，而不是 Secret 没配。**
+> 漏注入时脚本 `os.environ.get()` 读不到该变量，只会打印「⏭️ 跳过 <模型>: 环境变量 XXX 未设置」并**静默落到下一层兜底**（不报错、不中断）。曾踩此坑：Secret 已设置但 workflow 未注入，链路实际少一层；多层同时失败时会导致当日无日报产出。**排查口诀：日志里出现「跳过 … 未设置」= workflow env 漏注入，而不是 Secret 没配。**
 
 
 
@@ -430,7 +429,7 @@ Markdown 顶部的 `**今日定性导语**：<正文>`（单行格式，位于 H
 
 ├── scripts/
 
-│   ├── prefetch_data.py                     # 数据抓取（市场全景+估值+QDII/ETF+新闻；新闻：Google News 美国单地20条(失败指数退避重试3次)→LLM精选≤10且互不重复仅谷歌来源不补位 + 联合早报最新10(统一六实例兜底,命中即止+逐源状态日志；源校验放宽为昨天或今天内容) 双源 Top20，两块独立互不补位；data_deep.json 深度观察(仅精简模式抓取):**单源**=/rfi/cn(法广中文);**深度源专用**实例顺序(umzzz 首选)+desc 中位≥700字门槛(防锁死导语版实例,全不达标取最长者并告警),取最新10条,desc为去标签后完整正文并附source/desc_len;**代码侧先硬筛**标题含涉中美词/非文章条目(播音表)/超长文(>6000字),再由LLM语义精筛并选1篇中国美国之外的第三方深度文原文直出(零改写,须排除标题干净但主题涉中美者,长文不设上限,合规候选均不够深度则降级选其中话题性最强一篇,全部涉中美则今日暂停)；data_cls_zaobao.json 取财联社+格隆汇 RSS 合并(财联社 telegraph 与格隆汇均走统一六实例兜底(格隆汇以 rss.injahow.cn 为 cn 专属首选)；合并标题归一化去重+北京当天筛选,格隆汇缺pubDate保留)当天新闻供市场全景各板块一段简述（50–100字）+持仓聚焦(按持仓行业关键词预匹配industry_match)；data_holdings.json 取腾讯API持仓核心标的行情(价格+涨跌幅)+监督池供「持仓动态与聚焦」板块；已停抓 data_fund/data_industry（LLM 输入 JSON 由 11→9）
+│   ├── prefetch_data.py                     # 数据抓取（市场全景+估值+QDII/ETF+新闻；新闻：Google News 美国单地20条(失败指数退避重试3次)→LLM精选≤10且互不重复仅谷歌来源不补位 + 联合早报最新10(统一六实例兜底,命中即止+逐源状态日志；源校验放宽为昨天或今天内容) 双源 Top20，两块独立互不补位；data_deep.json 深度观察(仅精简模式抓取):**单源**=/rfi/cn(法广中文);**深度源专用**实例顺序(umzzz 首选)+desc 中位≥700字门槛(防锁死导语版实例,全不达标取最长者并告警),取最新10条,desc为去标签后完整正文并附source/desc_len;**代码侧先硬筛**标题含涉中美词/非文章条目(播音表)/超长文(>6000字),再由LLM语义精筛并选1篇中国美国之外的第三方深度文原文直出(零改写,须排除标题干净但主题涉中美者,长文不设上限,合规候选均不够深度则降级选其中话题性最强一篇,全部涉中美则今日暂停)；data_cls_zaobao.json 取财联社+格隆汇 RSS 合并(财联社 telegraph 与格隆汇均走统一六实例兜底(格隆汇以 rss.injahow.cn 为 cn 专属首选)；合并标题归一化去重+北京当天筛选,格隆汇缺pubDate保留)当天新闻供市场全景各板块一段简述（50–100字）+持仓聚焦(按持仓行业关键词预匹配industry_match)；data_holdings.json 取腾讯API持仓核心标的行情(价格+涨跌幅,6只)供「持仓动态与聚焦」板块（2026-09-22 移除监督池 54 只个股批量行情：下游从未消费）；已停抓 data_fund/data_industry（LLM 输入 JSON 由 11→9）
 
 │   ├── market_date_resolver.py             # 按市场解析业务日期 + 北京时间收盘标注（MarketDateResolver）
 
