@@ -41,7 +41,7 @@ python3 scripts/prefetch_data.py
 | A股市场 | `data_market_cn.json` | 腾讯 → 东财push2delay → 新浪 → yfinance | 上证/深成/沪深300/科创50/创业板指（含成交额） |
 | 港股市场 | `data_market_hk.json` | 腾讯 → 东财push2delay → 新浪 → yfinance | 恒生指数、恒生国企、恒生科技 |
 | 美股+全球 | `data_market_global.json` | 美股：腾讯链；全球：东财push2delay → 新浪znb_ → akshare → yfinance | 美股三大指数、日经225/KOSPI/欧洲STOXX 600/德国DAX/英国富时100/法国CAC40 |
-| 汇率/商品/债券 | `data_forex_rate.json` | akshare期货+债券利率 | 原油/黄金/中美债收益率 |
+| 汇率/商品/债券 | `data_forex_rate.json` | 新浪外盘期货(hf_) → akshare期货(兜底) + akshare债券利率 | 原油(WTI/布伦特)、COMEX金/银、中美债收益率 |
 | 估值/PE分位 | `data_valuation.json` | 雪球蛋卷API（1次返回63指数，白名单过滤11个） | 见下方"估值水位与情绪"：红利低波/中证红利/中证白酒/沪深300/中证500/创业板指/科创50/恒生科技/中概互联50/纳斯达克100/标普500 的 PE/PB/分位/股息率（固定顺序） |
 | 全球 Top20 新闻 | `data_news.json` + `data_cls_zaobao.json` | Google News(美国一地20条→LLM精选≤10,仅谷歌来源不补位) + 联合早报 RSS(最新10,统一六实例兜底) | 谷歌块≤10(实际精选条数) + 联合早报块≤10，两块独立互不补位、不强制凑满20 |
 | 🆕 深度观察专栏（仅精简模式） | `data_deep.json` | **法广中文（`/rfi/cn`，法国国际广播电台中文；统一六实例兜底、`rsshub.umzzz.com` 优先，命中即止）**；代码侧先做「涉中美硬筛 + 剔非文章条目（播音节目表等）+ 剔超长文（>6000 字）+ 标题去重」，再取最新 **10 条**，desc 均为**去标签后的完整正文** | 每条含 `title`/`desc`（完整正文）/`desc_len`/`source`（固定 `法广中文`）/`link`；**LLM 从候选中选 1 篇「中国与美国之外的第三方议题」中最有深度的原文直出**（🚫 涉中美一律排除；候选池全部涉中美则「今日暂停」） |

@@ -154,7 +154,7 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 | 全球指数（日经/KOSPI/STOXX600/DAX/富时/CAC） | **东财 push2delay**（`100.N225`/`100.KS11`/`100.SXXP`/`100.GDAXI`/`100.FTSE`/`100.FCHI`） | `u_open` | 新浪 `znb_*`（日期取 `[6]`） → akshare `index_global_spot_em`（东财 clist，与 push2delay 属不同端点） → yfinance（`^N225`/`^KS11`/`^STOXX`/`^GDAXI`/`^FTSE`/`^FCHI`）。⚠️ STOXX600 在新浪（`znb_SXXP` 陈旧）与 akshare 清单中均无有效代码 → 实际双源（东财 + yfinance）；单条失败只标该指数暂不可得，不影响其余 |
 
-| 汇率/商品/债券 | akshare 期货（`futures_global_spot_em`，详见下方「原油主力合约筛选」）+ 中美债收益率 | 完整模式 | — |
+| 汇率/商品/债券 | **新浪外盘期货 `hf_`**（`hf_CL`/`hf_OIL`/`hf_GC`/`hf_SI`，一次批量取，详见下方「原油／贵金属取数口径」）→ 新浪缺失时以 akshare `futures_global_spot_em` 的 `00Y`（当月连续）兜底（**布伦特不用该兜底**）+ 中美债收益率 | 完整模式 | — |
 
 | 估值/PE 分位（11 指数，固定顺序） | 雪球蛋卷 API `danjuanfunds.com/djapi/index_eva/dj`（1 次返回 63，白名单 11） | `a_open` | — |
 
@@ -178,11 +178,10 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 > **方案 C（curl_cffi HTTP/2 补丁）**：东方财富 `push2.eastmoney.com` / `push2delay.eastmoney.com` / `push2his.eastmoney.com` 需 HTTP/2，标准 `requests` 仅 HTTP/1.1 会静默断连。脚本在顶部注入 `curl_cffi` 浏览器模拟，仅对这些域名生效，保障指数主源稳定；其余请求不受影响。运行依赖已包含 `curl_cffi` 与 `pandas_market_calendars`。
 
-> **原油主力合约筛选口径**：WTI 与布伦特同源自 akshare `futures_global_spot_em()`（东财全球期货快照），走**两条匹配分支**：优先取「**当月连续**」（代码含 `00Y`，= 成交量/持仓量最大的主力合约）；**无连续合约的品种退回「成交量最大」筛选**。本数据源 36 个提供连续合约的品种中，**布伦特原油是唯一缺席者**（东财未为其生成 `B00Y`），故走后者取到近月 `B26Z`。
->
-> ⚠️ **不可用 `code.startswith("B")` 无约束匹配**：会命中数据表中第一个 B 开头合约（最远月），与 WTI 的近月口径错位 —— 曾导致报告里两油价差被放大到 17 美元（真实仅约 2–3 美元）。
->
-> **防静默失败**：3 处匹配失败均打印日志（布伦特无当月连续 / 未匹配到任何合约 / 主力筛选异常）；「布伦特原油」已列入**缺失字段检查列表** —— 该字段取数失败会导致报告少一行，不做检查不易察觉。
+> **原油／贵金属取数口径**：4 个品种（WTI原油 / 布伦特原油 / COMEX黄金 / COMEX白银）统一走**新浪外盘期货 `hf_`**（`hq.sinajs.cn/list=hf_CL,hf_OIL,hf_GC,hf_SI`，一次批量取），取到的是**连续/近月价**。
+> - **字段**：`[0]`现价、`[7]`昨结、`[8]`今开、`[12]`日期、`[13]`名称；涨跌幅 = `([0]−[7])/[7]×100`（`[7]`=昨结经「东财涨跌幅三重反推」验证：WTI 92.16 / 黄金 4318.58 / 白银 64.966 全部吻合）。
+> - **兜底**：新浪缺失时，以 akshare `futures_global_spot_em()` 的 `00Y`（当月连续）合约补齐 —— **布伦特除外**：该源未提供布伦特当月连续合约，可退化的合约均为远月（与真实近月相差约 20 美元、随换月持续漂移），取数不可信 → 布伦特**宁缺勿错**，缺失时报告按既定规则显示「数据暂不可得」。
+> - **防静默失败**：「布伦特原油」已列入**缺失字段检查列表** —— 该字段取数失败会导致报告少一行，不做检查不易察觉。
 
 
 

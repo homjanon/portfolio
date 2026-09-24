@@ -684,70 +684,109 @@ def fetch_market_global():
     return _ok(result)
 
 
-# ─── 4. 汇率/商品/债券（akshare期货 + FRED DGS10）───
+# ─── 4. 汇率/商品/债券（新浪外盘期货 hf_ 主 + akshare 债券）───
+_HF_FUTURES = {
+    "WTI原油":    "hf_CL",
+    "布伦特原油": "hf_OIL",
+    "COMEX黄金":  "hf_GC",
+    "COMEX白银":  "hf_SI",
+}
+
+
+def _sina_hf_futures():
+    """新浪外盘期货（hf_）—— 大宗商品主源。返回 {品种: 数据dict}，失败返回 {}。
+
+    2026-09-24 换源（polo 批准）：原 4 个商品仅从东财 futures_global_spot_em 取，
+      而东财该快照中**布伦特原油是唯一没有「当月连续」(00Y) 合约的品种**，
+      只能退化为「成交量最大」，命中远月合约（实测 B27Z / 2027年12月 = 79.90），
+      与真实近月价（本接口 hf_OIL = 100.04）相差约 20 美元 → 报告里 WTI 与布伦特
+      价差被放大到 −13 美元（正常应 +2~8）；且随主力换月（2612→2712）会持续漂移。
+      改走新浪外盘期货后，4 个品种统一取「连续/近月价」，根治该问题。
+
+    实测字段布局（15 字段；[7]=昨结 经东财涨跌幅三重反推验证：
+      WTI 93.79/1.0177=92.16、黄金 4305.2/0.9969=4318.58、白银 64.135/0.9872=64.966，
+      与 [7] 的 92.160 / 4318.400 / 64.964 全部吻合）：
+      [0]现价 [2]买价 [3]卖价 [4]最高 [5]最低 [6]时间
+      [7]昨结 [8]今开 [12]日期 'YYYY-MM-DD' [13]名称 [14]量
+    涨跌幅 = ([0] − [7]) / [7] × 100
+
+    ⚠️ 一次可批量取全部品种（list= 逗号拼接），无需逐个请求。
+    """
+    try:
+        q = ",".join(_HF_FUTURES.values())
+        r = requests.get(f"https://hq.sinajs.cn/list={q}",
+                         headers={"Referer": "https://finance.sina.com.cn", "User-Agent": UA},
+                         timeout=15)
+        r.encoding = "gbk"
+    except Exception as e:
+        print(f"    ⚠️ 新浪外盘期货请求失败: {type(e).__name__}: {str(e)[:60]}")
+        return {}
+    rev = {v: k for k, v in _HF_FUTURES.items()}
+    out = {}
+    for seg in (r.text or "").split(";"):
+        if "hq_str_" not in seg or '"' not in seg:
+            continue
+        sym = seg.split("=")[0].replace("var hq_str_", "").strip()
+        label = rev.get(sym)
+        if not label:
+            continue
+        f = [x.strip() for x in seg.split('"')[1].split(",")]
+        if len(f) < 13:
+            continue
+        price, prev = _num(f[0]), _num(f[7])
+        if price is None or not prev:
+            continue
+        out[label] = {
+            "名称": (f[13] if len(f) > 13 and f[13] else label),
+            "代码": sym,
+            "最新价": round(price, 3),
+            "涨跌幅": round((price - prev) / prev * 100, 2),
+            "昨结": prev,
+            "数据日期": (f[12] or "").strip()[:10],
+            "source": "新浪hf_",
+        }
+    if out:
+        print("    新浪外盘期货: " + ", ".join(f"{k}={v['最新价']}" for k, v in out.items()))
+    return out
+
+
 def fetch_forex_rate():
-    """原油(WTI)/黄金(COMEX)/CNH汇率/中美债券收益率"""
+    """原油(WTI/布伦特)/黄金(COMEX)/白银(COMEX)/CNH汇率/中美债券收益率"""
     result = {}
 
-    # ── 大宗商品: akshare futures_global_spot_em ──
-    try:
-        import akshare as ak
-        df = ak.futures_global_spot_em()
+    # ── 大宗商品主源：新浪外盘期货 hf_（连续/近月价，一次批量取 4 个品种）──
+    result.update(_sina_hf_futures())
+
+    # ── 兜底：新浪缺失的品种，用东财 futures_global_spot_em 的「当月连续」(00Y) 补齐 ──
+    #   ⚠️ 布伦特**不用东财兜底**：该源布伦特无可信近月报价（详见 _sina_hf_futures docstring），
+    #      宁可标缺失也不写错值；缺失由下方缺失检查标记，报告按既定规则显示「数据暂不可得」。
+    _em_missing = [k for k in ("WTI原油", "COMEX黄金", "COMEX白银") if k not in result]
+    if _em_missing:
+        try:
+            import akshare as ak
+            df = ak.futures_global_spot_em()
+        except Exception as e:
+            print(f"    ⚠️ 东财期货兜底失败: {type(e).__name__}: {str(e)[:60]}")
+            df = None
         if df is not None and len(df) > 0:
-            # 取主力合约。优先「当月连续」（代码含 00Y）；无连续合约的品种
-            # （如布伦特原油）退回「成交量最大」的合约——两者在本数据源中等价
-            # （实测 WTI：CL00Y == CL26X，成交量 300567 为全品种第一）。
-            #
-            # 2026-09-19 修复：布伦特原用 code.startswith("B") 无约束匹配，命中的是
-            # 数据表中第一个 B 开头合约 B28G（布伦特原油2802，最远月），价格 78.09；
-            # 而 WTI 走 00Y 分支取到近月（95.47），两者口径错位，导致报告里两个油价
-            # 相差 17 美元（真实价差仅约 2 美元）。改用成交量最大后取到 B26Z（2612，
-            # 近月/主力，98.85），与 WTI 口径对齐。
-            targets = {"NYMEX原油": ["CL"], "COMEX黄金": ["GC"],
-                       "布伦特原油": ["B"], "COMEX白银": ["SI"]}
-            found = {}
-            for _, r in df.iterrows():
+            _pre = {"WTI原油": "CL", "COMEX黄金": "GC", "COMEX白银": "SI"}
+            for _label in _em_missing:
                 try:
-                    code = str(r.get("代码",""))
-                    name = str(r.get("名称",""))
-                    price = _num(r.get("最新价")); chg = _num(r.get("涨跌幅"))
-                    for label, prefixes in targets.items():
-                        if label in found: continue
-                        if code.startswith(tuple(prefixes)) and "00Y" in code:  # 当月连续
-                            found[label] = {"名称": name, "代码": code, "最新价": price, "涨跌幅": chg}
-                except: pass
-
-            # 无「当月连续」合约的品种，退回成交量最大的合约（= 主力）
-            for label in ("布伦特原油",):
-                if label in found: continue
-                try:
-                    cand = df[df["名称"].astype(str).str.startswith(label)]
-                    if len(cand):
-                        cand = cand.copy()
-                        cand["_v"] = cand["成交量"].map(lambda x: _num(x) or 0)
-                        r = cand.loc[cand["_v"].idxmax()]
-                        found[label] = {"名称": str(r.get("名称","")), "代码": str(r.get("代码","")),
-                                        "最新价": _num(r.get("最新价")), "涨跌幅": _num(r.get("涨跌幅"))}
-                        print(f"    {label} 无当月连续，取成交量最大合约: "
-                              f"{found[label]['代码']} {found[label]['名称']} "
-                              f"(量={int(r['_v'])}, 价={found[label]['最新价']})")
+                    _p = _pre[_label]
+                    _m = (df["代码"].astype(str).str.startswith(_p)
+                          & df["代码"].astype(str).str.contains("00Y"))
+                    _cont = df[_m]
+                    if len(_cont):
+                        _r0 = _cont.iloc[0]
+                        result[_label] = {"名称": str(_r0.get("名称", "")), "代码": str(_r0.get("代码", "")),
+                                          "最新价": _num(_r0.get("最新价")), "涨跌幅": _num(_r0.get("涨跌幅")),
+                                          "source": "东财期货·当月连续"}
+                        print(f"    {_label} 新浪缺失 → 东财当月连续兜底: "
+                              f"{result[_label]['代码']} 价={result[_label]['最新价']}")
                     else:
-                        print(f"    ⚠️ {label} 未匹配到任何合约，本次将缺失")
+                        print(f"    ⚠️ {_label} 新浪缺失且东财无当月连续合约 → 本次缺失")
                 except Exception as e:
-                    print(f"    ⚠️ {label} 主力合约筛选失败: {e}")
-
-            if found.get("NYMEX原油"):
-                result["WTI原油"] = {**found["NYMEX原油"], "source": "akshare期货"}
-            else:
-                print("    ⚠️ WTI原油 未匹配到当月连续合约（00Y），本次将缺失")
-            if found.get("COMEX黄金"):
-                result["COMEX黄金"] = {**found["COMEX黄金"], "source": "akshare期货"}
-            if found.get("布伦特原油"):
-                result["布伦特原油"] = {**found["布伦特原油"], "source": "akshare期货"}
-            if found.get("COMEX白银"):
-                result["COMEX白银"] = {**found["COMEX白银"], "source": "akshare期货"}
-    except Exception as e:
-        print(f"    期货数据获取失败: {e}")
+                    print(f"    ⚠️ {_label} 东财兜底异常: {e}")
 
     # ── 债券收益率: CN10Y + US10Y 同一来源 akshare bond_zh_us_rate ──
     try:
