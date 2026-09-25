@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<link rel="icon" href="data:,">
+<title>全球金融市场日报</title>
+<style>
+:root{
+  --bg:#fafafa;--card:#fff;--text:#1a1a2e;--sub:#6b7280;--muted:#9ca3af;
+  --border:#e5e7eb;--accent:#2563eb;--note-bg:#f4f6fb;
+  --table-hdr:#f1f5f9;--table-stripe:#fafbfc;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#0f172a;--card:#1e293b;--text:#e2e8f0;--sub:#94a3b8;--muted:#64748b;
+    --border:#334155;--accent:#3b82f6;--note-bg:#1e293b;
+    --table-hdr:#1e293b;--table-stripe:#1a2332;
+  }
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--bg);color:var(--text);font-size:16px;line-height:1.7;
+  min-height:100dvh;padding:0 0 150px;-webkit-text-size-adjust:100%
+}
+.header{
+  background:var(--card);border-bottom:1px solid var(--border);
+  padding:18px 16px;text-align:center
+}
+.header h1{font-size:18px;font-weight:600;margin-bottom:2px;letter-spacing:.02em}
+.header .date{font-size:12px;color:var(--sub)}
+
+.article{max-width:680px;margin:0 auto;padding:16px 16px}
+
+.article h2{
+  font-size:17px;font-weight:600;margin:32px 0 10px;
+  padding-bottom:4px;border-bottom:2px solid var(--accent);color:var(--text)
+}
+.article h3{
+  font-size:15px;font-weight:600;margin:22px 0 6px;color:var(--accent)
+}
+.article h4{font-size:14px;font-weight:600;margin:16px 0 4px;color:var(--text)}
+
+.article p{margin:10px 0}
+.article p.lede{
+  font-size:15px;line-height:1.8;padding:10px 14px;
+  background:var(--note-bg);border-radius:10px;border-left:3px solid var(--accent)
+}
+.article p.lede strong{color:var(--accent)}
+
+.article blockquote{
+  border-left:3px solid var(--border);padding:6px 14px;margin:8px 0;
+  color:var(--sub);font-size:14px;line-height:1.7;border-radius:0 8px 8px 0
+}
+
+/* ---- 表格 ---- */
+.data-table{
+  width:100%;border-collapse:collapse;font-size:13px;margin:10px 0 16px;
+  border-radius:8px;overflow:hidden;border:1px solid var(--border)
+}
+.data-table thead th{
+  background:var(--table-hdr);padding:7px 9px;text-align:left;
+  font-weight:500;color:var(--sub);font-size:12px;border-bottom:2px solid var(--border);
+  white-space:nowrap
+}
+.data-table thead th:first-child{text-align:left}
+.data-table tbody td{
+  padding:6px 9px;border-bottom:1px solid var(--border);vertical-align:middle
+}
+.data-table tbody tr:last-child td{border-bottom:none}
+.data-table tbody tr:nth-child(even){background:var(--table-stripe)}
+.data-table .num{text-align:right;font-variant-numeric:tabular-nums}
+.data-table .label{color:var(--sub);font-size:12px;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px}
+
+/* 窄屏（手机）表格缩字，参考大宗商品与汇率表观感，避免估值等多列表过高 */
+@media(max-width:480px){
+  .data-table{font-size:11px}
+  .data-table thead th,.data-table tbody td{padding:5px 6px}
+  .data-table .label{max-width:92px}
+  .data-table thead th{font-size:10px}
+}
+
+/* ---- 涨跌颜色 ---- */
+.up{color:#dc2626!important;font-weight:600}
+.down{color:#059669!important;font-weight:600}
+@media(prefers-color-scheme:dark){.up{color:#f87171!important}.down{color:#34d399!important}}
+
+/* ---- 卡片 ---- */
+.card{
+  background:var(--note-bg);border-radius:10px;padding:12px 14px;margin:12px 0;
+  border:1px solid var(--border);font-size:14px;line-height:1.7
+}
+.card .card-title{font-size:13px;font-weight:600;color:var(--accent);margin-bottom:6px}
+.card p{margin:4px 0}
+
+/* ---- 新闻列表 ---- */
+.news-list{counter-reset:news;list-style:none;padding:0;margin:10px 0}
+.news-list li{
+  counter-increment:news;padding:8px 0 8px 32px;position:relative;
+  border-bottom:1px solid var(--border);font-size:14px;line-height:1.7
+}
+.news-list li:last-child{border-bottom:none}
+.news-list li::before{
+  content:counter(news);position:absolute;left:0;top:9px;
+  width:20px;height:20px;border-radius:50%;background:var(--accent);
+  color:#fff;font-size:11px;font-weight:600;text-align:center;line-height:20px
+}
+@media(prefers-color-scheme:dark){.news-list li::before{color:var(--bg)}}
+
+.news-list li strong{font-weight:600;color:var(--text)}
+.news-list .tag{
+  display:inline-block;font-size:11px;padding:1px 6px;border-radius:3px;
+  margin-left:4px;font-weight:500
+}
+.tag-bullish{background:#fef2f2;color:#dc2626}
+.tag-bearish{background:#ecfdf5;color:#059669}
+@media(prefers-color-scheme:dark){
+  .tag-bullish{background:#3b1111;color:#f87171}
+  .tag-bearish{background:#0a2e1a;color:#34d399}
+}
+
+/* ---- 持仓 ---- */
+.holding-item{
+  display:flex;align-items:baseline;gap:6px;padding:4px 0;
+  font-size:14px;flex-wrap:wrap
+}
+.holding-item .name{font-weight:500;min-width:80px}
+.holding-item .price{color:var(--sub);font-variant-numeric:tabular-nums}
+.holding-item .chg{font-weight:600;font-variant-numeric:tabular-nums}
+
+/* ---- 分隔 ---- */
+hr{border:none;border-top:1px solid var(--border);margin:20px 0}
+
+.source-note{font-size:12px;color:var(--muted);margin:16px 0 8px;text-align:center}
+
+/* ---- 提示条 ---- */
+.tip{
+  background:#e8f5e9;color:#2e7d32;font-size:12px;padding:5px 14px;
+  text-align:center;border-bottom:1px solid #c8e6c9
+}
+@media(prefers-color-scheme:dark){.tip{background:#1b3a1b;color:#81c784;border-color:#2e4a2e}}
+
+/* ---- 音频播放器 ---- */
+.player{
+  position:fixed;bottom:0;left:0;right:0;z-index:200;
+  background:var(--card);border-top:1px solid var(--border);
+  padding:8px 16px max(8px,env(safe-area-inset-bottom,8px));
+  box-shadow:0 -2px 12px rgba(0,0,0,.06)
+}
+.player-row{display:flex;align-items:center;gap:8px;max-width:680px;margin:0 auto}
+.btn-play{
+  width:44px;height:44px;border-radius:50%;border:none;font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+  background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(37,99,235,.2)
+}
+.btn-play:active{transform:scale(.92)}
+.player-time{font-size:11px;color:var(--sub);min-width:34px;text-align:center;font-variant-numeric:tabular-nums}
+.progress-wrap{flex:1;height:28px;display:flex;align-items:center;cursor:pointer;min-width:50px}
+.progress-track{width:100%;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--accent);border-radius:2px;width:0}
+.progress-thumb{
+  position:absolute;top:50%;width:14px;height:14px;border-radius:50%;
+  background:var(--accent);border:2px solid #fff;transform:translate(-50%,-50%);
+  opacity:0;transition:opacity .12s;pointer-events:none;box-shadow:0 1px 4px rgba(0,0,0,.2)
+}
+.progress-wrap:active .progress-thumb{opacity:1}
+@media(prefers-color-scheme:dark){.progress-thumb{border-color:var(--card)}}
+.player-sub{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:2px}
+.speed-btn{background:none;border:none;color:var(--sub);font-size:11px;cursor:pointer;padding:2px 5px;border-radius:3px}
+.speed-btn.active{color:var(--accent);font-weight:600}
+.voice-label{font-size:10px;color:var(--sub)}
+</style>
+</head>
+<body>
+<div class="tip">点击 ▶ 播放音频日报（微软 AI 语音播报）</div>
+<div class="header">
+<h1>全球金融市场日报</h1>
+<div class="date">2026年9月25日 星期五 17点21分</div>
+</div>
+<div class="article">
+<p class="lede"><strong>今日定性导语</strong>：全球权益市场表现分化，A股与港股集体承压回调整理，美股三大指数涨跌互现，欧亚多国市场则呈现企稳反弹态势；大宗商品方面受美伊停火谈判预期影响原油显著走低，贵金属金银震荡偏强；宏观与行业层面，美房贷利率重返高位抑制需求，Anthropic敲定巨额算力基建合作，中美元首互动与中东航道地缘变局持续牵动全球资金预期。</p>
+
+<h2>一、市场全景</h2>
+
+<h3>A股收盘（9月24日）</h3>
+<div class="table-wrap"><table class="data-table">
+<thead><tr>
+<th class="">指数</th>
+<th class="num">最新价</th>
+<th class="num">涨跌幅</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="label">上证指数</td>
+<td class="num">3888.37</td>
+<td class="num"><strong class="down">↓1.22%</strong></td>
+</tr>
+<tr>
+<td class="label">深证成指</td>
+<td class="num">13316.97</td>
+<td class="num"><strong class="down">↓2.34%</strong></td>
+</tr>
+<tr>
+<td class="label">沪深300</td>
+<td class="num">4439.14</td>
+<td class="num"><strong class="down">↓1.73%</strong></td>
+</tr>
+<tr>
+<td class="label">科创50</td>
+<td class="num">1621.87</td>
+<td class="num"><strong class="down">↓2.35%</strong></td>
+</tr>
+<tr>
+<td class="label">创业板指</td>
+<td class="num">3288.95</td>
+<td class="num"><strong class="down">↓2.68%</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>A股市场呈现深幅震荡回调，成长与双创板块跌幅居前，创业板指跌超2.6%。盘面上高估值科技成长赛道承压明显，资金避险情绪升温，传统红利低波类防御资产表现出相对韧性。</p>
+
+<h3>美股收盘（9月25日凌晨）</h3>
+<div class="table-wrap"><table class="data-table">
+<thead><tr>
+<th class="">指数</th>
+<th class="num">最新价</th>
+<th class="num">涨跌幅</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="label">道琼斯工业</td>
+<td class="num">51349.98</td>
+<td class="num"><strong class="down">↓0.31%</strong></td>
+</tr>
+<tr>
+<td class="label">标普500</td>
+<td class="num">7704.13</td>
+<td class="num"><strong class="down">↓0.02%</strong></td>
+</tr>
+<tr>
+<td class="label">纳斯达克综合</td>
+<td class="num">26939.37</td>
+<td class="num"><strong class="up">↑0.01%</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>美股三大指数走势分化，道指连续三个交易日承压收跌，标普500基本走平，纳指受科技与AI算力巨头托底微幅收涨。长端美债收益率高位运行，市场对高利率周期下企业资本开支与估值消化保持观望。</p>
+
+<h3>港股收盘（9月25日凌晨）</h3>
+<div class="table-wrap"><table class="data-table">
+<thead><tr>
+<th class="">指数</th>
+<th class="num">最新价</th>
+<th class="num">涨跌幅</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="label">恒生指数</td>
+<td class="num">24510.09</td>
+<td class="num"><strong class="down">↓1.01%</strong></td>
+</tr>
+<tr>
+<td class="label">恒生中国企业指数</td>
+<td class="num">8165.78</td>
+<td class="num"><strong class="down">↓1.21%</strong></td>
+</tr>
+<tr>
+<td class="label">恒生科技指数</td>
+<td class="num">4311.78</td>
+<td class="num"><strong class="down">↓1.13%</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>港股全天震荡下行，恒生指数与恒生科技指数跌幅均超1%。港交所披露信息显示外资机构对部分大型互联网、新能源车及中资金融股展开减持调仓，市场整体风险偏好偏向防御。</p>
+
+<h3>全球其他市场（9月25日凌晨）</h3>
+<div class="table-wrap"><table class="data-table">
+<thead><tr>
+<th class="">指数</th>
+<th class="num">代码</th>
+<th class="num">最新价</th>
+<th class="num">涨跌幅</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="label">日经225</td>
+<td class="num">N225</td>
+<td class="num">66364.20</td>
+<td class="num"><strong class="up">↑1.30%</strong></td>
+</tr>
+<tr>
+<td class="label">韩国KOSPI</td>
+<td class="num">KOSPI</td>
+<td class="num">7080.92</td>
+<td class="num"><strong class="up">↑0.90%</strong></td>
+</tr>
+<tr>
+<td class="label">欧洲STOXX 600</td>
+<td class="num">SXXP</td>
+<td class="num">642.14</td>
+<td class="num"><strong class="up">↑0.90%</strong></td>
+</tr>
+<tr>
+<td class="label">德国DAX</td>
+<td class="num">GDAXI</td>
+<td class="num">25511.23</td>
+<td class="num"><strong class="up">↑0.97%</strong></td>
+</tr>
+<tr>
+<td class="label">英国富时100</td>
+<td class="num">FTSE</td>
+<td class="num">10743.85</td>
+<td class="num"><strong class="up">↑0.60%</strong></td>
+</tr>
+<tr>
+<td class="label">法国CAC40</td>
+<td class="num">FCHI</td>
+<td class="num">8117.62</td>
+<td class="num"><strong class="up">↑0.45%</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>欧亚主要股票市场集体飘红走高。亚太日韩股市在半导体与制造业带动下反弹，日经225涨超1.3%；欧洲主要股指亦全线走强，德国DAX涨近1%，欧洲批发天然气价格显著走低进一步缓和能源成本压力。</p>
+
+<h3>大宗商品与汇率</h3>
+<div class="table-wrap"><table class="data-table">
+<thead><tr>
+<th class="">品种</th>
+<th class="num">最新价/值</th>
+<th class="num">涨跌幅</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="label">WTI原油</td>
+<td class="num">92.655</td>
+<td class="num"><strong class="down">↓2.07%</strong></td>
+</tr>
+<tr>
+<td class="label">COMEX黄金</td>
+<td class="num">4329.72</td>
+<td class="num"><strong class="up">↑0.74%</strong></td>
+</tr>
+<tr>
+<td class="label">布伦特原油</td>
+<td class="num">98.298</td>
+<td class="num"><strong class="down">↓1.92%</strong></td>
+</tr>
+<tr>
+<td class="label">COMEX白银</td>
+<td class="num">64.998</td>
+<td class="num"><strong class="up">↑1.56%</strong></td>
+</tr>
+<tr>
+<td class="label">美元/离岸人民币</td>
+<td class="num">6.7229</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">中国10Y国债收益率</td>
+<td class="num">1.6738%</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">美国10Y国债收益率</td>
+<td class="num">5.1800%</td>
+<td class="num">—</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>受美伊在纽约探讨分阶段停火及恢复霍尔木兹海峡通行预期的影响，国际原油大幅跳水下挫约2%，布油跌破98美元大关；避险买盘推动COMEX黄金与白银联袂上行，白银涨超1.5%；离岸人民币维持在6.72附近平稳震荡。</p>
+<hr>
+
+<h2>二、行业洞察</h2>
+
+<h3>全球 Top20</h3>
+<ol class="news-list">
+<p>📌 谷歌精选</p>
+<li>美国30年期房贷利率突破7%大关：美国抵押贷款利率20个月来首次重返7%上方，融资成本骤增令持续低迷的成屋销售与房地产市场再遭重击。（<a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxPX25CZmRVbDRSeW53X0h6MWh5TTN5OHhlV1RWSXVFbU9ZMk1BclZ4RTRtRldRVl9na3FtUEUtekhTOW05TFhWZ2lDcjRrQTlITzVTRTM0M2JpVE5ZcXN6bDVrTm4yd1B5ajk2QWVXREVaUmx3bWNIVG0wb0J3Uk02WmVzNXg?oc=5" target="_blank" rel="noopener">The Guardian</a>）</li>
+<li>甲骨文数据中心面临“无电亦须履约”风险：甲骨文在与机构投资者的合资协议中承担了“照付不议”条款，即便部分算力中心因电网接入延迟无法供电，仍需按期支付投资者回报。（<a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxPRnZrNVVKTGFRazBJWHdDXzMwYnM0dWp2SUlhcENBS09rTnAxOGpwSkN2NzBfemtQZ0l0RG1JcEluYWh6enZlLXdqRVBXRWMxR2xuLXBtbWF1X2w4RFFUOGp6SHlxZ2ZUMU5UVml1MFdEYl9ydTl3LS14OXVocTBCbENLMUc?oc=5" target="_blank" rel="noopener">Financial Times</a>）</li>
+<li>美国政府介入马斯克挑战欧盟对X平台罚款：美国联邦政府正式申请作为诉讼支持方加入埃隆·马斯克的法律战，共同抵制欧盟监管机构针对X平台开出的高额数字服务监管罚单。（<a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxPT19sa3dET0lPd3M4dTdDZ05xTWRaeEdDTVAwNFhobmV5ejY1TUNxVGxDcXJ5TVBMS3E0N1pYR1VGSTRxLTQ0endCNEFTb2RVSzBSanlDam5Xdk4xLWp5d3lWaGxfUV9XTk1ha2tEdWZ5c25Na0tJTHJrNFNYR18tU3FiZm94TkFOWER3X1RreWtJMDI3dDllRHNpV0p0a3piMjNCRURFa9IBrAFBVV95cUxORUlyeFVfSS1uOC1XNTBwdXRLLVN3Q2lhSzZrTDNiSWdra1hOV3puLVZPZGhzRjRLa1Rjel8tallSTGppalZkZkVyeXpFbENSVHkyVnpzVHRjU3pOeHZlMWVaUGRTTDdmMGZHNTIyc2gxYnp5Z1RaZmtXQUdZUGtRa0liRW8xWnpmbHVEOUxISmY4NERaekRZVndQMkZxWGRGcnQ4MVVLMTJFYU8y?oc=5" target="_blank" rel="noopener">CNBC</a>）</li>
+<li>好市多四季度利润营收双超预期：得益于具韧性的居民消费支出及会员续约增长，好市多第四财季业绩显著超越市场普遍预期，并在海外关税返还上取得1.84亿美元收益。（<a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxNcm9PTDUtSVlCWUUyY2hNRkFkRzhZSkNFN21NOUNBemdrSjBRdjJ3ZEt2akVCQmtvamc2OTBnU00wOTRja2ZYRjB0RDN4T3NGRjVBdm50dmtEUEYyLTJ1NzFIanZqcUJHYzhRXzg5aERTaWdacEc1aGtIR3ZFY3dUYzU4eGlsZVEzSmoyZVRNcE5Tc0FheEo4OXBpWmNrb01KX2VReEZ6X1dmSUJLS1A4dHpOTUhCM3l5M2pLdw?oc=5" target="_blank" rel="noopener">WSJ</a>）</li>
+<li>星巴克启动关店计划拟关闭250家门店：星巴克宣布将在北美等重点区域关停约250家运营效益不达标的门店，旨在优化重组其线下门店网络与运营成本结构。（<a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxPVUc1azZtS2lJLVFvTzQxeFJtelUwZTNJMG43NGRJSDZVUU9heFktLXozb3JjMlJtX2xmTUgyZzJPb24wMnNPRFo2d2NXaG96bHM1UmVxWEoxaHN1dTJ1S2M4V2ZhSFlEa01Jby1wM01yUUtkQ2lsRjhwekV0Sk0wVmVWTWlTTjF3REduYjJDSFJ2TDJ1cHV2RGFBTjdIc3JWamZNTGpn?oc=5" target="_blank" rel="noopener">Yahoo Finance</a>）</li>
+<li>Anthropic与阿卡迈达成120亿美元算力大单：人工智能初创企业Anthropic与边缘云计算巨头阿卡迈（Akamai）签署价值120亿美元的长期算力协议，并授予后者最高5%股权认股权证。（<a href="https://news.google.com/rss/articles/CBMiswFBVV95cUxQbEpHV0VXek9XWS1oa2ViR2ZBZ2d0ZERxdXdBaU1yRlB1aFQySTAxQUtmeV9CTk9qMm01eldSTWJ2MDVqQVFjdTNuS3RQUWZpRi1ycGNLTEs4a1FZMUsyVmt6dmtyZmc4cm14NkV2QkoxRjdITUFmbGJVbkF0c2hJajBZUzRFUWFTNE53bEg0MndlSEl0cmdHRXhkOUN4UXA4RXp1dVdRZkYySTBFRmRkMUl5TQ?oc=5" target="_blank" rel="noopener">Bloomberg.com</a>）</li>
+<li>特斯拉启动重型电动卡车Semi规模化交付：特斯拉内华达超级工厂重卡扩产线正式投产，新一代Semi电动重卡开启面向商用物流车队的新一轮集中交付。（<a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxQOHJlYl9Tdi1EenhkdjBqTzljQjFYZzBkZnRLUmR3RVhpXzI2dlhZWHpPN01XUjhGZWF4SmV6OXZteVY4bUVRNlVrenpNS0VQOURUb0Y1SERNNkR3dXpnRWVHeTlSdWdwd2R5bkxWWm1lblFqSXlrODF4NGt5LTFxMThKcHBJN0Rxek9lMEJKWnJia0ZGaGIweDZiM0Zqbkk4TG5abmc1SW5pT1Q3?oc=5" target="_blank" rel="noopener">The Verge</a>）</li>
+<li>欧盟展开外交斡旋阻止美国柴油出口禁令：欧洲多国政府与跨国商业协会联合致信美方，紧急开展外交游说，以防美国实施柴油出口限制恶化欧洲炼化供应与燃料短缺。（<a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxOd3Y2RWUwcjVhQjNwdC1hZ1JFT1ZuT1J5T29PR01OTXNldC1sOFdEeHJINTQzY043c3ZHUkNxNm9fV3hyb0lldFFBNzhUV0hqSnZlTUpwMGdqaTBIRFlmSDB0RVN0Njk3dndhblVnLUlVRWtrWDJwdVQzNGJJWW1NWHA0aHRKb2Y1aDZjM1B3ZmlvdEtvNmxhVWEtZ0hNaTQ?oc=5" target="_blank" rel="noopener">politico.eu</a>）</li>
+<li>FDA咨询委员会认可Grail泛癌早期血液检测益处：美国FDA专家顾问委员会对Grail一次采血筛查50种癌症的早期检测方案投出关键支持票，标志着液体活检筛查迈出里程碑式一步。（<a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxOV3RFSlhqcUhIUzJadmVZU2lsYVcyekdqVnd0aGRrNjZBNXFscW1MN1EtZEk4WHhRdmJhRXI2M0tiRmx5RzJOME5XTG03aHVpdE1oZ242SjU0T2p2WHJ1Um04X05ZLWdiNW1wYmFKRE5QZnM4c2JWb3RWQWUzcFhXQzhYdDZXbjZxQ0YzWFZqc191SG5MaEt3TXNZQVZNWmxrbWZ0T2dPQWYtVHZTbEo4Sm0xbW9HYXN4anhxUQ?oc=5" target="_blank" rel="noopener">The Washington Post</a>）</li>
+<li>Polymarket反诉纽约州涉嫌“非法赌博”指控：预测市场平台Polymarket对纽约州总检察长提起反诉，坚称基于区块链的事件预测交易属于合法信息衍生品，而非无序赌博行为。（<a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxOZXRQTGN0YUZld00wenVmVU5qZjlFNHhjZEhjOWhOdlBmclpYc3BkaXpEdWNqQW43Yk0wSFpuNWE0YmhLVUt1MC1uY21DYnZvdmlUX2E2dFJxWTl0NlJnZ2diVlhlT0tSWkcxdUl5TDRNeXFoZzlTZFFXcmNoc1RFZ2tjMFJHbnl5NnZXR1RqYjBtSjVwSmtSMFlHQnVkX0NrMFgtTUhBMno5Zzc4M3fSAbMBQVVfeXFMTVFKNWhOS0IzQUJiUnI5TmNtLWRxVjdPVXdqWnZBVEgzUkpyUWtaZzk4R1BoS3RBbVBUdDJzUWxjblhVamZkVFRmNXdHYVpQX1lOTEM2Y0NiRmxhblBBU1duZ2M0eGtKZGg3SEJIUHJLWWdKdTB5QXBnNU5sUmdfdTJaX2tQcTMxak5LQS1fWnUtamdualF3Sm81dzUtSU1DcHNJQWo5TkVkQk5NVzhaenpRS1E?oc=5" target="_blank" rel="noopener">CNBC</a>）</li>
+<p>📌 联合早报</p>
+<li>韩正：中国和塞尔维亚在国际形势复杂动荡中同舟共济：韩正在联大会见塞尔维亚总统武契奇，强调双方树立了国与国友好典范，愿拓展各领域合作推动双边关系迈上新台阶。（<a href="https://www.zaobao.com/news/china/story20260925-9736154" target="_blank" rel="noopener">联合早报</a>）</li>
+<li>《敦煌英雄》撤档近三年后中秋上映：以唐代归义军为历史背景的电影《敦煌英雄》历经波折后正式定档中秋，展现张议潮收复河西的真实历史叙事。（<a href="https://www.zaobao.com/news/china/story20260925-9735720" target="_blank" rel="noopener">联合早报</a>）</li>
+<li>中国海警在黄岩岛自然保护区开展执法巡查：中国海警多艘舰艇组成的编队在黄岩岛国家级自然保护区巡查，对船舶活动及破坏珊瑚礁等生态环境违法行为进行执法。（<a href="https://www.zaobao.com/news/china/story20260925-9735756" target="_blank" rel="noopener">联合早报</a>）</li>
+<li>菲律宾指中国危险操作阻挠南中国海补给任务：菲律宾海警指称中方船只阻挠菲方对仁爱礁坐滩军舰的人道主义补给任务，中方操作带来严重碰撞风险。（<a href="https://www.zaobao.com/news/china/story20260925-9735740" target="_blank" rel="noopener">联合早报</a>）</li>
+<li>刘洪建连任昆明市委书记：中共昆明市委举行全会选举刘洪建为市委书记，刘洪建强调严守政治纪律与政治规矩，盯紧“一把手”关键少数。（<a href="https://www.zaobao.com/news/china/story20260925-9735690" target="_blank" rel="noopener">联合早报</a>）</li>
+<li>中国中秋假期本地周边游热度走高：旅游出行数据显示中秋短途游热度大增，江西葛仙村等中式主题乐园预订火爆，跨城出行订单较端午稳步提升。（<a href="https://www.zaobao.com/news/china/story20260925-9735458" target="_blank" rel="noopener">联合早报</a>）</li>
+<li>新华社发文评中国男乒暴露阵容深度不足：国乒男团亚运决赛负于日本无缘九连冠，官方社评指出队伍当前过度依赖王楚钦，新生代梯队厚度亟待强化。（<a href="https://www.zaobao.com/news/china/story20260925-9735374" target="_blank" rel="noopener">联合早报</a>）</li>
+<li>港财政司副司长：全球逾75%离岸人民币支付经香港处理：黄伟纶在银行业峰会指出香港离岸人民币资金池已达1.3万亿元，正研究短期流动性招标与发行短期债完善收益率曲线。（<a href="https://www.zaobao.com/news/china/story20260925-9735304" target="_blank" rel="noopener">联合早报</a>）</li>
+<li>国民党团吁赖政府勿以挑衅言辞暴冲：国民党立院党团呼吁民进党当局正视“习特二会”展现的降温避险主流趋势，停止操弄意识形态对抗。（<a href="https://www.zaobao.com/news/china/story20260925-9735110" target="_blank" rel="noopener">联合早报</a>）</li>
+<li>特朗普即兴发言称习近平是石材专家：特朗普陪同中国国家主席习近平查看白宫南草坪花岗岩直升机停机坪时，公开称赞习近平熟悉建材、是“石材专家”。（<a href="https://www.zaobao.com/news/china/story20260925-9735096" target="_blank" rel="noopener">联合早报</a>）</li>
+<hr>
+</ol>
+
+<h3>持仓动态与聚焦</h3>
+
+<h4>个人持仓行情快照</h4>
+<div class="table-wrap"><table class="data-table">
+<thead><tr>
+<th class="">标的</th>
+<th class="num">代码</th>
+<th class="num">市场</th>
+<th class="num">最新价</th>
+<th class="num">涨跌幅</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="label">招商银行A</td>
+<td class="num">600036</td>
+<td class="num">A股</td>
+<td class="num">40.69 元</td>
+<td class="num"><strong class="up">↑0.22%</strong></td>
+</tr>
+<tr>
+<td class="label">招商银行H</td>
+<td class="num">03968</td>
+<td class="num">港股</td>
+<td class="num">50.50 港元</td>
+<td class="num"><strong class="down">↓1.37%</strong></td>
+</tr>
+<tr>
+<td class="label">长江电力</td>
+<td class="num">600900</td>
+<td class="num">A股</td>
+<td class="num">28.36 元</td>
+<td class="num"><strong class="up">↑1.00%</strong></td>
+</tr>
+<tr>
+<td class="label">红利低波ETF易方达</td>
+<td class="num">563020</td>
+<td class="num">A股</td>
+<td class="num">1.164 元</td>
+<td class="num"><strong class="up">↑0.26%</strong></td>
+</tr>
+<tr>
+<td class="label">QQQM</td>
+<td class="num">QQQM</td>
+<td class="num">美股</td>
+<td class="num">305.14 美元</td>
+<td class="num">0.00%</td>
+</tr>
+<tr>
+<td class="label">SPY</td>
+<td class="num">SPY</td>
+<td class="num">美股</td>
+<td class="num">767.18 美元</td>
+<td class="num"><strong class="down">↓0.08%</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<h4>持仓聚焦（未来催化）</h4>
+<h4>AI算力/光模块｜摩根士丹利增持中际旭创H股，持股比例升至5.18%（财联社）</h4>
+<h4>汽车/新能源车｜贝莱德减持比亚迪股份H股，持股比例降至6.74%（财联社）</h4>
+<h4>银行｜渣打银行在其他交易所斥资820万英镑回购36.3万股股份（格隆汇）</h4>
+<h4>航运/物流｜美伊探讨结束冲突谈判，霍尔木兹海峡单日通航船舶小幅回升（格隆汇）</h4>
+<hr>
+
+<h3>估值水位与情绪</h3>
+<div class="table-wrap"><table class="data-table">
+<thead><tr>
+<th class="">指数</th>
+<th class="num">PE(TTM)</th>
+<th class="num">PE分位</th>
+<th class="num">PB</th>
+<th class="num">PB分位</th>
+<th class="num">股息率</th>
+<th class="num">估值结论</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="label">红利低波</td>
+<td class="num">8.45</td>
+<td class="num">77.68%</td>
+<td class="num">0.87</td>
+<td class="num">61.80%</td>
+<td class="num">4.45%</td>
+<td class="num">股息稳健</td>
+</tr>
+<tr>
+<td class="label">中证红利</td>
+<td class="num">8.58</td>
+<td class="num">78.56%</td>
+<td class="num">0.85</td>
+<td class="num">49.56%</td>
+<td class="num">4.28%</td>
+<td class="num">股息稳健</td>
+</tr>
+<tr>
+<td class="label">中证白酒</td>
+<td class="num">19.21</td>
+<td class="num">10.96%</td>
+<td class="num">3.86</td>
+<td class="num">1.24%</td>
+<td class="num">4.77%</td>
+<td class="num">深度低估</td>
+</tr>
+<tr>
+<td class="label">沪深300</td>
+<td class="num">13.29</td>
+<td class="num">62.84%</td>
+<td class="num">1.40</td>
+<td class="num">36.08%</td>
+<td class="num">2.71%</td>
+<td class="num">极贵</td>
+</tr>
+<tr>
+<td class="label">中证500</td>
+<td class="num">32.63</td>
+<td class="num">76.20%</td>
+<td class="num">2.37</td>
+<td class="num">76.76%</td>
+<td class="num">1.39%</td>
+<td class="num">偏贵</td>
+</tr>
+<tr>
+<td class="label">创业板指</td>
+<td class="num">37.42</td>
+<td class="num">30.12%</td>
+<td class="num">5.24</td>
+<td class="num">58.48%</td>
+<td class="num">1.00%</td>
+<td class="num">中性偏贵</td>
+</tr>
+<tr>
+<td class="label">科创50</td>
+<td class="num">133.35</td>
+<td class="num">79.57%</td>
+<td class="num">7.74</td>
+<td class="num">91.31%</td>
+<td class="num">0.24%</td>
+<td class="num">极贵</td>
+</tr>
+<tr>
+<td class="label">恒生科技</td>
+<td class="num">23.17</td>
+<td class="num">36.42%</td>
+<td class="num">2.35</td>
+<td class="num">18.15%</td>
+<td class="num">1.05%</td>
+<td class="num">偏低</td>
+</tr>
+<tr>
+<td class="label">中概互联50</td>
+<td class="num">16.74</td>
+<td class="num">4.68%</td>
+<td class="num">1.98</td>
+<td class="num">0.96%</td>
+<td class="num">1.12%</td>
+<td class="num">深度低估</td>
+</tr>
+<tr>
+<td class="label">纳斯达克100</td>
+<td class="num">30.96</td>
+<td class="num">50.88%</td>
+<td class="num">9.56</td>
+<td class="num">87.72%</td>
+<td class="num">0.43%</td>
+<td class="num">偏高</td>
+</tr>
+<tr>
+<td class="label">标普500</td>
+<td class="num">25.32</td>
+<td class="num">58.40%</td>
+<td class="num">5.57</td>
+<td class="num">95.76%</td>
+<td class="num">1.02%</td>
+<td class="num">PB极贵</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<hr>
+
+<h3>QDII 溢价与申购额度监测</h3>
+<h4>场内ETF溢价率</h4>
+<div class="table-wrap"><table class="data-table">
+<thead><tr>
+<th class="">ETF</th>
+<th class="num">代码</th>
+<th class="num">溢价率</th>
+<th class="num">对比昨日溢价</th>
+<th class="num">评估</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="label">纳指ETF国泰</td>
+<td class="num">513100</td>
+<td class="num">11.91%</td>
+<td class="num">—</td>
+<td class="num">△溢价</td>
+</tr>
+<tr>
+<td class="label">纳指ETF广发</td>
+<td class="num">159941</td>
+<td class="num">10.33%</td>
+<td class="num">—</td>
+<td class="num">△溢价</td>
+</tr>
+<tr>
+<td class="label">纳斯达克100ETF招商</td>
+<td class="num">159659</td>
+<td class="num">8.54%</td>
+<td class="num">—</td>
+<td class="num">△溢价</td>
+</tr>
+<tr>
+<td class="label">标普500ETF博时</td>
+<td class="num">513500</td>
+<td class="num">8.28%</td>
+<td class="num">—</td>
+<td class="num">△溢价</td>
+</tr>
+<tr>
+<td class="label">标普500ETF国泰</td>
+<td class="num">159612</td>
+<td class="num">6.29%</td>
+<td class="num">—</td>
+<td class="num">△溢价</td>
+</tr>
+<tr>
+<td class="label">标普500ETF南方</td>
+<td class="num">513650</td>
+<td class="num">6.07%</td>
+<td class="num">—</td>
+<td class="num">△溢价</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>QDII场内普遍出现较明显溢价，最高溢价约11.91%（纳指ETF国泰）。</p>
+<h4>场外QDII申购额度（纳指100系+标普500系，各取5只）</h4>
+<div class="table-wrap"><table class="data-table">
+<thead><tr>
+<th class="">简称</th>
+<th class="num">代码</th>
+<th class="num">最新净值</th>
+<th class="num">申购状态</th>
+<th class="num">日累计限额</th>
+<th class="num">对比昨日限额</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="label">大成等权标普500c</td>
+<td class="num">008401</td>
+<td class="num">2.7347</td>
+<td class="num">限大额</td>
+<td class="num">100元</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">大成等权标普500a</td>
+<td class="num">096001</td>
+<td class="num">2.7507</td>
+<td class="num">限大额</td>
+<td class="num">100元</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">大成纳指100a</td>
+<td class="num">000834</td>
+<td class="num">6.4621</td>
+<td class="num">限大额</td>
+<td class="num">10元</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">大成纳指100c</td>
+<td class="num">008971</td>
+<td class="num">6.4006</td>
+<td class="num">限大额</td>
+<td class="num">10元</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">建信纳指100c</td>
+<td class="num">012752</td>
+<td class="num">3.4247</td>
+<td class="num">限大额</td>
+<td class="num">10元</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">南方纳指100a</td>
+<td class="num">016452</td>
+<td class="num">2.3512</td>
+<td class="num">限大额</td>
+<td class="num">10元</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">南方纳指100c</td>
+<td class="num">016453</td>
+<td class="num">2.3406</td>
+<td class="num">限大额</td>
+<td class="num">10元</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">摩根标普500a</td>
+<td class="num">017641</td>
+<td class="num">1.7059</td>
+<td class="num">限大额</td>
+<td class="num">10元</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">摩根标普500c</td>
+<td class="num">019305</td>
+<td class="num">1.6894</td>
+<td class="num">限大额</td>
+<td class="num">10元</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">摩根美钞标普500</td>
+<td class="num">017642</td>
+<td class="num">0.2528</td>
+<td class="num">限大额</td>
+<td class="num">0元</td>
+<td class="num">—</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>10只均严格限大额，额度最高仅100元，场外外汇申购通道极度紧缩。</p>
+<h4>热门全球QDII关注</h4>
+<div class="table-wrap"><table class="data-table">
+<thead><tr>
+<th class="">简称</th>
+<th class="num">代码</th>
+<th class="num">最新净值</th>
+<th class="num">申购状态</th>
+<th class="num">日累计限额</th>
+<th class="num">对比昨日限额</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="label">华安法国CAC40</td>
+<td class="num">021540</td>
+<td class="num">1.0326</td>
+<td class="num">限大额</td>
+<td class="num">100000元</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">广发全球精选</td>
+<td class="num">021277</td>
+<td class="num">6.3993</td>
+<td class="num">限大额</td>
+<td class="num">10000元</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">华宝致远</td>
+<td class="num">008254</td>
+<td class="num">1.7489</td>
+<td class="num">限大额</td>
+<td class="num">2000元</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">浦银安盛全球</td>
+<td class="num">014002</td>
+<td class="num">3.6564</td>
+<td class="num">限大额</td>
+<td class="num">1000元</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">华安德国DAX</td>
+<td class="num">015016</td>
+<td class="num">1.9325</td>
+<td class="num">限大额</td>
+<td class="num">1000元</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">汇添富全球移动互联</td>
+<td class="num">015202</td>
+<td class="num">5.3141</td>
+<td class="num">暂停申购</td>
+<td class="num">1000元</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">银华海外数字经济</td>
+<td class="num">016702</td>
+<td class="num">2.1990</td>
+<td class="num">限大额</td>
+<td class="num">1000元</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">华夏移动互联</td>
+<td class="num">002891</td>
+<td class="num">2.8580</td>
+<td class="num">限大额</td>
+<td class="num">100元</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">建信新兴市场</td>
+<td class="num">018147</td>
+<td class="num">2.4770</td>
+<td class="num">限大额</td>
+<td class="num">100元</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">国富全球科技互联</td>
+<td class="num">021842</td>
+<td class="num">7.0467</td>
+<td class="num">限大额</td>
+<td class="num">100元</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td class="label">建信富时100</td>
+<td class="num">008706</td>
+<td class="num">1.4558</td>
+<td class="num">限大额</td>
+<td class="num">10元</td>
+<td class="num">—</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>热门QDII多限大额且1只暂停申购，最高额度为华安法国CAC40（10万元）。</p>
+</div>
+<div class="player">
+<div class="player-row">
+<button class="btn-play" id="btnPlay">▶</button>
+<span class="player-time" id="currentTime">00:00</span>
+<div class="progress-wrap" id="progressWrap">
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+<span class="player-time" id="totalTime" data-duration="0.0">00:00</span>
+</div>
+<div class="player-sub">
+<button class="speed-btn" data-speed="0.8">0.8x</button>
+<button class="speed-btn active" data-speed="1.0">1x</button>
+<button class="speed-btn" data-speed="1.25">1.25x</button>
+<button class="speed-btn" data-speed="1.5">1.5x</button>
+</div>
+</div>
+<script>
+(function(){
+var btn=document.getElementById('btnPlay');
+var cf=document.getElementById('currentTime');
+var tf=document.getElementById('totalTime');
+var pf=document.getElementById('progressFill');
+var pw=document.getElementById('progressWrap');
+var speeds=document.querySelectorAll('.speed-btn');
+var playing=false,pos=0,rate=1;
+
+function fmt(t){var m=Math.floor(t/60),s=Math.floor(t%60);return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
+
+// 从 data-duration 取编译时预读的时长（ffprobe），若为0则后续靠 loadedmetadata 更新
+var dur=parseFloat(tf.getAttribute('data-duration'))||0;
+if(dur>0){tf.textContent=fmt(dur)}
+
+// 提前创建 Audio 并加载元数据，不依赖点击播放
+var a=new Audio();a.src='daily-report.mp3?v=20260925';a.preload='metadata';
+a.addEventListener('loadedmetadata',function(){dur=a.duration;tf.textContent=fmt(dur);upd()});
+a.addEventListener('timeupdate',function(){if(!playing)return;pos=a.currentTime;upd();if(pos>=dur-0.1){pause();pos=dur;upd()}});
+a.addEventListener('ended',function(){playing=false;btn.textContent='\u25B6';pos=dur;upd()});
+
+function upd(){if(!dur)return;var p=pos/dur;pf.style.width=(p*100)+'%';cf.textContent=fmt(pos)}
+
+function doPlay(){a.playbackRate=rate;a.currentTime=pos;a.play().then(function(){playing=true;btn.textContent='\u23F8'}).catch(function(){})}
+function pause(){a.pause();playing=false;btn.textContent='\u25B6'}
+
+btn.addEventListener('click',function(){if(playing)pause();else doPlay()});
+
+pw.addEventListener('click',function(e){
+if(!dur)return;var rect=pw.getBoundingClientRect();
+var x=e.clientX-rect.left;var p=Math.max(0,Math.min(1,x/rect.width));
+pos=p*dur;a.currentTime=pos;upd()});
+
+speeds.forEach(function(b){b.addEventListener('click',function(){
+speeds.forEach(function(s){s.classList.remove('active')});
+b.classList.add('active');rate=parseFloat(b.dataset.speed);
+if(a){a.playbackRate=rate}})});
+
+setInterval(function(){if(!playing)return;pos=a.currentTime;upd()},250)
+})();</script>
+</body>
+</html>
