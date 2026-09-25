@@ -1323,7 +1323,9 @@ def _fetch_rss_other():
     print(f"    [谷歌新闻·美国] 去重后 {len(items_google)} 条（原始 {_raw_cnt} 条，丢弃重复 {_dup_cnt} 条）")
 
     # 联合早报：取最新 10 条（feed 已按时间倒序；长文留给深度专栏独立源）
-    items_zaobao = _fetch_zaobao_raw()[:10]
+    _zb_all = _fetch_zaobao_raw()
+    items_zaobao = _zb_all[:10]
+    print(f"    联合早报候选: feed 返回 {len(_zb_all)} 条 → 截取 {len(items_zaobao)} 条入 items_zaobao")
     for _z in items_zaobao:
         if len(_z.get("desc", "")) > 300:
             _z["desc"] = _z["desc"][:300] + "…"
