@@ -102,6 +102,20 @@ jobs:
           cp report.md docs/daily-report.md 2>/dev/null || true
           cp daily-report.html docs/index.html 2>/dev/null || true
           cp script.txt docs/daily-script.txt 2>/dev/null || true
+          # 历史归档：把本次日报存为 docs/archive/YYYY-MM-DD.md（保留 30 天浏览入口，
+          # 供回看趋势；archive 与最新 daily-report.md 分离）。仅成功生成才归档。
+          mkdir -p docs/archive
+          arch_date="$(date +%Y-%m-%d)"
+          cp report.md "docs/archive/${arch_date}.md" 2>/dev/null || true
+          # 自动清理 30 天前的旧归档。⚠️ 不能用 find -mtime：Actions checkout 会把
+          #   检出文件的 mtime 重置为当前时刻，-mtime 永远不命中 → 清理永不生效。
+          #   改按文件名日期（YYYY-MM-DD.md 字典序=时间序）与 30 天前截止日做字符串比较。
+          cutoff="$(date -d '30 days ago' +%Y-%m-%d)"
+          for f in docs/archive/*.md; do
+            [ -e "$f" ] || continue
+            d="$(basename "$f" .md)"
+            if [[ "$d" < "$cutoff" ]]; then rm -f "$f"; fi
+          done
           # MP3 仅在本次成功生成时才部署（杜绝旧音频上线）
           if [ "${{ steps.md_to_mp3.outcome }}" = "success" ] && [ -f daily-report.mp3 ]; then
             cp daily-report.mp3 docs/
