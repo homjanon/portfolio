@@ -826,6 +826,16 @@ def _verify_skeleton(md_file):
     h1 = next((l for l in heads if l.startswith('# ')), '')
     if h1 and '全球金融资讯日报' not in h1:
         drift.append(f'H1 应为「…全球金融资讯日报」，实际「{h1[:42]}」')
+    # 联合早报块条数检查：9/24 报告仅 5 条、9/25 仅 2 条（应为 10）。
+    #   数据侧日志三天均 OK(24条)→截取 10 条，源正常；系 LLM 借「严格去重」删减，
+    #   prompt 已加跨块去重豁免，此处做**输出侧告警**，漂移当天可从 Actions 日志发现。
+    m_zb = re.search(r'\*\*📌 联合早报\*\*(.*?)(?=\n---|\n## |\Z)', text, re.S)
+    if m_zb:
+        n_zb = len(re.findall(r'^\s*\d+\.\s+\*\*', m_zb.group(1), re.M))
+        if n_zb < 5:
+            drift.append(f'联合早报块仅 {n_zb} 条（应为 10）—— 疑似 LLM 删减')
+        else:
+            print(f"  · 联合早报块 {n_zb} 条")
 
     if not miss and not drift and not extra_h2 and not miss_label:
         extra = f"，{len(miss_opt)} 个条件章节未出现（门控跳过，正常）" if miss_opt else ""
