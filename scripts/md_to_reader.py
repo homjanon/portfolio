@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """把 Markdown 日报转为 HTML — 保留5个核心表格、智能去粗、简洁设计"""
-import sys, re, os, datetime, subprocess
+import sys, re, os, json
 
 # ============================================================
 # CSS + HTML 模板（完全重设计）
@@ -836,6 +836,23 @@ def _verify_skeleton(md_file):
             drift.append(f'联合早报块仅 {n_zb} 条（应为 10）—— 疑似 LLM 删减')
         else:
             print(f"  · 联合早报块 {n_zb} 条")
+    m_gg = re.search(r'\*\*📌 谷歌精选\*\*(.*?)(?=\*\*📌 联合早报\*\*|\n---|\n## |\Z)', text, re.S)
+    if m_gg:
+        n_gg = len(re.findall(r'^\s*\d+\.\s+\*\*', m_gg.group(1), re.M))
+        # 精确判定：CI 工作目录下有 data_news.json，用 google_total 区分「候选不足」与「LLM 删减」
+        _gg_total = None
+        try:
+            _dn = json.load(open('data_news.json', encoding='utf-8'))
+            _gg_total = (_dn.get('data', _dn) or {}).get('google_total')
+        except Exception:
+            pass
+        if _gg_total is not None and _gg_total >= 10 and n_gg < 10:
+            drift.append(f'谷歌块仅 {n_gg} 条（候选 {_gg_total} 条，应为 10）—— 疑似 LLM 删减')
+        elif n_gg < 8:
+            drift.append(f'谷歌块仅 {n_gg} 条（应为 10）—— 疑似 LLM 删减或数据缺失')
+        else:
+            print(f"  · 谷歌块 {n_gg} 条" + (f"（候选 {_gg_total}）" if _gg_total is not None else ""))
+
 
     if not miss and not drift and not extra_h2 and not miss_label:
         extra = f"，{len(miss_opt)} 个条件章节未出现（门控跳过，正常）" if miss_opt else ""
