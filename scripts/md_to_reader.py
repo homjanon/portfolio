@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """把 Markdown 日报转为 HTML — 保留5个核心表格、智能去粗、简洁设计"""
-import sys, re, os, json
+import sys, re, os, datetime, subprocess, json
 
 # ============================================================
 # CSS + HTML 模板（完全重设计）
