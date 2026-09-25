@@ -1306,21 +1306,9 @@ def _fetch_rss_other():
         if not items_google:
             print("    [谷歌新闻·英国] 兜底也失败，由财联社/格隆汇补位")
 
-    # 标题去重（归一化：去源后缀/标点，仅留字母数字与汉字后小写比对）
-    def _norm(t):
-        t = re.sub(r"<[^>]+>", " ", t)
-        t = re.sub(r"[^\w\u4e00-\u9fff]+", "", t).lower()
-        return t
-    _raw_cnt = len(items_google)
-    seen, deduped = set(), []
-    for it in items_google:
-        key = _norm(it["title"])
-        if key and key not in seen:
-            seen.add(key)
-            deduped.append(it)
-    _dup_cnt = _raw_cnt - len(deduped)
-    items_google = deduped
-    print(f"    [谷歌新闻·美国] 去重后 {len(items_google)} 条（原始 {_raw_cnt} 条，丢弃重复 {_dup_cnt} 条）")
+    # 去重交给 LLM：数据侧实测始终「丢弃重复 0 条」（归一化只挡完全同名，挡不住同事件异标题），
+    # 留在代码里只增加一个永远不命中的环节；LLM 精选 10 条时负责剔除同事件重复并从候选内补位（见 prompt）。
+    print(f"    [谷歌新闻] 获取 {len(items_google)} 条，全量交 LLM 去重精选 10 条")
 
     # 联合早报：取最新 10 条（feed 已按时间倒序；长文留给深度专栏独立源）
     _zb_all = _fetch_zaobao_raw()
