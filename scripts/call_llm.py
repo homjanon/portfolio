@@ -188,6 +188,62 @@ def _call_llm(api_url, api_key, model, system, user, timeout=90, extra_headers=N
     raise RuntimeError(f"LLM 调用失败（{MAX_ATTEMPTS}次后切换下一模型）: {last_exc}")
 
 
+
+_LEAD_SYSTEM = (
+    "你是新闻编辑。下面给你一篇已完成的金融日报正文。请基于且仅基于正文内容，为它写「今日定性导语」。\n"
+    "要求：\n"
+    "- {mode_req}\n"
+    "- 整体 2–4 句连贯文字，直接给结论性要点，不逐条复述\n"
+    "- 单行输出（不要任何换行）；只输出导语正文本身，不要带「**今日定性导语**：」前缀\n"
+    "- 只能归纳正文中出现的信息，严禁引入正文之外的任何新闻或数据\n"
+    "- 涨跌幅用 ↑/↓ 箭头配合百分比，核心数字加粗（沿用正文写法）"
+)
+
+
+def _gen_lead(report_text, used_idx, mode):
+    """导语二次生成：模型 = 正文生成模型的下一位（循环映射，polo 2026-09-27 拍板）。
+    输入只有 report 正文——候选池等原始数据物理不可见，从根源杜绝导语掺杂。
+    降级链：指定模型重试 1 次 → 链内顺延 → 全部失败则机械兜底（正文 Top20 前 3 条标题拼接）。"""
+    n = len(LLM_CONFIGS)
+    mode_req = ("先用一句话梳理当日市场涨跌全景，再列 3–5 条新闻主线"
+                if "完整" in mode else
+                "以当日新闻要点为主线，列 3–5 条新闻主线（当日无行情数据，不得编造行情/资金数字）")
+    sys_p = _LEAD_SYSTEM.replace("{mode_req}", mode_req)
+    # 机械兜底素材（先备好）
+    titles = re.findall(r"^\s*\d+\.\s+\*\*(.+?)\*\*", report_text, re.M)[:3]
+    fallback = "今日新闻主线：" + "；".join(
+        f"{'一二三四'[i]}是{t}" for i, t in enumerate(titles)) + "。"
+    for off in range(n):
+        idx = (used_idx + 1 + off) % n
+        llm = LLM_CONFIGS[idx]
+        api_key = os.environ.get(llm["api_key_env"])
+        if not api_key:
+            print(f"  ⏭️ 导语模型 {llm['name']}: 环境变量未设置，顺延下一位")
+            continue
+        for attempt in (1, 2):
+            try:
+                lead = _call_llm(
+                    llm["api_url"], api_key, llm["model"], sys_p, report_text,
+                    extra_headers=llm.get("extra_headers"),
+                    name=llm["name"] + "(导语)",
+                )
+            except Exception as e:
+                print(f"  ❌ 导语调用 {llm['name']} 第{attempt}次失败: {str(e)[:90]}")
+                time.sleep(2)
+                continue
+            lead = re.sub(r"\s+", " ", (lead or "").strip()).strip()
+            lead = lead.strip("*").strip()  # 防模型把整句加粗
+            if len(lead) < 30:
+                print(f"  ❌ 导语过短（{len(lead)} 字），视为失败")
+                continue
+            if len(lead) > 400:
+                lead = lead[:397] + "…"
+            print(f"  ✅ 导语生成: {llm['name']}（{len(lead)} 字）")
+            return lead
+    print("  ⚠️ 导语 LLM 全部失败 → 机械兜底（正文 Top20 前 3 条标题拼接）")
+    return fallback
+
+
 def main():
     # 1. 读取 system prompt
     if not os.path.exists(PROMPT_PATH):
@@ -285,7 +341,8 @@ def main():
     # 3. 主 LLM → 兜底 LLM（含"近空输出"校验：过短视为失败，自动切下一模型）
     MIN_CHARS = 500  # 报告有效最低字符数；低于此判定为失败，避免空白被静默提交
     content = None
-    for llm in LLM_CONFIGS:
+    _used_idx = None
+    for _i_llm, llm in enumerate(LLM_CONFIGS):
         api_key = os.environ.get(llm["api_key_env"])
         if not api_key:
             print(f"⏭️  跳过 {llm['name']}: 环境变量 {llm['api_key_env']} 未设置")
@@ -332,12 +389,24 @@ def main():
         content = c
         # Top20 同链接去重（防 LLM 幻觉复制同一条新闻；对 HTML/广播稿链路无副作用）
         content = _dedup_top20_links(content)
+        _used_idx = _i_llm
         print(f"✅ {llm['name']} 成功（{len(content)} 字符）")
         break
 
     if content is None:
         print("❌ 所有 LLM 均失败或输出过短，无法生成报告，终止以免提交空白")
         sys.exit(1)
+
+    # 3b. 导语二次生成（模型 = 正文模型的下一位循环；输入仅正文——候选池物理不可见）
+    lead = _gen_lead(content, _used_idx if _used_idx is not None else 0, mode)
+    if "__LEAD__" in content:
+        content = content.replace("__LEAD__", lead)
+    else:
+        # LLM 未按骨架输出占位符 → 兜底插入到查询时间行之后
+        content = re.sub(r"(?m)^(查询时间（北京时间）：[^\n]*\n)",
+                         lambda m: m.group(1) + "\n**今日定性导语**：" + lead + "\n",
+                         content, count=1)
+        print("  ⚠️ 正文未含 __LEAD__ 占位符，已在查询时间行后插入导语")
 
     # 4. 写入 report.md
     out_path = "report.md"
