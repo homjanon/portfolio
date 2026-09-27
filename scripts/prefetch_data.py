@@ -1228,7 +1228,7 @@ def _fetch_rss_other():
     再失败由财联社/格隆汇补位；
     去重后交给LLM精选≤10(英译中)，LLM 输出条目必须互不重复，候选不足则按实际条数输出由财联社/格隆汇补位；
     早报：联合早报中港台即时（hub.slarker.me 主 + rsshub.rssforever.com 备），取最新10条。"""
-    TOPIC = "CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx6TVdZU0FtVnVHZ0pWVXlnQVAB"
+    # TOPIC 常量已移除（2026-09-27 换 Top stories，见 fetch_news 内 URL）
     MAX_PER = 20
 
     def _parse(url):
@@ -1269,8 +1269,9 @@ def _fetch_rss_other():
 
     # 谷歌：美国一地 30 条；失败或空结果时指数退避重试（2s/4s，共3次），应对间歇限流
     items_google = []
-    url = (f"https://news.google.com/rss/topics/{TOPIC}"
-           f"?hl=en-US&gl=US&ceid=US:en")
+    # 2026-09-27 由 Business topic 换为 Top stories（polo 拍板）：重大国际新闻（俄乌/中东/天灾等）
+    #   在 Business 类 topic 中结构性缺失，Top stories 才承载"当日最重要新闻"，与「全球 Top20」定位一致
+    url = "https://news.google.com/rss?hl=en-US&gl=US&ceid=US:en"
     for _attempt in range(3):
         try:
             items_google = _parse(url)
@@ -1287,8 +1288,7 @@ def _fetch_rss_other():
 
     # 谷歌主源（美国区）失败 → 兜底：谷歌英国区（同一商业 TOPIC，换地域参数 hl=en-GB&gl=GB&ceid=GB:en）
     if not items_google:
-        _UK_URL = (f"https://news.google.com/rss/topics/{TOPIC}"
-                   f"?hl=en-GB&gl=GB&ceid=GB:en")
+        _UK_URL = "https://news.google.com/rss?hl=en-GB&gl=GB&ceid=GB:en"
         for _attempt in range(2):
             try:
                 _uk = _parse(_UK_URL)
@@ -1412,8 +1412,14 @@ def _fetch_deep_feed(path, label):
                     _t = _c.tag.split("}")[-1] if "}" in _c.tag else _c.tag
                     _f[_t] = (_c.text or "").strip()
                 _title = re.sub(r"\s+", " ", _f.get("title", "")).strip()[:120]
-                _desc = html.unescape(re.sub(r"<[^>]+>", " ", _f.get("description", "")))
-                _desc = re.sub(r"\s+", " ", _desc).strip()
+                _desc = html.unescape(_f.get("description", ""))
+                # 段落保留（2026-09-27）：块级标签边界 → 换行，其余标签 → 空格，压空白时保留换行
+                #   旧写法把 <p> 一并剥成空格，原文分段被压成一行 → 专栏输出"全文一坨"（polo 实测反馈）
+                _desc = re.sub(r"(?i)<br\s*/?>|</p\s*>|</div\s*>|</h[1-6]\s*>", "\n\n", _desc)
+                _desc = re.sub(r"<[^>]+>", " ", _desc)
+                _desc = re.sub(r"[^\S\n]+", " ", _desc)
+                _desc = "\n".join(x.strip() for x in _desc.split("\n"))
+                _desc = re.sub(r"\n{3,}", "\n\n", _desc).strip()
                 if not _title or not _desc:
                     continue
                 out.append({
