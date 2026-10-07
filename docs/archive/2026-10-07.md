@@ -1,8 +1,8 @@
 # 2026年10月7日 星期三 全球金融资讯日报
 
-查询时间（北京时间）：2026年10月7日 06:32
+查询时间（北京时间）：2026年10月7日 09:48
 
-**今日定性导语**：全球主要市场10月6日多数收涨：美股三大指数集体走强，标普500 **↑0.58%**、纳指 **↑0.45%** 创收盘历史新高，道指 **↑0.49%**；港股恒指 **↑1.00%**，日经225 **↑1.05%** 领涨，德国DAX **↑0.77%**，唯韩国KOSPI **↓0.89%** 回调。消息面上，特朗普称俄乌冲突正“越来越接近结束”，美联储戴利担忧AI、关税和能源成本长期推高通胀；中东局势紧张与伊朗供应减少下，布伦特原油 **↑0.78%** 报 **101.104 美元/桶**，WTI原油 **↑0.46%**，中国独立炼厂增购伊拉克和卡塔尔原油 **1500万至2000万桶**。贸易与地缘方面，法德提议建立快速贸易反制机制，中国商务部回应称保护主义提升不了竞争力；拉美民调显示中国影响力评价首超美国，专家称中国在 **74项** 关键科技中领先 **66项*…
+**今日定性导语**：隔夜美股三大指数全线收涨且标普500刷新历史高点（标普500 **↑0.58%**、道指 **↑0.49%**、纳指 **↑0.45%**），欧洲主要股指延续涨势，而亚太股市多数下跌（恒指 **↓0.36%**、日经225 **↓0.49%**），商品端WTI原油涨 **↑1.02%** 突破90美元而黄金回落 **↓0.27%**。地缘与政策博弈持续发酵，法德拟推快速贸易反制机制加剧中欧摩擦风险，美议员施压美联储审查香港美元流动性工具资格，同时乌指俄筹备大规模进攻且黑海商船遇袭推升区域紧张。产业端则迎来积极催化，AI盈利韧性支撑美股大盘，三星电机计划斥资近50亿美元扩产基板叠加南亚科调升合约价提振半导体预期，微软Xbox斩获《GTA 6》首发独占云游戏权提振市场情绪。
 
 ---
 
@@ -14,54 +14,48 @@
 |------|--------|--------|
 | 道琼斯工业 | 51521.28 | **↑0.49%** |
 | 标普500 | 7818.93 | **↑0.58%** |
-| 纳斯达克综合 | 27599.79 | **↑0.45%** |
+| 纳斯达克综合 | 27599.89 | **↑0.45%** |
 
-美股三大指数10月6日集体收涨，纳指、标普500指数创收盘历史新高。特朗普称俄乌冲突正"越来越接近结束"；美联储的戴利表示可能需要进一步收紧政策，对AI、关税和能源成本可能长期推高通胀表示担忧；苹果将于11月3日公布第四财季财报，并宣布将与LG联合研发智能门铃、智能门锁等智能家居产品。
+隔夜美股三大指数集体收涨，标普500指数刷新历史高点。市场情绪受人工智能板块盈利韧性及大型科技公司资本开支前景支撑，半导体及设备股表现活跃，部分个股创年内新高。
 
----
-
-### 港股收盘（10月6日）
+### 港台市场（10月6日）
 
 | 指数 | 最新价 | 涨跌幅 |
 |------|--------|--------|
-| 恒生指数 | 24280.56 | **↑1.00%** |
-| 恒生中国企业指数 | 8128.97 | **↑0.96%** |
-| 恒生科技指数 | 4223.08 | **↑0.94%** |
+| 恒生指数 | 24192.21 | **↓0.36%** |
+| 恒生中国企业指数 | 8094.38 | **↓0.43%** |
+| 恒生科技指数 | 4204.63 | **↓0.44%** |
+| 台湾加权指数 | 49877.57 | **↑0.11%** |
 
-港股10月6日整体走强，三大指数均收涨。深圳传音控股在港交所发售0.866亿股H股，最高发售价不超过38.8港元，预计10月15日上市交易；富时罗素表示将持续监控韩国市场结算资金要求，关注卖空、结算及市场预警机制进展。
-
----
+港股今早低开低走，恒生科技指数跌超1%。大型科网股普遍走弱，阿里巴巴、百度跌逾2%，腾讯、小米跌超1%。生物医药股回调明显，金斯瑞生物科技大跌超14%，昭衍新药、维亚生物等跟跌。
 
 ### 全球其他市场（10月6日）
 
-> ⚠️ STOXX 600数据含 `_stale: true`（数据源为yfinance，日期为10月5日），以最新可得为准。
-
 | 指数 | 代码 | 最新价 | 涨跌幅 |
 |------|------|--------|--------|
-| 日经225 | N225 | 70683.98 | **↑1.05%** |
-| 韩国KOSPI | KOSPI | 6941.39 | **↓0.89%** |
-| 欧洲STOXX 600 | SXXP | 633.62 | **↑0.36%** |
+| 日经225 | N225 | 70335.19 | **↓0.49%** |
+| 韩国KOSPI | KOSPI | 6890.54 | **↓0.73%** |
+| 新加坡STI | STI | 5657.67 | **↓0.77%** |
+| 欧洲STOXX 50 | SX5E | 6274.55 | **↑0.52%** |
 | 德国DAX | GDAXI | 25449.19 | **↑0.77%** |
 | 英国富时100 | FTSE | 10541.69 | **↑0.42%** |
 | 法国CAC40 | FCHI | 7865.07 | **↑0.40%** |
 
-日经225强劲大涨超1%，德国DAX涨近0.8%；韩国KOSPI小幅回调0.89%。中东局势紧张，也门首都萨那传出爆炸声，沙特空袭也门多地；委内瑞拉第二大炼油厂卡登因火灾停运，日处理能力31万桶。
-
----
+亚太股市多数下跌，韩国KOSPI开盘跌1.11%，日经225小幅低开。欧股则延续昨日涨势，德国DAX升破25400点。日本东证指数盘中升破历史最高收盘水平，创下4201点新高。
 
 ### 大宗商品与汇率
 
 | 品种 | 最新价/值 | 涨跌幅 |
 |------|-----------|--------|
-| WTI原油 | 89.853 美元/桶 | **↑0.46%** |
-| COMEX黄金 | 4192.356 美元/盎司 | **↓0.13%** |
-| 布伦特原油 | 101.104 美元/桶 | **↑0.78%** |
-| COMEX白银 | 61.7 美元/盎司 | **↑0.18%** |
-| 美元/离岸人民币 | 数据暂不可得 | — |
-| 中国10Y国债收益率 | 数据暂不可得（CN10Y为NaN） | — |
+| WTI原油 | 90.355 美元/桶 | **↑1.02%** |
+| COMEX黄金 | 4175.919 美元/盎司 | **↓0.27%** |
+| 布伦特原油 | 101.506 美元/桶 | **↑0.92%** |
+| COMEX白银 | 61.41 美元/盎司 | **↓0.29%** |
+| 美元/离岸人民币 | — | 数据暂不可得 |
+| 中国10Y国债收益率 | — | 数据暂不可得 |
 | 美国10Y国债收益率 | 5.27% | — |
 
-API数据显示美国至10月2日当周原油库存减少210万桶，扭转此前增加趋势；COMEX黄金期货收涨0.86%报4192.7美元/盎司。雪佛龙宣布将出售所持赫斯中游、DJ盆地中游资产权益，预计产生约30亿至40亿美元亏损。
+原油价格震荡偏强，WTI突破90美元关口。黄金小幅回落，现货金价跌破4150美元/盎司。韩国宣布将于今日中午发射“世界号”火箭，区域能源及航运相关波动需关注。
 
 ---
 
@@ -71,47 +65,47 @@ API数据显示美国至10月2日当周原油库存减少210万桶，扭转此�
 
 **📌 谷歌精选**
 
-1. **执行失误后罪犯苏醒**：美国田纳西州囚犯Christa Pike在执行过程中遭遇意外，目前意识清醒并能说话，律师披露了这一情况，引发对美国死刑执行程序的广泛关注。（[The Guardian](https://news.google.com/rss/articles/CBMiggFBVV95cUxNY0M3VU1ldmttS21URTBlcmFWcWFYWHRGZGNJa2J6aFF5YWlKaW51Uld4WWFyUDUtdG42YTRUeEdacmRzSm5iSjgxRGNaUTZlbHg0NWZ2eExNcmZwaElQZGthX0RwTkF4djVhQ1o3Z0Z3QVNBaWdPamo0QWxhXzVtOHpB?oc=5)）
+1. **法国因教育抗议关闭近900所学校**：法国多地爆发 violent 教育抗议，警方使用催泪瓦斯，政府关闭约900所学校以维持秩序。**[NBC News](https://news.google.com/rss/articles/CBMirgFBVV95cUxNcVgxMUdwSXhTZzFhUmJOYW1rZmRQRV93cDhacEdyRE9vLXZDYkYxTjJSWi1yZkZpTW5hLVBjSkJXaEstbXJjOTBNdFBWZ2RwX21rUUNKb3VVT2x2Z04xSmlXTVNDcnNQQ3IyYXVTVHptalNZOWZuTmR6MmYyZ01NcUh5XzZubVRnTnI2bnI2N3NXaEtxUzljQXNSX1VyX3p5a1pmSzkxaHVPVWdXZnc?oc=5)**
 
-2. **法国校园抗议造成数十年来最大损失**：法国多地爆发大规模学生抗议活动，涉及教育公平与就业问题，抗议活动造成严重人员伤亡和社会影响。（[Reuters](https://news.google.com/rss/articles/CBMioAFBVV95cUxOTmtvTm9vbkpQcVdlWl9Lall5TlIyS1g2aWpJSEh3Z0hKbzdOYmZkRUlNWVRHMkZsOFNaMkwyNjhpVEtfQW9vUjhnTV93VlRGOXVnOUg1M0loSmk1bzF2dFJldExORU9tYTdabmQtTWNMOHkxbWhLZUR4bElDYUp5bWN2RmV2bVhVYVB3WW1KLXJaRVREdVQ1WXpuMUJtUXFk?oc=5)）
+2. **特朗普称伊朗可“摧毁”洛杉矶/圣迭戈引加州强烈批评**：特朗普暗示伊朗有能力打击美国西海岸城市，加州政界及民众纷纷谴责此言论不负责任。**[Reuters](https://news.google.com/rss/articles/CBMiswFBVV95cUxNMTY3RjZOMDVYS2VsdWNRS0ZWR0FoRTU1V1MtQk8wLWdEMmdvTXYwVUxORXFpQXNFM25wbU9uVFFKNnhMSmlYUkFEQ0xhNnNKMk5hTjZURGhtV3piTlhieVVhb3h4N3hCYmtTQUVZZUh5dkhPaERqT0hFWXdPQl8wYVNfemd6VkZqSXVEVHQ0Q2NzWWpQUlVjVUhpdHhDWnZUMWl4RUZKTVplVWp6c3prRDhGZw?oc=5)**
 
-3. **白宫为特朗普关于伊朗言论辩护**：特朗普暗示伊朗可"摧毁"洛杉矶和圣迭戈，白宫为其言论辩护，引发加州民众强烈愤怒和全美政治争议。（[BBC](https://news.google.com/rss/articles/CBMiW0FVX3lxTE93cEtTcmRaQm04RTdROTUtUm80V214eGRjaDlLcGh5d0NLcG9Ud1VnM1Vhc1hpTzV5VDI1ZjQ4ZHZqLVZReGFHX2xFOXVEeTVJWThpVm1HNWRQdkU?oc=5)）
+3. **美国疾控中心密切监测俄罗斯鼠疫风险**：CDC表示正监控西伯利亚实验室鼠疫泄漏可能性，并已做好应对任何威胁的准备。**[Axios](https://news.google.com/rss/articles/CBMijAFBVV95cUxQRl80d0VLZU9jVHVtbkhWUUw2QzdSNGpLck00Y1I2UlBWb3ZwZm5QV1ltVjNTcU5POENBRVZ1Q244UVdVbFJoQlVvOWRDbGc3NDJDTlNySTZfRk1qNDZXU0JKMktPb0xDa1JjbmZDOFUzRnE4ZkNhMG9OaC1SZDZUZ0xCVW40VGRyS2hxZQ?oc=5)**
 
-4. **Anduril获29亿美元海军潜艇船厂合同**：在帕尔特里克·卢瑞加入五角大楼军工部门数日后，Anduril拿下29亿美元海军潜艇船厂合同，特朗普政府加速国防工业布局。（[CNBC](https://news.google.com/rss/articles/CBMigwFBVV95cUxNVmF0WjZkaEpHdmRhSGFHczJHWlhib25fT1lvZXB6RVo0SVBGX1VOYzNKREk1N1R2RHJHaXV0anMxeHpNZFg5ZkNXY29jU0NTajVEeEdqSThmSUxzTERnY1g2cEg2azlfOU5qMmVCU1R3aWdZMlM1WV83NHZrWXQ0cXpmMNIBiAFBVV95cUxPN2RrNjh6UC1lYjVJSUZfcGpBQU1LNzRrb05UcGNWZml0RnBEUlUyN2FvNHdJM3B3c1hGTU1ITGxob1VlOXNURUx2cTlEamhNbTVjbm9iOWpLWmEzZEhRQU9wd3RNaGdTVXgtczNTTGt2Y0xFZW5SXzcybWRrdDByYnBQOG81NE5l?oc=5)）
+4. **前CIA官员携带金条被捕，承认参与欺诈并同意 forfeiture 1.94亿美元**：该官员曾向外国官员泄露机密情报来源，涉案金额巨大。**[CBS News](https://news.google.com/rss/articles/CBMidEFVX3lxTE9Bc3NfZk9QMl84SnBvbGNZMVhUR3FSbkxNcUhiZW5sWGswMmF5bFhuU3pOZ1E0UWVvNTRiSnhtc1g3YnNSUUxRaUstOHlZYk4xd2FKSlpLVHlyZWtDdGJjdWVUTTdheW50YW9RcG5jeWhKc0Rz?oc=5)**
 
-5. **前CIA特工携4000万美元金条认罪**：一名前美国CIA官员携带价值4000万美元金条被捕后，对电汇欺诈罪名认罪，承认曾向外国官员暴露秘密情报来源。（[BBC](https://news.google.com/rss/articles/CBMiW0FVX3lxTE1qenpHUjhaRlpWYUZDQVAwLWc2TmJPd29oM0RsU0ZvVmlSQ2MyM1RIcW1kaC1NeUlSdWxxTGZJd1ZHZDAtaE5Mdm40ZzhEd2o2Q2JWSnpKWkludzA?oc=5)）
+5. **乌克兰称情报显示俄罗斯正在筹备大规模进攻**：泽连斯基表示已掌握俄军即将发动大规模攻击的情报，乌方持续对俄后勤节点实施打击。**[Reuters](https://news.google.com/rss/articles/CBMiuwFBVV95cUxOU3BvN0RtZlBjUkl6T2RMRGhCS1ZhSnl5Q1RqOGRvOTE0aHBNMTVhU1VQc3BkenhpVk9WbVVGd1ZuZDNvRDFXWER6V0xadWtZcFVVVzlNakZ2bENjWl82TVVQZ0xVbTNEUUh5MnBHX1B1Y012SjdQemFSbDI5a1U5eXlOOGpTSUFoYnpJMWdhZThHU2Q0c2szNXlDRFAta3pVQ2czX00xTk5FOVdZSEoxWk54VHBqNmk3SlI0?oc=5)**
 
-6. **俄罗斯称西伯利亚实验室工人死亡病例无鼠疫**：俄罗斯宣布在西伯利亚一名实验室工作人员死亡案例中，其密切接触者未检测到鼠疫病毒，美国继续施压要求俄方提供详细信息。（[NBC News](https://news.google.com/rss/articles/CBMirgFBVV95cUxOLWtid3hYWUpRcnZmVnF4ZUZkTF9BdGlVQXBlNlVQa3ZPalRPd3k3Z2ZpNFpscHBTYXhCd3gwblF6dWVRTmxFRHZENXotRDE0eDZMRmpDaTRMUjF2ZkhzQUdLWWx6Y25qOEZsVmlWU1M4a1BpWGc0MEtINmMzMDE4MzI4RDR4N3dfUm0zTFdocVM4dWhnTmxTMEdVYl84c09PTjVSS2pfeHNsMk9NSXc?oc=5)）
+6. **保加利亚称无人机袭击击中两艘商船，乌克兰指责俄罗斯**：黑海海域出现无人机袭击事件，保加利亚总统证实商用船只受损。**[AP News](https://news.google.com/rss/articles/CBMirwFBVV95cUxPaU5DemRLSkhTVjNkckR2UjdISjRuV05vRjh3OHNUOWhTOUpQeDluSnl4QktrUHlad0VBakVfNjUzSHhnUXZvYXd4N1dydU96anliOERsckxiVWJVRXEtZXVyWGhtOEdDczl4VW41YndjczVKM0l0RnY1dGFkLTFETW4tZXhTT1R3UXI4dFVtVkd4dVltNlNiREdVRlVmSWxyVnMxYlI3enZqWHpIQVFZ?oc=5)**
 
-7. **德国逮捕前情报主管间谍案**：德国当局逮捕了前对外情报机构负责人，涉嫌间谍罪，引发德国安全机构高层动荡和国际关注。（[The Washington Post](https://news.google.com/rss/articles/CBMiqAFBVV95cUxNSTg2T2RhWk01ZzB2T2NnSnNCZlhZa2RuV0dkRmVmeEZHbFBvUGt2YVZfZ0ViRE9aYUt0YXVPNC04YVh5dFROYlU5STVzaERnSUVuckVsenhRQkFGMjlrYTdoaEVxa1pPRWpIci1fZk1vLTU0ZXFQTS00Z1dVWkl0eFhWdU92YnFBOWh1NFlBTVBwSk5BUHo1aDV2NUZaN0otOVNJd2twUHY?oc=5)）
+7. **Xbox获得GTA 6首发独占云游戏流媒体权**：微软已与Take-Two达成协议，Xbox云游戏将独家提供《Grand Theft Auto VI》首发在线体验。**[The Verge](https://news.google.com/rss/articles/CBMigwFBVV95cUxQdjd6VzIyMTdRVDZoQmZaMmVac2Y4ak1GbnQ1dW5XR3p1Y0ZnY3FBT1JwRjRMdWxsS2kxUm5DTjVVd003dGJ0RjRVVFItVFhYcmxoTzBhdzFFYzdFajJHZ0VseC1sUzNHZi1RTURQd3E0ektrR0xtYWczSzlmTFZScFFZMA?oc=5)**
 
-8. **立陶宛推动解除核武器禁令遭俄强烈反对**：俄罗斯邻国立陶宛支持解除核武器禁令的努力，引发莫斯科强烈抗议和警告，称此举可能加剧地区紧张局势。（[CNBC](https://news.google.com/rss/articles/CBMifEFVX3lxTFBXWDA4bWI5U1dKaE80VF9mYnFHMkh2R1JibTkwNzhoa0ZVRzl4TFdRZ2R5WFJfd2FTeHB1LUg4cWhwZnU4cjlpNFRPZkEzZnNRZDFlSFpOaFJLN0F6aFZSZEM2bkRHRjkwZzR4YjdiX3dhREoxTkNVRWRVUDLSAYIBQVVfeXFMT0hKSERTVUUyMFV6cXpYZnpyNndVaThwMjlrcjZqSmZZOVBjaWlWZTVxbXJVb3JFWTM3T1hMZUdqQWwxeDhiVlc3LUpGaFc2VEFVbW1OR0o3TnJ1MkQyR0tIRjY1YUxsMDdYb3hGQ0xYa3pndFl0TVZNVHR2al91cnU0Zw?oc=5)）
+8. **麦当劳因AI定价工具被起诉**：美国加盟商指控麦当劳利用AI算法强制推荐价格，涉嫌垄断及操纵 franchise 定价。**[AP News](https://news.google.com/rss/articles/CBMisgFBVV95cUxNY19ra2dQcnBhTDhWS3MwZ3FJOGlqOFlodHFBSXVYdG9XNnA2LUotWnJKU215N040Q3VicU9hR0tTdHZpT3R5R3RwejJIZndFTmV6UXdXS1VNbTBQcHBOTUlFMWI1M0gxRUZiWTAtanFHS1Nxald1S3BDN3M1UFUwRWZybXdSWlIxeFZaOV9EWmtBcVZLRXNlMTQyQ21ZUm5jLVBsdE5ObjAxSFNKZ0ZmcFNR?oc=5)**
 
-9. **标普500指数创下历史新高**：美股标普500指数突破历史高点，道指和纳指同步走强，市场乐观情绪推动投资者继续加仓科技股和成长型资产。（[WSJ](https://news.google.com/rss/articles/CBMihwFBVV95cUxPV0g3Vl9oNWVWc0JnemQ3U2xLOXJ0SDZZSVljcEtiaExTRTgtTzB1a3puLURIQjJJSmJvbG1XbE9jVWlKSTdfWFpSblZIUzhiTkVITkFpcm1XT1NMVVVQVHRZaXJoejh4UG5HaDRWQWNHclgtUmIxX1g2czJ3SUhFZEVlSGtrR1U?oc=5)）
+9. **特朗普计划自行承担竞选广告费用，不退还纳税人**：此前引发争议的纳税人资助宣传广告遭批评后，特朗普表态将自行支付相关费用。**[The New York Times](https://news.google.com/rss/articles/CBMigwFBVV95cUxPZFhpZm9MbjRCeDJFazk5M0R0a2p4VWZBWndSd0RVU0ZJUlpZVkxtREhFaDdTUkFFQ2xrTzFRMWtHekJmQl9UT0dIX3dOcWFpekV0NjMtVkxNMHh3ODA1cGExUC1ZZmlXTjJ4SUtBNlFhRVgwMzVuMHB6ZG52N0hUbTVVMA?oc=5)**
 
-10. **CNN迎新东家Skydance，未来走向成谜**：David Ellison领导的Skydance完成对CNN的收购，现任CEO马克·汤普森留任，新东家承诺保持编辑独立性，媒体格局将迎来重大变化。（[AP News](https://news.google.com/rss/articles/CBMingFBVV95cUxOLW9SY1RYVzNWd3Mwd2FHcmc1dHQ2ZjA0S1JGS0xBeG5UNDU1UDh0ZHRGMUtITUVnOWEtWjRHYU1tMzh3ZjJsalVGcEtucjlWZ3RuckhqcFNrWm9DUGNSbkR0d2NuVkJRQkRwV19COXFIaUVGZXlEQjYyMl9kV0FsOGpZV2RTUVRvYVN2REphZmlhaF9Sb2FQcWtXS3FRQQ?oc=5)）
+10. **Crypto巨鳄转向美国众议院席位投资**：主要加密捐赠者正将资金集中投入中期选举众议院 race，支持两党候选人以推动立法。**[Politico](https://news.google.com/rss/articles/CBMihgFBVV95cUxPX1JEczc2NkNCQzNVMVB6aTQ3ZEZFUHFXTTVOTTNSWnpaM1p6LUxveGFiRTJGdmNqcDZIZmNuZkZtdERGRy10Y25zYnJpMlVnYXdYVmZNOE1JOFd0YWRRN19GNmdxX2ljZTFtS0dwd3c2aDF2T2pwRDN5aUtrT19wc2Y3c0ZhZw?oc=5)**
 
 **📌 联合早报**
 
-11. **中美全球民意好感度此长彼消**：智利"拉美晴雨表"机构公布大型民调，拉丁美洲民众对华影响力评价首次超越美国——65%认为中国影响力积极，较2020年提升17个百分点；认为美国影响力积极的则从60%降至57%。17个调查国中，除哥斯达黎加和多米尼加外，多数受访者认为中国影响力更积极。（[联合早报](https://www.zaobao.com/news/china/story20261007-9795234)）
+11. **中国男乒主帅王皓与粉丝场外对峙，一度向警察求助**：WTT中国大满贯赛场外，部分观众辱骂王皓并高喊“王皓下课”，王皓被激怒后报警取证。国乒男队在亚运决赛不敌日本，无缘九连冠。**[联合早报](https://www.zaobao.com/news/china/story20261007-9796139)**
 
-12. **法德拟推快速切断市场准入，中欧或陷"打打停停"贸易冲突**：法国总统马克龙与德国总理默茨联名致信欧盟委员会主席冯德莱恩，要求建立"快速贸易反制机制"，必要时限制甚至切断相关国家进入欧盟单一市场。中国商务部回应称保护主义提升不了竞争力，脱钩断链只会损人不利己。（[联合早报](https://www.zaobao.com/news/china/story20261006-9794406)）
+12. **台民调：六成民众对特朗普维护台湾利益没信心**：《美丽岛电子报》9月民调显示，60.3%受访者对特朗普维护台利益无信心，民众党支持者中比例高达88.2%。**[联合早报](https://www.zaobao.com/news/china/story20261007-9796088)**
 
-13. **宏福苑火灾独立委员会报告将出炉**：香港大埔宏福苑火灾独立委员会月底向特区政府提交报告，行政长官李家超称将根据报告内容尽快推行全面改革并追究责任。保安局原副秘书长莫君虞、原体育专员蔡健斌已被部署专责为行政问责做前期工夫。（[联合早报](https://www.zaobao.com/news/china/story20261006-9794830)）
+13. **广西贵港一工程船舶发生闪爆，1死2失联**：10月6日下午，郁江河段一艘工程船喷漆作业时发生闪爆，造成1人死亡、2人失联、2人轻伤。**[联合早报](https://www.zaobao.com/news/china/story20261007-9796024)**
 
-14. **专家：中国对美握有更多筹码，74项关键科技中领先66项**：星展银行经济学家纪沫研判，中国在稀土及关键材料、制造业供应链、绿色技术等领域握有筹码，美国不得不对华做出妥协，中美关系未来一年将保持相对稳定。（[联合早报](https://www.zaobao.com/news/china/story20261006-9794152)）
+14. **韩金融机构遭黑客攻击，中国开发AI工具疑被用于入侵**：至少7家韩银行遭入侵，约6.8万人资料外泄。调查人员在服务器中发现中文字符串“ARTEX-自主渗透测试控制台”。**[联合早报](https://www.zaobao.com/news/china/story20261007-9795996)**
 
-15. **台湾迎来新采购战机，北京强调反对美对台出售武器立场是一贯明确**：首批两架F-16V BLK70战机自美国夏威夷飞抵台东志航基地，时隔29年台湾再度迎来新采购战机。中国大陆外交部回应坚决反对，敦促美方恪守一个中国原则。（[联合早报](https://www.zaobao.com/news/china/story20261006-9794828)）
+15. **大陆军媒评蔡康永：骑墙摇摆见风使舵，早晚付出代价**：蔡康永出席民进党籍台北市长参选人沈伯洋竞总成立大会，遭零跑汽车等陆企品牌切割。《解放军报》新媒体账号发文批评。**[联合早报](https://www.zaobao.com/news/china/story20261007-9795975)**
 
-16. **美官员判断大陆攻台可能性降低，大陆促美慎重处理台湾问题**：美国官员判断中国大陆2028年前武力夺取台湾可能性降低。中国外交部发言人郭嘉昆强调台湾问题是中国内政，不容任何外部势力干涉。（[联合早报](https://www.zaobao.com/news/china/story20261006-9794686)）
+16. **美共和党议员促美联储审查香港使用美元流动性工具资格**：众议院中国问题委员会主席穆勒纳尔致函美联储，要求审查香港金管局使用FIMA回购便利的资格，理由涉及香港作为中国金融中心及民主行动。**[联合早报](https://www.zaobao.com/news/china/story20261007-9795931)**
 
-17. **中国商务部促法德勿鼓动欧盟动辄使用保护主义工具**：法德提议欧盟实施新快速行动措施反制损害欧方的国家，中国商务部敦促法德坚持开放合作和自由贸易，不要将经贸问题政治化和泛安全化。（[联合早报](https://www.zaobao.com/news/china/story20261006-9794565)）
+17. **克宫：俄有意在APEC期间举行普京特朗普习近平三方会晤**：APEC领导人会议将于11月18-19日在深圳举行，俄方称三方会晤构想仍处于初步阶段。**[联合早报](https://www.zaobao.com/news/china/story20261007-9795797)**
 
-18. **赵长鹏罕见接受专访：1000万美元就足以支撑舒适日常生活**：币安创始人赵长鹏在《纽约时报》专访中表示，真实身家约在100亿至300亿美元区间，远低于此前福布斯估算的1100亿美元，并称财富存在边际效用递减规律。（[联合早报](https://www.zaobao.com/news/china/story20261006-9793746)）
+18. **中国拟提名候选人角逐世卫组织总干事**：据报道，中国计划推出资深公共卫生官员宋莉参选世卫组织总干事，若当选将成为继陈冯富珍后第二位中国籍总干事。**[联合早报](https://www.zaobao.com/news/china/story20261007-9795769)**
 
-19. **伊朗供应减少，中国独立炼厂增购伊拉克和卡塔尔原油**：随着霍尔木兹海峡出口逐步恢复，中国独立炼油企业加大采购伊拉克及卡塔尔原油，以替代日益减少的伊朗供应，采购量达1500万至2000万桶。（[联合早报](https://www.zaobao.com/news/china/story20261006-9794321)）
+19. **杨丹旭：中美全球民意好感度此长彼消**：“拉美晴雨表”调查显示，65%拉美民众认为中国影响力积极，首次超越美国的57%，为1995年启动调查以来首次逆转。**[联合早报](https://www.zaobao.com/news/china/story20261007-9795234)**
 
-20. **下午察：当"实名举报"也成了流量剧本**：国庆长假期间，短视频平台接连出现"员工实名控诉公司不放假"视频，结果多为商家事先安排，头套塑料袋、手持身份证摆拍维权，"实名举报"沦为流量生意。（[联合早报](https://www.zaobao.com/news/china/story20261006-9792705)）
+20. **法德拟推快速切断市场准入，中欧或陷“打打停停”贸易冲突**：法德联名致信欧盟委员会，要求建立“快速贸易反制机制”，必要时限制相关国家进入欧盟单一市场。中国商务部回应称保护主义提升不了竞争力。**[联合早报](https://www.zaobao.com/news/china/story20261006-9794406)**
 
 ---
 
@@ -122,7 +116,7 @@ API数据显示美国至10月2日当周原油库存减少210万桶，扭转此�
 | 标的 | 代码 | 市场 | 最新价 | 涨跌幅 |
 |------|------|------|--------|--------|
 | 招商银行A | 600036 | A股 | 41.26 元 | **↑1.85%** |
-| 招商银行H | 03968 | 港股 | 51.0 港元 | **↑0.59%** |
+| 招商银行H | 03968 | 港股 | 51.15 港元 | **↑0.29%** |
 | 长江电力 | 600900 | A股 | 28.54 元 | **↑0.56%** |
 | 红利低波ETF易方达 | 563020 | A股 | 1.177 元 | **↑1.47%** |
 | QQQM | QQQM | 美股 | 312.76 美元 | **↑0.44%** |
@@ -130,47 +124,22 @@ API数据显示美国至10月2日当周原油库存减少210万桶，扭转此�
 
 #### 持仓聚焦（未来催化）
 
-**半导体/AI芯片｜阿波罗牵头的融资将助力SpaceX采购英伟达芯片（财联社）**
+**半导体/AI芯片｜三星电机计划斥资近50亿美元在韩越扩产FC-BGA基板，用于AI服务器及智能汽车芯片**（财联社）
 
-**AI算力/光模块｜英伟达支持的Lambda拟融资40亿美元冲刺IPO，AI算力积压订单从150亿美元增至500亿美元（格隆汇）**
+**半导体/AI芯片｜DRAM大厂南亚科通知客户再度上调合约价，涨幅最高达20%，涨价效应有望传导至整体经营**（格隆汇）
 
-**消费电子/苹果链｜苹果将与LG联合研发智能门铃、智能门锁等智能家居产品，于10月13日发布HomePod mini及新款电视机顶盒（财联社）**
+**有色/资源/煤炭｜现货黄金跌破4150美元/盎司，日内跌0.33%，贵金属短期承压**（格隆汇）
 
-**银行｜日本计划最早于本财年向外部研究人员开放详细银行业数据，以发现风险并改善监管（格隆汇）**
+**有色/资源/煤炭｜澳大利亚高等法院就气候相关议题做出历史性判决，裁定地方规划部门未妥善考量温室气体排放限制方法**（格隆汇）
 
 ---
 
 ### 估值水位与情绪
 
-> 数据暂不可得（`data_valuation.json` 文件缺失）
+> 数据暂不可得（`data_valuation.json` 未提供）
 
 ---
 
 ### QDII 溢价与申购额度监测
 
-**场内ETF溢价率**
-
-| ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
-|-----|------|-------|------------|------|
-| 纳指ETF国泰 | 513100 | — | — | — |
-| 纳指ETF广发 | 159941 | — | — | — |
-| 纳斯达克100ETF招商 | 159659 | — | — | — |
-| 标普500ETF博时 | 513500 | — | — | — |
-| 标普500ETF国泰 | 159612 | — | — | — |
-| 标普500ETF南方 | 513650 | — | — | — |
-
-QDII溢价：今日无场内ETF溢价率数据
-
-**场外QDII申购额度（纳指100系+标普500系，各取5只）**
-
-| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
-|------|------|---------|---------|-----------|------------|
-
-今日无场外QDII额度数据
-
-**热门全球QDII关注**
-
-| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
-|------|------|---------|---------|-----------|------------|
-
-今日无热门QDII数据
+> 数据暂不可得（`data_extra.json` 未提供）
