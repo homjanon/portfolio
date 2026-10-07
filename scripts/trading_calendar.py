@@ -40,7 +40,12 @@ def _us_open(d):
 
 
 def _hk_open(d):
-    """港股是否交易日（pandas_market_calendars XHKG）"""
+    """港股是否交易日（pandas_market_calendars XHKG）
+
+    注：2026-10-07 台湾加权指数并入报告「港台市场」板块后，**沿用本门控**（polo 已确认）——
+    即港股休市则港台板块整体不输出。港台假期绝大多数重合，仅少数日子不同步
+    （实测 2026-10-01 台股开市、港股休市），届时港台板块整体跳过，属预期行为。
+    """
     try:
         import pandas_market_calendars as mcal
         xcal = mcal.get_calendar("XHKG")
@@ -58,7 +63,7 @@ def market_flags():
         dict: {
             "a_open": bool,   # A股昨日是否交易日
             "u_open": bool,   # 美股昨日是否交易日
-            "hk_open": bool,  # 港股昨日是否交易日
+            "hk_open": bool,  # 港股昨日是否交易日（同时作为「港台市场」模块门控）
             "mode": str,      # "完整模式" 或 "精简模式"
             "yesterday": date, # 参考日
         }
@@ -87,5 +92,5 @@ if __name__ == "__main__":
     print(f"参考日(昨日): {y} 星期{'一二三四五六日'[y.weekday()]}")
     print(f"A股: {'开市' if flags['a_open'] else '休市'}")
     print(f"美股: {'开市' if flags['u_open'] else '休市'}")
-    print(f"港股: {'开市' if flags['hk_open'] else '休市'}")
+    print(f"港股/港台: {'开市' if flags['hk_open'] else '休市'}")
     print(f"模式: {flags['mode']}")
