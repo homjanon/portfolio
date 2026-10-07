@@ -35,9 +35,9 @@ python3 scripts/prefetch_data.py
 
 | 板块 | JSON 文件 | 主要数据来源 | 覆盖内容 |
 |------|-----------|-------------|---------|
-| A股市场 | `data_market_cn.json` | 腾讯 → 东财push2delay → 新浪 → yfinance | 上证/深成/沪深300/科创50/创业板指（含成交额） |
-| 港股市场 | `data_market_hk.json` | 腾讯 → 东财push2delay → 新浪 → yfinance | 恒生指数、恒生国企、恒生科技 |
-| 美股+全球 | `data_market_global.json` | 美股：腾讯链；全球：东财push2delay → 新浪znb_ → akshare → yfinance | 美股三大指数、日经225/KOSPI/欧洲STOXX 600/德国DAX/英国富时100/法国CAC40 |
+| A股市场 | `data_market_cn.json` | 腾讯 → 新浪 → yfinance | 上证/深成/沪深300/科创50/创业板指（含成交额） |
+| 港台市场 | `data_market_hk.json` | 港股：腾讯 → 新浪 → yfinance；台湾：新浪znb_ → yfinance | 恒生指数、恒生国企、恒生科技、台湾加权指数 |
+| 美股+全球 | `data_market_global.json` | 美股：腾讯 → 新浪 → yfinance；全球：新浪znb_ → yfinance | 美股三大指数、日经225/KOSPI/新加坡STI/欧洲STOXX 50/德国DAX/英国富时100/法国CAC40 |
 | 汇率/商品/债券 | `data_forex_rate.json` | 新浪外盘期货(hf_) → akshare期货(兜底) + akshare债券利率 | 原油(WTI/布伦特)、COMEX金/银、中美债收益率 |
 | 估值/PE分位 | `data_valuation.json` | 雪球蛋卷API（1次返回63指数，白名单过滤11个） | 见下方"估值水位与情绪"：红利低波/中证红利/中证白酒/沪深300/中证500/创业板指/科创50/恒生科技/中概互联50/纳斯达克100/标普500 的 PE/PB/分位/股息率（固定顺序） |
 | 全球 Top20 新闻 | `data_news.json` + `data_cls_zaobao.json` | Google News(美国一地20条→LLM去重精选10条,剔除后从候选内补位) + 联合早报 RSS(最新10,统一六实例兜底) | 谷歌块10条(候选不足时按实际) + 联合早报块10条(逐条全量)，两块独立互不补位 |
@@ -89,7 +89,7 @@ python3 scripts/prefetch_data.py
 > 门控：仅当 `data_market_global.json` 存在时输出，否则整节跳过
 > **数据时效提示**：若 `data_market_global.json` 中美股数据含 `_stale: true`，须在本节开头注明「⚠️ 美股数据可能滞后（多源均暂不可得），以最新可得为准」，再写行情。
 
-📊 先读取 `data_market_global.json` 获取 DJI/SPX/IXIC 点位+涨跌幅（数据源：腾讯 → 东财 push2delay → 新浪 → yfinance），用表格展示：
+📊 先读取 `data_market_global.json` 获取 DJI/SPX/IXIC 点位+涨跌幅（数据源：腾讯 → 新浪 → yfinance），用表格展示：
 
 | 指数 | 最新价 | 涨跌幅 |
 |------|--------|--------|
@@ -99,33 +99,35 @@ python3 scripts/prefetch_data.py
 
 在上方表格下方**直接输出一段简述**（读取 `data_cls_zaobao.json` 的 `items` 财联社+格隆汇当天新闻，筛选与 美股/板块 最相关的若干条，综合写成 **50–100 字 一段话、丰富该市场最新情况**，**必须基于新闻事实、不得编造**）；**禁止写『一段简述』『简述』等任何标题或前缀词，直接给内容本身**；若当天无美股相关新闻，本节**留空**（不输出任何文字）。
 
-### 港股收盘（__HK_CLOSE__）
+### 港台市场（__HK_CLOSE__）
 
 > 门控：仅当 `data_market_hk.json` 存在时输出，否则整节跳过（该标题**原样保留**，不写门控说明）
 
-📊 先读取 `data_market_hk.json` 获取恒生/国企/恒生科技指数点位+涨跌幅，用表格展示：
+📊 先读取 `data_market_hk.json` 获取恒生/国企/恒生科技/台湾加权指数点位+涨跌幅，用表格展示：
 
 | 指数 | 最新价 | 涨跌幅 |
 |------|--------|--------|
 | 恒生指数 | （读JSON） | （读JSON） |
 | 恒生国企指数 | （读JSON） | （读JSON） |
 | 恒生科技指数 | （读JSON） | （读JSON） |
+| 台湾加权指数 | （读JSON） | （读JSON） |
 
-在上方表格下方**直接输出一段简述**（读取 `data_cls_zaobao.json` 的 `items` 财联社+格隆汇当天新闻，筛选与 港股 最相关的若干条，综合写成 **50–100 字 一段话、丰富该市场最新情况**，**必须基于新闻事实、不得编造**）；**禁止写『一段简述』『简述』等任何标题或前缀词，直接给内容本身**；若当天无港股相关新闻，本节**留空**（不输出任何文字）。
+在上方表格下方**直接输出一段简述**（读取 `data_cls_zaobao.json` 的 `items` 财联社+格隆汇当天新闻，筛选与 港股/台股 最相关的若干条，综合写成 **50–100 字 一段话、丰富该市场最新情况**，**必须基于新闻事实、不得编造**）；**禁止写『一段简述』『简述』等任何标题或前缀词，直接给内容本身**；若当天无港台相关新闻，本节**留空**（不输出任何文字）。
 
 ### 全球其他市场（__GLOBAL_CLOSE__）
 
 > 门控：仅当 `data_market_global.json` 存在时输出，否则整节跳过
 > ⚠️ 标题中**不得**出现「（欧股 / 日经 / 韩股 / 德股 / 英股 / 法股）」这类括号枚举，只写「全球其他市场（{日期}）」
-> **数据时效提示**：若 `data_market_global.json` 中日经225 / KOSPI / STOXX 600 / 德国DAX / 英国富时100 / 法国CAC40 任一含 `_stale: true`，须在本节开头注明「⚠️ 全球数据可能滞后（多源均暂不可得），以最新可得为准」，再写行情。
+> **数据时效提示**：若 `data_market_global.json` 中日经225 / KOSPI / 新加坡STI / 欧洲STOXX 50 / 德国DAX / 英国富时100 / 法国CAC40 任一含 `_stale: true`，须在本节开头注明「⚠️ 全球数据可能滞后（多源均暂不可得），以最新可得为准」，再写行情。
 
-📊 先读取 `data_market_global.json` 获取 STOXX 600/日经225/KOSPI/德国DAX/英国富时100/法国CAC40 点位+涨跌幅，填表：
+📊 先读取 `data_market_global.json` 获取 日经225/KOSPI/新加坡STI/欧洲STOXX 50/德国DAX/英国富时100/法国CAC40 点位+涨跌幅，填表：
 
 | 指数 | 代码 | 最新价 | 涨跌幅 |
 |------|------|--------|--------|
 | 日经225 | N225 | （读JSON） | （读JSON） |
 | 韩国KOSPI | KOSPI | （读JSON） | （读JSON） |
-| 欧洲STOXX 600 | SXXP | （读JSON） | （读JSON） |
+| 新加坡STI | STI | （读JSON） | （读JSON） |
+| 欧洲STOXX 50 | SX5E | （读JSON） | （读JSON） |
 | 德国DAX | GDAXI | （读JSON） | （读JSON） |
 | 英国富时100 | FTSE | （读JSON） | （读JSON） |
 | 法国CAC40 | FCHI | （读JSON） | （读JSON） |
@@ -184,7 +186,7 @@ python3 scripts/prefetch_data.py
 
 📊 读取 `data_holdings.json` → 个股行情字段（招行A/H/长电/563020/QQQM/SPY 价格+涨跌幅）。
 
-**个股行情快照请用 Markdown 表格输出**（与「A股收盘 / 美股收盘 / 港股收盘」一致的表格形式）：
+**个股行情快照请用 Markdown 表格输出**（与「A股收盘 / 美股收盘 / 港台市场」一致的表格形式）：
 
 列：**标的 | 代码 | 市场 | 最新价 | 涨跌幅**
 
@@ -419,13 +421,14 @@ python3 scripts/prefetch_data.py
 
 {50–100 字简述}
 
-### 港股收盘（{M月D日}）
+### 港台市场（{M月D日}）
 
 | 指数 | 最新价 | 涨跌幅 |
 |------|--------|--------|
 | 恒生指数 |  |  |
 | 恒生中国企业指数 |  |  |
 | 恒生科技指数 |  |  |
+| 台湾加权指数 |  |  |
 
 {50–100 字简述}
 
@@ -435,7 +438,8 @@ python3 scripts/prefetch_data.py
 |------|------|--------|--------|
 | 日经225 | N225 |  |  |
 | 韩国KOSPI | KOSPI |  |  |
-| 欧洲STOXX 600 | SXXP |  |  |
+| 新加坡STI | STI |  |  |
+| 欧洲STOXX 50 | SX5E |  |  |
 | 德国DAX | GDAXI |  |  |
 | 英国富时100 | FTSE |  |  |
 | 法国CAC40 | FCHI |  |  |
