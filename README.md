@@ -61,7 +61,7 @@ Cloudflare qdii-dispatch → workflow_dispatch
 |------|----------|----------|
 | A 股 | akshare `tool_trade_date_hist_sina` | 昨日为 A 股交易日 |
 | 美股 | `pandas_market_calendars` XNYS | 昨日为美股交易日 |
-| 港股 | `pandas_market_calendars` XHKG | 昨日为港股交易日 |
+| 港股 | `pandas_market_calendars` XHKG | 昨日为港股交易日（**同时作为「港台市场」模块门控**：台湾加权指数跟随港股门控） |
 **模式规则**：
 
 | 条件 | 执行模式 | 抓取模块 |
@@ -70,16 +70,16 @@ Cloudflare qdii-dispatch → workflow_dispatch
 | 三市场均休市（通常周日/周一） | **精简模式** | 仅抓 `data_news.json`（Top20：谷歌美国20条→LLM去重精选10条,剔除后从候选内补位 + 联合早报最新10,统一六实例兜底；两块独立互不补位）+ `data_deep.json`（深度观察专栏·**法广中文** `/rfi/cn` 单源（取最新 10 条）；**先按关键词硬筛「非中美」与非文章条目，再由 LLM 选 1 篇中国/美国之外的第三方深度文章原文直出**；无合格候选则今日暂停） |
 
 > 任一日历网络获取失败时降级为"看昨天星期几 ≤4 即视为开市"。
-> **收盘日期标注（MarketDateResolver）**：报告「一、市场全景」各市场收盘均按真实交易日历标注业务日期与北京时间收盘时刻，由 `scripts/market_date_resolver.py` 的 `MarketDateResolver` 在 LLM 调用前注入。A股/港股/日经/韩国/欧洲取上一交易日（如 `A股收盘（7月13日）`），美股取美东前一交易日但于北京时间今天凌晨收盘（如 `美股收盘（7月14日凌晨）`）。海外用 `pandas_market_calendars`（DST 自动适配，禁止手写时区偏移），A股用 `tool_trade_date_hist_sina`（本地文件缓存，避免每次网络请求）。美股另做新鲜度校验：若 akshare 实际返回日期早于解析业务日期，置 `_stale` 提示数据可能滞后。**全球/港股指数新鲜度闸门**：各指数走多源取数链（全球指数：东财 push2delay → 新浪 `znb_` → akshare → yfinance；A股/港股/美股：腾讯 → 东财 → 新浪 → yfinance），结果带「数据日期」与本批最新值比对——落后 ≤3 天视为休市正常，真滞后则重挑源/标 `_stale`（拦截「旧值当新值写进报告」）。
+> **收盘日期标注（MarketDateResolver）**：报告「一、市场全景」各市场收盘均按真实交易日历标注业务日期与北京时间收盘时刻，由 `scripts/market_date_resolver.py` 的 `MarketDateResolver` 在 LLM 调用前注入。A股/港股/日经/韩国/欧洲取上一交易日（如 `A股收盘（7月13日）`），美股取美东前一交易日但于北京时间今天凌晨收盘（如 `美股收盘（7月14日凌晨）`）。海外用 `pandas_market_calendars`（DST 自动适配，禁止手写时区偏移），A股用 `tool_trade_date_hist_sina`（本地文件缓存，避免每次网络请求）。美股另做新鲜度校验：若 akshare 实际返回日期早于解析业务日期，置 `_stale` 提示数据可能滞后。**全球/港台指数新鲜度闸门**：各指数走多源取数链（全球指数：新浪 `znb_` → yfinance；A股/港股/美股/台湾：腾讯/新浪 → yfinance），结果带「数据日期」与本批最新值比对——落后 ≤3 天视为休市正常，真滞后则重挑源/标 `_stale`（拦截「旧值当新值写进报告」）。
 
 ## 数据源路由
 
 | 数据类型 | 主数据源 | 门控条件 | 兜底 |
 |---------|---------|----------|------|
-| A 股指数 | **腾讯财经 `qt.gtimg.cn`**（批量，`sh000001` 等） | `a_open` | 东财 push2（push2delay，0.6s 限速） → 新浪 `s_sh000001` → yfinance（`000001.SS` 等） |
-| 港股指数 | **腾讯财经**（`hkHSI` / `hkHSCEI` / `hkHSTECH`） | `hk_open` | 东财 push2（`100.HSI`/`100.HSCEI`/`124.HSTECH`） → 新浪 `rt_hk*` → yfinance（`^HSI` / `^HSCE` / **`HSTECH.HK`**） |
-| 美股指数 | **腾讯财经**（`usDJI`/`usINX`/`usIXIC`/`usNDX`） | `u_open` | 东财 push2 → 新浪 `gb_$dji` 等 → yfinance |
-| 全球指数（日经/KOSPI/STOXX600/DAX/富时/CAC） | **东财 push2delay**（`100.N225`/`100.KS11`/`100.SXXP`/`100.GDAXI`/`100.FTSE`/`100.FCHI`） | `u_open` | 新浪 `znb_*`（日期取 `[6]`） → akshare `index_global_spot_em`（东财 clist，与 push2delay 属不同端点） → yfinance（`^N225`/`^KS11`/`^STOXX`/`^GDAXI`/`^FTSE`/`^FCHI`）。⚠️ STOXX600 在新浪（`znb_SXXP` 陈旧）与 akshare 清单中均无有效代码 → 实际双源（东财 + yfinance）；单条失败只标该指数暂不可得，不影响其余 |
+| A 股指数 | **腾讯财经 `qt.gtimg.cn`**（批量，`sh000001` 等） | `a_open` | 新浪 `s_sh000001` → yfinance（`000001.SS` 等） |
+| 港台指数（恒生×3 + 台湾加权） | 港股：**腾讯财经**（`hkHSI`/`hkHSCEI`/`hkHSTECH`）；台湾：**新浪 `znb_TWJQ`** | `hk_open` | 港股：新浪 `rt_hk*` → yfinance（`^HSI`/`^HSCE`/**`HSTECH.HK`**）；台湾：yfinance **`^TWII`** |
+| 美股指数 | **腾讯财经**（`usDJI`/`usINX`/`usIXIC`/`usNDX`） | `u_open` | 新浪 `gb_$dji` 等 → yfinance |
+| 全球指数（日经/KOSPI/新加坡STI/欧洲STOXX 50/德国DAX/富时/CAC） | **新浪 `znb_*`**，**一次批量取全部**（日期取 `[6]`） | `u_open` | yfinance（`^N225`/`^KS11`/`^STI`/`^STOXX50E`/`^GDAXI`/`^FTSE`/`^FCHI`）。单条失败只标该指数暂不可得，不影响其余。<br>⚠️ **新增指数前必须先验证字段数**：新浪 `znb_` 有**两套代码** —— **13 字段 = 新鲜可用**（日期在 `[6]`）；**6 字段 = 陈旧必弃**（数据停在 2025-09，如 `znb_SXXP`/`znb_TWSE`/`znb_SMI`）。代码名不可按常规缩写猜（台湾加权是 `znb_TWJQ`，不是 `znb_TWSE`） |
 | 汇率/商品/债券 | **新浪外盘期货 `hf_`**（`hf_CL`/`hf_OIL`/`hf_GC`/`hf_SI`，一次批量取，详见下方「原油／贵金属取数口径」）→ 新浪缺失时以 akshare `futures_global_spot_em` 的 `00Y`（当月连续）兜底（**布伦特不用该兜底**）+ 中美债收益率 | 完整模式 | — |
 | 估值/PE 分位（11 指数，固定顺序） | 雪球蛋卷 API `danjuanfunds.com/djapi/index_eva/dj`（1 次返回 63，白名单 11） | `a_open` | — |
 | 个人持仓行情 | 腾讯财经 `qt.gtimg.cn` | `a_open OR u_open` | yfinance |
@@ -93,7 +93,7 @@ Cloudflare qdii-dispatch → workflow_dispatch
 > `hub.slarker.me → rsshub.rssforever.com → rsshub.umzzz.com → rsshub.isrss.com → rsshub.ktachibana.party → rsshub-balancer.virworks.moe`
 > ⚠️ **深度观察专栏是例外**：各实例对同一条目返回的 `desc` 深浅不一（部分实例只给导语、部分给全文），沿用「命中即止」会锁死在导语版实例上、导致专栏只输出文章开头 → **深度源改用独立实例顺序（`rsshub.umzzz.com` 首选）+ `desc` 中位 ≥700 字门槛**：不达标继续试下一实例，全不达标则取最长者并打印降级告警。
 > 例外：**格隆汇**以 `rss.injahow.cn`（.cn 专属实例，实测仅支持格隆汇路由）为**首选**，失败后再走上述统一池；财联社路由在 rss.injahow.cn 与 rsshub.umzzz.com 上不可用（503/超时，实测），由池内其余实例覆盖。单实例超时已收紧为 (8s连接, 15s读取)。
-> **方案 C（curl_cffi HTTP/2 补丁）**：东方财富 `push2.eastmoney.com` / `push2delay.eastmoney.com` / `push2his.eastmoney.com` 需 HTTP/2，标准 `requests` 仅 HTTP/1.1 会静默断连。脚本在顶部注入 `curl_cffi` 浏览器模拟，仅对这些域名生效，保障指数主源稳定；其余请求不受影响。运行依赖已包含 `curl_cffi` 与 `pandas_market_calendars`。
+> ⚠️ **踩坑（不要再试）**：**东方财富 `push2*` 全系不可用** —— `push2delay`/`push2`/`clist`/`push2his` 对 GitHub Actions 共享美国 IP 段定向限流（实测：执行全球指数模块的 6/8 天出 502，且四个端点会一起被封，属 IP 级、不可修复）。**不要再用东财做指数源**；另「东财需 HTTP/2，标准 `requests` 会静默断连」的旧判断已证伪（纯 HTTP/1.1 冷启动 18/18 正常）。同理**腾讯无全球指数**：`usDAX` 实为「DAX德国指数ETF」、`usCAC` 为「卡姆登国家银行」——撞名会静默写入错值，禁用。
 > **原油／贵金属取数口径**：4 个品种（WTI原油 / 布伦特原油 / COMEX黄金 / COMEX白银）统一走**新浪外盘期货 `hf_`**（`hq.sinajs.cn/list=hf_CL,hf_OIL,hf_GC,hf_SI`，一次批量取），取到的是**连续/近月价**。
 > - **字段**：`[0]`现价、`[7]`昨结、`[8]`今开、`[12]`日期、`[13]`名称；涨跌幅 = `([0]−[7])/[7]×100`（`[7]`=昨结经「东财涨跌幅三重反推」验证：WTI 92.16 / 黄金 4318.58 / 白银 64.966 全部吻合）。
 > - **兜底**：新浪缺失时，以 akshare `futures_global_spot_em()` 的 `00Y`（当月连续）合约补齐 —— **布伦特除外**：该源未提供布伦特当月连续合约，可退化的合约均为远月（与真实近月相差约 20 美元、随换月持续漂移），取数不可信 → 布伦特**宁缺勿错**，缺失时报告按既定规则显示「数据暂不可得」。
