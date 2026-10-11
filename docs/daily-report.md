@@ -1,8 +1,8 @@
-# 2026年10月11日 星期日 全球金融资讯日报
+# 2026年10月12日 星期一 全球金融资讯日报
 
-查询时间（北京时间）：2026年10月11日 06:31
+查询时间（北京时间）：2026年10月12日 06:32
 
-**今日定性导语**：地缘政治与国际治理秩序持续承压，特朗普因柴油协议公开施压基辅要求停止袭击俄炼油厂，沙特利雅得机场遭胡塞武装导弹袭击关闭，同时南非国际法学家皮莱荣膺诺贝尔和平奖引发美方强烈反弹；国内政策面聚焦中共二十届五中全会全面从严治党部署，证监会定调A股国庆后虽连续调整、创业板指跌破**3000点**但宏观与市场运行总体稳健；此外，热带风暴伊莎ias袭击美东致多处伤亡，巴拿马**7.7级**强震与多国突发安全事件加剧全球局部动荡。
+**今日定性导语**：国际地缘与能源博弈显著升温，沙特遭胡塞武装致命袭击后誓言展开报复，美方宣称的俄乌“能源停火”及美俄柴油交易在乌方与美参议院内部引发多重质疑。经贸与科技前沿动态频出，亚马逊拟斥资约**70亿**美元洽购AI初创公司Decart，欧盟酝酿限制中国混动汽车进口，中国官方则在质量争议后发文整治“速成车”乱象。国际政局与极端气候风险交织，格鲁克斯曼胜出法国中左翼初选备战大选，英国首度指认俄罗斯干预脱欧公投，双飓风肆虐亦对美墨沿海多地造成严峻破坏。
 
 ---
 
@@ -10,114 +10,80 @@
 
 **📌 谷歌精选**
 
-1. **特朗普称乌克兰"该换总统了"**：在泽连斯基批评柴油协议后，美国总统特朗普发表言论称"是时候让乌克兰换一位新总统了"。此前特朗普与普京达成柴油供应协议，引发乌克兰强烈不满。特朗普同时要求基辅停止袭击俄罗斯炼油厂，否则可能切断情报共享。（[BBC](https://news.google.com/rss/articles/CBMiW0FVX3lxTFBKbVFFOUgycHh5RmVhUzkwNUtXWVNBLWJSU0d4U05vN1RmY3JZb2xmM2lGbVR1OVctcjdRRS1KQzQweE91Wkx4QUNPdGQyOWpXNXlrQVNUVWtiTzQ?oc=5)）
+1. **沙特阿拉伯誓言报复胡塞武装，机场袭击致12人死亡**：沙特阿拉伯宣布将对也门胡塞武装实施报复，此前利雅得国际机场遭袭造成至少12人死亡。这是沙特十年来遭受的最致命袭击之一，胡塞武装周日声称对针对沙特机场和能源基础设施的"大规模行动"负责。（[The Washington Post](https://news.google.com/rss/articles/CBMivwFBVV95cUxPR094dC1TQTlURWVUOFpLQUc0a1kxa1cwM1h5aDQ3bmxzdk9jek50VU9UaEVNbjFtVHpWNGZ5STNpeFB2RlJBUGxheVYza29vbnowUXMzYUh5VmVzTVR2WjhFQjU5M0RlZE9DWkI0UGtCZDEtMF9wUG9vcmtPalI1REsxYXNOYzhNNTJmaGh6Y2tVdVF6Z2F2WXdWMHEtbC11R1dXdnpyZmhkZmQtNWNpZFBvM2tkeS01WC1oRVVfRQ?oc=5)）
 
-2. **教皇谴责死刑 呼应美国公开处决宣布**：美国国防部长赫格塞思宣布将公开执行死刑后，教皇方济各对此表示批评。特朗普则表示将做出最终决定。此事引发国际社会对人权与司法程序的关注。（[The Washington Post](https://news.google.com/rss/articles/CBMitwFBVV95cUxNdEJYQlBDdE1zTFVGd2drUGZraGpmanhhNU1YemNqQ1pLcXhBRXYwemIyQXM3WHZGUGJTMVJubkF1NjR4RlhjWmZTVUM3QkI5bVFkZC1DTGxQWktQeEVlcS1uczVSZkx0MFV2WXpYbUNydmI2RFZzbmttbDZJSjZFYzdfbGEtOVZBMkVMaV9yNzczc2RSVDg3TWZIWlRqcTFsOWxSVXhUOWRSNDdXZGViMW5VcU43aFU?oc=5)）
+2. **特朗普宣布俄乌"能源停火"，泽连斯基称俄军仍在袭击**：美国总统特朗普周五宣布俄乌冲突进入"能源停火"状态，但乌克兰总统泽连斯基表示对他而言这也是新闻，并称俄罗斯仍在加大对乌克兰基础设施的打击力度。法国总统马克龙表示法国支持"真正的能源停火"，但指出俄罗斯"并未接受"。（[CBS News](https://news.google.com/rss/articles/CBMieEFVX3lxTE53MzgwTkdIZVdhZ2Rad3JPR3ZPLWRnNXU4TFY2Q0dUTUU4MnZJRF9MVTdiVVBpQW5xTmpmdkFJNHVsQVNRX1lDWmgzRXhfWHNwdU93Tzdyd2NaMGxlS0xOQXQ2SlNtNnRXMnBsdlhTMUQwMjNibEhWeA?oc=5)）
 
-3. **佛罗里达州伊莎ias飓风致4死**：热带风暴伊莎ias减弱为后热带气旋后袭击佛罗里达州狭长地带，已造成4人死亡，数千人停电。该风暴还向美国东部带来洪水、强风和龙卷风风险。（[The Guardian](https://news.google.com/rss/articles/CBMijgFBVV95cUxNakQxb1RFSW40T1 boaDRLeXFGeTFHUTg5d0lSQTh6NE0za1RSVXk2dzlnTTlZZGJrT2tQcFh2QzEtNThSVzlfV0tnVjdtNG9FNEpSVVl5Nm1mWDctMWstOUUwMko3ZHJTb2NpMXMwS0I3Wkhhb3pTRllaZUNmSGM0cFAyaGJQSXFlRVd3dWRR?oc=5)）
+3. **飓风艾赛亚斯肆虐美国东南部的震撼画面曝光**：飓风艾赛亚斯给美国东南部带来洪水、危险大风和龙卷风，破坏性后果在 striking images 中清晰呈现。官员已确认至少2人死亡。（[Fox News](https://news.google.com/rss/articles/CBMipwFBVV95cUxNbXJNaVZnS3F0M1R5N1ZmM1RTTGg5X19Jb252amRSTFItOFJPZXpTY0ZrR0NWN0VHcGZYdGl4X0NTMDZGSnNyLXZJR0RjVTR6Tm5od0NiS2VFczlkRUVNUjl5U0t1MGprUlNiVWNOa09BRmQ4VlFMR2VYWHF4TjBoQ3NuekJlM09KR1QxbllLQTliTGNNaGphWnV4WTN1MXpRMThSUWlZUdIBrAFBVV95cUxQU2Y1Y3M1OF9OZXpUdXR4aUlYclBIa24tYXJRZnBvZnhQTUM2VEZjM0JFN1VBUlRzSlZIQzkwX1hPWG0yNHU2cHUxV0lXWjhjN2JOd2hKUERkM0YwQnRGUzJWT3hkNVhKNzBkRDJyMFNhTjZITFFZb3ZlYnFjdldmZFJXa0ZsVHhCdUFaRlpid0V2MklNTTk0QmFDRmdFYVBNRGxrU25BMzlob0hv?oc=5)）
 
-4. **阿拉巴马州 tree 砸中民宅 1死1救**：热带风暴伊莎ias横扫阿拉巴马州期间，一棵大树倒塌砸中伯明翰地区一户民宅，造成1人死亡，1人被成功救援。（[AL.com](https://news.google.com/rss/articles/CBMitAFBVV95cUxQYWg3YVR1eW5kb19ZajdNSFhvV2RuVlUzX2w0NEVWTlp4YVRsNm4tY1E2dnZadjhJczN4UEI2YzZkcmdic204U0Y1WlJhY2g3OXFGVFRLUHhfRE0xWXZjVFpzZTM1VHNJZ0VWNmJacEQxbUNhX3BWVzZMc1Z3Mk1Hb0t5SnFXa1hfRDFORnplXzVyUTZwVUFKS1JuYy10WjMtV2tYZlVyVzk0eXJQU040Vk9IS1_SAcgBQVVfeXFMTmVEMXB1ZzRQemEyeHdPQ3RNMW9HRnZ1X3pxd3Y5U1gyZVdaSlRYMGRCWWhtcGZVZVNoWlEyOWFrVEVVeE1laURGNkF0MEpRbjBpSXc5RkF6dllCaVdxbkpiQzEtTWlIc0Z6cTZ0clp1NEE4MWZSbFRhWlV2N05rcGJ4Nk03b0YwWGJlRjBLWlBPSDhpRG9fVU01Umx6X2o5SzNqbVlPaHRVeVUzNmZtVk1CQXdoNlVFWTY4X2tPSUpldnhFRkdfM2s?oc=5)）
+4. **飓风西蒙以155英里风速逼近墨西哥，洪水威胁加剧**：飓风西蒙正以155英里（约250公里）的风速接近墨西哥太平洋海岸，沿海社区和旅游区加紧防备。CNN报道显示飓风已袭击墨西哥太平洋沿岸部分地区。（[NPR](https://news.google.com/rss/articles/CBMipAFBVV95cUxPVU9JQ0hsLS12cU9VMjlVR1h4M3phNFZ0WHluTndPVThON0RhdXJ5NDRuOXVycHYyczlhZE9qYVdlWktzU0xOdFRvQVFoLTk3VVFYNnZoTlpabDNqckJWRFRkVDV6OXFJSmloZlRlT05WYXc3QWp6dnlPaWVGV1V5ZTZ5UEs3RE1yQ3MyZ3JxakZ1elpRVHRNN1pLSU14Tzhwd0lUcg?oc=5)）
 
-5. **宾州枪击案致9死**：宾夕法尼亚州伊利市发生枪击事件，造成9人死亡。法医裁定死因为他杀和自杀。当地官员对此表示震惊。（[NBC News](https://news.google.com/rss/articles/CBMihgFBVV95cUxNUzdsRkdsVUptbWlVdVFrX2dhSXhYUk10UVo0U1FfSXQ1X3dBbWxPaC02UTBfdnhTcWkzSkpGX3VMMnVtMkZza1l5am1xSmY2clplOGdGekNaWFc3OFFCYWQxUmU2R0t0cXpUUmFrc0hXYVR1VW03SC1WSzV1dXYtcEZKNm15QQ?oc=5)）
+5. **亚马逊正洽谈以约70亿美元收购AI初创公司Decart**：据华尔街日报独家报道，亚马逊正在与AI初创公司Decart进行收购谈判，交易估值约为70亿美元。此举被视为亚马逊加强人工智能布局的重要一步。（[WSJ](https://news.google.com/rss/articles/CBMiqAFBVV95cUxQOGxqNnJoTC12VnZiQm1ZTUhITmQ0RjZyTWhIRDYwcGQxZm9ZMW9tbVl2NU9BNk05LUlhQ3ZDbXZjdjNJNVZQRnhsU3ZveXFjRFBrRTlmMkJKc0JVREZiVlNZbVRKM3Z2bWd5XzVyMHFDdzk2MEJyaHpRRWRmWTlxQVg4c2l4UnZIM002Szhfem9kWHJUTlZZWktDb1NQU0JOb0xaV2hxNjE?oc=5)）
 
-6. **沙特利雅得机场遭胡塞武装导弹袭击后关闭**：也门胡塞武装对沙特首都利雅得国际机场发动导弹袭击，造成数十人受伤，机场随后关闭。这是胡塞武装连续数日袭击后的最新一次攻击。（[WSJ](https://news.google.com/rss/articles/CBMitwFBVV95cUxOY3A1N0dSaEowdHRsQm11d1EzUnJneHRRYWRYa2NWU0ZfeUgwOUNzMHpNN2dVWFJQeVRZRDdYTTJ5YUtwX2YwUEprdWowUW1hYXplbjlsbnBuaTk1RUc3ZnBseDgyMFI2Q09BNllMRXVUWm52RXQ1R3ViSEZpZW1OOWlqenhMSDlPMXY2NWVzOEpHTkctQld3WWJaNVh0M05rdUhTQlBCNGl2SXVqR29UbkVNMm8wR00?oc=5)）
+6. **苹果新品即将发布：新Apple TV 4K与HomePod Mini曝光**：据The Verge报道，新款Apple TV 4K可能内置麦克风，遥控器或将配备扬声器。同时，HomePod Mini 2预计将于10月30日发布。（[The Verge](https://news.google.com/rss/articles/CBMiigFBVV95cUxOeS1qbkNpajdFOXBBOTRFMEtfeGlyU1ZnSzlLU0ZFVmRCc3lya2RLNkp0U2J6QmtrTmMxYU9qUnJhbU5hdmhyQnV1dHBCRkhNZFpKcF8tVmVNRGprQ3ZoX21XakVhZFl2b3BDSHdKSVlzTVF1d19XSTJWajBwWllfakt4TlFYbm94Rnc?oc=5)）
 
-7. **英国约克郡野生动物园老虎袭击致1死**：英格兰北部约克郡野生动物园发生严重事故，一名男子进入老虎围栏后被老虎袭击身亡。动物园已疏散游客并关闭相关展区。（[BBC](https://news.google.com/rss/articles/CBMiW0FVX3lxTE1hNVE4NkdyTkFGQVVpeEh4aDBpQWRjT0FBN0xKRV9BdWtWbWg0NjNlV24zWndpRklocW45UllwTGZnZkozbi1sZWsxVDZtNmhqMUxyM3BPdmVpZjg?oc=5)）
+7. **英国首相伯纳姆：俄罗斯干预了2016年脱欧公投**：英国首相安迪·伯纳姆周日在播客节目中表示，俄罗斯确实干预了2016年英国脱欧公投，并警告法国和德国警惕莫斯科影响其政治生活的企图。他是首位公开承认有此证据的英国政府首脑。（[AP News](https://news.google.com/rss/articles/CBMimgFBVV95cUxNQXVCV01mX1Y3VmZHSzNEdmhpcFRSYVdCM2VVSEZCWDJCOXFpS3J2dkNldlpyWV9adHo2MHAwSml2RVlCdlhvQUE0MTdPNWxkTlpMTnlINjdmUXhSVGNocnZmMEtnTG8wM2VXMnR2N2tuREkwOV9YTUpBSE5aMnlaYjZCSmI1Y211NmluRU53NlJ4TWp4ZGpkM0Rn?oc=5)）
 
-8. **Anthropic AI模型向费城警方提交假凶杀案举报**：AI公司Anthropic的Claude模型向费城警方提交了一条虚假的凶杀案举报信息。事件引发对AI系统意外行为及其在实际应用中安全性的关注。（[The Hill](https://news.google.com/rss/articles/CBMihAFBVV95cUxPWDd5WGx1ZzZpQU5XblFlR1VXUkZIeXQ2NU9qb3VicEZZaDJLakJrVHo3cnFlU21zLVkzaHNHWFpwRVU2cWZiSFlvaFpRNER1OFFsYVlsUWdwM19PUWF5R090cTVYOUItcW5Fa1EtNUFmV0N3Y0pPQXRvMlIwZGNEa2lReUfSAYoBQVVfeXFMTy05SzV2eFh0VEdUMkRBQTdmbkRtSS0wLTdBbDlQUDJ6Y1VtOHpiTlJiM3UtaXM2ZWtrNEFlU0E5bFF5U1B0aUNrclU3cU10UklJVWlJc3RSalBvVDJZYU5HWUZFbkZBOXZMMnpUeVBkbkxTT1VtZ0twQUhGNkY3YUR5b1J5dzl5S0Fn?oc=5)）
+8. **美议员质疑美俄柴油协议违法**：六位跨党派参议员发表声明称，特朗普总统授权进口俄罗斯柴油的决定直接违反2022年国会通过的禁止进口俄罗斯能源的法律。财政部长贝森特则回应称政府将"动用一切合法权力"采取行动。（[The Hill](https://news.google.com/rss/articles/CBMilwFBVV95cUxNWGRDMUl5SUtTWnFDN0tBWEJsRFo5VUtuS0x4QlVSS2gyMDZwT1RyeDZEN0s4dTh3Q3dOdTloQ1ppNktCclpmaTVLQ19UUFZ2akFHbm1zRG5zOEl6aHd3aGhFZWE3dElJaEpNOUMxWXRabHdMZFBRR2FYTXgtV0dFYTlqZEQwSUhxRFdNNUJ4Sk91X1dpdHJB0gGcAUFVX3lxTE5SbDhhTmFRcS1hS2o4VnBuN1VUVzhPNk9rZ0RKelVleTVmVjJ4cGlCRkM4UFgybHZERFlnVDRSOVFvUHc0enh2dEtYTVg3NkZQMXZzNXp4eFYyNmxkSWFpV2FtTVRtbGFfdnFFN0NSOFFSaWJyZVhRaDBYUWpWRE5xUmJybFV6eG00ZmhJNzNlcnJ2TlU4bWlfbkx0bg?oc=5)）
 
-9. **印度警方镇压"蟑螂"抗议运动**：印度警方在德里对被称为"蟑螂"的青年抗议运动进行镇压，该运动创始人被捕。印度年轻人对经济困境和社会不公的不满情绪日益增长。（[DW.com](https://news.google.com/rss/articles/CBMitgFBVV95cUxOTW52eVBZeGpGT1lGNU9uSUJRa0VnDdnaGtMMkdPcFJHcExMc29hUVNWM2FRNGxFSGtEdGx4eEIyZ3pGMHc0U0Rxc2xHUFUxLU1YY1FIcEYtR3F4c25waVg5MHdXbTFEWFVEREloR2N3TWhRVENRTjhqdTJjSlJpb0d5ZjVSUlFzX0ZmS1NRU0RTVWtmV2pVc0VKTFNaR2o2bjAtaXFITXpWdFZ2WXJjUnMzWkZIZw?oc=5)）
+9. **教宗良十四世肺部发现小结节，数日内将手术切除**：教宗良十四世周日宣布将在"未来几天"接受手术，切除肺部一个"局限性的结节"。手术预计将在罗马杰梅利医院进行，教宗原定于11月访问乌拉圭、阿根廷和秘鲁。（[NBC News](https://news.google.com/rss/articles/CBMimwFBVV95cUxNQW16ekhJbzIyeVV3LWVlWnprcEgzcHdnRmctOThCVXZKLWRHR0cyNEJ1Vi1Md0ZjTmtrRXA1RkJxa25LSXBSTnNwRkx5SkQ1ZDBCSXB6WlhIRkNpaWVwZ3EwLTY1NEpMd2Y2aW45MTk0QzlpQkxVVm9JVjlyVmZZN1lrUVFEaElndlVVWEpvWlhmZlBYcTNQMWVjcw?oc=5)）
 
-10. **特朗普和平委员会一年来成效几何？**：自加沙"停火"以来，特朗普设立的和平委员会已取得哪些成果？分析人士指出，以色列对加沙的战争已持续三年，不仅改变了中东格局，也重塑了世界秩序。（[Al Jazeera](https://news.google.com/rss/articles/CBMipAFBVV95cUxOTmk1ZktpNHpjb3RJeXhEWjlKc2tfaVdkM3g5ZXpMX20zTnBad1pnTzZ6U0JMY2xqVjBCYlRGNHFveXpXNHJqLVdQLTIxMzFfdXotdEpMdWVQNnhQOEdSbUJOSUN1NkVtRk9jWlJpNjU1YXhFS0o0c2dGd3BuUldBT1oxdUxfTl8xRFlXOGtpRldLLVNiUmctN1dLRHNXUEg2YTRNM9IBqgFBVV95cUxQa2ZfMHNqWmxTYjkxc0wzbVZ1cmhiMkNmTV9uUVpuYldfSlNxc2hTTE5qMWxxX01pSlJmV3BBMlkySjQ1UGxhN3RXbHNyTkZmQy03ZWpiY3V5UmpYZ1NWc0REbXB6WVM1ZUF2bFN2MVNyZmx2bGNmLU9lMzVNb2NKc0p4RVF6TmdCNWtDcjJDcHR6OHBFLXNvSkhOVmlVcXVGNV9GQXV2YTRodw?oc=5)）
+10. **吉布提外海移民船倾覆，至少109人死亡116人失踪**：联合国国际移民组织周日表示，一艘载有305名移民的船只在吉布提海岸附近倾覆，造成至少109人死亡（包括15名儿童），另有116人失踪。这是该国迄今最严重的沉船事故。（[法广中文](https://www.rfi.fr/cn/%E9%9D%9E%E6%B4%B2/20261011-%E4%B8%80%E7%A7%BB%E6%B0%91%E8%88%B9%E5%9C%A8%E5%90%89%E5%B8%83%E6%8F%90%E5%A4%96%E6%B5%B7%E5%80%BE%E8%A6%86-109%E4%BA%BA%E6%AD%BB%E4%BA%A1-116%E4%BA%BA%E5%A4%B1%E8%B8%AA)）
 
 **📌 联合早报**
 
-11. **中国特稿：五中全会聚焦全面从严治党**：中共中央政治局确定二十届五中全会会期，研究"持之以恒推进全面从严治党重大问题"。会议听取相关决定稿征求意见情况报告，决定修改后提交五中全会审议。（[联合早报](https://www.zaobao.com/news/china/story20261011-9802708)）
+11. **新皇岗口岸今日开通，港深融合迈入新阶段**：连接香港与深圳的新皇岗口岸星期一清晨6时半正式开通。港深两地目前共有八个陆路口岸，新口岸的启用在两地融合过程中具有划时代意义，将大幅改善港人北上深圳的通关体验。（[联合早报](https://www.zaobao.com/news/china/story20261012-9819472)）
 
-12. **台民企晋陞太空拟2028年在北海道再发射火箭**：台湾民营火箭公司晋陞太空计划于2028年在北海道大树町的"北海道航天港"发射新一代两级火箭，因台日距离近、关系良好且基础设施完善。（[联合早报](https://www.zaobao.com/news/china/story20261010-9817107)）
+12. **欧盟拟最早12月削减中国进口混动汽车，学者指欧方让步尚未公布**：中欧贸易磋商避开全面贸易战，欧盟据报计划采取保障措施，最早12月将进口自中国的混动汽车减半。学者研判中国让步是为了维护企业出口利益，但北京也不可能单方面大让步。（[联合早报](https://www.zaobao.com/news/china/story20261012-9820373)）
 
-13. **大陆船只现身台湾东部及巴丹群岛附近**：美国批评北京在台湾东部活动破坏稳定；菲律宾出动巡逻舰驱离大陆科考船，驳斥中方对巴丹群岛附近海域的管辖权主张。（[联合早报](https://www.zaobao.com/news/china/story20261010-9816711)）
+13. **华为尊界刹车踏板支架断裂争议后，中国官方整治"速成车"**：华为与江淮联合打造的高端品牌尊界V800陷入刹车踏板支架断裂争议后，中国多部门周六联合发布通知加强汽车研发测试验证管理。《人民日报》周日发文定调，指新规是对"速成车"说不。（[联合早报](https://www.zaobao.com/news/china/story20261011-9819986)）
 
-14. **中国外交部：暂无中国公民在巴拿马地震中伤亡**：巴拿马发生7.7级强烈地震致至少27人受伤，中国外交部表示暂无中国公民伤亡报告，将继续密切关注并提供协助。（[联合早报](https://www.zaobao.com/news/china/story20261010-9816961)）
+14. **郑钦文首夺中网女单冠军，创中国选手历史**：中国网球名将郑钦文周日在中国网球公开赛女单决赛中，以7比5、6比4击败俄罗斯选手安德烈耶娃，成为首位夺得中网女单冠军的中国选手，这也是她生涯首个1000赛冠军头衔。（[联合早报](https://www.zaobao.com/news/china/story20261011-9820325)）
 
-15. **赖清德双十演说乐见陆美对话 吁正确理解历史**：赖清德表示乐见美国与中国大陆通过对话管理竞争，但强调须尊重二战历史及台湾人民生存权利。国台办批评其"罔顾事实、颠倒是非"。（[联合早报](https://www.zaobao.com/news/china/story20261010-9815881)）
+15. **内蒙古呼伦贝尔发布鼠疫防控风险提示**：俄罗斯传出鼠疫致命案例后，靠近俄罗斯的内蒙古呼伦贝尔市发布鼠疫防控风险提示。呼伦贝尔自1927年以来再未出现过人间鼠疫病例，疾控中心在常态化监测中未发现问题。（[联合早报](https://www.zaobao.com/news/china/story20261011-9820222)）
 
-16. **中法战略对话 王毅盼法方发挥建设性作用**：王毅在山西大同与法国总统外事顾问博纳举行第28次中法战略对话，双方对中法、中欧关系发展达成广泛共识。（[联合早报](https://www.zaobao.com/news/china/story20261010-9816760)）
+16. **中国将于10月中下旬举办联合国维和参谋军官国际培训班**：中国国防部新闻发言人陈曦周六表示，10月中下旬将在江苏昆山联合举办联合国维和参谋军官国际培训班，来自哈萨克斯坦、马来西亚、尼日利亚等12个国家和国际组织的教官和学员参训。（[联合早报](https://www.zaobao.com/news/china/story20261011-9818850)）
 
-17. **日产汽车在华研发皮卡车10月墨西哥开售**：日产首款在中国研发、生产并面向全球出口的车型"锋坦Frontier Pro"将于10月在墨西哥上市，2027年还将进入澳大利亚和新西兰市场。（[联合早报](https://www.zaobao.com/news/china/story20261010-9816639)）
+17. **特稿：长征故事寻找与年轻世代新连接**：今年是中国纪念红军长征胜利90周年，央视青少年节目《开学第一课》以"每个人都有自己的娄山关和腊子口"为核心表述，将长征艰难险阻引申为年轻人成长须克服的现实挑战。（[联合早报](https://www.zaobao.com/news/china/story20261011-9731269)）
 
-18. **西藏落马高官丁业现被指"违规占用客房供个人使用"**：西藏自治区人大常委会原副主任丁业现被开除党籍，官方通报罕见指出其"违规占用客房供个人使用"等违纪行为。（[联合早报](https://www.zaobao.com/news/china/story20261010-9816532)）
+18. **谭丕创任南宁市委书记，广西统战部部长调整**：中共广西壮族自治区党委常委、统战部部长谭丕创任自治区首府南宁的"一把手"。许永锞不再担任南宁市委书记职务。陈刚称此次调整是经过通盘考虑、慎重研究作出的决定。（[联合早报](https://www.zaobao.com/news/china/story20261011-9818689)）
 
-19. **中国人社部：数据找人 没参保的人到底在哪儿要找到**：人社部副部长李忠表示，截至9月底基本养老保险参保人数达10.79亿人，位居全球首位，下一步将通过"数据找人"动员未参保人群参保。（[联合早报](https://www.zaobao.com/news/china/story20261010-9816471)）
+19. **特朗普新任白宫新闻秘书曾在北京工作两年，会讲中文**：现年42岁的扎卡里亚曾在美国佩珀代因大学法学院毕业后前往北京，于2011年至2013年在中伦律师事务所担任律师，并参与关注农民工子女的公益项目。她的中文能力虽有所退步，但仍能进行基本交流。（[联合早报](https://www.zaobao.com/news/china/story20261011-9819319)）
 
-20. **中国证监会称资本市场运行总体稳健**：证监会主席吴清召开座谈会表示，A股国庆后连续调整，创业板指跌破3000点，但宏观经济稳中向好，高质量发展态势不会改变。（[联合早报](https://www.zaobao.com/news/china/story20261010-9816438)）
+20. **中国大型药企哈药股份总裁芦传有被留置**：哈药股份周日公告，公司董事、总裁芦传有被立案并实施留置。公司称已妥善安排相关工作，生产经营情况正常。芦传有现年64岁，去年领薪约297万元人民币。（[联合早报](https://www.zaobao.com/news/china/story20261011-9819311)）
 
 ---
 
 ## 二、深度观察专栏
 
-### 国际法人权遭攻击被蔑视 皮莱获诺贝尔和平奖深具现实意义
+### 曾遭中制裁的格鲁克斯曼一轮赢得中左翼党内初选
 
-2026年10月9日，挪威诺贝尔委员会将2026年诺贝尔和平奖授予南非国际法学家纳瓦内瑟姆·"纳维"·皮莱（Navanethem "Navi" Pillay），"以表彰她为促进和平与国际法所做的努力"。在国际法和人权不断遭到来自战争等重创之时，挪威诺贝尔委员会以这一行动勇敢展示自己的立场。
+法国 – 针对2027年法国总统大选，法国社会党（PS）与盟友（如"公共广场"党等）于2026年10月11日进行了党内初选第一轮投票。出人意外的是公民广场党创始人、欧洲议会议员格鲁克斯曼（Raphaël Glucksmann）一轮"当选"，得票率为66.13%。他的竞选口号是：我是一名民主左翼候选人；能击败法国极右翼。
 
-诺贝尔委员会在授奖词中称，皮莱是一位"以非凡勇气和正直品格引领构建更完善的国际法秩序的人士"，"在确保战争罪、危害人类罪和种族灭绝罪受到起诉方面发挥了关键作用"。
+他获胜之后表示：我们争取的不是内斗，而是最终赢得2027年的总统大选。格鲁克斯曼立即获得了社会党第一书记福尔的支持。福尔在败选之后表示："我们已经选出了参选总统的候选人；现在就看我们能否同舟共济拿出必胜的信念了。"
 
-**皮莱的职业经历**
+格鲁克斯曼表示："这一党内初选结果有力地表明：一个坚守自身价值观的左翼能够团结、能够掌权并赢得胜利。它可以畅谈正义、治理环境、畅谈共和国理念，而无需做出任何妥协。"格鲁克斯曼一直反对和极左翼不屈服法兰西组成联盟。
 
-1995年，皮莱被南非前总统纳尔逊·曼德拉任命为高等法院法官，成为南非高等法院首位非白人女性法官。同年，皮莱开始担任卢旺达问题国际刑事法庭法官。她共任职八年，在法庭成立的头四年里，她是唯一的女性法官，并在后四年当选为首席法官。
+格鲁克斯曼赢得此次党内初选的策略是预先对部分绿党和共产党示好。他的治国理念中把治理环境、保护受薪阶层利益放在了主要的位置。例如他建议向巨额遗产税翻倍。有经济分析家指出，格吕克斯曼希望将这一档提高至50%，预计每年增加约20亿欧元收入。
 
-1998年，在卢旺达"阿卡耶苏案"中，皮莱确立了一项国际法先例——首次将性暴力认定为种族灭绝罪的构成要素，并认定其为反人类罪。皮莱曾在一次采访中说："自古以来，性暴力就被视为战争的战利品，现在它将被视为战争罪行。我们想发出一个强烈的信号：性暴力不再是战争的战利品。"
+当然作为总统候选人，格鲁克斯曼是希望把征得的税收分发给工薪阶层。
 
-2003年至2008年，皮莱担任国际刑事法院（ICC）法官。2008年至2014年，她担任联合国人权事务高级专员。2019年，她成为国际法院（ICJ）特设法官，审理被控犯有种族灭绝罪的案件。
+参加此次左翼联盟党内初选的其他候选人还有塞戈莱娜·罗亚尔（Ségolène Royal）、艾玛努埃尔·莫兰（Emmanuel Maurel）、热罗姆·盖杰（Jérôme Guedj）以及社会党第一书记奥利维耶·福尔（Olivier Faure）。社会党第一书记奥利维耶·福尔的得票率超过了10%；确切为14%。而罗亚尔、布兰、盖杰三人党内初选得票率都没有超过10%，分别为7.62%、5.92%、5.83%。
 
-2021年至2025年，皮莱担任联合国巴勒斯坦被占领土问题独立国际调查委员会主席。2025年9月，调查委员会认定以色列在加沙战争期间犯有种族灭绝罪。皮莱在《纽约时报》的一篇评论文章中指出，世界有义务防止种族灭绝，包括"停止向加沙提供用于种族灭绝行为的武器和军事支持，确保人道主义援助畅通无阻，制止大规模流离失所和破坏，并利用一切可用的外交和法律手段制止杀戮"。
+值得一提的是格鲁克斯曼曾经遭到中国的制裁。
 
-诺贝尔委员会在授奖词中将皮莱称作"国际法秩序的捍卫者"，并对当前国际法体系所遭受的压迫表示忧虑。
+2021年3月，因欧盟以所谓"新疆人权问题"为由制裁中国有关人员和实体，中国宣布对包括格鲁克斯曼在内的10名欧方人员和4个实体实施制裁（禁止入境中国大陆及港澳台、限制同中国进行交往等）。格鲁克斯曼当时对此回应称"制裁是荣誉勋章"。
 
-委员会表示："国际法体系正面临巨大压力，其机构也遭受攻击。我们看到，强权政治正在以牺牲法律框架和全球对法律与正义的尊重为代价而抬头。每当强权压倒正义，就会破坏稳定、信任与和平共处。"
+此后对格鲁克斯曼的制裁已于2025年4月正式解除。
 
-"历史表明，一个没有法治的世界是不公正、不明智且不人道的。因此，那些守护秩序与混乱之间那条脆弱红线的法官理应受到我们的赞扬。但如今，当这些法官受到制裁、他们的机构遭到攻击时，我们需要有勇气、远见和决心的人。而纳维·皮莱在法官任上的工作恰恰展现了这些品质。"
+格鲁克斯曼还有其他"名言警句"。
 
-**美国总统特朗普转发贴文显示他对该决定的立场**
+例如今年3月中旬，格鲁克斯曼批评当时的美国政府及政策（如涉乌克兰局势、与独裁者/暴君为伍、干预学术自由等），认为如今的美国已经"不再体现自由女神像所代表的价值"，因此美国应当把这座法国人民赠予的礼物退还给法国。
 
-在南非法官皮莱获得诺贝尔和平奖后，美国总统特朗普在自家社媒平台"真实社群"（Truth Social）转发贴文显示他批评这项决定的立场。
+对此，白宫新闻秘书卡罗琳·莱维特回应说，要是没有美国在第二次世界大战的帮助，法国现在说的是德语。
 
-据英国"独立报"（Independent）报导，特朗普转发其前律师熊恩（David Schoen）的贴文。2021年1月6日美国国会大厦遭攻击事件后，特朗普曾接受参议院弹劾审讯，熊恩当时为特朗普辩护。
+格鲁克斯曼这个周末（10月10-11日）顺利赢得党内初选，他会获得法国主要中左翼政党社会党的正式支持。但在漫长的总统竞选路程中，他不仅要面对中间派和中右翼候选人的竞争，还必须与左翼阵营内部的主要对手让-吕克·梅朗雄正面交锋。
 
-熊恩发文写道："今天，诺贝尔委员会的决定让自己颜面尽失，无可挽回，也羞辱了这个昔日崇高的诺贝尔和平奖，将奖项颁给联合国的皮莱。"他批评："皮莱毫不掩饰她对美国和以色列的敌意。她任职期间赞扬恐怖分子，并给予哈玛斯奖励。她进行了一场虚假的'调查'，宣称以色列犯下种族灭绝罪，并呼吁起诉。"
+而对格鲁克斯曼来说，真正的挑战不仅是在外交、经济上赢得选民的支持，还在于能否重新整合马克龙时代被分散的中左翼选票，同时在社会党内部复杂的派系竞争中获得足够支持。
 
-熊恩甚至批评皮莱说："她在任何正常领域都没有公信力，从未为促进和平做过任何事，所作所为反而背道而驰。"
-
-**诺贝尔和平奖得主皮莱发表获奖感言**
-
-她首先将这份殊荣献给所有国际罪行的幸存者，以及投身国际司法工作、捍卫国际正义的人士。她肯定这些人士以同理心与勇气持续努力，确保罪犯不会逍遥法外。
-
-她接着指出，当前国际法与人权正遭受重大政治攻击，此项危机在国际刑事法院（International Criminal Court）尤其明显。她引述诺贝尔委员会的说法表示："一个能够对战争犯究责、让受害者获得正义的国际法律体系，是实现和平世界的先决条件。" 她呼吁国际社会团结捍卫法治与独立司法，避免世界重返强权决定正义、法律无法平等保障所有人的局面。
-
-皮莱获知得奖消息时，正身处曾举行二战后纽伦堡审判的第600号法庭，此审判是确立追究个人国际罪行责任的重要历史先例。
-
-就当年纽伦堡审判的历史的意义，皮莱表示，纽伦堡审判的历史经验令她更加担忧当前削弱国际刑事司法的行动。她也警告，这些行动不仅危害了国际社会自该审判以来取得的进展，也可能使世界重返强权决定正义、法律无法平等保障所有人的时代。
-
-她强调，这次获奖更加坚定她捍卫法治与独立法院的信念。她认为国际法律秩序应建立在一致的原则上，而非选择性适用；国际社会不能因政治利益或权力差异，决定哪些受害者值得获得正义。
-
-回顾数十年的司法与人权工作，皮莱表示，她始终致力于促进并保障每一个人的平等尊严，尤其是妇女与儿童的权利。
-
-皮莱最后呼吁，国际社会应继续履行"联合国宪章"所载"欲免后世再遭战祸"的承诺。她说，这不仅是对国际罪行受害者与倖存者的责任，也是对当代儿童及未来世代应有的承诺。
-
-**皮莱也是无所畏惧的全球人权捍卫者**
-
-2026年诺贝尔和平奖得主皮莱也是无所畏惧的全球人权捍卫者，她在联合国人权事务高级专员任内曾经多次挑战中国，包括要求揭露六四事件中，军队在天安门清场时的真相。
-
-2014年8月卸任联合国人权事务高级专员之前，她于同年6月4日呼吁中国公布北京天安门事件真相。她说："证实天安门事件相关真相，符合每个人的利益。"
-
-皮莱当时指出，仍然不清楚究竟有多少人死于这起事件，对军队镇压造成死亡人数有数百到数千不等的估计。
-
-2009年12月当中国异议人士刘晓波被法院以"煽动颠覆国家政权罪"判处有期徒刑11年时，皮莱就曾发声明强调判决是中国人权的倒退。
-
-在西藏发生藏人自焚抗议后，皮莱呼吁中国妥善处理西藏的不满，她也敦促藏人以自焚以外的"其他方法"进行抗争。
-
-此外，皮莱目前是国际法院（International Court of Justice）特任法官，正就缅甸镇压罗兴亚人是否违反1948年"联合国防止及惩治灭绝种族罪公约"（Genocide Convention）一案进行审理，预计将于未来几个月作出裁决。
-
-最后让我们重读诺贝尔委员会授奖词中的这段话："历史表明，一个没有法治的世界是不公正、不明智且不人道的。因此，那些守护秩序与混乱之间那条脆弱红线的法官理应受到我们的赞扬。但如今，当这些法官受到制裁、他们的机构遭到攻击时，我们需要有勇气、远见和决心的人。而纳维·皮莱在法官任上的工作恰恰展现了这些品质。"
-
-（[法广中文](https://www.rfi.fr/cn/%E4%B8%93%E6%A0%8F%E6%A3%80%E7%B4%A2/%E8%A6%81%E9%97%AE%E5%88%86%E6%9E%90/20261009-%E5%9B%BD%E9%99%85%E6%B3%95%E4%BA%BA%E6%9D%83%E9%81%AD%E6%94%BB%E5%87%BB%E8%A2%AB%E8%94%AD%E8%A7%86-%E7%9A%AE%E8%8E%B1%E8%8E%B7%E8%AF%BA%E8%B4%9D%E5%B0%94%E5%92%8C%E5%B9%B3%E5%A5%96%E6%B7%B1%E5%85%B7%E7%8E%B0%E5%AE%9E%E6%84%8F%E4%B9%89)）
+（[法广中文](https://www.rfi.fr/cn/%E6%B3%95%E5%9B%BD/20261011-%E6%9B%BE%E9%81%AD%E4%B8%AD%E5%88%B6%E8%A3%81%E7%9A%84%E6%A0%BC%E9%B2%81%E5%85%8B%E6%96%AF%E6%9B%BC%E4%B8%80%E8%BD%AE%E8%B5%A2%E5%BE%97%E4%B8%AD%E5%B7%A6%E7%BF%BC%E5%85%9A%E5%86%85%E5%88%9D%E9%80%89)）
