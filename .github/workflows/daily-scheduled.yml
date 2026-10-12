@@ -41,6 +41,14 @@ jobs:
         run: |
           pip install akshare requests pandas yfinance edge-tts lxml curl_cffi pandas_market_calendars
 
+      # ⚠️ 临时补丁（2026-10-13 起）：微软已把 Edge TTS 的**合成**端点从
+      #   speech.platform.bing.com 迁移到 api.msedgeservices.com；edge-tts 7.2.8
+      #   （PyPI 当前最新）仍指向旧端点 → 合成 WebSocket 握手 403、最终无音频。
+      #   上游修复见 PR #491；本步骤改写 site-packages 内的 constants.py。
+      #   自愈：官方发布含该修复的新版后，脚本会自动跳过（详见 scripts/patch_edge_tts.py）。
+      - name: 修复 edge-tts 403（临时补丁 · 对应上游 PR #491）
+        run: python3 scripts/patch_edge_tts.py
+
       - name: 预抓取数据
         id: prefetch
         continue-on-error: true
@@ -84,6 +92,18 @@ jobs:
         run: |
           echo "生成 MP3 音频..."
           python3 scripts/md_to_mp3.py
+
+      # MP3 步骤是 continue-on-error：失败时 job 仍为 success、日报照常发布但没有音频。
+      # 此处显式告警，避免"无音频"只能靠人发现（2026-10-13 该问题曾静默发生）。
+      - name: MP3 结果检查（失败告警）
+        if: ${{ always() && steps.md_to_mp3.outcome == 'failure' }}
+        run: |
+          echo "::warning::本次 MP3 生成失败，日报将以无音频形式发布（详见「生成 MP3 音频」步骤日志）"
+          {
+            echo "## ⚠️ 本次日报无音频"
+            echo ""
+            echo "MP3 生成失败，日报其他内容正常发布；原因见「生成 MP3 音频」步骤日志。"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: 转换 MD → HTML
         id: md_to_html
