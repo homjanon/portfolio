@@ -1,73 +1,73 @@
-# 2026年10月15日 星期四 全球金融资讯日报
+# 2026年10月16日 星期五 全球金融资讯日报
 
-查询时间（北京时间）：2026年10月15日 06:32
+查询时间（北京时间）：2026年10月16日 06:32
 
-**今日定性导语**：全球市场呈现明显分化，A股科创50（**↓3.29%**）与创业板指（**↓3.10%**）领跌下挫，美股受紧缩预期冲击纳指收跌**↓1.88%**，而欧洲主要股指集体飘红。宏观面上，美国9月CPI同比达**3.7%**超预期升温，美联储官员暗示加息促使10月加息概率升至**33.2%**，虽重挫多数科技股但苹果市值仍逆势首破5万亿美元大关。地缘与供应链扰动加剧，伊朗袭击升级导致霍尔木兹海峡货轮沉没，乌克兰限制星链亦引发博弈猜测。产业端美日落地GlobalFoundries最高**210亿美元**建厂资助，国内在三季报窗口期则见资金与政策加速向半导体等业绩确定性主线集聚。
+**今日定性导语**：今日全球权益市场剧烈分化，欧美股市表现相对抗跌且道指涨**↑1.08%**突破**5.2万**点，而亚太市场遭遇普跌重挫，韩国KOSPI暴跌**↓7.57%**、日经225挫**↓4.90%**，A股创业板指亦跌**↓2.92%**，黄金避险买盘强劲涨超**2%**报**4192.5美元/盎司**。宏观与资金面上，美国能源成本推升PPI至**6.3%**引发通胀担忧，国内资金面宽松带动DR001降至**1.262%**新低，30年国债期货冲高后失守**118元**关口。产业与贸易动态中，苹果智能在华获批并预计10月下旬推出测试版，硬科技资产加速推进“H+A”回A上市，但欧盟拟将贸易限制扩大至化工及机械领域加剧摩擦担忧。地缘局势方面，乌克兰恢复打击俄炼油厂叠加也门亚丁总统府遭导弹袭击，多重扰动持续牵动市场神经。
 
 ---
 
 ## 一、市场全景
 
-### A股收盘（10月14日）
+### A股收盘（10月15日）
 
 | 指数 | 最新价 | 涨跌幅 |
 |------|--------|--------|
-| 上证指数 | 3767.23 | **↓0.88%** |
-| 深证成指 | 12110.59 | **↓1.97%** |
-| 沪深300 | 4217.68 | **↓1.36%** |
-| 科创50 | 1380.26 | **↓3.29%** |
-| 创业板指 | 2866.76 | **↓3.10%** |
+| 上证指数 | 3707.48 | **↓1.59%** |
+| 深证成指 | 11816.79 | **↓2.43%** |
+| 沪深300 | 4166.01 | **↓1.23%** |
+| 科创50 | 1359.52 | **↓1.50%** |
+| 创业板指 | 2783.17 | **↓2.92%** |
 
-三季报预告密集披露窗口开启，公募机构近一月合计调研约1700次，将目光转向业绩确定性标的。科创50与创业板指领跌，市场波动加大背景下资金明显向确定性较高的板块集中。
+A股三大指数集体收跌，成长股领跌，创业板指跌近**3%**。市场成交有所萎缩，两市合计成交额约**1.63万亿**，资金观望情绪浓厚。科技板块回调压力较大，半导体、新能源等赛道普遍走弱，显示前期涨幅较大的品种在获利盘涌出下承压。
 
-### 美股收盘（10月15日凌晨）
-
-| 指数 | 最新价 | 涨跌幅 |
-|------|--------|--------|
-| 道琼斯工业 | 51621.48 | **↓0.09%** |
-| 标普500 | 7718.94 | **↓1.11%** |
-| 纳斯达克综合 | 26692.87 | **↓1.88%** |
-
-美国9月CPI同比增长3.7%，超预期升温，交易员大幅加码10月加息押注，美联储10月加息概率升至**33.2%**。美联储戴利暗示"可能需要加息"，纳指下挫近2%，热门科技股普跌；苹果市值首次收盘站上5万亿美元，成继英伟达后全球第二家达成此里程碑的企业。
-
-### 港台市场（10月14日）
+### 美股收盘（10月16日凌晨）
 
 | 指数 | 最新价 | 涨跌幅 |
 |------|--------|--------|
-| 恒生指数 | 24314.17 | **↓0.13%** |
-| 恒生中国企业指数 | 8183.17 | **↑0.10%** |
-| 恒生科技指数 | 4174.47 | **↑0.91%** |
-| 台湾加权指数 | 48625.83 | **↑0.59%** |
+| 道琼斯工业 | 52177.69 | **↑1.08%** |
+| 标普500 | 7744.06 | **↑0.33%** |
+| 纳斯达克综合 | 26713.03 | **↑0.08%** |
 
-港股整体表现稳健，恒生科技指数逆势上涨近1%，中字头国企股表现亮眼。台股同步走强，台湾加权指数小幅上涨。富时A50期指夜盘收跌0.86%，报13397点，A股次日开盘承压。
+美股三大指数集体收涨，道指突破**5.2万**大关领涨。能源成本上升推动PPI超预期上涨至**6.3%**，市场对通胀担忧升温，但股市暂未大幅反应。存储芯片板块低开高走，Meta发布开源大模型Muse Spark Open，AI板块维持韧性。
 
-### 全球其他市场（10月14日）
+### 港台市场（10月15日）
+
+| 指数 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| 恒生指数 | 24062.72 | **↓1.03%** |
+| 恒生中国企业指数 | 8103.27 | **↓0.98%** |
+| 恒生科技指数 | 4060.99 | **↓2.72%** |
+| 台湾加权指数 | 46969.87 | **↓3.41%** |
+
+港股三大指数齐跌，恒科指挫近**3%**，台股重挫超**3%**，亚太市场整体表现疲软。资金面延续宽松，债市走强，但权益市场承压明显。港股"回A"浪潮持续升温，硬科技资产青睐"H+A"模式。
+
+### 全球其他市场（10月15日）
 
 | 指数 | 代码 | 最新价 | 涨跌幅 |
 |------|------|--------|--------|
-| 日经225 | N225 | 67744.07 | **↓0.05%** |
-| 韩国KOSPI | KOSPI | 6008.81 | **↓0.44%** |
-| 新加坡STI | STI | 5423.34 | **↓0.13%** |
-| 欧洲STOXX 50 | SX5E | 6195.23 | **↑0.46%** |
-| 德国DAX | GDAXI | 25298.61 | **↑0.15%** |
-| 英国富时100 | FTSE | 10724.86 | **↑0.70%** |
-| 法国CAC40 | FCHI | 7873.11 | **↑0.58%** |
+| 日经225 | N225 | 64425.73 | **↓4.90%** |
+| 韩国KOSPI | KOSPI | 5554.22 | **↓7.57%** |
+| 新加坡STI | STI | 5403.51 | **↓0.37%** |
+| 欧洲STOXX 50 | SX5E | 6166.10 | **↓0.39%** |
+| 德国DAX | GDAXI | 25382.62 | **↑0.33%** |
+| 英国富时100 | FTSE | 10840.35 | **↑1.08%** |
+| 法国CAC40 | FCHI | 7934.70 | **↑0.78%** |
 
-欧亚市场分化明显，欧洲股市集体收红，英国富时100涨逾0.7%领跑；亚太市场普遍小幅回调，日经225基本持平，韩股小幅走弱。
+亚太股市领跌，日经225暴跌近**5%**，韩国KOSPI重挫超**7%**，为年内最大单日跌幅。欧美市场相对抗跌，英股、法股、德股普遍收涨，避险情绪升温下资金流向防御性资产。
 
 ### 大宗商品与汇率
 
 | 品种 | 最新价/值 | 涨跌幅 |
 |------|-----------|--------|
-| WTI原油 | 95.004 | **↓0.09%** |
-| COMEX黄金 | 4130.23 | **↑0.54%** |
-| 布伦特原油 | 106.011 | **↑0.30%** |
-| COMEX白银 | 55.871 | **↓0.01%** |
-| 美元/离岸人民币 | 6.6951 | — |
-| 中国10Y国债收益率 | 1.6516 | — |
-| 美国10Y国债收益率 | 5.19 | — |
+| WTI原油 | 97.589 美元/桶 | **↓0.39%** |
+| COMEX黄金 | 4188.85 美元/盎司 | **↑0.45%** |
+| 布伦特原油 | 105.768 美元/桶 | **↓0.28%** |
+| COMEX白银 | 57.508 美元/盎司 | **↑0.62%** |
+| 美元/离岸人民币 | 6.6898 | — |
+| 中国10Y国债收益率 | 1.6601% | — |
+| 美国10Y国债收益率 | 5.1% | — |
 
-COMEX黄金期货延续强势，报4127.3美元/盎司；白银期货大幅下挫6.26%，报55.8美元/盎司。美国API数据显示原油库存减少1112.3万桶，预期利多。俄罗斯副总理称俄今年将向全球市场供应10%—15%的柴油需求。
+贵金属延续强势，COMEX黄金收涨超**2%**报**4192.5美元/盎司**，白银同步走强。油价小幅回落，WTI原油跌破**98美元**。资金面宽松推动债市冲高后回落，30年期国债期货尾盘失守**118元**关口。
 
 ---
 
@@ -77,47 +77,47 @@ COMEX黄金期货延续强势，报4127.3美元/盎司；白银期货大幅下�
 
 **📌 谷歌精选**
 
-1. **乌克兰限制星链使用引发对马斯克与特朗普报复的猜测**：乌克兰的星链限制政策引发外界猜测，担心会招致马斯克或特朗普的报复行动，反映出地缘政治与技术依赖之间的复杂博弈。（[Axios](https://news.google.com/rss/articles/CBMiggFBVV95cUxNWHdxWXlmN2ZYWklDT2FlREFOVjhVN3VqWTNJX084YW0tVktrMVY4UTUxa3hMa2Y5M1BvZkRHdUhmSjE5LUNsbTJUSGQxZDJEdF9kaVB2T0l3T0RUSFZhTW9iODktOVZpMmpTMFN3ZXVRV2dfWXY5Vy1iM2FxSm0ySXN3?oc=5)）
+1. **俄勒冈州小学发生枪击事件，多人受伤**：美国警方称俄勒冈州班德市Silver Rail Elementary小学发生枪击事件，多人受伤，枪手已被击毙。当地学区发表声明确认发生"active shooter"事件。（[CNN](https://news.google.com/rss/articles/CBMib0FVX3lxTE5ucy03Y1N5V2ctYVlsQ29jQTE5WWdHQ0dtYU5LWTBQS0tuQXh4ODFEM082WXNaUHk1OGFYcW1hLWN2M1pRTFY5MWNqWHVUMXNxYWM2WXZieWNnbEJ1VTByRThtX01GSGFhS21lV1VNcw?oc=5)）
 
-2. **美国9月通胀意外升温，交易员大幅加码10月加息押注**：CPI同比上升3.7%，超预期；美联储10月加息概率升至33.2%，戴利暗示"可能需要加息"，市场情绪剧烈波动。（[CNBC](https://news.google.com/rss/articles/CBMiugFBVV95cUxQU2tUUkRYQTNINmxBSUtjSDlkU0t5SVFuSFJYNi10N0xxbTlhYi1jTHVIb0NBamV3c1hUNGloQnd5MjBmZEx0TTN1MGxvWHBzRnNXR3pNTzBvdGpBTWhDOUM3YlNUdUV6bmdnQV9SMktMLU1DRFBHY29FTFhVNVdyYUZpMWFLcHpOVHIxcU5ObXNDN1pESlFMbHoxOUpYU1BXa0V4RDA2NFRQZjVjWlNNZ0ktRGZ0MF9KSHc?oc=5)）
+2. **特朗普叫停军队处决直播计划**：特朗普表示福特胡德基地枪手不会通过直播方式执行死刑。五角大楼此前曾计划公开展示处决过程，后被特朗普叫停。（[Axios](https://news.google.com/rss/articles/CBMigwFBVV95cUxOQlJ5Qmd1QjhDREJTMjNfaGRMdjRWRlZUMXkwS0xldkJFeXB5YWZ4ZklnRVlxSTdtRWVuZE9kaWpDaUliTlY2cmdndFZMYTNJQkZfZ2pnNnF6RjUzZnFhVGRMRUVvSHg3M1BZaE9ZNml3SWczWUFUdVhVQmhNckhkUnRuNA?oc=5)）
 
-3. **众议院控制权事实上已丢失，共和党高层私下承认**：多位共和党领袖私下承认失去众议院控制权已无悬念，政治风暴正在加剧党内紧张局势。（[Politico](https://news.google.com/rss/articles/CBMijwFBVV95cUxQa19RZ2cyTnpRbE4xTTg1Y2tvMVhCTEFaNDB2SUxQM2pzN08xaUZVMENHMUhpYnNUVlVQWUwydWZfR0owdTIyLXJEa3BlOGZMT01zMmt2RllUcHY0ak1GN0hrYkVpc3BmWTAzeVZ1YkZfYzd0YXJ6Q2lwV1NiOFZfSTlRV3dmYVg0enpkaktKWQ?oc=5)）
+3. **白宫新闻秘书凯蒂·扎卡里亚未通过律师资格考试**：NBC News独家报道，白宫新闻秘书凯蒂·扎卡里亚未能通过律师资格考试，引发外界对其资格的关注。（[NBC News](https://news.google.com/rss/articles/CBMitgFBVV95cUxPS3BTQ2k5a1ExZ2NBbHdZajJCS19KemZPelhwU05tTTQ2blVXSlAtMVh6OHFJeVFiQXQ5WTY0N3NmNG1kZDRRYThyWGtITGhIWFI1a3FiajI0R2JJaXBUdWNTcVZkVGZKZkp1NnZBWWVIZ1FVU0lqN21EajdqbU9Cc3h2SkV4Q0FmRHJYTnlNQmhvMUE1eVFfaFdUcGRiNk1HRDV3dGM3aG11T3MzZWgtWVVGSUdGZw?oc=5)）
 
-4. **教皇利奥癌症手术后进展良好，但行程安排仍不确定**：教皇利奥在癌症手术后已开始正常进食、庆祝弥撒和步行，但后续出访计划仍悬而未决。（[AP News](https://news.google.com/rss/articles/CBMinAFBVV95cUxOd2xLYi1GaG84eGZndEJRLXpCS0JWUTZjeTU4N3drUTVxVzFGLUlLSHg2b1ZXU3M2SG44NVFhYnh4MzlsaW1EaEtTQVBaeEJHcTZ5ejVOY2NpQzVNcURpY0taa1V6di1DN1M0RlMyR2pibHlTbWFRaDg5SUJFQWNMWUlaRXNvd0stV3dYY2J6Q0t3YjlKaDNOaW9RbWw?oc=5)）
+4. **司法部起诉加州要求清理选民名册**：美国司法部正式对加州提起诉讼，指控该州存在非公民注册选民问题，要求清理选民名单。（[Politico](https://news.google.com/rss/articles/CBMifEFVX3lxTE96djc4Zy1RZS1BUkJ1RlBiZERzY2FCUUV0RDF3WUI0bThZd19xMU9WZmR2N1VfTUNuUVdzMmttS0xrd0tZTTZuVVBua3VIVDBmMk5qVEdzbjA3VmFXZ3hhQ3ZBRm5TclRoajh6LXJweHdkSVAxSTNKZk5vZko?oc=5)）
 
-5. **热点通胀数据加剧共和党中期选举困境**：通胀升温为特朗普 midterm 议程带来额外压力，能源价格高企进一步考验"可负担性"叙事。（[Politico](https://news.google.com/rss/articles/CBMihwFBVV95cUxPZ3dzLUtpY05HNUJxdEg3d3hwSHpPTVZ1dGtvVEtIdEZFd19mSzlHVnFkUEtRWGpaMGw2SW5Zd0NTZkZXSzBycVNiN0tvSVBqN3JNMHF1MWRyZFFvLU1kcG5MSUZWTndyWHhyWlphSUhFNGtDcHMzd3VEckQxSG9McmIybElDeWM?oc=5)）
+5. **英伟达、苹果各捐2500万美元支持特朗普宴会厅建设**：据《华盛顿邮报》报道，英伟达和苹果公司各捐赠2500万美元，用于支持特朗普在白宫扩建宴会厅的项目。（[Reuters](https://news.google.com/rss/articles/CBMiugFBVV95cUxPd1poWEFKa01FenF2THNycHFFMFNaeklhc2JGSVJqa21nTGo1cFpyMFR5cGFwMHN1cVdjdWM5NjhiaU9Zakg2ZUJDVG1aeVBPRHVNYm95NEItUlFGNndZQnhVQUE3bE1rZE52bHgxM3Jmd1RCVm9FNy1LNFlFb1RXQ0ZXRG9CRXNUUE9PUG1rbHdqSE5XT3FOSzBlUFdoTUoxZmwxbUFoY01ZMG85cG5INDg2ZmdycTdUaHc?oc=5)）
 
-6. **泽连斯基访英获全面支持，英国谨慎平衡美乌关系**：泽连斯基在特朗普态度转变后获得英国全力支持，英国首相伯纳姆在访英期间小心翼翼平衡与美国和乌克兰的关系。（[BBC](https://news.google.com/rss/articles/CBMiW0FVX3lxTE1wTkpha2hYakFfbkFlY3F2Znd0QUFIMmZTSkxUZ0xvbndxRTk2THBtNVNPU2I2dzdzRXZkZmtQZUoybnRWaUVaeEY2V2RjQjZ5c3dmU0ZXaG5TVEk?oc=5)）
+6. **SpaceX股价下跌：星链乌克兰风险困扰马斯克**：SpaceX面临Starlink在乌克兰服务中断的风险，参议员要求调查此事，对公司股价构成压力。（[Barron's](https://news.google.com/rss/articles/CBMiiAFBVV95cUxNSlA4QWlHWWpmR0liMndNVEZ2bEFnMkhfSDV4OXZvSFJIc3NFN0FOcU5sci1NaTFKTXVreEhVaGI5b0xNOFNVY3I2cVlFUFpTVktWUnp5SHFHalVydjYzemJvM3BTVUZ4OXVrdkIwQ3I5RTRBNy1vYTNtQVA2eGJURlBDODRXQ0ZU?oc=5)）
 
-7. **霍尔木兹海峡一艘集装箱船沉没，伊朗袭击升级**：随着伊朗加大对航运的袭击力度，一艘集装箱船在霍尔木兹海峡沉没，全球能源运输通道风险持续攀升。（[CNBC](https://news.google.com/rss/articles/CBMilgFBVV95cUxQMWFKMzFFcmxqYVdxcTVUYmZBZTZHejZpWTJmZ3o3Z3lFbnA0NTV4MkFlb1ZEMmRGQmw3MjJkc2RnTFgtX19YRkZOUDR4WXhNeWg5Zy1qV3FpeVpTVUo5QVBOVmJxcXVhc0NqandfT2ltQ3BseThmbG5oQTJhYUJ4MV9nM240c3I3ZG5wai1fY3ZIYWdpbGfSAZsBQVVfeXFMUHl0VWNMbEpIOXhweHBSVTdYdHNjd1V5a2NfNkJSdFk5UUV0R2lDSUtZV1BpMEM3aWxZOXlWRTBRRTNtVkxRcDZtYVFDdnA5X3RPLW4zTm42M0hzVFJYNGtoMWJHcjVGVlJ1a2Jja1F5SnFDUHVTYVFkYXRYTFFnbDd1REZsc0haTlNibWhxdTU0aHZCcjVYQ0x1Vm8?oc=5)）
+7. **多封含"可疑物质"的信寄往国会及选举办公室**：当局正在调查多封寄往国会议员和选举办公室的信件，信中疑似含有危险物质。（[AP News](https://news.google.com/rss/articles/CBMivwFBVV95cUxPdjdXQjZTSnNCWmdZVmw4Mk5ydFlXRV9tbFltdkVId3l4TDR6YWw0RGFicmlQQU9EM0l3YXlzR3Z4eFY0WDlRa2RQa0o3UGN0TnFQdXBnME83enZWX2NlaEU4S2l6TU0wcXp0TnBvMWJPY3lVLVVBQTg0emE2OFNfWVdGOXU1ZDI4cnhCaHpaVUZYOU1QaGJ3UmtFYWtKQklmYTBMSlFoZ093YWtOVTF6RDNIenFlZGZKZnpZUnBqaw?oc=5)）
 
-8. **OpenAI工程师因在办公室发现录音设备被捕**：一名OpenAI工程师在旧金山办公室被发现携带录音装置后被捕，案件引发科技公司信息安全担忧。（[Fox News](https://news.google.com/rss/articles/CBMifkFVX3lxTE9DNGtWOUZxNDhRajRUakVfNjlhMkRjUlc3M0JjZFdtbkFnSExjUjFtcDlrakRMVGFfUGRXT3Y4UzBldWRvZ0stVm0zcDdRLWItQncyUmwwdFN4MFRicUNON3JYR3doWUVQb29id0VfYmdrV3ZTbzVKUV9qX2dyUQ?oc=5)）
+8. **也门胡塞武装导弹袭击亚丁总统府**：胡塞武装发射导弹袭击了沙特领导的联军在也门亚丁的指挥部，位于总统府内，造成至少5人死亡、16人受伤。（[The Guardian](https://news.google.com/rss/articles/CBMihgFBVV95cUxPbkFOY3lPYnZzY2JhR0RfeEUtQU1lZDVLU1N4a254d1Z6ZmlLM25LUm12Q2tudk1VOU9oR0xSaW92aUJEUlgyWWJ5NVQzVEJNb0dzU21MWWlXcU5JNkVKWlE5eVBteEItT3RXSHRvY2djQTFkOGNIUFVuVXRERUItcnMtSl9hdw?oc=5)）
 
-9. **CoreWeave股价暴跌，债券收益率逼近15%**：CoreWeave股价因债券收益率飙升而重挫，CEO blames 市场"非理性"，AI投资热潮下的融资成本风险引发关注。（[Yahoo Finance](https://news.google.com/rss/articles/CBMi3AFBVV95cUxQaUVycnpSdEl3N1l6b1k4R2FXSTJHcW1Sa2hSbFJMWThxOXg5OVFjSzNLcEpiSVVObktpdVBSZkRjYU81b0Y4bTdXaTZFejhMU0Rfb1dxeTBPRW9jd0FGMnJPbTlSSHF1MFNPamlLQndFSVJaSkdZSkpXY2w0RzZjSmVwYm1tdjZ3R2tLblRkdzBEaUZ6UG9IM2x0U3hKOGowUEh1UXV0YjJJeDZRNjYySzlDcUJ1cE5DejBVVDlkOU1MdFVPRGR0V1Fsd1QwUGdzWXBrVG1VVzZBYmQ4?oc=5)）
+9. **巴基斯坦白沙瓦学校屋顶坍塌致至少33名学生和教师死亡**：白沙瓦一所学校的屋顶坍塌，造成至少33名学生和1名教师遇难，数百人聚集在屋顶导致结构崩溃。（[BBC](https://news.google.com/rss/articles/CBMiW0FVX3lxTE83bEFwbS0za0dIT0c3VS1wdk1QMlhmemVfUTNEUWtWaGwyTlY4N2RPTG9jdlpJNVFkQnJmTWM2Y3hmMUhZWERXYjB3cFpFc0FaS2s0NDNPU25pdkE?oc=5)）
 
-10. **GlobalFoundries获210亿美元资助在美日建两家芯片厂**：GlobalFoundries宣布将耗资最高210亿美元在美国和日本各建一座半导体工厂，作为美日 landmark 合作计划的一部分。（[WSJ](https://news.google.com/rss/articles/CBMipAFBVV95cUxNZW8xQ1AtdjA2d1B4YXlXNkp6YnBCblFZNTI1YzZVYVYtMXBhZGtjdm9RMnZaOUx6M3hrRlFpbzhuMmZwcV83ZmNtSUh0aTB0MHlnQkpMSFhWamFhRnEwSFZuV2lpMmI0SWhjY29GVTNfX2NVdmhOUk0zN0dORXNnbGpnSjZ6RFV5a2NfNkJSdFk5UUV0R2lDSUtZV1BpMEM3aWxZOXlWRTBRRTNtVkxRcDZtYVFDdnA5X3RPLW4zTm42M0hzVFJYNGtoMWJHcjVGVlJ1a2Jja1F5SnFDUHVTYVFkYXRYTFFnbDd1REZsc0haTlNibWhxdTU0aHZCcjVYQ0x1Vm8?oc=5)）
+10. **乌克兰恢复对俄罗斯炼油厂的袭击**：乌克兰恢复了对俄罗斯炼油厂的袭击行动，此前Starlink卫星服务已恢复正常。泽连斯基不顾特朗普的反对，继续推进对俄炼油设施的打击。（[Axios](https://news.google.com/rss/articles/CBMijAFBVV95cUxOaFZNbDJFdzhjclZMYTJwMm1yV2lTWmNaUVlGNlRLOUtKTlk2a2pSSHpINmtyb2ZGTjM2YWVqVEQ1Uk41VGJlVUNYQzhjaVpkWWNHYVFZV3R5eFBvUWRLWE0zbVFKYnloNTF4SXloNWJRRlh2MHYwN1ZQX2JPdVhvTjNjYktFa0ptM2FNeQ?oc=5)）
 
 **📌 联合早报**
 
-11. **沈泽玮：从"奇帆啊"到被查，重庆往事未了？**：回顾2011年全国两会期间薄熙来公开称呼黄奇帆"奇帆啊"的场景，折射出重庆政治生态的深远影响及后续调查进展。（[联合早报](https://www.zaobao.com.sg/news/china/story20261015-9837507)）
+11. **中美可合作开发AI药物试验平台**：红鸟资本合伙人桑顿在清华大学会议上呼吁中美两国携手合作，开发计算机模拟药物试验平台，利用AI辅助药物研发，让合作成果惠及全球人口。（[联合早报](https://www.zaobao.com.sg/news/china/story20261015-9844604)）
 
-12. **中国代表团罕见登日俄争议岛屿，日本：完全不可接受**：黑龙江省官员与商人访问俄罗斯实际控制、与日本有主权争议的南千岛群岛，日本向中俄两国提出交涉，中方称属友好交流和民企商业活动。（[联合早报](https://www.zaobao.com.sg/news/china/story20261015-9838315)）
+12. **欧盟拟扩大对华贸易限制，中欧贸易摩擦恐升级**：尽管中欧刚就混动车贸易达成协议，欧盟便酝酿将对华进口限制扩大至化工、机械等行业，双方贸易分歧短期难解。（[联合早报](https://www.zaobao.com.sg/news/china/story20261015-9843930)）
 
-13. **伍浩被双开，曾任中国发改委秘书长**：中国科学院科技创新发展中心原党委副书记、主任伍浩因严重违纪违法被"双开"并移送司法，通报指其靠上市项目审核敛财。（[联合早报](https://www.zaobao.com.sg/news/china/story20261014-9838467)）
+13. **中国三部门联合调查尊界V800刹车踏板支架断裂问题**：工信部、中央网信办、市场监管总局成立联合调查组，核查尊界V800汽车紧急制动测试中刹车踏板支架断裂事件。（[联合早报](https://www.zaobao.com.sg/news/china/story20261015-9844572)）
 
-14. **四川雷波教师与"耻辱"二字合影，当地教体局局长调离**：雷波县安排未达标教师在"耻辱"标语大屏幕前合影引发巨大争议，县政府已公开致歉并成立专项工作组调查。（[联合早报](https://www.zaobao.com.sg/news/china/story20261014-9838412)）
+14. **雅思取消风波背后的留学焦虑**：中国大陆部分雅思考场10月10日至13日连续四天临时取消考试，考生听力考试完成后被要求摘下耳机，官方称系技术问题导致。（[联合早报](https://www.zaobao.com.sg/news/china/story20261015-9843198)）
 
-15. **美学者：中国崛起威胁美国世界第一信念，中美合作预计有限**：哈佛学者艾鼎德指出，中国的崛起威胁美国基于"世界第一"的国家神话，即便两国领导人会面，合作空间仍然有限。（[联合早报](https://www.zaobao.com.sg/news/china/story20261014-9837549)）
+15. **大陆国台办批蔡康永，台陆委会称"杀鸡儆猴"**：台湾主持人蔡康永出席民进党台北市长参选人沈伯洋竞选总部成立大会后遭国台办批评，台陆委会回应称大陆企图施压但适得其反。（[联合早报](https://www.zaobao.com.sg/news/china/story20261015-9844038)）
 
-16. **辽宁舰时隔四月再赴西太平洋训练，或与解放军六处海域演训相关**：辽宁舰编队赴西太平洋展开例行训练，军事专家研判与本周解放军六处海域密集演训相关，旨在针对美日同盟并突破第一岛链。（[联合早报](https://www.zaobao.com.sg/news/china/story20261014-9837708)）
+16. **蒋万安沈伯洋10月31日举行电视辩论**：台北市长选举首场电视辩论确定于10月31日中午12时至下午2时举行，由三立电视与TVBS联合主办，将包括交叉诘问和媒体提问环节。（[联合早报](https://www.zaobao.com.sg/news/china/story20261015-9843427)）
 
-17. **APEC财长会议下周在香港登场，港府酝酿借机讲好香港故事**：APEC财长会议将于10月20日至21日在香港举行，欧美国家对香港观感偏负面，香港舆论界热议借机改善形象。（[联合早报](https://www.zaobao.com.sg/news/china/story20261014-9837774)）
+17. **中国风电场以国产替代欧洲零部件**：欧洲智库发现，出于安全和控制权考量，中国风电企业正以国产设备替换欧洲零部件，预计将影响欧洲风电出口竞争力。（[联合早报](https://www.zaobao.com.sg/news/china/story20261015-9843361)）
 
-18. **安徽省委书记李乐成调研长鑫科技，强调做大做强集成电路**：李乐成赴长鑫科技调研，强调集成电路是战略性产业，要培育世界级先进制造业集群，吸引更多上下游配套企业。（[联合早报](https://www.zaobao.com.sg/news/china/story20261014-9837944)）
+18. **库克：苹果智能已在中国获批**：苹果执行董事长库克表示，苹果智能在中国已获批准，预计10月下旬推出测试版本，首批功能包括实时翻译、写作工具等。（[联合早报](https://www.zaobao.com.sg/news/china/story20261015-9843138)）
 
-19. **中国9月CPI微升、PPI涨幅扩大，上游涨价向下游传导仍不顺畅**：9月CPI同比上涨0.9%，PPI同比上涨5%，能源价格上涨推动，但终端消费需求疲软制约传导效率。（[联合早报](https://www.zaobao.com.sg/news/china/story20261014-9837034)）
+19. **李强：新鸭绿江大桥将成为象征中朝传统友谊的新地标**：连接中国丹东与朝鲜新义州的新鸭绿江大桥正式开通，中朝双方总理通过视频致辞，希望深化经贸合作。（[联合早报](https://www.zaobao.com.sg/news/china/story20261015-9842464)）
 
-20. **中粮油脂总会计师：大豆压榨行业产能过剩问题突出**：吕秀萍指出中国大豆压榨年产能从1.3亿吨增至1.5亿吨，增幅19.8%，但油厂平均开机率仅维持55%—70%，产能过剩拖累行业盈利。（[联合早报](https://www.zaobao.com.sg/news/china/story20261014-9837741)）
+20. **民进党大咖为高雄市长参选人赖瑞隆助阵**：面对国民党"韩流"造势活动，民进党为高雄市长参选人赖瑞隆组织绿营大咖助阵，应对选举攻势。（[联合早报](https://www.zaobao.com.sg/news/china/story20261015-9842887)）
 
 ---
 
@@ -127,22 +127,22 @@ COMEX黄金期货延续强势，报4127.3美元/盎司；白银期货大幅下�
 
 | 标的 | 代码 | 市场 | 最新价 | 涨跌幅 |
 |------|------|------|--------|--------|
-| 招商银行A | 600036 | A股 | 42.67 元 | **↓0.30%** |
-| 招商银行H | 03968 | 港股 | 53.55 港元 | **↓0.65%** |
-| 长江电力 | 600900 | A股 | 29.45 元 | **↑1.03%** |
-| 红利低波ETF易方达 | 563020 | A股 | 1.212 元 | **↑0.66%** |
-| QQQM | QQQM | 美股 | 300.13 美元 | **↓1.97%** |
-| SPY | SPY | 美股 | 769.60 美元 | **↓1.08%** |
+| 招商银行A | 600036 | A股 | 42.66 元 | **↓0.02%** |
+| 招商银行H | 03968 | 港股 | 53.95 港元 | **↑0.75%** |
+| 长江电力 | 600900 | A股 | 29.6 元 | **↑0.51%** |
+| 红利低波ETF易方达 | 563020 | A股 | 1.198 元 | **↓1.16%** |
+| QQQM | QQQM | 美股 | 299.79 美元 | **↓0.11%** |
+| SPY | SPY | 美股 | 771.79 美元 | **↑0.28%** |
 
 #### 持仓聚焦（未来催化）
 
-**银行｜监管部门出手整治"长险短做"，"快返型"保险产品被叫停，银保渠道整改落地（财联社）**
+**银行｜资金面延续宽松 债市冲高回落，DR001降至1.262%创5月以来新低（财联社）**
 
-**半导体｜安徽省委书记李乐成调研长鑫科技，强调做大做强集成电路，培育世界级先进制造业集群（联合早报）**
+**券商/金融｜港股公司加快"回A"步伐，力勤资源、智谱、MINIMAX等有序推进H+A模式（财联社）**
 
-**汽车/新能源车｜马自达通过改造线束产品适配机器人，将线束生产迁回本土（财联社）**
+**半导体/AI芯片｜芯片初创公司Bolt Graphics拟融资1亿美元，估值约7亿美元，挑战英伟达与AMD（格隆汇）**
 
-**有色/资源/煤炭｜COMEX黄金期货收跌1.2%，报4127.3美元/盎司；白银期货大跌6.26%，报55.8美元/盎司（财联社）**
+**有色/资源/煤炭｜COMEX黄金期货收涨2.06%报4192.5美元/盎司，白银涨3.09%（财联社）**
 
 ---
 
@@ -150,17 +150,17 @@ COMEX黄金期货延续强势，报4127.3美元/盎司；白银期货大幅下�
 
 | 指数 | PE(TTM) | PE分位 | PB | PB分位 | 股息率 | 估值结论 |
 |------|---------|--------|-----|--------|--------|---------|
-| 红利低波 | 8.87 | 80.28 | 0.91 | 66.36 | 4.23 | 股息稳健 |
-| 中证红利 | 9.03 | 86.36 | 0.89 | 58.72 | 4.12 | 股息稳健 |
-| 中证白酒 | 19.78 | 15.96 | 3.97 | 2.28 | 4.64 | 深度低估 |
-| 沪深300 | 13.09 | 57.88 | 1.39 | 31.48 | 2.78 | 极贵 |
-| 中证500 | 30.09 | 70.32 | 2.18 | 68.56 | 1.51 | 偏贵 |
-| 创业板指 | 33.00 | 21.52 | 4.62 | 41.56 | 1.13 | 中性偏贵 |
-| 科创50 | 112.89 | 77.78 | 6.53 | 69.14 | 0.28 | 极贵 |
-| 恒生科技 | 22.35 | 27.01 | 2.27 | 14.27 | 1.08 | 偏低 |
-| 中概互联50 | 16.24 | 2.16 | 2.01 | 1.56 | 1.12 | 深度低估 |
-| 纳斯达克100 | 30.74 | 49.72 | 9.69 | 90.76 | 0.42 | 偏高 |
-| 标普500 | 25.32 | 58.24 | 5.69 | 98.20 | 1.01 | PB极贵 |
+| 红利低波 | 8.89 | 80.28% | 0.91 | 66.48% | 4.22% | 股息稳健 |
+| 中证红利 | 9.0 | 86.04% | 0.89 | 58.4% | 4.13% | 股息稳健 |
+| 中证白酒 | 20.12 | 18.76% | 4.04 | 2.72% | 4.56% | 深度低估 |
+| 沪深300 | 12.99 | 55.32% | 1.38 | 29.36% | 2.82% | 极贵 |
+| 中证500 | 29.2 | 67.8% | 2.12 | 65.28% | 1.56% | 偏贵 |
+| 创业板指 | 32.1 | 18.92% | 4.49 | 36.32% | 1.16% | 中性偏贵 |
+| 科创50 | 111.15 | 77.68% | 6.43 | 67.15% | 0.29% | 极贵 |
+| 恒生科技 | 21.82 | 22.35% | 2.22 | 11.21% | 1.11% | 偏低 |
+| 中概互联50 | 16.0 | 1.68% | 1.98 | 1.24% | 1.13% | 深度低估 |
+| 纳斯达克100 | 30.08 | 45.4% | 9.5 | 86.08% | 0.43% | 偏高 |
+| 标普500 | 25.02 | 55.68% | 5.57 | 95.8% | 1.02% | PB极贵 |
 
 ---
 
@@ -170,46 +170,46 @@ COMEX黄金期货延续强势，报4127.3美元/盎司；白银期货大幅下�
 
 | ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
 |-----|------|-------|------------|------|
-| 纳指ETF国泰 | 513100 | 16.67% | ↑2.02% | △溢价 |
-| 纳指ETF广发 | 159941 | 14.84% | ↑1.35% | △溢价 |
-| 纳斯达克100ETF招商 | 159659 | 13.26% | ↑1.32% | △溢价 |
-| 标普500ETF博时 | 513500 | 10.15% | ↓0.47% | △溢价 |
-| 标普500ETF国泰 | 159612 | 7.88% | ↑0.09% | △溢价 |
-| 标普500ETF南方 | 513650 | 7.47% | ↑0.04% | △溢价 |
+| 纳指ETF国泰 | 513100 | 13.25% | ↓3.42% | △溢价 |
+| 纳指ETF广发 | 159941 | 11.58% | ↓3.26% | △溢价 |
+| 纳斯达克100ETF招商 | 159659 | 9.71% | ↓3.55% | △溢价 |
+| 标普500ETF博时 | 513500 | 6.93% | ↓3.22% | △溢价 |
+| 标普500ETF国泰 | 159612 | 5.76% | ↓2.12% | △溢价 |
+| 标普500ETF南方 | 513650 | 5.19% | ↓2.28% | △溢价 |
 
-QDII溢价整体偏高，纳指ETF国泰溢价率最高达16.67%（↑2.02%），需警惕追高风险。
+QDII溢价整体偏高，最高溢价约13.25%（纳指ETF国泰），但较昨日均有回落。
 
 **场外QDII申购额度（纳指100系+标普500系，各取5只）**
 
 | 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
 |------|------|---------|---------|-----------|------------|
-| 大成等权标普500c | 008401 | 2.7511 | 限大额 | 100.0 元 | — |
-| 大成等权标普500a | 096001 | 2.7678 | 限大额 | 100.0 元 | — |
-| 大成纳指100a | 000834 | 6.458 | 限大额 | 10.0 元 | — |
-| 大成纳指100c | 008971 | 6.3956 | 限大额 | 10.0 元 | — |
-| 建信纳指100c | 012752 | 3.4241 | 限大额 | 10.0 元 | — |
-| 南方纳指100a | 016452 | 2.3522 | 限大额 | 10.0 元 | — |
-| 南方纳指100c | 016453 | 2.3415 | 限大额 | 10.0 元 | — |
-| 摩根标普500a | 017641 | 1.7233 | 限大额 | 10.0 元 | — |
-| 摩根标普500c | 019305 | 1.7065 | 限大额 | 10.0 元 | — |
-| 摩根美钞标普500 | 017642 | 0.2561 | 限大额 | 0 元 | — |
+| 大成等权标普500c | 008401 | 2.7341 | 限大额 | 50元 | ↓50元 |
+| 大成等权标普500a | 096001 | 2.7508 | 限大额 | 50元 | ↓50元 |
+| 大成纳指100a | 000834 | 6.3249 | 限大额 | 10元 | — |
+| 大成纳指100c | 008971 | 6.2638 | 限大额 | 10元 | — |
+| 建信纳指100c | 012752 | 3.359 | 限大额 | 10元 | — |
+| 南方纳指100a | 016452 | 2.3049 | 限大额 | 10元 | — |
+| 南方纳指100c | 016453 | 2.2944 | 限大额 | 10元 | — |
+| 摩根标普500a | 017641 | 1.7037 | 限大额 | 10元 | — |
+| 摩根标普500c | 019305 | 1.687 | 限大额 | 10元 | — |
+| 摩根美钞标普500 | 017642 | 0.2533 | 限大额 | 0元 | — |
 
-场外QDII额度整体收紧：10只全部限大额，最高100元（大成等权标普500），无不限购品种，申购偏紧。
+场外QDII额度整体收紧：2只下调（大成等权标普500各50元），无不限购品种，申购偏紧。
 
 **热门全球QDII关注**
 
 | 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
 |------|------|---------|---------|-----------|------------|
-| 华安法国CAC40 | 021540 | 0.9737 | 限大额 | 100,000.0 元 | — |
-| 银华海外数字经济 | 016702 | 2.1601 | 限大额 | 10,000.0 元 | — |
-| 广发全球精选 | 021277 | 6.1096 | 限大额 | 10,000.0 元 | — |
-| 华宝致远 | 008254 | 1.6692 | 限大额 | 2,000.0 元 | — |
-| 浦银安盛全球 | 014002 | 3.5093 | 限大额 | 1,000.0 元 | — |
-| 华安德国DAX | 015016 | 1.8733 | 限大额 | 1,000.0 元 | — |
-| 汇添富全球移动互联 | 015202 | 5.3204 | 限大额 | 300.0 元 | — |
-| 华夏移动互联 | 002891 | 2.63 | 限大额 | 100.0 元 | — |
-| 建信新兴市场 | 018147 | 2.292 | 限大额 | 100.0 元 | — |
-| 国富全球科技互联 | 021842 | 6.8672 | 限大额 | 100.0 元 | — |
-| 建信富时100 | 008706 | 1.4348 | 限大额 | 10.0 元 | — |
+| 华安法国CAC40 | 021540 | 0.981 | 限大额 | 100000元 | — |
+| 银华海外数字经济 | 016702 | 2.0954 | 限大额 | 10000元 | — |
+| 广发全球精选 | 021277 | 5.9601 | 限大额 | 10000元 | — |
+| 华宝致远 | 008254 | 1.6039 | 限大额 | 2000元 | — |
+| 浦银安盛全球 | 014002 | 3.4016 | 限大额 | 1000元 | — |
+| 华安德国DAX | 015016 | 1.8814 | 限大额 | 1000元 | — |
+| 汇添富全球移动互联 | 015202 | 5.1452 | 限大额 | 300元 | — |
+| 华夏移动互联 | 002891 | 2.506 | 限大额 | 100元 | — |
+| 建信新兴市场 | 018147 | 2.211 | 限大额 | 100元 | — |
+| 国富全球科技互联 | 021842 | 6.6345 | 限大额 | 100元 | — |
+| 建信富时100 | 008706 | 1.4481 | 限大额 | 10元 | — |
 
-热门QDII申购偏紧：11只全部限大额，额度最高10万元（华安法国CAC40），无不限购品种，申购通道整体收紧。
+热门QDII申购整体偏紧：全部11只均限大额，额度最高10万元（华安法国CAC40）。
