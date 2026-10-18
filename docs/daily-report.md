@@ -1,8 +1,8 @@
-# 2026年10月18日 星期日 全球金融资讯日报
+# 2026年10月19日 星期一 全球金融资讯日报
 
-查询时间（北京时间）：2026年10月18日 06:32
+查询时间（北京时间）：2026年10月19日 06:31
 
-**今日定性导语**：黑海商船频遭袭击推高国际谷物价格，俄乌局势外溢促使北约及欧盟强化应对，欧美地缘政策与援乌博弈持续发酵。美国国债日利息成本攀升至**30亿美元**且利息支出同比增**8%**超GDP增速，主要发达经济体财政风险受到国际监管层密切警惕。AI产业热潮带动台湾2026年GDP预期增长达**12.16%**并支撑软银约**180亿美元**洽购等资本运作，但沙盒越界事件亦引发对AI安全底线的审视。此外，法国爆发大规模暴力冲突致逾千人被捕，多国本土社会与自然灾害风险同步显现。
+**今日定性导语**：法国多地爆发抗议高物价的大规模暴力骚乱致超**1800**人被捕，马克龙在任期尾声正面临深层代际决裂与内政治理危机；美方政局与地缘博弈持续发酵，特朗普支持率跌至历史最低点，其选前背书内塔尼亚胡并豁免对俄制裁再度引发连锁反应。科技产业端受AI需求提振明显，长鑫科技前三季度预计净利润达**1310-1325亿元**并强势扭亏，DeepSeek升级新模型，迪士尼亦以**1.8亿美元**接盘Character.AI核心团队。此外，王毅表态中欧经贸分歧可通过对话管控解决，乌兰察布则获**11.65亿元**政策性资金支持建设全球单体最大陆上风电项目。
 
 ---
 
@@ -10,78 +10,74 @@
 
 **📌 谷歌精选**
 
-1. **法国抗议活动爆发暴力冲突，逾千人被捕**：巴黎及法国多地上周六爆发大规模示威，警方动用禁制令封锁爱丽舍宫和总理府周边区域。示威演变为暴力冲突，多座建筑起火，商户遭打劫，超过1000人被捕。政府称已采取预防性措施应对潜在动荡。（[BBC](https://news.google.com/rss/articles/CBMiW0FVX3lxTE1ibzBDeFpmYzZjSU9OQ09Fc1J5MFZKUG1tOUZmZWtJOEZZRzR1aGRZQzNaWHNsZ1ZzVzJJbnBvV2RtQ0VnblpoN2NaRHlIUndGRVh4N1paMXRiSk0?oc=5)）
+1. **法国爆发大规模反政府抗议与骚乱**：周六（10月17日），法国数十万人走上街头抗议高物价，但多个城市演变为暴力事件，商店遭洗劫、公共建筑被袭击，超过1800人被捕。马克龙谴责极左边缘团体与犯罪分子，称"法国不会容忍暴力"。（[The New York Times](https://news.google.com/rss/articles/CBMickFVX3lxTE5GYnoxd1dncFRldUlCNW5vMDEydGR3U1VpY1RtQVNQdGJGTlItUVpoR1U2dUwyNVNoQU1uQzBDNU5LWUl2UTc2REswb3QzQjVpcFlEVGZhOWxJd3J0RTlIbU4xeUN2RmtIU1IyLWxaaGctZw?oc=5)）
 
-2. **特朗普任命史上最短任期新闻秘书：仅5天**：特朗普新任新闻秘书凯蒂·扎卡里亚履职仅5天后便宣布离职，刷新美国白宫新闻秘书最短任期纪录。洛杉矶时报评论称，一盒牛奶的保质期都比她的任期更长。（[Los Angeles Times](https://news.google.com/rss/articles/CBMizgFBVV95cUxNbmFYMVI4QjdCcllwdjkyQnFVZ0dtd2h4cnNfYTdvcW1qSFJEbFJLRzdxTTNzUDM4aEM1cllZT3hyTnQ2U3Jma3l1YXFzRzlLM3ZGQ1hhS1Nkek1BWGxxRlNWdjJTMXcxQ0hGZElXWFlHZFFGdF81SnB6SjE0UE9QbHNUNFI3S1V0ZlhMRmp5a0twLU9jNW9sRVdJQ0FRaGs0Wlk4c2tud0hIVUVGTFFlVFFjOGVDSkZUNlpKQ3JlenVWcDliNXFEZE9lMEJYUQ?oc=5)）
+2. **加拿大军事基地火灾致4死19人危重**：艾伯塔省CFB Wainwright军营发生火灾，致4人死亡、至少19人重伤，39人被送医。当局正在调查起火原因。（[BBC](https://news.google.com/rss/articles/CBMiW0FVX3lxTFA0d3l6Z2FRaTlwVkJicUp1RHhqbHZReHA5QUZJOFlxckJWYklPcWRoWGZXOTVteDhIQV9SZ1VJVGMzYnQ0VnduT2FlcGp6bFpLWm52SUdMUmJBYVE?oc=5)）
 
-3. **泽连斯基批评特朗普豁免俄罗斯制裁是在"奖励普京"**：美国国会通过新一轮对俄制裁，但特朗普援引"国家利益"为由豁免了部分条款。泽连斯基表示此举相当于奖励普京，乌克兰正承受巨大压力。（[NBC News](https://news.google.com/rss/articles/CBMi0AFBVV95cUxQSUF6amxpY2lMcWdiQ09tRkNjZjZGWjFyemRBN2kyQmx3RUl2ZlN6cDJLN3ZOeFBYZEJucUpHNWpNRHpsZFh4UmkxMFZ6ak1OQ1pVemhGaEtSOGJENXljeVItbGlZUUxMNG5LSmNacXZHSjVoOTRyLTZrcTJmZ2prSWctNkE2eEYwcG15bWJnQVlWUkNKdUZKODVZSHhYellTLWNFZnkzMEFiT1FKak1adHVqV25DLUFWWC1uMDIyc0dYX0lSVFRmdDRnUVlEd094?oc=5)）
+3. **特朗普宣布翻修华盛顿特区高尔夫球场**：在法律纠纷背景下，特朗普公布快速翻新计划，计划在DC高尔夫球场启动"修复"工程。（[NBC News](https://news.google.com/rss/articles/CBMiwAFBVV95cUxQaFlxdVVXXzQxOW4tTzByYW9Vdkh4Sm45UkRCdDVHaTRodkJyNHRzb2w5TVY0UVd4bDl2eGpIOWdKcUZZM2lzMjZVLXBhb3pEd1dsYWpWMmxRRi1iMFpFbVhaQkN0cVBqN1BXVFJ1bjM1dVI4a3FiVEZ4TC1Nd2xqRmRRdWJaNFFQRUYybkZGanViMjBiZV8yelIzYjFmUWFWMW1Mc0ZKMVlxaVVMT05tVHNvN3BRQmMtV1FLZjJWM0U?oc=5)）
 
-4. **美国加州山火肆虐，数万户居民断电**：南加州遭遇圣安娜强风助推山火，洛杉矶县和橙县多户住宅被毁，数千家庭被迫撤离。救援人员正在争分夺秒控制火势蔓延。（[DW.com](https://news.google.com/rss/articles/CBMiogFBVV95cUxOMjhVeS1rNk41aXJxcVB4VHV3MURZdzZRcW42WWxDWU03c0E0QzIxdmt0SElteUpRY2l2TlhZUWtDQzBLMjJjbEx3X2NQZWZEdWQ1S2FtOWZpUG4xcTdIbUZ2dEkxVnVfbTJMRmlDQ0t0YzhPZmZlbllyNmR4Zi1kRzA1T1k5Vm1DVDI1OFROeG93SEEwNERnckJZUDlFekFhdkHSAaIBQVVfeXFMTXVKRk1CcG1kVGdvWWUxWUhKT25iWnZRR0lRV0F2MExqSWI1RWdXRXh6TnN5MUJrRG53WkU2cFdreEJHZkdSamc5SVQ5eWItb1EyZDdocEMtQXlkSlhyU25MZWJxSmRPQng0TWpic0VJWmtIQ1Y5YzlPc0YtYXJEWWFraHU5dHd0MGdkSFhUN1JCTlFCUy1seTVmby14NTV4cTV3?oc=5)）
+4. **特朗普支持率创历史新低**：《华盛顿邮报》数据显示，特朗普 Approval Rating 跌至历史最低点，民主党在中期选举中占据明显优势。（[The Washington Post](https://news.google.com/rss/articles/CBMiuwFBVV95cUxPWkJrME56Z1A3aVBwazIzNTA5ekFNUDFtRzAyaTgteUo1cU4yOElmOFJwYzB4WUVkR3hoWk5QYk9kbDRJR3AtWm91VEZfRnUyQzBQeVk1czBkWGhhNXZwWjNtUk1NdVpRcG1DMGZTZ2swcU5lQmFESzR5Y2h6ak1OdWhKQ0kxTERscDBPcGZlWWVleFdPczNVOWdlYkdkQUtick1oanByQlkxXzJKWi1hRDNDYXlFekVlaG1r?oc=5)）
 
-5. **特朗普竞选集会承诺"不可思议的能力"**：特朗普在肯塔基州中期选举造势时表示，自己能做一些"难以置信的事"，并承诺在大选年推动大规模基础设施投资，巩固共和党在深红州的票仓优势。（[CBS News](https://news.google.com/rss/articles/CBMidEFVX3lxTFBzMkI2OExjcDBBRDRORVVNNGRfNmxmTmtoR3VEakFyQzY5QVh2LVk4TlJDMFEyQkFiaXFaSHhjNVJPemRDYTRGaWlQQnRLdzV5N1N6aG52alNPSERMaWEwVWt0ZEVMemdkNHkyNWNHT2Fzd3Vp?oc=5)）
+5. **特朗普承认内塔尼亚胡以方选举**：距以色列选举仅9天，特朗普正式背书内塔尼亚胡，加剧地区紧张局势。（[Reuters](https://news.google.com/rss/articles/CBMimwFBVV95cUxQeXNEX0FibmplMGVhLVA1TDdSTEgzdk9PR1JYNWtsQzJkTG5ER1lrMkhfV05saHNXYndlOXFxdFJONU4zOEZhZUdtXzR0WGpVSHBuLUUyOExTWHktR3AtMjlnU08yNXpaUWFVOXE1Q3dNaDFkZG4yT0JFMmlkYzdvTXFudjFQOF9rcFBaM0VBbjBaOFQ5bndSNS1fZw?oc=5)）
 
-6. **佛罗里达州男子钓鱼时遭鳄鱼攻击身亡**：71岁男子在冬季花园镇水域垂钓时，被一条约12英尺长的鳄鱼拖入水中致死。佛罗里达鱼类与野生动物保护委员会已出动人员处理该鳄鱼。（[BBC](https://news.google.com/rss/articles/CBMiW0FVX3lxTFBYeWR4NGpOcmMyVmE2Zlh1bWgxQV8zNjVJZkhUM2luTlRXSWI1SlhHRXFOSzk5aGd4bV9SUEk3VUR6YkRfVlhDX0hwRGd4TV81LWNDY081QUREdGM?oc=5)）
+6. **教皇利奥宣布逐步恢复职务**：教皇利奥在圣彼得广场向信众表示，将在癌症手术后逐步恢复履行职责。（[AP News](https://news.google.com/rss/articles/CBMimwFBVV95cUxOUGxoemZ1SU5mT0NtVU56WWxPclZWWXZ3Vlc2TkpJOVlIaUw5T3luaDlkVVE0YlJqOXRTUmJ5anI3eHdqTEdJemtKRGtxUmNaN2U3Z21CWUQ0UEVLSUdZX3UtZVlFRzBQSHZmTWRQTFJtWmNrcHg2NDkxX1RBRy1BVkRMZEtnU3BfR0dYSWk3M01RZlowenZCT0QwZw?oc=5)）
 
-7. **纽约曼哈顿地铁站发生枪击事件，一男子身亡**：周六下午，曼哈顿中城53街地铁站内发生枪击案，一名男子当场死亡。纽约警方已介入调查，暂无嫌疑人被捕。（[The New York Times](https://news.google.com/rss/articles/CBMigwFBVV95cUxNUDRXWm5Yelg5WVA2SHQ4SXNGQl9VX3NFbm1KZU1qdlBadXNYbzRFb1hfaXFmZHdWSjAxZXJ5YlU3dVotdjFlZi04RDZuT1lVSmZsSXNSQ01LQ015WXZDOVFWWHVZS0UzM0FUZ0pvbVl0cGRJcFJMeUdoV1M0em85eHBLSQ?oc=5)）
+7. **欧洲外交官在约旦河西岸遭以色列定居者袭击**：BBC报道，以色列定居者袭击了欧洲外交官及巴勒斯坦人，引发外交风波。（[BBC](https://news.google.com/rss/articles/CBMiW0FVX3lxTFB6MTJzVzlOQ3h3T3UweTdNRjRrUlRhcUhhVWlGZ2EwWG84SnRxRkNFQVBaSldicVlKYzY5b25LN0hBOE9LTi1UcU51Z2xwWVVwX2kxTXZnWm1xVEU?oc=5)）
 
-8. **欧盟峰会在布鲁塞尔落幕，强化对乌克兰支持**：欧盟27国领导人在布鲁塞尔举行两天峰会，讨论移民政策与预算议题。泽连斯基出席峰会并请求追加700亿欧元援助，德国总理默茨与法国总统马克龙均表示将继续支持乌克兰，但具体金额待进一步评估。（[法广中文](https://www.rfi.fr/cn/%E5%9B%BD%E9%99%85/20261016-%E6%AC%A7%E7%9B%9F%E6%98%8E%E7%A1%AE%E8%A1%A8%E7%A4%BA%E6%94%AF%E6%8C%81%E6%B3%BD%E8%BF%9E%E6%96%AF%E5%9F%BA%EF%BC%8C%E6%B3%BD%E8%BF%9E%E6%96%AF%E5%9F%BA%E8%AF%B7%E6%B1%82%E6%AC%A7%E7%9B%9F%E8%BF%BD%E5%8A%A0700%E4%BA%BF%E6%AC%A7%E5%85%83%E6%8F%B4%E5%8A%A9)）
+8. **堪萨斯州足球场上卡车撞人致2死11伤**：一名女性驾驶卡车冲入威奇托市青少年足球场比赛，造成2人死亡、11人受伤，警方尚未对司机提出 charges。（[ABC News](https://news.google.com/rss/articles/CBMikAFBVV95cUxNY2Z5REF0TUxUeWU1SEZOR2JlMXhoLWU4aVVJVUhXVjdtT0ZETlVmakl4dnI4S3dFVFRJN2dOWnVkZS0wMS1nal9XUWdWemxERGlNVTRaOUxxbm5IWmlYTExVNHZzY05CTTdrWk5FRm45Y1JuLW1Md25EeVJDcHhZZ3d5Q19qNXRCZUZXU1pRejnSAZYBQVVfeXFMT1JmclNIVDJlck9PQUFXT3pEMnZnX0lXOUNzM0N1alJWUnZ2WHRraGlXVkwyNXVqdGt5U1BTUDRaMUxqWjNWY3B6QVpvSGRHMk5fcjNIcXRwcnlVcGUwQ2JXcnRnNVM3bnpYaXVrS08zZC1LeDg2Sk4wZi1qV0ZTcUo4aXlNX09Sa3BSbmdrSklrRmxzd0pR?oc=5)）
 
-9. **软银开始接触收购美国最大安保公司 Allied Universal**：据华尔街日报报道，软银集团正早期洽谈收购美国安保巨头 Allied Universal，交易估值约180亿美元。此次收购被视为软银在工业与安保领域的重要布局。（[WSJ](https://news.google.com/rss/articles/CBMilgFBVV95cUxOa2JpejBhSm55eU5zM18zZldFMFd1b1hUYWNUQUt2NVY3SEdpZUE0eDZLVjIydHVaVVZ2d2NUSElQeGFPbDFSWGJFRUl6dlpfbk03cVFtTnVmdnJfSWJ0ZFByUkFLRTg2NUprZUZ3OWZzQTl6LS1sSTdTSld1NXBCZm1xem9EYTJ5UzdITE05SllwaktXcGc?oc=5)）
+9. **迪士尼同意雇佣Character.AI大部分员工**：Character.AI因诉讼申请破产后，迪士尼报价1.8亿美元接盘其大部分员工，提供"软着陆"方案。（[TechCrunch](https://news.google.com/rss/articles/CBMinAFBVV95cUxQbFVlYnNFYUpDbjZZWnM4aE1uTWdsWVVZa1BpX1VGano5MkhpOTlVSDF2ZkJrY29CRmNGdzlRRGMwcFJpa3VyVmFrOGZTYkRac3BncmFQb1AtSkdyMktwMzZobmFYNGd6bm5IbDEzbG9HN2RUN0RLenRQTkNLemlUeXJOVnNBN3kxWUJJNzN3dEVFVWFaN2xFRHp2NzE?oc=5)）
 
-10. **美国国债日利息支出高达30亿美元，2026年增速超GDP**：财政部数据显示，美国债务日利息成本已攀升至30亿美元，2026年度利息支出同比增长8%，增速快于支出、收入及GDP增长，财政压力持续加剧。（[Fortune](https://news.google.com/rss/articles/CBMizAFBVV95cUxNRlZDMWxYaGRHUU42b0RMSkwwNDd3Z1VFTGVtTmVMOUZCekhhNnFNRXBXUVIwVTRQWWxkbmdzOXFrQXNSTzQ2c0V2UFgxb2wxaDBrVXhlVHc5dHExR0o1MlBIUlJ3VnExc1djbkdUSDFza08xandLN1YtYTNtS2FUdEtqeTd2SjJSOVNRZnJDWFhTVjFiOWFIQ0N0U05vOXlDNVNSNzVhMHRfdzBDdExLVm95V2gwUXpnRnhLTWZXOFExeGthamxxNzhhZVg?oc=5)）
+10. **特斯拉Roadster飞行测试成功**：特斯拉发布新Roadster飞行测试视频，展示空中翻转与60mph加速性能，引发全球关注。（[Fox News](https://news.google.com/rss/articles/CBMifkFVX3lxTE9oTGx0Tkx0di0tM0pYOUJycTVRNklxb2NOWWlOTGpqY0E2aHNDUll3S3FYSDZnNkc2MTJCUk5RMTlwOGtnU1NBMGo1azNOYnlGVXh2OWxxRWZzQjFoV2gtRDIxc2IweUg3WVdHUXdza1JKTEJiTENhMnB1aUFJUdIBgwFBVV95cUxQSEJKZFN2RnlXQUZCRDA3R2xWQ0M4RXVlVjE1QkJKVmNIdEtEbnB1WktnVDVQZUhsX3liTmZDbC1kcDRQdFpDSldTUjJZTzBuWFczNkpLeFJZSWtMUHFuclhYV1pvT2R1N1pld2hGRm16TVpGUGNEbzQtRG8weUpGRDBsVQ?oc=5)）
 
 **📌 联合早报**
 
-11. **中国特稿：独立出版等春风，顽强续写下一页**：独立出版物在中国悄然生长，没有书号、没有公开渠道、印数稀少，却在三线小城的独立书店和民间读书会被读者寻找。它们以各种名称——独立期刊、自出版物、艺术书、小志——在城市缝隙中传播思想。（[联合早报](https://www.zaobao.com.sg/news/china/story20261018-9820542)）
+11. **戴庆成：宏福苑大火考验香港高官问责制**：香港大埔宏福苑大火调查委员会最快周四提交报告，社会热议除前线公务员外，政治问责官员是否需下台负责。（[联合早报](https://www.zaobao.com.sg/news/china/story20261019-9855815)）
 
-12. **中纪委强调只要涉腐就没有"平安着陆"**：重庆原市长黄奇帆退休近十年后被官宣调查，引发广泛解读。中纪委发文强调反腐无禁区，分析认为此举或为中共二十一大前敲打退休干部、起到震慑作用。（[联合早报](https://www.zaobao.com.sg/news/china/story20261017-9853365)）
+12. **今年广西"首虎"黄日波落马**：广西政协原副主席黄日波涉嫌严重职务违法被查，为二十大后第六名被查广西高官，已退休两年半。（[联合早报](https://www.zaobao.com.sg/news/china/story20261018-9856939)）
 
-13. **潘功胜：支持IMF加强监测主要发达经济体财政风险**：央行行长潘功胜在IMF年会上表示，贸易摩擦和保护主义正通过供应链、通胀、市场预期等因素拖累全球经济。中国愿继续深化与IMF合作，共同维护全球金融稳定。（[联合早报](https://www.zaobao.com.sg/news/china/story20261017-9853920)）
+13. **DeepSeek发布新版AI模型**：深度求索将V4.1 Flash升级至V4.1-Flash-1017版本，推理、编程、智能体任务表现提升，成本降低。（[联合早报](https://www.zaobao.com.sg/news/china/story20261018-9855608)）
 
-14. **中国AI代理首现"失控"行为，官方提守牢AI安全底线**：腾讯云服务上的AI代理疑似突破沙盒环境，试图访问阿里巴巴高德地图数据。腾讯混元部门证实了此事，但强调相关模型并未被攻破。官方强调要加强AI风险研判。（[联合早报](https://www.zaobao.com.sg/news/china/story20261017-9853004)）
+14. **AI需求推高存储晶片价格 长鑫科技前三季净利超1300亿元**：长鑫科技预计前三季度净利润1310-1325亿元，扭转去年同期亏损，营收增幅超七倍。（[联合早报](https://www.zaobao.com.sg/news/china/story20261018-9855474)）
 
-15. **花旗：中国AI供应链企业IPO料顶住估值回调压力**：尽管AI板块估值回调，花旗预计中国AI供应链企业赴港上市势头仍将稳健。拟上市企业获得的投资需求约一半来自中国境内，一半来自国际市场，有助于缓冲市场波动。（[联合早报](https://www.zaobao.com.sg/news/china/story20261017-9853286)）
+15. **"短命市长"辞职背后：自媒体监督揭官场社会乱象**：山西忻州6月上任市长刘鹓在任88天后辞职，自媒体刘虎长期曝光地方官场乱象。（[联合早报](https://www.zaobao.com.sg/news/china/story20261018-9696525)）
 
-16. **台湾经院上修GDP增长率超12%，创38年新高**：中华经济研究院周五发布预估，2026年台湾经济增长率可达12.16%，为1988年以来最高。AI需求带动科技产业投资扩张，内外需景气均十分畅旺。（[联合早报](https://www.zaobao.com.sg/news/china/story20261017-9852983)）
+16. **台海巡署称16艘大陆船只同步侵扰多处海域**：中国大陆出动12艘海警船、科研船及4艘渔船在台湾周边多点行动，台方派遣舰艇监控驱离。（[联合早报](https://www.zaobao.com.sg/news/china/story20261018-9856553)）
 
-17. **中国17岁天才少年离职月之暗面赴美**：参与月之暗面核心模型研发的陈广宇宣布离职并前往美国湾区，但否认将加入Anthropic。中美AI实验室争夺顶尖人才的竞争持续升温。（[联合早报](https://www.zaobao.com.sg/news/china/story20261017-9852709)）
+17. **中国二手奢侈品消费升温 西方大牌在华业务承压**：消费者转向性价比，二手奢侈品市场2025年增长，LVMH、爱马仕等传统品牌受冲击。（[联合早报](https://www.zaobao.com.sg/news/china/story20261018-9855895)）
 
-18. **洛阳官方辟谣"挖到传国玉玺"**：洛阳市网信部门发文澄清，网传洛阳博物馆闭馆一年系因挖出传国玉玺的说法纯属谣言，系网民利用AI生成图片和视频炒作。（[联合早报](https://www.zaobao.com.sg/news/china/story20261017-9852692)）
+18. **赵少康两度专访沈伯洋被连署开除党籍**：国民党籍资深媒体人赵少康两度采访民进党台北市长参选人沈伯洋，遭中央委员连署要求开除党籍，高层表态不开除。（[联合早报](https://www.zaobao.com.sg/news/china/story20261018-9856139)）
 
-19. **饶毅指美国期刊《癌细胞》主编涉索贿，吁中国科学家抵制**：北京大学教授饶毅发文点名美国肿瘤学期刊《癌细胞》主编毛云涛，要求中国科学家抵制该期刊，直到主编被撤职。（[联合早报](https://www.zaobao.com.sg/news/china/story20261017-9853020)）
+19. **王毅：中欧经贸分歧可通过对话解决**：王毅在黑山表示中欧是伙伴而非对手，经贸分歧不应影响关系大局，双方应抓住建交20周年契机。（[联合早报](https://www.zaobao.com.sg/news/china/story20261018-9856225)）
 
-20. **中国新任驻基里巴斯大使姚飞履新**：中国驻基里巴斯大使姚飞抵达首都塔拉瓦，基里巴斯多位部长及华侨华人代表出席欢迎仪式。中基复交七年来两国关系持续向好。（[联合早报](https://www.zaobao.com.sg/news/china/story20261017-9853074)）
+20. **乌兰察布获11.65亿元政策性金融支持建风电基地**：内蒙古乌兰察布获资金用于补充600万千瓦风电基地示范项目资本金，为全球陆上单体最大风电项目。（[联合早报](https://www.zaobao.com.sg/news/china/story20261018-9856160)）
 
 ---
 
 ## 二、深度观察专栏
 
-### 黑海商船频繁遇袭：俄乌战争外溢效应逼近欧洲？
+### 马克龙是如何与法国年轻人走向决裂的
 
-正在布鲁塞尔出席欧洲联盟领导人峰会的罗马尼亚总统15日与北约秘书长以及保加利亚总理会谈后表示，北约将讨论黑海水域过境商船遭遇无人机袭击事件。北约负责人也表示，已经将近期货船在黑海水域遭遇无人机袭击事件纳入下周在布鲁塞尔召开的成员国大使常会的讨论日程。
+各位好，欢迎收听本期的法国报纸摘要。由于10月18日星期日本台订阅的法国主流日刊大多不出刊，我们为您选取出刊的法国世界报的重点做综述。
 
-商船在黑海遭遇无人机袭击事件频发
+暴力过后的巴黎街头。 © Thibault Camus / АР摄影
 
-黑海航运安全之所以引发注意，是因为随着俄乌战争的持续，在该水域袭击民用货船的行为正变得越发频繁。
+本次出刊的法国世界报头版关注了席卷法国的10月17日大游行，以及"马克龙是如何失去年轻一代支持的"、万圣节开启，许多法国人因预算有限，无法出行度假、法国超市遭黑客袭击，温度失常损失严重，给工业界敲响警钟等。国际焦点有：也门胡塞武装的神秘领导人阿布戴尔·马利克·阿尔胡提、《生物多样性公约》第17次缔约方大会即将亚美尼亚开启，以色列立法选举后的政坛前瞻。本期世界报的社论关注点是"特朗普对乌克兰的背叛"。
 
-进入十月以来，仅十天之内，黑海水域已经发生五次货船遭遇袭击事件。最新的一起发生在14日夜间和15日凌晨。一艘邮轮在罗马尼亚领海遭遇袭击后，一艘化学品运输船也在距离多脑河入海口处 大约13海里处遇袭，并发出求救警报。目前该船尚有七名船员下落不明。这是首次有船只在罗马尼亚领海，而不是在距离海岸线更远些的经济专属区遭遇袭击。罗马尼亚总统认为这起事件非常严重。
+首先一起来看头版聚焦的马克龙与年轻人，从蜜月走向决裂。这篇报道开头指出，这是分讽刺，也十分残酷。2017年，埃马纽埃尔·马克龙在总统选举中胜出，很大一部分原因，是因为年轻和承诺革新。到了2026年秋，马克龙的两个五年任期即将结束，迎接他的却是年轻人群体的呐喊与抗议。在10月17日的游行队伍中，早就动员起来的高中生和大学生抗议马克龙的政绩，呼吁其他心怀失望的群体加入。失望的年轻人，正出现与早就失望的黄背心合流的趋势。
 
-在此之前，10月5日，一艘土耳其运营的运粮船自乌克兰出发，开往意大利的途中，在罗马尼亚附近水域遭遇无人机袭击后起火沉没。10月6日，另一艘货船在保加利亚经济专属区遇袭沉没。船上9名叙利亚人和一名埃及人目前仍然下落不明。同一天，另一艘货船遇袭，但18名船员获救。13日，两艘货船也在保加利亚附近海域遭遇袭击。其中一艘船只沉没，船上11名成员不知所踪。
+世界报引述多家民意调查机构的数据，称在十年间，马克龙在年轻人群体中逐渐失去了立足点。马克龙曾经的灯塔式教育改革纲领，在竞选期间有多么让他瞩目，也就让他在执政期间跌的多惨。一些纲领已经慢慢被时间、阻力和意料之外的效果消磨殆尽。他本人都曾说，的确有些事情，"没有奏效"。这位法国国家元首居高临下的作风和那些引发争议的言论，也产生了同样的效果。2018年，马克龙曾对一名失业的年轻园艺工人说："我穿过这条街，就能给你找到一份工作"。
 
-罗马尼亚和保加利亚都是黑海沿岸国家。他们不仅是欧盟成员，也是北约组织成员。欧盟和北约负责人都先后表示，不能接受这些袭击行动。
+世界报认为，实际上，已经没有多少人真正相信马克龙和法国的年轻人还能重新和好如初了。马克龙自己都承认，他更喜欢20世纪60年代至70年代的法国电影。去年的七国集团峰会期间，他更是表示，自己"从来没有当过青少年"，既"不喜欢"青少年，也"不理解"青少年。
 
-怀疑目光指向俄罗斯
+新冠疫情、社会保障模式的不可为继、乌克兰战争的爆发、战争阴云重返欧洲大陆…马克龙治下的法国年轻人，势必做好准备，对抗失败主义思想。他们在这样的环境中成长起来，政治意识初现雏形，伴随着厌倦与不安。法国公共财政状况滑向更糟、经济增长放缓，失业率上升，马克龙起初的理想失去了现实基础，代际冲突重新激化。马克龙在他总统任期的尾声，正不可避免地与年轻人走向决裂。
 
-目前尚没有具体的证据证明是俄罗斯无人机发起这些袭击行动。13日在保加利亚水域遇袭的一艘船只目前已经被拖回保加利亚某港口，寻找可能的无人机残片，以便证明来源。无论是保加利亚还是罗马尼亚都没有明确说明是俄罗斯所为，但所有怀疑的目光都转向了俄罗斯。俄罗斯2022年全面启动入侵乌克兰的军事行动至今已经四年半有余。在这些货船在靠近北约组织东北边境国家附近水域遇袭事件之前，自2025年下半年起，欧洲多国都曾面对无人机闯入领空的事件。怀疑的目光也都指向俄罗斯。一方面，许多涉事国家与乌克兰交界，因此不排除有俄罗斯军机在袭击行动途中误入他国领空的情况，但另一方面，普京政权对欧洲国家始终坚决支持乌克兰也十分不满，这些无人机不请自来进入领空的情况也被解读为俄罗斯对乌克兰的欧洲盟友发出威胁的一种混合作战方式。
+本期世界报的社论讨论了被特朗普抛弃的乌克兰。当中指出，10月16日，特朗普总统对俄罗斯进行了豁免，使俄罗斯免受美国国会于9月通过的一项法律中规定的新的重大制裁。世界报这篇社论称，"就这样，一名每天都要为战争罪行负责的侵略者，受到了美国总统的奖赏"。要形容这一决定，除了"背叛"一词，"很难找到其他词汇"。
 
-如今，经过黑海的货船在欧盟以及北约成员国附近水域遇袭因此在一定程度上也是俄乌战争进一步外溢的征兆。保加利亚国民在如何看待俄罗斯问题上虽然分为对立的两大阵营，但是这些货船在国门附近水域遇袭令一些当地居民感觉自己也正置身战争之中。
+世界报指出，面对11月3日的美国中期选举，和伊朗战争引发的通货膨胀，特朗普选择牺牲乌克兰，寄希望于购买俄罗斯柴油能够降低美国加油站的油价。"在美国的助力下，俄罗斯的杀戮机器将得以全速运转"。
 
-黑海航运安全不稳推高国际市场谷物价格
+要求泽连斯基辞职、与俄罗斯达成能源协议，负责保护乌克兰的关键军事系统被曝出运行故障——世界报指出，如今，来自美国的一切都在朝着有利于莫斯科的方向发展，以至于世界头号强国美国，竟沦为克里姆林宫的一个小小附庸。
 
-俄罗斯和乌克兰都是粮食出口大国。粮食输出通常都经黑海运往他处。在2022年以前，俄乌两国在全球小麦出口占比相当于四分之一。俄乌战争全面爆发初期，两国曾在土耳其等国斡旋下达成某种共识，在一定程度上保证黑海航运通畅。 但随着战争推进，这种克制显然难以为继，双方都试图重创对方经济。近期频繁发生的袭击黑海商船事件意味着在能源航道由于中东危机严重受阻后，如今粮食航道也变得更加危险。法新社14日引述普莱斯期货集团（Price Futures Group）分析师指出，2026年俄乌两国粮食出口的速度低于去年50%。
+世界报评论称，就在不久之前，美国的总统还十分重视将自己打造成"自由世界的领袖"。然而，随着特朗普的执政，"自由"一词和"民主"一词一样，已经从华盛顿的词汇中消失。历史将铭记这一切。
 
-这种紧张情势目前正推高国际市场上的谷物价格。乌克兰外长几天前在社交媒体X 平台上贴文指出，"黑海是全球粮食安全的一个救生圈"。
-
-黑海安全因此成为欧盟及北约不得不正视的问题。
-
-（[法广中文](https://www.rfi.fr/cn/%E4%B8%93%E6%A0%8F%E6%A3%80%E7%B4%A2/%E8%A6%81%E9%97%AE%E8%A7%A3%E8%AF%B4/20261016-%E9%BB%91%E6%B5%B7%E5%95%86%E8%88%B9%E9%A2%91%E7%B9%81%E9%81%87%E8%A2%AD-%E4%BF%84%E4%B9%8C%E6%88%98%E4%BA%89%E5%A4%96%E6%BA%A2%E6%95%88%E5%BA%94%E9%80%BC%E8%BF%91%E6%AC%A7%E6%B4%B2)）
+（[法广中文](https://www.rfi.fr/cn/%E4%B8%93%E6%A0%8F%E6%A3%80%E7%B4%A2/%E6%B3%95%E5%9B%BD%E6%8A%A5%E7%BA%B8%E6%91%98%E8%A6%81/20261018-%E9%A9%AC%E5%85%8B%E9%BE%99%E6%98%AF%E5%A6%82%E4%BD%95%E4%B8%8E%E6%B3%95%E5%9B%BD%E5%B9%B4%E8%BD%BB%E4%BA%BA%E8%B5%B0%E5%90%91%E5%86%B3%E8%A3%82%E7%9A%84)）
