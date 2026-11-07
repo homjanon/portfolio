@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
 预抓取金融市场数据 — 按板块切分为结构化 JSON 文件。
+v39: 2026-11-07 场内ETF溢价率改 IOPV 口径（对齐同花顺/东财）+ ETF 6→10 只；
+     修正东财 lsjz 取 [-1] 的老 bug（该接口按日期倒序返回，最新在 [0]）
 v38: 2026-10-07 移除东财 push2 全链（IP 级限流，CI 6/8 天出 502）→ A股/港/美股改「腾讯 → 新浪 → yfinance」、
      全球指数主源改「新浪 znb_」（→ yfinance）；移除 STOXX600 与 akshare 兜底层；删除 curl_cffi HTTP/2 补丁
 v37: 市场全景A股/美股/港股改先表格后叙述(与全球/大宗/估值统一)；估值快照删顺序列(8→7)+结论改极简2-4字标签；md_to_reader窄屏缩字；QDII简称修复+11指数固定顺序+对比昨日保持
@@ -12,7 +14,7 @@ v37: 市场全景A股/美股/港股改先表格后叙述(与全球/大宗/估值
   data_forex_rate.json      汇率/商品/中美债券        akshare期货 + 中美债收益率
   data_valuation.json       中美核心指数估值+PE/PB分位 雪球蛋卷API
   data_news.json   全球Top20新闻源    Google News RSS 美国一地(20条→LLM选≤10且互不重复) + 联合早报(按缺口补齐至20)
-  data_extra.json           资金面+QDII+涨停/跌停  akshare(汇率/资金流/QDII)  v29: 场外QDII纳指100/标普500可申购大额度
+  data_extra.json           资金面+QDII+涨停/跌停  akshare(汇率/资金流/QDII)  v39: 场内ETF溢价率改 IOPV 口径 + 10 只
 
 每个文件：{"ts":"...", "ok":true/false, "data":..., "error":"..."}
 """
@@ -101,6 +103,11 @@ def _tencent_quote(codes_str):
                 "low": _num(fields[34]),
                 "change": _num(fields[31]),
                 "change_pct": _num(fields[32]),
+                # ETF 专属（2026-11-07）：[78]=IOPV 参考净值，[77]=溢价率。
+                # ⚠️ A股 [77]/[78] 为空串（_num→None）；港股 [77] 有值但无 [78]（须校验 iopv>0）；
+                #    美股仅 73 字段，两项均不存在 → 消费侧一律以 iopv>0 为准。
+                "iopv": _num(fields[78]) if len(fields) > 78 else None,
+                "premium_pct": _num(fields[77]) if len(fields) > 77 else None,
             }
         return result
     except:
@@ -861,6 +868,7 @@ def _normalize_qdii_prev(prev):
     旧格式(历史残留, v23~v29 前写入): {"ts":..., "场内ETF":[{代码,溢价率}...], "场外QDII":[{代码,日累计限定金额}...]}
     新格式(v33+ 写入):               {"日期":..., "场内ETF":{代码:{溢价率,日期}}, "场外QDII":{代码:{日累计限定金额,日期}}}
     旧格式的写逻辑已在重构中丢失，仅残留文件；读取端必须兼容，否则 list.get() 会崩。
+    v39+ 新格式额外带 "口径" 字段（溢价率算法版本）；本函数不校验，由调用方判断基准是否可比。
     """
     _etf_raw = (prev or {}).get("场内ETF", {})
     _qdii_raw = (prev or {}).get("场外QDII", {})
@@ -970,11 +978,27 @@ def fetch_extra():
     except Exception:
         _prev = {}
     _prev_etf, _prev_qdii = _normalize_qdii_prev(_prev)  # 兼容新旧两种结构
-    _etf_set = {"513100","513500","159941","159659","159612","513650"}
+    # 溢价率口径版本（2026-11-07 起）：旧版用「最新净值」算，新版改用 IOPV → 两者不可比。
+    # 口径不匹配时本次不计算「对比昨日」（报告显示 —），当天写回即完成一次性迁移，
+    # 避免切换当天出现「溢价率突增 7pp」的假跳变。
+    _PREV_SCHEME = "iopv_v1"
+    _prev_scheme_ok = (not _prev) or (_prev.get("口径") == _PREV_SCHEME)
+    if _prev and not _prev_scheme_ok:
+        print(f"    ⚠️ qdii_prev.json 口径为「{_prev.get('口径') or '旧版(净值)'}」，"
+              f"与当前 {_PREV_SCHEME} 不一致 → 本次不计算「对比昨日」")
+    # 2026-11-07：6 → 10 只（polo 指定新增 道指/标普生物科技/纳指科技/标普信息科技LOF）
+    # 用 tuple 而非 set：保证 JSON 行序稳定，与 prompt 骨架表格逐行对齐（纳指系→标普系→道指）
+    _etf_set = (
+        "513100", "159941", "159659", "159509",          # 纳指系
+        "513500", "159612", "513650", "159502", "161128", # 标普系
+        "513400",                                          # 道指
+    )
     _etf_names = {
         "513100":"纳指ETF国泰","513500":"标普500ETF博时",
         "159941":"纳指ETF广发","159659":"纳斯达克100ETF招商",
         "159612":"标普500ETF国泰","513650":"标普500ETF南方",
+        "513400":"道琼斯ETF鹏华","159502":"标普生物科技ETF嘉实",
+        "159509":"纳指科技ETF景顺","161128":"标普信息科技LOF",
     }
     # 腾讯API批量查询ETF实时价
     _etf_q = ",".join(
@@ -1000,20 +1024,43 @@ def fetch_extra():
             _nav_j = _nav_resp.json()
             _nav_rows = _nav_j.get("Data", {}).get("LSJZList", [])
             if _nav_rows:
-                _nav_last = _nav_rows[-1]
+                # ⚠️ 东财 lsjz 按日期**倒序**返回（最新在前）→ 必须取 [0]。
+                #    原代码取 [-1] = 最旧一条，是 2026-11-07 溢价率系统性偏差的根因
+                #    （513100 实际取到 11-04 净值，而最新是 11-05）。
+                _nav_last = _nav_rows[0]
                 _nav = round(float(_nav_last.get("DWJZ", 0)), 4)
                 _nav_d = str(_nav_last.get("FSRQ", ""))
         except Exception as _nav_e:
             print(f"      东方财富净值API失败({_code}): {_nav_e}")
-        _pr = round((_mp - _nav) / _nav * 100, 2) if _mp and _nav and _nav > 0 else None
-        _prev_pr = _prev_etf.get(_code, {}).get("溢价率")
+        # ── 溢价率（2026-11-07 改口径）──
+        # 主口径 = IOPV（参考净值）：QDII 官方净值天然滞后 1~2 天，用「今日价 ÷ 滞后净值」
+        # 会系统性失真；同花顺/东方财富用的都是 IOPV，而腾讯行情 [78] 已直接提供，无需新数据源。
+        # 兜底 = 最新披露净值：LOF（如 161128）无实时 IOPV（返回 0.0000），只能退回净值口径。
+        _ti = _etf_raw.get(_code) or {}
+        _iopv = _ti.get("iopv")
+        _tx_pr = _ti.get("premium_pct")
+        _pr = None; _pr_src = None; _ref_nav = None
+        if _mp and _iopv and _iopv > 0:
+            _pr = round((_mp - _iopv) / _iopv * 100, 2)
+            _ref_nav = _iopv
+            _pr_src = "IOPV"
+            # 交叉校验：腾讯自带的 [77] 应与自算值一致；偏差 >0.5pp 只告警、不改值
+            if _tx_pr is not None and abs(_pr - _tx_pr) > 0.5:
+                print(f"      ⚠️ {_code} IOPV口径({_pr:.2f}%) 与腾讯[77]({_tx_pr:.2f}%) 偏差 >0.5pp")
+        elif _mp and _nav and _nav > 0:
+            _pr = round((_mp - _nav) / _nav * 100, 2)
+            _ref_nav = _nav
+            _pr_src = "最新净值"
+        _prev_pr = _prev_etf.get(_code, {}).get("溢价率") if _prev_scheme_ok else None
         _pr_diff = round(_pr - _prev_pr, 2) if (_pr is not None and _prev_pr is not None) else None
         qdii_data["场内ETF"].append({
             "代码": _code, "名称": _etf_names.get(_code,""),
             "最新价": _mp, "涨跌幅": _cp,
-            "最新净值": _nav, "净值日期": _nav_d, "溢价率": _pr,
+            "最新净值": _nav, "净值日期": _nav_d,
+            "参考净值": _ref_nav, "参考净值口径": _pr_src,
+            "溢价率": _pr,
             "溢价率对比昨日": _pr_diff,
-            "溢价率来源": "腾讯价+东方财富净值",
+            "溢价率来源": "腾讯价+IOPV" if _pr_src == "IOPV" else "腾讯价+东方财富净值",
         })
     # 场外QDII申购额度（纳指100/标普500，可申购且额度较大的6条）
     # ── 场外QDII：共用行构建 + 排序（不限购[开放申购]置顶，其余按日累计限额降序）──
@@ -1093,6 +1140,7 @@ def fetch_extra():
     # ── 写回昨日基准快照（供下次运行对比；工作流已 commit 持久化）──
     try:
         _snap = {
+            "口径": _PREV_SCHEME,   # 2026-11-07：标记溢价率算法版本，供下次运行判断基准可比性
             "日期": today_str,
             "场内ETF": {e["代码"]: {"溢价率": e.get("溢价率"), "日期": today_str} for e in qdii_data["场内ETF"]},
             "场外QDII": {f["代码"]: {"日累计限定金额": f.get("日累计限定金额"), "不限购": f.get("不限购"), "日期": today_str} for f in qdii_data["场外QDII"]},
@@ -1795,7 +1843,7 @@ def _timeout_handler(signum, frame):
 # 主流程
 # ═══════════════════════════════════════════════════════════════
 def main():
-    print(f"═══ 预抓取金融市场数据（v38: 移除东财push2全链+curl_cffi补丁；A股/港/美股→腾讯首选、兜底新浪→yfinance；全球指数主源改新浪znb_；移除STOXX600 | v37: 市场全景先表格后叙述/估值极简标签/QDII固定顺序） ═══")
+    print(f"═══ 预抓取金融市场数据（v39: 场内ETF溢价率改IOPV口径+ETF 6→10只+修正lsjz取[-1]老bug | v38: 移除东财push2全链+curl_cffi补丁，全球指数主源改新浪znb_，移除STOXX600 | v37: 市场全景先表格后叙述/估值极简标签/QDII固定顺序） ═══")
     print(f"时间: {_ts()}\n")
 
     # 三市场交易日历判定（共享模块）
