@@ -1,98 +1,192 @@
-# 2026年11月9日 星期一 全球金融资讯日报
+# 2026年11月10日 星期二 全球金融资讯日报
 
-查询时间（北京时间）：2026年11月9日 14:31
+查询时间（北京时间）：2026年11月10日 06:33
 
-**今日定性导语**：美国政局因民主党中期选举胜利而急剧紧绷：众议院民主党领袖坚定支持弹劾国防部长赫格塞斯，特朗普司法部拒绝排除起诉民主党可能性，共和党内部亦现分歧，密西西比联邦参议员选举结果仍悬而未决；国内方面，香港报业经营承压，《香港仔》停刊转型、《明报》等三报加价3港元两年累涨五成，太原高层公寓火灾致**5死**38人送医，专家借消费税改革提议对含糖饮料分级征税；非洲几内亚驱离非法淘金者引发人道危机，逾**十万人**涌入马里巴马科地区，另有**6万人**滞留边境，马里已组织车队送返。
+**今日定性导语**：隔夜美股三大指数集体大涨（道指 **↑2.15%**、标普500 **↑2.35%**、纳指 **↑2.74%**），欧股、日股及台股同步走强，A股则延续结构性分化（上证 **↑0.32%**、创业板指 **↓0.27%**），国际油价重挫逾5%、贵金属反弹。今日市场主线集中在四条：美联储12月加息25个基点概率升至**84.2%**，激进加息预期升温；中国10月PPI同比涨**5.7%**创四年半新高而CPI仅涨**0.7%**，汽车出口增近七成但内需仍疲软；美国政坛动荡加剧，共和党推动对防长赫格塞斯的弹劾表决，特朗普再度质疑中期选举公正性；AI算力赛道热度不减，英伟达股价逆市跌**4.22%**并伴随CEO事件发酵，谷歌新推TPU系统、CoreWeave与Wayve达成多年合作。
 
 ---
 
-## 一、全球 Top20
+## 一、市场全景
+
+### A股收盘（11月9日）
+
+| 指数 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| 上证指数 | 3660.79 | **↑0.32%** |
+| 深证成指 | 11145.49 | **↓0.27%** |
+| 沪深300 | 4056.11 | **↑0.05%** |
+| 科创50 | 1256.96 | **↑0.30%** |
+| 创业板指 | 2458.56 | **↓0.27%** |
+
+昨日A股整体呈现结构性分化走势，上证、科创50小幅收涨，创业板指与深成指小幅回落。北向资金延续净流入态势，市场情绪整体平稳。板块层面防御与高股息方向相对抗跌，科技成长有所分化。富时中国A50指数期货夜盘收涨1.06%，为今日开盘提供一定支撑。
+
+### 美股收盘（11月10日凌晨）
+
+| 指数 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| 道琼斯工业 | 52389.75 | **↑2.15%** |
+| 标普500 | 7549.94 | **↑2.35%** |
+| 纳斯达克综合 | 25253.14 | **↑2.74%** |
+
+美股三大指数集体大涨，纳指领涨逾2.7%，科技股强势反弹。费城半导体指数暴增6.85%，AMD涨超13%，应用材料、拉姆研究均涨超10%。特斯拉涨5.48%，Meta Platforms涨5.16%；英伟达逆市跌4.22%并创近七个月收盘新低。美联储12月加息25个基点概率升至84.2%，市场押注激进加息周期临近。
+
+### 港台市场（11月9日）
+
+| 指数 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| 恒生指数 | 24448.95 | **↓0.13%** |
+| 恒生中国企业指数 | 8260.15 | **↓0.17%** |
+| 恒生科技指数 | 4040.73 | **↓0.92%** |
+| 台湾加权指数 | 41661.70 | **↑4.94%** |
+
+港股窄幅波动，恒指微跌，恒生科技表现偏弱，科技股承压明显；台股大幅反弹近5%，市场信心回升。中概龙头指数收涨0.36%，爱奇艺跌超5%，阿里巴巴跌超3%。
+
+### 全球其他市场（11月9日）
+
+⚠️ 新加坡STI数据可能滞后（多源均暂不可得），以最新可得为准。
+
+| 指数 | 代码 | 最新价 | 涨跌幅 |
+|------|------|--------|--------|
+| 日经225 | N225 | 58775.28 | **↑2.33%** |
+| 韩国KOSPI | KOSPI | 5018.85 | **↓0.81%** |
+| 新加坡STI | STI | 5179.18 | **↓2.21%** |
+| 欧洲STOXX 50 | SX5E | 6290.29 | **↑1.94%** |
+| 德国DAX | GDAXI | 26264.86 | **↑1.72%** |
+| 英国富时100 | FTSE | 10782.87 | **↑1.02%** |
+| 法国CAC40 | FCHI | 8236.67 | **↑1.20%** |
+
+欧股全线走强，德国DAX涨1.72%领跑，法国CAC40与 STOXX 50均升逾1%；日经225大涨2.33%，韩股与狮股逆势走弱。
+
+### 大宗商品与汇率
+
+| 品种 | 最新价/值 | 涨跌幅 |
+|------|-----------|--------|
+| WTI原油 | 86.24 美元/桶 | **↓5.05%** |
+| COMEX黄金 | 4150.41 美元/盎司 | **↑1.85%** |
+| 布伦特原油 | 92.14 美元/桶 | **↓6.28%** |
+| COMEX白银 | 53.47 美元/盎司 | **↑2.94%** |
+| 美元/离岸人民币 | 6.67 | — |
+| 中国10Y国债收益率 | 1.5874% | — |
+| 美国10Y国债收益率 | 4.88% | — |
+
+国际油价跌至8月以来最低，WTI大跌超5%，布伦特跌超6%；贵金属反弹，COMEX金涨1.85%，白银涨2.94%。中美债利差维持在3.3个百分点左右。
+
+---
+
+## 二、行业洞察
+
+### 全球 Top20
 
 **📌 谷歌精选**
 
-1. **美国众议院民主党领袖坚定支持弹劾国防部长赫格塞思**：随着民主党的中期选举胜利，弹劾国防部长皮特·赫格塞思的势头进一步巩固。众议院多数党领袖哈基姆·杰弗里斯明确表示对此持坚定支持态度。（[BBC](https://news.google.com/rss/articles/CBMiW0FVX3lxTFBRQmRlVU1CeEg3c09yaDNzWC1JbVJ6bTFzUnhNcE5nTjd4bmQ2V09VNWJUT3hoZ3lsWG5teVBpeDRndk03VGFSZjFXaDl5VFkwRk5PdEp2Z3AtY00?oc=5)）
+1. **共和党人将推动对防长赫格塞斯的弹劾表决**：众议员托马斯·马西宣布将强制发起对 Defense Secretary Pete Hegseth 的弹劾程序。BBC报道此事已引发华盛顿内部震动。（[BBC](https://news.google.com/rss/articles/CBMiW0FVX3lxTE1aUEhMZjZyYlU4a0hnUHJCLVA0X2YwbTlvQ0lCR1hXdnJQOUN0dGZKNjhfUzIwYnJoQVYyYXM2Vmh6T0gtd09CbU9JdWRaenlZRjJ1d0RyUkZJTEU?oc=5)）
 
-2. **共和党议员批评特朗普提拔斯蒂芬·米勒是"错误"**：有共和党议员公开表示，特朗普政府任命斯蒂芬·米勒为代理白宫幕僚长的决定可能是一个失误。（[The Hill](https://news.google.com/rss/articles/CBMigwFBVV95cUxOaENVOVV2VVgxRzZabnZVZzNtS2JPdVVXQ3pVX1V6RWQ5MkxoNFQtTWZCVlJ4Tlp6YXZqaFVtTTNJVTdfVXJmd0xCX3NGUlY1dXdjZ2FXNC1WbVVYcTI4TTFSWThfekdpQXFLYUFQM3hGMjI4VlFPMmtHN3VET1JyQUo3b9IBiAFBVV95cUxPQmgxYzVDUDNOTDZyQmhRbHRUU0J3QkFxcVRTOGlRUk5IOUtMLXNpWXItdjhxWWxMWlJKSXI0YlBpRnkzaG42bkF1RWRpMW15MU5QUHRWZWM3SWZkQWxwclpQWWFNYml6NnZJSG96QUZsR2hpNkwxUHFzNEV5SmlvNXFfWWRXUnlT?oc=5)）
+2. **特朗普重提"操纵选举"言论，质疑中期选举结果**：纽约时报报道特朗普再度质疑中期选举公正性，面临民主党强力抵制。（[The New York Times](https://news.google.com/rss/articles/CBMikwFBVV95cUxNTzhkZC1lQXN1VGt3RjlJRmV1RGNrVGw0andnVWxpS0lPV3otWmJra0ptNXZRMENfaS1SMEZCc0FiekVrUDNHclhub1U5R29uWklBd2p5ZHJRY1o3Y3JuUVptRHZFVlRfTFl0RWJPUkFuQW9MSVZrLXdTcFJaREJsWlRmTTBrdG1pamczNjgtelNrWjg?oc=5)）
 
-3. **密西西比州议会选举结果悬而未决**：一场关键的联邦参议员中期选举最终取决于县书记员办公室，两位候选人站在历史边缘。（[The Washington Post](https://news.google.com/rss/articles/CBMingFBVV95cUxOS2VSeEJuZUZtTThnRjdWREI1VXZFV3AtenhQR2taM2FrMXFaN2xRbDhaVVdCdTlsSnZfYTdPMWZUMFZYejRnX3ZEZTN2TUJKRU4yMTdhblZlVDdLbFBvbWJaQ2lEUzFRTllDcWNMOXJJVUhsXzl4RnpUYkg2T18yV0xCOFA3b0xrLUpqT040R0tMMU5EQUY2cEpxNVE3UQ?oc=5)）
+3. **俄亥俄州立大学调查兄弟会事件：视频显示两人全身着火**：NBC News报道该校暂时停停办相关活动，校园内震动。（[NBC News](https://news.google.com/rss/articles/CBMiuAFBVV95cUxPQkJrbkttaTQ3WUF1QzJuSGlLc3NkRi0xWnZNdnI4Ny16WVRZZDFUU0pTLXMwdHVKZENFSU1aclFjNmhUQ2h0UzdIdmpwd3FyeWcwTEh3YThqRGJmRDNjcDJRbE9kYTdwVmFVczZadmFsV3UtY2d1TDlLdWotXzJzajFxTFh4M2Y5dlBxR1RhMFpRVWxHbGpjdDZqNDNnZ0VmMkRtemJCR1Zla0o4VXNmNXpwa2tNQVQw?oc=5)）
 
-4. **万斯潜在挑战者在GOP惨败后嗅到机会**：随着共和党在中期选举中遭遇重创，潜在的万斯竞选挑战者们正在寻找突破口，这使万斯在考虑是否参加2028年大选时面临复杂计算。（[The Washington Post](https://news.google.com/rss/articles/CBMivgFBVV95cUxNNUZIQUxDUjgyWTJFcnptb2FZY3phcHBBaVlxQkcyMTVxd25vcDZDNGhGbjE3bEkzbXNxbjZLRk9nX29qRmR2SUpXdGc2UFZMWHVFVWx5aEV2R09KTHppUXYzdDlOdTVZbFN3ekNoZmVLMXowR3QyUFJrNVNKYTh2T2xxSVQ4NjBYbUh6dWVpUDRRM25HSlY1NmFiUTU4dWVyUF8wRWpLaTU3UjEyRVA2UlZ6LWtjU1BQa3I3bGVR?oc=5)）
+4. **美国最高法院放行特朗普在大 Bend 边境墙施工**：NBC News报道该决定允许在德克萨斯州大弯地区建造隔离墙，被批评为"令人震惊"。（[NBC News](https://news.google.com/rss/articles/CBMipwFBVV95cUxQcnk2bHNkaTJLbFNVcWZtcVZlbUtfcnFCZktRbHFoNFZGamhYaHVycG5DOVUtakRSRFhBWENqZ3drc3UtRGoxOFB1TW13LTJtOFJ5M0xfT1g5MDdCdFVGYjlrNVlhUUh3Qml0Y0tUWVpQS3llbkNxc3NDZ3FFNDZVQXpaMDdDMV9ER0w1eVZkX09yQWMxVjhtanp2V1BMeWkzOWt2LTdRbw?oc=5)）
 
-5. **特朗普司法部长拒绝排除起诉民主党的可能性**：针对民主党人威胁要展开调查，特朗普的司法部拒绝排除采取法律行动的可能性。（[Axios](https://news.google.com/rss/articles/CBMiiAFBVV95cUxNNVZiN25FOFNGUDl4UjFlY2VIZ0QzLUg4TzhMWk51UXpkT0RKMnVJME1XR1l3ejNHVHNvWHdTbXJlNDF6V1VuM0pSbi1KM3lRZFByZEQwQWVPSGZZdENFR1lxMG5ZWGh1dVNEa3lPTDN0cGJVdmhKWUZtX1NSbDJHb3p6OC1yUktN?oc=5)）
+5. **白宫硬刚基层：特朗普移民谈判惹怒支持者后仍不退让**：Fox News报道白宫外交策略再度遭遇保守派批评，争议持续发酵。（[Fox News](https://news.google.com/rss/articles/CBMirAFBVV95cUxNczdRWVZZZUtObWFfWW1tQjh0eWxyR3NZaloxMzBaYmlKOUtLeUF6NnBkTGxCY1l4THJRcUs4NG1jRldfbnB6UWs3VUNGUG5BU0dscl80bXFOTGU1MTBpMWd0VXFENmJ0cFg5QURPTG1NRjcyOVZ1UTRNUFczTy1FSURMWHFFTEYwdm44TU8tUlhOLV96bHJhVm05VDFCUl9YZ1Z0SW1DelFrZ3lt0gGyAUFVX3lxTE9KUVpZTFRPU2FKLXRSal93b1RVZkdDYS1QTDZZRGtPZ19wRnJxclpFVldkWTlCYXZtYzZOUlFwZzZiVU9XUzFsZmFDYXprQ0FSMUptWEJvYVdtTmxFb2hmdDlmaTBDZU0taGhGNE5jREtxcWxKY0NRU195TFEyTXppNjhXbmZqTXgyMWNTX0ZVODlFNHp2MVNRVWtDWTAyWlluVjdLZEktZjZoLWNLSlVkWVE?oc=5)）
 
-6. **当选参议员汉密尔顿称若民主党聚焦调查特朗普会失望**：堪萨斯州当选参议员亚当·汉密尔顿表示，他对选民对舒默的看法反映了该地区对调查-focused策略的担忧。（[NBC News](https://news.google.com/rss/articles/CBMivwFBVV95cUxOeWliUUVQLUIwblJESW9meTA3OGMyTnB1U1NXSmRVTHdhUkY1WndiZ2EybFFEYXNpSFp6cVdZcGxBSTFreFhUc2l4MUxCU3ZlZGxwaXhtU093d0hJWW5BRUwzSTY5dXdHWHVqQ1pORE5UQ2FwaGt4SWs5cjhydHZ2TDJLZFhuS1RzSVhNVFB0UXQ5SDZ4d0c2TzVYY3RET2RQMXAyV0hWLUxVVVZFYVRfVkhGeGp5bmthOFBOZFFNOA?oc=5)）
+6. **密西西比与阿拉斯加州参议员选举仍未定局**：USA Today跟踪报道两州大选结果僵持，计票仍在进行中。（[USA Today](https://news.google.com/rss/articles/CBMixgFBVV95cUxNSVg1LWpLUFFyR0Rhd05Qbzk3SkFTYV9neHVxaDJjRlhuTXV2VEc4X0JvYnRuOEd6ajVHR2N6MU5mbnE3T2ZjbXB3eGNQN2NRRGpRWmJ0UXMxRDgtclNVbkQ3Z1JfTW9uZ0Nya1JJbGFZeDVYeVhkbGNrUy1sZk9aOV9SbFcyeDAzeXRTTHBfUDRLSm5peFFnWjBRX2Z0a3dSc25VbDAxSFQtRmdZVVNYSFpuT2F3VmxCVWJLcXQ4VVBMY3RPc2c?oc=5)）
 
-7. **纽约布鲁克林慢跑者遇刺案嫌疑人被捕**：一名曾在 NYPD 短暂任职的学校助理因涉嫌致命刺伤案被逮捕。（[NBC News](https://news.google.com/rss/articles/CBMipgFBVV95cUxOWUowd0U2QVJXSzZtbGx4N2NOel80YV9ibkpzWXVZTGc1cERkZjNBalZwOFlWUTY0M3FsRDFZQ2F2dWNVSVl4MWh1RzJBcFNUdWNEYlRNZjIzR1hyRVJwUXBoZF9oWDhaYXFzaV9EZDFaTm8xU3EwRkJIQlJOZ082TWJEc1NKVG11SzZlZU1tSlRvcHdvckF6bXdpN0FIVDhhbXJQTjJB?oc=5)）
+7. **费城犹太餐厅遭抵制引发动乱：抗议者与反抗议者对峙**：纽约时报报道当地社区紧张局势升级。（[The New York Times](https://news.google.com/rss/articles/CBMilwFBVV95cUxOM3VlRVJYTUh0V1BJejhUVWhlNmlEZ1lUS0RmQ3FRMm5OTGlpNGFTWmlfWEZiQXhCR0duQks1M242UEpaZEVLb01tMS1nYl9nVmxySUczbDhEOGRua3Z4MXV3aU1aYWRqdUZRMkFwQTBGYzRLMHdFVW51VEw4N19Kb2hkS0oydk9FUTl0N2xjdHF1UFZpTTFN?oc=5)）
 
-8. **北卡罗来纳州车祸致自行车手遇难**：一辆汽车撞向一群骑行者，导致一人死亡、七人受伤，司机面临多项重罪指控。（[ABC11 News](https://news.google.com/rss/articles/CBMinAFBVV95cUxQQkFTQ1VUbWp5Rk9sZmJJaVpOODNydGRxS0J1cUNCRmtGaFZpbGkzY2d3Qjk1UmtZQTBsaTVpb3kwY1BzdDgtcHUyR2VSbnk2amJuOWw3RUtxOUppVzVreWI1V1p4TzdlMzBmdGVCeFFPNlkyT2Uzb0lMdmFUOHBnLWNmSVJKOUdSR3VvWDBXenAzTWdfUzI3Z3p0MGTSAaIBQVVfeXFMUFV5YWRwZjBOWmF3Y2ljekgxejl4Q3JrSXU4aHBGd1dYbjI5WUQ3bGx1MTBjaENZMmdORGtQWTU3MFJDQ3FjcUZYdnA4R091MHBMRnpHTThGc2ZLc1RwUVF6RmFhaUo5TjRqUGRrVzR4Vlc4SzhmSlV1MkFlRS1Mc1o0Z3BvWkcxRktLU0ZpcTRKd05OcmctWDNSMmc2R19oQ3N3?oc=5)）
+8. **查理·柯克遇害案嫌犯将于2028年7月受审**：卫报报道法官给出审判日期，案件进入司法程序。（[The Guardian](https://news.google.com/rss/articles/CBMifkFVX3lxTE82XzExZm9Ba1QwMzVYeG9fbThTTEtCN1luOVY0bXNOSWotUVdub2syTUNhc0VyT1ZqWGxCb2pfZW9LOF9TUjN1eWFLVHU0cVhHWkl1ZDd6V0RXRENiTEktRUtkWFlKNGtjVjdDMUNUZC0wOE5kdG9KZ1ZvYkpNQQ?oc=5)）
 
-9. **美铁"美国号"邮轮的最后旅程**：作为海洋邮船时代的终结象征，SS United States 即将被沉没成为人工鱼礁。（[CBS News](https://news.google.com/rss/articles/CBMiggFBVV95cUxQNFU4dll4MjhHNEdpT0pwR1FfM3RkbDdPajZhRkMwYVNDSFhvNUNvODNjaGRTVmx0am5lSTZtV2pBSk92T0k2YzdybElWeC11bTVGTElVbzFVOWxqUmxTZmM3aEtzWl9RSThOaEpZUlFubzBrUURCc1AwWWNaa05UVlFn?oc=5)）
+9. **英国艺人罗素·布兰因强奸等罪名获刑10年半**：路透社报道其性侵案定罪引发广泛关注。（[Reuters](https://news.google.com/rss/articles/CBMiuAFBVV95cUxPbmk4dlVnT1E1bFJGb01tRkZvLVFXSkt0bTRsY2t4RzMzRDVGb2RzLUJTblJPQ1EwZFhlSUZXOTR3VlF2UTU0V29tVjd5dWwtOFZpUGNxSE1uRW5JNF94a0RmRV9SRWgyZ3dCaDNJZmR2M05ZRHMzam9EVkF0OUJ3bnloSGdkNVZZU3QyODdKei14dU9nalBDSmwxOFpCNUJHUDFTbnFLTVp2UTJfaGlPQ1htNGxvbjRB?oc=5)）
 
-10. **威斯康星州参议员约翰逊指控特朗普政府腐败**：共和党参议员罗恩·约翰逊指责特朗普政府内部存在腐败行为，前RFK Jr.顾问也公开批评白宫官员。（[Wausau Pilot & Review](https://news.google.com/rss/articles/CBMirwFBVV95cUxNUnI0LU9fRFRVSFZER1JMUG9QMTZaeVBBaF9FNjlDeHQweVhxenU5eU5ZcFFUdko0ZE9ybUFxN3BxU1BrMVM5RXZvSGRXZ3FvVHUwaDJxNVZoQldBUlh1ZjNmc1JaVGVnN1B6QTVqRlZHVTlxTWx0SjdHVGc4LTBlYU53ZjVpcDgxV1hlN1RHLVR3Qzlkc1Y4MGZCaFpwZFhxbV9MUllaaURTbkRJQUxN?oc=5)）
+10. **法国指控伊朗黑客攻击超市制冷系统**：BBC报道网络攻击事件指向伊朗，外交摩擦升级。（[BBC](https://news.google.com/rss/articles/CBMiW0FVX3lxTFAzeFI0SDNQMm9ieHFIWGNtSFV6cEliY0dwOUhXNE9NODFkSTZKUktramxLV0ZHS1BaN3RZX1pTWEtsNmZxSVlBQTNfN2I0Rlk4NTlCdnRnUElYbUE?oc=5)）
 
 **📌 联合早报**
 
-11. **香港传媒能否迎来第二春？**：《文汇报》旗下免费报纸《香港仔》结束八年多纸本出版全面转型网络；与此同时，《明报》《香港经济日报》《信报》相继宣布每份加价3港元，两年内累计加幅高达五成。传统报业经营艰难态势凸显。（[联合早报](https://www.zaobao.com.sg/news/china/story20261109-9967224)）
+11. **庄慧良："洋流"的认知作战争议**：台北及新北扫街活动中"洋流"飘带成为焦点，蓝绿阵营选战气氛热烈。（[联合早报](https://www.zaobao.com.sg/news/china/story20261110-9971904)）
 
-12. **山西太原一高层建筑失火致5死**：太原市迎泽区豪生国际公寓星期天下午发生火灾，明火晚间扑灭。38人被送医，其中5人死亡。起火位置位于五至六层，一至三层为培训机构，八至九层为酒店。（[联合早报](https://www.zaobao.com.sg/news/china/story20261108-9967905)）
+12. **央视纪录片《孙中山》开播，北京料高规格纪念诞辰160周年**：六集纪录片运用AI技术还原历史场景，凸显两岸共同符号价值。（[联合早报](https://www.zaobao.com.sg/news/china/story20261109-9971432)）
 
-13. **柯志恩阵营攻新潮流图分化绿营**：高雄市长选举蓝绿阵营同日造势。国民党候选人柯志恩挟辩论声势催票，猛攻民进党新潮流系；民进党候选人赖瑞隆获总统赖清德亲自站台助选。（[联合早报](https://www.zaobao.com.sg/news/china/story20261108-9967719)）
+13. **黄仁勋事件引中国舆论场炸锅：学者称不会是最后一起**：英伟达CEO婚外情疑涉中国间谍传闻引发强烈反弹，外交部两次澄清。（[联合早报](https://www.zaobao.com.sg/news/china/story20261109-9971466)）
 
-14. **中国征收糖税呼声渐起**：随着肥胖与糖尿病风险上升，中国专家及官媒提议借消费税改革契机对含糖饮料分级征税。超重和肥胖者比例已超50%，建议按含糖量设置阶梯税率。（[联合早报](https://www.zaobao.com.sg/news/china/story20261108-9967728)）
+14. **下午察：中共二十一大选举有新变化**：官方代表选举通知删去惯例表述，首度未直接公布党员领导干部具体比例。（[联合早报](https://www.zaobao.com.sg/news/china/story20261109-9970959)）
 
-15. **福建舰可搭配四川舰形成协同作战体系**：军事专家指出，076型两栖攻击舰四川舰搭载察打一体隐身无人机"攻击-21"后，可与航母福建舰配合——前者主攻、后者辅助兵力投送或无人机支援。（[联合早报](https://www.zaobao.com.sg/news/china/story20261108-9967764)）
+15. **中国官媒：外资机构看好中国资产配置价值**：高盛、摩根大通、瑞银纷纷唱多，看好AI及相关股票配置机会。（[联合早报](https://www.zaobao.com.sg/news/china/story20261109-9971410)）
 
-16. **中国首个科技法学院落地雄安新区**：北京科技大学科技法学院11月7日在雄安正式成立，聚焦人工智能、自动驾驶、新材料等战略技术与未来产业，培养工法复合型人才。（[联合早报](https://www.zaobao.com.sg/news/china/story20261108-9967320)）
+16. **中国10月PPI涨幅创四年半新高，消费需求持续承压**：PPI同比涨5.7%超预期，CPI仅涨0.7%，供需失衡局面依旧。（[联合早报](https://www.zaobao.com.sg/news/china/story20261109-9970726)）
 
-17. **菲外交部罕见批评官员涉华言论**：菲律宾外交部公开发声警告部分官员就南海争议发表的言论可能损害国际公信力，强调"透明是一种工具，本身并不是战略"，公布影像无法取代法律和外交手段。（[联合早报](https://www.zaobao.com.sg/news/china/story20261108-9967514)）
+17. **中国汽车出口10月增近七成，国内销量持续低迷**：乘用车出口同比大增68.2%，连续12个月下滑困局难解。（[联合早报](https://www.zaobao.com.sg/news/china/story20261109-9971270)）
 
-18. **宇树科技联手巨星传奇推收藏机器狗**：两款公司发布UNI-DOGGIE消费级收藏机器狗，售价4.39万元人民币，全球限量2000台，已获1000台采购订单。产品主打潮流艺术与智能陪伴功能。（[联合早报](https://www.zaobao.com.sg/news/china/story20261108-9966500)）
+18. **2025年中国老人数量首次比孩子多，养老担子重于养小**：老年抚养比首超少儿抚养比，辽宁居首西藏最低。（[联合早报](https://www.zaobao.com.sg/news/china/story20261109-9970722)）
 
-19. **史文斌调任福建省纪委书记**：吉林省委常委、省纪委书记史文斌跨省调任福建省委常委、省纪委书记。现年60岁的史文斌拥有管理学博士学位，长期在江西工作，曾任江西省扶贫办主任、上饶市委书记等职。（[联合早报](https://www.zaobao.com.sg/news/china/story20261108-9966416)）
+19. **熊猫外卖华人骑手澳洲遇害案：凶手被控谋杀罪**：47岁华人骑手墨尔本市中心遇袭身亡，嫌疑人当庭多次干扰。（[联合早报](https://www.zaobao.com.sg/news/china/story20261109-9970790)）
 
-20. **佟丽娅当选新疆文艺志愿者协会副主席**：影视演员佟丽娅通过视频发言表示将多走进乡村牧区，用接地气的作品讲好温暖真实的新疆故事。陈建斌当选该协会主席。（[联合早报](https://www.zaobao.com.sg/news/china/story20261108-9966834)）
+20. **中国男子东京干扰手机网络发诈骗短信：涉嫌违反《电波法》**：31岁男子用伪基站发射电波，警方称系日本首例。 （[联合早报](https://www.zaobao.com.sg/news/china/story20261109-9970347)）
 
 ---
 
-## 二、深度观察专栏
+### 持仓动态与聚焦
 
-### 非洲:几内亚逐十万淘金人入马里
+#### 个人持仓行情快照
 
-在非洲内陆国马里（le Mali），有数以万计遭几内亚驱逐的手工淘金人在过去几天里入境。这是本台法广非洲组（RFI Afrique）今天（2026年11月08号星期日）的法文更新消息之一。马里安全与民防部于11月07日周六晚发布的统计数据显示，已有超过十万人（+ 100 000 orpailleurs）抵达首都巴马科地区，另外还有六万人在一百多公里外的边境地带。目前已知至少六人死亡。马里过渡当局已经给这些从几内亚入境的外国淘金客提供了人道援助。下一步是要送他们回国。
+| 标的 | 代码 | 市场 | 最新价 | 涨跌幅 |
+|------|------|------|--------|--------|
+| 招商银行A | 600036 | A股 | 43.01 元 | **↑0.30%** |
+| 招商银行H | 03968 | 港股 | 54.40 港元 | **↑0.46%** |
+| 长江电力 | 600900 | A股 | 29.83 元 | **↓0.27%** |
+| 红利低波ETF易方达 | 563020 | A股 | 1.22 元 | **↑0.49%** |
+| QQQM | QQQM | 美股 | 279.52 美元 | **↑3.44%** |
+| SPY | SPY | 美股 | 752.69 美元 | **↑2.37%** |
 
-非洲 / 马里 和 几内亚
-Afrique / carte : le Mali et la Guinée © montage RFI / FMM
+#### 持仓聚焦（未来催化）
 
--- 十多万人从几内亚涌入马里 --
+**半导体/AI芯片｜CoreWeave与Wayve签署多年合作协议，后者将使用英伟达Blackwell GPU扩展自动驾驶基础模型训练能力，CoreWeave收盘涨5.56%（格隆汇）**
 
-据本台法广 非洲 组（RFI Afrique）的法文报道，数以万计被几内亚驱逐的个体淘金人正在 马里 （le Mali ）获得援助。科纳克里（Conakry）当局于本周一（2026年11月02日）采取措施,终结非法开采黄金,导致数以万计被 几内亚 （la Guinée ）驱逐的手工矿工进入邻国马里。在国际合作伙伴的支持下，巴马科(Bamako)当局做出紧急安排，接待了这些遭 几内亚 驱离的人员，并将帮助他们回国。这些被几内亚逐出的淘金客，除了马里人，主要有 布基纳法索 人（le Burkina Faso ）,还有科特迪瓦、塞内加尔、多哥、贝宁等国公民。
+**半导体/AI芯片｜谷歌推出TPU 8tx和TPU 8i Max两款新系统，前者面向机密推理任务，后者支持超长上下文和多智能体任务（格隆汇）**
 
-非洲 / 马里 和 几内亚
-Afrique / carte : le Mali et la Guinée © montage RFI / FMM
+**银行｜摩根大通拟以大幅折价出售Qualtrics 50亿美元债务，发行价约每美元面值85美分，反映软件企业融资成本上升压力（格隆汇）**
 
-本台法广（RFI） 非洲 通讯员大卫（ David Baché ）在今天（2026年11月08号星期日）的法文更新消息中引述马里安全与民防部在昨晚（11月07日周六晚）发布的统计数据，已有超过10万名流离失所的个体采矿者抵达巴马科地区（district de Bamako），另有6万人目前身处与几内亚接壤的马里边境城镇 Kourémalé 。
+---
 
--- 马里正在组织成批送返回国 --
+### 估值水位与情绪
 
-同一法文报道介绍说，马里负责危机与灾害管理的跨部门委员会于本周六召开了会议。综合巴马科（Bamako）官方发布的多项声明，那些被识别出的手工淘金人来自非洲多国，主要是 布基纳法索 ，还有科特迪瓦、塞内加尔、多哥、贝宁等。目前尚无详尽的国籍统计数据。
+| 指数 | PE(TTM) | PE分位 | PB | PB分位 | 股息率 | 估值结论 |
+|------|---------|--------|-----|--------|--------|---------|
+| 红利低波 | 9.09 | 80.12% | 0.91 | 66.36% | 4.61% | 股息稳健 |
+| 中证红利 | 9.10 | 86.80% | 0.88 | 58.24% | 4.59% | 股息稳健 |
+| 中证白酒 | 22.77 | 26.48% | 4.27 | 4.76% | 4.15% | 深度低估 |
+| 沪深300 | 13.52 | 67.92% | 1.34 | 21.68% | 3.02% | 极贵 |
+| 中证500 | 27.91 | 60.36% | 2.04 | 59.20% | 1.61% | 偏贵 |
+| 创业板指 | 27.95 | 7.36% | 3.93 | 17.88% | 1.27% | 中性偏贵 |
+| 科创50 | 92.97 | 74.89% | 6.13 | 59.60% | 0.29% | 极贵 |
+| 恒生科技 | 21.53 | 19.28% | 2.20 | 10.56% | 1.10% | 偏低 |
+| 中概互联50 | 16.36 | 3.36% | 2.02 | 2.20% | 1.11% | 深度低估 |
+| 纳斯达克100 | 26.28 | 21.44% | 8.04 | 57.60% | 0.48% | 偏高 |
+| 标普500 | 22.95 | 25.56% | 5.16 | 85.44% | 1.08% | PB极贵 |
 
-Image d'archive / Afrique : le Comité international de la Croix rouge (CICR) soutient la Croix rouge malienne, qui elle-même vient en aide aux milliers d'orpailleurs expulsés de Guinée et arrivés à Kourémalé. Ici, des véhicules du Comité international de la Croix Rouge. (illustration) AP - Jehad Alshrafi
+---
 
-本台法广 非洲 组（RFI Afrique）的法文报道注意到，巴马科方面强调了"马里与布基纳法索之间积极的团结协作"。两国同为[萨赫勒国家联盟]（ AES - Alliance des États du Sahel ）成员国。目前已包租卡车和巴士，用于送返1.5万人。马里的跨部门委员会表示："首批由47辆巴士组成的车队已抵达布基纳法索；另有一支由50辆卡车组成的车队也正准备出发。"
+### QDII 溢价与申购额度监测
 
--- 马里当局采取紧急应对措施 --
+**场内ETF溢价率**
 
-本台法广（RFI） 非洲 通讯员在其法文稿中还提到，马里安全与民防部长谈到他的优先任务是：对抵达者进行"拦截"（ intercepter ）、"识别"（ identifier ）和"管控"（ cantonner ）。巴马科（Bamako）制定了一套"安全机制"（ dispositif de sécurité ）。在医疗方面，马里卫生部已启动一项紧急方案（ un plan d'urgence ），旨在为伤病人员提供救治。当局的正式记录显示已有6人死亡，但也有其它来源说实际数字可能更高。
+| ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
+|-----|------|-------|------------|------|
+| 纳指ETF国泰 | 513100 | 18.59% | ↓2.67% | ⚠️高溢价 |
+| 纳指ETF广发 | 159941 | 16.44% | ↓2.31% | ⚠️高溢价 |
+| 纳斯达克100ETF招商 | 159659 | 15.66% | ↓1.86% | ⚠️高溢价 |
+| 纳指科技ETF景顺 | 159509 | 38.73% | ↓2.91% | ⚠️高溢价 |
+| 标普500ETF博时 | 513500 | 11.14% | ↑0.40% | — |
+| 标普500ETF国泰 | 159612 | 9.57% | ↑0.34% | — |
+| 标普500ETF南方 | 513650 | 8.91% | ↑0.20% | — |
+| 标普生物科技ETF嘉实 | 159502 | 4.04% | ↓0.26% | — |
+| 标普信息科技LOF | 161128 | 11.06% | ↓2.63% | — |
+| 道琼斯ETF鹏华 | 513400 | 3.69% | ↑1.17% | — |
 
-存档地图 / 非洲：几内亚及其首都科纳克里（Conakry）。
-Carte archive / Afrique : Guinée et sa capitale Conakry. © RFI carte archive
+纳指科技ETF景顺溢价率达38.73%，风险显著；五只产品溢价率仍高于20%，需警惕追高风险。整体溢价率较昨日有所回落，但仍处于高位区间。
 
-本台法广（RFI）的法文报道还补充说， 马里 官方在 世界卫生组织 （ WHO / OMS- Organisation Mondiale de la Santé）和[红十字国际委员会]（CICR- Comité International de la Croix-Rouge）等人道主义合作伙伴的帮助下，为入境者发放了帐篷，并提供了热餐。其中， 世界卫生组织 （WHO/ OMS ）提供了大批药品。[马里红十字会]于11月07日周六报告说，在[红十字国际委员会]（CICR）的支持下，已向这些淘金客分发了数千份餐食。[马里红十字会]指出，这些人"需要粮食援助、医疗保健、聆听他们当前的处境，并给予相应的陪伴 "（ besoin d'une assistance alimentaire, de soins de santé, d'écoute et d'un accompagnement adapté à leur situation ）。
+**场外QDII申购额度（纳指100系+标普500系，各取5只）**
 
-（ 翻译和编辑：法广 RFI 电台 中文部记者 尼古拉 ）
+> 今日无场外QDII额度数据（模块执行超时）。
 
--- Fin—
-非洲国家 / 马里及其首都巴马科（Bamako）。
-RFI Afrique / Carte pays : Mali et sa capitale Bamako. © FMM Studio graphique
+**热门全球QDII关注**
 
-（[法广中文](https://www.rfi.fr/cn/%E9%9D%9E%E6%B4%B2/20261108-rfi%E6%B3%95%E5%B9%BF-%E4%B8%AD%E6%96%87-%E5%B0%BC%E5%8F%A4%E6%8B%89-%E9%9D%9E%E6%B4%B2-%E5%87%A0%E5%86%85%E4%BA%9A%E9%80%90%E5%8D%81%E4%B8%87%E6%B7%98%E9%87%91%E4%BA%BA%E5%85%A5%E9%A9%AC%E9%87%8C)）
+> 今日无热门QDII数据（模块执行超时）。
