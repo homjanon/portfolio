@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
 预抓取金融市场数据 — 按板块切分为结构化 JSON 文件。
+v39.2: 2026-11-14 ETF 名称改两级取值（_etf_names 仅作显示覆盖 → 缺项回退腾讯行情 [1]）；
+       qdii_prev.json 三张表补「名称」字段（供「老张工具箱」App 直接渲染，免去 App 侧硬编码名称表）
 v39: 2026-11-07 场内ETF溢价率改 IOPV 口径（对齐同花顺/东财）+ ETF 6→10 只；
      修正东财 lsjz 取 [-1] 的老 bug（该接口按日期倒序返回，最新在 [0]）
 v38: 2026-10-07 移除东财 push2 全链（IP 级限流，CI 6/8 天出 502）→ A股/港/美股改「腾讯 → 新浪 → yfinance」、
@@ -993,6 +995,8 @@ def fetch_extra():
         "513500", "159612", "513650", "159502", "161128", # 标普系
         "513400",                                          # 道指
     )
+    # 名称硬编码表：2026-11-14 起【只作显示覆盖】，缺项自动回退腾讯行情字段 [1]。
+    # 新增 ETF 只改 _etf_set 即可，不必再补这张表（原先进 App 显示「（未收录名称）」的根因就是两边各存一份、必然漂移）。
     _etf_names = {
         "513100":"纳指ETF国泰","513500":"标普500ETF博时",
         "159941":"纳指ETF广发","159659":"纳斯达克100ETF招商",
@@ -1005,6 +1009,18 @@ def fetch_extra():
         f"sh{c}" if c.startswith(("51","56","58")) else f"sz{c}" for c in _etf_set
     )
     _etf_raw = _tencent_quote(_etf_q)
+
+    def _tx_name(_c):
+        """腾讯行情字段 [1] = 中文简称。找不到返回 ""。
+        与下方价格取值同一套回退逻辑（先精确、再前缀），保证名称与价格指向同一只基金。"""
+        _r = _etf_raw.get(_c)
+        if _r is None:
+            for _k, _v in _etf_raw.items():
+                if _k.startswith(_c):
+                    _r = _v
+                    break
+        return (_r or {}).get("name") or ""
+
     for _code in _etf_set:
         _mp = None; _cp = None
         if _code in _etf_raw:
@@ -1054,7 +1070,7 @@ def fetch_extra():
         _prev_pr = _prev_etf.get(_code, {}).get("溢价率") if _prev_scheme_ok else None
         _pr_diff = round(_pr - _prev_pr, 2) if (_pr is not None and _prev_pr is not None) else None
         qdii_data["场内ETF"].append({
-            "代码": _code, "名称": _etf_names.get(_code,""),
+            "代码": _code, "名称": _etf_names.get(_code) or _tx_name(_code),
             "最新价": _mp, "涨跌幅": _cp,
             "最新净值": _nav, "净值日期": _nav_d,
             "参考净值": _ref_nav, "参考净值口径": _pr_src,
@@ -1142,9 +1158,11 @@ def fetch_extra():
         _snap = {
             "口径": _PREV_SCHEME,   # 2026-11-07：标记溢价率算法版本，供下次运行判断基准可比性
             "日期": today_str,
-            "场内ETF": {e["代码"]: {"溢价率": e.get("溢价率"), "日期": today_str} for e in qdii_data["场内ETF"]},
-            "场外QDII": {f["代码"]: {"日累计限定金额": f.get("日累计限定金额"), "不限购": f.get("不限购"), "日期": today_str} for f in qdii_data["场外QDII"]},
-            "场外QDII主动": {f["代码"]: {"日累计限定金额": f.get("日累计限定金额"), "不限购": f.get("不限购"), "日期": today_str} for f in qdii_data["场外QDII主动"]},
+            # 2026-11-14：三张表都带上「名称」—— App（老张工具箱）只读本文件，
+            # 名称随数据下发后，新增 ETF/基金不必再去 App 侧补硬编码表。
+            "场内ETF": {e["代码"]: {"名称": e.get("名称"), "溢价率": e.get("溢价率"), "日期": today_str} for e in qdii_data["场内ETF"]},
+            "场外QDII": {f["代码"]: {"名称": f.get("名称_短") or f.get("简称"), "日累计限定金额": f.get("日累计限定金额"), "不限购": f.get("不限购"), "日期": today_str} for f in qdii_data["场外QDII"]},
+            "场外QDII主动": {f["代码"]: {"名称": f.get("名称_短") or f.get("简称"), "日累计限定金额": f.get("日累计限定金额"), "不限购": f.get("不限购"), "日期": today_str} for f in qdii_data["场外QDII主动"]},
         }
         with open(_prev_path, "w", encoding="utf-8") as _f:
             json.dump(_snap, _f, ensure_ascii=False, indent=2)
