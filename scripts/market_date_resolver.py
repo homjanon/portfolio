@@ -61,7 +61,13 @@ class MarketDateResolver:
         # 2) 重新拉取并写回缓存
         try:
             import akshare as ak
-            cal = ak.tool_trade_date_hist_sina()
+            # ⚠️ akshare 1.20.45 起旧名 tool_trade_date_hist_sina 已移除，改为 calendar_trade_date_hist_sina
+            #    （新接口无参数、返回列同为 trade_date，下游 date.fromisoformat(str(x)[:10]) 无需改造）
+            _cal_fn = (getattr(ak, "calendar_trade_date_hist_sina", None)
+                       or getattr(ak, "tool_trade_date_hist_sina", None))
+            if _cal_fn is None:
+                raise AttributeError("akshare 无交易日历接口（新旧名均不存在）")
+            cal = _cal_fn()
             dates = sorted({date.fromisoformat(str(x)[:10]) for x in cal["trade_date"].tolist()})
             try:
                 os.makedirs(_CACHE_DIR, exist_ok=True)
