@@ -16,10 +16,22 @@ from datetime import datetime, timezone, timedelta
 
 
 def _china_open(d):
-    """A股是否交易日（akshare 交易日历，与 xiaoxu-fear 一致）"""
+    """A股是否交易日（akshare 交易日历，与 xiaoxu-fear 一致）
+
+    ⚠️ 2026-11-15 修复：akshare **1.20.45 起** `tool_trade_date_hist_sina` 更名为
+    `calendar_trade_date_hist_sina`，**旧名已从包内移除**（官方 changelog 有 removal 说明）。
+    CI 每次 `pip install akshare` 装最新版 → 旧名抛 AttributeError → 每天降级「周几判定」，
+    节假日会误判开市/休市。新接口**无参数**、返回列仍为 `trade_date`（元素为 datetime.date），
+    下游 `str(x)[:10]` 逻辑无需改造。
+    此处新名优先、旧名兜底，新旧两版 akshare 均可跑。
+    """
     try:
         import akshare as ak
-        cal = ak.tool_trade_date_hist_sina()
+        _cal_fn = (getattr(ak, "calendar_trade_date_hist_sina", None)
+                   or getattr(ak, "tool_trade_date_hist_sina", None))
+        if _cal_fn is None:
+            raise AttributeError("akshare 无交易日历接口（新旧名均不存在）")
+        cal = _cal_fn()
         trade_dates = {str(x)[:10] for x in cal["trade_date"].tolist()}
         return str(d) in trade_dates
     except Exception as e:
