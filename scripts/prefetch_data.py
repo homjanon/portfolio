@@ -744,7 +744,13 @@ def fetch_forex_rate():
     if _em_missing:
         try:
             import akshare as ak
-            df = ak.futures_global_spot_em()
+            # ⚠️ akshare 1.20.44 起 `futures_global_spot_em` 更名为 `futures_global_realtime_em`
+            #    （旧名已移除）；返回列不变（代码/名称/最新价/涨跌幅），下游逻辑无需改造。
+            _fut_fn = (getattr(ak, "futures_global_realtime_em", None)
+                       or getattr(ak, "futures_global_spot_em", None))
+            if _fut_fn is None:
+                raise AttributeError("akshare 无全球期货行情接口（新旧名均不存在）")
+            df = _fut_fn()
         except Exception as e:
             print(f"    ⚠️ 东财期货兜底失败: {type(e).__name__}: {str(e)[:60]}")
             df = None
@@ -768,19 +774,27 @@ def fetch_forex_rate():
                 except Exception as e:
                     print(f"    ⚠️ {_label} 东财兜底异常: {e}")
 
-    # ── 债券收益率: CN10Y + US10Y 同一来源 akshare bond_zh_us_rate ──
+    # ── 债券收益率: CN10Y + US10Y 同一来源 akshare（东财数据中心，非 push2 行情接口）──
+    # ⚠️ akshare 1.20.41 起 `bond_zh_us_rate` 更名为 `bond_zh_us_yield_em`（旧名已移除）。
+    #    实测两者实现完全一致（同为 datacenter.eastmoney.com + 19 批分页），换名不引入新风险；
+    #    返回列不变（`中国国债收益率10年` / `美国国债收益率10年`），下游逻辑无需改造。
+    #    2026-11-14 起旧名失效 → 报告「中国/美国10Y国债收益率」两行全部变「数据暂不可得」。
     try:
         import akshare as ak
-        df = ak.bond_zh_us_rate()
+        _bond_fn = (getattr(ak, "bond_zh_us_yield_em", None)
+                    or getattr(ak, "bond_zh_us_rate", None))
+        if _bond_fn is None:
+            raise AttributeError("akshare 无中美债券收益率接口（新旧名均不存在）")
+        df = _bond_fn()
         if df is not None and len(df) > 0:
             last = df.iloc[-1]
             result["CN10Y"] = {"名称": "10Y中国国债收益率", "最新值": _num(last.get("中国国债收益率10年")),
                               "日期": str(last.iloc[0]), "source": "akshare"}
             result["US10Y"] = {"名称": "10Y美国国债收益率", "最新值": _num(last.get("美国国债收益率10年")),
-                              "日期": str(last.iloc[0]), "source": "akshare(bond_zh_us_rate)"}
+                              "日期": str(last.iloc[0]), "source": "akshare(bond_zh_us_yield_em)"}
             print(f"    中美10Y: CN={result['CN10Y']['最新值']}, US={result['US10Y']['最新值']}")
     except Exception as e:
-        print(f"    bond_zh_us_rate 失败: {e}")
+        print(f"    中美债券收益率获取失败: {e}")
         for k in ["CN10Y", "US10Y"]:
             if k not in result:
                 result[k] = {"note": "数据暂不可得"}
@@ -953,7 +967,15 @@ def fetch_extra():
     # 末位兜底：外汇局中间价（官方锚定价、非市场成交价，来源字段明确标注防误导）
     if not usdcnh_ok:
         try:
-            _df_fx = ak.currency_boc_safe()
+            # ⚠️ akshare 1.20.44 起 `currency_boc_safe` 更名为 `fx_central_parity_safe`
+            #    （旧名已移除）；返回列不变（`日期` / `美元` 等），逻辑无需改造。
+            #    数据源为国家外汇管理局 safe.gov.cn，非东财，不受 CI 限流影响。
+            import akshare as ak
+            _fx_fn = (getattr(ak, "fx_central_parity_safe", None)
+                      or getattr(ak, "currency_boc_safe", None))
+            if _fx_fn is None:
+                raise AttributeError("akshare 无外汇局中间价接口（新旧名均不存在）")
+            _df_fx = _fx_fn()
             if _df_fx is not None and len(_df_fx) > 0:
                 _latest = _df_fx.iloc[-1]
                 _usd_str = str(_latest.get("美元", ""))
@@ -964,7 +986,7 @@ def fetch_extra():
                     result["USD_CNH_来源"] = "外汇局官方中间价(非市场价)"
                     usdcnh_ok = True
         except Exception as e:
-            print(f"    currency_boc_safe 失败: {e}")
+            print(f"    外汇局中间价获取失败: {e}")
 
     # 注：资金面(南下/北向/涨跌家数)、两融、涨停/跌停 已移除（prompt 不再消费，且为卡顿主因）
 
@@ -1765,84 +1787,6 @@ def fetch_holdings():
     #   从未引用「监督池」字段 → 零产出动作，白付一次批量请求、徒增文件体积。
     # 保留：HOLDINGS_INDUSTRY_GROUPS（15 个行业/概念组关键词）+ industry_match 打标，
     #   持仓聚焦的新闻匹配走关键词组，与本块无关，不受影响。
-
-    return _ok(result)
-
-
-# ─── 🆕 9. 中国宏观数据（v21新增）─────────────────────────
-def fetch_macro():
-    """v21: 中国宏观7项指标最新值"""
-    import akshare as ak
-    result = {}
-
-    # LPR
-    try:
-        df = ak.macro_china_lpr()
-        if df is not None and len(df) > 0:
-            latest = df.tail(1).iloc[0]
-            result['LPR_1Y'] = str(latest.get('LPR1Y', 'N/A'))
-            result['LPR_5Y'] = str(latest.get('LPR5Y', 'N/A'))
-            result['LPR_日期'] = str(latest.get('TRADE_DATE', ''))
-    except Exception as e:
-        result['_lpr_error'] = str(e)[:100]
-
-    # PMI（数据按月份倒序：index 0 = 最新）
-    try:
-        df = ak.macro_china_pmi()
-        if df is not None and len(df) > 0:
-            latest = df.iloc[0]  # 最新行
-            result['PMI_制造业'] = str(latest.get('制造业-指数', 'N/A'))
-            result['PMI_非制造业'] = str(latest.get('非制造业-指数', 'N/A'))
-            result['PMI_日期'] = str(latest.get('月份', ''))
-    except: pass
-
-    # CPI年率
-    try:
-        df = ak.macro_china_cpi_yearly()
-        if df is not None and len(df) > 0:
-            latest = df.dropna(subset=['今值']).tail(1)
-            if len(latest) > 0:
-                r = latest.iloc[0]
-                result['CPI年率'] = str(r.get('今值', 'N/A'))
-                result['CPI_日期'] = str(r.get('日期', ''))
-    except: pass
-
-    # M2货币供应
-    try:
-        df = ak.macro_china_money_supply()
-        if df is not None and len(df) > 0:
-            latest = df.tail(1).iloc[0]
-            result['M2同比'] = str(latest.get('货币和准货币(M2)-同比增长', 'N/A'))
-    except: pass
-
-    # 社融
-    try:
-        df = ak.macro_china_shrzgm()
-        if df is not None and len(df) > 0:
-            latest = df.tail(1).iloc[0]
-            result['社融增量_亿'] = str(latest.get('社会融资规模增量', 'N/A'))
-    except: pass
-
-    # GDP年率
-    try:
-        df = ak.macro_china_gdp_yearly()
-        if df is not None and len(df) > 0:
-            latest = df.dropna(subset=['今值']).tail(1)
-            if len(latest) > 0:
-                r = latest.iloc[0]
-                result['GDP年率'] = str(r.get('今值', 'N/A'))
-                result['GDP_日期'] = str(r.get('日期', ''))
-    except: pass
-
-    # 贸易差额
-    try:
-        df = ak.macro_china_trade_balance()
-        if df is not None and len(df) > 0:
-            latest = df.dropna(subset=['今值']).tail(1)
-            if len(latest) > 0:
-                r = latest.iloc[0]
-                result['贸易差额_亿美元'] = str(r.get('今值', 'N/A'))
-    except: pass
 
     return _ok(result)
 
