@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """
-调用 LLM 生成日报（四层冗余链，2026-09-19 起）：
+调用 LLM 生成日报（三层冗余链，2026-11-15 起）：
   ① 主模型: Agnes agnes-2.5-flash (AGNES_API_KEY)
-  ② 次选: Google Gemini 3.8 Flash (GEMINI_API_KEY)
-  ③ 备选: 商汤 SenseNova DeepSeek-V4-Flash (SENSENOVA_API_KEY)
-  ④ 兜底: Google Gemini 3.5 Flash-Lite (GEMINI_API_KEY)
+  ② 备选: 商汤 SenseNova DeepSeek-V4.1-Flash (SENSENOVA_API_KEY)
+  ③ 兜底: Google Gemini 3.5 Flash-Lite (GEMINI_API_KEY)
+
+⚠️ 2026-11-15 移除原第 ② 层 Gemini 3.8 Flash（polo 决定）：最近 6 次 CI 实测调用 5 次、
+   成功 0 次（Timeout / HTTP 503），且每次白耗 2 次重试、把导语生成拖后到商汤 —— 直接删层，
+   链路变 3 层。GEMINI_API_KEY 保留（第 ③ 层仍用）。
 
 用法: python3 scripts/call_llm.py
   读取 prompt/daily_report_prompt.txt (system) + data_*.json (user)
@@ -31,32 +34,24 @@ LLM_CONFIGS = [
         "model": "agnes-2.5-flash",
     },
     {
-        # Google Gemini 3.8 Flash（走官方 OpenAI 兼容端点，无需额外 SDK）
-        # 2026-09-19 由 3.1 Flash-Lite 升级：同 1M 上下文，本机实测 74K 字符长输入 25.0s（本链最快）
-        # ⚠️ 免费档 503「high demand」拥堵实测：长输入 5/12、小输入 4/24 → 靠 _call_llm 2 次重试 + 下层兜底
-        # ⚠️ Gemini 3 系**无法关闭思考**（官方明确：Reasoning cannot be turned off for 3 models），
-        #    现有 _THINKING_OFF_BACKENDS 对其无效；如需压延迟只能用 reasoning_effort=low/minimal 降档
-        # ⚠️ 与第 ④层 Gemini 3.5 Flash-Lite 共用 GEMINI_API_KEY（同一配额池：Gemini 故障会连废两层）
-        "name": "Gemini 3.8 Flash",
-        "api_url": "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
-        "api_key_env": "GEMINI_API_KEY",
-        "model": "gemini-3.8-flash",
-    },
-    {
-        # 商汤日日新 DeepSeek-V4-Flash（OpenAI 兼容）
-        # 2026-09-11 替换已 EOL 的 NVIDIA MiniMax-M3（410 Gone, 2026-09-09 09:00 UTC 下线）
+        # 商汤日日新 DeepSeek-V4.1-Flash（OpenAI 兼容）
+        # 2026-11-15 由 deepseek-v4-flash 升级：商汤官网公告 DeepSeek V4 Flash 于 2026-11-24 下线，
+        #   要求在此之前把 Model ID 换成 `deepseek-flash`（= DeepSeek V4.1 Flash，官方当前仅
+        #   deepseek-flash / deepseek-v4-pro 两个 ID）。提前切换，不等下线当天。
         # reasoning_effort=low 轻思考：参考 douban-tracker 实测 12s→2.6s 且 content 稳定非空
-        "name": "SenseNova DeepSeek-V4-Flash",
+        # 2026-11-15 起为第 ② 层（原 Gemini 3.8 Flash 长期 100% 失败已移除）
+        # ⚠️ name 变更必须同步 md_to_script.py 的 _SCRIPT_ORDER 与 _REASONING_EFFORT_BACKENDS
+        "name": "SenseNova DeepSeek-V4.1-Flash",
         "api_url": "https://token.sensenova.cn/v1/chat/completions",
         "api_key_env": "SENSENOVA_API_KEY",
-        "model": "deepseek-v4-flash",
+        "model": "deepseek-flash",
     },
     {
-        # Google Gemini 3.5 Flash-Lite（2026-09-19 替换 NVIDIA Nemotron-3 Ultra 550B 为第 ④层）
+        # Google Gemini 3.5 Flash-Lite（2026-09-19 替换 NVIDIA Nemotron-3 Ultra 550B 为末位兜底）
         # 动因：3.5 Flash-Lite 是 3.1 Flash-Lite 的同档继任者（2026-07-21 发布，稳定版，EOL ≥2027-07-21），
         #       1,048,576 输入 / 65,536 输出，官方称输出 350 tok/s；3.1-flash-lite 官方退役窗口 2027-05-07 起
         #       Nemotron-3 Ultra 550B 移除后 NVIDIA_API_KEY 不再被本项目使用
-        # ⚠️ 与第 ②层同 key 同配额池（第 ③层商汤夹在中间作隔离）
+        # ⚠️ 2026-11-15 起本层独占 GEMINI_API_KEY（原第 ② 层 Gemini 3.8 Flash 已移除，不再共用配额池）
         "name": "Gemini 3.5 Flash-Lite",
         "api_url": "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
         "api_key_env": "GEMINI_API_KEY",
@@ -66,7 +61,7 @@ LLM_CONFIGS = [
 
 # 已知支持 reasoning_effort 的后端（轻思考：大幅降延迟，且避免长思考导致 content 为空）
 # 用白名单而非写死在函数里：将来增删模型只改此处，函数体不动
-_REASONING_EFFORT_BACKENDS = {"SenseNova DeepSeek-V4-Flash"}
+_REASONING_EFFORT_BACKENDS = {"SenseNova DeepSeek-V4.1-Flash"}
 # 推理模型白名单：这些模型需关闭内部思考（enable_thinking=false），否则先消费 output tokens 挤空可见输出
 # 曾加入 agnes-3.0-flash（推理模型），实测 90s 超时后回退 2.5，白名单暂置空（机制保留备用）
 _THINKING_OFF_BACKENDS = set()
@@ -157,8 +152,8 @@ def _call_llm(api_url, api_key, model, system, user, timeout=90, extra_headers=N
         else:
             # ---- 请求已返回，以下分支互斥且不使用任何「可能被异常捕获顺序影响」的控制流 ----
             if resp.status_code == 200:
-                # 字段兼容（2026-09-12）：部分平台（如商汤 deepseek-v4-flash）把答案放在
-                # reasoning_content / reasoning，content 可能为空字符串 → 依次回退，
+                # 字段兼容（2026-09-12）：部分平台（如商汤 DeepSeek 系，现 model=deepseek-flash）
+                # 把答案放在 reasoning_content / reasoning，content 可能为空字符串 → 依次回退，
                 # 避免「HTTP 200 但内容为空」被上层误判为「输出过短」而白丢一层兜底
                 _msg = resp.json()["choices"][0].get("message") or {}
                 return (_msg.get("content") or _msg.get("reasoning_content")
