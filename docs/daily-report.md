@@ -1,79 +1,205 @@
-# 2026年11月16日 星期一 全球金融资讯日报
+# 2026年11月17日 星期二 全球金融资讯日报
 
-查询时间（北京时间）：2026年11月16日 06:30
+查询时间（北京时间）：2026年11月17日 06:31
 
-**今日定性导语**：11月16日资讯主线集中于英伟达治理与AI资本风向、俄乌及北约安全博弈、COP31气候谈判进展有限以及中国产业与政策动向：英伟达方面，贝森特要求董事会外部物色CEO并质疑对华出口合规，黄仁勋则与盟友讨论复职，治理不确定性升温；AI领域，Anthropic IPO被视为行业下一考验，具身智能融资降温、创投资金重回半导体。地缘上，泽连斯基呼吁解除星链限制，美方被曝提出以顿巴斯换北约席位，FBI调查无人机厂纵火未遂并指向俄军情机构。COP31首周在电气化、融资和化石能源退出等议题上成果甚微；国内方面，中共修订地方委员会工作条例禁搞形象工程，C919新开上海虹桥至郑州航线，台湾九合一选战进入冲刺。
+**今日定性导语**：全球风险资产普跌，A股科创50 **↓5.16%**、创业板指 **↓4.37%**、深证成指 **↓2.53%**、上证指数 **↓0.87%** 全线走弱，美股道指 **↓1.41%**、标普500 **↓1.92%**、纳指 **↓2.49%** 同步下挫，台湾加权 **↓6.03%**、韩国KOSPI **↓3.59%**、日经225 **↓2.42%** 跌幅居前，仅港股恒生指数 **↑0.49%**、恒生中国企业指数 **↑0.55%** 逆势收涨，WTI原油 **↓3.96%**、布伦特原油 **↓4.22%**、COMEX白银 **↓4.58%** 领跌商品。主线一是乌克兰袭击克里米亚大桥、俄乌冲突升级，二是特朗普亚洲之行拟在马尼拉与深圳达成交易并与中俄领导人举行核峰会，三是中国10月工业增加值、零售与投资均低于预期但分析仍认为有望实现全年增速目标，四是第三批互换便利…
 
 ---
 
-## 一、全球 Top20
+## 一、市场全景
+
+### A股收盘（11月16日）
+
+| 指数 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| 上证指数 | 3602.57 | **↓0.87%** |
+| 深证成指 | 10690.78 | **↓2.53%** |
+| 沪深300 | 3979.80 | **↓0.91%** |
+| 科创50 | 1213.68 | **↓5.16%** |
+| 创业板指 | 2320.02 | **↓4.37%** |
+
+### 美股收盘（11月17日凌晨）
+
+| 指数 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| 道琼斯工业 | 51608.17 | **↓1.41%** |
+| 标普500 | 7416.59 | **↓1.92%** |
+| 纳斯达克综合 | 24509.76 | **↓2.49%** |
+
+### 港台市场（11月16日）
+
+| 指数 | 最新价 | 涨跌幅 |
+|------|--------|--------|
+| 恒生指数 | 23753.84 | **↑0.49%** |
+| 恒生中国企业指数 | 7981.54 | **↑0.55%** |
+| 恒生科技指数 | 3801.64 | **↓0.30%** |
+| 台湾加权指数 | 41040.08 | **↓6.03%** |
+
+### 全球其他市场（11月16日）
+
+| 指数 | 代码 | 最新价 | 涨跌幅 |
+|------|------|--------|--------|
+| 日经225 | N225 | 59661.80 | **↓2.42%** |
+| 韩国KOSPI | KOSPI | 5100.50 | **↓3.59%** |
+| 新加坡STI | STI | 5183.19 | **↓0.93%** |
+| 欧洲STOXX 50 | SX5E | 6354.51 | **↓0.51%** |
+| 德国DAX | GDAXI | 26629.07 | **↓0.45%** |
+| 英国富时100 | FTSE | 10881.55 | **↓0.19%** |
+| 法国CAC40 | FCHI | 8364.78 | **↓0.05%** |
+
+### 大宗商品与汇率
+
+| 品种 | 最新价/值 | 涨跌幅 |
+|------|-----------|--------|
+| WTI原油 | 85.056 美元 | **↓3.96%** |
+| COMEX黄金 | 3856.382 美元 | **↓0.77%** |
+| 布伦特原油 | 91.794 美元 | **↓4.22%** |
+| COMEX白银 | 46.869 美元 | **↓4.58%** |
+| 美元/离岸人民币 | 6.6655 | — |
+| 中国10Y国债收益率 | 1.6285 | — |
+| 美国10Y国债收益率 | 数据暂不可得 | — |
+
+---
+
+## 二、行业洞察
+
+### 全球 Top20
 
 **📌 谷歌精选**
 
-1. **泽连斯基呼吁美方解除星链限制，站在"历史正确一边"**：乌克兰总统泽连斯基呼吁美国政府及埃隆·马斯克解除乌克兰境内星链服务限制，称此举关乎"站在历史的正确一方"。此前有报道披露民主党人已要求马斯克保存有关乌克兰星链访问的记录。（[BBC](https://news.google.com/rss/articles/CBMiW0FVX3lxTFBKRV92VVNvRTJsaGp2REVNVTkxQVgtRllsdDUydFV0Ym9hcklORXo0UjFwR1lIOVBTYm5Ed3hfenpzV2tfLVl0N3ZhVUcwZ3gzaFpQcGRTTlNYRzQ?oc=5)）
+1. **Lindsay Clancy将因三名子女死亡案于2027年3月再次受审**：英国女子Lindsay Clancy将在2027年3月就其三名子女的死亡案再次接受审判，此前她的定罪曾因程序问题被推翻。（[BBC](https://news.google.com/rss/articles/CBMiW0FVX3lxTFBweWFpbm9kbmUtMGF4VnhNX1BUZ1FMaFFrSGRWZTNlV0wwTWRnREFkUzhmZm0tQ0ZFUEJWQWZRU0otRnZKQ1pFaDdMaS1EcnFQZjJQTGNZSUc1TW8?oc=5)）
 
-2. **CBS News｜参议员卡西迪猛烈抨击卫生部长小肯尼迪"一系列失败"**：参议员比尔·卡西迪公开指责卫生部长小罗伯特·肯尼迪任职期间出现"一系列失败"，肯塔基州州长亦呼吁将其罢免。此表态引发联邦政府内部公共卫生政策争议的广泛讨论。（[CBS News](https://news.google.com/rss/articles/CBMijwFBVV95cUxQRUc2djFCNUJLUFUxSE9OVEdFaTJXekJTNElLUVU4dEVVNFdPNThfZzlLQUtWTUFuaGdEaTM1SG1ucDFScVFhUlk1aE9VUURUbTFuNUVRMmdpVWt0ZkJmVDIybnNnQ3hZZGJGQ0NlSjlGY2VOU0NIS080cWpMTXVWeEVQUktqUW1FYnFtLVM4MA?oc=5)）
+2. **乌克兰袭击克里米亚大桥，俄乌冲突升级**：乌克兰对连接俄罗斯与占领区克里米亚的克里米亚大桥发动袭击，这是自战争爆发以来乌克兰对俄本土发动的最大规模无人机攻击之一。（[The Guardian](https://news.google.com/rss/articles/CBMimwFBVV95cUxQTEZvZ1pFSGNkdXh4bXdESEZXLVpHdHFIMWJnd0VLVDhrMHBaUVF3c2VHNVZEOU95cWk1UzE5RWFyQmJFLUFfTjlEbzRteXBOa0RVdFFtTzdQN183V2htYzBMSGprcEZQVHdWTDgzbnRpY1pSUjhpeW5adklHMU02VDFfZkhTQUNoZEhkSEZ3TXU3cWw5VExLdHRJRQ?oc=5)）
 
-3. **梵蒂冈新闻网｜教宗良十四世探访秘鲁原住民社区**：教宗良十四世在秘鲁之旅中到访亚马逊雨林深处的普卡尔帕市，会见当地原住民代表，谴责非法伐木、毒品走私及环境污染等问题，并为西瓦瓦科树祈福浇水以象征保护热带雨林。（[Vatican News](https://news.google.com/rss/articles/CBMirwFBVV95cUxNUl9kRUlXS2ZXMmJjQ1Y3WUF2OUFFRUthSlhVZWpPdnlmZUJDemRRb0NfZkgza0I4N2VzT0ZJQ0VYMVNvUWliVG4zbGRlVzVraFFFaG9KNW1Wb3lzV3NiYWpBNVJBenhTenpEMGpHUXpRLWdlVDE0SXhYVC1qclZDeURrSWlIbnBsUGhDYWFuMldNamlyTmlRUkdmLVZPWDNkZUVJTGRFZTFrYTFZYnhB?oc=5)）
+3. **特朗普亚洲之行：在马尼拉和深圳达成交易，并与习近平、普京举行核峰会**：特朗普的亚洲之行计划包括在马尼拉和深圳签署贸易协议，并与中国和俄罗斯的领导人举行核峰会，可能还会见金正恩。（[AP News](https://news.google.com/rss/articles/CBMikAFBVV95cUxOcGw5a2lMb1B2bEtyYWotSkJYcWhXNHN2R3lwQlNuSUxfSHB5VzJ4Y25wNjZvcnVMLWhlN01rNnM3LXo2OHVScndJZm5VRWhjVFNrNnJZZDRhdEpoSThDelpzbDJlMTB0QXZ2al9FLWFkS3JTU1FfaFpBVkp1X2lrMU93bU5FbzlIQl9qbzFQLXE?oc=5)）
 
-4. **美联社｜FBI就涉嫌无人机公司遭纵火未遂展开调查**：FBI正对一家国防无人机制造商厂房遭纵火未遂一案展开调查。爱沙尼亚当局指认俄罗斯军事情报机构格鲁乌为幕后黑手，并拘留八名嫌疑人，事件引发北约东部边界安全担忧。（[AP News](https://news.google.com/rss/articles/CBMisAFBVV95cUxNTU1hZmdOTzU0Z2o1bHlDb01wcDNMU3h1R1B4RGpiRm9PamRydUF4cjd3dkV6ZmE1WVp1MU1WZXU0N1JnUVlqbjFYUjE3RWFuRm02Q1hYSEtkWUw2OF9EcFhYUWk4Rk5janRtaDNTWXJOYVFqTnc0UHJMNThxQzV3NjFHV1dxdWJNOV96eE9zbDJmS0dWNmFkaG1PRklTVGZ1c05LNGVpaWlMaGFFVGs1aA?oc=5)）
+4. **特朗普因FAA危机对DC项目开支问题大发雷霆**：在美国联邦航空管理局全国停机事件后，特朗普对有关其在华盛顿特区项目开支的提问表示愤怒，指责媒体转移焦点。（[The Independent](https://news.google.com/rss/articles/CBMiwgFBVV95cUxNX2xleG9NdmV2MGR0NFB6VEwwUFZhendwcU5yQlRKbHhfNUgzX3JtLUF6bExFWVVRY1otcXNSQ0Q4Z2RUOGdjV3hrclFjdHprQkdLT3h1VUVMeGVvcUlJYnZkbXdjb25Kai1SMm1lblJ0UDBMZ05pTi1IaFBYNzZMMEJOUmx2R3N0ZHVfZXJKSHhFVDBhdWt1ZkVlNXNjSlhjZEFxYVFBUHhlSk5LcHM3aE8wTS1XNldqdHZ4b1hOVEVwQQ?oc=5)）
 
-5. **Fox Business｜贝森特要求英伟达"戏剧性改组"，催促外部找CEO**：美国财政部长贝森特周日表示，英伟达董事会须在外部物色新首席执行官，并对公司是否存在绕过对华出口限制的合规文化提出质疑，要求董事会及法律顾问十日内回应相关问题。（[Fox Business](https://news.google.com/rss/articles/CBMixgFBVV95cUxOSElEN2tuOTNYdFY4ZWx0X1hyU3I3ZElVZERWOTBhUE01a1AzaXNSNHhTOFU4ZWRBdElkRVlBNDRUQUpSSnppbDB6b0llSjNGeFhzNmUxVWVVa3gwQmNaM3dNeU5INHdQbW5JT2Z0d1BKT0VQNENBd2hVdWROeVdodDIxSzQ2MzhQcVRTTVhVWHhUZU9Ua2wxSkQ2bktWSkZPNG9IS2lJcWwwWTdhb3RtSEtRYW1zSlJ4SHlGTERacmxqOWRmdVHSAcsBQVVfeXFMTTZ5V0FKd0JlWTR4VFVQN2FNeWd3Wl82VkNYRFhjcS1wN0FCVlNQQTY1YV9ybXdESy1MRWg3LUt1UmlnaTg3SzcxdGVMNFVWMlpieDRJVFF3Yk03QmR3MVktV2VFNWwtVmlwbXlrNF9Nb3R6VkxVWWZnaUtVUDVTZEs3dHdJb0s2M0dhRmlJTU0taUJUQnNTT0gzbUJ0S2lFZGpLakljUVFraWkwblR2N0s0WTRoTnlQWVpmdTZOekd3MWszaGZXYV9zVTQ?oc=5)）
+5. **最高法院驳回特朗普恢复大学研究削减的尝试**：美国最高法院拒绝执行特朗普政府关于取消多元化、公平和包容性相关研究经费的行政令，给其平权行动政策带来挫折。（[The New York Times](https://news.google.com/rss/articles/CBMinAFBVV95cUxQZ2h6bkRNMGZpbXB1NVR4c2Z6a3IydWNSaGZIVV9JZUgybHMxalVpQ3RDVVpPbWl3R2hYX0FWWnZ4b0xNRnZsRHplellDOW9oSXBUTFZKeXZDOW0zTHZWUXNfTkgzb0x2d2JqTGdXWVRpTmRJbWludlgycEllbDVsM3UzdGtUcWY4ZTBVSTA5VXVOS1lkZDFTa0tYT3Y?oc=5)）
 
-6. **Financial Times｜Anthropic IPO成AI行业下一大考验**：Anthropic首次公开募股被视为AI行业的下一个关键里程碑，分析师认为其上市进程将对人工智能领域的市场格局及投资者信心产生深远影响。（[Financial Times](https://news.google.com/rss/articles/CBMihAFBVV95cUxOelhLb2QtNy1faTdqOEwwQVNzSk5IX25mc0VOQjQzVTdPc3pZdUMyOE9EWkxVd1pJX0huTDZMMTBNR0ZLV0E2WHVkb1Vuam1vMjJ3TUptVGloS2VhWFlmYW1ITGJvVjJpNzNCdkYyQ3hTdXIzUlhaUElJN01UQzVWc2NfSjE?oc=5)）
+6. **华盛顿特区分享的高尔夫球场暂时关闭**：特朗普试图接管华盛顿特区一个受欢迎的高尔夫球场，但法官下令暂停，该球场目前仍处于关闭状态。（[The Washington Post](https://news.google.com/rss/articles/CBMiswFBVV95cUxOVGVDYzFGODVkMDRHVC13UDNJUU56LTNVcERac3gxN3VKNzF5WU50YldOd0NrVlFXV0ZuZkZLR1Jwb01HVUFaV0x4UXI2N1FoZmdkN2R2c1NJV3ViaUJGREt1ZXZ3emRsQkZYYmFiZ0xRaDJnbGNkbTVsenprUklGOHBIbnRma1AxT0VkV1dDY0ZQenFkWmZJWDlvc2FmSzE0anZEQzN0dm1MT0hIVkcyYXM4NA?oc=5)）
 
-7. **Al Jazeera｜交出顿巴斯换北约席位？美新方案能否奏效**：据报美国已向东道国乌克兰提出新方案，即乌克兰割让顿巴斯地区主权以换取北约成员资格。该方案若落实将深刻改变俄乌战争的地缘政治走向。（[Al Jazeera](https://news.google.com/rss/articles/CBMisAFBVV95cUxPOFZxYzB6N3djaUJMOWI1QW1oaTFhLVc1bDZXNVlEMERPNlR5Z2FSMl9rdnJJSkNnVVhQclUteWJYWE1rM1F4amRadVRJQk1YZHNHU2UxcmtFYTRqNWk4eXhLTjhNWlBPbE1uNU1zMzFWMWJaZGpDUFgzSml5V29ZeVgwQUFuNzZMaXpWQVV2YUxaQ0wwckNfLWR4a3pYV3ROSjVHcVhCTnlEQlItWFBuctIBtgFBVV95cUxOV2YtTEY4U180dER0UjRwQUFDdUhDWVRLTnpMVzhJVkdJUTlhbXc0UEVvaHN1cnV3bWJud2FDZldDZ2h2WEtlVG9uWWlfZEI2OF82M05oMlRzUUxRaUg5cGgxM19acGEyeVpkMnNrcDZxaS1NTFQzdXNoZUJyVk9iUnFfTHQyeHZ6Nmc5cWtPcGM0LWpqVDcwUG9RNEExV0h5cEJwNXNVMzVZQ0hkM245SUdjM0F2QQ?oc=5)）
+7. **特朗普称不会解雇商务部长卢特尼克**：特朗普 defending 商务部长卢特尼克，后者被指控在英伟达芯片出口限制问题上行动迟缓。（[Politico](https://news.google.com/rss/articles/CBMijwFBVV95cUxQRHJyQjNtQTZBdjk5UmRYVi1Fd1dFWmVDTTlNcXRuTEluS3M3VF9LU3BTbEx1WGNjN0xCT0xyZUZ5d0hNMmlyaTd5MF9hdDMzRDNEdHZ6UGNsVmRrMnZKWktBaXZYS1QzUTVPbFpGSm1kU3NxVi1nNkdtZ2Raa080aGduTzVuakxqZUhRdjhDaw?oc=5)）
 
-8. **NBC News｜新当选参议员科勒姆：投资南部助民主党赢得持久多数**：即将就任的参议员斯科特·科勒姆表示，民主党应将资源投向美国南部各州，通过基础设施和投资改善民生，以此争取选民信任并赢得"持久多数"。（[NBC News](https://news.google.com/rss/articles/CBMiugFBVV95cUxOQnpLbWpkRktVeWpIREZDSWRxUkNodnZwMW5EVDJYQzhRYzlsRC1Ba1I4ZF9JYXRjOTFzTExfYWg3UHI1emJUeUZfUmYwMVVSVnJVaEpBSmhzcnQ2U2R2eHNkSWFNSmRLQkdwbjZnNFFfY0htUmpLNWFpYjVQYXFkMUU2czU2RHBFcjExam1iTGZidDI3MGZXN01Cajlicl9XMm1FeDZBQVRLN2VpR3lRN0FFSDFWTWtfLVE?oc=5)）
+8. **第三艘美军航母向中东派遣更多部队**：第三艘美国航空母舰“罗斯福号”抵达中东地区，携带数千名增援部队，引发对美伊战争是否会重启的担忧。（[The Guardian](https://news.google.com/rss/articles/CBMiiwFBVV95cUxPanNCYkxYaVNLekhaVjJHVHZOOWVELWd6OTIwdk42bTg2YVVWTjRJb2IyUzhfbnJaYlB1UVljVlNucmlWYkRXX0tYNDdFOUxVRUdRV3BKZFpGcHQtMzJlNHdXY2FOcmlqZWpicDhsWWxsdEVsZkF1RXRlUmtxczNNbTRqVlZFdlFtRFgw?oc=5)）
 
-9. **Reuters/卫报｜迈阿密机场滑行跑道两机相撞，酿航空安全隐忧**：全美航班恢复运行的次日，迈阿密国际机场发生两架飞机在滑行道上相撞事故，再次引发航空安全及航空管制系统可靠性的公众关注。（[The Guardian](https://news.google.com/rss/articles/CBMiggFBVV95cUxNbnlqY0IwelVhVGQxdGoxSjVjOVNVRDY2NjJDZFVad1Z5Q05ORWlXX1QzVUZseWhnVVBNOGRBX0dqbWVtOFJTTFVGdko5ZnlETEhMVU41R1VWTm1Fek8tLV85bDVOdXh4Nng1TzJucEZ4ZEVlR2Q0Vk15dnZSUU5UYW9R?oc=5)）
+9. **休斯顿联邦检察官被控违反道德规则**：休斯顿顶级联邦检察官被监察机构指控违反道德规则，引发政治风波。（[Yahoo](https://news.google.com/rss/articles/CBMinwFBVV95cUxNdUViR0N5aHR2TUZSdTF1ZjYzQW5MVnYzdjE3VHZ6NHpuY1cydUtGWXZGRmp0VllHX1AzNDNkNDlKY3AxSHhDWTdxbW5xSnNtNlAyaFI3UWlNelhjUXBueDBsa19pdnhCVUxrRkhpZ0Vic3FTa2RidW5hTWxqLTNsUHZMMzRZbHhqdmZxMmdDcklQTG5lN0RBQ3ZtblljN1E?oc=5)）
 
-10. **Forbes｜黄仁勋已开始与盟友讨论重返英伟达CEO职位**：据金融时报报道，黄仁勋正在与亲信讨论复职事宜。硅谷盟友已组建"作战室"游说董事会，特斯拉CEO马斯克及Epic Games CEO斯威尼等多位科技高管联名致信支持。（[Forbes](https://news.google.com/rss/articles/CBMivAFBVV95cUxOa3E3cUNQYmpNNDRkbXlac1dOeC1qWWF3cjdUcnRPLWtONW5QM3FUVk1PVXBuamhCQzdZOHdMYUdxMHd0LTNkTFF3UVV2VzFFenAzaGtEYnFsY3BuOVU4VVp6YmRpSExBUm9PSjhaXzVzWE1mbmx2R2pKa2tGM2V0bDRrMlNJMEZqLWVGYXVvUlY1ek9lQm9UOFRBeUdrNkU4UVhuVlBTSlFJcWFtVzMwQ1VNM2RsaDlwcm10Vg?oc=5)）
+10. **科学家称照片显示爱泼斯坦可能死于谋杀**：一名法医专家对爱泼斯坦的死因提出质疑，认为照片证据表明他可能被杀害，而非自杀。（[The New York Times](https://news.google.com/rss/articles/CBMiigFBVV95cUxNbnhJWExFZWtYcnJWYkstZXFIN0VrZEk0bHZ2ZEFiQWl1RDQyQUwzb0N5b0NXSzFrUzFhNjVqWUNlV2tYYVJRdmhXSnVVc082X3JwRW9uOWlKaUk5UlNfMlNCbGtIMTNwd1VGU01oeWJZSmhWODVMTlZyTjVFXzd1alZmeF9BdkN6Z2c?oc=5)）
 
 **📌 联合早报**
 
-11. **深圳下一步如何走？**：今年是APEC领导人非正式会议首次在中国粤港澳大湾区举办，深圳这座毗邻香港的中国南方城市迎来全球聚焦。回顾四十年前，深圳仍是名不见经传的宝安县，直到1980年成为中国首批经济特区之一才迎来巨变，但发展过程中也伴随治安等社会问题。（[联合早报](https://www.zaobao.com.sg/news/china/story20261116-10001954)）
+11. **缪宗翰：饭圈掀起台湾选战新模式**：台北市长选举中，民进党候选人沈伯洋的支持者自发创作“洋流”设计，形成粉丝社群参与竞选的新模式，将偶像应援文化带入选举宣传。（[联合早报](https://www.zaobao.com.sg/news/china/story20261117-10006495)）
 
-12. **九合一选举冲刺 蒋万安万人游行对阵沈伯洋水陆会师**：台湾九合一选举进入最后冲刺，台北市长选战日趋白热。寻求连任的国民党籍蒋万安周六举办"台北安心大游行"吸引超8万人参与；民进党籍沈伯洋周日在士林、北投展开压轴车队扫街，支持者自发组织水路应援，游艇、龙舟齐聚淡水河形成水陆并进声势。（[联合早报](https://www.zaobao.com.sg/news/china/story20261115-10002528)）
+12. **中国多所高校密集严查“翻墙”**：继哈尔滨工程大学20名学生因“翻墙”被处分后，中国传媒大学通报教职工“翻墙”案例，分析认为此举意在加强意识形态监管。（[联合早报](https://www.zaobao.com.sg/news/china/story20261116-10008321)）
 
-13. **具身智能投资降温 中国创投资金重回半导体**：随着具身智能赛道热度消退，中国一级市场资金正重新转向半导体领域。数据显示，10月具身智能融资33笔、金额101亿元，环比跌幅近半；而入秋后机器人行业接连传出负面信号，私募股权融资市场环境骤然转冷。（[联合早报](https://www.zaobao.com.sg/news/china/story20261115-10001877)）
+13. **澳门特首发表施政报告 连续20年向合格永久居民派发现金**：澳门行政长官岑浩辉宣布将继续派发现金分享计划，每名永久居民获1万元澳门元，以减轻家庭经济负担。（[联合早报](https://www.zaobao.com.sg/news/china/story20261116-10008401)）
 
-14. **C919新开上海虹桥至郑州航线并完成首航**：中国商飞C919客机新开上海虹桥—河南郑州定期航线并于周日完成首航，单程飞行时长约1小时40分钟。东航目前已拥有17架C919机队规模，通达城市拓展至16座城市共18个航点。（[联合早报](https://www.zaobao.com.sg/news/china/story20261115-10002144)）
+14. **特稿：台北市长选战胶着 封关民调分歧凸显预测难题**：台湾九合一选举进入最后冲刺，多家机构公布的封关民调显示沈伯洋领先蒋万安，但幅度不一，选情依然胶着。（[联合早报](https://www.zaobao.com.sg/news/china/story20261116-9997414)）
 
-15. **中共修订地方委员会工作条例 禁搞形象工程和政绩工程**：中共中央印发修订后的《中国共产党地方委员会工作条例》，明确禁止地方委员会搞"形象工程""政绩工程"、违规新增地方政府隐性债务以及新官不理旧账等行为，条例自发布之日起施行。（[联合早报](https://www.zaobao.com.sg/news/china/story20261115-10001853)）
+15. **下午察：中国无人机航母入列在即？**：中国海军076型两栖攻击舰“四川舰”迎来首次海试一周年，首型舰载隐身无人机“攻击21”成功起降，引发西方军媒关注。（[联合早报](https://www.zaobao.com.sg/news/china/story20261116-10008110)）
+
+16. **西甲称网传亚马尔转发歧视亚裔内容截图系伪造**：西班牙职业足球联盟澄清网传球星亚马尔发布歧视亚裔视频截图为恶意伪造，已启动调查。（[联合早报](https://www.zaobao.com.sg/news/china/story20261116-10008374)）
+
+17. **中国10月经济放缓 分析：仍有望实现全年经济增速目标**：中国10月工业增加值、零售和投资均低于预期，进出口保持高增长，分析认为无需年内出台刺激措施。（[联合早报](https://www.zaobao.com.sg/news/china/story20261116-10007549)）
+
+18. **中国中小学及幼儿园设健康副校长**：中国国家卫健委等部门印发通知，要求中小学校、幼儿园聘任健康副校（园）长，由医疗卫生机构派出，不坐班不占编制。（[联合早报](https://www.zaobao.com.sg/news/china/story20261116-10007205)）
+
+19. **澳门连续20年向合格永久居民派发现金**：澳门现金分享计划自2008年推行以来已连续20年，成为最具标志性的福利政策。（[联合早报](https://www.zaobao.com.sg/news/china/story20261116-10007185)）
+
+20. **中国汽车行业协会调研17家车企供应商账款支付情况**：中国汽车工业协会将对重点汽车企业的供应商账款支付情况进行调研评估，推动规范账款支付。（[联合早报](https://www.zaobao.com.sg/news/china/story20261116-10007117)）
 
 ---
 
-## 二、深度观察专栏
+### 持仓动态与聚焦
 
-### COP31 : 主会场成果甚微 人民峰会气氛热烈
+#### 个人持仓行情快照
 
-正在土耳其安塔利亚举行的第31届气候峰会刚刚结束第一周的谈判，上周的谈判是否取得进展？下周的谈判又将如何展开？在市中心的举行的人民峰会又有何特色？
+| 标的 | 代码 | 市场 | 最新价 | 涨跌幅 |
+|------|------|------|--------|--------|
+| 招商银行A | 600036 | A股 | 43.40 元 | **↑1.09%** |
+| 招商银行H | 03968 | 港股 | 54.70 港元 | **↑1.39%** |
+| 长江电力 | 600900 | A股 | 30.49 元 | **↑1.94%** |
+| 红利低波ETF易方达 | 563020 | A股 | 1.241 元 | **↑1.64%** |
+| QQQM | QQQM | 美股 | 272.49 美元 | **↓2.67%** |
+| SPY | SPY | 美股 | 739.95 美元 | **↓1.91%** |
 
-一周谈判成果甚微
+#### 持仓聚焦（未来催化）
 
-土耳其安塔利亚气候峰会一周来举行的谈判无论是在主席国土耳其提倡的电气化问题还是在气候峰会的焦点议题，也就是融资以及走出化石能源等议题上均未取得进展。
+**券商/金融｜第三批互换便利操作加速推进，多家券商完成首批买入**（财联社）
+**AI算力/光模块｜黄仁勋的名字已从明日X峰会的官网议程中移除**（格隆汇）
+**半导体/AI芯片｜谷歌云公布第七代Ironwood TPU的10项测试结果**（格隆汇）
 
-据密切跟踪气候谈判的法国可持续发展与国际关系学院的气候谈判专家们的介绍，主席国提出的到2035年将电力在全球终端能源消费中的占比提升至 35 %的目标到目前为止并未受到多数国家的支持，阿拉伯联盟国家以及俄罗斯和印度等国尚对此目标持有保留，中国在此次议题上的立场依然缺乏明确，尽管中国目前的电气化比例已经接近上述目标。此外，原先提出必须是清洁的电气化的欧盟似乎也正做出退步，不再坚持电力必须来自可再生能源。
+---
 
-尽管去年的主席国巴西在走出化石能源以及保护森林方面提出了诸多倡议，不过，这些倡议似乎并未获得土耳其以及澳大利亚这两大主席国的推动。唯一有所进展的话题是在联合国气候谈判的程序改革方面。
+### 估值水位与情绪
 
-接下来的一周将继续讨论电气化议题，融资问题，尤其是在气候适应领域。下周四将发布第二份峰会封面协议文本草稿，专家对其内容并不乐观。就中国为何拒绝申请举办第33届气候峰会，有专家在回答记者提问时引述来自中国代表团的消息指出，其中原因或许与中国高层调整气候谈判团队有关。
+| 指数 | PE(TTM) | PE分位 | PB | PB分位 | 股息率 | 估值结论 |
+|------|---------|--------|-----|--------|--------|---------|
+| 红利低波 | 9.28 | 80.2% | 0.93 | 68.92% | 4.49% | 股息稳健 |
+| 中证红利 | 9.28 | 88.56% | 0.90 | 61.24% | 4.40% | 股息稳健 |
+| 中证白酒 | 22.83 | 26.8% | 4.28 | 5.0% | 4.14% | 深度低估 |
+| 沪深300 | 13.43 | 65.72% | 1.33 | 19.32% | 3.02% | 极贵 |
+| 中证500 | 26.78 | 55.68% | 1.96 | 52.24% | 1.68% | 偏贵 |
+| 创业板指 | 26.38 | 4.04% | 3.71 | 13.44% | 1.32% | 中性偏贵 |
+| 科创50 | 88.52 | 73.47% | 5.96 | 55.52% | 0.31% | 极贵 |
+| 恒生科技 | 19.53 | 5.49% | 2.05 | 3.86% | 1.20% | 偏低 |
+| 中概互联50 | 14.83 | 24% | 1.87 | 60% | 1.20% | 深度低估 |
+| 纳斯达克100 | 26.91 | 23.8% | 8.24 | 59.84% | 0.47% | 偏高 |
+| 标普500 | 23.62 | 38.68% | 5.29 | 89.32% | 1.06% | PB极贵 |
 
-公民社会才是世界领导者
+---
 
-COP31 Sommet des peuples, Antalya, Turquie. 15 novembre 2026 © RFI Yang mei
+### QDII 溢价与申购额度监测
 
-周日是气候峰会会场的休会日，位于市中心的人民峰会因而吸引了诸多的媒体以及观察人士，去年巴西的人民峰会规模超前，参与人数创历史记录，今年的人民峰会虽然规模很小，但对气候活动人士来说，得以举办此次峰会本身就是一大胜利，来自全世界多个国家的气候活动人士出席了峰会，美国著名的原住民活动人士，俄克拉荷马州庞卡族的长者凯西·坎普-霍里内克（Casey Camp-Horinek）向法广表示她出席峰会是为了向全世界传递以下信息 ：
+**场内ETF溢价率**
 
-首先，我认为公民社会才是世界领导者。 其次，我认为那些凌驾于我们所有人之上的人必须倾听我们的声音，我们必须告诉他们我们的子孙后代需要我们去守护。 我们存在的意义在于理解水是生命之源，是土地孕育生命、是滋养我们赖以生存的食物的源泉。 我们呼吸的空气必须洁净，必须得到保护，不能被纳入碳市场，我们必须找到一条能够保障我们所有人享有食物、饮水和呼吸的道路。 金钱无法养活我们， 地球才能养活我们。
+| ETF | 代码 | 溢价率 | 对比昨日溢价 | 评估 |
+|-----|------|-------|------------|------|
+| 纳指ETF国泰 | 513100 | 17.15% | ↓0.70% | △溢价 |
+| 纳指ETF广发 | 159941 | 15.42% | ↓1.03% | △溢价 |
+| 纳斯达克100ETF招商 | 159659 | 14.83% | ↓1.30% | △溢价 |
+| 纳指科技ETF景顺 | 159509 | 39.21% | ↓0.69% | ⚠️高溢价 |
+| 标普500ETF博时 | 513500 | 8.40% | ↓2.03% | △溢价 |
+| 标普500ETF国泰 | 159612 | 7.77% | ↓1.29% | △溢价 |
+| 标普500ETF南方 | 513650 | 6.81% | ↓1.77% | △溢价 |
+| 标普生物科技ETF嘉实 | 159502 | 4.27% | ↓1.07% | — |
+| 标普信息科技LOF | 161128 | 10.56% | ↓1.27% | △溢价 |
+| 道琼斯ETF鹏华 | 513400 | 2.24% | ↓0.94% | ✓ |
 
-COP 31 Sommet des peuples, Casey Camp-Horinek, 15 novembre, Antalya, Turquie. © RFI/Yang mei
+QDII溢价整体偏高，最高溢价约39.21%（纳指科技ETF景顺），提示回落风险。
 
-此外，记者在会场遇见了丹麦著名雕塑家，耻辱之柱的作者高志活(Jens Galschiøt），他给会场带来了一座高达四米的自由女神的雕塑，不过，女神手中的火炬不断地冒着烟雾，雕塑名叫"自由地污染"，以此嘲讽美国特朗普政府肆无忌惮，无视全世界民众所面对的 迫在眉睫 的气候危机。
+**场外QDII申购额度（纳指100系+标普500系，各取5只）**
 
-COP31, statut de Jens Galschiøt, "liberté de polluer", Antalya, Turquie, 15 novembre, 2026. © RFI/Yang mei
+| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
+|------|------|---------|---------|-----------|------------|
+| 大成等权标普500c | 008401 | 2.8373 | 限大额 | 50元 | — |
+| 大成等权标普500a | 096001 | 2.8552 | 限大额 | 50元 | — |
+| 大成纳指100a | 000834 | 5.8694 | 限大额 | 10元 | — |
+| 大成纳指100c | 008971 | 5.8113 | 限大额 | 10元 | — |
+| 建信纳指100c | 012752 | 3.1466 | 限大额 | 10元 | — |
+| 南方纳指100a | 016452 | 2.1542 | 限大额 | 10元 | — |
+| 南方纳指100c | 016453 | 2.1441 | 限大额 | 10元 | — |
+| 摩根标普500a | 017641 | 1.6669 | 限大额 | 10元 | — |
+| 摩根标普500c | 019305 | 1.6501 | 限大额 | 10元 | — |
+| 摩根美钞标普500 | 017642 | 0.2482 | 限大额 | 0元 | — |
 
-他还给会场带来了许多讽刺美国总统特朗普的雕像，免费赠送给在会场所有参与者。特朗普在雕像中赤身露体是为了形容他如同安徒生童话中的国王一样，是一位自以为穿着聪明人才看得见的衣服的愚蠢的国王。
+场外QDII额度整体收紧：无不限购，最高限额50元（大成等权标普500）。
 
-另外，峰会组办方成员隐晦地向法广表示举办过程十分艰难，有出席峰会的土耳其维权人士向记者表示峰会会场安置了监视器，另外多名便衣警察在会场活动。不过，曾经遭受打压的维权人士被接受出席峰会，并且可以接受外国记者采访。（[法广中文](https://www.rfi.fr/cn/%E7%94%9F%E6%80%81/20261115-cop31-%E4%B8%BB%E4%BC%9A%E5%9C%BA%E6%88%90%E6%9E%9C%E7%94%9A%E5%BE%AE-%E4%BA%BA%E6%B0%91%E5%B3%B0%E4%BC%9A%E6%B0%94%E6%B0%9B%E7%83%AD%E7%83%88)）
+**热门全球QDII关注**
+
+| 简称 | 代码 | 最新净值 | 申购状态 | 日累计限额 | 对比昨日限额 |
+|------|------|---------|---------|-----------|------------|
+| 华安法国CAC40 | 021540 | 1.022 | 限大额 | 100000元 | — |
+| 华宝致远 | 008254 | 1.4143 | 限大额 | 2000元 | — |
+| 广发全球精选 | 021277 | 5.2539 | 限大额 | 2000元 | — |
+| 浦银安盛全球 | 014002 | 2.9779 | 暂停申购 | 1000元 | — |
+| 华安德国DAX | 015016 | 1.9508 | 限大额 | 1000元 | — |
+| 汇添富全球移动互联 | 015202 | 4.5728 | 限大额 | 500元 | — |
+| 银华海外数字经济 | 016702 | 1.841 | 限大额 | 500元 | — |
+| 华夏移动互联 | 002891 | 2.038 | 限大额 | 100元 | — |
+| 建信新兴市场 | 018147 | 1.837 | 限大额 | 100元 | — |
+| 建信富时100 | 008706 | 1.4658 | 限大额 | 100元 | — |
+| 国富全球科技互联 | 021842 | 5.8353 | 限大额 | 100元 | — |
+
+热门QDII申购偏紧：1只暂停申购（浦银安盛全球），其余均限大额，额度最高10万元（华安法国CAC40）。
