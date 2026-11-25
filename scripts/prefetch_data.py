@@ -787,12 +787,30 @@ def fetch_forex_rate():
             raise AttributeError("akshare 无中美债券收益率接口（新旧名均不存在）")
         df = _bond_fn()
         if df is not None and len(df) > 0:
-            last = df.iloc[-1]
-            result["CN10Y"] = {"名称": "10Y中国国债收益率", "最新值": _num(last.get("中国国债收益率10年")),
-                              "日期": str(last.iloc[0]), "source": "akshare"}
-            result["US10Y"] = {"名称": "10Y美国国债收益率", "最新值": _num(last.get("美国国债收益率10年")),
-                              "日期": str(last.iloc[0]), "source": "akshare(bond_zh_us_yield_em)"}
-            print(f"    中美10Y: CN={result['CN10Y']['最新值']}, US={result['US10Y']['最新值']}")
+            # ⚠️ 2026-11-25 修复：CN / US **分别**取各自最后一个非空行，不能统一取 df.iloc[-1]。
+            #    原因：美债收益率比中债晚一天录入（美股收盘晚，东财数据中心次日才补），
+            #    最新行的 US 列恒为 NaN → 原写法每天都拿到空 US。
+            #    实测 11-25：CN=1.5914 / US=NaN，而 US 最后一个非空行是 11-24 = 4.91。
+            #    两者各带**自己的日期**，避免用滞后值冒充当日。
+            _COL_CN, _COL_US = "中国国债收益率10年", "美国国债收益率10年"
+            _i_cn = df[_COL_CN].last_valid_index() if _COL_CN in df.columns else None
+            _i_us = df[_COL_US].last_valid_index() if _COL_US in df.columns else None
+            if _i_cn is not None:
+                _r = df.loc[_i_cn]
+                result["CN10Y"] = {"名称": "10Y中国国债收益率", "最新值": _num(_r.get(_COL_CN)),
+                                   "日期": str(_r.iloc[0]), "source": "akshare"}
+            if _i_us is not None:
+                _r = df.loc[_i_us]
+                result["US10Y"] = {"名称": "10Y美国国债收益率", "最新值": _num(_r.get(_COL_US)),
+                                   "日期": str(_r.iloc[0]), "source": "akshare(bond_zh_us_yield_em)"}
+            # 任一列整列皆空（极端情况）→ 显式标缺失，避免报告里整行消失
+            for _k in ("CN10Y", "US10Y"):
+                if _k not in result:
+                    result[_k] = {"note": "数据暂不可得"}
+            print(f"    中美10Y: CN={result.get('CN10Y', {}).get('最新值')}"
+                  f"({result.get('CN10Y', {}).get('日期', '?')}), "
+                  f"US={result.get('US10Y', {}).get('最新值')}"
+                  f"({result.get('US10Y', {}).get('日期', '?')})")
     except Exception as e:
         print(f"    中美债券收益率获取失败: {e}")
         for k in ["CN10Y", "US10Y"]:
