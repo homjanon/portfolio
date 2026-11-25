@@ -22,49 +22,59 @@ BEIJING = timezone(timedelta(hours=8))
 _WEEKDAYS = ["一", "二", "三", "四", "五", "六", "日"]
 LLM_CONFIGS = [
     {
-         # Agnes 2.5 Flash（2026-09-19 实测回退：3.0 为推理模型 90s 超时，回退 2.5）
-         # 动因：官方已将 agnes-2.0-flash 标记为「已废弃」，2.5 为其接替档
-         # ⚠️ 实测教训：3.0 是推理模型，长日报 58K tokens 时 90s 超时，GitHub Actions 上限内不可用
-         #   已回退 2.5，_THINKING_OFF_BACKENDS 白名单保留机制暂置空
+        # ① 主模型：Agnes 3.0 Flash（2026-11-25 由 agnes-2.5-flash 升级）
+        #   动因：Agnes 官方公告 agnes-2.5-flash 于 **2026-11-30 下线**，新一代默认对话模型为
+        #   agnes-3.0-flash（512K 上下文 / 最大输出 65,536，当前免费）。
+        # ⚠️ 3.0 是**推理模型**：2026-09-19 曾实测长日报（system 15K + user 58K ≈ 74K 字符）
+        #   单次生成 90s 超时 → 当时直接回退 2.5，并把 _THINKING_OFF_BACKENDS 置空。
+        #   本次不靠回退，改为**启用关闭思考**：_THINKING_OFF_BACKENDS 已加入本后端，
+        #   _call_llm 会发 `chat_template_kwargs={"enable_thinking": false}`（官方 chat template 支持），
+        #   把耗时压回非推理档。
+        # ⚠️ 若首轮 CI 仍见 90s 超时 → 说明该开关在 apihub 端点未生效。应急：把 model 临时改回
+        #   `agnes-2.5-flash`（11-30 前仍可用），主力交给 ② Gemini；同时向 Agnes 反馈。
         # 响应字段可能放 reasoning/reasoning_content → _call_llm 已做 content or reasoning 兼容。
         # ⚠️ name 与 scripts/md_to_script.py 的 _SCRIPT_ORDER 按字符串精确匹配，两处必须同步改。
-        "name": "Agnes agnes-2.5-flash",
+        "name": "Agnes agnes-3.0-flash",
         "api_url": "https://apihub.agnes-ai.com/v1/chat/completions",
         "api_key_env": "AGNES_API_KEY",
-        "model": "agnes-2.5-flash",
+        "model": "agnes-3.0-flash",
     },
     {
-        # 商汤日日新 DeepSeek-V4.1-Flash（OpenAI 兼容）
-        # 2026-11-15 由 deepseek-v4-flash 升级：商汤官网公告 DeepSeek V4 Flash 于 2026-11-24 下线，
+        # ② 备选：Google Gemini 3.5 Flash-Lite（2026-11-25 由 ③ 升为 ②）
+        #   3.5 Flash-Lite 是 3.1 Flash-Lite 的同档继任者（2026-07-21 发布，稳定版，EOL ≥2027-07-21），
+        #   1,048,576 输入 / 65,536 输出，官方称输出 350 tok/s；3.1-flash-lite 官方退役窗口 2027-05-07 起
+        #   实测（74K 字符量级）6/6 通过、14.5–24.1s，比商汤层更稳，故提到 ② 承接主模型超时。
+        # ⚠️ 本层独占 GEMINI_API_KEY（Gemini 3.8 Flash 已于 2026-11-15 移除，无共用配额池问题）。
+        "name": "Gemini 3.5 Flash-Lite",
+        "api_url": "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+        "api_key_env": "GEMINI_API_KEY",
+        "model": "gemini-3.5-flash-lite",
+    },
+    {
+        # ③ 兜底：商汤日日新 DeepSeek-V4.1-Flash（2026-11-25 由 ② 降为 ③）
+        #   2026-11-15 由 deepseek-v4-flash 升级：商汤公告 DeepSeek V4 Flash 于 2026-11-24 下线，
         #   要求在此之前把 Model ID 换成 `deepseek-flash`（= DeepSeek V4.1 Flash，官方当前仅
-        #   deepseek-flash / deepseek-v4-pro 两个 ID）。提前切换，不等下线当天。
-        # reasoning_effort=low 轻思考：参考 douban-tracker 实测 12s→2.6s 且 content 稳定非空
-        # 2026-11-15 起为第 ② 层（原 Gemini 3.8 Flash 长期 100% 失败已移除）
+        #   deepseek-flash / deepseek-v4-pro 两个 ID）。
+        # reasoning_effort=low 轻思考：参考 douban-tracker 实测 12s→2.6s 且 content 稳定非空。
+        #   降为兜底的原因：免费档全局限流池偏紧（douban-tracker 2026-10-20 实测 8 次仅 1 次 200，
+        #   余为 429 RPM/TPM/rps exhausted），不适合承接每一轮的主力请求；作末位兜底仍可用。
         # ⚠️ name 变更必须同步 md_to_script.py 的 _SCRIPT_ORDER 与 _REASONING_EFFORT_BACKENDS
         "name": "SenseNova DeepSeek-V4.1-Flash",
         "api_url": "https://token.sensenova.cn/v1/chat/completions",
         "api_key_env": "SENSENOVA_API_KEY",
         "model": "deepseek-flash",
     },
-    {
-        # Google Gemini 3.5 Flash-Lite（2026-09-19 替换 NVIDIA Nemotron-3 Ultra 550B 为末位兜底）
-        # 动因：3.5 Flash-Lite 是 3.1 Flash-Lite 的同档继任者（2026-07-21 发布，稳定版，EOL ≥2027-07-21），
-        #       1,048,576 输入 / 65,536 输出，官方称输出 350 tok/s；3.1-flash-lite 官方退役窗口 2027-05-07 起
-        #       Nemotron-3 Ultra 550B 移除后 NVIDIA_API_KEY 不再被本项目使用
-        # ⚠️ 2026-11-15 起本层独占 GEMINI_API_KEY（原第 ② 层 Gemini 3.8 Flash 已移除，不再共用配额池）
-        "name": "Gemini 3.5 Flash-Lite",
-        "api_url": "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
-        "api_key_env": "GEMINI_API_KEY",
-        "model": "gemini-3.5-flash-lite",
-    },
 ]
 
 # 已知支持 reasoning_effort 的后端（轻思考：大幅降延迟，且避免长思考导致 content 为空）
 # 用白名单而非写死在函数里：将来增删模型只改此处，函数体不动
 _REASONING_EFFORT_BACKENDS = {"SenseNova DeepSeek-V4.1-Flash"}
-# 推理模型白名单：这些模型需关闭内部思考（enable_thinking=false），否则先消费 output tokens 挤空可见输出
-# 曾加入 agnes-3.0-flash（推理模型），实测 90s 超时后回退 2.5，白名单暂置空（机制保留备用）
-_THINKING_OFF_BACKENDS = set()
+# 推理模型白名单：这些模型需关闭内部思考（chat_template_kwargs.enable_thinking=false），
+# 否则先消费 output tokens 挤空可见输出、且长输入下耗时不可控。
+# 2026-11-25 起启用：Agnes 3.0 Flash 是推理模型（2.5 于 11-30 下线必须升级），
+#   2026-09-19 曾在未关思考的情况下实测 74K 字符长输入 90s 超时；本开关是当时就备好的解法，
+#   现在正式启用。若首轮 CI 仍超时 → 说明 apihub 端点未识别该参数，需回退 2.5 或改走 ② Gemini。
+_THINKING_OFF_BACKENDS = {"Agnes agnes-3.0-flash"}
 
 
 def _dedup_top20_links(text):
