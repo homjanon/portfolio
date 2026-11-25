@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
 读取 report.md → 调用 LLM 转换为口语化广播稿 → 输出 script.txt
-主模型: Agnes agnes-2.5-flash (AGNES_API_KEY)
-备选: 商汤 SenseNova DeepSeek-V4.1-Flash (SENSENOVA_API_KEY)
-兜底: Google Gemini 3.5 Flash-Lite (GEMINI_API_KEY)
+主模型: Agnes agnes-3.0-flash (AGNES_API_KEY)
+备选: Google Gemini 3.5 Flash-Lite (GEMINI_API_KEY)
+兜底: 商汤 SenseNova DeepSeek-V4.1-Flash (SENSENOVA_API_KEY)
+（2026-11-25 Agnes 2.5→3.0；Gemini 提到 ②、商汤降到 ③，与 call_llm.py 同步）
 （2026-11-15 移除原次选 Gemini 3.8 Flash，与 call_llm.py 同步）
 LLM 失败时直接复制 report.md 作为 script.txt
 
@@ -21,15 +22,16 @@ OUTPUT_PATH = sys.argv[2] if len(sys.argv) > 2 else "script.txt"
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from call_llm import LLM_CONFIGS, _call_llm
 
-# 广播稿专用顺序：Agnes 2.5 主用 → 商汤 SenseNova DeepSeek-V4.1-Flash 备 → Gemini 3.5 Flash-Lite 兜（与日报一致）
+# 广播稿专用顺序：Agnes 3.0 主用 → Gemini 3.5 Flash-Lite 备 → 商汤 SenseNova DeepSeek-V4.1-Flash 兜（与日报一致）
 # ⚠️ 名字必须与 call_llm.py 的 LLM_CONFIGS[].name 完全一致：
 #    _MODEL_CHAIN 按 name 精确匹配，对不上会被静默跳过（不报错，直接少一层兜底）
 # ⚠️ 2026-11-15：原第 2 位 "Gemini 3.8 Flash" 已在 call_llm.py 删除，此处必须同步移除，
 #    否则该名字匹配不到任何 config → 静默少一层（已踩过类似坑，改模型链两处必须同改）。
+# ⚠️ 2026-11-25：Agnes 2.5→3.0（2.5 于 11-30 下线），并把 Gemini 提到第 2、商汤降到第 3。
 _SCRIPT_ORDER = [
-    "Agnes agnes-2.5-flash",
-    "SenseNova DeepSeek-V4.1-Flash",
+    "Agnes agnes-3.0-flash",
     "Gemini 3.5 Flash-Lite",
+    "SenseNova DeepSeek-V4.1-Flash",
 ]
 _MODEL_CHAIN = [c for name in _SCRIPT_ORDER
                for c in LLM_CONFIGS if c["name"] == name]
