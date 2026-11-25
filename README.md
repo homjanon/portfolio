@@ -31,28 +31,33 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 | 优先级 | 模型 | API 端点 | 环境变量 |
 |--------|------|----------|---------|
-| ① 主模型 | **Agnes agnes-2.5-flash** (`agnes-2.5-flash`) | `apihub.agnes-ai.com/v1` | `AGNES_API_KEY` |
-| ② 备选 | **商汤 SenseNova DeepSeek-V4.1-Flash** (`deepseek-flash`) | `token.sensenova.cn/v1` | `SENSENOVA_API_KEY` |
-| ③ 兜底 | **Google Gemini 3.5 Flash-Lite** (`gemini-3.5-flash-lite`) | `generativelanguage.googleapis.com/v1beta/openai` | `GEMINI_API_KEY` |
+| ① 主模型 | **Agnes agnes-3.0-flash** (`agnes-3.0-flash`) | `apihub.agnes-ai.com/v1` | `AGNES_API_KEY` |
+| ② 备选 | **Google Gemini 3.5 Flash-Lite** (`gemini-3.5-flash-lite`) | `generativelanguage.googleapis.com/v1beta/openai` | `GEMINI_API_KEY` |
+| ③ 兜底 | **商汤 SenseNova DeepSeek-V4.1-Flash** (`deepseek-flash`) | `token.sensenova.cn/v1` | `SENSENOVA_API_KEY` |
 
 - 三个模型依次尝试，前一个失败（异常或输出 <500 字符判为近空）自动切换到下一个
 - 失败时自动重试（指数退避）；**但 403/404/410 属永久性错误，不重试、立即切换下一模型**
 - 商汤后端带 `reasoning_effort=low` 轻思考（实测 12s→2.6s 且 content 稳定非空）
 
-> **⚠️ 2026-11-15 移除原第 ② 层 Gemini 3.8 Flash**（polo 决定）：最近 6 次 CI 实测**调用 5 次、成功 0 次**（Timeout / HTTP 503），每次白耗 2 次重试、把导语生成拖后到商汤才成功 → 直接删层，链路由 4 层变 3 层。`GEMINI_API_KEY` 保留（第 ③ 层仍用）。
+> **⚠️ 2026-11-25 Agnes 2.5 → 3.0 + 层级重排（① Agnes ② Gemini ③ 商汤）**：Agnes 官方公告 `agnes-2.5-flash` 于 **2026-11-30 下线**，默认对话模型切为 `agnes-3.0-flash`（512K 上下文 / 最大输出 65,536，当前免费）。
+> 同时把 **Gemini 3.5 Flash-Lite 由 ③ 升为 ②、商汤 V4.1 由 ② 降为 ③**——依据是 74K 字符量级实测中Gemini 3.5 Flash-Lite **6/6 通过（14.5–24.1s）**，而商汤免费档全局限流偏紧（douban-tracker 2026-10-20 实测 **8 次仅 1 次 200**，余为 429 RPM/TPM/rps exhausted），更适合做末位兜底。
+> 同步范围：`call_llm.py`（`LLM_CONFIGS` 顺序 + `_THINKING_OFF_BACKENDS` 启用）、`md_to_script.py`（`_SCRIPT_ORDER`）、本文件。
+
+> **⚠️ 2026-11-15 移除原第 ② 层 Gemini 3.8 Flash**（polo 决定）：最近 6 次 CI 实测**调用 5 次、成功 0 次**（Timeout / HTTP 503），每次白耗 2 次重试、把导语生成拖后到商汤才成功 → 直接删层，链路由 4 层变 3 层。`GEMINI_API_KEY` 保留（现第 ② 层仍用）。
 >
 > **⚠️ 2026-11-15 商汤模型升级 V4 Flash → V4.1 Flash**：商汤官网公告 DeepSeek V4 Flash 于 **2026-11-24 下线**，要求在此之前把 Model ID 由 `deepseek-v4-flash` 换成 `deepseek-flash`（= DeepSeek V4.1 Flash，官方当前仅 `deepseek-flash` / `deepseek-v4-pro` 两个 ID）。已提前切换，不等下线当天。
 > 改 `name` 时**必须同步三处**：`call_llm.py::LLM_CONFIGS`、`md_to_script.py::_SCRIPT_ORDER`、`call_llm.py::_REASONING_EFFORT_BACKENDS`（漏第三处则该层不再发 `reasoning_effort=low`，延迟回涨甚至 content 为空）。
 >
-> **⚠️ 架构提示**：三层跨 2 个平台（Agnes/新加坡 → 商汤/国内 → Google/美国）。移除 3.8 后 `GEMINI_API_KEY` **已被 Gemini 3.5 Flash-Lite 独占**，不再有「两层共用同一配额池」的连废风险。
+> **⚠️ 架构提示**：三层跨 2 个平台（Agnes/新加坡 → Google/美国 → 商汤/国内）。移除 3.8 后 `GEMINI_API_KEY` **已被 Gemini 3.5 Flash-Lite 独占**，不再有「两层共用同一配额池」的连废风险。
 >
-> **Agnes 2.5 能力规格**：上下文 512K、最大输出 65.5K，现价输入/输出均 `$0 / 1M tokens`（刊例价 $0.05 / $0.15）。`_call_llm` 响应字段兼容 `content or reasoning_content or reasoning`（商汤 DeepSeek 系——现 `deepseek-flash`——的 content 常为空、答案在 `reasoning_content`，缺兼容时该层会静默失效）。
+> **Agnes 3.0 能力规格**：上下文 512K、最大输出 65,536 tokens，当前免费（输入/输出均 $0）。`_call_llm` 响应字段兼容 `content or reasoning_content or reasoning`（商汤 DeepSeek 系——现 `deepseek-flash`——的 content 常为空、答案在 `reasoning_content`，缺兼容时该层会静默失效）。
 >
-> **⚠️ 推理模型避坑**：推理档模型（如 `agnes-3.0-flash`）在长日报（58K tokens 输入）下单次生成耗时远超 Actions 的 90s 上限 → **主模型须用非推理档（现为 `agnes-2.5-flash`）**。`_call_llm` 保留 `enable_thinking` 关闭机制与 `max_tokens=16000`，供后续接入更快推理模型时复用。
+> **⚠️ 推理模型避坑（2026-11-25 起改为「关思考」而非「换非推理档」）**：`agnes-3.0-flash` 是推理模型，2026-09-19 曾在**未关思考**下实测长日报（74K 字符）单次生成 **90s 超时** → 当时直接回退 `agnes-2.5-flash`。但 2.5 将于 **2026-11-30 下线**，无法再靠回退，故改用官方 chat template 的 `chat_template_kwargs={"enable_thinking": false}` 关闭内部思考（`_THINKING_OFF_BACKENDS` 已启用该后端），把耗时压回非推理档。
+> **若首轮 CI 仍见 90s 超时** → 说明该参数在 `apihub` 端点未生效，应急处理：把 `config` 里的 `model` 临时改回 `agnes-2.5-flash`（11-30 前仍可用），主力交给 ② Gemini 3.5 Flash-Lite，同时向 Agnes 反馈。
 >
 > **⚠️ Gemini 3 系无法关闭思考**（官方明确）→ `_THINKING_OFF_BACKENDS`（发 `enable_thinking=false`）对其**无效**，唯一降延迟杠杆是 `reasoning_effort`。
 >
-> **免费档实测要点**（Google，规模 system 15,426 + user 58,667 ≈ 74K 字符，即线上真实量级）：`gemini-3.5-flash-lite` **6/6 通过、14.5–24.1s** → 现兜底层；`gemini-3.8-flash` 曾测得 25.0s 最快，但 2026-11 起**持续 503/Timeout（6 次运行 0 成功）已移除**；`gemini-3.5-flash` / `3.6-flash` 需 50–65s 逼近 90s 上限，未采用；`gemini-3-flash-preview` 两轮全 503，已排除。免费档 503「high demand」拥堵率长输入约 **42%**，由 `_call_llm` 的 2 次重试 + 下层兜底覆盖。
+> **免费档实测要点**（Google，规模 system 15,426 + user 58,667 ≈ 74K 字符，即线上真实量级）：`gemini-3.5-flash-lite` **6/6 通过、14.5–24.1s** → 现第 ② 层；`gemini-3.8-flash` 曾测得 25.0s 最快，但 2026-11 起**持续 503/Timeout（6 次运行 0 成功）已移除**；`gemini-3.5-flash` / `3.6-flash` 需 50–65s 逼近 90s 上限，未采用；`gemini-3-flash-preview` 两轮全 503，已排除。免费档 503「high demand」拥堵率长输入约 **42%**，由 `_call_llm` 的 2 次重试 + 下层兜底覆盖。
 >
 > **⚠️ 改模型必读**：`scripts/md_to_script.py` 的 `_MODEL_CHAIN` 按 `name` 从 `LLM_CONFIGS` 精确匹配取值，**两处名字必须同步改**，对不上会被静默跳过（不报错，直接少一层兜底）。
 
@@ -183,7 +188,7 @@ Cloudflare qdii-dispatch → workflow_dispatch
 ## 今日定性导语
 报告固定开头板块（完整/精简模式均必出，单行，H1 与查询时间之后），句式要求：完整模式=一句话市场全景 + 3–5 条新闻主线；精简模式=3–5 条新闻主线。
 
-**二次生成（物理隔离）**：导语**不由报告主调用撰写**——主调用的导语行只逐字输出占位符 `**今日定性导语**：__LEAD__`，`call_llm.py` 在正文完成后发起**第二次 LLM 调用**，输入**仅含 report 正文**（候选池等原始数据物理不可见，从根源杜绝导语掺杂正文外内容）。**模型映射**：正文由第 N 位生成 → 导语由第 N+1 位生成（循环：正文①Agnes → 导语②商汤 SenseNova；正文③Gemini 3.5 Flash-Lite → 导语①Agnes）。**降级链**：指定模型重试 1 次 → 链内顺延 → 全失败则机械兜底（正文 Top20 前 3 条标题拼接，纯代码）；导语强制单行、上限 400 字、<30 字拒收。
+**二次生成（物理隔离）**：导语**不由报告主调用撰写**——主调用的导语行只逐字输出占位符 `**今日定性导语**：__LEAD__`，`call_llm.py` 在正文完成后发起**第二次 LLM 调用**，输入**仅含 report 正文**（候选池等原始数据物理不可见，从根源杜绝导语掺杂正文外内容）。**模型映射**：正文由第 N 位生成 → 导语由第 N+1 位生成（循环：正文①Agnes → 导语②Gemini 3.5 Flash-Lite；正文③商汤 → 导语①Agnes）。**降级链**：指定模型重试 1 次 → 链内顺延 → 全失败则机械兜底（正文 Top20 前 3 条标题拼接，纯代码）；导语强制单行、上限 400 字、<30 字拒收。
 
 **HTML 朗读版渲染**：`md_to_reader.py` 将导语行单独抽取，渲染为顶部带左侧强调色边框的高亮卡片 `<p class="lede">`（由 `_extract_lede()` 置顶注入，与 Markdown 报告一致）。骨架零风险：占位符属骨架一部分、替换为机械操作，占位符缺失时自动在查询时间行后插入。
 
@@ -196,9 +201,9 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 | Secret | 用途 |
 |--------|------|
-| `AGNES_API_KEY` | Agnes API Key（免费）；日报+广播稿主选 Agnes agnes-2.5-flash（`apihub.agnes-ai.com/v1`） |
-| `GEMINI_API_KEY` | Google AI Studio API Key（免费层）；**日报+广播稿末位兜底 Gemini 3.5 Flash-Lite 独占本 key**（`generativelanguage.googleapis.com/v1beta/openai`），在 AI Studio → API Keys 生成。2026-11-15 移除 Gemini 3.8 Flash 后不再与其他层共用配额池 |
-| `SENSENOVA_API_KEY` | 商汤日日新 API Key；日报+广播稿次选 **DeepSeek-V4.1-Flash**（`deepseek-flash`，`token.sensenova.cn/v1`）；旧 ID `deepseek-v4-flash` 于 2026-11-24 下线 |
+| `AGNES_API_KEY` | Agnes API Key（免费）；日报+广播稿主选 **Agnes agnes-3.0-flash**（`apihub.agnes-ai.com/v1`）；旧 2.5 于 2026-11-30 下线 |
+| `GEMINI_API_KEY` | Google AI Studio API Key（免费层）；**日报+广播稿第 ② 层 Gemini 3.5 Flash-Lite 独占本 key**（`generativelanguage.googleapis.com/v1beta/openai`），在 AI Studio → API Keys 生成。2026-11-15 移除 Gemini 3.8 Flash 后不再与其他层共用配额池 |
+| `SENSENOVA_API_KEY` | 商汤日日新 API Key；日报+广播稿**末位兜底** **DeepSeek-V4.1-Flash**（`deepseek-flash`，`token.sensenova.cn/v1`）；旧 ID `deepseek-v4-flash` 于 2026-11-24 下线 |
 | ~~`NVIDIA_API_KEY`~~ | **已弃用**：本模型链不含 NVIDIA 模型，不再使用该 Secret（可自行删除） |
 
 > **⚠️ 新增 Secret 后必须回 workflow 注入（否则静默失效）**：仅在 Settings → Secrets and variables → Actions 添加 Secret 是**不够的**——Secret 必须在 `.github/workflows/daily-scheduled.yml` 中需要该 Key 的 step（「调用 LLM 生成日报」「转换日报为广播稿」）的 `env:` 段显式注入才会成为容器内环境变量：
@@ -220,14 +225,14 @@ Cloudflare qdii-dispatch → workflow_dispatch
 
 | 优先级 | 模型 | 密钥 | 说明 |
 |--------|------|------|------|
-| ① 主用 | Agnes agnes-2.5-flash | `AGNES_API_KEY` | 默认主模型 |
-| ② 备选 | 商汤 SenseNova DeepSeek-V4.1-Flash | `SENSENOVA_API_KEY` | 主模型异常或近空（<500字符）即切换 |
-| ③ 兜底 | Google Gemini 3.5 Flash-Lite | `GEMINI_API_KEY` | 前序模型连续报错 2 次（`_call_llm` 内部重试）仍未产出有效内容即切换 |
+| ① 主用 | Agnes agnes-3.0-flash | `AGNES_API_KEY` | 默认主模型 |
+| ② 备选 | Google Gemini 3.5 Flash-Lite | `GEMINI_API_KEY` | 主模型异常或近空（<500字符）即切换 |
+| ③ 兜底 | 商汤 SenseNova DeepSeek-V4.1-Flash | `SENSENOVA_API_KEY` | 前序模型连续报错 2 次（`_call_llm` 内部重试）仍未产出有效内容即切换 |
 | 末路 | 复制原文 | — | 三模型全失败，直接复制 `report.md` 为 `script.txt`，避免 workflow 中断 |
 
 **MP3 完整性防护**（`md_to_mp3.py`）：Edge TTS 合成后用 `ffprobe` 校验时长（预期 ≈ 广播稿字数 ÷ 4.5 秒；阈值 = max(60s, 预期×0.6)），**疑似截断（时长过短）则删除并自动重试 1 次，仍截断则不部署**，杜绝"部分音频上线"。广播稿 `script.txt` 随报告入库为 `docs/daily-script.txt`，便于核对每日实际播报文本。
 
-> 日报与广播稿模型链相互独立、结构一致：均为 **Agnes 2.5 主 → 商汤 SenseNova DeepSeek-V4.1-Flash 备 → Gemini 3.5 Flash-Lite 兜**（2026-11-15 起三层）（见 `scripts/call_llm.py` 的 `LLM_CONFIGS` 与 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
+> 日报与广播稿模型链相互独立、结构一致：均为 **Agnes 3.0 主 → Gemini 3.5 Flash-Lite 备 → 商汤 SenseNova DeepSeek-V4.1-Flash 兜**（2026-11-25 起；2026-11-15 起为三层）（见 `scripts/call_llm.py` 的 `LLM_CONFIGS` 与 `scripts/md_to_script.py` 的 `_SCRIPT_ORDER`）。
 
 ## 文件结构
 
